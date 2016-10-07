@@ -53,7 +53,7 @@ cmuwm::Load( const char  *fullname, FILE  *fp ) {
 
     if((objectName = filetype::Lookup(f, fullname, &objectID, NULL))) {
 	long status = 0;
-	if((status = (rasterp)->Read( f, objectID)) == dataobject_NOREADERROR && (rasterp)->GetPix()!=NULL) {
+	if((status = (rasterp)->Read( f, objectID)) == dataobject::NOREADERROR && (rasterp)->GetPix()!=NULL) {
 	    int i;
 	    int w = (rasterp)->GetWidth(), h = (rasterp)->GetHeight();
 	    int widthBytes = ((w)/8) + ((w)%8 ? 1 : 0);
@@ -93,8 +93,8 @@ cmuwm::Load( const char  *fullname, FILE  *fp ) {
 	long
 cmuwm::Read( FILE  *file, long  id ) {
     if((this)->Load( NULL, file) == 0)
-	return(dataobject_NOREADERROR);
-    else return(dataobject_BADFORMAT);
+	return(dataobject::NOREADERROR);
+    else return(dataobject::BADFORMAT);
 }
 
 	long

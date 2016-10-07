@@ -210,7 +210,7 @@ void rasterview::ObservedChanged(class observable  *obs, long  status)
     DEBUG(("Enter rasterview__ObservedChanged(0x%p, 0x%p, %ld)   ras: 0x%p\n", this, obs, status, ras));
 
     if (obs == (class observable *)this->toolset) {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    fprintf(stderr, "rasterview: observed toolset destroyed!\n");
 	}
 	else {
@@ -242,7 +242,7 @@ void rasterview::ObservedChanged(class observable  *obs, long  status)
 	if (ras == NULL) return;
 	pix = (ras)->GetPix();
 
-	if (status == observable_OBJECTDESTROYED) return;
+	if (status == observable::OBJECTDESTROYED) return;
 
 	switch (status) {
 	    case 0:

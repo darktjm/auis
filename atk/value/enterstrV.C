@@ -33,7 +33,7 @@ void enterstrV::ObservedChanged(class observable  *changed,long  value)
 
     val = (this)->Value();
     if( changed == (class observable *) this->etext){
-	if(value == observable_OBJECTDESTROYED){
+	if(value == observable::OBJECTDESTROYED){
 	    this->etext = NULL;
 	    (val)->SetString(NULL);
 	}

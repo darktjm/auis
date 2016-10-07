@@ -679,33 +679,33 @@ static long ReadObject(class figure  *self, class figobj  *o , long  oref, FILE 
     class figobj *subo;
 
     ix = (o)->Read( fp, oid);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
 
     /* printf("fig: ReadObject(%d): %s\n", oref, class_GetTypeName(o)); */
     if (!(o)->IsGroup())
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     while (1) {
 	if (!strncmp(buf, "#end", 4)) 
-	    return dataobject_NOREADERROR;
+	    return dataobject::NOREADERROR;
 
 	ix = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-	if (ix!=2) return dataobject_BADFORMAT;
+	if (ix!=2) return dataobject::BADFORMAT;
 
 	if (!ATK::IsTypeByName(namebuf, "figobj"))
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	subo = (class figobj *)ATK::NewObject(namebuf);
-	if (!subo) return dataobject_OBJECTCREATIONFAILED;
+	if (!subo) return dataobject::OBJECTCREATIONFAILED;
 
 	subref = (self)->AlwaysInsertObject( subo, oref, -1);
 	ix = ReadObject(self, subo, subref, fp, tid);
-	if (ix!=dataobject_NOREADERROR) return ix;
+	if (ix!=dataobject::NOREADERROR) return ix;
 
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
     }
 }
 
@@ -776,25 +776,23 @@ long figure::Read(FILE  *fp, long  id)
     char namebuf[100];
     class figobj *o;
 
-    (this)->SetID( (this)->UniqueID()); 
-
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$origin %ld %ld", &val1, &val2);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
     this->originx = val1;
     this->originy = val2;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$printscale %lf %lf", &fal1, &fal2);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
     this->printscalex = fal1;
     this->printscaley = fal2;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
-    if (strncmp(buf, "#none", 5)) return dataobject_BADFORMAT;
+	return dataobject::PREMATUREEOF;
+    if (strncmp(buf, "#none", 5)) return dataobject::BADFORMAT;
     ix = sscanf(buf, "#none %ld", &val1); /* optional parameter */
     if (ix==1) {
 	val1 = (val1) ? 1 : 0;
@@ -802,7 +800,7 @@ long figure::Read(FILE  *fp, long  id)
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     if ((this)->RootObjRef() != figure_NULLREF)
 	(this)->AlwaysDeleteObject( this->objs[(this)->RootObjRef()].o);
@@ -812,30 +810,30 @@ long figure::Read(FILE  *fp, long  id)
     }
     else {
 	ix = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-	if (ix!=2) return dataobject_BADFORMAT;
+	if (ix!=2) return dataobject::BADFORMAT;
 
 	if (!ATK::IsTypeByName(namebuf, "figobj"))
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	o = (class figobj *)ATK::NewObject(namebuf);
-	if (!o) return dataobject_OBJECTCREATIONFAILED;
+	if (!o) return dataobject::OBJECTCREATIONFAILED;
 	
 	ref = (this)->AlwaysInsertObject( o, figure_NULLREF, -1);
 	this->root = ref;
 	ix = ReadObject(this, o, ref, fp, tid);
-	if (ix!=dataobject_NOREADERROR) return ix;
+	if (ix!=dataobject::NOREADERROR) return ix;
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "\\enddata{%[^,],%ld}", namebuf, &tid);
-    if (ix!=2) return dataobject_MISSINGENDDATAMARKER;
+    if (ix!=2) return dataobject::MISSINGENDDATAMARKER;
 
     if ((id && tid!=id) || strcmp(namebuf, (this)->GetTypeName()))
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
     (this)->GetOverallBounds();
 
-    return dataobject_NOREADERROR;     
+    return dataobject::NOREADERROR;     
 }
 
 /* put stuff from file into focus. The root group of the file is *not* inserted; everything in the root group is copied into the focus group of self. The origin field of the file is returned in origin.
@@ -847,60 +845,54 @@ long figure::ReadPartial(FILE  *fp, long  id, long  focus, struct point  *origin
     double fal1, fal2;
     char namebuf[100];
     class figobj *o;
-    /* long unid;
-    if (id==0) 
-	unid = figure_UniqueID(self);
-    else
-	unid = id;
-    figure_SetID(self, unid);*/ /* ### ??? */
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$origin %ld %ld", &val1, &val2);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
     if (origin) {
 	origin->x = val1;
 	origin->y = val2;
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$printscale %lf %lf", &fal1, &fal2);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
-    if (strncmp(buf, "#none", 5)) return dataobject_BADFORMAT;
+	return dataobject::PREMATUREEOF;
+    if (strncmp(buf, "#none", 5)) return dataobject::BADFORMAT;
     /* ignore PrintLandscale value for partial read */
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     if (!strncmp(buf, "#empty", 6)) {
 
     }
     else {
 	ix = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-	if (ix!=2) return dataobject_BADFORMAT;
+	if (ix!=2) return dataobject::BADFORMAT;
 
 	if (!ATK::IsTypeByName(namebuf, "figobj"))
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 
 	o = (this)->FindObjectByRef( focus);
 
 	ix = ReadObject(this, o, focus, fp, tid); 
 
-	if (ix!=dataobject_NOREADERROR) return ix;
+	if (ix!=dataobject::NOREADERROR) return ix;
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "\\enddata{%[^,],%ld}", namebuf, &tid);
-    if (ix!=2) return dataobject_MISSINGENDDATAMARKER;
+    if (ix!=2) return dataobject::MISSINGENDDATAMARKER;
 
     if ((id && tid!=id) || !ATK::IsTypeByName(namebuf, "figure"))
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
     /*printf("figure_ReadPartial: done OK\n");*/
-    return dataobject_NOREADERROR; 
+    return dataobject::NOREADERROR; 
 }

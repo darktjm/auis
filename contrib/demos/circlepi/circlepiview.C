@@ -86,7 +86,7 @@ void
 circlepiview::ObservedChanged(class observable  *b, long  v)
                {
     (this)->view::ObservedChanged( b, v);
-    if (v == observable_OBJECTCHANGED) {
+    if (v == observable::OBJECTCHANGED) {
 	this->need_full_update = TRUE;
 	(this)->WantUpdate( this);
     }

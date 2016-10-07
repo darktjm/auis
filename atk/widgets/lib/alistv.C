@@ -146,7 +146,7 @@ START_VIEW_CALLBACK_METHOD(TextHitMethod,AList,AListv) {
             ExtendedMode(act,line);
             break;
     }
-    t->NotifyObservers(observable_OBJECTCHANGED);
+    t->NotifyObservers(observable::OBJECTCHANGED);
     im::ForceUpdate();
 }
 END_CALLBACK_METHOD();

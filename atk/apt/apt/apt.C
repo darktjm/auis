@@ -349,7 +349,7 @@ long
 apt::ReadObject( FILE			      *file, long			       id, apt_readfptr reader )
           {
 	class apt *self=this;
-  long			      i, j, found, status = dataobject_NOREADERROR;
+  long			      i, j, found, status = dataobject::NOREADERROR;
   char				      line[256 + 1];
 
   IN(apt_ReadObject);
@@ -471,15 +471,15 @@ apt::WriteObject( FILE			      *file, long			       id , long			       level, ap
 	class apt *self=this;
 
   IN(apt_WriteObject);
-  if ( this->writeID != id ) /*avoid recursive writes */
+  if ( this->GetWriteID() != id ) /*avoid recursive writes */
     { DEBUG(Not Recursive);
     FieldsFile = file;
-    this->writeID = id;
+    this->SetWriteID(id);
 /*===    if ( level )===*/ /* not parent, use datastream */
       {
       DEBUG( Write To Datastream );
       sprintf( bracket, "data{%s, %ld}\n", (this )->GetTypeName( ),
-			  this->UniqueID( ) );
+			  this->GetID( ) );
       fprintf( file, "\\begin%s", bracket );
       for ( i = 0; i < 4; i++ )
 	{

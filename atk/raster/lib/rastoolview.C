@@ -453,7 +453,7 @@ static void SetToolNum(class rastoolview  *self, int  toolnum)
 void rastoolview::ObservedChanged(class observable  *observed, long  status)
 {
     if (observed == (class observable *)this->primaryview) {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    this->primaryview = NULL;
 	}
 	else {
@@ -481,7 +481,7 @@ void rastoolview::ObservedChanged(class observable  *observed, long  status)
 	}
     }
     else {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    fprintf(stderr, "rastoolview: Primary raster dataobject destroyed.\n");
 	}
     }

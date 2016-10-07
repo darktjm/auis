@@ -312,7 +312,7 @@ static void AddSwitchee(class switview  *self)
 	return;
     }
     NextSwitchee(self);
-    (sw)->NotifyObservers( observable_OBJECTCHANGED);
+    (sw)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void NextSwitchee(class switview  *self)
@@ -373,7 +373,7 @@ void AddSwitcheeFromFile(class switview  *self)
 		"Could not create new object, sorry.");
 	return;
     }
-    if ((d)->Read( fp, ID) != dataobject_NOREADERROR) {
+    if ((d)->Read( fp, ID) != dataobject::NOREADERROR) {
 	fclose(fp);
 	message::DisplayString(self, 10,
 		"Read operation failed, sorry.");
@@ -401,5 +401,5 @@ void AddSwitcheeFromFile(class switview  *self)
 	return;
     }
     NextSwitchee(self);
-    (sw)->NotifyObservers( observable_OBJECTCHANGED);
+    (sw)->NotifyObservers( observable::OBJECTCHANGED);
 }

@@ -2435,7 +2435,7 @@ htmltext::Read(FILE *file, long id)  {
 			environment_ReadFileChange, 0, GetLength());
 #endif /*SMARTSTYLES*/
 
-		retval= dataobject_NOREADERROR;
+		retval= dataobject::NOREADERROR;
 			/*XXX-this is a dumb assumption. We should've
 				been checking this in do_read somehow.
 				But all we get back is "len", and being

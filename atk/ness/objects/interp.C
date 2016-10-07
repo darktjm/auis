@@ -962,7 +962,7 @@ brancher: {
 		else if (subop == 'a') {
 			/* read an ATK file into mark on top of stack */
 			val = ReadTextFileStream(t, fname, f, TRUE);
-			if (val != dataobject_NOREADERROR)
+			if (val != dataobject::NOREADERROR)
 				fprintf(stderr, 
 					"Ness: file not in ATK format \"%s\"",
 					fname);

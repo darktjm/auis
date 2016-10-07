@@ -1553,7 +1553,7 @@ static long ReadFormatted(class rofftext  *self, FILE  *file, long  id)
     put(self, lastc);
     put(self,'\n');
     CloseAllStyles(self);
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 static boolean istroff(FILE  *fp )
@@ -1640,7 +1640,7 @@ long rofftext::Read(FILE  *file,long  id)
     Tag_fixup(this);
 #endif /* TROFF_TAGS_ENV */
     
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 const char *rofftext::ViewName()
@@ -1707,21 +1707,21 @@ void rofftext::SetAttributes(struct attributes  *atts)
 long rofftext::Write(FILE  *file, long  writeID, int  level)
                 {
 
-    if (this->textm->writeID != writeID)  {
-	this->textm->writeID = writeID;
+    if (this->textm->GetWriteID() != writeID)  {
+	this->textm->SetWriteID(writeID);
         fprintf(file, "\\begindata{%s, %ld}\n", "text",
-                 this->UniqueID());
+                 this->GetID());
         fprintf(file, "\\textdsversion{%d}\n", DATASTREAMVERSIONNUMBER);
 
 	if (this->textm->styleSheet->templateName)
 	    fprintf(file, "\\template{%s}\n", this->textm->styleSheet->templateName);
 	(this->textm->styleSheet)->Write( file);
 	(this)->WriteSubString( 0, this->length, file, TRUE);
-        fprintf(file, "\\enddata{%s,%ld}\n", "text", this->textm->id);
+        fprintf(file, "\\enddata{%s,%ld}\n", "text", this->textm->GetID());
 
 	fflush(file);
     }
-    return this->id;
+    return this->GetID();
 }
 
 

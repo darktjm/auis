@@ -536,7 +536,7 @@ long eq::ReadFILE(FILE  *file, long  start)
 	if (strncmp(word, "\\begindata{", 11) == 0) {
 	    sscanf(word, "\\begindata{%s,%ld}", name, &inid);
 	    if (strcmp(name, "eq") == 0)
-		this->id = inid;
+		this->SetID(inid);
 	    else
 		break;
 	}
@@ -562,22 +562,20 @@ long eq::ReadFILE(FILE  *file, long  start)
 long eq::Read(FILE  *file, long  id)
 {
     (this)->Erase();
-    if (id != 0L)
-	this->id = (this)->UniqueID();
-    this->modified = 0;
+    /* this->modified = 0; tjm - modified field doesn't work this way */
     (this)->ReadFILE( file, 0);
-    return dataobject_NOREADERROR; /* probably should get a status value from eq_ReadFILE */
+    return dataobject::NOREADERROR; /* probably should get a status value from eq_ReadFILE */
 }
 
 long eq::Write(FILE  *file, long  writeid, int  level)
 {
-    if ((this->writeID != writeid)) {
-	this->writeID = writeid;
-	fprintf(file, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID()); 
+    if ((this->GetWriteID() != writeid)) {
+	this->SetWriteID(writeid);
+	fprintf(file, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID()); 
 	(this)->WriteFILE( file, 0, (this)->Size(), ' ');
-	fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
+	fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
     }
-    return (this)->UniqueID();
+    return (this)->GetID();
 }
 
 /* Dump info */

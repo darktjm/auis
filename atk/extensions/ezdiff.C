@@ -309,7 +309,7 @@ ezdiff::ezdiff()
 void ezdiff::ObservedChanged(class observable  *changed, long  value)
 {
     /* If the buffer changes, Diff is probably wrong. So.. */
-    if(value == observable_OBJECTDESTROYED){
+    if(value == observable::OBJECTDESTROYED){
 	if(changed == (class observable *) this->buf[0] )
 	    this->buf[0] = NULL;
 	else if(changed == (class observable *) this->buf[1] )

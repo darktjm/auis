@@ -360,7 +360,7 @@ boxview::ObservedChanged(class observable  *changed		/* that which changed */, l
 
     else { /* my dataobject has changed */
 
-	if (status != observable_OBJECTDESTROYED)
+	if (status != observable::OBJECTDESTROYED)
 	    RequestUpdate(this);
     }
 }

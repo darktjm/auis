@@ -175,7 +175,7 @@ void runbuttonview::SetCommandProc(runbuttonview *self, const char *arg)
     if (message::AskForString(self,50,"Enter new command for button: ", old_cmd, buf, sizeof(buf)) >= 0) {
 	b->SetCommandString(buf);
 	b->SetModified();
-	b->NotifyObservers(observable_OBJECTCHANGED);
+	b->NotifyObservers(observable::OBJECTCHANGED);
 	message::DisplayString(self, 10, "Changed button command.");
     }
 }

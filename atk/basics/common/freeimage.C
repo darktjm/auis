@@ -171,9 +171,9 @@ int imageio::Load(const char *fname, FILE *f)
 long imageio::Read( FILE  *file, long  id )
 {
     if(this->Load( NULL, file) == 0)
-	return(dataobject_NOREADERROR);
+	return(dataobject::NOREADERROR);
     else
-	return(dataobject_BADFORMAT);
+	return(dataobject::BADFORMAT);
 }
 
 int  imageio::Ident( const char  *fullname )

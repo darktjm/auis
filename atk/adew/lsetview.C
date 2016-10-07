@@ -473,7 +473,7 @@ void lsetview::ObservedChanged(class observable  *changed, long  value)
 	class lset *ls = Data(this);
 	class lpair *lp = (class lpair *) this;
 	class view *v;
-	if(value ==  observable_OBJECTDESTROYED ){
+	if(value ==  observable::OBJECTDESTROYED ){
 	    if(changed == (class observable *)this->child ||
 	       changed == (class observable *) DataObject(this) ){
 		class view *c = this->child, *a = this->app;

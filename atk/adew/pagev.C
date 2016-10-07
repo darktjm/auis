@@ -343,7 +343,7 @@ static void AddSwitchee(class pagev  *self)
     }
     (sw)->SetNowPlaying( d);
  /*   NextSwitchee(self);
-    page_NotifyObservers(sw, observable_OBJECTCHANGED); */
+    page_NotifyObservers(sw, observable::OBJECTCHANGED); */
 }
 #endif
 
@@ -399,7 +399,7 @@ static void AddSwitcheeFromFile(class pagev  *self)
 		"Could not create new object; sorry.");
 	return;
     }
-    if ((d)->Read( fp, ID) != dataobject_NOREADERROR) {
+    if ((d)->Read( fp, ID) != dataobject::NOREADERROR) {
 	fclose(fp);
 	message::DisplayString(self, 10,
 		"Read operation failed; sorry.");
@@ -451,7 +451,7 @@ static void PasteSwitchee(class pagev  *self)
 		"Could not create new object; sorry.");
 	return;
     }
-    if ((d)->Read( fp, ID) != dataobject_NOREADERROR) {
+    if ((d)->Read( fp, ID) != dataobject::NOREADERROR) {
 	((self)->GetIM())->CloseFromCutBuffer( fp);
 	message::DisplayString(self, 10,
 		"Read operation failed; sorry.");
@@ -530,7 +530,7 @@ void pagev::ObservedChanged(class observable  *changed, long  value)
 {
     struct pagev_switcheroo *swtmp,*last=NULL;
 
-    if(value == observable_OBJECTDESTROYED){
+    if(value == observable::OBJECTDESTROYED){
 	if(changed == (class observable *) (this)->GetDataObject()) 
 	{
 	    (this)->UnlinkTree();

@@ -351,17 +351,17 @@ image::GetBeginData(FILE  *file, long  id)
 {
     int tc;
     if(file == NULL) 
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     ungetc(tc = getc(file), file);
     if(tc == '\\') {
 	long discardid;
 	if (fscanf(file, "\\begindata{image,%ld", &discardid) != 1
 	    || getc(file) != '}' || getc(file) != '\n') {
 	    printf("NotATKDatastream\n");
-	    return(dataobject_NOTATKDATASTREAM);
+	    return(dataobject::NOTATKDATASTREAM);
     }
     }
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }
 
 long
@@ -375,12 +375,12 @@ image::GetImageData(FILE  *file)
     if(fscanf(file, "format: %s", format) == 0) { /* empty image? Better be! */
 	while(fgets(buf, sizeof(buf), file))
 	    if(!strncmp(buf, "\\enddata", 8)) break;
-	return(dataobject_NOREADERROR);
+	return(dataobject::NOREADERROR);
     }
 
     if(*format == (char)0) {
 	fprintf(stderr, "image: No save-format found in image data\n");
-	return(dataobject_BADFORMAT);
+	return(dataobject::BADFORMAT);
     }
     else {
 	if(this->saveformatstring)
@@ -394,7 +394,7 @@ image::GetImageData(FILE  *file)
 	if(tmpFile1)
 	    fclose(tmpFile1);
 	perror("image: couldn't open temporary file for writing.");
-	return(dataobject_OBJECTCREATIONFAILED);
+	return(dataobject::OBJECTCREATIONFAILED);
     }
 
     /* Write image bytes to tmpFile1 */
@@ -405,14 +405,14 @@ image::GetImageData(FILE  *file)
 	    perror("image: error writing out image data");
 	    fclose(tmpFile1);
 	    fclose(tmpFile2);
-	    return(dataobject_OBJECTCREATIONFAILED);
+	    return(dataobject::OBJECTCREATIONFAILED);
 	}
     }
     if(fflush(tmpFile1) || fseek(tmpFile1, 0L, SEEK_SET) < 0) {
 	perror("image: error writing out image data");
 	fclose(tmpFile1);
 	fclose(tmpFile2);
-	return(dataobject_OBJECTCREATIONFAILED);
+	return(dataobject::OBJECTCREATIONFAILED);
     }
 
     /* decode base64 data into temp2 */
@@ -421,7 +421,7 @@ image::GetImageData(FILE  *file)
     if(fflush(tmpFile2) || fseek(tmpFile2, 0L, SEEK_SET) < 0) {
 	perror("image: error decoding image data");
 	fclose(tmpFile2);
-	return(dataobject_OBJECTCREATIONFAILED);
+	return(dataobject::OBJECTCREATIONFAILED);
     }
 
     /* decompress/load file */
@@ -446,14 +446,14 @@ image::GetImageData(FILE  *file)
 	(savedimage)->Destroy();
     }
     fclose(tmpFile2);
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }
 
 long
 image::GetEndData(FILE  *file, long  id)
 {
 /* This is a noop because GetImageData can deal with or without the enddata */
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }
 
 static long
@@ -462,7 +462,7 @@ WriteImageToTempFile( class image  *self, FILE  *file )
     char buf[BUFSIZ];
     FILE *f;
     int size = 0;
-    long retval= dataobject_NOREADERROR;
+    long retval= dataobject::NOREADERROR;
     
 
     if(self->origData) {
@@ -482,14 +482,14 @@ WriteImageToTempFile( class image  *self, FILE  *file )
 	    } else {
 		/* this is some big nasty binary file -RSK*/
 		fclose(f);
-		return dataobject_NOTATKDATASTREAM;
+		return dataobject::NOTATKDATASTREAM;
 	    }
 	}
 	if((self->origData = (char*) malloc(size))) {
 	    if(!fflush(f) && !fseek(f, 0, SEEK_SET)) {
 		if((cnt = fread(self->origData, 1, size, f)) != size) {
 		    fprintf(stderr, "image: short read on image data.\n");
-		    retval= dataobject_PREMATUREEOF; /*RSK*/
+		    retval= dataobject::PREMATUREEOF; /*RSK*/
 		    free(self->origData);
 		    self->origData = NULL;
 		    self->origDataSize = 0;
@@ -500,7 +500,7 @@ WriteImageToTempFile( class image  *self, FILE  *file )
 	    }
 	    else {
 		fprintf(stderr, "image: couldn't open temp file for writing.\n");
-		retval= dataobject_OBJECTCREATIONFAILED; /* not quite true, but close enough -RSK*/
+		retval= dataobject::OBJECTCREATIONFAILED; /* not quite true, but close enough -RSK*/
 		self->origData = NULL;
 		self->origDataSize = 0;
 	    }
@@ -510,7 +510,7 @@ WriteImageToTempFile( class image  *self, FILE  *file )
     }
     else {
 	fprintf(stderr, "image: couldn't open temp file for writing.\n");
-	retval= dataobject_OBJECTCREATIONFAILED; /* not quite true, but close enough -RSK*/
+	retval= dataobject::OBJECTCREATIONFAILED; /* not quite true, but close enough -RSK*/
 	self->origData = NULL;
 	self->origDataSize = 0;
     }
@@ -536,8 +536,8 @@ image::Read( FILE  *file, long  id )
 long
 image::SendBeginData(FILE  *file, long  writeID, int  level)
 {
-    long id = (this)->UniqueID();
-    this->writeID = writeID;
+    long id = (this)->GetID();
+    this->SetWriteID(writeID);
     fprintf(file, "\\begindata{image,%ld}\n", id);
     if(ferror(file))
 	return(-1);
@@ -595,7 +595,6 @@ long
 image::SendEndData(FILE  *file, long  writeID, int  id)
 {
     (this)->SetWriteID( writeID);
-    (this)->SetID( id);
     fprintf(file, "\\enddata{image, %d}\n", id);
     if(ferror(file))
 	return(-1);
@@ -2287,14 +2286,14 @@ image::Halftone( )
   return(this);
 }
 
-long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
+long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::otherformat usagetype, const char  *boundary)
 {
     FILE *tmpfp;
     class imageio *imgp = new imageio;
 
     const char *type = imgp->SaveFormatString();
-    if(this->writeID == writeID)  return(this->id);
-    this->writeID = writeID;
+    if(this->GetWriteID() == writeID)  return(this->GetID());
+    this->SetWriteID(writeID);
 
     fprintf(file, "\n--%s\nContent-type: image/%s\nContent-Transfer-Encoding: base64\n\n", boundary, type);
     if(!(tmpfp = tmpfile())) {
@@ -2315,11 +2314,11 @@ long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usaget
     rewind(tmpfp);
     to64(tmpfp, file);
     fclose(tmpfp);
-    return(this->id);
+    return(this->GetID());
 }
 
 boolean
-image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
+image::ReadOtherFormat(FILE  *file, const char  *fmt, const char  *encoding, const char  *desc)
 {
     FILE *tmpfp = NULL;
     int code;
@@ -2350,7 +2349,7 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
 
     code = (this)->Read( tmpfp, -1);
     fclose(tmpfp);
-    if (code == dataobject_NOREADERROR) {
+    if (code == dataobject::NOREADERROR) {
 	return(TRUE);
     } else {
 	return (FALSE);

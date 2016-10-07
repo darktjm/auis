@@ -55,7 +55,7 @@ xddimage_draw::~xddimage_draw() {
 }
 
 void xddimage_draw::ObservedChanged(observable *changed, long change) {
-    if(change==observable_OBJECTDESTROYED) {
+    if(change==observable::OBJECTDESTROYED) {
 	RemoveObserver(changed);
 	if(changed==src) src=NULL;
     }
@@ -875,7 +875,7 @@ xddimage::~xddimage() {
 }
 
 void xddimage::ObservedChanged(observable *changed, long change) {
-    if(changed==xgd && change==observable_OBJECTDESTROYED) {
+    if(changed==xgd && change==observable::OBJECTDESTROYED) {
 	draw->Stop();
 	xgd=NULL;
 	return;
@@ -884,7 +884,7 @@ void xddimage::ObservedChanged(observable *changed, long change) {
 	ReleaseData(FALSE);
     }
     if(cmap && *cmap==changed) {
-        if(change==observable_OBJECTDESTROYED) {
+        if(change==observable::OBJECTDESTROYED) {
             if(delayedeval) {
                 delayedeval->Cancel();
                 delayedeval=NULL;
@@ -902,7 +902,7 @@ void xddimage::ObservedChanged(observable *changed, long change) {
                 if(change==xcolormap_NEWIMAGECOLORS) {
                     ReProcess();
                     // trigger a redraw of this view...
-                    NotifyObservers( observable_OBJECTCHANGED);
+                    NotifyObservers( observable::OBJECTCHANGED);
                 } else if(change==xcolormap_NEWMANAGER) {
                     ReleaseData(FALSE);
                     // the resources are gone with the previous manager...
@@ -910,7 +910,7 @@ void xddimage::ObservedChanged(observable *changed, long change) {
                     histogram=NULL;
                     ReleaseResources(FALSE);
                     released=TRUE;
-                    NotifyObservers(observable_OBJECTCHANGED);
+                    NotifyObservers(observable::OBJECTCHANGED);
                 } else if(change==xcolormap_LOSTMANAGER) {
                     ReleaseData(FALSE);
                     // the resources are gone with the previous manager...
@@ -918,15 +918,15 @@ void xddimage::ObservedChanged(observable *changed, long change) {
                     histogram=NULL;
                     ReleaseResources(FALSE);
                     released=TRUE;
-                    NotifyObservers(observable_OBJECTCHANGED);
+                    NotifyObservers(observable::OBJECTCHANGED);
                 }
             }
         }
     }
-    if(changed==draw && (change==WorkProc_Done || change==WorkProc_Exited || change==WorkProc_Stopped || change==observable_OBJECTDESTROYED)) {
+    if(changed==draw && (change==WorkProc_Done || change==WorkProc_Exited || change==WorkProc_Stopped || change==observable::OBJECTDESTROYED)) {
 	RemoveObserver(changed);
 	draw=NULL;
-    } else if(change==observable_OBJECTDESTROYED) {
+    } else if(change==observable::OBJECTDESTROYED) {
 	RemoveObserver(changed);
     }
     iddimage::ObservedChanged(changed, change);

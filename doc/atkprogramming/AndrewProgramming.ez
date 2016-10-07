@@ -381,30 +381,30 @@ name of the class, and id is from the \argument{id} argument.)  Several
 return value are defined for Read:
 
 
-\preproc{#define	\constant{dataobject_NOREADERROR}	0}
+\preproc{#define	\constant{dataobject::NOREADERROR}	0}
 
-\preproc{#define	\constant{dataobject_PREMATUREEOF}	1}
+\preproc{#define	\constant{dataobject::PREMATUREEOF}	1}
 
-\preproc{#define	\constant{dataobject_NOTATKDATASTREAM} 2}
+\preproc{#define	\constant{dataobject::NOTATKDATASTREAM} 2}
 
-\preproc{#define	\constant{dataobject_MISSINGENDDATAMARKER} 3}
+\preproc{#define	\constant{dataobject::MISSINGENDDATAMARKER} 3}
 
-\preproc{#define	\constant{dataobject_OBJECTCREATIONFAILED}	4}
+\preproc{#define	\constant{dataobject::OBJECTCREATIONFAILED}	4}
 
-#define	\constant{dataobject_BADFORMAT} 5
+#define	\constant{dataobject::BADFORMAT} 5
 
 
-\constant{dataobject_NOREADERROR} indicates a successful read operation.
+\constant{dataobject::NOREADERROR} indicates a successful read operation.
 
-\constant{dataobject_PREMATUREEOF} indicates the input file was incomplete.
+\constant{dataobject::PREMATUREEOF} indicates the input file was incomplete.
 
-\constant{dataobject_NOTATKDATASTREAM} indicates the data was not in a 
+\constant{dataobject::NOTATKDATASTREAM} indicates the data was not in a 
 format the object understands.
 
-\constant{dataobject_MISSINGENDDATAMARKER} indicates that the appropriate 
+\constant{dataobject::MISSINGENDDATAMARKER} indicates that the appropriate 
 \\enddata\{typename,id\} was never found.
 
-\constant{dataobject_OBJECTCREATIONFAILED} indicates that a subobject being 
+\constant{dataobject::OBJECTCREATIONFAILED} indicates that a subobject being 
 read in could not be created.
 
 \section{
@@ -415,7 +415,7 @@ read in could not be created.
 \virtualmemberfunction{WriteOtherFormat} are intended to support additional 
 formats for ATK \class{dataobjects} in addition to the native ATK 
 datastream.  Currently the only other supported format is MIME, which is 
-represented by the \constant{dataobject_OTHERFORMAT_MAIL} constant used as 
+represented by the \constant{dataobject::OTHERFORMAT_MAIL} constant used as 
 the \argument{usagetype} parameter to these two functions.  See also 
 ToQP(atkams/messages/lib/mailobj.C), to64, fromqp, and from64 in 
 overhead/util/lib/encode.c.  Implementing 
@@ -3355,13 +3355,13 @@ recognize.
 
 Just before an \classobject{observable} object is destroyed, 
 \virtualmemberfunction{NotifyObservers} is called with 
-\constant{observable_OBJECTDESTROYED}.
+\constant{observable::OBJECTDESTROYED}.
 
 
 Most other uses of \virtualmemberfunction{NotifyObservers} use 
-\constant{observable_OBJECTCHANGED} (which is 0), but they can use any 
+\constant{observable::OBJECTCHANGED} (which is 0), but they can use any 
 value for \argument{change} except -1 (which corresponds to 
-\constant{observable_OBJECTDESTROYED}).  \
+\constant{observable::OBJECTDESTROYED}).  \
 
 
 
@@ -3371,12 +3371,12 @@ updates when a \classobject{dataobject} is modified.  When a
 \classobject{dataobject} is modified the code performing the modification 
 should usually call SetModified, and then call 
 \virtualmemberfunction{NotifyObservers} with 
-\constant{observable_OBJECTCHANGED}, or another appropriate value as 
+\constant{observable::OBJECTCHANGED}, or another appropriate value as 
 understood by the observer's \virtualmemberfunction{ObservedChanged} 
 method. The default \virtualmemberfunction{ObservedChanged} method in view 
 will call \virtualmemberfunction{WantUpdate} if the value passed to 
 \virtualmemberfunction{NotifyObservers} was not 
-\constant{observable_OBJECTDESTROYED}. Multiple modifications may be made 
+\constant{observable::OBJECTDESTROYED}. Multiple modifications may be made 
 between calls to  \virtualmemberfunction{SetModified} and 
 \virtualmemberfunction{NotifyObservers} but the calls should be made before 
 control returns to the user.

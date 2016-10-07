@@ -1254,7 +1254,6 @@ EditStylesInWindow(class view  *textv)
 		if ((newobject = (class lookz *) ATK::NewObject("lookz")))  {
 			char bufferName[50];
 
-			(newobject)->SetID( (newobject)->UniqueID());
 			(newobject)->SetTextObject( d);
 			(newobject)->SetCanClose( FALSE);
 			buffer::GetUniqueBufferName("Style-Editor", bufferName,
@@ -1787,7 +1786,7 @@ lookzview::ObservedChanged(class observable   *dobj, long   status)
 	    if (status == lookz_TEXTOBJECTCHANGED) {
 		NewTextObject(this, text);
 	    }
-	    if (status == observable_OBJECTDESTROYED) {
+	    if (status == observable::OBJECTDESTROYED) {
 		long i;
 
 		for (i = 0; i < numStyleEditors; i++) {
@@ -1804,7 +1803,7 @@ lookzview::ObservedChanged(class observable   *dobj, long   status)
 	    if(curss->FindReplacement(curstyle,&rep)) {
 		curstyle=rep;
 	    }
-	    if (status == observable_OBJECTDESTROYED) {
+	    if (status == observable::OBJECTDESTROYED) {
 		CloseStyleSheet(this);
 	    }
 	    else if (status == (long)this || this->curstyle == NULL) {
@@ -1867,7 +1866,7 @@ UpdateDocument(class lookzview  *self)
 	if (text != NULL) {
 	        (text)->SetModified();
 		(text)->RegionModified( 0, (text)->GetLength());
-		(text)->NotifyObservers( observable_OBJECTCHANGED);
+		(text)->NotifyObservers( observable::OBJECTCHANGED);
 	}
 	if (self->embedded) {
 		/* BOGOSITY ALERT:  we call Full_Update of parent */

@@ -1315,7 +1315,7 @@ else{
 void arbcon::ObservedChanged(class observable  * observed,long  status)
 {
 /* user code begins here for ObservedChanged */
-    if(status == observable_OBJECTDESTROYED &&
+    if(status == observable::OBJECTDESTROYED &&
 	observed == (class observable * )OwnArb &&
 	this == Gself){
 	this->ArbTextEditView = NULL;
@@ -1328,7 +1328,7 @@ void arbcon::ObservedChanged(class observable  * observed,long  status)
 	return;  /* w/o this, no wonder DESTROY sometimes FAILS */
     }
 /* user code ends here for ObservedChanged */
-    if (status == observable_OBJECTDESTROYED) {
+    if (status == observable::OBJECTDESTROYED) {
 	if (observed == (class observable *) this->ArbLinkCelView) this->ArbLinkCelView=NULL;
 	if (observed == (class observable *) this->ArbCutCelView) this->ArbCutCelView=NULL;
 	if (observed == (class observable *) this->ArbApplicationChoiceView) this->ArbApplicationChoiceView=NULL;

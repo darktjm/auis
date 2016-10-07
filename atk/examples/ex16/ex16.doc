@@ -249,7 +249,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al1=appLayerOrDestroy(v1=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj1)));
+*)class_NewObject(dataobject::ViewName(dobj1)));
 
     if(al1==NULL)
 
@@ -257,7 +257,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al2=appLayerOrDestroy(v2=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj2)));
+*)class_NewObject(dataobject::ViewName(dobj2)));
 
     if(al2==NULL) \{
 
@@ -570,26 +570,23 @@ long id;
     char buf[100];
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL)
 
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     /* the %hd tells scanf that blackOnWhite is a short, not an int */
 
     if(sscanf(buf,"%d %d %hd\\n",&hw->x,&hw->y,&hw->blackOnWhite)<3)
 
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
 
     if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 
 \}
 
@@ -613,18 +610,18 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
@@ -1605,7 +1602,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al1=appLayerOrDestroy(v1=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj1)));
+*)class_NewObject(dataobject::ViewName(dobj1)));
 
     if(al1==NULL)
 
@@ -1613,7 +1610,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al2=appLayerOrDestroy(v2=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj2)));
+*)class_NewObject(dataobject::ViewName(dobj2)));
 
     if(al2==NULL) \{
 

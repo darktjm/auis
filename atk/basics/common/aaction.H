@@ -15,7 +15,7 @@ static atom_def aaction_error("error");
  *  An aaction is an object which executes a function with a given
  *  set of arguments and provides information about the arguments and
  *  return types.  It does nothing itself; only derived children actually
- *  implment anything.  */
+ *  implement anything.  */
 class aaction : public traced {
   public:
     virtual ATKregistryEntry *ATKregistry();

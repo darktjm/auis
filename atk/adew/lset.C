@@ -97,9 +97,8 @@ void lset::InsertObject (const char  *name,const char  *viewname)
 	}
     }
     if(newobject){
-	newobject->id = (newobject)->UniqueID(); 
 	/* 	    Register the object with the dictionary */
-	dictionary::Insert(NULL,(char *)newobject->id,(char *) newobject);
+	dictionary::Insert(NULL,(char *)newobject->GetID(),(char *) newobject);
     }
     if(viewname == NULL || *viewname == '\0'){
 	if(newobject == NULL) return;
@@ -163,7 +162,6 @@ long lset::Read(FILE  *file, long  id)
     textpending = 0;
     buf = cbuf;
 
-    (this)->SetID((this)->UniqueID());/* change id to unique number */
     while (endcount != 0)  {
         while ((c = getc(file)) != EOF && c != '\\')  {
 	    if(endcount == 1){
@@ -173,9 +171,9 @@ putchar(c);
 	    *buf++ = c;
 	    }
         }
-        if (c == EOF) return dataobject_NOREADERROR;
+        if (c == EOF) return dataobject::NOREADERROR;
         if ((c = getc(file)) == EOF)
-            return dataobject_PREMATUREEOF;
+            return dataobject::PREMATUREEOF;
 	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
@@ -192,7 +190,7 @@ putchar(c);
 		    version = 0;
 		    while ((c = getc(file)) != EOF && c != '\n')
 			if(isdigit(c)) version = (version * 10) + (c - '0');
-		    if (c == EOF) return dataobject_NOREADERROR;
+		    if (c == EOF) return dataobject::NOREADERROR;
 		}
 	    }
             continue;
@@ -203,12 +201,12 @@ putchar(c);
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
                     *s++ = c;
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
                 *s = '\0';
                 objectid = 0;
                 while ((c = getc(file)) != EOF && c != '}')
                     if(c >= '0' && c <= '9')objectid = objectid * 10 + c - '0';
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
 		if(((c = getc(file))!= '\n') || (strcmp(objectname,"zip") == 0)) ungetc(c,file);
 		/* Call the New routine for the object */
 		ccp=objectname;
@@ -220,14 +218,14 @@ putchar(c);
 		    dictionary::Insert(NULL,(char *)objectid, (char *)newobject);
                     /* Call the read routine for the object */
                     status = (newobject)->Read( file, objectid);
-		    if (status != dataobject_NOREADERROR){
+		    if (status != dataobject::NOREADERROR){
 			printf("ERROR reading %s, %ld\n",objectname,status);
 			return status; 
 		    }
 		}
                 else {
                     endcount += 1;
-		    /* return dataobject_OBJECTCREATIONFAILED; */
+		    /* return dataobject::OBJECTCREATIONFAILED; */
 		}
 
 	    }
@@ -268,21 +266,21 @@ putchar(c);
 #ifdef DEBUG
     printf("dobj = %d, left = %d, right = %d\n",this->dobj, this->left, this->right);
 #endif /* DEBUG */
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 long lset::Write(FILE  *file ,long  writeid,int  level)
 {
     long did,lid,rid;
     did = lid = rid = 0l;
-    if (this->writeID == writeid)  return (this)->GetID();
-    this->writeID = writeid;
+    if (this->GetWriteID() == writeid)  return (this)->GetID();
+    this->SetWriteID(writeid);
 
     fprintf(file,"\\begindata{lset,%ld}\n",(this)->GetID());
     fprintf(file,"\\V 1\n"); /* Version Number */
-    if(this->dobj){(this->dobj)->Write(file,writeid,level+1); did = (this->dobj)->UniqueID();}
-    if(this->left){(this->left)->Write(file,writeid,level+1);lid = (this->left)->UniqueID();}
-    if(this->right){ (this->right)->Write(file,writeid,level+1);rid = (this->right)->UniqueID();}
+    if(this->dobj){(this->dobj)->Write(file,writeid,level+1); did = (this->dobj)->GetID();}
+    if(this->left){(this->left)->Write(file,writeid,level+1);lid = (this->left)->GetID();}
+    if(this->right){ (this->right)->Write(file,writeid,level+1);rid = (this->right)->GetID();}
     fprintf(file,"%d %d %d %ld %ld %ld %d\n>OBJ< %s\n>VIEW< %s\n>REF< %s\n" ,this->type,this->pct,this->application,
 	 did,lid,rid,(this->pdoc != NULL),this->dataname,this->viewname,this->refname);
     if(this->pdoc){
@@ -306,7 +304,6 @@ this->dobj = NULL;
 this->left = NULL;
 this->right = NULL;
 this->application = FALSE;
-(this)->SetID((this)->UniqueID());
 this->pdoc = NULL;
 THROWONFAILURE( TRUE);
 }

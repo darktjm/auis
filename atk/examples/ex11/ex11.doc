@@ -261,7 +261,7 @@ cannot make any assumptions about whether the objects writing it out can
 handle either format. 
 
 
-Finally, the Write method should return its object's \italic{UniqueID}, which 
+Finally, the Write method should return its object's \italic{GetID}, which 
 is the uniqueId for the object/file itself can be used to distinguish 
 helloworld from other objects. 
 
@@ -290,18 +290,18 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
@@ -313,7 +313,7 @@ writeId, and then writes to \italic{file} the \italic{begindata} header, the 3
 numbers that represent the \italic{helloworld} state (i.e. the numbers 
 corresponding to x, y, and blackOnWhite), and the \italic{enddata} trailer. 
  The class_GetTypeName calls gets the type for helloworld, and 
-helloworld_UniqueID gets the uniqueID for helloworld. 
+helloworld_GetID gets the uniqueID for helloworld. 
 
 
 \paragraph{Reading a data object from a file} \indexi{Data objects++Reading}
@@ -348,12 +348,9 @@ long id;
     char buf[100];
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL)
 
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     /* the %hd tells sscanf that blackOnWhite is a short, not an int
 
@@ -361,24 +358,23 @@ long id;
 
     if(sscanf(buf,"%d %d %hd\\n",&hw->x,&hw->y,&hw->blackOnWhite)<3)
 
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
 
 
     if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\}
 
 */
 
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
 
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 
 \}
 
 }
 
-First, we set the ID for the read process by calling SetID with a pointer to 
-the object and its uniqueID.  The variable buf is used to store the text 
+The variable buf is used to store the text 
 strings as they are read. 
 
 
@@ -679,26 +675,23 @@ long id;
     char buf[100];
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL)
 
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     /* the %hd tells scanf that blackOnWhite is a short, not an int */
 
     if(sscanf(buf,"%d %d %hd\\n",&hw->x,&hw->y,&hw->blackOnWhite)<3)
 
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
 
 
     if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 
 \}
 
@@ -722,18 +715,18 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 

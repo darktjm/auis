@@ -70,7 +70,7 @@ void ToggleStyle(class fontanim  *self, long time)
     (self)->SetEnvironmentStyle( self->myenv,
 				       self->currentstyle);
     (self)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
     self->myevent = im::EnqueueEvent((event_fptr)ToggleStyle, (char *)self,
 				     event_MSECtoTU(1000));
 }

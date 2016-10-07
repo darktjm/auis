@@ -129,7 +129,7 @@ void view::ChildReceivingInputFocus() {
 void view::ObservedChanged(class observable  *changed, long  value)
 {
     if (changed == (class observable *) this->dataobject)  {
-	if (value == observable_OBJECTDESTROYED)
+	if (value == observable::OBJECTDESTROYED)
 	    this->dataobject = NULL;
 	else
 	    (this)->WantUpdate( this);

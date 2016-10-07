@@ -35,11 +35,11 @@ static long check_for_title(class ps  * self, FILE  * file)
     while (*match != '\0') {
 	c = fgetc(file);
 	if (c == EOF) 
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	if (c != *match){
 	    ungetc(c,file); 
 	    (self)->SetTitle("");
-	    return dataobject_NOREADERROR;
+	    return dataobject::NOREADERROR;
 	}
 	++match;
     }
@@ -49,23 +49,23 @@ static long check_for_title(class ps  * self, FILE  * file)
     x = 0;
     while ((c = fgetc(file)) != '}') {
 	if (c == EOF)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	if (c == '\\')
 	    if ((c = fgetc(file)) != EOF)
 		title[x] = c;
-	    else return dataobject_PREMATUREEOF;
+	    else return dataobject::PREMATUREEOF;
 	else
 	    title[x] = c;
 	if (++x == 1024)
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
     }
     title[x] = '\0';
     (self)->SetTitle(title);
 
     while ((c = fgetc(file)) != '\\')
 	if (c == EOF)
-	    return dataobject_PREMATUREEOF;
-    return dataobject_NOREADERROR;
+	    return dataobject::PREMATUREEOF;
+    return dataobject::NOREADERROR;
 }
 
 
@@ -139,7 +139,7 @@ ps::Write(FILE  *file, long  writeID, int  level)
 
 	if (haschild) 
 	    (childob)->Write(file,
-			     this->writeID,
+			     this->GetWriteID(),
 			     2);
 	fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(),(this)->GetID());
     }
@@ -164,8 +164,6 @@ ps::Read(FILE  * file,long  id)
 	/* has the effect of destroying the child */
 	(this)->SetChild( (class dataobject *)0);
 
-    (this)->SetID((this)->UniqueID());
-
     fscanf(file,"%ld %ld %ld %ld %ld", &x, &y, &haschild, &width, &height);
     (this)->SetSize( x, y);
     (this)->SetPixelWidth( width);
@@ -173,10 +171,10 @@ ps::Read(FILE  * file,long  id)
 
     while ((c = fgetc(file)) != '\\')
 	if (c == EOF)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 
-    if (check_for_title(this, file) != dataobject_NOREADERROR)
-	return dataobject_BADFORMAT;
+    if (check_for_title(this, file) != dataobject::NOREADERROR)
+	return dataobject::BADFORMAT;
 
     newobject = (class dataobject *)0;
     if (haschild) {
@@ -184,9 +182,9 @@ ps::Read(FILE  * file,long  id)
 	while (*match != '\0') {
 	    c = fgetc(file);
 	    if (c == EOF) 
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	    if (c != *match)
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    ++match;
 	}
 	if((c = fgetc(file))!= '\n')
@@ -194,16 +192,16 @@ ps::Read(FILE  * file,long  id)
 	x = 0;
 	while ((c = fgetc(file)) != ',') {
 	    if (c == EOF)
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	    datatype[x] = c;
 	    if (++x == 1024)
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	}
 	datatype[x] = '\0';
 	objectid = 0;
 	while ((c = fgetc(file)) != '}') {
 	    if (c == EOF)
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	    if(c >= '0'	&& c <=	'9')
 		objectid = objectid * 10 + c - '0';
 	}
@@ -213,10 +211,10 @@ ps::Read(FILE  * file,long  id)
 
 	newobject = (class dataobject *)ATK::NewObject(datatype);
 	if (newobject == (class dataobject *)0)
-	    return dataobject_OBJECTCREATIONFAILED;
+	    return dataobject::OBJECTCREATIONFAILED;
 	dictionary::Insert(NULL,(char *)objectid, (char *)newobject);
 	status = (newobject)->Read( file, objectid);
-	if (status != dataobject_NOREADERROR) 
+	if (status != dataobject::NOREADERROR) 
 	    return status;
     }
     /* adapt a cavalier attitude towards enddata */
@@ -226,5 +224,5 @@ ps::Read(FILE  * file,long  id)
 
     (this)->SetChild(newobject);  /* might be null */
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }

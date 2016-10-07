@@ -211,7 +211,7 @@ static void SetNewValue(class printopts *self, struct p_option *rec, char *str)
     if (rec->op->name == A_tofile) {
 	AdjustHiddenEnv(self, rec->answer[0] == 'Y');
     }
-    tx->NotifyObservers(observable_OBJECTCHANGED);
+    tx->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 static void HandleClick(class printopts *self, class environment *env)

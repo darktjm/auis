@@ -297,7 +297,7 @@ void stylesheet::Copy(stylesheet *dest) {
 		e->newstyle=n;
 	    }
 	}
-	dest->NotifyObservers(observable_OBJECTCHANGED);
+	dest->NotifyObservers(observable::OBJECTCHANGED);
 	delete dest->mapstyles;
 	dest->mapstyles=NULL;
 	old->Destroy();
@@ -324,7 +324,7 @@ void stylesheet::PrepareForChanges() {
 	dest->SetTemplateName(GetTemplateName());
 	stylesheetInternal *old=si;
 	si=dest;
-	NotifyObservers(observable_OBJECTCHANGED);
+	NotifyObservers(observable::OBJECTCHANGED);
 	delete mapstyles;
 	mapstyles=NULL;
 	old->Destroy();

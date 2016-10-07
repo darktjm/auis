@@ -131,7 +131,7 @@ calc::Read( FILE			      *file, long			       id )
 
   IN(calc::Read);
   if ( (status = (this)->ReadObject(  file, id, (apt_readfptr)Reader )) ==
-	dataobject_NOREADERROR )
+	dataobject::NOREADERROR )
     {
     (this)->NotifyObservers(  calc_value_changed );
     }

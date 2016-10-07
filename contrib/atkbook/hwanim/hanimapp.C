@@ -59,6 +59,6 @@ void AnimateText(class hanimapp  *self, long time)
 	if (len < 20) self->GoingForward = TRUE;
 	(t)->DeleteCharacters( 0, 1);
     }
-    (t)->NotifyObservers( observable_OBJECTCHANGED); 
+    (t)->NotifyObservers( observable::OBJECTCHANGED); 
     im::EnqueueEvent((event_fptr)AnimateText, (char *)self, ANIMATIONDELAY);
 }

@@ -118,7 +118,7 @@ boolean metextview::InitializeClass()
 void metextview::ObservedChanged(class observable  *changed,long  value)
 {
     (this)->textview::ObservedChanged(changed,value);
-    if(value != observable_OBJECTDESTROYED){
+    if(value != observable::OBJECTDESTROYED){
 	if((this)->GetDotPosition() == 0 && 
 	   (value = (Text(this))->GetLength()) > 0 &&
 	   (value = (Text(this))->Index(0,'\n',value)) != EOF)

@@ -153,7 +153,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 
     ctmp = GetString(fl);
     if (!ctmp) {
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     }
     while (ctmp && buf[0]=='%') {
 	ctmp = GetString(fl);
@@ -161,21 +161,21 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 
     while (ctmp) {
 	if (buf[0] != '*') {
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
 	ctmp = strchr(buf, ';');
 	if (!ctmp) {
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
 	res = sscanf(ctmp, ";%ld,%ld", &starx, &stary);
 	if (res!=2) {
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
 	objtype = buf[1];
 	switch (objtype) {
 	    case 'P': {
 		ctmp = GetString(fl);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		ctmp = EatLinesUntil(fl, "*", TRUE);
 		}
@@ -184,23 +184,23 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 	    case 'G': {
 		class figorect *o;
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld", &altx, &alty);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		o = figorect::Create(FromZipX(starx), FromZipY(stary), FromZipW(altx-starx), FromZipH(alty-stary));
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		(dummyattr)->SetShade( greyval);
@@ -216,26 +216,26 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		long tid;
 
 		ctmp = EatLinesUntil(fl, "SG", FALSE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		res = sscanf(buf, ">%ld,%ld", &altx, &alty);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		
 		ctmp = GetString(fl);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 		res = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-		if (res!=2) return dataobject_BADFORMAT;
+		if (res!=2) return dataobject::BADFORMAT;
 
 		o = figoins::Create(FromZipX(starx), FromZipY(stary), FromZipW(altx-starx), FromZipH(alty-stary), namebuf);
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		dobj = (o)->GetDataObject();
 
 		res = (dobj)->Read( fl, tid);
-		if (res != dataobject_NOREADERROR) {
+		if (res != dataobject::NOREADERROR) {
 		    return res;
 		}
 
@@ -248,19 +248,19 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 	    case 'L': {
 		class figoell *o;
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld", &altx, &alty);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		if (objtype=='J') {
 		    if (altx < alty) altx = alty;
@@ -268,7 +268,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		}
 		o = figoell::Create(FromZipX(starx-altx), FromZipY(stary-alty), FromZipW(altx*2), FromZipH(alty*2));
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		(dummyattr)->SetShade( greyval);
@@ -281,23 +281,23 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		class figoell *o;
 		long t1, t2, t3, t4;
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld;%ld,%ld;%ld,%ld", &t1, &t2, &t3, &t4, &altx, &alty);
 		if (res!=6) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		o = figoell::Create(FromZipX(starx-altx), FromZipY(stary-alty), FromZipW(altx*2), FromZipH(alty*2));
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		(dummyattr)->SetShade( greyval);
@@ -309,23 +309,23 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 	    case 'N': {
 		class figorrec *o;
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld", &altx, &alty);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		o = figorrec::Create(FromZipX(starx), FromZipY(stary), FromZipW(altx-starx), FromZipH(alty-stary));
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		(dummyattr)->SetShade( greyval);
@@ -337,19 +337,19 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 	    case 'C': {
 		class figoplin *o;
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld", &altx, &alty);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		pts[0].x = FromZipX(starx);
 		pts[0].y = FromZipY(stary);
@@ -357,7 +357,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		pts[1].y = FromZipY(alty) - pts[0].y;
 		o = figoplin::Create(pts, 2, FALSE);
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		ctmp = EatLinesUntil(fl, "*", TRUE);
@@ -370,13 +370,13 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		long count;
 
 		ctmp = EatLinesUntil(fl, ">", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		pts[0].x = FromZipX(starx);
 		pts[0].y = FromZipY(stary);
 
 		if (buf[0]!='>')  {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		ctmp = buf;
 		count = 1;
@@ -384,7 +384,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		    ctmp++;
 		    res = sscanf(ctmp, "%ld,%ld", &altx, &alty);
 		    if (res!=2)  {
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    EnsurePts(count+1);
 		    pts[count].x = FromZipX(altx) - pts[0].x;
@@ -406,7 +406,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 
 		o = figoplin::Create(pts, count, FALSE);
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 
@@ -420,7 +420,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		pts[2].y = alty + (long)((double)(FromZipW(figio_ArrowHead)) * sin(theta-0.5)) - pts[0].y;
 		o = figoplin::Create(pts, 3, FALSE);
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 
@@ -434,18 +434,18 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		long count;
 
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		if (buf[0]!='>')  {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		ctmp = buf;
 		count = 0;
@@ -458,7 +458,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		    ctmp++;
 		    res = sscanf(ctmp, "%ld,%ld", &altx, &alty);
 		    if (res!=2)  {
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    EnsurePts(count+1);
 		    /* count>0 */
@@ -475,7 +475,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		if (count >= 2) {
 		    o = figoplin::Create(pts, count, res);
 		    if (!o) {
-			return dataobject_OBJECTCREATIONFAILED;
+			return dataobject::OBJECTCREATIONFAILED;
 		    }
 		    (fig)->InsertObject( o, parent, -1);
 		    (dummyattr)->SetShade( greyval);
@@ -491,19 +491,19 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		long dx, dy, ix;
 
 		ctmp = EatLinesUntil(fl, "G>", TRUE);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		greyval = figattr_ShadeClear;
 		if (buf[0]=='G') {
 		    greyval = atol(buf+1);
 		    greyval = greyval * figattr_ShadeDenom / 100;
 		    ctmp = EatLinesUntil(fl, ">", TRUE);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 
 		res = sscanf(buf, ">%ld,%ld", &alty, &altx);
 		if (res!=2) {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		EnsurePts(altx+1);
 		thetadiv = TWOPI / (double)altx;
@@ -525,7 +525,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		}
 		o = figoplin::Create(pts, altx, TRUE);
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		(fig)->InsertObject( o, parent, -1);
 		(dummyattr)->SetShade( greyval);
@@ -540,7 +540,7 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		long fsize, fstyle, tpos;
 
 		ctmp = GetString(fl);
-		if (!ctmp) return dataobject_PREMATUREEOF;
+		if (!ctmp) return dataobject::PREMATUREEOF;
 
 		strcpy(fname, "andy");
 		fsize = 12;
@@ -552,22 +552,22 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 			strcpy(extra, "");
 		    }
 		    if (res!=3) {
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    if (strchr(extra, 'b'))
 			fstyle |= fontdesc_Bold;
 		    if (strchr(extra, 'i'))
 			fstyle |= fontdesc_Italic;
 		    ctmp = GetString(fl);
-		    if (!ctmp) return dataobject_PREMATUREEOF;
+		    if (!ctmp) return dataobject::PREMATUREEOF;
 		}
 		if (buf[0]!='T')  {
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		SquishZipTextInput(buf);
 		o = figotext::Create(buf, FromZipX(starx), FromZipY(stary));
 		if (!o) {
-		    return dataobject_OBJECTCREATIONFAILED;
+		    return dataobject::OBJECTCREATIONFAILED;
 		}
 		ctmp = EatLinesUntil(fl, "*M", TRUE);
 		tpos = figattr_PosCenter;
@@ -597,9 +597,9 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 		break;
 
 	    default:
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	}
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }

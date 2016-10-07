@@ -99,8 +99,8 @@ box::Write(FILE  * f				/* file to be written */, long  writeID				/* unique ID 
     if (debug)
 	printf("box_Write(%ld, %d)\n", writeID, level);
 
-    if (getDataObject(this).writeID != writeID) {
-	getDataObject(this).writeID = writeID;
+    if (getDataObject(this).GetWriteID() != writeID) {
+	getDataObject(this).SetWriteID(writeID);
 	fprintf (f, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	if (this->contents != NULL) {
 	    if (debug)
@@ -169,11 +169,11 @@ readASCII(class box  *self, FILE  *f			    /* input file */, long  id			    /* u
     while ((ch = getc(f)) != EOF) {
 	if (ch == 0) {
 	    printf("stopped on zero character");
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
 	if (ch != '\\') {
 	    objectto(f, "box:  missing begindata or enddata\n");
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
 
 	ch = getc(f);
@@ -182,30 +182,30 @@ readASCII(class box  *self, FILE  *f			    /* input file */, long  id			    /* u
 
 	    if (fgetstring(f, "begindata{") != 0) {
 		objectto(f, "box:  missing begindata");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
 	    for (np = dataname; np < dataname + sizeof dataname - 1 && (ch = getc(f)) != EOF && ch != ','; np++)
 		*np = ch;
 	    *np = '\0';
 	    if (fscanf(f, "%ld ", &uniqueID) != 1) {
 		objectto(f, "box:  missing , after component name");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
 	    if (fgetstring(f, "}") != 0) {
 		objectto(f, "box:  missing closing brace after begindata");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
 	    if (fgetstring(f, "\n") != 0)
 		objectto(f, "box:  extra stuff after begindata");
 	    self->contents = (class dataobject *)ATK::NewObject(dataname);
 	    if (self->contents == NULL) {
 		printf("Could not create %s object.\n", dataname);
-		return dataobject_OBJECTCREATIONFAILED;
+		return dataobject::OBJECTCREATIONFAILED;
 	    }
-	    self->contents->id = uniqueID;
+	    self->contents->SetID(uniqueID);
 	    (self->contents)->Read( f, uniqueID);
 	    (self)->SetModified();
-	    (self)->NotifyObservers( observable_OBJECTCHANGED);
+	    (self)->NotifyObservers( observable::OBJECTCHANGED);
 
 	    if (debug)
 		printf("done adding component\n");
@@ -214,26 +214,26 @@ readASCII(class box  *self, FILE  *f			    /* input file */, long  id			    /* u
 	else if (ch == 'e')	{   /* enddata coming */
 	    if (fscanf(f, "enddata{%255[^,}\n],%ld}\n", dataname, &uniqueID) != 2) {
 		objectto(f, "box:  expected enddata or another component");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
 	    else if (strcmp(dataname, (self)->GetTypeName()) != 0) {
 		objectto(f, "box: wrong data name in enddata");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
 	    else if (uniqueID != id) {
 		objectto(f, "box:  wrong unique ID in enddata");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    }
-	    return dataobject_NOREADERROR;
+	    return dataobject::NOREADERROR;
 	}
 
 	else {
 	    objectto(f, "box:  bad input line");
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	}
     } /* end of reading loop */
     printf("box:  premature EOF");
-    return dataobject_PREMATUREEOF;
+    return dataobject::PREMATUREEOF;
 }
 
 /* read box from file */
@@ -246,11 +246,10 @@ box::Read(FILE  * f			    /* input file */, long  id			    /* unique identifier 
     if (debug)
 	printf("box_Read(%ld)\n", id);
 
-    (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
 
     rc = readASCII(this, f, id);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
     if (debug)
 	printf("box_Read rc = %ld\n", rc);
 
@@ -292,9 +291,8 @@ box::FillInContents(const char  *name)
     if (newobject != NULL) {
 	if (this->contents != NULL)
 	    (this->contents)->Destroy();
-	newobject->id = (long) newobject;
 	this->contents = newobject;
     }
     (this)->SetModified();
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }

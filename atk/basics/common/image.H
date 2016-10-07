@@ -94,8 +94,8 @@ public:
    long Read( FILE *file, long id )  ;
    long Write( FILE *file, long writeID, int level )  ;
    const char * ViewName()  ;
-   long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
-   boolean ReadOtherFormat(FILE *file, char *fmt, char *encoding, char *description)  ;
+   long WriteOtherFormat(FILE *file, long writeid, int level, dataobject::otherformat usagetype, const char *boundary)  ;
+   boolean ReadOtherFormat(FILE *file, const char *fmt, const char *encoding, const char *description)  ;
 
 
   

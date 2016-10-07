@@ -30,7 +30,7 @@ int main (int argc, char *argv[])
 	fprintf(stderr, "Out of memory!\n");
 	exit(-1);
     }
-    if(t->Read(stdin,0)!=dataobject_NOREADERROR) {
+    if(t->Read(stdin,0)!=dataobject::NOREADERROR) {
 	fprintf(stderr, "Couldn't read original file.\n");
 	exit(-2);
     }

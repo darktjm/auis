@@ -99,7 +99,7 @@ static void ATextValueAssign(ASlot *slot, const avalueflex &aux, const avaluefle
     t->AlwaysDeleteCharacters(0, t->GetLength());
     if(val->cstr) t->AlwaysInsertCharacters(0, (char *)val->cstr, strlen(val->cstr));
     at->SetObserveTextChanges(FALSE);
-    t->NotifyObservers(observable_OBJECTCHANGED);
+    t->NotifyObservers(observable::OBJECTCHANGED);
     at->SetObserveTextChanges(TRUE);
 }
 

@@ -353,14 +353,14 @@ static class environment *SelectLine(class textview  *tv, class environment  *ol
 	(oldsel)->Remove( (oldsel)->Eval(), (oldsel)->GetLength(), environment_Style, FALSE);
     }
     if(!donew) {
-	(t)->NotifyObservers( observable_OBJECTCHANGED);
+	(t)->NotifyObservers( observable::OBJECTCHANGED);
 	return NULL;
     }
     if(lend<0 || ss==NULL ) return NULL;
     bold=(ss)->Find( "bold");
     if(bold==NULL) return NULL;
     oldsel=(t)->AlwaysAddStyle( pos, lend-pos, bold);
-    (t)->NotifyObservers( observable_OBJECTCHANGED);
+    (t)->NotifyObservers( observable::OBJECTCHANGED);
     return oldsel;
 }
 
@@ -388,7 +388,6 @@ static class viewref *InsertObject(class text  *self, long  pos, const char  *na
     class environment *env;
 
     if((newobject = (class dataobject *) ATK::NewObject(name)))  {
-        newobject->id = (newobject)->UniqueID(); 
         /* Register the object with the dictionary */
         /* is this needed? dictionary_Insert(NULL, (char *) newobject->id, (char *) newobject); */
         if (viewname == NULL || *viewname == '\0')
@@ -794,7 +793,7 @@ static void FixPref(class pintv  *self, struct prefdesc  *pd)
     rock.npos = (pd->mark)->GetPos();
     AddInstances(pd, &rock);
     DoStyles(self);
-    (TEXT(self->cpref))->NotifyObservers( observable_OBJECTCHANGED);
+    (TEXT(self->cpref))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void AddPref(class pintv  *self, struct prefdesc  *pd, struct prefdesc  *pd2)
@@ -819,7 +818,7 @@ static void AddPref(class pintv  *self, struct prefdesc  *pd, struct prefdesc  *
     AddInstances(pd2, &rock);
     DoStyles(self);
     if(self->cpref && pd2->mark) (self->cpref)->SetTopPosition( (pd2->mark)->GetPos());
-    (TEXT(self->cpref))->NotifyObservers( observable_OBJECTCHANGED);
+    (TEXT(self->cpref))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void changecondition(class pintv  *self, class sbutton  *sb, struct prefdesc  *pd)
@@ -842,7 +841,7 @@ static void changecondition(class pintv  *self, class sbutton  *sb, struct prefd
 
     pd->cond=newcond?strdup(newcond):NULL;
     (pd->obj)->SetCondition( pd->cond);
-    (pd->obj)->NotifyObservers( observable_OBJECTCHANGED);
+    (pd->obj)->NotifyObservers( observable::OBJECTCHANGED);
     FixPref(self, pd);
     message::DisplayString(self, 0, "Condition changed.");
 }
@@ -871,7 +870,7 @@ static void duplicate(class pintv  *self, class sbutton  *sb, struct prefdesc  *
     }
     pd2=(prefs)->DuplicatePref( pd, buf, ur.cond);
     PREFS(self)->selfmod=TRUE;
-    (PREFS(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (PREFS(self))->NotifyObservers( observable::OBJECTCHANGED);
     PREFS(self)->selfmod=FALSE;
     AddPref(self, pd, pd2);
     message::DisplayString(self, 0, "Preference duplicated.");
@@ -915,7 +914,7 @@ static void delete_c(class pintv  *self, class sbutton  *sb, struct prefdesc  *p
     (TEXT(self->cpref))->AlwaysDeleteCharacters( (pd->mark)->GetPos(), (pd->mark)->GetLength());
     
     (TEXT(self->cpref))->RemoveMark( pd->mark);
-    (TEXT(self->cpref))->NotifyObservers( observable_OBJECTCHANGED);
+    (TEXT(self->cpref))->NotifyObservers( observable::OBJECTCHANGED);
     
     (PREFS(self))->DeletePref( pd);
 
@@ -933,7 +932,7 @@ static void delete_c(class pintv  *self, class sbutton  *sb, struct prefdesc  *p
     (self->preferences)->WantUpdate( self->preferences);
     
     PREFS(self)->selfmod=TRUE;
-    (PREFS(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (PREFS(self))->NotifyObservers( observable::OBJECTCHANGED);
     PREFS(self)->selfmod=FALSE;
     message::DisplayString(self, 0, "Preference deleted.");
 }
@@ -950,7 +949,7 @@ static void reset(class pintv  *self, class sbutton  *sb, struct prefdesc  *pd)
     } else {
 	(pd->obj)->SetFromPreferenceString( "");
     }
-    (pd->obj)->NotifyObservers( observable_OBJECTCHANGED);
+    (pd->obj)->NotifyObservers( observable::OBJECTCHANGED);
     message::DisplayString(self, 0, "Preference reset to default.");
 }
 
@@ -1182,7 +1181,7 @@ static void UpdateCPref(class pintv  *self)
     (PREFS(self)->prefsp)->Enumerate((list_efptr)RemoveMarks, (char *)&rock);
     (PREFS(self)->prefsp)->Enumerate((list_efptr)AddInstances, (char *)&rock);
     DoStyles(self);
-    (ct)->NotifyObservers( observable_OBJECTCHANGED);
+    (ct)->NotifyObservers( observable::OBJECTCHANGED);
 #ifdef TIMEY
     gettimeofday(&a, NULL);
     printf("time after:%lf\n", (((double)a.tv_sec)*1000000.0+(double)a.tv_usec)/1000000);
@@ -1227,7 +1226,7 @@ static void ReProcess(class pintv  *self)
     message::DisplayString(self, 0, "Processing changes from text.");
     (PREFS(self))->ReScan();
     PREFS(self)->selfmod=TRUE;
-    (PREFS(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (PREFS(self))->NotifyObservers( observable::OBJECTCHANGED);
     PREFS(self)->selfmod=FALSE;
     self->lockdown=FALSE;
 }

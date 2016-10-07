@@ -645,7 +645,7 @@ void ReadCell(class table  *T, FILE  *f, char  *buff, char  **cpp, char  *cl, st
 		cell->celltype = table_ImbeddedObject;
 		cell->interior.ImbeddedObject.data = newobject;
 		cell->interior.ImbeddedObject.views = NULL;
-		newobject->id = uniqueID;
+		newobject->SetID(uniqueID);
 		
 		(newobject)->AddObserver(T);
 		

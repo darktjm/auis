@@ -220,7 +220,7 @@ static void CBResetFunc (AWidget *self,
 			if ( ! ttxt) break;
 			ttxt->Clear();
 			ttxt->AlwaysInsertCharacters(0, cval, strlen(cval));
-                        ttxt->NotifyObservers( observable_OBJECTCHANGED);
+                        ttxt->NotifyObservers( observable::OBJECTCHANGED);
 			break;
 
 		case htmlform_InCheckbox:
@@ -242,7 +242,7 @@ static void CBResetFunc (AWidget *self,
 			if ( ! ttxt) break;
 			textarea->Clear();
 			textarea->AlwaysCopyText(0, ttxt, 0, ttxt->GetLength());
-                        textarea->NotifyObservers( observable_OBJECTCHANGED);
+                        textarea->NotifyObservers( observable::OBJECTCHANGED);
 			break;
 
 		case htmlform_InReset:

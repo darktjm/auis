@@ -190,7 +190,7 @@ pushbutton::Write(FILE  *fp, long  id, int  level)
 
 */
 
-  long uniqueid = (this)->UniqueID();
+  long uniqueid = (this)->GetID();
 
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
@@ -222,19 +222,19 @@ pushbutton__ReadDataPart(class pushbutton  *self, FILE  *fp, int dsversion)
   unsigned char rgb[3];
   
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strcmp(buf,"")!= 0 )
     (self)->SetText( buf);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strcmp(buf,"")!= 0 )
     (self)->SetStyle( atoi(buf));
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strcmp(buf,"")!= 0) {
     char name[MAXPATHLEN];
     long style, size;
@@ -246,7 +246,7 @@ pushbutton__ReadDataPart(class pushbutton  *self, FILE  *fp, int dsversion)
 
   if (dsversion >= 2) {
       if ((buf = ReadLine(fp)) == NULL)
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
       if (strcmp(buf,"")!= 0 ) {
 	  if ((strncmp(buf, "0x", 2) != 0)
 	      &&(strncmp(buf, "0X", 2) != 0)) {
@@ -259,7 +259,7 @@ pushbutton__ReadDataPart(class pushbutton  *self, FILE  *fp, int dsversion)
       free(buf);
 	  
       if ((buf = ReadLine(fp)) == NULL)
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
       if (strcmp(buf,"")!= 0 ) {
 	  if (strncmp(buf, "0x", 2) != 0)  {
 	      (self)->SetBGColor( buf, 0, 0, 0);
@@ -271,7 +271,7 @@ pushbutton__ReadDataPart(class pushbutton  *self, FILE  *fp, int dsversion)
       free(buf);
   }
 
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 
@@ -289,12 +289,12 @@ pushbutton_SanelyReturnReadError(class pushbutton  *self, FILE  *fp, long  id, l
     do {
 	if (buf != NULL) free(buf);
 	if ((buf = ReadLine(fp)) == NULL)
-	  return(dataobject_PREMATUREEOF);
+	  return(dataobject::PREMATUREEOF);
     } while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
     if (strcmp(buf, buf2) != 0) {
 	free(buf);
-	return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+	return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
     }
     free(buf);
 
@@ -314,25 +314,23 @@ pushbutton::Read(FILE  *fp, long  id)
   long result;
   int dsversion;
   
-  (this)->SetID( (this)->UniqueID());
-
   if ((buf = ReadLine(fp)) == NULL)
-    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF));
+    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject::PREMATUREEOF));
   if (strncmp(buf,"Datastream version:",19))
-    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
   if ((dsversion = atoi(buf+19)) > DS_VERSION)	/* datastream version */
-    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
   if (dsversion < 1)
-    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
   free(buf);
 #ifdef PL8
   if (dsversion > 1) this->new_DS = TRUE; /* preserve information */
 #endif /* PL8 */
 
-  if ((result = pushbutton__ReadDataPart(this, fp, dsversion)) != dataobject_NOREADERROR)
+  if ((result = pushbutton__ReadDataPart(this, fp, dsversion)) != dataobject::NOREADERROR)
     return(pushbutton_SanelyReturnReadError(this, fp, id, result));
 
-  return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject_NOREADERROR));
+  return(pushbutton_SanelyReturnReadError(this, fp, id, dataobject::NOREADERROR));
 }
 
 
@@ -347,7 +345,7 @@ pushbutton::SetText(const char  *txt)
     char *oldtxt = text;
     text = (txt) ? strdup(txt) : NULL; 
     SetModified();
-    NotifyObservers(observable_OBJECTCHANGED);
+    NotifyObservers(observable::OBJECTCHANGED);
     if (oldtxt) 
       free(oldtxt);
 }
@@ -362,7 +360,7 @@ pushbutton::SetStyle(int  stylecode)
 
     this->style = stylecode;
     (this)->SetModified();
-    (this)->NotifyObservers(observable_OBJECTCHANGED);
+    (this)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 
@@ -378,7 +376,7 @@ pushbutton::SetButtonFont(class fontdesc  *f)
 
     this->myfontdesc = f;
     (this)->SetModified();
-    (this)->NotifyObservers(observable_OBJECTCHANGED);
+    (this)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 
@@ -405,7 +403,7 @@ pushbutton::SetFGColor(char  *name, int  red , int  green , int  blue)
     }
     
     (this)->SetModified();
-    (this)->NotifyObservers(observable_OBJECTCHANGED);
+    (this)->NotifyObservers(observable::OBJECTCHANGED);
 #ifdef PL8
     this->new_DS = TRUE; /* preserve information */
 #endif /* PL8 */
@@ -434,7 +432,7 @@ pushbutton::SetBGColor(char  *name, int  red , int  green , int  blue)
     }
     
     (this)->SetModified();
-    (this)->NotifyObservers(observable_OBJECTCHANGED);
+    (this)->NotifyObservers(observable::OBJECTCHANGED);
 #ifdef PL8
     this->new_DS = TRUE; /* preserve information */
 #endif /* PL8 */

@@ -523,7 +523,7 @@ printf("Found via arbiter - Returning %d\n",val);
 }
 void arbiterview::ObservedChanged(class observable  *changed, long  value)
 {
-    if (value == observable_OBJECTDESTROYED){
+    if (value == observable::OBJECTDESTROYED){
 	if(deletelist(this,(class celview *)changed)) return;
     }
     (this)->celview::ObservedChanged( changed, value);

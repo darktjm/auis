@@ -165,7 +165,7 @@ void helloworldview::ObservedChanged(class observable *obj, long  val)
 	    case helloworld_SubObjectChanged:
 		setSubView(this,hw->dobj);
 		break;
-	    case observable_OBJECTDESTROYED:
+	    case observable::OBJECTDESTROYED:
 		setSubView(this,NULL);
 		break;
 	}

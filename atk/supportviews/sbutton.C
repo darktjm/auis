@@ -421,7 +421,7 @@ static void sbutton__WriteDataPart(class sbutton  *self, FILE  *fp)
 
 long sbutton::Write(FILE  *fp, long  id, int  level)
 {
-    long uniqueid = (this)->UniqueID();
+    long uniqueid = (this)->GetID();
 
     if (id != (this)->GetWriteID()) {
 	/* New Write Operation */
@@ -645,7 +645,7 @@ static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, c
     while(!done) {
 	const struct dataprocs *dps;
 	buf=ReadLine(fp);
-	if(buf==NULL) return dataobject_PREMATUREEOF;
+	if(buf==NULL) return dataobject::PREMATUREEOF;
 	if(!linehascontrol) {
 	    free(buf);
 	    continue;
@@ -653,7 +653,7 @@ static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, c
 	buf2=ReadLine(fp);
 	if(buf2==NULL) {
 	    free(buf);
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	}
 	for(dps=procs;dps->name;dps++) {
 	    if(!strcmp(dps->name, buf+1)) {
@@ -664,7 +664,7 @@ static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, c
 	free(buf);
 	free(buf2);
     }
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 
@@ -684,7 +684,7 @@ static long sbutton__ReadDataPart(class sbutton  *self, FILE  *fp, int  dsversio
     rs.lastbutton=(-1);
     rs.prefs=NULL;
     if ((buf = ReadLine(fp)) == NULL)
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
     count=atoi(buf);
     p=strchr(buf,' ');
     if(p) {
@@ -720,20 +720,20 @@ static long sbutton__ReadDataPart(class sbutton  *self, FILE  *fp, int  dsversio
 	}
     }
     free(buf);
-    if(count<=0) return dataobject_PREMATUREEOF;
+    if(count<=0) return dataobject::PREMATUREEOF;
 
     rs.lastbutton=count;
     if(rs.maxprefs>0 && rs.maxprefs<=count+1) {
 	int i;
 	rs.prefs=(struct sbutton_prefs **)malloc(sizeof(struct sbutton_prefs *)*rs.maxprefs);
-	if(rs.prefs==NULL) return dataobject_PREMATUREEOF;
+	if(rs.prefs==NULL) return dataobject::PREMATUREEOF;
 	for(i=0;i<rs.maxprefs;i++) {
 	    if(self->prefs==NULL) SetupInitialState(self);
 	    rs.prefs[i] = sbutton::DuplicatePrefs(self->prefs, NULL);
-	    if(rs.prefs[i]==NULL) return dataobject_PREMATUREEOF;
+	    if(rs.prefs[i]==NULL) return dataobject::PREMATUREEOF;
 	    rs.prefs[i]->refcount=1;
 	}
-    } else return dataobject_NOREADERROR;
+    } else return dataobject::NOREADERROR;
     err = dostuff(self, fp, &rs, sprocs);
     if(rs.prefs!=NULL) {
 	int i;
@@ -759,12 +759,12 @@ static long sbutton_SanelyReturnReadError(class sbutton  *self, FILE  *fp, long 
     do {
 	if (buf != NULL) free(buf);
 	if ((buf = ReadLine(fp)) == NULL)
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
     } while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
     if (strcmp(buf, buf2) != 0) {
 	free(buf);
-	return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+	return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
     }
     free(buf);
 
@@ -777,19 +777,17 @@ long sbutton::Read(FILE  *fp, long  id)
 
   char *buf;
   int dsversion;
-  long err=dataobject_NOREADERROR;
+  long err=dataobject::NOREADERROR;
   
-  (this)->SetID( (this)->UniqueID());
-  
-  if ((buf = ReadLine(fp)) == NULL) err=dataobject_PREMATUREEOF;
+  if ((buf = ReadLine(fp)) == NULL) err=dataobject::PREMATUREEOF;
   else if (strncmp(buf,"Datastream version:",19)) {
-      err=dataobject_BADFORMAT;
+      err=dataobject::BADFORMAT;
   } else if ((dsversion = atoi(buf+19)) > DS_VERSION)	{
-      err=dataobject_BADFORMAT;
+      err=dataobject::BADFORMAT;
   }
   if(buf) free(buf);
 
-  if(err==dataobject_NOREADERROR) {
+  if(err==dataobject::NOREADERROR) {
       return sbutton_SanelyReturnReadError(this, fp, id, sbutton__ReadDataPart(this, fp, dsversion));
   } else return(sbutton_SanelyReturnReadError(this, fp, id, err));
 }
@@ -840,7 +838,7 @@ void sbutton::DeActivateButton(int  ind)
 
 void sbutton::Actuate(int  ind)
 {
-    if(id<0 || ind>=this->count || !this->buttons[ind].sensitive) return;
+    if(GetID()<0 || ind>=this->count || !this->buttons[ind].sensitive) return;
     struct owatch_data *w1=owatch::Create(this);
     if(this->hitfunc) this->hitfunc(this, this->hitfuncrock, ind, this->buttons[ind].rock);
     if(owatch::CheckAndDelete(w1)) {
@@ -902,7 +900,7 @@ void sbutton::SetLayout(int  rows , int  cols, enum sbutton_sizepolicy  policy)
     }
     (this)->SetModified();
     (this)->SetChangeFlag( sbutton_SIZECHANGED);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void sbutton::Delete(int  ind)
@@ -929,7 +927,7 @@ void sbutton::Delete(int  ind)
     
     (this)->SetModified();
     (this)->SetChangeFlag( sbutton_SIZECHANGED);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
     return;
 }
 
@@ -944,7 +942,7 @@ void sbutton::Swap(int  i1 , int  i2)
     this->buttons[i2]=si;
     (this)->SetModified();
     (this)->SetChangeFlag( sbutton_ALLCHANGED);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 	
 void sbutton::SetLabel(int  ind, const char  *txt)

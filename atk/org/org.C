@@ -232,17 +232,17 @@ org::Write( FILE			      *file, long			       writeID, int			       level )
   DEBUGdt(Headerwriteid,this->writeID);
   DEBUGdt(Given Id,writeID);
   DEBUGdt(Given Level,level);
-  id = (this )->UniqueID( );
+  id = (this )->GetID( );
   DEBUGdt(Local-ID,id);
-  if ( this->writeID != writeID ) {
-    this->writeID = writeID;
+  if ( this->GetWriteID() != writeID ) {
+    this->SetWriteID(writeID);
     fprintf( file, "\\begindata{%s,%ld}\n", (this )->GetTypeName( ), id );
     status = Write_Body( this, file, writeID );
     fprintf( file, "\n\\enddata{%s,%ld}\n", (this )->GetTypeName( ), id );
   }
   DEBUGdt(Status,status);
   OUT(org_Write);
-  return  this->dataobject::id;
+  return  this->GetID();
 }
 
 static

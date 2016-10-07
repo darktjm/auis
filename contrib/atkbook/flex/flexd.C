@@ -157,20 +157,20 @@ long flexd::Read(FILE  *fp, long  id)
     char LineBuf[250];
 
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     sscanf(LineBuf, "$ %d %d %d %d\n", &(this->porf),
 	    &(this->vorh), &(this->movable), &(this->pct));
     status = ReadOneObject(this, fp, TRUE);
-    if (status != dataobject_NOREADERROR) return status;
+    if (status != dataobject::NOREADERROR) return status;
     status = ReadOneObject(this, fp, FALSE);
-    if (status != dataobject_NOREADERROR) return status;
+    if (status != dataobject::NOREADERROR) return status;
     while (fgets(LineBuf, sizeof(LineBuf)-1, fp) != NULL) {
 	if (!strncmp(LineBuf, "\\enddata{flexd", 13)) {
-	    return dataobject_NOREADERROR;
+	    return dataobject::NOREADERROR;
 	}
     }
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
 }
 
 static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
@@ -180,11 +180,11 @@ static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
     class dataobject *newob = NULL;
 
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     if (strncmp(LineBuf, "\\begindata{", 11) != 0) {
 	if (strncmp(LineBuf, "\\ObjectEmpty", 12) != 0) {
-	    return(dataobject_BADFORMAT);
+	    return(dataobject::BADFORMAT);
 	}
 	if (IsLeft) {
 	    self->left = NULL;
@@ -193,34 +193,34 @@ static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
 	    self->right = NULL;
 	    self->rvname = NULL;
 	}
-	return(dataobject_NOREADERROR);
+	return(dataobject::NOREADERROR);
     }
     thisname = &LineBuf[11];
     obidstr = index(thisname, ',');
-    if (!obidstr) return(dataobject_BADFORMAT);
+    if (!obidstr) return(dataobject::BADFORMAT);
     *obidstr++ = '\0';
     s = index(obidstr, '}');
-    if (!s) return(dataobject_BADFORMAT);
+    if (!s) return(dataobject::BADFORMAT);
     *s = '\0';
     obid = atoi(obidstr);
     if ((newob = (class dataobject *)
 	  ATK::NewObject(thisname)))  {
 	status = (newob)->Read( fp, obid);
-	if (status != dataobject_NOREADERROR) return status;
+	if (status != dataobject::NOREADERROR) return status;
     } else {
-	return(dataobject_OBJECTCREATIONFAILED);
+	return(dataobject::OBJECTCREATIONFAILED);
     }
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     if (strncmp(LineBuf, "\\view{", 6)) {
-	return(dataobject_BADFORMAT);
+	return(dataobject::BADFORMAT);
     }
     thisname = &LineBuf[6];
     s = index(thisname, '}');
     if (s) *s = '\0';
     s = strdup(thisname);
-    if (!s) return(dataobject_OBJECTCREATIONFAILED);
+    if (!s) return(dataobject::OBJECTCREATIONFAILED);
     if (IsLeft) {
 	self->lvname = s;
 	self->left = newob;
@@ -228,6 +228,6 @@ static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
 	self->rvname = s;
 	self->right = newob;
     }
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }
 

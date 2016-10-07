@@ -77,7 +77,7 @@ labelview::ObservedChanged(class observable  *dobj, long  status)
 		this->GaveSize = FALSE;
 		(this)->WantNewSize( this);
 	}
-	else if (status == observable_OBJECTDESTROYED) 
+	else if (status == observable::OBJECTDESTROYED) 
 		return;	/* deleting it */
 	(this)->WantUpdate( this);
 }

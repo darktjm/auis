@@ -297,7 +297,7 @@ saveBuffer(class frame  *outputFrame, class buffer  *buffer, char  *filename)
         (buffer)->SetCkpVersion( version);
         (buffer)->SetWriteVersion( version);
         (buffer)->SetReadOnly( (access(filename, W_OK) == -1 && errno == EACCES));
-        (buffer)->NotifyObservers( observable_OBJECTCHANGED);
+        (buffer)->NotifyObservers( observable::OBJECTCHANGED);
 
         sprintf(message, "Wrote file '%.*s'.%s", MAXPATHLEN, filename,
 		buffer->readOnly ? " File is now readonly." : "");

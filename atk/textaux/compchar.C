@@ -211,7 +211,7 @@ static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,c
 	}
 	(t)->ReplaceCharacters(pos, 1, (const char *)codes+(i-list),1);
     }
-    (t)->NotifyObservers(observable_OBJECTCHANGED);
+    (t)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 struct arock {

@@ -84,7 +84,7 @@ void cltextview::AddClickObserver( ATK   * observer, cltextview_hitfptr  callBac
                     {
   short free;
 
-  if (FindObserver( this, observer) == -1)
+  if (::FindObserver( this, observer) == -1)
     {
       free = FreeSlot(this);
       this->observers[free].observer = observer;
@@ -109,7 +109,7 @@ void cltextview::RemoveClickObserver( ATK   * observer )
           {
   short i;
 
-  while ((i = FindObserver( this, observer )) != -1)
+  while ((i = ::FindObserver( this, observer )) != -1)
     this->observers[i].observer = NULL;
 }
 

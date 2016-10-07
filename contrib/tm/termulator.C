@@ -1341,15 +1341,15 @@ long termulator::Read(FILE  *fp,long  id)
 	return (this)->text::Read(fp,id);
 
     if(fgets(buf,sizeof(buf),fp)==NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     if(fscanf(fp,"\\enddata{%[^,],%d}\n",dummyS,&dummyI)!=2)
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
 /* A statement here to start up termulator with the read args 
 has been removed , as it represented a major security hole.  tpn 2/28/90 */
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 long termulator::Write(FILE  *fp,long  writeID,int  level)
@@ -1360,7 +1360,7 @@ long termulator::Write(FILE  *fp,long  writeID,int  level)
 	(this)->SetWriteID(writeID);
 
 	fprintf(fp,"\\begindata{%s,%ld}\n",
-		(this)->GetTypeName(), (this)->UniqueID());
+		(this)->GetTypeName(), (this)->GetID());
 
 	if(this->args==NULL)
 	    *buf='\0';
@@ -1368,10 +1368,10 @@ long termulator::Write(FILE  *fp,long  writeID,int  level)
 	    argvtostr(this->args,buf,sizeof(buf));
 
 	fprintf(fp,"%s\n\\enddata{%s,%ld}\n",
-		buf,(this)->GetTypeName(), (this)->UniqueID());
+		buf,(this)->GetTypeName(), (this)->GetID());
     }
 
-    return (this)->UniqueID();
+    return (this)->GetID();
 }
 
 /* this routine in effect puts the bold cooked-mode characters at the end of the document */

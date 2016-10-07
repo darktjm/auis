@@ -851,7 +851,7 @@ void callCompLib(struct libnode  *lnode);
 		/* compile ness from library and set libnode->status */
 long ReadTextFileStream(class text *text, const char *name, FILE *f, boolean  objok);
 	/* checks filetype and whatnot 
-	returns dataobject_NOREADERROR or a dataobject error */
+	returns dataobject::NOREADERROR or a dataobject error */
 
 /* dump.C */
 void dumpStack(FILE *f, union stackelement *NSP);

@@ -167,7 +167,7 @@ AWidgetView::InitChildren() {
 
 	void
 AWidgetView::ObservedChanged(class observable  *changed, long  status)  {
-	if (status == observable_OBJECTDESTROYED) 
+	if (status == observable::OBJECTDESTROYED) 
         {
             if(changed==mouseFocus) mouseFocus=NULL;
         }

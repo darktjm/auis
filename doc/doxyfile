@@ -12,6 +12,10 @@ PROJECT_LOGO           = ${ANDREWDIR}/lib/xicons/alogo.icon
 # that it's better to just leave it off.
 #ALWAYS_DETAILED_SEC    = YES
 INLINE_INHERITED_MEMB  = YES
+# Stripping include from the path confuses doxygen due to 2 util.h files
+# that are in completely different locations.  Stupid doxygen.
+#STRIP_FROM_PATH        = ${ANDREWDIR}/include
+#STRIP_FROM_INC_PATH    = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk
 STRIP_FROM_PATH        = ${ANDREWDIR}
 STRIP_FROM_INC_PATH    = ${ANDREWDIR}
 JAVADOC_AUTOBRIEF      = YES
@@ -35,6 +39,11 @@ SHOW_NAMESPACES        = YES
 WARN_NO_PARAMDOC       = YES
 # probably want to do this to put some blurb in front
 #USE_MDFILE_AS_MAINPAGE =
+# it creates hierarchy diagrams even w/o dot, with no config to disable
+#HAVE_DOT               = YES
+DOT_NUM_THREADS        = 5
+GROUP_GRAPHS           = NO
+COLLABORATION_GRAPH    = NO
 
 SOURCE_BROWSER         = YES
 REFERENCES_LINK_SOURCE = YES
@@ -47,6 +56,14 @@ OUTPUT_DIRECTORY       = dox
 GENERATE_HTML          = YES
 GENERATE_LATEX         = YES
 PAPER_TYPE             = letter
+
+# Reduce JavaScript usage in HTML output
+# No matter what, the start page is useless without JavaScript.
+SEARCHENGINE           = NO
+# these two are off by default, but best to make sure.
+GENERATE_TREEVIEW      = NO
+USE_MATHJAX            = NO
+
 
 # probably need to find any preproc functions that create classes and add here
 PREDEFINED             = __GNUC__ __STDC__

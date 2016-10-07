@@ -86,7 +86,7 @@ static boolean SetSwitchee(class page  *self,struct page_switchee  *sw)
 {
     if(sw == self->NowPlaying) return(FALSE); /* no change */
     self->NowPlaying = sw;
-    (self)->NotifyObservers(observable_OBJECTCHANGED);
+    (self)->NotifyObservers(observable::OBJECTCHANGED);
     return(TRUE);
 }
 
@@ -123,23 +123,23 @@ long page::Read(FILE  *fp, long  id)
 
     while (TRUE) {
 	if (fgets(Label, sizeof(Label)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (!strncmp(Label, "\\enddata{page", 13)) {
 	    break;
 	}
 	if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (strncmp(LineBuf, "\\begindata{", 11)) {
-	    return(dataobject_BADFORMAT);
+	    return(dataobject::BADFORMAT);
 	}
 	thisname = lp = &LineBuf[11];
 	obidstr = strchr(lp, ',');
-	if (!obidstr) return(dataobject_BADFORMAT);
+	if (!obidstr) return(dataobject::BADFORMAT);
 	*obidstr++ = '\0';
 	s = strchr(obidstr, '}');
-	if (!s) return(dataobject_BADFORMAT);
+	if (!s) return(dataobject::BADFORMAT);
 	*s = '\0';
 	obid = atoi(obidstr);
 	if(!ATK::LoadClass(thisname)) {
@@ -148,17 +148,17 @@ long page::Read(FILE  *fp, long  id)
 	if ((newob = (class dataobject *)
 	     ATK::NewObject(thisname)))  {
 	    status = (newob)->Read( fp, obid);
-	    if (status != dataobject_NOREADERROR) {
+	    if (status != dataobject::NOREADERROR) {
 		return status;
 	    }
 	} else {
-	    return(dataobject_OBJECTCREATIONFAILED);
+	    return(dataobject::OBJECTCREATIONFAILED);
 	}
 	if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (strncmp(LineBuf, "\\view{", 6)) {
-	    return(dataobject_BADFORMAT);
+	    return(dataobject::BADFORMAT);
 	}
 	thisname = lp = &LineBuf[6];
 	s = strchr(lp, '}');
@@ -168,17 +168,17 @@ long page::Read(FILE  *fp, long  id)
 	if (Label[0] == '*') {
 	    if (!(this)->AddObject( newob,
 				    Label+1, thisname,page_ATEND)) {
-		return(dataobject_OBJECTCREATIONFAILED);
+		return(dataobject::OBJECTCREATIONFAILED);
 	    }
 	    (this)->SetNowPlaying( newob);
 	} else if (!(this)->AddObject( newob,
 				       Label, thisname,page_ATEND)) {
-		return(dataobject_OBJECTCREATIONFAILED);
+		return(dataobject::OBJECTCREATIONFAILED);
 	}
     }
     if(this->NowPlaying == NULL && this->FirstSwitchee != NULL)
 	SetSwitchee(this,this->FirstSwitchee);
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 
 }
 
@@ -253,7 +253,7 @@ boolean page::DeleteObject(class dataobject  *d)
 	    } else {
 		this->FirstSwitchee = sw->next;
 	    }
-/*	    dataobject_Destroy(sw->d); */
+/*	    dataobject::Destroy(sw->d); */
 	    free(sw->label);
 	    free(sw->viewname);
 	    if(this->NowPlaying == sw){

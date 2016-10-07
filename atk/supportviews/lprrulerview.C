@@ -160,7 +160,7 @@ lprrulerview::ObservedChanged(class observable  *dobj, long  status)
 			{
 	if (status == lprruler_DATACHANGED) 
 		this->iconschanged = this->textchanged = TRUE;
-	else if (status == observable_OBJECTDESTROYED)
+	else if (status == observable::OBJECTDESTROYED)
 		return;
 	(this)->WantUpdate( this);
 }

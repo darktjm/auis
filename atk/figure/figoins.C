@@ -218,7 +218,7 @@ static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
 	return figobj_Failed;
     }
     ix=this_c->dobj->Read(fp, id);
-    if (ix!=dataobject_NOREADERROR) {
+    if (ix!=dataobject::NOREADERROR) {
 	message::DisplayString(v, 0, "Unable to read inset from cut buffer.");
 	((v)->GetIM())->CloseFromCutBuffer( fp);
 	return figobj_Failed;
@@ -282,16 +282,16 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
     const char *np=namebuf;
 
     ix = (this)->figorect::ReadBody( fp, FALSE);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     if (!strncmp(buf, "\\nodata", 7)) {
 	this->dobj = NULL;
     }
     else {
 	ix = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-	if (ix!=2) return dataobject_BADFORMAT;
+	if (ix!=2) return dataobject::BADFORMAT;
 	if(ATK::LoadClass(np)==NULL) {
 	    np="unknown";
 	}
@@ -303,7 +303,7 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
 	    this->dobj=(class dataobject *)ATK::NewObject("unknown");
 	}
 	if (!this->dobj) 
-	    return dataobject_OBJECTCREATIONFAILED;
+	    return dataobject::OBJECTCREATIONFAILED;
 	(this->dobj)->Read( fp, tid);
     }
 
@@ -312,7 +312,7 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 void figoins::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)

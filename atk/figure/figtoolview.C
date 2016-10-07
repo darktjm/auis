@@ -914,14 +914,14 @@ boolean figtoolview::SetPrimaryView(class figview  *view)
 void figtoolview::ObservedChanged(class observable  *observed, long  status)
 {
     if (observed == (class observable *)this->primaryview) {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    this->primaryview = NULL;
 	}
 	else {
 	}
     }
     else if (observed == (class observable *)this->fontselp) {
-	if (status!=observable_OBJECTDESTROYED) {
+	if (status!=observable::OBJECTDESTROYED) {
 	    long changemask = 0;
 	    /*printf("figtool: observing: %c%s %c%d (%c%d)\n", 
 		   (fontsel_IsActive(self->fontselp, fontsel_Family) ? ' ' : '!'), fontsel_GetFamily(self->fontselp), 
@@ -977,7 +977,7 @@ void figtoolview::ObservedChanged(class observable  *observed, long  status)
 	}
     }
     else { /* observed = GetDataObject(self), we hope */
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    fprintf(stderr, "figtoolview: Primary fig dataobject destroyed.\n");
 	}
 	else {

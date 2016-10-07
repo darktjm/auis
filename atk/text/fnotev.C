@@ -360,7 +360,7 @@ ismyenv(class fnotev  *self,class text  *d,long  pos,class environment  *env)
 #endif
 void fnotev::ObservedChanged(class observable  *changed, long  value)
 {
-    if(value == observable_OBJECTDESTROYED){
+    if(value == observable::OBJECTDESTROYED){
 	if(this->imp && changed == (class observable *)this->imp->fn){
 #if 0
 	    /* can't do this code */

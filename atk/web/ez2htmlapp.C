@@ -427,7 +427,7 @@ ReadInfile(ez2htmlapp *self, FILE *infile, boolean *iscode, boolean *isplain) {
 	}
 	txt->SetAttributes(attribs);
 
-	if (txt->Read(infile, objID) != dataobject_NOREADERROR) {
+	if (txt->Read(infile, objID) != dataobject::NOREADERROR) {
 		fprintf(stderr, "%s: Failed reading %s\n", 
 			self->GetName(),
 			(self->inputFile) ? self->inputFile : "stdin");

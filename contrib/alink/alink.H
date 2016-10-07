@@ -21,8 +21,8 @@ public:
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;
-       boolean ReadOtherFormat(FILE *file, char *fmt, char *encoding, char *description)  ;
-       long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
+       boolean ReadOtherFormat(FILE *file, const char *fmt, const char *encoding, const char *description)  ;
+       long WriteOtherFormat(FILE *file, long writeid, int level, dataobject::otherformat usagetype, const char *boundary)  ;
        void SetText(char *txt);
     
       virtual void SetAudio(long len, char *audio);

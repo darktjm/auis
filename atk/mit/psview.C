@@ -201,7 +201,7 @@ static void autobounds(class psview  *self, long  rock)
     /* insert the funky translate command */
     sprintf(tr_buf, translate, -llx, -lly);
     (tobj)->AlwaysInsertCharacters( 0L, tr_buf, strlen(tr_buf)); 
-    (tobj)->NotifyObservers( observable_OBJECTCHANGED);
+    (tobj)->NotifyObservers( observable::OBJECTCHANGED);
     (tvobj)->SetDotPosition( 0L);
     (tvobj)->SetDotLength( strlen(tr_buf));
     (tvobj)->FrameDot( 0L);

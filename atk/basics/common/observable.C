@@ -45,11 +45,7 @@ struct triggerclass {
 static struct triggerclass *Triggers = NULL;	/* the list of defined triggers */
 
 
-
-
-
 ATKdefineRegistry(observable, traced, NULL);
-static int FindObserver(class observable  *self, class observable  *observer  );
 
 
 observable::observable()
@@ -80,26 +76,26 @@ observable::~observable()
 }
 
 void observable::Destroy() {
-    if(ReferenceCount()==1) NotifyObservers( observable_OBJECTDESTROYED);
+    if(ReferenceCount()==1) NotifyObservers( observable::OBJECTDESTROYED);
     traced::Destroy();
 }
     
 /* Finds the index of the observer in self observers table.  Returns -1 if observer is not in the list
  */
-static int FindObserver(class observable  *self, class observable  *observer  )
+int observable::FindObserver( class observable  *observer  )
 {
     int i = 0;
-    class observable **observers;
+    class observable **ob;
 
-    for (i = 0, observers = self->observers; i < self->nObservers; i++, observers++)
-	if (*observers == observer) return i;
+    for (i = 0, ob = observers; i < nObservers; i++, ob++)
+	if (*ob == observer) return i;
     
     return -1;
 }
 
 boolean observable::IsObserver(class observable  *observer  )
 {
-    return (FindObserver(this, observer) != -1 ? TRUE: FALSE);
+    return (FindObserver(observer) != -1 ? TRUE: FALSE);
 }
 
 void observable::AddObserver(class observable  *observer  )
@@ -108,7 +104,7 @@ void observable::AddObserver(class observable  *observer  )
 	this->maxObservers = INITIALNUMOBSERVERS;
 	this->observers = (class observable **) malloc (INITIALNUMOBSERVERS * sizeof(class observable *));
     }
-    else if (FindObserver(this, observer) != -1) return;
+    else if (FindObserver(observer) != -1) return;
     else if (this->nObservers == this->maxObservers)  {
 	this->maxObservers += this->maxObservers / 2;
 	this->observers = (class observable **) realloc(this->observers, this->maxObservers * sizeof(class observable *));
@@ -120,7 +116,7 @@ void observable::RemoveObserver(class observable  *observer  )
 {
     int i;
 
-    if ((i = FindObserver(this, observer)) != -1)  {
+    if ((i = FindObserver(observer)) != -1)  {
 	while (++i < this->nObservers) {
 	    this->observers[i - 1] = this->observers[i];
 	}
@@ -196,15 +192,15 @@ observable::ListTriggers(ATKregistryEntry   *info)
 	return result;
 }
 
-static struct triggerhousing *FindOrMakeTrigger(observable *self, const atom *trigger) {
+struct triggerhousing *observable::FindOrMakeTrigger(const atom *trigger) {
     struct triggerclass *tc;
     struct triggerhousing *th;
-    for (th	= self->triggers; th !=	NULL &&	th->trigger != trigger; th = th->next) {};
+    for (th	= triggers; th !=	NULL &&	th->trigger != trigger; th = th->next) {};
     if (th == NULL) {
 	/* find out if the trigger is defined */
 	/* we have to loop through ALL the classes since triggers should be inheritable but some triggers may be defined for the superclass and others for the subclass */
 	for (tc = Triggers;  tc != NULL; tc = tc->next) {
-	    if((self)->IsType( tc->class_c) && (tc->triggers)->Memberp( trigger)) break;
+	    if(IsType( tc->class_c) && (tc->triggers)->Memberp( trigger)) break;
 	};
 	if (tc == NULL)
 	    /* not defined */
@@ -215,14 +211,14 @@ static struct triggerhousing *FindOrMakeTrigger(observable *self, const atom *tr
 	th->instances = NULL;
 	th->disablecount = 0;
 	th->firepending = FALSE;
-	th->next = self->triggers;
-	self->triggers = th;
+	th->next = triggers;
+	triggers = th;
     }
     return th;
 }
 
 boolean observable::AddRecipient(const class atom  *trigger, ATK   *rcvr, const aaction &act) {
-    struct triggerhousing *th=FindOrMakeTrigger(this,trigger);
+    struct triggerhousing *th=FindOrMakeTrigger(trigger);
     struct triggerinstance *ti;
     if(th==NULL) return FALSE;
  /* th now points to an appropriate triggerhousing */
@@ -255,7 +251,7 @@ boolean observable::AddRecipient(const class atom  *trigger, ATK   *rcvr, const 
 	boolean
 observable::AddRecipient(const class atom  *trigger, ATK   *rcvr, observable_fptr func, long  rock)
 					{
-	struct triggerhousing *th=FindOrMakeTrigger(this,trigger);
+	struct triggerhousing *th=FindOrMakeTrigger(trigger);
 	struct triggerinstance *ti;
 	if(th==NULL) return FALSE;
 	

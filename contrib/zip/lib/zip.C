@@ -242,11 +242,11 @@ zip::Read( FILE			      *file, long			       id )
     {
     if ( ( status = (this)->Open_Stream(  &STREAM, generated_file_name, zip_default ) ) )
       { DEBUGdt(Open Status,status);
-      status = dataobject_BADFORMAT;
+      status = dataobject::BADFORMAT;
       }
     if ( ( status = (this)->Read_Stream(  STREAM ) ) )
       { DEBUGdt(Read Status,status);
-      status = dataobject_BADFORMAT;
+      status = dataobject::BADFORMAT;
       }
     unlink( generated_file_name );
     }
@@ -268,14 +268,14 @@ zip::Write( FILE			      *file, long			       id, int 			       level )
   WriteStreamFile = file;
   WriteStreamId = id;
   WriteStreamLevel = level;
-  if ( this->writeID != id ) /*===???avoid recursive writes */
+  if ( this->GetWriteID() != id ) /*===???avoid recursive writes */
     {
-    this->writeID = id;
+    this->SetWriteID(id);
     if ( level )
       { DEBUG(Not Parent -- Write To Datastream);
       fprintf( file, "\\begindata{%s,%ld}\n",
 		(this)->GetTypeName( ),
-		(this)->UniqueID( ) );
+		(this)->GetID( ) );
       Write_View_Info( this, file );
       Write_Object_Info( this, file );
       Write_PrintSize_Info( this, file );
@@ -293,7 +293,7 @@ zip::Write( FILE			      *file, long			       id, int 			       level )
       DEBUGdt(Status,status);
       fprintf( file, "\n\\enddata{%s,%ld}\n",
 		(this )->GetTypeName( ),
-		(this)->UniqueID( ) );
+		(this)->GetID( ) );
       }
       else
       { DEBUG(Parent -- Write To Raw File);
@@ -339,7 +339,7 @@ static void Write_PrintSize_Info( class zip *self, FILE *file )
 static
 long Generate_Temp_File( class zip		      *self, FILE			      *file, char			     **generated_file_name )
         {
-  long			      status = dataobject_NOREADERROR;
+  long			      status = dataobject::NOREADERROR;
   static char			      temp_name[512];
   FILE			     *temp_file;
   long			      level = 0;
@@ -373,7 +373,7 @@ long Generate_Temp_File( class zip		      *self, FILE			      *file, char			    
 	else
 	{ DEBUG(EOF);
 	if ( level > 0 )
-	  status = dataobject_PREMATUREEOF;
+	  status = dataobject::PREMATUREEOF;
 	break;
 	}
       }

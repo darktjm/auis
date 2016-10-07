@@ -831,7 +831,7 @@ content::~content()
 void content::ObservedChanged(class observable  *changed,long  value)
 {
     if(changed == (class observable *) this->srctext){
-	if(value == observable_OBJECTDESTROYED){
+	if(value == observable::OBJECTDESTROYED){
 	    this->srctext = NULL;
 	    clear(this);
 	}

@@ -44,13 +44,13 @@ contimer::~contimer()
     if (this->queuedevent != NULL) {
 	(this->queuedevent)->Cancel();
     }
-    (this)->NotifyObservers( observable_OBJECTDESTROYED);
+    (this)->NotifyObservers( observable::OBJECTDESTROYED);
 }
 
 void HandleTimer(class contimer  *self)
 {
     if (self->proc) (self->proc)(self);
-    (self)->NotifyObservers( observable_OBJECTCHANGED);
+    (self)->NotifyObservers( observable::OBJECTCHANGED);
     self->queuedevent = im::EnqueueEvent((event_fptr)HandleTimer, (char *)self, event_MSECtoTU(self->interval)); 
 }
 

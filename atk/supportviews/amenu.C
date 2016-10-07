@@ -713,7 +713,7 @@ class view *AmenuOptionCardv::Hit(enum view_MouseAction action, long x, long y, 
     if(action==view_LeftUp || action==view_RightUp) {
 	AmenuOption *ao=(AmenuOption *)GetDataObject();
 	if(e) ao->selected=e;
-	ao->NotifyObservers(observable_OBJECTCHANGED);
+	ao->NotifyObservers(observable::OBJECTCHANGED);
     }
     ret=AmenuCardv::Hit(action,x,y,numberOfClicks);
     if(action==view_LeftUp || action==view_RightUp) GetIM()->VanishWindow();

@@ -680,7 +680,7 @@ void textview::ObservedChanged(class observable  *changed, long  value)
             {
     class view *vself = (class view *) this;
     if (changed == (class observable *) vself->dataobject)  {
-	if (value == observable_OBJECTDESTROYED) {
+	if (value == observable::OBJECTDESTROYED) {
 	    if (this->displayEnvironment != NULL) {
 		(this)->ReleaseStyleInformation( this->displayEnvironment);
 		this->displayEnvironment = NULL;
@@ -695,7 +695,7 @@ void textview::ObservedChanged(class observable  *changed, long  value)
 	    (vself)->WantUpdate( vself);
 	}
     }
-    else if (value == observable_OBJECTDESTROYED &&
+    else if (value == observable::OBJECTDESTROYED &&
            (ATK::IsTypeByName((changed)->GetTypeName(), "viewref"))) {
 
                class view *vw;
@@ -4008,7 +4008,7 @@ static void DoCopySelection(class textview  *self, FILE  *cutFile, long  pos , l
 	fprintf(cutFile, "\\begindata{%s, %d}\n",
 		(d)->GetCopyAsText() ? "text": (d)->GetTypeName(),
 		/* d->header.dataobject.id */ 999999);
-    d->writeID = im::GetWriteID();
+    d->SetWriteID(im::GetWriteID());
     (d)->WriteSubString( pos, len, cutFile, UseDataStream);
     
     if (UseDataStream)

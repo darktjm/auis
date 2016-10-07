@@ -74,7 +74,7 @@ int main(int  argc, char  **argv)
 	    (self)->SetJPEGSaveQuality( saveQuality);
 	if(saveformat)
 	    (self)->SetSaveFormatString( saveformat);
-	if((self)->Write( stdout, im::GetWriteID(), -1) == dataobject_NOREADERROR)
+	if((self)->Write( stdout, im::GetWriteID(), -1) == dataobject::NOREADERROR)
 	    exit(0);
     }
     else {

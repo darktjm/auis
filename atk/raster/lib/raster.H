@@ -41,8 +41,8 @@ public:
 	 long Read(/* struct raster *self, */ FILE *file, long id) ;
 	 long Write(/* struct raster *self, */ FILE *file, long id, int level)
 			 ;
-	 boolean ReadOtherFormat(FILE *file, char *fmt, char *encoding, char *description)  ;
-	 long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
+	 boolean ReadOtherFormat(FILE *file, const char *fmt, const char *encoding, const char *description)  ;
+	 long WriteOtherFormat(FILE *file, long writeid, int level, dataobject::otherformat usagetype, const char *boundary)  ;
 	 void ObservedChanged(/* struct raster *self, */ class observable *pix, long status);
 	 void SetAttributes( struct attributes *attributes );
 

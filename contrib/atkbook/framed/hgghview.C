@@ -125,7 +125,7 @@ static void ChangeButton(class hgghview  *self, long  param)
 		NULL, Buf, sizeof(Buf)) >= 0) {
 	(self->b)->SetText( Buf);
 	(self->b)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
 	message::DisplayString(self, 10,
 		"Changed the button text as requested.");
     }

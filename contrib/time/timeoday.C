@@ -208,7 +208,7 @@ timeoday::FormatTime()
     }
   }
   this->tod[j] = '\0';
-  (this)->NotifyObservers(observable_OBJECTCHANGED);
+  (this)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 
@@ -368,7 +368,7 @@ timeoday::Write(FILE  *fp, long  id, int  level)
 
 */
 
-  long uniqueid = (this)->UniqueID();
+  long uniqueid = (this)->GetID();
 
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
@@ -393,12 +393,12 @@ timeoday::ReadDataPart(FILE  *fp)
   char *buf;
   
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   (this)->SetFormat( buf);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strcmp(buf,"")!= 0) {
     char name[MAXPATHLEN];
     long style, size;
@@ -408,7 +408,7 @@ timeoday::ReadDataPart(FILE  *fp)
   }
   free(buf);
 
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 
@@ -422,29 +422,27 @@ timeoday::Read(FILE  *fp, long  id)
   char *buf, buf2[255];
   long result;
   
-  (this)->SetID( (this)->UniqueID());
-
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strncmp(buf,"Datastream version:",19))
-    return(dataobject_BADFORMAT);
+    return(dataobject::BADFORMAT);
   if (atoi(buf+19) != DS_VERSION)	/* datastream version */
-    return(dataobject_BADFORMAT);
+    return(dataobject::BADFORMAT);
   free(buf);
 
-  if ((result = (this)->ReadDataPart( fp)) != dataobject_NOREADERROR)
+  if ((result = (this)->ReadDataPart( fp)) != dataobject::NOREADERROR)
     return(result);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   sprintf(buf2, "\\enddata{%s,%ld}", (this)->GetTypeName(), id);
   if (strcmp(buf, buf2)) {
     free(buf);
-    return(dataobject_MISSINGENDDATAMARKER);
+    return(dataobject::MISSINGENDDATAMARKER);
   }
   free(buf);
 
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 
@@ -457,7 +455,7 @@ timeoday::SetFont(class fontdesc  *f)
 */
 
   this->myfontdesc = f;
-  (this)->NotifyObservers(observable_OBJECTCHANGED);
+  (this)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 

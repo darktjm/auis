@@ -40,6 +40,10 @@ typedef boolean (*ATKinitfptr)(void);
  * Note that the latter means that you can have no more than one call of this
  * macro in a given C++ file.
  *
+ * The current dynamic object linker requires that you define each
+ * class using either ATKdefineRegistry() or ATKdefineRegistryNoInit()
+ * or a raw definition.  No additional macros will be expanded.
+ *
  * Its use looks like this (example):
  *
  *    `ATKdefineRegistry(textview, view, initfunc);`
@@ -88,6 +92,10 @@ static UNUSED ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
  * Note that the lack of initialization also means that the static
  * ATKinited_ variable is no longer declared, so more than one of these
  * may appear in a C++ file.
+ *
+ * The current dynamic object linker requires that you define each
+ * class using either ATKdefineRegistry() or ATKdefineRegistryNoInit()
+ * or a raw definition.  No additional macros will be expanded.
  */
 #define ATKdefineRegistryNoInit(me, sup) \
   static ATK *me ## _new_() { return new me; };\

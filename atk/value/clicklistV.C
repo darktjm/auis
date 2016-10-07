@@ -126,7 +126,7 @@ void clicklistV::ObservedChanged(class observable  *changed,long  value)
     const char * const *arr;
     long size;
     val = (this)->Value();
-    if(value == observable_OBJECTDESTROYED){
+    if(value == observable::OBJECTDESTROYED){
 	if(changed == (class observable *)this->cltextviewp)
 	    this->cltextviewp = NULL;
 	if( changed == (class observable *) this->textp)

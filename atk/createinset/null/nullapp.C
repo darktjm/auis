@@ -143,9 +143,9 @@ nullapp::Start()
 
 		if (c != EOF)
 			val = (this->dobj)->Read( f, objectID);
-		else val = dataobject_NOREADERROR;
+		else val = dataobject::NOREADERROR;
 
-		if (val != dataobject_NOREADERROR) {
+		if (val != dataobject::NOREADERROR) {
 			fprintf(stderr, "Input file is corrupted (%ld): %s\n",
 					 val, this->inputfile);
 			return FALSE;

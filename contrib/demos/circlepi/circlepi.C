@@ -59,6 +59,6 @@ circlepi::SetDepth(int  limit)
           {
     if (this->depth_limit != limit) {
 	this->depth_limit = limit;
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }

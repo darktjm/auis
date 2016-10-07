@@ -140,7 +140,7 @@ ReadInputFile(FILE * InputFile, struct pixelimage *pix)
 	default:
 	case typePostscript: 
 	case typeUnknown: 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	case typeraster: 
 	    return rasterio::ReadImage(InputFile, pix);
 	case typeRF: 
@@ -431,7 +431,7 @@ int main(int argc, char **argv)
 	pix = new pixelimage;
 
 	ret = ReadInputFile(infile, pix);
-	if (ret != dataobject_NOREADERROR) {
+	if (ret != dataobject::NOREADERROR) {
 		fprintf (stderr, "Read of %s failed with code %ld\n", inname, ret);
 		exit(3);
 	}

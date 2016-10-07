@@ -488,12 +488,12 @@ long figorect::ReadBody(FILE  *fp, boolean  recompute)
     char buf[LINELENGTH+1];
 
     ix = (this)->figobj::ReadBody( fp, FALSE);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$ %ld %ld", &w, &h);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
 
     this->w = w;
     this->h = h;
@@ -502,7 +502,7 @@ long figorect::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 #define FadeColor(col, shad)  (1.0 - (1.0-(shad)) * (1.0-(col)))

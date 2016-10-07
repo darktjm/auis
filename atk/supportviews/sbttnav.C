@@ -398,7 +398,7 @@ static void FontProc(class sbttnav  *self, long  param)
   }
   (b)->SetModified();
   (b)->SetChangeFlag( sbutton_ALLCHANGED|sbutton_SIZECHANGED);
-  (b)->NotifyObservers( observable_OBJECTCHANGED);
+  (b)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 
@@ -436,7 +436,7 @@ static void StyleProc(class sbttnav  *self, long  param)
     }
     (b)->SetModified();
     (b)->SetChangeFlag( sbutton_ALLCHANGED|sbutton_SIZECHANGED);
-    (b)->NotifyObservers( observable_OBJECTCHANGED);
+    (b)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void ColorProc(class sbttnav  *self, long  param)
@@ -497,7 +497,7 @@ static void ColorProc(class sbttnav  *self, long  param)
     } else return;
     (b)->SetModified();
     (b)->SetChangeFlag( sbutton_ALLCHANGED);
-    (b)->NotifyObservers( observable_OBJECTCHANGED);
+    (b)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void GroupProc(class sbttnav  *self, long  rock)
@@ -649,7 +649,7 @@ static void GDeleteProc(class sbttnav  *self, long  rock)
     free(h);
     (b)->SetModified();
     (b)->SetChangeFlag( sbutton_SIZECHANGED|sbutton_ALLCHANGED);
-    (b)->NotifyObservers( observable_OBJECTCHANGED);
+    (b)->NotifyObservers( observable::OBJECTCHANGED);
     (self)->PostMenus( NULL);
 }
 
@@ -684,7 +684,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
 	    sbutton::GetTopShadow(prefs) = Intern(buf1);
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    if(sbutton::GetTopShadow(prefs)!=NULL) {
 		sprintf(buf3, "Changed button top shadow color to %s.", buf1);
 	    } else {
@@ -707,7 +707,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
 	    sbutton::GetBottomShadow(prefs) = Intern(buf2);
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    if(sbutton::GetBottomShadow(prefs)!=NULL) {
 		sprintf(buf3, "Changed button bottom shadow color to %s.", buf2);
 	    } else {
@@ -730,7 +730,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
 	    sbutton::GetTop(prefs)=Intern(buf2);
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    if(sbutton::GetTop(prefs)!=NULL) {
 		sprintf(buf3, "Changed button top color to %s.", buf2);
 	    } else {
@@ -761,7 +761,7 @@ static void DepthProc(class sbttnav  *self, long  param)
 	if(prefs) prefs->bdepth=atoi(buf1);
 	(b)->SetModified();
 	(b)->SetChangeFlag( sbutton_ALLCHANGED|sbutton_SIZECHANGED);
-	(b)->NotifyObservers( observable_OBJECTCHANGED);
+	(b)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -792,13 +792,13 @@ static void LabelColorProc(class sbttnav  *self, long  param)
 	    sbutton::GetLabelFG(prefs)=NULL;
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    message::DisplayString(self, 10, "Restored button label foreground color to the default.");
 	} else {
 	    sbutton::GetLabelFG(prefs)=Intern(buf1);
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    if(sbutton::GetLabelFG(prefs)!=NULL) {
 		sprintf(buf3, "Changed button label foreground color to %s.", buf1);
 	    } else {
@@ -817,13 +817,13 @@ static void LabelColorProc(class sbttnav  *self, long  param)
 	    sbutton::GetLabelBG(prefs)=NULL;
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    message::DisplayString(self, 10, "Restored button label background color to the default.");
 	} else {
 	    sbutton::GetLabelBG(prefs)=Intern(buf2);
 	    (b)->SetModified();
 	    (b)->SetChangeFlag( sbutton_ALLCHANGED);
-	      (b)->NotifyObservers( observable_OBJECTCHANGED);
+	      (b)->NotifyObservers( observable::OBJECTCHANGED);
 	    if(sbutton::GetLabelBG(prefs)!=NULL) {
 		sprintf(buf3, "Changed button label background color to %s.", buf2);
 	    } else {

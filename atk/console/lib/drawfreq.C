@@ -757,14 +757,17 @@ void ScrollToEnd(struct RegionLog  *rlogptr, int  Op)
 {
     int i;
     long pos;
+    int nObservers;
+    observable * const * observers;
 
     mydbg(("entering: ScrollToEnd\n"));
-    for(i = 0; i < rlogptr->TextLog->nObservers; i++){
+    observers = rlogptr->TextLog->GetObservers(&nObservers);
+    for(i = 0; i < nObservers; i++){
 	long dotlength = 0;
 	
 	class logview *tempview;
 	pos = GetMyPosition(rlogptr->TextLog);
-	tempview = ((class logview *)rlogptr->TextLog->observers[i]);
+	tempview = ((class logview *)observers[i]);
 	dotlength = (tempview)->GetDotLength();
 	if(dotlength <= 1){
 	    if (!(tempview)->Visible( pos - 1)){

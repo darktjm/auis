@@ -361,7 +361,7 @@ chart::Read( FILE			      *file, long			       id )
   IN(chart::Read);
   ItemCount = 0;
   if ( (status = (this)->ReadObject(  file, id, (apt_readfptr) Reader )) ==
-	dataobject_NOREADERROR )
+	dataobject::NOREADERROR )
     {
     (this)->NotifyObservers(  1234 );
     }
@@ -472,7 +472,7 @@ chart::Write( FILE			      *file, long			       writeID, int			       level )
   IN(chart::Write);
   (this)->WriteObject(  file, writeID, level, (apt_writefptr) Writer );
   OUT(chart::Write);
-  return  this->dataobject::id;
+  return  this->GetID();
   }
 
 const struct chart_monikers *

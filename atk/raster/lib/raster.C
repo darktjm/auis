@@ -83,7 +83,7 @@ void raster::Resize(long  width , long  height)
 void raster::ObservedChanged(class observable  *opix, long  status)
 {
     class rasterimage *pix=(class rasterimage *)opix;
-    if (status == observable_OBJECTDESTROYED) {
+    if (status == observable::OBJECTDESTROYED) {
 	/* the observed rasterimage is going away
 	 we must not use raster_SetPix because
 	 it will tinker the refcnt and try again to 
@@ -187,15 +187,15 @@ WriteV1Stream(class raster  *ras, FILE  *file, long  id)
 raster::Write(FILE  *file, long  writeID, int  level)
 	 	 	 	 {
 	class rasterimage *pix = (this)->GetPix();
-	long id = (this)->UniqueID();
+	long id = (this)->GetID();
 	if (pix == NULL) {
 		return 0;
 	}
-	if (this->writeID != writeID) {
+	if (this->GetWriteID() != writeID) {
 		const char *name = (this)->GetTypeName();
 		long x, y, width, height;	/* subraster parms */
 
-		this->writeID = writeID;
+		this->SetWriteID(writeID);
 
 /* XXX combine with options a bit saying this image is not shared
 (so it doesn't need to be put in the dictionary and retained forever) */
@@ -444,8 +444,8 @@ ReadV1Raster(class raster   *self, FILE   *file, long  id)
 	byteaddr = (pix)->GetBitsPtr();
 	for (row = 0;   row < height;   row++, byteaddr += W) {
 		if (plusspace::ReadRow(file, byteaddr, nbytesfromfile) 
-				!= dataobject_NOREADERROR) {
-			retval = dataobject_BADFORMAT;
+				!= dataobject::NOREADERROR) {
+			retval = dataobject::BADFORMAT;
 			break;
 		}
 	}
@@ -474,7 +474,7 @@ ReadV1SubRaster(class raster  *self, FILE  *file, struct rectangle  *r)
 	while (getc(file) != '\\') {}
 	fgets(s, MAXFILELINE + 2, file);	/* discard \enddata{...}  */	
 
-	return dataobject_OBJECTCREATIONFAILED;
+	return dataobject::OBJECTCREATIONFAILED;
 }
 
 /* raster__Read(self, file, id)
@@ -502,14 +502,14 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 	long objectid;	/* id read for the incoming pixel image */
 	char filename[256], path[1024];
 	FILE *f2;		/* for "file" keyword */
-	long result = dataobject_BADFORMAT;
+	long result = dataobject::BADFORMAT;
 
 	char s[MAXFILELINE + 2];
 	long tc;
 
 	this->xScale = this->yScale = raster_UNITSCALE / 2;
 
-	if (file == NULL) return dataobject_PREMATUREEOF;
+	if (file == NULL) return dataobject::PREMATUREEOF;
 
 	/* check for RasterFile magic number */
 	ungetc(tc=getc(file), file);
@@ -523,7 +523,7 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 		long discardid;
 		if (fscanf(file, "\\begindata{raster,%ld", &discardid) != 1
 				|| getc(file) != '}' || getc(file) != '\n') 
-			return dataobject_NOTBE2DATASTREAM;
+			return dataobject::NOTATKDATASTREAM;
 	}
 
 	/* XXX check for "\begindata{raster," */
@@ -558,9 +558,9 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 
 		if (FALSE  /* XXX object is in namespace */ )  {
 			(this)->SetPix( pix=addr);
-			result = dataobject_NOREADERROR;
+			result = dataobject::NOREADERROR;
 		}
-		else result = dataobject_OBJECTCREATIONFAILED;
+		else result = dataobject::OBJECTCREATIONFAILED;
 	}	break; 
 
 	case 's':	{            /* "share" type */
@@ -570,9 +570,9 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 		if (pid == getpid()  && strcmp((addr)->GetTypeName(), 
 						"rasterimage")==0) {
 			(this)->SetPix( pix=addr);
-			result = dataobject_NOREADERROR;
+			result = dataobject::NOREADERROR;
 		}
-		else result = dataobject_OBJECTCREATIONFAILED;
+		else result = dataobject::OBJECTCREATIONFAILED;
 	}	break;
 
 	case 'f':	/* "file" type */
@@ -597,7 +597,7 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 
 	case 'b':	/* "bits" type */
 		if (strcmp(keyword, "bits") != 0) {
-			result = dataobject_BADFORMAT;
+			result = dataobject::BADFORMAT;
 			break;
 		}
 		/* fix this to not Defile ??? XXX */
@@ -605,7 +605,7 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 		fscanf(file, " %ld %ld %ld ", &objectid, &width, &height);
 
 		if (width < 1 || height < 1 || width > 1000000 || height > 1000000) {
-			result = dataobject_BADFORMAT;
+			result = dataobject::BADFORMAT;
 			break;
 		}
 
@@ -615,13 +615,13 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 		W = (pix)->GetRowWidth();
 		nbytesfromfile = (width+7)>>3;
 		byteaddr = (pix)->GetBitsPtr();
-		result = dataobject_NOREADERROR;
+		result = dataobject::NOREADERROR;
 		for (row = 0;   row < height;   row++, byteaddr += W) {
 			long c = rasterio::ReadRow(file, byteaddr, nbytesfromfile);
 			if (c != '|') {
 				result = (c == EOF) 
-					? dataobject_PREMATUREEOF
-					: dataobject_BADFORMAT;
+					? dataobject::PREMATUREEOF
+					: dataobject::BADFORMAT;
 				break;
 			}
 		}
@@ -630,10 +630,10 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 			(via the magic of ungetc) */
 		while (! feof(file) && getc(file) != '\\') {};	/* scan for \enddata */
 		fgets(s, MAXFILELINE + 2, file);	/* discard \enddata{...}  */
-		if (result == dataobject_NOREADERROR &&
+		if (result == dataobject::NOREADERROR &&
 				strncmp(s, "enddata{raster,", 
 					strlen("enddata{raster,")) != 0) 
-			result = dataobject_MISSINGENDDATAMARKER;
+			result = dataobject::MISSINGENDDATAMARKER;
 
 		/* XXX enter rasterimage into dictionary with objectid as key 
 		unless bit in options says it is singly referenced */
@@ -644,7 +644,7 @@ raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 
 	}  /* end of switch(*keyword) */
 
-	if (result == dataobject_NOREADERROR) {
+	if (result == dataobject::NOREADERROR) {
 	rectangle_SetRectSize(&this->subraster, 
 		xoffset, yoffset, subwidth, subheight);
 		this->options = options;
@@ -673,7 +673,7 @@ raster::ReadSubRaster(FILE  *file, struct rectangle  *r)
 	char rastertype [6];
 	long objectid, fullwidth, fullheight;
 	struct rectangle Dest;
-	long result = dataobject_NOREADERROR;
+	long result = dataobject::NOREADERROR;
 
 	char s[MAXFILELINE + 2];
 	
@@ -709,8 +709,8 @@ raster::ReadSubRaster(FILE  *file, struct rectangle  *r)
 		long c = rasterio::ReadRow(file, (unsigned char *)buffer, nbytesfromfile);
 		if (c != '|') {
 			result = (c == EOF) 
-				? dataobject_PREMATUREEOF
-				: dataobject_BADFORMAT;
+				? dataobject::PREMATUREEOF
+				: dataobject::BADFORMAT;
 			break;
 		}
 		(pix)->SetRow( x, y, w, buffer);
@@ -742,13 +742,13 @@ raster::SetAttributes(struct attributes  *attributes)
 
 static int tmpfilectr = 0;
 
-long raster::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
+long raster::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::otherformat usagetype, const char  *boundary)
 {
     FILE *tmpfp;
     char Fnam[1000];
 
-    if (this->writeID == writeID)  return(this->id);
-    this->writeID = writeID;
+    if (this->GetWriteID() == writeID)  return(this->GetID());
+    this->SetWriteID(writeID);
     
     fprintf(file, "\n--%s\nContent-type: image/x-xwd\nContent-Transfer-Encoding: base64\n\n", boundary);
     
@@ -764,10 +764,10 @@ long raster::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usage
     to64(tmpfp, file);
     fclose(tmpfp);
     unlink(Fnam);
-    return(this->id);
+    return(this->GetID());
 }
 
-boolean raster::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
+boolean raster::ReadOtherFormat(FILE  *file, const char  *fmt, const char  *encoding, const char  *desc)
 {
     char TmpFile[250];
     FILE *tmpfp = NULL;
@@ -801,7 +801,7 @@ boolean raster::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  
 	fclose(tmpfp);
 	unlink(TmpFile); 
     }
-    if (code == dataobject_NOREADERROR) {
+    if (code == dataobject::NOREADERROR) {
 	(this->pix)->InvertSubraster( &this->subraster);	
 	return(TRUE);
     } else {

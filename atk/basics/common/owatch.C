@@ -20,7 +20,7 @@ ATKdefineRegistry(owatch, observable, NULL);
 void owatch::ObservedChanged(class observable  *changed, long  value  )
 {
     struct owatch_data *o=useddata;
-    if(value!=observable_OBJECTDESTROYED) return;
+    if(value!=observable::OBJECTDESTROYED) return;
     while(o) {
 	if(o->obj==changed && o->alive) {
 	    o->alive=FALSE;

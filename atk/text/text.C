@@ -259,9 +259,8 @@ class viewref *text::InsertObject(long  pos, const char  *name, const char  *vie
     class environment *env;
 
     if((newobject = (class dataobject *) ATK::NewObject(name)))  {
-        newobject->id = (newobject)->UniqueID(); 
         /* Register the object with the dictionary */
-	dictionary::Insert(NULL, (char *) newobject->id, (char *) newobject);
+	dictionary::Insert(NULL, (char *) newobject->GetID(), (char *) newobject);
         if (viewname == NULL || *viewname == '\0')
 	    viewname = (newobject)->ViewName();
 	/* the viewref will prevent the dataobject from being destroyed until the viewref is destroyed. */
@@ -943,7 +942,7 @@ long text::AlwaysInsertFile(FILE  *file, const char  *filename, long  position)
 		}
 		(dat)->Read( file, objectID);
 		(dat)->SetAttributes(&attr);
-		dictionary::Insert(NULL, (char *) objectID, (char *) (dat)->UniqueID());
+		dictionary::Insert(NULL, (char *) objectID, (char *) (dat)->GetID());
 		/* the viewref will prevent the dataobject from being destroyed until the viewref is destroyed. */
 		(dat)->UnReference();
 		(this)->AlwaysAddView( position, (dat)->ViewName(), dat);
@@ -1032,7 +1031,7 @@ long text::Read(FILE  *file, long  id)
     retval = (this)->simpletext::Read( file, id);
 
 #ifdef CHECK_BE1
-    if (retval == dataobject_NOREADERROR)
+    if (retval == dataobject::NOREADERROR)
         if (HasBinaryChars(this))
             TryConversion(this);
 #endif /* CHECK_BE1 */
@@ -1091,12 +1090,12 @@ long text::Write(FILE  *file, long  writeID, int  level)
 	    break;
     }
 
-    if (this->writeID != writeID)  {
+    if (this->GetWriteID() != writeID)  {
         if (quoteCharacters) {
-            this->writeID = writeID;
+            this->SetWriteID(writeID);
 	    fprintf(file, "\\begindata{%s,%ld}\n", 		
 		    (this->WriteAsText)?"text": (this)->GetTypeName(),
-		    this->UniqueID());
+		    this->GetID());
             fprintf(file, "\\textdsversion{%d}\n", DataStreamVersion);
             if (this->styleSheet->templateName)
                 fprintf(file, "\\template{%s}\n", this->styleSheet->templateName);
@@ -1104,13 +1103,13 @@ long text::Write(FILE  *file, long  writeID, int  level)
             (this)->WriteSubString( 0, (this)->GetLength(), file, quoteCharacters);
 	    fprintf(file, "\\enddata{%s,%ld}\n",
 		    (this->WriteAsText)?"text": (this)->GetTypeName(),
-		    this->id);
+		    this->GetID());
             fflush(file);
         }
         else
             (this)->simpletext::Write( file, writeID, level);
     }
-    return this->id;
+    return this->GetID();
 }
 
 long text::ReadSubString(long  pos, FILE  *file, boolean  quoteCharacters)
@@ -1290,8 +1289,8 @@ static char *WriteOutBuf(FILE  *file,char  *outbuf,char  *outp,char  *lastblank)
                 outp = WriteOutBuf(file,outbuf,outp,lastblank);
             }
             /*  code to write out view information */
-            (curenv->data.viewref->dataObject )->Write(file,this->writeID,2);
-            sprintf(outbuf,"\\view{%s,%ld,%ld,%ld,%ld", curenv->data.viewref->viewType, (curenv->data.viewref->dataObject)->UniqueID( ), curenv->data.viewref->viewID,curenv->data.viewref->desw, curenv->data.viewref->desh);
+            (curenv->data.viewref->dataObject )->Write(file,this->GetWriteID(),2);
+            sprintf(outbuf,"\\view{%s,%ld,%ld,%ld,%ld", curenv->data.viewref->viewType, (curenv->data.viewref->dataObject)->GetID( ), curenv->data.viewref->viewID,curenv->data.viewref->desw, curenv->data.viewref->desh);
             while(*outp) outp++;
             i += curenv->length;
             elen = 0;
@@ -2056,20 +2055,20 @@ void text::ObservedChanged (class observable  *changed, long  value)
     if (this->rootEnvironment == NULL)
         return;
 
-    if (changed == (class observable *) this->currentViewreference && value == observable_OBJECTDESTROYED)
+    if (changed == (class observable *) this->currentViewreference && value == observable::OBJECTDESTROYED)
         this->currentViewreference = NULL;
 
     pos = 0;
     len = (this)->GetLength();
     if(changed==styleSheet) {
-	if(value==observable_OBJECTCHANGED) {
+	if(value==observable::OBJECTCHANGED) {
 	    remap(0, this, 0, this->rootEnvironment);
 	    EnumerateEnvironments(0, rootEnvironment->GetLength(), remap, 0);
 	}
 	return;
     }
     if(vci==NULL) vci=ATK::LoadClass("viewref");
-    if(value==observable_OBJECTDESTROYED && (class observable *)this!=changed) {
+    if(value==observable::OBJECTDESTROYED && (class observable *)this!=changed) {
 	if((changed)->ATKregistry()!=vci) {
 	    DelObj(this, (class dataobject *)changed);
 	}
@@ -2080,7 +2079,7 @@ void text::ObservedChanged (class observable  *changed, long  value)
     // (but we might have skipped the notify observers if it wasn't one
     // of the dataobjects... the NotifyObservers call in this case will
     // almost certainly be harmless.)
-    if(value==observable_OBJECTCHANGED && changed->ATKregistry()!=vci) {
+    if(value==observable::OBJECTCHANGED && changed->ATKregistry()!=vci) {
         NotifyObservers(0);
         return;
     }
@@ -2092,7 +2091,7 @@ void text::ObservedChanged (class observable  *changed, long  value)
                 class environment *curenv =(class environment *) (this->rootEnvironment)->GetInnerMost( pos);
 		if (curenv && curenv->type == environment_View) {
 		    if(changed == (class observable *) curenv->data.viewref) {
-			if(value == observable_OBJECTDESTROYED) {
+			if(value == observable::OBJECTDESTROYED) {
 			    curenv->data.viewref = NULL;
 			    (this)->AlwaysDeleteCharacters( pos, 1);
                         } else {
@@ -2105,7 +2104,7 @@ void text::ObservedChanged (class observable  *changed, long  value)
 #if 0
                     // this is now handled in the catchall above
                     // for all non-viewref 'changed' objects.
-		    if(changed == (class observable *)curenv->data.viewref->dataObject && value!=observable_OBJECTDESTROYED) {
+		    if(changed == (class observable *)curenv->data.viewref->dataObject && value!=observable::OBJECTDESTROYED) {
 
 			/* text_RegionModified(self, pos, 1); */
 			(this)->NotifyObservers( 0);
@@ -2371,7 +2370,7 @@ static char *WriteOutBufOther(FILE  *file, char  *outbuf, char  *outp)
 #define COMING_STYLE 2
 #define COMING_INSET 3
 
-long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
+long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::otherformat usagetype, const char  *boundary)
 {
     long pos, len;
     class environment *rootenv;
@@ -2401,8 +2400,8 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
     pos = 0;
     len = (this)->GetLength();
     Top = NULL;
-    if (this->writeID == writeID)  return(this->id);
-    this->writeID = writeID;
+    if (this->GetWriteID() == writeID)  return(this->GetID());
+    this->SetWriteID(writeID);
 
     if ((this)->CheckHighBit()) {
 	charset = environ::Get("MM_CHARSET");
@@ -2510,7 +2509,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
 		}
 		fprintf(file, "=\n"); /* soft newline */
 	    }	    
-	    retcode = (curenv->data.viewref->dataObject )->WriteOtherFormat( file, this->writeID, 2, usagetype, boundary);
+	    retcode = (curenv->data.viewref->dataObject )->WriteOtherFormat( file, this->GetWriteID(), 2, usagetype, boundary);
 	    if (retcode) {
 		if (!tmp || nextcode != COMING_STYLE) {
 		    nextcode = ComingNext(this, i+curenv->length);
@@ -2611,7 +2610,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
     if(terminateNewline) {
 	putc('\n', file);
     }
-    return(this->id);
+    return(this->GetID());
 }
 
 static int ComingNext(class text  *self, int  pos)

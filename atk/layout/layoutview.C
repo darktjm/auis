@@ -1055,12 +1055,12 @@ layoutview::ObservedChanged(class observable  *changed		/* that which changed */
 
     if (changed	== this->GetDataObject()) {	/* if it is my dataobject */
 
-	if (status == observable_OBJECTDESTROYED)
+	if (status == observable::OBJECTDESTROYED)
 	    DestroySubviews(this);
 	(this)->WantUpdate( &getView(this));
     }
 
-    else if (status == observable_OBJECTDESTROYED) {
+    else if (status == observable::OBJECTDESTROYED) {
 	c = (this)->RemoveSubview( (class view *)changed);
 	if (c != NULL) {
 	    (getLayout(this))->RemoveComponent( c);

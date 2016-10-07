@@ -208,7 +208,7 @@ static void LabelProc(class alinkview  *self, long  param )
   if (message::AskForString(self,50,"Enter new text for button: ",
 			   oldtext, buf, sizeof(buf)) >= 0) {
     (l)->SetText( buf);
-    (l)->NotifyObservers( observable_OBJECTCHANGED);
+    (l)->NotifyObservers( observable::OBJECTCHANGED);
     (self)->WantNewSize(self);
     (self)->WantUpdate( self);
     message::DisplayString(self, 10, "Changed link text.");
@@ -327,7 +327,7 @@ static void RecordAudio(class alinkview  *self, long  param )
     }
     else
 	message::DisplayString(self, 10, "Recording complete.");
-    (b)->NotifyObservers( observable_OBJECTCHANGED);
+    (b)->NotifyObservers( observable::OBJECTCHANGED);
     return;
 }
 #else

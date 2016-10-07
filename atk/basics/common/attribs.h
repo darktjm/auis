@@ -17,13 +17,14 @@
 
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
+/** Generic attribute for use with dataobject::SetAttributes() */
 struct attributes {
-    struct attributes *next; /* Representation is a linked list. */
-    const char *key; /* attribute name. */
-    union { /* Value can either be an integer or a string. */
-        long integer;
-        const char *string;
-    } value;
+    struct attributes *next;  /**< Representation is a linked list. */
+    const char *key;          /**< Attribute name. */
+    union {
+        long integer;         /**< Integer value. */
+        const char *string;   /**< String value. */
+    } value;  /**< Value can either be an integer or a string. */
 };
 ENDCPLUSPLUSPROTOS
 /** @} */

@@ -368,12 +368,12 @@ struct helloworld *hw;
 
 \{
 
-    dataobject_Destroy(hw->dobj);
+    dataobject::Destroy(hw->dobj);
 
 \}
 
 }
-The statement \italic{dataobject_Destroy(hw->dobj)} frees the storage 
+The statement \italic{dataobject::Destroy(hw->dobj)} frees the storage 
 allocated to the text data object pointed to by \italic{hw->dobj}. 
 
 
@@ -411,29 +411,29 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
-	\bold{dataobject_Write(hw->dobj,file,writeId,level);}
+	\bold{dataobject::Write(hw->dobj,file,writeId,level);}
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
 }
 
 The \italic{Write} method is the same as Example 11, with the exception of the 
-statement \italic{dataobject_Write(hw->dobj,file,writeId,level)}.  Like 
+statement \italic{dataobject::Write(hw->dobj,file,writeId,level)}.  Like 
 before, the method writes out the position and color (black or white) of the 
-helloworld dataobject, \italic{hw}, but the statement \italic{dataobject_Write} 
+helloworld dataobject, \italic{hw}, but the statement \italic{dataobject::Write} 
 writes out the text data object, \italic{hw->dobj}, as well--inside the 
 helloworld dataobject. 
 
@@ -476,9 +476,6 @@ long id;
     long retVal,dobjObjId;
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL ||
 
 
@@ -493,13 +490,13 @@ long id;
 
 		classNameBuf,&dobjObjId) <2)
 
-	   	retVal=dataobject_PREMATUREEOF;
+	   	retVal=dataobject::PREMATUREEOF;
 
       else\{
 
-	     retVal=dataobject_Read(hw->dobj,file,id);
+	     retVal=dataobject::Read(hw->dobj,file,id);
 
-	     if(retVal==dataobject_NOREADERROR)
+	     if(retVal==dataobject::NOREADERROR)
 
 	    	if(fgets(buf,sizeof(buf),file)==NULL) 
 
@@ -507,7 +504,7 @@ long id;
 /* read the \\enddata\{...\}*/
 
 
-	retVal=dataobject_MISSINGENDDATAMARKER;
+	retVal=dataobject::MISSINGENDDATAMARKER;
 
     \}
 
@@ -523,13 +520,13 @@ the \italic{x}, \italic{y}, & \italic{blackOnWhite} values correctly, the
 method attempts to read in the embedded text object.  The statement 
 \italic{sscanf(buf,"\\\\begindata\{%[^,],%d\}\\n",classNameBuf,&textObjId)<2)} 
 scans for the \\begindata header, returning 
-\italic{dataobject_\smaller{PREMATUREEOF}} upon an error.  If it is of type 
-dataobject, the statement \italic{retVal=dataobject_Read(hw->dobj,file,id)} 
+\italic{dataobject::\smaller{PREMATUREEOF}} upon an error.  If it is of type 
+dataobject, the statement \italic{retVal=dataobject::Read(hw->dobj,file,id)} 
 reads the data object (in this case, text) up to an including its \\enddata 
-marker.  If the dataobject_Read was successful (i.e., \italic{if 
-(retVal==dataobject_\smaller{NOREADERROR}) }succeeds) the statement 
+marker.  If the dataobject::Read was successful (i.e., \italic{if 
+(retVal==dataobject::\smaller{NOREADERROR}) }succeeds) the statement 
 \italic{if(fgets(buf,sizeof(buf),file)==NULL)} performs a quick "check" for an 
-\\enddata marker, returning \italic{dataobject_\smaller{MISSINGENDDATAMARKER}} 
+\\enddata marker, returning \italic{dataobject::\smaller{MISSINGENDDATAMARKER}} 
 upon a failure, success otherwise. 
 
 
@@ -780,7 +777,7 @@ struct helloworld *hw;
 
     hwv->blackOnWhite=hw->blackOnWhite;
 
-    hwv->view=(struct view*) 	class_NewObject(dataobject_ViewName(hw->dobj));
+    hwv->view=(struct view*) 	class_NewObject(dataobject::ViewName(hw->dobj));
 
     hwv->applayer=view_GetApplicationLayer(hwv->view);
 
@@ -1498,7 +1495,7 @@ struct helloworld *hw;
 
 \{
 
-    dataobject_Destroy(hw->dobj);
+    dataobject::Destroy(hw->dobj);
 
 \}
 
@@ -1518,9 +1515,6 @@ long id;
     long retVal,dobjObjId;
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL ||
 
        /* the %hd tells scanf that blackOnWhite is a short, not an int */
@@ -1533,17 +1527,17 @@ long id;
 
 	classNameBuf,&dobjObjId)<2)
 
-	retVal=dataobject_PREMATUREEOF;
+	retVal=dataobject::PREMATUREEOF;
 
     else\{
 
-	retVal=dataobject_Read(hw->dobj,file,id);
+	retVal=dataobject::Read(hw->dobj,file,id);
 
-	if(retVal==dataobject_NOREADERROR)
+	if(retVal==dataobject::NOREADERROR)
 
 	    if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-		retVal=dataobject_MISSINGENDDATAMARKER;
+		retVal=dataobject::MISSINGENDDATAMARKER;
 
     \}
 
@@ -1572,20 +1566,20 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
-	dataobject_Write(hw->dobj,file,writeId,level);
+	dataobject::Write(hw->dobj,file,writeId,level);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
@@ -1804,7 +1798,7 @@ struct helloworld *hw;
 
     hwv->blackOnWhite=hw->blackOnWhite;
 
-    hwv->view=(struct view *)class_NewObject(dataobject_ViewName(hw->dobj));
+    hwv->view=(struct view *)class_NewObject(dataobject::ViewName(hw->dobj));
 
     hwv->applayer=view_GetApplicationLayer(hwv->view);
 
@@ -2716,7 +2710,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al1=appLayerOrDestroy(v1=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj1)));
+*)class_NewObject(dataobject::ViewName(dobj1)));
 
     if(al1==NULL)
 
@@ -2724,7 +2718,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al2=appLayerOrDestroy(v2=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj2)));
+*)class_NewObject(dataobject::ViewName(dobj2)));
 
     if(al2==NULL) \{
 

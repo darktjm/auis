@@ -10,7 +10,7 @@
 
 #include <andrewos.h>
 ATK_IMPL("lookz.H")
-#include <dataobject.H>	/* for dataobject_NOREADERROR */
+#include <dataobject.H>	/* for dataobject::NOREADERROR */
 #include <text.H>
 #include <lookz.H>
 
@@ -60,17 +60,17 @@ lookz::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from fi
 
 		(this)->SetVisibility( strncmp(s, "visible", strlen("visible")) == 0);	
 	}
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }
 	  
 	long
 lookz::Write( FILE   *file, long   writeID, int   level )
 		 		{
 	char head[50];
-	long id = (this)->UniqueID();
-	if (this->writeID != writeID) {
+	long id = (this)->GetID();
+	if (this->GetWriteID() != writeID) {
 		/* new instance of write, do it */
-		this->writeID = writeID;
+		this->SetWriteID(writeID);
 		sprintf(head, "data{%s, %ld}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);
 
@@ -116,7 +116,7 @@ void lookz::SetTextObject(class text  *text)
 
 void lookz::ObservedChanged(class observable  *dobj, long  value)
 {
-    if (value == observable_OBJECTDESTROYED &&
+    if (value == observable::OBJECTDESTROYED &&
 	 (class observable *) this->text == dobj) {
 	(this->text)->RemoveObserver( this);
 	this->text = NULL;

@@ -330,11 +330,11 @@ rasterio::ReadImage(FILE  *file			/* where to get bits from */, class pixelimage
 
 	if (fscanf(file, "\\begindata{raster,%ld", &discardid) != 1
 				|| getc(file) != '}' || getc(file) != '\n') 
-		return dataobject_NOTBE2DATASTREAM;
+		return dataobject::NOTATKDATASTREAM;
 
 	fscanf(file, " %ld ", &version);
 	if (version < 2) 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	/* ignore all these features: */
 	fscanf(file, " %lu %ld %ld %ld %ld %ld %ld",  
@@ -348,34 +348,34 @@ rasterio::ReadImage(FILE  *file			/* where to get bits from */, class pixelimage
 	/* read the keyword */
 	fscanf(file, " %5s", keyword);
 	if (strcmp(keyword, "bits") != 0)
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	fscanf(file, " %ld %ld %ld ", &objectid, &width, &height);
 
 	if (width < 1 || height < 1 || width > 1000000 || height > 1000000) 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	(pix)->Resize( width, height);
 	W = (pix)->GetRowWidth();
 	nbytesfromfile = (width+7)>>3;
 	byteaddr = (pix)->GetBitsPtr();
-	result = dataobject_NOREADERROR;
+	result = dataobject::NOREADERROR;
 	for (row = 0;   row < height;   row++, byteaddr += W) {
 		long c = rasterio::ReadRow(file, byteaddr, nbytesfromfile);
 		if (c != '|') {
 			result = (c == EOF) 
-				? dataobject_PREMATUREEOF
-				: dataobject_BADFORMAT;
+				? dataobject::PREMATUREEOF
+				: dataobject::BADFORMAT;
 			break;
 		}
 	}
 	(pix)->NotifyObservers( pixelimage_DATACHANGED);
 
 	while (! feof(file) && getc(file) != '\\') {};	/* scan for \enddata */
-	if (result == dataobject_NOREADERROR &&
+	if (result == dataobject::NOREADERROR &&
 			(fscanf(file, "enddata{raster,%ld", &discardid) != 1
 				|| getc(file) != '}' || getc(file) != '\n'))
-		result = dataobject_MISSINGENDDATAMARKER;
+		result = dataobject::MISSINGENDDATAMARKER;
 
 	return result;
 }

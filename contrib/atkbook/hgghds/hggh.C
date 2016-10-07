@@ -38,12 +38,12 @@ hggh::hggh()
 void hggh::SetButtonText(char  *t)
 {
     (this->b)->SetText( t);
-    (this->b)->NotifyObservers( observable_OBJECTCHANGED);
+    (this->b)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 long hggh::Write(FILE  *fp, long  id, int  level)
 {
-    long uniqueid = (this)->UniqueID();
+    long uniqueid = (this)->GetID();
 
     if (id != (this)->GetWriteID()) {
 	/* New write operation */
@@ -62,16 +62,16 @@ long hggh::Read(FILE  *fp, long  id)
     char LineBuf[250];
 
     if (fgets(LineBuf,sizeof(LineBuf), fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     /* should check for quoted backslashes first */
     (this)->SetButtonText( LineBuf); 
     /* Now read in the \enddata line */
     if (fgets(LineBuf,sizeof(LineBuf), fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     if (strncmp(LineBuf, "\\enddata", 8)) {
-	return(dataobject_MISSINGENDDATAMARKER);
+	return(dataobject::MISSINGENDDATAMARKER);
     }
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }

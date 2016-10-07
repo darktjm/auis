@@ -311,10 +311,10 @@ void calccon::ObservedChanged(class observable  * observed,long  status)
 /* user code begins here for ObservedChanged */
 /* user code ends here for ObservedChanged */
 if(observed == (class observable *) this->arbv){
-	if (status == observable_OBJECTDESTROYED) this->arbv = NULL;
+	if (status == observable::OBJECTDESTROYED) this->arbv = NULL;
 	 else initself(this,this->v);
 }
-if (status == observable_OBJECTDESTROYED) {
+if (status == observable::OBJECTDESTROYED) {
 	if (observed == (class observable *) this->calc_4View) this->calc_4View=NULL;
 	if (observed == (class observable *) this->calc_5View) this->calc_5View=NULL;
 	if (observed == (class observable *) this->valenterView) this->valenterView=NULL;

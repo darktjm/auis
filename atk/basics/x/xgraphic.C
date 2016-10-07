@@ -2901,7 +2901,7 @@ long xgraphic::DisplayClass( )
 
 void xgraphic::ObservedChanged(class observable *changed, long val) {
     graphic::ObservedChanged(changed,val);
-    if(val==observable_OBJECTDESTROYED) {
+    if(val==observable::OBJECTDESTROYED) {
 	RemoveObserver(changed);
     }
 }

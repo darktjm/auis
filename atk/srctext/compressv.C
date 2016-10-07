@@ -152,7 +152,7 @@ void compressv::ObservedChanged(observable *changed, long value)
 {
     boolean destroy=FALSE;
     /* check this BEFORE we call super_, because super_ will set our dataobject to NULL if it IS destroyed. */
-    if (changed==(observable *)GetDataObject() && value==observable_OBJECTDESTROYED)
+    if (changed==(observable *)GetDataObject() && value==observable::OBJECTDESTROYED)
 	destroy= TRUE;
     (this)->view::ObservedChanged(changed,value);
     if (destroy)

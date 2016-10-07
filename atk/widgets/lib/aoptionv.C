@@ -53,7 +53,7 @@ START_VIEW_MOUSE_METHOD(ButtonHitMethod, AOptionMenu, AOptionMenuv) {
         cv->SetDataObject(b);
         cv->SetOptionMenuv(this);
     }
-    dself->NotifyObservers(observable_OBJECTCHANGED);
+    dself->NotifyObservers(observable::OBJECTCHANGED);
     if(win==NULL) win=popupwin::Create(GetIM(), cv);
     if(win==NULL) {
         message::DisplayString(this, 100, "Couldn't create option menu.");
@@ -168,7 +168,7 @@ void AOptionSourceFormula::Evaluate() {
 void AOptionMenuv::ObservedChanged(observable *changed, long change) {
     AButtonv::ObservedChanged(changed, change);
     if(changed==source.Observed()) {
-        if(change!=observable_OBJECTDESTROYED) size.Invalidate();
+        if(change!=observable::OBJECTDESTROYED) size.Invalidate();
         else source.ClearObserved();
     }
 }

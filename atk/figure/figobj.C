@@ -523,9 +523,9 @@ long figobj::ReadBody(FILE  *fp, boolean  recompute)
     long x, y;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$ %ld %ld", &x, &y);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
 
     this->x = x;
     this->y = y;
@@ -535,7 +535,7 @@ long figobj::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 long figobj::Write(FILE  *fp, long  writeid, int  level)
@@ -565,21 +565,20 @@ long figobj::Write(FILE  *fp, long  writeid, int  level)
 
 long figobj::Read(FILE  *fp, long  id)
 {
-    long unid, tid, ix;
+    long tid, ix;
     long val1, val2, val3, val4, val5;
     char *cx, *cx2;
     char namebuf[100];
 
     if (id==0) 
-	unid = (this)->UniqueID();
+	id = (this)->GetID();
     else
-	unid = id;
-    (this)->SetID( unid); 
+	(this)->SetID( id);
 
     ix = ((this)->GetVAttributes())->Read( fp, 0);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
     ix = (this)->ReadBody( fp, TRUE);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
 
     if (this->numpts && this->vas) {
 	for (ix=0; ix<this->numpts; ix++) 
@@ -587,22 +586,22 @@ long figobj::Read(FILE  *fp, long  id)
     }
     
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     while (strncmp(buf, "$endatt", 7)) {
 	ix = sscanf(buf, "$# %ld %ld %ld %ld %ld", &val1, &val2, &val3, &val4, &val5);
-	if (ix!=5) return dataobject_BADFORMAT;
+	if (ix!=5) return dataobject::BADFORMAT;
 	(this)->SetAttachmentActive( val1, TRUE);
 	this->vas[val1].rposx = val2;
 	this->vas[val1].rposy = val3;
 	this->vas[val1].offx = val4;
 	this->vas[val1].offy = val5;
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     if (!strncmp(buf, "$name:", 6)) {
 	cx = buf+6;
 	cx2 = strchr(cx, '\n');
@@ -610,16 +609,16 @@ long figobj::Read(FILE  *fp, long  id)
 	    (*cx2) = '\0';
 	this->SetName(cx);
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
     }
 
     ix = sscanf(buf, "\\enddata{%[^,],%ld}", namebuf, &tid);
-    if (ix!=2) return dataobject_MISSINGENDDATAMARKER;
+    if (ix!=2) return dataobject::MISSINGENDDATAMARKER;
 
     if (tid!=id || strcmp(namebuf, (this)->GetTypeName()))
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
-    return dataobject_NOREADERROR;     
+    return dataobject::NOREADERROR;     
 }
 
 void figobj::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)

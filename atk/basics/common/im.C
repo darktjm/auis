@@ -1626,7 +1626,7 @@ static class im *ownerIM=NULL;
 void im::ObservedChanged(class observable  *changedo, long  value)
 {
     class view *changed=(class view *)changedo;
-    if(value!=observable_OBJECTDESTROYED) return;
+    if(value!=observable::OBJECTDESTROYED) return;
     if(changed!=selectionOwner) return;
     selectionOwner=NULL;
     ownerIM=NULL;

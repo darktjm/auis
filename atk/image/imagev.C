@@ -575,7 +575,7 @@ imagev::PostMenus( class menulist  *menulist )
 void
 imagev::ObservedChanged( class observable  *changed, long  value )
 {
-    if(changed==dimage.IDDImage() && value==observable_OBJECTCHANGED) {
+    if(changed==dimage.IDDImage() && value==observable::OBJECTCHANGED) {
         if(GetLogicalWidth()>0 && GetLogicalHeight()>0) {
             this->do_renderupdate = TRUE;
             (this)->WantUpdate( this);
@@ -605,9 +605,9 @@ imagev::ObservedChanged( class observable  *changed, long  value )
 		this->do_fullupdate = TRUE;
 		this->orig->inited=FALSE;
 		(this)->WantUpdate( this);
-	    case observable_OBJECTCHANGED:
+	    case observable::OBJECTCHANGED:
 		break;
-	    case observable_OBJECTDESTROYED:
+	    case observable::OBJECTDESTROYED:
 		break;
 	}
 }
@@ -1375,7 +1375,7 @@ ReadCmd( class imagev  *self )
 	long status;
 	class image *new_c = new image;
 	if(new_c) {
-	    if((status = (new_c)->Read( in, 0)) == dataobject_NOREADERROR) {
+	    if((status = (new_c)->Read( in, 0)) == dataobject::NOREADERROR) {
 		(imagep)->Reset();
 		(new_c)->Duplicate(imagep);
 		self->dimage=(class image *)NULL;
@@ -1390,16 +1390,16 @@ ReadCmd( class imagev  *self )
 	    }
 	    else {
 		switch(status) {
-		    case dataobject_NOTATKDATASTREAM:
+		    case dataobject::NOTATKDATASTREAM:
 			sprintf(message, "Contents of '%.*s' not ATK image data", MAXPATHLEN, filename);
 			break;
-		    case dataobject_PREMATUREEOF:
+		    case dataobject::PREMATUREEOF:
 			sprintf(message, "Contents of '%.*s' truncated", MAXPATHLEN, filename);
 			break;
-		    case dataobject_OBJECTCREATIONFAILED:
+		    case dataobject::OBJECTCREATIONFAILED:
 			sprintf(message, "Failed to create a necessary object");
 			break;
-		    case dataobject_BADFORMAT:
+		    case dataobject::BADFORMAT:
 			sprintf(message, "Contents of '%.*s' in bad format", MAXPATHLEN, filename);
 			break;
 		    default:

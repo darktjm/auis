@@ -702,7 +702,7 @@ gentext::CreateFromFILE(FILE  *f, long  objectID)  {
 		fprintf(stderr, "allocation error in gentext_CreateFromFILE\n");
 		return NULL;
 	}
-	if ((t)->Read( f, objectID) != dataobject_NOREADERROR) {
+	if ((t)->Read( f, objectID) != dataobject::NOREADERROR) {
 		(t)->Destroy();
 		fprintf(stderr, "File not in ATK format\n");
 		return NULL;

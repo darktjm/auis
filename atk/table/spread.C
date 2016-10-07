@@ -825,11 +825,11 @@ void spread::ObservedChanged(class observable  *changed, long  status)
 	DestroySubviews(this,(class table *)changed);
     }
     view::ObservedChanged( changed, status);
-    if(status==observable_OBJECTCHANGED && hasInputFocus && MyTable(this)->GetReadOnly()!=readonlyposted) {
+    if(status==observable::OBJECTCHANGED && hasInputFocus && MyTable(this)->GetReadOnly()!=readonlyposted) {
 	hasInputFocus=FALSE;
 	ReceiveInputFocus();
     }
-    if(status==observable_OBJECTCHANGED && changed==GetDataObject()) {
+    if(status==observable::OBJECTCHANGED && changed==GetDataObject()) {
         sizescached=FALSE;
     }
 }

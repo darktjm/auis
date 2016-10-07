@@ -1619,11 +1619,11 @@ long \paramname{value});}
 
 \fieldtext{On the one hand, if \paramname{changed} is equal to 
 \paramname{textview}'s dataobject and \paramname{value} is 
-\paramname{observable_OBJECTDESTROYED}, sets \paramname{textview}'s dataobject 
+\paramname{observable::OBJECTDESTROYED}, sets \paramname{textview}'s dataobject 
 field to NULL; if value is not equal to 
-\paramname{observable_OBJECTDESTROYED}, calls a \paramname{WantUpdate}.  On 
+\paramname{observable::OBJECTDESTROYED}, calls a \paramname{WantUpdate}.  On 
 the other hand, if \paramname{changed} is a view reference and 
-\paramname{value} is \paramname{observable_OBJECTDESTROYED},  unlinks the view 
+\paramname{value} is \paramname{observable::OBJECTDESTROYED},  unlinks the view 
 reference from the view tree, deletes its entry in the dictionary, and 
 destroys it.}
 

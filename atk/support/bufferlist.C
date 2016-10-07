@@ -56,7 +56,7 @@ bufferlist::~bufferlist()
 
 void bufferlist::ObservedChanged(class observable  *object, long  changeType)
 {
-    if (changeType == observable_OBJECTDESTROYED) {
+    if (changeType == observable::OBJECTDESTROYED) {
 	class buffer *buffer = (class buffer *) object;
 
 	(buffer)->RemoveObserver( this);
@@ -79,7 +79,7 @@ void bufferlist::AddBuffer(class buffer  *buffer)
 	    newElement->next = this->head;
 	    this->head = newElement;
 	    (buffer)->AddObserver( this);
-	    (this)->NotifyObservers( observable_OBJECTCHANGED);
+	    (this)->NotifyObservers( observable::OBJECTCHANGED);
 	}
     }
 }
@@ -95,7 +95,7 @@ void bufferlist::RemoveBuffer(class buffer  *buffer)
 
     if (traverse != NULL) {    /* Bad error if this is false. */
         *previous = traverse->next;
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
 	free(traverse);
     }
 }

@@ -188,7 +188,7 @@ clock::Write(FILE  *fp, long  id, int  level)
 
 */
 
-  long uniqueid = (this)->UniqueID();
+  long uniqueid = (this)->GetID();
 
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
@@ -213,50 +213,50 @@ clock__ReadDataPart(class clock  *self, FILE  *fp)
   char *buf;
   
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (sscanf(buf, "hand lengths, %d, %d, %d",
 	     &(self->options.hours_length),
 	     &(self->options.minutes_length),
 	     &(self->options.seconds_length)) < 3)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (sscanf(buf, "hand widths, %d, %d, %d",
 	     &(self->options.hours_width),
 	     &(self->options.minutes_width),
 	     &(self->options.seconds_width)) < 3)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (sscanf(buf, "ticks, %d, %d, %d",
 	     &(self->options.tick_length),
 	     &(self->options.major_ticks),
 	     &(self->options.minor_ticks)) < 3)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (sscanf(buf, "border, %d, %d",
 	     (int *)&(self->options.border_shape), /* enum, so safe cast to int */
 	     &(self->options.border_width)) < 2)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   char *ff;
   if ((self->options.fontfamily = ff = (char *)malloc(201*sizeof(char))) == NULL)
-    return(dataobject_OBJECTCREATIONFAILED);
+    return(dataobject::OBJECTCREATIONFAILED);
   if (sscanf(buf, "labels, %d, %d, %200s",	
 	     &(self->options.num_labels),
 	     &(self->options.fontface),
 	     ff) < 3)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   free(buf);
 
   if ((self->options.num_labels) > 0) {
@@ -264,16 +264,16 @@ clock__ReadDataPart(class clock  *self, FILE  *fp)
       char **labels;
 
       if ((labels = (char **)malloc(self->options.num_labels*sizeof(char *))) == NULL)
-	return(dataobject_OBJECTCREATIONFAILED);
+	return(dataobject::OBJECTCREATIONFAILED);
       self->options.labels = labels;
       for(i = 0; i < self->options.num_labels; ++i) {
 	  if ((buf = ReadLine(fp)) == NULL)
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	  labels[i] = buf;
       } /* for i */
   } /* if num_labels > 0 */
 
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 
@@ -291,12 +291,12 @@ SanelyReturnReadError(class clock  *self, FILE  *fp, long  id, long  code)
     do {
 	if (buf != NULL) free(buf);
 	if ((buf = ReadLine(fp)) == NULL)
-	  return(dataobject_PREMATUREEOF);
+	  return(dataobject::PREMATUREEOF);
     } while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
     if (strcmp(buf, buf2) != 0) {
 	free(buf);
-	return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+	return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
     }
     free(buf);
 
@@ -312,14 +312,12 @@ clock::Read(FILE  *fp, long  id)
 */
   char *buf;
   
-  (this)->SetID( (this)->UniqueID());
-
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   if (strncmp(buf,"Datastream version:",19))
-    return(SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    return(SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
   if (atoi(buf+19) != DS_VERSION)	/* datastream version */
-    return(SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    return(SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
   free(buf);
 
   return(SanelyReturnReadError(this, fp, id, clock__ReadDataPart(this, fp)));

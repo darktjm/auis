@@ -2318,7 +2318,7 @@ void *rock;	\italic{/* unused */}
 
 	  if (last_text && last_text != txt)
 
-	    text_NotifyObservers(last_text, observable_OBJECTCHANGED);
+	    text_NotifyObservers(last_text, observable::OBJECTCHANGED);
 
 	  last_text = txt;
 
@@ -2326,7 +2326,7 @@ void *rock;	\italic{/* unused */}
 
     if (last_text)
 
-	  text_NotifyObservers(last_text, observable_OBJECTCHANGED);
+	  text_NotifyObservers(last_text, observable::OBJECTCHANGED);
 
     flashed = !flashed;
 

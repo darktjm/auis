@@ -287,7 +287,7 @@ parsediagram(gofig *self, FILE *f) {
 	}
 	if (cols < maxcols-2) row --;  /* no last row */
 	if (row == 0)
-		return  dataobject_BADFORMAT;
+		return  dataobject::BADFORMAT;
 	self->setdimensions( maxcols, row );
 
 	guessedges(self);
@@ -295,7 +295,7 @@ parsediagram(gofig *self, FILE *f) {
 	(self)->SetModified(); /* tell the enclosing document I have changed */
 	(self)->NotifyObservers( gofig_SIZECHANGED );
 
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }
 
 
@@ -314,7 +314,7 @@ parsediagram(gofig *self, FILE *f) {
 */
 	long
 gofig::Read( FILE *file, long id ) {
-	long result = dataobject_BADFORMAT;
+	long result = dataobject::BADFORMAT;
 	char s[MAXFILELINE + 2];
 	long len;
 	long sid, eid;
@@ -338,11 +338,11 @@ gofig::Read( FILE *file, long id ) {
 	/* read header line */
 	if (fscanf( file, " %d %d %d %d %d ",
 			&v, &w, &h, &p, &e) != 5) 
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 
 	if (v != 1 || w<1 || w>25 || h<1 || h>25 || p < 2000 || p > 200000 
 			|| e<0 || e>31) 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	width = w;  height = h;
 	printcolwidth = p;
@@ -354,12 +354,12 @@ gofig::Read( FILE *file, long id ) {
 		char *nl;
 		if ((fgets( s, MAXFILELINE + 2, file )) == 0) {
 			/* EOF or error */
-			result = dataobject_PREMATUREEOF;
+			result = dataobject::PREMATUREEOF;
 			break;
 		}
 		if (*s == '\\') {
 			/* \enddata */
-			result = dataobject_NOREADERROR;
+			result = dataobject::NOREADERROR;
 			break;
 		}
 
@@ -382,12 +382,12 @@ gofig::Read( FILE *file, long id ) {
 	(this)->NotifyObservers( gofig_SIZECHANGED );
 
 	len = strlen("\\enddata{gofig,");
-	if (result == dataobject_NOREADERROR &&
+	if (result == dataobject::NOREADERROR &&
 			( strncmp( s, "\\enddata{gofig,", len ) != 0
 			  || sscanf(s+len, "%ld}\n", &eid) != 1
 			  || eid != sid
 			) ) 
-		result = dataobject_MISSINGENDDATAMARKER;
+		result = dataobject::MISSINGENDDATAMARKER;
 
 	return result;
 }
@@ -412,9 +412,9 @@ gofig::Write( FILE *file, long writeID, int level ) {
 	char head[50];
 	long id = (this)->GetID();
 	int i;
-	if (this->writeID != writeID) {
+	if (this->GetWriteID() != writeID) {
 		/* new instance of write, do it */
-		this->writeID = writeID;
+		this->SetWriteID(writeID);
 		sprintf( head, "data{%s, %ld}\n", (this)->GetTypeName(), id );
 		fprintf( file, "\\begin%s", head );
 

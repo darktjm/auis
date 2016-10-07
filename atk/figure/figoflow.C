@@ -96,7 +96,7 @@ static boolean figoflow_OrderFlows(struct figobj *o, long ref, struct figure *se
 	long oldorder = flo->order;
 	flo->order = (*rock);
 	(*rock)++;
-	flo->figmodified = self->modified;
+	flo->figmodified = self->GetModified();
 	if (oldorder != flo->order) {
 	    flo->SetModified();
 	}
@@ -112,7 +112,7 @@ void figoflow::ObservedChanged(class observable  *obs, long  status)
 		figoflow_reg = ATK::LoadClass("figoflow");
 	    }
 
-	    if (this->figmodified != this->GetAncestorFig()->modified) {
+	    if (this->figmodified != this->GetAncestorFig()->GetModified()) {
 		long num;
 		num = 1;
 		this->GetAncestorFig()->EnumerateObjectTree(figure_NULLREF, NULL, TRUE, (figure_eofptr)figoflow_OrderFlows, (long)(&num));

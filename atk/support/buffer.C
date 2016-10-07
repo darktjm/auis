@@ -841,7 +841,7 @@ void buffer::SetReadOnly(boolean  readOnly)
     attributes.value.integer = readOnly;
     ((this)->GetData())->SetAttributes( &attributes);
     this->readOnly = readOnly;
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 class bufferlist *buffer::GetGlobalBufferList()
@@ -853,7 +853,7 @@ class bufferlist *buffer::GetGlobalBufferList()
 
 void buffer::ObservedChanged(class observable  *object, long  value)
 {
-   if (value == observable_OBJECTDESTROYED) {
+   if (value == observable::OBJECTDESTROYED) {
 	/* this makes little to no sense.
     observable_RemoveObserver(object, self); */
     }
@@ -866,11 +866,11 @@ void buffer::ObservedChanged(class observable  *object, long  value)
 void buffer::SetIsModified(boolean  value)
 {
     this->isModified = value;
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void buffer::SetIsRawFile(boolean  value)
 {
     this->isRawFile = value;
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }

@@ -136,7 +136,7 @@ void value::RemoveCallBackObserver( ATK   * observer )
           {
   short i;
 
-  while ((i = FindObserver( this, observer )) != -1)
+  while ((i = ::FindObserver( this, observer )) != -1)
     this->observers[i].observer = NULL;
 }
 
@@ -171,12 +171,12 @@ long value::Read(FILE  *file, long  id)
 {
     char buf[256];
     while(1){
-	if(fgets(buf,256,file) == NULL) return dataobject_PREMATUREEOF;
+	if(fgets(buf,256,file) == NULL) return dataobject::PREMATUREEOF;
 	if(*buf == '>') {
 	    this->rock1 = atoi(buf + 1);
 	    (this)->Put(valueatom,rock1atom,this->rock1);
 	}
-	else if(strncmp(buf,"\\enddata",8) == 0)return dataobject_NOREADERROR;
+	else if(strncmp(buf,"\\enddata",8) == 0)return dataobject::NOREADERROR;
     }
     
 }

@@ -797,12 +797,12 @@ static void eqview_Cut(class eqview  *self)
     len = (self)->GetDotLength();
 
     cutFile = (((class view *) self)->GetIM())->ToCutBuffer();
-    fprintf(cutFile, "\\begindata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->UniqueID());
+    fprintf(cutFile, "\\begindata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->GetID());
     fprintf(cutFile, "%s", eqview_cut_prefix);
-    eqptr->writeID = im::GetWriteID();
+    eqptr->SetWriteID(im::GetWriteID());
     (eqptr)->WriteFILE( cutFile, pos, pos+len, ' ');
     fprintf(cutFile, "%s", eqview_cut_suffix);
-    fprintf(cutFile, "\\enddata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->UniqueID());
+    fprintf(cutFile, "\\enddata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->GetID());
     (((class view *) self)->GetIM())->CloseToCutBuffer( cutFile);
     (eqptr)->DeleteCarefully( pos, pos+len);
     (self)->SetDotLength( 0);
@@ -820,12 +820,12 @@ static void eqview_Copy(class eqview  *self)
     len = (self)->GetDotLength();
 
     cutFile = (((class view *) self)->GetIM())->ToCutBuffer();
-    fprintf(cutFile, "\\begindata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->UniqueID());
+    fprintf(cutFile, "\\begindata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->GetID());
     fprintf(cutFile, "%s", eqview_cut_prefix);
-    eqptr->writeID = im::GetWriteID();
+    eqptr->SetWriteID(im::GetWriteID());
     (eqptr)->WriteFILE( cutFile, pos, pos+len, ' ');
     fprintf(cutFile, "%s", eqview_cut_suffix);
-    fprintf(cutFile, "\\enddata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->UniqueID());
+    fprintf(cutFile, "\\enddata{%s,%ld}\n", (eqptr)->GetTypeName(), (eqptr)->GetID());
     (((class view *) self)->GetIM())->CloseToCutBuffer( cutFile);
 }
 

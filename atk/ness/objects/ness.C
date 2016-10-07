@@ -666,7 +666,7 @@ ness::ReadNamedFile(const char *name) {
 	inputfile = fopen(name, "r" );
 	if (inputfile == NULL) {
 		printf("File %s not found\n", name);
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	}
 	/* check to see if we might be a shell script !  */
 	c = getc(inputfile);
@@ -931,7 +931,7 @@ procload(char *filename) {
 		tempNess = new ness;
 		if (ReadTextFileStream((class text *)tempNess, 
 				expandedname, inputfile, FALSE) == 
-				dataobject_NOREADERROR) {
+				dataobject::NOREADERROR) {
 			(tempNess)->SetAccessLevel( ness_codeBlue);
 
 			if ((tempNess)->Compile() != NULL) {
