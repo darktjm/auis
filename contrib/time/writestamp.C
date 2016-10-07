@@ -100,16 +100,16 @@ writestamp::ReadDataPart(FILE  *fp)
   char *buf;
   long ec;
 
-  if ((ec = (this)->timeoday::ReadDataPart( fp)) != dataobject_NOREADERROR) {
+  if ((ec = (this)->timeoday::ReadDataPart( fp)) != dataobject::NOREADERROR) {
     return(ec);
   }
   if ((buf = ReadLine(fp)) == NULL)
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   (this)->SetTime( atol(buf));
   (this)->FormatTime();
   free(buf);
 
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 

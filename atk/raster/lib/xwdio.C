@@ -163,8 +163,8 @@ long xwdio::ReadRow(FILE  *file		, unsigned char *row	, long  nbytes   )
 {
 
     if ((long)fread(row, sizeof(char), nbytes, file) < nbytes)
-	return dataobject_PREMATUREEOF;
-    return dataobject_NOREADERROR;
+	return dataobject::PREMATUREEOF;
+    return dataobject::NOREADERROR;
 }
 
 static void reverse_video(unsigned char *location , unsigned char *output, long  nbytes)
@@ -276,7 +276,7 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
       */
 
     if (fread(&hdr, sizeof(hdr), 1, file) < 1)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     
     /* Swap header bytes if necessary */
 
@@ -288,20 +288,20 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
     {
 	fprintf(stderr, "Xwd file is in 8 bit/pixel XYPixmap format, only ZPixmap is supported for 8-bit\n");
 	fflush(stderr);
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
     }
     else if (hdr.pixmap_depth == 8)
     {
 	fprintf(stderr, "Xwd file is in 8 bit/pixel format of unknown type -- only ZPixmap is supported\n");
 	fflush(stderr);
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
     }
     else if (hdr.pixmap_depth != 1 && hdr.pixmap_depth !=8)
     {
 	fprintf(stderr,	"Xwd file is %d	bits/pixel; only 1 bit/pixel or 8-bit ZPixmap are supported\n",
 		hdr.pixmap_depth  );
 	fflush(stderr);
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
     }
 
 
@@ -425,7 +425,7 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
     }
     (pix)->Resize( hdr.pixmap_width, hdr.pixmap_height);
     (pix)->NotifyObservers( pixelimage_DATACHANGED);
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 void xwdio::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *sub)

@@ -23,7 +23,7 @@ long hlptext::Read(FILE *file, long id)
     long tmpRetValue;
 
     tmpRetValue = (this)->text::Read(file, id);
-    if (tmpRetValue == dataobject_NOREADERROR) {
+    if (tmpRetValue == dataobject::NOREADERROR) {
 	dogtags_substitute(this);
     }
     return tmpRetValue;

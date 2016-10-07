@@ -52,7 +52,7 @@ void plink::SetTag(char  *newtag)
 
 long plink::Write(FILE  *fp, long  wid, int  level)
 {
-    long unid = (this)->UniqueID();
+    long unid = (this)->GetID();
 
     if (wid!=(this)->GetWriteID()) {
 	/* this dataobj has not been written yet */
@@ -77,7 +77,7 @@ long plink::Read(FILE  *fp, long  id)
     
     buf = ReadLine(fp);
     if (buf==NULL) {
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     }
 
     if (!strcmp(buf, "\\NoTag")) {
@@ -90,29 +90,29 @@ long plink::Read(FILE  *fp, long  id)
 
     buf = ReadLine(fp);
     if (buf==NULL) {
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     }
     if (strncmp(buf, "\\begindata", 10)) {
 	free(buf);
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
     }
     free(buf);
 
     res = (this)->link::Read( fp, id);
-    if (res!=dataobject_NOREADERROR)
+    if (res!=dataobject::NOREADERROR)
 	return res;
 
     buf = ReadLine(fp);
     if (buf==NULL) {
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     }
     if (strncmp(buf, "\\enddata", 8)) {
 	free(buf);
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
     }
     free(buf);
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 static void WriteLine(FILE  *f, const char  *l)

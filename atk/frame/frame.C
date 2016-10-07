@@ -529,23 +529,23 @@ void frame::Update()
 
 void frame::ObservedChanged(class observable  *changed, long  value)
 {    
-    if((class observable *)this->returnFocus==changed && value==observable_OBJECTDESTROYED) {
+    if((class observable *)this->returnFocus==changed && value==observable::OBJECTDESTROYED) {
 	this->returnFocus=NULL;
 	return;
     }
-    if(value==observable_OBJECTDESTROYED && changed==(class observable *)this->deleteTarget) {
+    if(value==observable::OBJECTDESTROYED && changed==(class observable *)this->deleteTarget) {
 	this->deleteTarget=NULL;
 	return;
     }
     
-    if (value!=observable_OBJECTDESTROYED && this->buffer != NULL && changed == (class observable *) this->buffer && this->object != (this->buffer)->GetData()) {
+    if (value!=observable::OBJECTDESTROYED && this->buffer != NULL && changed == (class observable *) this->buffer && this->object != (this->buffer)->GetData()) {
 	if (this->object)
 	    (this->object)->RemoveObserver( this);
 	this->object = (this->buffer)->GetData();
 	(this->object)->AddObserver( this);
     }
     else if (changed == (class observable *) this->object) {
-	if (value == observable_OBJECTDESTROYED) {
+	if (value == observable::OBJECTDESTROYED) {
 	    this->object = NULL;
 	}
 	else if (this->dataModified || (this->buffer)->GetScratch()) {

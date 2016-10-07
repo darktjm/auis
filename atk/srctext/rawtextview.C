@@ -79,5 +79,5 @@ static void toggleOverstrike(rawtextview  *self,long  key)
 	(d)->ChangeOverstrikeMode(TRUE);
 	message::DisplayString(self,0,"Overstrike mode.");
     }
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
 }

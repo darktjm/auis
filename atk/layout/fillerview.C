@@ -401,6 +401,6 @@ fillerview::SetDataObjectByName(const char  *dataname				/*class  dataname of re
     (MyFiller(this))->SetViewName( NULL, TRUE);
     (MyFiller(this))->SetRefName( dataname);
     ((class celview *) this)->arb = NULL;
-    (this)->ObservedChanged( MyFiller(this), observable_OBJECTCHANGED);
+    (this)->ObservedChanged( MyFiller(this), observable::OBJECTCHANGED);
     (this)->WantInputFocus( this);
 }

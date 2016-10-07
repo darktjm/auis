@@ -353,7 +353,7 @@ nullview::InitializeClass()
 	void
 nullview::ObservedChanged(class observable  *dobj, long  status)
 {
-	if (status == observable_OBJECTDESTROYED) 
+	if (status == observable::OBJECTDESTROYED) 
 		/* do not call wantupdate in this case,
 			it will bomb the program */
 		{}

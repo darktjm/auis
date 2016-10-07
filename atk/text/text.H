@@ -41,7 +41,7 @@ class text: public  simpletext {
     long Read(FILE *file, long id)  ;
     long Write(FILE *file, long writeID, int level)  ;
     long WriteOtherFormat(FILE *file, long writeid, int level, 
-			int usagetype, char *boundary)  ;
+			dataobject::otherformat usagetype, const char *boundary)  ;
     long ReadSubString(long pos, FILE *file, boolean quoteCharacters)  ;
     void WriteSubString(long pos, long len, FILE *file, boolean quoteCharacters);
     void ObservedChanged (class observable *changed, long value);

@@ -121,7 +121,7 @@ link::GetResolvedLink(view *viewer) {
 */
 	long
 link::Write(FILE  *fp, long  id, int  level) {
-	long uniqueid = (this)->UniqueID();
+	long uniqueid = (this)->GetID();
 
 	if (id == (this)->GetWriteID()) 
 			return uniqueid;
@@ -179,12 +179,12 @@ link_SanelyReturnReadError(class link  *self, FILE  *fp,
 	do {
 		if (buf != NULL) free(buf);
 		if ((buf = ReadLine(fp)) == NULL)
-		  return(dataobject_PREMATUREEOF);
+		  return(dataobject::PREMATUREEOF);
 	} while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
 	if (strcmp(buf, buf2) != 0) {
 		free(buf);
-		return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+		return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
 	}
 	free(buf);
 
@@ -197,19 +197,19 @@ ReadOldFormat(class link  *self, FILE  *fp, long  id) {
 
 	if ((buf = ReadLine(fp)) == NULL) 
 		return(link_SanelyReturnReadError(self, fp, id, 
-				dataobject_PREMATUREEOF));
+				dataobject::PREMATUREEOF));
 	(self)->SetText((*buf) ? buf : NULL);
 	free(buf);
 	
 	if ((buf = ReadLine(fp)) == NULL) 
 		return(link_SanelyReturnReadError(self, fp, id, 
-				dataobject_PREMATUREEOF));
+				dataobject::PREMATUREEOF));
 	(self)->SetLink((*buf) ? buf : NULL);
 	free(buf);
 	
 	if ((buf = ReadLine(fp)) == NULL) 
 		return(link_SanelyReturnReadError(self, fp, id, 
-				dataobject_PREMATUREEOF));
+				dataobject::PREMATUREEOF));
 	char name[255];
 	long style, size;
 	if (! *buf || !fontdesc::ExplodeFontName(buf,name,sizeof(name),
@@ -220,7 +220,7 @@ ReadOldFormat(class link  *self, FILE  *fp, long  id) {
 	}
 	(self)->SetButtonFont(fontdesc::Create(name,style,size));
 	free(buf);
-	return(dataobject_NOREADERROR);
+	return(dataobject::NOREADERROR);
 }
 
 /*
@@ -231,13 +231,11 @@ link::Read(FILE  *fp, long  id)	{
 	char *buf;
 	int ds_version; 
 	
-	(this)->SetID( (this)->UniqueID());
-
 	// read data stream version number
 	if ((buf = ReadLine(fp)) == NULL) {
 		free(buf);
 		return(link_SanelyReturnReadError(this, fp, id, 
-				dataobject_PREMATUREEOF));
+				dataobject::PREMATUREEOF));
 	}
 	if (sscanf(buf, "%d", &ds_version) == 1) {
 		// version 4 or above
@@ -246,14 +244,14 @@ link::Read(FILE  *fp, long  id)	{
 		if (strncmp(buf,"Datastream version:",19)) {
 			free(buf);
 			return(link_SanelyReturnReadError(this, fp, id, 
-				dataobject_BADFORMAT));
+				dataobject::BADFORMAT));
 		}
 		ds_version = atoi(buf+19);
 	}
 	if (ds_version < 1  ||  (ds_version > 3 && !isdigit(*buf))) {
 		free(buf);
 		return(link_SanelyReturnReadError(this, fp, id, 
-					dataobject_BADFORMAT));
+					dataobject::BADFORMAT));
 	}
 	free(buf);
 
@@ -267,21 +265,21 @@ link::Read(FILE  *fp, long  id)	{
 
 	if ((buf = ReadLine(fp)) == NULL) 
 		return(link_SanelyReturnReadError(this, fp, id, 
-			dataobject_PREMATUREEOF));
+			dataobject::PREMATUREEOF));
 	(this)->SetLink((*buf) ? buf : NULL);
 	free(buf);
 	
 	if (ds_version >= 3) {
 		if ((buf = ReadLine(fp)) == NULL) {
 			free(buf);
-			return(dataobject_PREMATUREEOF);
+			return(dataobject::PREMATUREEOF);
 		}
 		(this)->SetPos( atol(buf));
 		free(buf);
 
 		if ((buf = ReadLine(fp)) == NULL) {
 			free(buf);
-			return(dataobject_PREMATUREEOF);
+			return(dataobject::PREMATUREEOF);
 		}
 		(this)->SetLen( atol(buf));
 		free(buf);
@@ -289,7 +287,7 @@ link::Read(FILE  *fp, long  id)	{
 	if (ds_version >= 4) {
 		if ((buf = ReadLine(fp)) == NULL) {
 			free(buf);
-			return(dataobject_PREMATUREEOF);
+			return(dataobject::PREMATUREEOF);
 		}
 		SetTypeCode(
 			(*buf == 'F') ? FileLink
@@ -306,7 +304,7 @@ link::Read(FILE  *fp, long  id)	{
 		buf = ReadLine(fp);
 		if (!buf)
 			return(link_SanelyReturnReadError(this, fp, id,
-				dataobject_PREMATUREEOF));
+				dataobject::PREMATUREEOF));
 		if (*buf == '\\') 
 			break;
 		free(buf);
@@ -314,13 +312,13 @@ link::Read(FILE  *fp, long  id)	{
 
 	if (strncmp(buf,"\\begindata{", 11) != 0 ) {
 		return(link_SanelyReturnReadError(this, fp, id, 
-				dataobject_BADFORMAT));
+				dataobject::BADFORMAT));
 	}
 	free(buf);
 	(this)->pushbutton::Read(fp, id);
 
 	return(link_SanelyReturnReadError(this, fp, id, 
-		dataobject_NOREADERROR));
+		dataobject::NOREADERROR));
 }
 
 

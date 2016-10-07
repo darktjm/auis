@@ -31,7 +31,7 @@ void menterstrV::ObservedChanged(class observable  *changed,long  value)
     const char *str,*os;
     val = (this)->Value();
     if( changed == (class observable *) this->etext){
-	if(value == observable_OBJECTDESTROYED){
+	if(value == observable::OBJECTDESTROYED){
 	    this->etext = NULL;
 	    (val)->SetString(NULL);
 	}

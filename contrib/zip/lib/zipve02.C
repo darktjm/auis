@@ -167,7 +167,7 @@ zipedit::Expose_Palettes( zip_type_pane	       pane )
         (status = Create_BL_Palette(	    self, container, pane, &BLPane ))		||
 	(status = Create_BR_Palette(	    self, container, pane, &BRPane ))  )
 	{ /*=== handle error ===*/}
-      Data->modified = modified;
+      Data->RestoreModified(modified);
       (this->view_object)->Remove_Pane(  container );
       }
 

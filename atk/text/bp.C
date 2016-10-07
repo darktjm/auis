@@ -44,36 +44,35 @@ long bp::Read(FILE  *file, long  id)
     long val;
     int ix;
 
-    (this)->SetID((this)->UniqueID()); /* change id to unique number */
     this->ClearPageNum();
 
     if (!fgets(buf, 200, file))
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     if (!strncmp(buf, "Version 2", 9)) {
 	/* version 2: */
 	if (!fgets(buf, 200, file))
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	ix = sscanf(buf, "%c %ld", &flag, &val);
 	if (ix != 2)
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	this->haspagenum = (flag=='y');
 	this->pagenum = val;
 	if (!fgets(buf, 200, file))
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
     }
 
     /* if the first line was not "Version 2", we expect an enddata immediately */
     if (!strncmp(buf, "\\enddata{", 9)) {
 	ix = sscanf(buf, "\\enddata{%[^,],%ld}", name, &val);
 	if (ix != 2)
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	if (val != id || strcmp(name, (this)->GetTypeName()))
-	    return dataobject_BADFORMAT;
-	return dataobject_NOREADERROR;
+	    return dataobject::BADFORMAT;
+	return dataobject::NOREADERROR;
     }
 
-    return dataobject_BADFORMAT;
+    return dataobject::BADFORMAT;
 }
 
 long bp::Write(FILE  *file, long  writeID, int  level)

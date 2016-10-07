@@ -1349,7 +1349,7 @@ void sbuttonv::ObservedChanged(class observable  *ob, long  v)
     long change=(b2)->GetChangeType();
     int i;
 	
-    if(b2!=b || v==observable_OBJECTDESTROYED) return;
+    if(b2!=b || v==observable::OBJECTDESTROYED) return;
 
     this->needredraw=FALSE;
     
@@ -1363,7 +1363,7 @@ void sbuttonv::ObservedChanged(class observable  *ob, long  v)
     }
     
     if(bchange<0) {
-	(this)->view::ObservedChanged( b, observable_OBJECTCHANGED);
+	(this)->view::ObservedChanged( b, observable::OBJECTCHANGED);
 	return;
     }
     
@@ -1387,7 +1387,7 @@ void sbuttonv::ObservedChanged(class observable  *ob, long  v)
     }
 	
 	
-    (this)->view::ObservedChanged( b, observable_OBJECTCHANGED);
+    (this)->view::ObservedChanged( b, observable::OBJECTCHANGED);
 }
 
 

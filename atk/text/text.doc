@@ -288,7 +288,7 @@ new environment could not be created.}
 \fieldheading{See Also}
 
 \fieldtext{See also \italic{text_AlwaysAddView}; to get the name of a 
-dataobject's default view, see \italic{dataobject_ViewName} 
+dataobject's default view, see \italic{dataobject::ViewName} 
 (atk/basics/common/dataobj.doc).}
 
 
@@ -433,7 +433,7 @@ otherwise use \italic{text_AddView}; otherwise use this routine.
 \fieldheading{See Also}
 
 \fieldtext{See also \italic{text_AddView}; to get the name of a dataobject's 
-default view, see \italic{dataobject_ViewName} 
+default view, see \italic{dataobject::ViewName} 
 (atk/basics/common/dataobj.doc).}
 
 \view{bpv,538271560,258,0,0}
@@ -1066,8 +1066,8 @@ object has not been modified between the calls.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{dataobject_SetModified}; 
-\paramname{dataobject_GetModified} (atk/basics/common/dataobj.doc).}
+\fieldtext{\paramname{dataobject::SetModified}; 
+\paramname{dataobject::GetModified} (atk/basics/common/dataobj.doc).}
 
 \begindata{bp,538927368}
 \enddata{bp,538927368}
@@ -1161,7 +1161,7 @@ conjunction with \italic{text_HandleKeyWord.}}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{dataobject_HandleCloseWord} 
+\fieldtext{\paramname{dataobject::HandleCloseWord} 
 (atk/basics/common/dataobj.doc).}
 
 \begindata{bp,538927496}
@@ -1226,7 +1226,7 @@ into the buffer, then call \italic{text_Write} to write it to a file. }
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{dataobject_HandleKeyWord} 
+\fieldtext{\paramname{dataobject::HandleKeyWord} 
 (atk/basics/common/dataobj.doc).}
 
 
@@ -1607,7 +1607,7 @@ standards; if it does not, the method will generate error messages to
 
 \fieldheading{Return Value}
 
-\fieldtext{dataobject_NOREADERROR.}
+\fieldtext{dataobject::NOREADERROR.}
 
 
 
@@ -1865,7 +1865,7 @@ What attributes are there?  What can they be set too?
 }
 \fieldheading{See Also}
 
-\fieldtext{\paramname{dataobject_SetAttributes} 
+\fieldtext{\paramname{dataobject::SetAttributes} 
 (atk/basics/common/dataobj.doc).
 
 
@@ -1888,7 +1888,7 @@ class_NewObject(objectname)))  \{
 
 	    readOnlyAttr.next = NULL;
 
-	    dataobject_SetAttributes(newobject, &readOnlyAttr);
+	    dataobject::SetAttributes(newobject, &readOnlyAttr);
 
 \}}
 
@@ -2138,7 +2138,7 @@ to a file. }
 
 \fieldheading{See Also}
 
-\fieldtext{\italic{text_WriteSubString}; \paramname{dataobject_Write} 
+\fieldtext{\italic{text_WriteSubString}; \paramname{dataobject::Write} 
 (atk/basics/common/dataobj.doc).}
 
 \begindata{bp,538928392}
@@ -2192,7 +2192,7 @@ so that a read will interpret them as data stream symbols. }
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{text_Write}; \paramname{dataobject_WriteSubString} 
+\fieldtext{\paramname{text_Write}; \paramname{dataobject::WriteSubString} 
 (atk/basics/common/dataobj.doc)}.
 
 \begindata{bp,537558784}

@@ -385,7 +385,7 @@ void textview_QueryReplaceCmd(class textview  *self)
 		(self)->SetDotLength( originalLength);
 	    }
 	    (self)->FrameDot( originalPos);
-	    (d)->NotifyObservers( observable_OBJECTCHANGED);
+	    (d)->NotifyObservers( observable::OBJECTCHANGED);
 	}
 	sprintf(messageString, "Found %d occurrences; replaced %d.",
 		numFound, numReplaced);

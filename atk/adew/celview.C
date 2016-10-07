@@ -1399,7 +1399,7 @@ void celview::ObservedChanged(class observable  *changed, long  value)
     {
 	class cel *c = Cel(this);
 	class view *parent = ((class view *) this)->parent;
-	if (value == observable_OBJECTDESTROYED){
+	if (value == observable::OBJECTDESTROYED){
 /* NO LONGER assumes the parent is also observing the cel and will destroy the celview */
 	    if(parent == NULL) this->truechild = NULL;
 	    else (this)->UnlinkTree();
@@ -1426,7 +1426,7 @@ void celview::ObservedChanged(class observable  *changed, long  value)
 	    (this)->WantUpdate(this);
 
     }
-    if(value ==  observable_OBJECTDESTROYED ){
+    if(value ==  observable::OBJECTDESTROYED ){
 	if(this->olist){
 	    if(changed == (class observable *) ::PopOverlay(this,(class view *)changed))
 		  return;

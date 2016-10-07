@@ -240,7 +240,7 @@ nessrunapp::Start() {
 
 	fname = path::UnfoldFileName(this->inputfile, fullName, 0);
 	if ((this->theNess)->ReadNamedFile( fname) 
-				!= dataobject_NOREADERROR) {
+				!= dataobject::NOREADERROR) {
 		fprintf(stderr, "Input file is neither plain text not ATK format: %s\n",
 				fname);
 		return FALSE;

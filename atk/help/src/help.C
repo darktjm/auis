@@ -596,7 +596,7 @@ ShowFile(class help  *self, const char  *afilename	/* the file */, int  amoreFla
     if (attr != NULL)
 	((class text *)newdata)->SetAttributes( attr);
     if (!isTroffFormat) {
-	if (((class text *)newdata)->Read( fd, objectID) != dataobject_NOREADERROR) {
+	if (((class text *)newdata)->Read( fd, objectID) != dataobject::NOREADERROR) {
 	    ERRORBOX(c->view, err_read);
 	    (newview)->Destroy();
 	    (newdata)->Destroy();
@@ -646,7 +646,7 @@ ShowFile(class help  *self, const char  *afilename	/* the file */, int  amoreFla
 	chdir(manroot);
 	/* ======== END of change to root of man pages ========== */
 
-	if (rofftext::ReadRoffIntoText((class text *)newdata, fd, 0, manfiles) != dataobject_NOREADERROR) {
+	if (rofftext::ReadRoffIntoText((class text *)newdata, fd, 0, manfiles) != dataobject::NOREADERROR) {
 	    ERRORBOX(c->view, err_read);
 	    (newview)->Destroy();
 	    (newdata)->Destroy();

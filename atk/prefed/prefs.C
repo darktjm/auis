@@ -188,7 +188,7 @@ prefs::prefs()
     }
     if(errs) err=1;
     else err=(this)->ReadDataPart();
-    if(err!=dataobject_NOREADERROR) {
+    if(err!=dataobject::NOREADERROR) {
 	FreeHelpStyles(this);
 	delete this->prefsp;
 	delete this->categories;
@@ -534,7 +534,7 @@ void prefs::DeletePref(struct prefdesc  *pd)
 	    (pd->obj)->SetFromPreferenceString( "");
 	}
 	(pd->obj)->SetDefault();
-	(pd->obj)->NotifyObservers( observable_OBJECTCHANGED);
+	(pd->obj)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -1121,7 +1121,7 @@ long prefs::ReadDataPart()
     /*
       Read in the object from the file.
       */
-    long err=dataobject_NOREADERROR;
+    long err=dataobject::NOREADERROR;
     struct prefline line;
     boolean cont=TRUE;
     int order=0;
@@ -1183,7 +1183,7 @@ long prefs::ReScan()
 
 long prefs::Read(FILE  *fp, long  id)
 {
-    long err=dataobject_NOREADERROR;
+    long err=dataobject::NOREADERROR;
     endflag=TRUE;
     err=(this)->text::Read( fp, id);
     if(err<0) return err;
@@ -1202,10 +1202,10 @@ void prefs::ObservedChanged(class observable  *changed, long  val)
     static struct ATKregistryEntry  *prefval_ci=NULL;
     struct prefdesc *pd=NULL;
     if(prefval_ci==NULL) prefval_ci=ATK::LoadClass("prefval");
-    if(val!=observable_OBJECTDESTROYED && (changed)->ATKregistry()==prefval_ci && (pd=(struct prefdesc *)(this->prefsp)->Enumerate((list_efptr)PrefvalP, (char *)changed))) {
+    if(val!=observable::OBJECTDESTROYED && (changed)->ATKregistry()==prefval_ci && (pd=(struct prefdesc *)(this->prefsp)->Enumerate((list_efptr)PrefvalP, (char *)changed))) {
 	(this)->UpdateOneInText( pd);
 	this->selfmod=TRUE;
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
 	this->selfmod=FALSE;
     }
     (this)->text::ObservedChanged( changed, val);

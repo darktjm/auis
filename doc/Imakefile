@@ -1,6 +1,6 @@
 #define	IHaveSubdirs
 
-SUBDIRS = mkbrowse atkprogramming
+SUBDIRS = mkbrowse atkprogramming papers
 
 all::README
 README: README.ez

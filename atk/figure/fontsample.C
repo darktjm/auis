@@ -71,7 +71,7 @@ void fontsample::Update()
 
 void fontsample::ObservedChanged(class observable  *dobj, long  status)
 {
-    if (status == observable_OBJECTDESTROYED) {
+    if (status == observable::OBJECTDESTROYED) {
     }
     else if (status == fontsel_DATACHANGED) {
 	this->dirty = TRUE;

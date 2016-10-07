@@ -33,11 +33,11 @@ long month::Write(FILE  *fp, long  id, int  level)
 	clock = time(0);
 	thisdate = localtime(&clock);
 	fprintf(fp, "\\begindata{%s,%ld}\n%d\n%d\n\\enddata{%s,%ld}\n",
-		(this)->GetTypeName(), (this)->UniqueID(),
+		(this)->GetTypeName(), (this)->GetID(),
 		this->mon - thisdate->tm_mon, this->year - thisdate->tm_year,
-		(this)->GetTypeName(), (this)->UniqueID());
+		(this)->GetTypeName(), (this)->GetID());
     }
-    return((this)->UniqueID());
+    return((this)->GetID());
 }
 
 long month::Read(FILE  *fp, long  id)
@@ -46,23 +46,22 @@ long month::Read(FILE  *fp, long  id)
     time_t clock = time(0);
     struct tm *thisdate = localtime(&clock);
 
-    (this)->SetID( (this)->UniqueID());
     if (fgets(LineBuf,sizeof(LineBuf), fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     this->mon = thisdate->tm_mon + atoi(LineBuf);
     if (fgets(LineBuf,sizeof(LineBuf), fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     this->year = thisdate->tm_year + atoi(LineBuf);
     /* Now read in the \enddata line */
     if (fgets(LineBuf,sizeof(LineBuf), fp) == NULL) {
-	return(dataobject_PREMATUREEOF);
+	return(dataobject::PREMATUREEOF);
     }
     if (strncmp(LineBuf, "\\enddata", 8)) {
-	return(dataobject_MISSINGENDDATAMARKER);
+	return(dataobject::MISSINGENDDATAMARKER);
     }
-    return(dataobject_NOREADERROR);
+    return(dataobject::NOREADERROR);
 }
 
 void month::SetMonthAndYear(int  mon , int  year)

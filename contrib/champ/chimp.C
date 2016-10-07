@@ -37,11 +37,9 @@ long chimp::Read(FILE  *fp, long  id)
     char LineBuf[250];
     struct eventnode *en;
 
-    (this)->SetID((this)->UniqueID());/* change id to unique number */
-
     while (fgets(LineBuf, sizeof(LineBuf)-1, fp) != NULL) {
 	if (strncmp(LineBuf, "\\enddata{", 9) == 0) {
-	    return(dataobject_NOREADERROR);
+	    return(dataobject::NOREADERROR);
 	}
 	en = champ::ReadDateIntoEventNode(LineBuf);
 	if (en) {
@@ -67,7 +65,7 @@ long chimp::Read(FILE  *fp, long  id)
 	    }		
 	}
     }
-    return dataobject_NOREADERROR; /* What, me worry? */
+    return dataobject::NOREADERROR; /* What, me worry? */
 }
 
 long chimp::Write(FILE  *fp, long  id, int  level)
@@ -81,7 +79,7 @@ long chimp::Write(FILE  *fp, long  id, int  level)
 	/* New write operation */
 	(this)->SetWriteID( id);
 	if (level>0) {
-	    fprintf(fp, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
+	    fprintf(fp, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	}
 	for (cm = this->comment; cm; cm = cm->next) {
 	    fprintf(fp, "%s", cm->line); /* newline already there */
@@ -91,10 +89,10 @@ long chimp::Write(FILE  *fp, long  id, int  level)
 	    WriteOutEvent(fp, (struct eventnode *)li[i].rock);
 	}
 	if (level > 0) {
-	    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
+	    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	}
     }
-    return((this)->UniqueID());
+    return((this)->GetID());
 }
 
 static void WriteOutEvent(FILE  *fp, struct eventnode  *en)

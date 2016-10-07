@@ -572,8 +572,8 @@ static long InsertAFile(srctext *self, FILE *file, long position, char *objectNa
 		DiscardToEnddata(file);
 		length = 0;
 	    } else {
-		(dat)->Read(file, (dat)->UniqueID());
-		dictionary::Insert(NULL, (char *) objectID, (char *) (dat)->UniqueID());
+		(dat)->Read(file, (dat)->GetID());
+		dictionary::Insert(NULL, (char *) objectID, (char *) (dat)->GetID());
 		(self)->AlwaysAddView(position, (dat)->ViewName(),    dat);
 		length = 1;
 	    }
@@ -706,7 +706,7 @@ long srctext::Read(FILE *file, long id)
 {
     long tmpRetValue;
     tmpRetValue= (this)->text::Read(file, id);
-    if (tmpRetValue == dataobject_NOREADERROR) {
+    if (tmpRetValue == dataobject::NOREADERROR) {
 	if (id==0) /* it better NOT be a datastream! */
 	    FindSrcInsets();
 	SetupStyles(); /* text_Read blows the stylesheet away, so we have to either find (or CREATE) all the styles AGAIN */
@@ -777,7 +777,7 @@ long srctext::Read(FILE *file, long id)
 		WrapStyleNow(0,strlen(troffcommands), fmtnote, FALSE,FALSE);
 	    }
 	    RestoreModified(fakeunmodified);
-	    /* make the thing readonly!  Can't do it here, because bufferlist_GetBufferOnFile has its own local flag, and doesn't use it until AFTER the dataobject_Read is done.  Cripes. */
+	    /* make the thing readonly!  Can't do it here, because bufferlist_GetBufferOnFile has its own local flag, and doesn't use it until AFTER the dataobject::Read is done.  Cripes. */
 	}
     }
     return tmpRetValue;
@@ -963,7 +963,7 @@ long srctext::Write(FILE *file, long writeID, int level)
     if (level==0 && GetWriteStyle()!=text_DataStream) {
 	if (!writesrc(this, file, writeID))
 	    fprintf(stderr, "srctext error: File could not be written properly. (Saving insets requires free space in /tmp.  If this file has insets, clean out /tmp and try again).\n");
-	retval= this->dataobject::id;
+	retval= this->GetID();
     } else /* this thing is an inset (or else user set "datastream=yes"), just belch it out as a datastream */
 	retval= (this)->text::Write(file, writeID, level);
 
@@ -1017,7 +1017,7 @@ void srctext::SetWriteCallbacks(srctext_writefptr pre, srctext_writefptr post)
 long srctext::GetModified()
 {
     long pos=0, len=GetLength();
-    long mod, maxmod=this->dataobject::modified;
+    long mod, maxmod=this->GetModified();
     while ((pos=nextInset(this, pos,len-pos)) >= 0 && pos<len) {
 	environment *env=(environment *)(this->text::rootEnvironment)->GetInnerMost(pos);
 	if (env->type == environment_View) {
@@ -1057,7 +1057,7 @@ static mark *prev_pos=NULL;
 long srctext::GetPosForLine(long line)
 {
     long base_line=1, pos=0;
-    long len=GetLength(), mod=this->dataobject::modified;
+    long len=GetLength(), mod=this->GetModified();
 
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
 	if (line>=prev_line) {
@@ -1119,7 +1119,7 @@ long srctext::GetPosForLine(long line)
 long srctext::GetLineForPos(long pos)
 {
     long base_pos=0, line=1;
-    long mod=this->dataobject::modified;
+    long mod=this->GetModified();
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
 	long prvpos=(prev_pos)->GetPos();
 	if (pos>=prvpos) {

@@ -113,7 +113,7 @@ table::~table ()
     if (table_debug)
 	printf("table_FinalizeObject(%s)\n", (this)->Name());
     
-   /* this is bad... there should be only one observable_OBJECTDESTROYED message sent, and it will be sent by the observable destructor. therefore here we use a magic value 42 which spread understands. -rr2b */
+   /* this is bad... there should be only one observable::OBJECTDESTROYED message sent, and it will be sent by the observable destructor. therefore here we use a magic value 42 which spread understands. -rr2b */
     (this)->NotifyObservers(42);
     IgnoreObserved(this);
     
@@ -512,8 +512,8 @@ long table::Write (FILE  * f, long  writeID, int  level)
     if (table_debug)
 	printf("table_Write(%s,, %ld, %d)\n", (this)->Name(), writeID, level);
 
-    if (getDataObject(this).writeID != writeID) {
-	getDataObject(this).writeID = writeID;
+    if (getDataObject(this).GetWriteID() != writeID) {
+	getDataObject(this).SetWriteID(writeID);
 	fprintf (f, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	chunk.LeftCol = -1;
 	chunk.RightCol = (this)->NumberOfColumns() - 1;
@@ -532,13 +532,12 @@ long table::Read (FILE  * f, long  id)
     if (table_debug)
 	printf("table_Read(%s,, %ld)\n", (this)->Name(), id);
 
-    (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
     ::ReadASCII (this, f);
 
     this->fileWritten = this->timeStamper;
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
-    return dataobject_NOREADERROR;
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
+    return dataobject::NOREADERROR;
 }
 
 /* write subrectangle */
@@ -1022,7 +1021,6 @@ void table::Imbed (char  *name, Chunk  chunk)
 		DestroyCell(this, cell);
 		newobject = (class dataobject *) ATK::NewObject(name);
 		if (newobject) {
-		    newobject->id = (long) newobject;
 		    cell->celltype = table_ImbeddedObject;
 		    cell->interior.ImbeddedObject.data = newobject;
 		    cell->interior.ImbeddedObject.views = NULL;

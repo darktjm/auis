@@ -1357,7 +1357,7 @@ static void BeginTroff(FILE  *file,int  yneed			/* dots per inch */,class fadvie
 void fadview::ObservedChanged(class observable  *changed, long  value)
 {
     class fad *cpic = findpic(this);
-    if (value == observable_OBJECTDESTROYED)
+    if (value == observable::OBJECTDESTROYED)
 	(this)->Destroy();
     else {
 	if(value == fad_NEWFAD){

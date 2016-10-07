@@ -56,7 +56,7 @@ static void sort(class prefsv  *pv, char  *rock)
 	    }
 	    break;
     }
-    (DATA(pv))->NotifyObservers( observable_OBJECTCHANGED);
+    (DATA(pv))->NotifyObservers( observable::OBJECTCHANGED);
     message::DisplayString(pv, 0, buf);
 }
 

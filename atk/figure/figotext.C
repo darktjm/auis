@@ -855,19 +855,19 @@ long figotext::ReadBody(FILE  *fp, boolean  recompute)
     char buf[LINELENGTH+1];
 
     ix = (this)->figobj::ReadBody( fp, FALSE);
-    if (ix!=dataobject_NOREADERROR) return ix;
+    if (ix!=dataobject::NOREADERROR) return ix;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$ %ld %ld", &tmp1, &tmp2);
-    if (ix!=2) return dataobject_BADFORMAT;
+    if (ix!=2) return dataobject::BADFORMAT;
     this->excessx = tmp1;
     this->excessy = tmp2;
 
     count = 0;
     while (1) {
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 
 	for (ix=0; buf[ix]; ix++) {
 	    if (buf[ix]=='\n') 
@@ -895,7 +895,7 @@ long figotext::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 void figotext::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)

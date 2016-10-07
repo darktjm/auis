@@ -105,12 +105,12 @@ void iddimage::SetSource(image *src) {
 
 void iddimage::ObservedChanged(observable *changed, long change) {
     if(changed==source) {
-	if(change==observable_OBJECTDESTROYED) {
+	if(change==observable::OBJECTDESTROYED) {
 	    source=NULL;
 	    outdated=FALSE;
 	    return;
 	}
-	if(change==observable_OBJECTCHANGED) {
+	if(change==observable::OBJECTCHANGED) {
 	    outdated=TRUE;
 	}
     }

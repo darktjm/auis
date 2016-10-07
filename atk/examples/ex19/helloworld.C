@@ -59,21 +59,19 @@ long helloworld::Read(FILE  *file,long  id)
     char buf[100],classNameBuf[100];
     long retVal,dobjObjId;
 
-    (this)->SetID((this)->UniqueID());
-
     if(fgets(buf,sizeof(buf),file)==NULL ||
        /* the %hd tells scanf that blackOnWhite is a short, not an int */
        sscanf(buf,"%ld %ld %d\n",&this->x,&this->y,&this->blackOnWhite)<3 ||
        fgets(buf,sizeof(buf),file)==NULL ||
        sscanf(buf,"\\begindata{%[^,],%ld}\n",classNameBuf,&dobjObjId)<2)
-	retVal=dataobject_PREMATUREEOF;
+	retVal=dataobject::PREMATUREEOF;
     else{
 	if(strcmp(classNameBuf,(this->dobj)->GetTypeName())!=0){
 	    /* the type of the sub-object has changed */
 	    class dataobject *oldDobj;
 
 	    if(!ATK::IsTypeByName(classNameBuf,"dataobject"))
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	    oldDobj=this->dobj;
 	    this->dobj=(class dataobject *)ATK::NewObject(classNameBuf);
@@ -84,9 +82,9 @@ long helloworld::Read(FILE  *file,long  id)
 	}
 
 	retVal=(this->dobj)->Read(file,id);
-	if(retVal==dataobject_NOREADERROR)
+	if(retVal==dataobject::NOREADERROR)
 	    if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \enddata{...} */
-		retVal=dataobject_MISSINGENDDATAMARKER;
+		retVal=dataobject::MISSINGENDDATAMARKER;
     }
 
     return retVal;
@@ -97,12 +95,12 @@ long helloworld::Write(FILE  *file,long  writeId,int  level)
     if(writeId!=(this)->GetWriteID()){ /* only write a given version once */
 	(this)->SetWriteID(writeId);
 	fprintf(file,"\\begindata{%s,%ld}\n",
-		(this)->GetTypeName(), (this)->UniqueID());
+		(this)->GetTypeName(), (this)->GetID());
 	fprintf(file,"%ld %ld %d\n",this->x,this->y,this->blackOnWhite);
 	(this->dobj)->Write(file,writeId,level);
 	fprintf(file,"\\enddata{%s,%ld}\n",
-		(this)->GetTypeName(), (this)->UniqueID());
+		(this)->GetTypeName(), (this)->GetID());
     }
 
-    return (this)->UniqueID();
+    return (this)->GetID();
 }

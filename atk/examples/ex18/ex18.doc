@@ -394,7 +394,7 @@ long val;
 
 		break;
 
-	    case observable_OBJECTDESTROYED:
+	    case observable::OBJECTDESTROYED:
 
 		setSubView(hwv,NULL);
 
@@ -448,7 +448,7 @@ struct dataobject *dobj;
 
     if(dobj!=NULL)\{
 
-	hwv->view=(struct view*)class_NewObject(dataobject_ViewName(dobj));
+	hwv->view=(struct view*)class_NewObject(dataobject::ViewName(dobj));
 
 
 	hwv->applayer=view_GetApplicationLayer(hwv->view);
@@ -532,7 +532,7 @@ long rock;
 
     helloworld_NotifyObservers(hw,helloworld_SubObjectChanged);
 
-    dataobject_Destroy(oldDobj); /* get rid of the old one */
+    dataobject::Destroy(oldDobj); /* get rid of the old one */
 
 \}
 
@@ -642,9 +642,6 @@ long id;
     long retVal,dobjObjId;
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL ||
 
        /* the %hd tells scanf that blackOnWhite is a short, not an int */
@@ -657,7 +654,7 @@ long id;
 
 				&dobjObjId)<2)
 
-	retVal=dataobject_PREMATUREEOF;
+	retVal=dataobject::PREMATUREEOF;
 
     \bold{else\{
 
@@ -670,7 +667,7 @@ long id;
 
 	    if(!class_IsTypeByName(classNameBuf,"dataobject"))
 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	    oldDobj=hw->dobj;
 
@@ -681,18 +678,18 @@ long id;
 
 			helloworld_SubObjectChanged);
 
-	    dataobject_Destroy(oldDobj);
+	    dataobject::Destroy(oldDobj);
 
 	\}}
 
 
-	retVal=dataobject_Read(hw->dobj,file,id);
+	retVal=dataobject::Read(hw->dobj,file,id);
 
-	if(retVal==dataobject_NOREADERROR)
+	if(retVal==dataobject::NOREADERROR)
 
 	    if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-		retVal=dataobject_MISSINGENDDATAMARKER;
+		retVal=dataobject::MISSINGENDDATAMARKER;
 
     \}
 
@@ -853,7 +850,7 @@ struct helloworld *hw;
 
 \{
 
-    dataobject_Destroy(hw->dobj);
+    dataobject::Destroy(hw->dobj);
 
 \}
 
@@ -873,9 +870,6 @@ long id;
     long retVal,dobjObjId;
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL ||
 
        /* the %hd tells scanf that blackOnWhite is a short, not an int */
@@ -888,7 +882,7 @@ long id;
 
 			&dobjObjId)<2)
 
-	retVal=dataobject_PREMATUREEOF;
+	retVal=dataobject::PREMATUREEOF;
 
     else\{
 
@@ -901,7 +895,7 @@ long id;
 
 	    if(!class_IsTypeByName(classNameBuf,"dataobject"))
 
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 
 	    oldDobj=hw->dobj;
@@ -914,18 +908,18 @@ long id;
 		helloworld_SubObjectChanged);
 
 
-	    dataobject_Destroy(oldDobj);
+	    dataobject::Destroy(oldDobj);
 
 	\}
 
 
-	retVal=dataobject_Read(hw->dobj,file,id);
+	retVal=dataobject::Read(hw->dobj,file,id);
 
-	if(retVal==dataobject_NOREADERROR)
+	if(retVal==dataobject::NOREADERROR)
 
 	    if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-		retVal=dataobject_MISSINGENDDATAMARKER;
+		retVal=dataobject::MISSINGENDDATAMARKER;
 
     \}
 
@@ -954,20 +948,20 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
-	dataobject_Write(hw->dobj,file,writeId,level);
+	dataobject::Write(hw->dobj,file,writeId,level);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
@@ -1203,7 +1197,7 @@ struct dataobject *dobj;
 
     if(dobj!=NULL)\{
 
-	hwv->view=(struct view *)class_NewObject(dataobject_ViewName(dobj));
+	hwv->view=(struct view *)class_NewObject(dataobject::ViewName(dobj));
 
 
 	hwv->applayer=view_GetApplicationLayer(hwv->view);
@@ -1296,7 +1290,7 @@ long val;
 
 		break;
 
-	    case observable_OBJECTDESTROYED:
+	    case observable::OBJECTDESTROYED:
 
 		setSubView(hwv,NULL);
 
@@ -1929,7 +1923,7 @@ long rock;
     helloworld_NotifyObservers(hw,helloworld_SubObjectChanged);
 
 
-    dataobject_Destroy(oldDobj); /* get rid of the old one */
+    dataobject::Destroy(oldDobj); /* get rid of the old one */
 
 \}
 
@@ -2220,7 +2214,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al1=appLayerOrDestroy(v1=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj1)));
+*)class_NewObject(dataobject::ViewName(dobj1)));
 
     if(al1==NULL)
 
@@ -2228,7 +2222,7 @@ struct dataobject *dobj1,*dobj2;
 
 
     al2=appLayerOrDestroy(v2=(struct view 
-*)class_NewObject(dataobject_ViewName(dobj2)));
+*)class_NewObject(dataobject::ViewName(dobj2)));
 
     if(al2==NULL) \{
 

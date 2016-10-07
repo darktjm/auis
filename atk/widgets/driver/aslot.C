@@ -1236,7 +1236,7 @@ ASlotDataObj::ReadValue(const char *src) {
 	if ( ! dobj) goto fail;
 
 	// call dataobject::Read (f)
-	if (dobj->Read(f, objid) != dataobject_NOREADERROR) {
+	if (dobj->Read(f, objid) != dataobject::NOREADERROR) {
 		dobj->Destroy();
 		goto fail;
 	}

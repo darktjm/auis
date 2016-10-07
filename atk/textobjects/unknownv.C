@@ -65,7 +65,7 @@ static long DisplayRaw(ATK   *aself, long  rock)
     if(dself->odata) {
 	(dself)->AlwaysInsertCharacters( (dself)->GetLength(), sepline, strlen(sepline));
 	(dself)->AlwaysCopyText( (dself)->GetLength(), dself->odata, 0, (dself->odata)->GetLength());
-	(dself)->NotifyObservers( observable_OBJECTCHANGED);
+	(dself)->NotifyObservers( observable::OBJECTCHANGED);
 	message::DisplayString(self, 0, "Inserted raw data for unavailable inset.");
     } else {
 	message::DisplayString(self, 0, "The unavailable inset had no data apparently.");

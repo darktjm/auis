@@ -266,7 +266,7 @@ long figattr::Read(FILE  *fp, long  id)
     long ival;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     if (*buf == 'a') {
 	/* read brief attrs form */
@@ -281,7 +281,7 @@ long figattr::Read(FILE  *fp, long  id)
 		&tfontstyle, tfontfamily, &ttextpos, &tarrowsize, &tarrowpos, 
 		&tarrow, &tlinestyle);
 	if (n != figattr_NumAttributes) 
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	SetShade(tshade);
 	SetLineWidth(tlinewidth);
 	SetRRectCorner(trrectcorner);
@@ -294,19 +294,19 @@ long figattr::Read(FILE  *fp, long  id)
 	SetArrowPos(tarrowpos);
 	SetArrow(tarrow);
 	SetLineStyle(tlinestyle);
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
     }
    
     if (strncmp(buf, "\\figattr{", 9)) 
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     while (1) {
 	
-	if (!strncmp(buf, "}", 1)) return dataobject_NOREADERROR;
+	if (!strncmp(buf, "}", 1)) return dataobject::NOREADERROR;
 	pt = strchr(buf, ':');
-	if (!pt) return dataobject_BADFORMAT;
+	if (!pt) return dataobject::BADFORMAT;
 	*pt = '\0';
 	pt++;
 	tmp = strchr(pt, '\n');
@@ -371,7 +371,7 @@ long figattr::Read(FILE  *fp, long  id)
 	}
 
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
     }
 }
 

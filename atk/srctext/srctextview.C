@@ -1352,21 +1352,21 @@ static void toggleOverstrike(srctextview *self, long key) /*RSK91overstrike*/
 	message::DisplayString(self,0,"Overstrike mode.");
     }
     /*srctext_RegionModified(d,0,srctext_GetLength(d));*/ /*wimpy way to get all the views to refresh the cursor type*/ /* not needed anyway, unless drawtxtv got changed to display a different cursor in overstrike mode */
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 static void overstrikeOn(srctextview *self, long key) /*RSK91overstrike*/
 {
     srctext *d = (srctext *)(self)->GetDataObject();
     (d)->ChangeOverstrikeMode(TRUE);
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 static void overstrikeOff(srctextview *self, long key) /*RSK91overstrike*/
 {
     srctext *d = (srctext *)(self)->GetDataObject();
     (d)->ChangeOverstrikeMode(FALSE);
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 /* WaitCursorOn sets the process cursor to a Clock (wait) symbol */
@@ -1460,5 +1460,5 @@ static void copyrightScramble(textview *self)
 	return;
     }
     srctext::CopyrightScramble(txt, pos, len);
-    txt->NotifyObservers(observable_OBJECTCHANGED);
+    txt->NotifyObservers(observable::OBJECTCHANGED);
 }

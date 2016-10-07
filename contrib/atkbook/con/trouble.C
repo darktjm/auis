@@ -92,12 +92,12 @@ trouble::~trouble()
 
 void trouble::ObservedChanged(class contimer  *ct, long  code)
 {
-    if (code == observable_OBJECTDESTROYED) {
+    if (code == observable::OBJECTDESTROYED) {
 	(this)->Destroy(); /* can't go on without a timer */
 	return;
     }
     (this)->SetNumval( NumProblems);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void trouble::GetStringToDisplay(char  *buf, int  buflen, boolean  IsClick)

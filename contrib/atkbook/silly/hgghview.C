@@ -137,7 +137,7 @@ static void ChangeButton(class hgghview  *self, long  param)
 		NULL, Buf, sizeof(Buf)) >= 0) {
 	(self->b)->SetText( Buf);
 	(self->b)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
 	message::DisplayString(self, 10,
 		"Changed the button text as requested.");
     }
@@ -181,7 +181,7 @@ static void ChangeFromShortList(class hgghview  *self, long  param)
 		1, &result, ShortList, NULL) >= 0) {
 	(self->b)->SetText( ShortList[result]);
 	(self->b)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
 	message::DisplayString(self, 10,
 		"Changed the button text as requested.");
     }
@@ -193,7 +193,7 @@ static void ChangeFromLongList(class hgghview  *self, long  param)
 
     if (message::AskForStringCompleted(self, 50, "Enter new text for button: ", NULL, Buf, sizeof(Buf), NULL, CompleteChoice, (message_helpfptr)HelpChoice, 0, message_MustMatch) >= 0) {
 	(self->b)->SetText( Buf);
-	(self->b)->NotifyObservers(observable_OBJECTCHANGED);
+	(self->b)->NotifyObservers(observable::OBJECTCHANGED);
 	message::DisplayString(self, 10, "Changed the button text as requested.");
     }
 }

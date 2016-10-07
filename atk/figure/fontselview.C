@@ -214,7 +214,7 @@ void fontselview::ObservedChanged(class observable  *d, long  status)
     long ix, vnum, accnum;
     const char *cx;
 
-    if (status == observable_OBJECTDESTROYED) {
+    if (status == observable::OBJECTDESTROYED) {
     }
     else if (status == fontsel_DATACHANGED) {
 

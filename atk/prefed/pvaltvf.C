@@ -135,7 +135,7 @@ static void pvaltvfComplete(class pvaltvf  *self, long  rock)
     if(good) {
 	int len=strlen(buf2);
 	(TEXT(self))->ReplaceCharacters( pos, end-pos, buf2, len);
-	(TEXT(self))->NotifyObservers( observable_OBJECTCHANGED);
+	(TEXT(self))->NotifyObservers( observable::OBJECTCHANGED);
 	(tv)->SetDotPosition( pos+len);
 	(tv)->SetDotLength( 0);
 	(tv)->FrameDot( pos+len);

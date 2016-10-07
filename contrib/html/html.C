@@ -570,7 +570,7 @@ html::ChangeTitle(const char * name)
 	    (buf)->SetName( this->title);
 	}
 	(this)->SetModified();
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     } else if (buf) {
 	(buf)->SetName( "Untitled");
     }
@@ -581,7 +581,7 @@ html::ChangeIndexable(int  flag)
 {
     this->isindex = flag;
     (this)->SetModified();
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void
@@ -599,7 +599,7 @@ html::AddLink(long  inpos, long  len, char * uri)
     closeEntity(this, ep, &pos, 1);
     popEntity(this);
     (this)->RegionModified( inpos, len);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 char*
@@ -674,7 +674,7 @@ html::ChangeAttribute(class view * tv, class environment * env, const char * att
 	}
 	/* We're done */
 	(this)->SetModified();
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -1000,7 +1000,7 @@ html::AddEntity(long  pos, long  len, const char * name, char * vars)
     closeEntity(this, entityPeek(this), &pos, 1);
     popEntity(this);
     (this)->RegionModified( pos, len);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 /* ------------------------------------------------------------------------ */
@@ -1262,14 +1262,13 @@ fixStyles(long  rock, class text * self, long  pos, class environment * curenv)
 long
 html::Read(FILE * file, long  id)
 {
-    (this)->SetID( (this)->UniqueID());
     (this)->ReadSubString( 0, file, 1);
 
     /* Set all the environments back with SetStyle to TRUE,
      * TRUE so that we behave like an editor
      */
     (this)->EnumerateEnvironments( 0, (this)->GetLength(), (text_eefptr) fixStyles, 1);
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 long
@@ -1412,7 +1411,7 @@ html::Write(FILE * file, long  id, int  level)
     fprintf(file, "<body>\n");
     (this)->WriteSubString( 0, (this)->GetLength(), file, 1);
     fprintf(file, "\n</body>\n");
-    return this->dataobject::id;
+    return this->GetID();
 }
 
 /* Take a style and produce the html entity name which corresponds to it */
@@ -1789,7 +1788,7 @@ html::TagItem(long  pos , long  len, const char * text, const char * itemS, clas
 	(env)->SetStyle( FALSE, FALSE);
     }
     (this)->RegionModified( pos, len+tlen);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
     return TRUE;
 }
 
@@ -1877,7 +1876,7 @@ html::UntagItem(long  pos)
 
     /* Tell people about it */
     (this)->RegionModified( itempos, itemlen);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
     return len;
 }
 

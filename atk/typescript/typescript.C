@@ -1614,7 +1614,7 @@ typescript::ObservedChanged(class observable  *ov, long  value )
 
     /* after output has arrived, make sure view's dot is >= fence */
     if(ov == (class observable*) TEXT(this)) {
-	if(value == observable_OBJECTDESTROYED)
+	if(value == observable::OBJECTDESTROYED)
 	    /* the typescript can't do much without its text */
 	    (this)->Destroy();
 	else {

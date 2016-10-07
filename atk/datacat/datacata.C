@@ -80,7 +80,7 @@ static void clean_insert(class datacata  *self, FILE  *fp)
 	    else {
 		ix = (o)->Read( fp, tid);
 		switch (ix) {
-		    case dataobject_NOREADERROR:
+		    case dataobject::NOREADERROR:
 			if ((o)->IsType( self->tx)) {
 			    if (!self->insertedtemplate) {
 				self->insertedtemplate = TRUE;

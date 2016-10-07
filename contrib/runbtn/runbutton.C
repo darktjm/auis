@@ -281,7 +281,7 @@ long runbutton::Read(FILE  *fp, long  id)
 	     */
 	    len--;
 	    if (buffer[len] != '\n')
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    buffer[len] = '\0';
 	}
 	/* Check for known keywords. */
@@ -302,7 +302,7 @@ long runbutton::Read(FILE  *fp, long  id)
 	 * current state, which must not be NoneState.
 	 */
 	if (buffer[0] != 'X' || buffer[len-1] != 'X' || state == NoneState)
-	    return dataobject_BADFORMAT;
+	    return dataobject::BADFORMAT;
 	len--;
 	buffer[len] = '\0';	/* Smash trailing X. */
 	/* Data is the contents of the data string. */
@@ -315,24 +315,24 @@ long runbutton::Read(FILE  *fp, long  id)
 		 */
 		if (cmd - command_buffer + len >= (int)sizeof(command_buffer)) {
 		    /* It won't fit in our buffer. */
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		for (p = data; *p; )
 		    *cmd++ = *p++;
 		break;
 	    default:
 		/* What happened? */
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	}
     }
     if (feof(fp))
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     if (cmd != command_buffer) {
 	/* Read a quoted command. */
 	*cmd = '\0';
 	(this)->SetCommandString( unquote(command_buffer));
     }
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 /*
@@ -356,7 +356,7 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
     const char *lbl = GetLabelString();
     const char *quotecmd, *quotelabel, *p;
     int len;
-    long uniqueid = UniqueID();
+    long uniqueid = GetID();
 
     if (id != GetWriteID()) {
 	/* New Write Operation */
@@ -512,7 +512,7 @@ void runbutton::ExecuteNess(runbuttonview *rbv, char *cmd, int argc, char **argv
     nss->SupplyMarkerArg(args);
 
     /* Read the ness macro file. */
-    if (nss->ReadNamedFile(cmd) != dataobject_NOREADERROR) {
+    if (nss->ReadNamedFile(cmd) != dataobject::NOREADERROR) {
 	char msg[4096];
 	sprintf(msg, "%s is not valid ness.\n", cmd);
 	message::DisplayString(rbv, 0, msg);

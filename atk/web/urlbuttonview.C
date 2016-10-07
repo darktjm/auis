@@ -193,7 +193,7 @@ void urlbuttonview::SetURLProc(urlbuttonview *self, char *arg)
     if (message::AskForString(self,50,"Enter new URL: ", old_url, buf, sizeof(buf)) >= 0) {
 	b->SetURL(buf);
 	b->SetModified();
-	b->NotifyObservers(observable_OBJECTCHANGED);
+	b->NotifyObservers(observable::OBJECTCHANGED);
 	message::DisplayString(self, 10, "Changed URL.");
     }
 }

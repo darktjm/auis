@@ -196,7 +196,7 @@ class view *flexview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  
 	    (flexd)->SetDisplayParams( porf, vorh,
 				      movable, pct);
 	    (flexd)->NotifyObservers(
-			observable_OBJECTCHANGED);
+			observable::OBJECTCHANGED);
 	}
 	return(v);
     }
@@ -320,7 +320,7 @@ static void InsertObject(class flexview  *self)
 		"Could not insert object -- sorry.");
 	return;
     }
-    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void DeleteObjects(class flexview  *self)
@@ -358,7 +358,7 @@ static void DeleteObjects(class flexview  *self)
     self->oldleftdata = NULL;
     self->oldrightdata = NULL;
     (flexd)->DeleteObjects();
-    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->NotifyObservers( observable::OBJECTCHANGED);
     (self)->WantUpdate( self);
     (self)->WantInputFocus( self);
 }
@@ -413,7 +413,7 @@ static void AlterPair(class flexview  *self)
 	case 1:
 	    (flexd)->ToggleParts();
 	    (flexd)->NotifyObservers(
-			observable_OBJECTCHANGED);
+			observable::OBJECTCHANGED);
 	    v = self->leftview;
 	    self->leftview = self->rightview;
 	    self->rightview = v;
@@ -434,6 +434,6 @@ static void AlterPair(class flexview  *self)
 	    flexd->movable = !flexd->movable;
 	    break;
     }
-    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->NotifyObservers( observable::OBJECTCHANGED);
 }
 

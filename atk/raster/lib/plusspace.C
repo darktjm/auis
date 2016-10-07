@@ -190,7 +190,7 @@ plusspace::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row
 				/* ERROR: string extends beyond length
 				    given by length.  Store to end of line
 				    and then read and ignore the rest of the batch */
-				return dataobject_BADFORMAT;
+				return dataobject::BADFORMAT;
 			}
 			sofar += curr;
 			while (curr--)
@@ -203,12 +203,12 @@ plusspace::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row
 			if (curr > length - sofar) {
 				/* ERROR: code gives line longer than length
 				    ignore bytes beyond length */
-				return dataobject_BADFORMAT;
+				return dataobject::BADFORMAT;
 			}
 			sofar += curr;
 			while (curr--)
 				*row++ = repchar;
 		}
 	}
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }

@@ -704,7 +704,7 @@ void rasterview_RotateCommand(class rasterview  *self, long  rock)
 void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
 {
     /* need to use FindFile XXX */
-    long readresult = dataobject_OBJECTCREATIONFAILED;
+    long readresult = dataobject::OBJECTCREATIONFAILED;
     FILE *f;
     int c;
 
@@ -740,7 +740,7 @@ void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
     fclose(f);
     /* XXX need to inform observers of scroll change. */
 
-    if (readresult == dataobject_NOREADERROR) {
+    if (readresult == dataobject::NOREADERROR) {
 	self->needsFullUpdate = TRUE;
 	self->Xscroll = self->Yscroll = 0;
 	/* select the entire raster */
@@ -904,7 +904,7 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
     switch (rock) {
 	case InMacPaint:
 	    if (paint::ReadImage(f, (ras)->GetPix()) 
-		!= dataobject_NOREADERROR) {
+		!= dataobject::NOREADERROR) {
 		char msg[MAXPATHLEN + 50];
 		sprintf(msg, "File %s apparently not in MacPaint format", filename);
 		message::DisplayString((class view *)self, 0, msg); }
@@ -932,7 +932,7 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
 	case MakeWD:
 #endif
 	    if (xwdio::ReadImage(f, (ras)->GetPix()) 
-		!= dataobject_NOREADERROR) {
+		!= dataobject::NOREADERROR) {
 		char msg[MAXPATHLEN + 50];
 		sprintf(msg, "File %s apparently not in X Window Dump format", filename);
 		message::DisplayString((class view *)self, 0, msg); }
@@ -955,7 +955,7 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
 	    break;
 	case Inxbm:
 	    if (xbm::ReadImage(f, (ras)->GetPix()) 
-		!= dataobject_NOREADERROR) {
+		!= dataobject::NOREADERROR) {
 		char msg[MAXPATHLEN + 50];
 		sprintf(msg, "File %s apparently not in X Bitmap format", filename);
 		message::DisplayString((class view *)self, 0, msg); }

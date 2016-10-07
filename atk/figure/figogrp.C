@@ -514,10 +514,10 @@ long figogrp::ReadBody(FILE  *fp, boolean  recompute)
     long val1, val2, val3, val4, val5;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$ %ld %ld %ld %ld %ld", &val1, &val2, &val3, &val4, &val5);
 
-    if (ix != 5) return dataobject_BADFORMAT;
+    if (ix != 5) return dataobject::BADFORMAT;
 
     if (val2 == (-1) && val3 == (-1) && val4 == (-1) && val5 == (-1)) {
 	/* the group was written out as the root of a figure_WritePartial() operation. Thus, we should ignore these values, rather than overwrite the values of this (the focus group.) */
@@ -532,5 +532,5 @@ long figogrp::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }

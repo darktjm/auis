@@ -214,6 +214,6 @@ static void HandleGetstatsInput(FILE  *gfp, long  ignored)
 	    (ol->gsob)->SetStrval( StringValues[id]);
 	}
 	(ol->gsob)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
     }
 }

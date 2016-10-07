@@ -69,7 +69,7 @@ long urlbutton::Read(FILE *fp, long id)
 	     */
 	    len--;
 	    if (buffer[len] != '\n')
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    buffer[len] = '\0';
 	}
 	if (strncmp(buffer, "\\url:", 5) == 0) {
@@ -84,8 +84,8 @@ long urlbutton::Read(FILE *fp, long id)
 	    break;	/* End of our data. */
     }
     if (feof(fp))
-	return dataobject_PREMATUREEOF;
-    return dataobject_NOREADERROR;
+	return dataobject::PREMATUREEOF;
+    return dataobject::NOREADERROR;
 }
 
 /*
@@ -101,7 +101,7 @@ long urlbutton::Write(FILE  *fp, long  id, int  level)
 {
     const char *url = GetURL();
     const char *lbl = GetURLLabel();
-    long uniqueid = UniqueID();
+    long uniqueid = GetID();
     const char *tname = GetTypeName();
 
     if (id != GetWriteID()) {

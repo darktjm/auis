@@ -74,7 +74,7 @@ oldRF::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 
 	savebyte = *(row+W-1);		/* save last byte */
 	if (fread(row, W, 1, file) < 1) /* read the bytes */
-		return dataobject_PREMATUREEOF;  /* report error, if any */
+		return dataobject::PREMATUREEOF;  /* report error, if any */
 
 	/* convert colors */
 	if (((unsigned long)row) & 3) {
@@ -102,7 +102,7 @@ oldRF::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 		unsigned char *loc = row+W-1;
 		*loc = (*loc & mask) | (savebyte & ~mask);
 	}
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }
 
 
@@ -120,7 +120,7 @@ oldRF::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *p
 	long row, W;		/* count rows;  byte length of row */
 
 	if (fread(&hdr, 14, 1, file) < 1)   /* read the header */
-		  return dataobject_PREMATUREEOF;
+		  return dataobject::PREMATUREEOF;
 
 	if (hdr.Magic == RasterMagic) {
 		/* it is a proper raster file */
@@ -134,7 +134,7 @@ oldRF::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *p
 		fprintf(stderr, "File starts w/ F1, but magic # is 0x%lx\n",
 			hdr.Magic);
 		fflush(stderr);
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	}
 
 	W = (hdr.width+7)>>3;
@@ -152,7 +152,7 @@ oldRF::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *p
 	for (row = 0; row < hdr.height; row ++, where += W)
 		oldRF::ReadRow(file, where, hdr.width);
 	(pix)->NotifyObservers( pixelimage_DATACHANGED);
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }
 
 /* oldRF__WriteImage(file, pix, sub) 

@@ -332,7 +332,7 @@ static long dostuff(class prefval  *self, FILE  *fp, long  rock, const struct da
     while(!done) {
 	const struct dataprocs *dps;
 	buf=ReadLine(fp);
-	if(buf==NULL) return dataobject_PREMATUREEOF;
+	if(buf==NULL) return dataobject::PREMATUREEOF;
 	if(!linehascontrol) {
 	    free(buf);
 	    continue;
@@ -340,7 +340,7 @@ static long dostuff(class prefval  *self, FILE  *fp, long  rock, const struct da
 	buf2=ReadLine(fp);
 	if(buf2==NULL) {
 	    free(buf);
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	}
 
 	for(dps=procs;dps->name;dps++) {
@@ -353,7 +353,7 @@ static long dostuff(class prefval  *self, FILE  *fp, long  rock, const struct da
 	free(buf2);
     }
     
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 
@@ -567,12 +567,12 @@ static long prefval_SanelyReturnReadError(class prefval  *self, FILE  *fp, long 
     do {
 	if (buf != NULL) free(buf);
 	if ((buf = ReadLine(fp)) == NULL)
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
     } while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
     if (strcmp(buf, buf2) != 0) {
 	free(buf);
-	return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+	return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
     }
     free(buf);
 
@@ -585,21 +585,19 @@ long prefval::Read(FILE  *fp, long  id)
 
   char *buf;
   int dsversion;
-  long err=dataobject_NOREADERROR;
+  long err=dataobject::NOREADERROR;
   
-  (this)->SetID( (this)->UniqueID());
-
-  if ((buf = ReadLine(fp)) == NULL) err=dataobject_PREMATUREEOF;
+  if ((buf = ReadLine(fp)) == NULL) err=dataobject::PREMATUREEOF;
   else if (strncmp(buf,"Datastream version:",19)) {
-      err=dataobject_BADFORMAT;
+      err=dataobject::BADFORMAT;
   } else if ((dsversion = atoi(buf+19)) > prefval_DS_VERSION)	{
-      err=dataobject_BADFORMAT;
+      err=dataobject::BADFORMAT;
   }
   if(buf) free(buf);
 
   (this)->SetModified();
   (this)->NotifyObservers( prefval_Generic);
-  if(err==dataobject_NOREADERROR) {
+  if(err==dataobject::NOREADERROR) {
       return prefval_SanelyReturnReadError(this, fp, id, (this)->ReadDataPart( fp, dsversion));
   } else return(prefval_SanelyReturnReadError(this, fp, id, err));
 }

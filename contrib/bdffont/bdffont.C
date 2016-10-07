@@ -655,7 +655,7 @@ long bdffont::Read(FILE  *file, long  id)
     this->lastcharloaded = (-1);
 
     read_status=ReadIt(this, file);
-    if (read_status != dataobject_NOREADERROR)
+    if (read_status != dataobject::NOREADERROR)
 	fprintf(stderr, "bdffont: an error occurred while reading the font file.\n");
 
     return (read_status);

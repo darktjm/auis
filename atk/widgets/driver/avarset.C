@@ -83,15 +83,15 @@ ConsumeEverything(FILE *fp, const char *name, long id) {
 			fscanf(fp, "%ld}", &oid);
 			if(oid != id) continue;
 			if((c=fgetc(fp)) == '\n') 
-				return dataobject_NOREADERROR;
+				return dataobject::NOREADERROR;
 			else {
 				ungetc(c, fp);
-				return dataobject_NOREADERROR;
+				return dataobject::NOREADERROR;
 			}
 		}
 		if(c == '\\') ungetc(c, fp);
 	}
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 }
 
 	ASlot *
@@ -204,7 +204,7 @@ AVarSet::Read(FILE *fp, long id) {
 		return ConsumeEverything(fp, GetTypeName(), id);
 	else {
 		ConsumeEverything(fp, GetTypeName(), id);
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	}
 }
 

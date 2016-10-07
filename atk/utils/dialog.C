@@ -90,7 +90,7 @@ const char *dialog::ViewName()
 
 long dialog::Write(FILE  *fp, long  id, int  level)
 {
-    long uniqueid = (this)->UniqueID();
+    long uniqueid = (this)->GetID();
 
     if (id != (this)->GetWriteID()) {
 	/* New Write Operation */
@@ -130,11 +130,11 @@ static long SanelyReturnReadError(class dialog  *self, FILE  *fp, long  id, long
     sprintf(buf2, "\\enddata{%s,%ld}\n", (self)->GetTypeName(), id);
     do {
 	if ((fgets(buf, sizeof(buf)-1, fp)) == NULL)
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
     } while (strncmp(buf, "\\enddata{", 9) != 0); /* find an enddata */
 
     if (strcmp(buf, buf2) != 0) {
-	return(dataobject_MISSINGENDDATAMARKER); /* not ours! */
+	return(dataobject::MISSINGENDDATAMARKER); /* not ours! */
     }
 
     return(code);
@@ -148,40 +148,38 @@ long dialog::Read(FILE  *fp, long  id)
     long err;
     long textid;
     
-    (this)->SetID( (this)->UniqueID());
-
     p=fgets(buf, sizeof(buf)-1, fp);
-    if(!p) return dataobject_PREMATUREEOF;
+    if(!p) return dataobject::PREMATUREEOF;
     if (strncmp(buf, DatastreamHeader, sizeof(DatastreamHeader) - 1))
-	return(SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+	return(SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
     
-    if ((atoi(buf+sizeof(DatastreamHeader)-1)) > dialog_DS_VERSION) return(SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT));
+    if ((atoi(buf+sizeof(DatastreamHeader)-1)) > dialog_DS_VERSION) return(SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT));
 
     p=fgets(buf, sizeof(buf)-1, fp);
-    if(!p) return SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
+    if(!p) return SanelyReturnReadError(this, fp, id, dataobject::PREMATUREEOF);
     
-    if(sscanf(buf, "\\begindata{text,%ld}", &textid )!=1)  SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
+    if(sscanf(buf, "\\begindata{text,%ld}", &textid )!=1)  SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT);
     
     if(this->textp) (this->textp)->Clear();
     else this->textp=new text;
 
-    if(!this->textp) return  SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
+    if(!this->textp) return  SanelyReturnReadError(this, fp, id, dataobject::PREMATUREEOF);
     err=(this->textp)->Read( fp, textid);
 
-    if(err!=dataobject_NOREADERROR) return SanelyReturnReadError(this, fp, id, err);
+    if(err!=dataobject::NOREADERROR) return SanelyReturnReadError(this, fp, id, err);
     
-    if(!this->buttons) return SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
+    if(!this->buttons) return SanelyReturnReadError(this, fp, id, dataobject::PREMATUREEOF);
     
     p=fgets(buf, sizeof(buf)-1, fp);
-    if(!p) return SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
+    if(!p) return SanelyReturnReadError(this, fp, id, dataobject::PREMATUREEOF);
     
-    if(sscanf(buf, "\\begindata{sbutton,%ld}", &textid )!=1)  return SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
+    if(sscanf(buf, "\\begindata{sbutton,%ld}", &textid )!=1)  return SanelyReturnReadError(this, fp, id, dataobject::BADFORMAT);
 
     err=(this->buttons)->Read( fp, textid);
     
-    if(err!=dataobject_NOREADERROR) return SanelyReturnReadError(this, fp, id, err);
+    if(err!=dataobject::NOREADERROR) return SanelyReturnReadError(this, fp, id, err);
 
-    return SanelyReturnReadError(this, fp, id, dataobject_NOREADERROR); 
+    return SanelyReturnReadError(this, fp, id, dataobject::NOREADERROR); 
 }
 
 void dialog::SetText(class text  *textp)

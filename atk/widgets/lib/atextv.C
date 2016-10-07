@@ -57,7 +57,7 @@ void ATextvStateFormula::Evaluate() {
                 if(wrap) s->RemoveNoWrap();
                 else s->AddNoWrap();
                 src->RegionModified(0, src->GetLength());
-                src->NotifyObservers( observable_OBJECTCHANGED);
+                src->NotifyObservers( observable::OBJECTCHANGED);
             }
         }
     }
@@ -74,7 +74,7 @@ void ATextvStateFormula::Evaluate() {
                 s->ClearOldFontFaces();
                 s->AddNewFontFace(fd->GetFontStyle());
                 src->RegionModified(0, src->GetLength());
-                src->NotifyObservers( observable_OBJECTCHANGED);
+                src->NotifyObservers( observable::OBJECTCHANGED);
             }
         }
     }
@@ -437,7 +437,7 @@ view_DSattributes ATextv::DesiredSize(long  width, long  height, enum view_DSpas
 
 void ATextv::ObservedChanged(class observable  *changed, long  status)  {
     AWidgetView::ObservedChanged(changed, status);
-    if (status == observable_OBJECTDESTROYED) 
+    if (status == observable::OBJECTDESTROYED) 
     {
         if(changed==lastobs) lastobs=NULL;
     }

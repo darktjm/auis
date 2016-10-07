@@ -150,7 +150,7 @@ char name[64], bits[64], *t;
 	} 
 	else
 	{
-	    return dataobject_BADFORMAT;	
+	    return dataobject::BADFORMAT;	
 	}
     }
 
@@ -172,7 +172,7 @@ char name[64], bits[64], *t;
    {
        if ((byte = NextInt(file)) == EOF)
        {
-	   return dataobject_BADFORMAT;	
+	   return dataobject::BADFORMAT;	
        }
        *location++ = flipbits[(unsigned char)byte];
 
@@ -187,7 +187,7 @@ char name[64], bits[64], *t;
    (pix)->Resize( width, height);
    /* Finish */
    (pix)->NotifyObservers( pixelimage_DATACHANGED);
-   return dataobject_NOREADERROR;
+   return dataobject::NOREADERROR;
 }
 
 void xbm::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *sub)

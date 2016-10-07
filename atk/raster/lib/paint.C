@@ -150,7 +150,7 @@ paint::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbits)
 paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		/* where to put them */, long  length		/* how many bits in row must be filled */)
 				{
 	long sofar;		/* length unpacked so far */
-	int retval = dataobject_NOREADERROR;	/* no error so far */
+	int retval = dataobject::NOREADERROR;	/* no error so far */
 
 	unsigned char savebyte = *(row+((length+7)>>3)-1);	/* save last byte */
 
@@ -159,7 +159,7 @@ paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 		int curr = getc(file);
 		int databyte = 0;
 		if (curr == EOF) {
-			retval = dataobject_PREMATUREEOF;
+			retval = dataobject::PREMATUREEOF;
 			break;
 		}
 		else if (curr < 128)	{
@@ -167,7 +167,7 @@ paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 			curr++;		/* add in the +1 */
 			if (curr > length - sofar) {
 				/* ERROR: string extends beyond 'length' */
-				retval = dataobject_BADFORMAT;
+				retval = dataobject::BADFORMAT;
 				break;
 			}
 			sofar += curr;
@@ -181,7 +181,7 @@ paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 			if (curr > length - sofar) {
 				/* ERROR: code gives line longer than length
 				    ignore bytes beyond length */
-				retval = dataobject_BADFORMAT;
+				retval = dataobject::BADFORMAT;
 				break;
 			}
 			sofar += curr;
@@ -189,7 +189,7 @@ paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 				*row++ = databyte;
 		}
 		if (databyte == EOF) {
-			retval = dataobject_PREMATUREEOF;
+			retval = dataobject::PREMATUREEOF;
 			break;
 		}
 	}
@@ -215,14 +215,14 @@ paint::ReadImage(FILE  *file, class pixelimage  *pix)
 			{
 	unsigned char *where;	/* where to store next row */
 	long row;		/* count rows */
-	long status = dataobject_NOREADERROR;
+	long status = dataobject::NOREADERROR;
 
 	(pix)->Resize( PAINTWIDTH, PAINTHEIGHT);
 	where = (pix)->GetBitsPtr();
 	fread(where, PAINTHEADERLENGTH, 1, file);	/* skip header */
 	for (row = 0; row < PAINTHEIGHT; row ++, where += PAINTWIDTHINBYTES) {
 		status = paint::ReadRow(file, where, PAINTWIDTHINBYTES);
-		if (status != dataobject_NOREADERROR) break;
+		if (status != dataobject::NOREADERROR) break;
 	}
 	(pix)->NotifyObservers( pixelimage_DATACHANGED);
 	return status;

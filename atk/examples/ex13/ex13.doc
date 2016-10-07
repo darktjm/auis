@@ -359,26 +359,23 @@ long id;
     char buf[100];
 
 
-    helloworld_SetID(hw,helloworld_UniqueID(hw));
-
-
     if(fgets(buf,sizeof(buf),file)==NULL)
 
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
 
     /* the %hd tells scanf that blackOnWhite is a short, not an int */
 
     if(sscanf(buf,"%d %d %hd\\n",&hw->x,&hw->y,&hw->blackOnWhite)<3)
 
-	return dataobject_BADFORMAT;
+	return dataobject::BADFORMAT;
 
 
     if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \\enddata\{...\} */
 
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 
 \}
 
@@ -402,18 +399,18 @@ once */
 
 	fprintf(file,"\\\\begindata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
 	fprintf(file,"%d %d %d\\n",hw->x,hw->y,hw->blackOnWhite);
 
 	fprintf(file,"\\\\enddata\{%s,%d\}\\n",
 
-		class_GetTypeName(hw), helloworld_UniqueID(hw));
+		class_GetTypeName(hw), helloworld_GetID(hw));
 
     \}
 
 
-    return helloworld_UniqueID(hw);
+    return helloworld_GetID(hw);
 
 \}
 
@@ -1350,7 +1347,7 @@ struct dataobject *dobj;
     struct im *im;
 
 
-    v=(struct view *)class_NewObject(dataobject_ViewName(dobj));
+    v=(struct view *)class_NewObject(dataobject::ViewName(dobj));
 
     if(v==NULL)
 

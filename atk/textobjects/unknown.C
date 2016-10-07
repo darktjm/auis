@@ -101,7 +101,7 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 		    *p++=ch;
 		}
 	    }
-	    if(ch==EOF) return dataobject_PREMATUREEOF;
+	    if(ch==EOF) return dataobject::PREMATUREEOF;
 	    if(ch=='\\' || ch=='}') {
 		/* well this may have LOOKED like a keyword but somebody wrote
 		 some strange datastream.  ungetting the \ or } and starting
@@ -116,22 +116,22 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 		    long bid=0;
 		    /* everything after the '{' and before the ',' is the classname */
 		    while((ch=tgetc(self, file))!=EOF && ch!=',');
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* skip any space after the comma */
 		    while((ch=tgetc(self, file))!=EOF && isspace(ch));
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* put back the first non-space character after the comma */
 		    tungetc(self, ch, file);
 		    /* read the dataobject id */
 		    while((ch=tgetc(self, file))!=EOF && isdigit(ch)) bid=bid*10+(ch-'0');
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* discard any chunk after the id and before the '}' */
 		    if(ch!='}') while((ch=tgetc(self, file))!=EOF && ch!='}');
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* if there is a newline after the '}' slurp it up, otherwise leave the character
 		     for the subobject. */
 		    if((ch=tgetc(self, file))!=EOF && ch!='\n') tungetc(self, ch, file);
-		    else if(ch==EOF) return dataobject_PREMATUREEOF;
+		    else if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* recurse to read the subobject */
 		    res=RealRead(uself, self, file, bid, lev+1);
 		    if(res!=0) return res;
@@ -157,26 +157,26 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 			(self)->CopySubString( cpos, cepos-cpos+1, cbuf, FALSE);
 			(uself)->SetRealClass( cbuf);
 		    }
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* skip the space after the comma in \enddata{classname, 328} */
 		    while((ch=tgetc(self, file))!=EOF && isspace(ch));
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* put back the first non-space character, it should be the first digit
 		     of the dataobject id. */
 		    tungetc(self, ch, file);
 		    /* read the enddata id */
 		    while((ch=tgetc(self, file))!=EOF && isdigit(ch)) eid=eid*10+(ch-'0');
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* slurp up garbage after the id and before the '}' */
 		    if(ch!='}') while((ch=tgetc(self, file))!=EOF && ch!='}');
-		    if(ch==EOF) return dataobject_PREMATUREEOF;
+		    if(ch==EOF) return dataobject::PREMATUREEOF;
 		    /* slurp up the newline if it is there. */
 		    if((ch=tgetc(self, file))!=EOF && ch!='\n') tungetc(self, ch, file);
-		    else if(ch==EOF) return dataobject_PREMATUREEOF;
+		    else if(ch==EOF) return dataobject::PREMATUREEOF;
 		    if(eid!=id) {
 			fprintf(stderr, "warning: %s__Read: enddata id %d doesn't match begindata id %ld.\n", (self)->GetTypeName(), eid, id);
 		    }
-		    return dataobject_NOREADERROR;
+		    return dataobject::NOREADERROR;
 		}
 	    }
 
@@ -185,7 +185,7 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 	    if(ch=='\\') sawslash=1;
 	}
     }
-    return dataobject_PREMATUREEOF;
+    return dataobject::PREMATUREEOF;
 }
 
 /* this function will read and ignore any dataobject. */
@@ -208,7 +208,7 @@ long unknown::Read(FILE  *file, long  id)
  /* if the unknown object was at the top level when we read it in, we
 	     now wrap it in the unknown inset since upon writing the data contained
 	     in it may become invalid.  This would occur for example if it contains
-	     references to dataobject_UniqueID's of objects outside itself.  There is
+	     references to dataobject::GetID's of objects outside itself.  There is
 	     also the potential for conflict between id's in the object and objects
 	     outside. Manual intervention will be required to */
 	if(!this->wrapped) {
@@ -243,7 +243,7 @@ long unknown::Write(FILE  *file, long  writeid, int  level)
     if((this)->GetWriteID()!=writeid) {
 	long pos=0, len;
 	/* output the raw inset data wrapped in an 'unknown' dataobject. */
-	fprintf(file, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
+	fprintf(file, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	if(this->odata) {
 	    /* write out the data verbatim! */
 	    while(pos<(this->odata)->GetLength()) {
@@ -252,7 +252,7 @@ long unknown::Write(FILE  *file, long  writeid, int  level)
 		pos+=len;
 	    }
 	} else fprintf(file, "\n");
-	fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
+	fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
     }
-    return (this)->UniqueID();
+    return (this)->GetID();
 }

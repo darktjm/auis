@@ -38,7 +38,7 @@ void cel::ObservedChanged(class observable  *changed, long  value)
 {
     if(changed==(class	observable *)this->dataObject) {
 	
-	if(value==observable_OBJECTDESTROYED) {
+	if(value==observable::OBJECTDESTROYED) {
 	    this->dataObject=NULL;
 	    (this)->Destroy();
 	} else (this)->NotifyObservers(value);
@@ -63,7 +63,7 @@ cel::~cel()
        this->dataObject=NULL;
     }
     
-    /* cel_NotifyObservers(self,observable_OBJECTDESTROYED);
+    /* cel_NotifyObservers(self,observable::OBJECTDESTROYED);
       this doesn't appear to be needed and this should never be
       done since observable will take care of notifying observers
       of the destruction */
@@ -186,9 +186,8 @@ long cel::GetModified()
 boolean cel::SetObject(class dataobject  *newobject)
 {
     if(newobject){
-	newobject->id = (newobject)->UniqueID(); 
 	/* 	    Register the object with the dictionary */
-	dictionary::Insert(NULL,(char *)newobject->id,(char *) newobject);
+	dictionary::Insert(NULL,(char *)newobject->GetID(),(char *) newobject);
 	this->dataObject = newobject;
 	
 	(newobject)->Reference();
@@ -282,9 +281,8 @@ void cel::InsertObject (class dataobject  *newobject, char  *dataname,const char
 	}
     }
     if(newobject){
-	newobject->id = (newobject)->UniqueID(); 
 	/* 	    Register the object with the dictionary */
-	dictionary::Insert(NULL,(char *)newobject->id,(char *) newobject);
+	dictionary::Insert(NULL,(char *)newobject->GetID(),(char *) newobject);
 	this->dataObject = newobject;
 
 	(newobject)->AddObserver(this);
@@ -333,7 +331,7 @@ printf("GETLINE GOT ---- %s XXXXXXX\n",*place);
 }
 long cel::ReadSup(FILE  *file, long  id)
             {
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
     }
 long cel::ReadFile(FILE  *thisFile)
 {  
@@ -391,7 +389,6 @@ long cel::Read(FILE  *file, long  id)
     buf = cbuf;
 /* printf("In Cel Read\n"); */
     this->count++;
-    (this)->SetID((this)->UniqueID());/* change id to unique number */
     while (endcount != 0)  {
         while ((c = getc(file)) != EOF && c != '\\')  {
 	    if(endcount == 1){
@@ -399,9 +396,9 @@ long cel::Read(FILE  *file, long  id)
 	    *buf++ = c;
 	    }
         }
-        if (c == EOF) return dataobject_NOREADERROR;
+        if (c == EOF) return dataobject::NOREADERROR;
         if ((c = getc(file)) == EOF)
-            return dataobject_PREMATUREEOF;
+            return dataobject::PREMATUREEOF;
 	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
@@ -418,8 +415,8 @@ long cel::Read(FILE  *file, long  id)
 		    version = 0;
 		    while ((c = getc(file)) != EOF && c != '\n')
 			if(isdigit(c)) version = (version * 10) + (c - '0');
-		    if (c == EOF) return dataobject_NOREADERROR;
-		    if((status = (this)->ReadSup( file, id)) != dataobject_NOREADERROR){
+		    if (c == EOF) return dataobject::NOREADERROR;
+		    if((status = (this)->ReadSup( file, id)) != dataobject::NOREADERROR){
 			return status;
 		    }
 		}
@@ -432,12 +429,12 @@ long cel::Read(FILE  *file, long  id)
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
                     *s++ = c;
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
                 *s = '\0';
                 objectid = 0;
                 while ((c = getc(file)) != EOF && c != '}')
                     if(c >= '0' && c <= '9')objectid = objectid * 10 + c - '0';
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
 		if((c = getc(file))!= '\n' || (strcmp(objectname,"zip") == 0)) ungetc(c,file);
                 /* Call the New routine for the object */
 		if( buf == cbuf && endcount == 1 && version == 0 && id == 0 &&
@@ -456,14 +453,14 @@ long cel::Read(FILE  *file, long  id)
 		    /* Call the read routine for the object */
 		    (newobject)->UnReference();
                     status = (newobject)->Read( file, objectid);
-		    if (status != dataobject_NOREADERROR) {
+		    if (status != dataobject::NOREADERROR) {
 			printf("ERROR reading %s, %ld\n",objectname,status);
 			return status;
 		    }
 		}
                 else {
                     endcount += 1;
-		    /* return dataobject_OBJECTCREATIONFAILED; */
+		    /* return dataobject::OBJECTCREATIONFAILED; */
 		}
 
 	    }
@@ -534,7 +531,7 @@ long cel::Read(FILE  *file, long  id)
     if(this->dataObject == NULL) this->count = 0;
     if((this->ab = arbiter::GetMaster()) != NULL)
 	(this->ab)->DeclareRead(this);
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 long cel::WriteLink(FILE  *file ,long  writeid,int  level)
@@ -555,7 +552,7 @@ long cel::Write(FILE  *file ,long  writeid,int  level)
 {
     long did;
     did = 0l;
-    if (this->writeID == writeid)  return (this)->GetID();
+    if (this->GetWriteID() == writeid)  return (this)->GetID();
     if(level == 0 && (this->refname==NULL || *(this->refname) == '\0') && this->script == NULL && 
 	this->application == cel_APPLICATION && 
 	this->dataObject != NULL && 
@@ -566,7 +563,7 @@ long cel::Write(FILE  *file ,long  writeid,int  level)
 	/* don't write out self over plain text */
 	level--;
     if(level != -1){
-	this->writeID = writeid;
+	this->SetWriteID(writeid);
 	fprintf(file,"\\begindata{%s,%ld}\n",(this)->GetTypeName(),(this)->GetID());
 	fprintf(file,"\\V 2\n"); /* Version Number */
 	(this)->WriteSup(file ,writeid,level);
@@ -578,7 +575,7 @@ long cel::Write(FILE  *file ,long  writeid,int  level)
 #ifdef WOULDWORKBUT
     if(this->dataObject) did = (this->dataObject)->Write(file,writeid,level+1);
 #else /* WOULDWORKBUT */
-    if(this->dataObject){(this->dataObject)->Write(file,writeid,level+1); did = (this->dataObject)->UniqueID();}
+    if(this->dataObject){(this->dataObject)->Write(file,writeid,level+1); did = (this->dataObject)->GetID();}
 #endif /* WOULDWORKBUT */
     if(level != -1){
 	if(this->linkname)
@@ -709,7 +706,7 @@ long cel::InitDefault()
 	    fputs("Can't write init file for cel in /tmp\n",stderr);
 	    fflush(stderr);
 	    this->count--;
-	    return dataobject_OBJECTCREATIONFAILED;
+	    return dataobject::OBJECTCREATIONFAILED;
 	}
 	fwrite(this->defaultStream,strlen(this->defaultStream),1,f);
 	fclose(f);
@@ -719,7 +716,7 @@ long cel::InitDefault()
 	unlink(fnm);
 	return ret;
     }
-    return dataobject_OBJECTCREATIONFAILED;
+    return dataobject::OBJECTCREATIONFAILED;
 
 }
 #if 0

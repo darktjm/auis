@@ -119,7 +119,7 @@ void bpv::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width
 
 void bpv::ObservedChanged(class observable  *obs, long  status)
 {
-    if (status == observable_OBJECTDESTROYED) {
+    if (status == observable::OBJECTDESTROYED) {
     }
     else if (status == bp_DATACHANGED) {
 	class bp *dobj = (class bp *)(this)->GetDataObject();

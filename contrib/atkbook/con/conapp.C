@@ -96,7 +96,7 @@ boolean conapp::Start()
 	    s = &LineBuf[19];
 	    t = index(LineBuf, '}');
 	    if (t) *t = '\0';
-	    if (cp->Read(fp, atoi(s)) != dataobject_NOREADERROR) {
+	    if (cp->Read(fp, atoi(s)) != dataobject::NOREADERROR) {
 		printf("Error reading data from file %s\n", this->filenames[i]);
 		fclose(fp);
 		return(FALSE);

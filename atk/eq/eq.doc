@@ -133,7 +133,7 @@ parse the data.}\fieldtext{
 
 \fieldheading{Return Value}
 
-\fieldtext{This function returns dataobject_NOREADERROR.  It should probably 
+\fieldtext{This function returns dataobject::NOREADERROR.  It should probably 
 get a status value from eq_ReadFILE and return that instead.}
 
 

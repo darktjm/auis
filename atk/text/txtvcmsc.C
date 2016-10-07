@@ -93,7 +93,7 @@ void textview_PlaceReference(class textview  *self,long  key)
     if (p[0] == '\0')  strcpy(p,d->currentViewreference->viewType);
     if(textview_objecttest(self,p,"view") == FALSE) return;
     (d)->AddView(pos,p, d->currentViewreference->dataObject);
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
 }
 
 void textview_CheckSpelling(class textview  *self)
@@ -131,7 +131,7 @@ void textview_ToggleReadOnly(class textview  *self)
 	message::DisplayString(self, 0, "Text is now read only.");
     else
 	message::DisplayString(self, 0, "Text is now writable.");
-    (myText)->NotifyObservers( observable_OBJECTCHANGED); /* Handles updating of menus on read only transition. */
+    (myText)->NotifyObservers( observable::OBJECTCHANGED); /* Handles updating of menus on read only transition. */
 }
 
 void textview_InsertPageBreak (class textview  *self)
@@ -157,7 +157,7 @@ void textview_InsertPageBreak (class textview  *self)
     /* self->currentViewreference = */
     (d)->InsertObject( pos,"bp","bpv"); 
     (self)->FinishInsertion();
-    (d)->NotifyObservers(observable_OBJECTCHANGED);
+    (d)->NotifyObservers(observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -225,7 +225,7 @@ void textview_InsertFootnote(class textview  *self)
     (Text(self))->AddView( pos,"fnotev",fn);
     (fn)->addenv(Text(self),pos);
     
-    (Text(self))->NotifyObservers(observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers(observable::OBJECTCHANGED);
     (self)->SetDotPosition(pos + 1);
 }
 void textview_OpenFootnotes(class textview  *self)

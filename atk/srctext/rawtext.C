@@ -101,7 +101,7 @@ void rawtext::OverstrikeAChar(long  pos)
 	    if (c!='\t')
 		(this)->DeleteCharacters( pos, 1);
 	}		
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 

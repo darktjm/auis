@@ -129,26 +129,24 @@ long phlumph::Read(FILE  *fp, long  id)
     char buf[LINELENGTH+1];
     class textflow *o;
 
-    (this)->SetID( (this)->UniqueID()); 
-
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$version %ld", &val1);
-    if (ix!=1) return dataobject_BADFORMAT;
+    if (ix!=1) return dataobject::BADFORMAT;
     if (val1 > phlumph_DatastreamVersion) {
-	return dataobject_BADFORMAT; /* well, it probably will be */
+	return dataobject::BADFORMAT; /* well, it probably will be */
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "pages %ld", &val1);
-    if (ix!=1) return dataobject_BADFORMAT;
+    if (ix!=1) return dataobject::BADFORMAT;
     numpg = val1;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "repeat %ld", &val1);
-    if (ix!=1) return dataobject_BADFORMAT;
+    if (ix!=1) return dataobject::BADFORMAT;
     this->repeat = val1;
 
     if (numpg) {
@@ -159,40 +157,40 @@ long phlumph::Read(FILE  *fp, long  id)
 	    this->listsize = this->numpages;
 	    this->pagelist = (class textflow **)malloc(sizeof(class textflow *) * this->listsize);
 	    if (!this->pagelist)
-		return dataobject_OBJECTCREATIONFAILED;
+		return dataobject::OBJECTCREATIONFAILED;
 	}
 
 	if (this->numpages > this->listsize) {
 	    this->listsize = this->numpages;
 	    this->pagelist = (class textflow **)realloc(this->pagelist, sizeof(class textflow *) * this->listsize);
 	    if (!this->pagelist)
-		return dataobject_OBJECTCREATIONFAILED;
+		return dataobject::OBJECTCREATIONFAILED;
 	}
 
 	for (jx=0; jx<numpg; jx++) {
 	    if (fgets(buf, LINELENGTH, fp) == NULL)
-		return dataobject_PREMATUREEOF;
+		return dataobject::PREMATUREEOF;
 	    ix = sscanf(buf, "\\begindata{%[^,],%ld}", namebuf, &tid);
-	    if (ix!=2) return dataobject_BADFORMAT;
+	    if (ix!=2) return dataobject::BADFORMAT;
 
 	    if (!ATK::IsTypeByName(namebuf, "textflow"))
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 	    o = (class textflow *)ATK::NewObject(namebuf);
-	    if (!o) return dataobject_OBJECTCREATIONFAILED;
+	    if (!o) return dataobject::OBJECTCREATIONFAILED;
 
 	    ix = (o)->Read( fp, tid);
-	    if (ix!=dataobject_NOREADERROR) return ix;
+	    if (ix!=dataobject::NOREADERROR) return ix;
 	    this->pagelist[jx] = o;
 	}
     }
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "\\enddata{%[^,],%ld}", namebuf, &tid);
-    if (ix!=2) return dataobject_MISSINGENDDATAMARKER;
+    if (ix!=2) return dataobject::MISSINGENDDATAMARKER;
 
     if ((id && tid!=id) || strcmp(namebuf, (this)->GetTypeName()))
-	return dataobject_MISSINGENDDATAMARKER;
+	return dataobject::MISSINGENDDATAMARKER;
 
-    return dataobject_NOREADERROR;     
+    return dataobject::NOREADERROR;     
 }

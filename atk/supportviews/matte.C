@@ -477,7 +477,7 @@ void matte::ObservedChanged(class observable  *changed, long  value)
 {
     if(changed == (class observable *)this->ref ) 
     {
-	if (value == observable_OBJECTDESTROYED){
+	if (value == observable::OBJECTDESTROYED){
 	    this->ref = NULL;
  /* assumes the parent is also observing the viewref and will destroy the matte */
 /*	    matte_Destroy(self); */
@@ -485,7 +485,7 @@ void matte::ObservedChanged(class observable  *changed, long  value)
 	else if (this->ref && (this->desw != this->ref->desw || this->desh != this->ref->desh))
 	    (this)->WantUpdate(this);
 	}
-    if(changed == (class observable *)this->child && value ==  observable_OBJECTDESTROYED){
+    if(changed == (class observable *)this->child && value ==  observable::OBJECTDESTROYED){
 	this->child = NULL;
 	if(this->ref) {
 	    class viewref *vv = this->ref;

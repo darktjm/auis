@@ -391,14 +391,14 @@ static void ToggleReadOnlyProc(class figview  *self, long  val)
 void figview::ObservedChanged(class observable  *obs, long  status)
 {
     if (obs == (class observable *)this->toolset) {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    fprintf(stderr, "figview: observed toolset destroyed!\n");
 	}
 	else {
 	}
     }
     else {
-	if (status == observable_OBJECTDESTROYED) {
+	if (status == observable::OBJECTDESTROYED) {
 	}
 	else if (status == figure_DATACHANGED) 
 	    (this)->WantUpdate( this);	
@@ -2290,7 +2290,7 @@ static void PasteSelProc(class figview  *self, long  rock)
     }
 
     count2 = (fig)->GetObjectCounter();
-    if (ix!=dataobject_NOREADERROR) {
+    if (ix!=dataobject::NOREADERROR) {
 	message::DisplayString(self, 0, "Unable to read figure from cut buffer.");
 	((self)->GetIM())->CloseFromCutBuffer( fp);
 	return;
@@ -2515,7 +2515,7 @@ static void ReadZipProc(class figview  *self, long  rock)
     }
 
     if (eofl)
-	res = dataobject_NOTATKDATASTREAM;
+	res = dataobject::NOTATKDATASTREAM;
     else {
 	count1 = (fig)->GetObjectCounter();
 	res = figio::ReadZipFile(fl, fig, (self)->GetFocusRef(), ratio);
@@ -2523,22 +2523,22 @@ static void ReadZipProc(class figview  *self, long  rock)
     }
 
     switch (res) {
-	case dataobject_NOREADERROR:
+	case dataobject::NOREADERROR:
 	    message::DisplayString(self, 10, "Zip data read in.");
 	    break;
-	case dataobject_PREMATUREEOF:
+	case dataobject::PREMATUREEOF:
 	    message::DisplayString(self, 10, "Error: unexpected end of file.");
 	    break;
-	case dataobject_NOTATKDATASTREAM:
+	case dataobject::NOTATKDATASTREAM:
 	    message::DisplayString(self, 10, "Error: apparently not Zip file.");
 	    break;
-	case dataobject_MISSINGENDDATAMARKER:
+	case dataobject::MISSINGENDDATAMARKER:
 	    message::DisplayString(self, 10, "Error: missing enddata line.");
 	    break;
-	case dataobject_OBJECTCREATIONFAILED:
+	case dataobject::OBJECTCREATIONFAILED:
 	    message::DisplayString(self, 10, "Error: unable to create an object.");
 	    break;
-	case dataobject_BADFORMAT:
+	case dataobject::BADFORMAT:
 	    message::DisplayString(self, 10, "Error in Zip data file.");
 	    break;
 	default:

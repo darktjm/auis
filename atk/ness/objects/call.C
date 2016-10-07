@@ -1489,7 +1489,7 @@ callCompLib(struct libnode  *lnode) {
 		strcpy(fullname, lnode->path);
 		strcat(fullname, lnode->filename);
 		if ((lnode->ness)->ReadNamedFile( fullname) 
-				!= dataobject_NOREADERROR) {
+				!= dataobject::NOREADERROR) {
 			lnode->ness->ErrorList = errornode_Create(lnode->ness,
 					0, 0, 0, ":file read failed", 
 					FALSE, NULL);
@@ -1686,7 +1686,7 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 			class text *t;
 			class arbiter *shit = new arbiter;
 			val = (shit)->Read( f, objectID);
-			if (val != dataobject_NOREADERROR)
+			if (val != dataobject::NOREADERROR)
 				return val;
 			t = (class text *)(shit)->GetObject();
 			if ((t)->IsType( textClass)) {
@@ -1694,10 +1694,10 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 					(text)->SetAttributes( attributes);
 				(text)->AlwaysCopyTextExactly( 0, 
 					t, 0, (t)->GetLength());
-				val = dataobject_NOREADERROR;
+				val = dataobject::NOREADERROR;
 			}
 			else 
-				val = dataobject_BADFORMAT;
+				val = dataobject::BADFORMAT;
 			(shit)->Destroy();
 			return val;
 		}
@@ -1708,7 +1708,7 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 				vr = (text)->InsertObject( 0, 
 						objectType, NULL);
 				if (vr == NULL) 
-					return dataobject_BADFORMAT;
+					return dataobject::BADFORMAT;
 				dobj = vr->dataObject;
 				if (attributes != NULL)
 					(dobj)->SetAttributes( 
@@ -1719,7 +1719,7 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 			  /*	fprintf(stderr, "%s, it's a %s\n", 
 					"File is not a ness",
 					objectType);  */
-				return dataobject_BADFORMAT;
+				return dataobject::BADFORMAT;
 			}
 		}
 	}

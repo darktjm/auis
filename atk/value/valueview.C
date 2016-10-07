@@ -226,7 +226,7 @@ void valueview::ObservedChanged( class observable  * observed, long  status )
                {
   switch (status)
     {
-    case observable_OBJECTDESTROYED:
+    case observable::OBJECTDESTROYED:
       (this)->Destroyed();
       break;
     case value_NEWVALUE:

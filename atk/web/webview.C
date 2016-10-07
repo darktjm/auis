@@ -609,13 +609,13 @@ webview::SetRemote(class im  *im) {
 webview::ObservedChanged(class observable  *changed,  
 			long  value) {
 	if (changed == (class observable *) this->remoteim)  {
-		if (value == observable_OBJECTDESTROYED) {
+		if (value == observable::OBJECTDESTROYED) {
 			/* XXX may want to destroy self here */
 			this->remoteim = NULL;
 		}
         }
         
-        if(mouseFocus && changed==mouseFocus && value==observable_OBJECTDESTROYED) mouseFocus=NULL;
+        if(mouseFocus && changed==mouseFocus && value==observable::OBJECTDESTROYED) mouseFocus=NULL;
         
 	(this)->htmltextview::ObservedChanged( changed,  value);
 }

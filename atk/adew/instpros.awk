@@ -218,7 +218,7 @@ printf "{\n"
 printf "    long c,count,extradata;\n"
 printf "    if((c = getc(file)) != '@'){\n"
 printf "	ungetc(c,file);\n"
-printf "	return dataobject_NOREADERROR;\n"
+printf "	return dataobject::NOREADERROR;\n"
 printf "    }\n"
 # read the number of data elements to be read 
 print "    fscanf(file,\"%ld\\n\",&count);"
@@ -229,7 +229,7 @@ print "    if((extradata = count) > 0)" # may cause compiler warning
 print "        adew_ReadExtraData(file,count);"
 printf "/* user code begins here for ReadSup */\n"
 printf "/* user code ends here for ReadSup */\n"
-printf "    return dataobject_NOREADERROR;\n"
+printf "    return dataobject::NOREADERROR;\n"
 printf "}\n"
 printf "long %s::WriteSup(FILE *file ,long writeid,int level)\n",dclass
 printf "{\n"
@@ -340,7 +340,7 @@ printf "void %s::ObservedChanged(class observable *observed,long status)\n",clas
 printf "{\n",class
 printf "/* user code begins here for %s */\n","ObservedChanged"
 printf "/* user code ends here for %s */\n","ObservedChanged"
-printf "if (status == observable_OBJECTDESTROYED) {\n"
+printf "if (status == observable::OBJECTDESTROYED) {\n"
 printf "adew_NoteDestroyed(this,observed,this->AdewArray);\n";
 printf "}\n"
 printf "}\n"

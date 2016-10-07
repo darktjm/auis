@@ -90,7 +90,7 @@ static void DoUpdate(class wincelview  *self)
 }
 void wincelview::ObservedChanged(class observable  *changed, long  value)
 {
-    if(value == observable_OBJECTDESTROYED){
+    if(value == observable::OBJECTDESTROYED){
 	if(changed == (class observable *)this->window){
 	    this->window = NULL;
 	    (this->celviewp)->RemoveObserver(this);

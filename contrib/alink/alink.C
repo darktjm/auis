@@ -86,7 +86,7 @@ alink::Write(FILE  *fp, long  id, int  level )
 
 */
 
-  long uniqueid = (this)->UniqueID();
+  long uniqueid = (this)->GetID();
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
     (this)->SetWriteID( id);
@@ -113,23 +113,20 @@ alink::Read(FILE  *fp, long  id)
   int ds_version;
   long len;
   
-  (this)->SetID( (this)->UniqueID());
-
-
   if ((buf = ReadLine(fp)) == NULL) {
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   }
   if (strncmp(buf,"Datastream version:",19)) {
-    return(dataobject_BADFORMAT);
+    return(dataobject::BADFORMAT);
   }
   ds_version = atoi(buf+19);
   if (ds_version != 1) {
-    return(dataobject_BADFORMAT);
+    return(dataobject::BADFORMAT);
   }
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL) {
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   }
 
   if (strcmp(buf,"")!= 0 ) {
@@ -139,7 +136,7 @@ alink::Read(FILE  *fp, long  id)
 
   do {
       if ((buf = ReadLine(fp)) == NULL) {
-	  return(dataobject_PREMATUREEOF);
+	  return(dataobject::PREMATUREEOF);
       }
   } while (buf[0] == '\n' || !buf[0]);
   if (strcmp(buf,"")!= 0 ) {
@@ -148,7 +145,7 @@ alink::Read(FILE  *fp, long  id)
   free(buf);
 
   if ((buf = ReadAudio(fp, len)) == NULL) {
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   }
   if (strcmp(buf,"")!= 0 ) {
     (this)->SetAudio( len, buf);
@@ -156,17 +153,17 @@ alink::Read(FILE  *fp, long  id)
   free(buf);
 
   if ((buf = ReadLine(fp)) == NULL) {
-    return(dataobject_PREMATUREEOF);
+    return(dataobject::PREMATUREEOF);
   }
 
   sprintf(buf2, "\\enddata{%s,%ld}",
 	  (this)->GetTypeName(), id);
   if (strcmp(buf, buf2)) {
     free(buf);
-    return(dataobject_MISSINGENDDATAMARKER);
+    return(dataobject::MISSINGENDDATAMARKER);
   }
   free(buf);
-  return(dataobject_NOREADERROR);
+  return(dataobject::NOREADERROR);
 }
 
 
@@ -426,7 +423,7 @@ ReadLine(FILE  *f)
   return(NULL);
 }
 
-long alink::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
+long alink::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::otherformat  usagetype, const char  *boundary)
 {
     char *s, *end;
     unsigned char c1, c2, c3;
@@ -465,7 +462,7 @@ long alink::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usaget
     return(this->id);
 }
 
-boolean alink::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
+boolean alink::ReadOtherFormat(FILE  *file, const char  *fmt, const char  *encoding, const char  *desc)
 {
     char TmpFile[250];
     FILE *tmpfp = NULL;

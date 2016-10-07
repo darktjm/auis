@@ -74,39 +74,39 @@ long switcher::Read(FILE  *fp, long  id)
 
     while (TRUE) {
 	if (fgets(Label, sizeof(Label)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (!strncmp(Label, "\\enddata{switcher", 16)) {
-	    return dataobject_NOREADERROR;
+	    return dataobject::NOREADERROR;
 	}
 	if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (strncmp(LineBuf, "\\begindata{", 11)) {
-	    return(dataobject_BADFORMAT);
+	    return(dataobject::BADFORMAT);
 	}
 	thisname = &LineBuf[11];
 	obidstr = index(thisname, ',');
-	if (!obidstr) return(dataobject_BADFORMAT);
+	if (!obidstr) return(dataobject::BADFORMAT);
 	*obidstr++ = '\0';
 	s = index(obidstr, '}');
-	if (!s) return(dataobject_BADFORMAT);
+	if (!s) return(dataobject::BADFORMAT);
 	*s = '\0';
 	obid = atoi(obidstr);
 	if ((newob = (class dataobject *)
 	     ATK::NewObject(thisname)))  {
 	    status = (newob)->Read( fp, obid);
-	    if (status != dataobject_NOREADERROR) {
+	    if (status != dataobject::NOREADERROR) {
 		return status;
 	    }
 	} else {
-	    return(dataobject_OBJECTCREATIONFAILED);
+	    return(dataobject::OBJECTCREATIONFAILED);
 	}
 	if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
-	    return(dataobject_PREMATUREEOF);
+	    return(dataobject::PREMATUREEOF);
 	}
 	if (strncmp(LineBuf, "\\view{", 6)) {
-	    return(dataobject_BADFORMAT);
+	    return(dataobject::BADFORMAT);
 	}
 	thisname = &LineBuf[6];
 	s = index(thisname, '}');
@@ -116,12 +116,12 @@ long switcher::Read(FILE  *fp, long  id)
 	if (Label[0] == '*') {
 	    if (!(this)->AddObject( newob,
 				    Label+1, thisname)) {
-		return(dataobject_OBJECTCREATIONFAILED);
+		return(dataobject::OBJECTCREATIONFAILED);
 	    }
 	    (this)->SetNowPlaying( newob);
 	} else if (!(this)->AddObject( newob,
 				       Label, thisname)) {
-		return(dataobject_OBJECTCREATIONFAILED);
+		return(dataobject::OBJECTCREATIONFAILED);
 	}
     }
 }
@@ -157,7 +157,7 @@ boolean switcher::AddObject(class dataobject  *d, const char  *label , const cha
     if (this->NowPlaying == NULL) {
 	this->NowPlaying = sw;
 	(this)->NotifyObservers(
-		observable_OBJECTCHANGED);
+		observable::OBJECTCHANGED);
     }
     return(TRUE);
 }
@@ -195,7 +195,7 @@ boolean switcher::SetNowPlaying(class dataobject  *d)
 	    }
 	    this->NowPlaying = sw;
 	    (this)->NotifyObservers(
-			observable_OBJECTCHANGED);
+			observable::OBJECTCHANGED);
 	    return(TRUE);
 	}
     }

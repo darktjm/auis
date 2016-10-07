@@ -88,20 +88,19 @@ long header::Read(FILE  *file, long  id)
     int texts=header_ltext,i;
     class dataobject *newobject;
 
-    (this)->SetID((this)->UniqueID());/* change id to unique number */
-    if(!fgets(buf,sizeof(buf),file)) return dataobject_PREMATUREEOF;
+    if(!fgets(buf,sizeof(buf),file)) return dataobject::PREMATUREEOF;
     s=strrchr(buf,':');
     if(s) *s++='\0';
-    else return dataobject_PREMATUREEOF;
-    if(strcmp(buf,"where")) return dataobject_NOREADERROR;
+    else return dataobject::PREMATUREEOF;
+    if(strcmp(buf,"where")) return dataobject::NOREADERROR;
     else {
 	if(!strcmp(s,"header\n")) this->where=header_HEADER;
 	else if(!strcmp(s,"footer\n")) this->where=header_FOOTER;
     }
-    if(!fgets(buf,sizeof(buf),file)) return dataobject_PREMATUREEOF;
+    if(!fgets(buf,sizeof(buf),file)) return dataobject::PREMATUREEOF;
     s=strrchr(buf,':');
     if(s) *s++='\0';
-    else return dataobject_PREMATUREEOF;
+    else return dataobject::PREMATUREEOF;
     if(!strcmp(buf,"active")) {
 	for(i=header_ltext;*s && i<header_TEXTS;i++,s++) {
 	    /* Currently ALWAYS_ACTIVE_MODE is defined in header.ch */
@@ -115,12 +114,12 @@ long header::Read(FILE  *file, long  id)
     while (endcount != 0)  {
         while ((c = getc(file)) != EOF && c != '\\')  {
 	    if(endcount == 1){
-		return dataobject_NOREADERROR;
+		return dataobject::NOREADERROR;
 	    }
         }
-        if (c == EOF) return dataobject_NOREADERROR;
+        if (c == EOF) return dataobject::NOREADERROR;
         if ((c = getc(file)) == EOF)
-            return dataobject_PREMATUREEOF;
+            return dataobject::PREMATUREEOF;
 	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
@@ -142,18 +141,18 @@ long header::Read(FILE  *file, long  id)
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
                     *s++ = c;
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
                 *s = '\0';
 		objectid = 0;
 		while ((c = getc(file)) != EOF && c != '}')
 		    if(c >= '0' && c <= '9')objectid = objectid * 10 + c - '0';
-		if (c == EOF) return dataobject_PREMATUREEOF;
+		if (c == EOF) return dataobject::PREMATUREEOF;
 		if((c = getc(file))!= '\n') ungetc(c,file);
 		/* Call the New routine for the object */
 		if(!strcmp(objectname,"text")) {
 		    if(texts>=header_TEXTS) continue;
 		    status = (this->texts[texts])->Read( file, objectid);
-		    if (status != dataobject_NOREADERROR) return status;
+		    if (status != dataobject::NOREADERROR) return status;
 		    dictionary::Insert(NULL,(char *)objectid, (char *)this->texts[texts]);
 		    header_SetPrompt(this->texts[texts], header_prompts[texts]);
 		    (this->texts[texts])->SetObjectInsertionFlag( FALSE);
@@ -162,14 +161,14 @@ long header::Read(FILE  *file, long  id)
 		    if ((newobject = (class dataobject *) ATK::NewObject(objectname)))  {
 			/* Call the read routine for the object */
 			status = (newobject)->Read( file, objectid);
-			if (status != dataobject_NOREADERROR) return status;
+			if (status != dataobject::NOREADERROR) return status;
 			/* We don't know this object so ignore it */
 			(newobject)->Destroy();
 
 		    }
 		    else {
 			endcount += 1;
-			/* return dataobject_OBJECTCREATIONFAILED; */
+			/* return dataobject::OBJECTCREATIONFAILED; */
 		    }
 		}
 
@@ -185,18 +184,18 @@ long header::Read(FILE  *file, long  id)
         /* 	    Place Handling of characters following \  
            */	}
     }
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID, int  level)
 {
     int len, pos;
 
-    if (textobj->writeID != writeID)  {
-	textobj->writeID = writeID;
+    if (textobj->GetWriteID() != writeID)  {
+	textobj->SetWriteID(writeID);
 	fprintf(file, "\\begindata{%s,%ld}\n", 		
 		(textobj->WriteAsText)?"text": (textobj)->GetTypeName(),
-		textobj->UniqueID());
+		textobj->GetID());
 	fprintf(file, "\\textdsversion{%d}\n", 12);
 	if (textobj->styleSheet->templateName)
 	    fprintf(file, "\\template{%s}\n", textobj->styleSheet->templateName);
@@ -207,10 +206,10 @@ static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID,
 	(textobj)->WriteSubString( pos, len, file, 1);
 	fprintf(file, "\\enddata{%s,%ld}\n",
 		(textobj->WriteAsText)?"text": (textobj)->GetTypeName(),
-		textobj->id);
+		textobj->GetID());
 	fflush(file);
     }
-    return textobj->id;
+    return textobj->GetID();
 }
 
 

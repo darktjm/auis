@@ -477,34 +477,22 @@ class avalueflex : public avalueflex_base {
     /**< Add array elements from a string descriptor.
      *   Parses an array descriptor.  The descriptor has the following
      *   format, loosely in EBNF:
-     *
+     *   \code{.unparsed}
      *     array = '(' [whitespace] { element [whitespace] } ')'
-     *
      *     element = [name '=' [whitespace]] value [ ':' type ]
-     *
      *     name = atom
-     *
      *     type = { not-whitespace-or-) }
-     *
-     *     value = int // integer type by default
-     *
-     *           | float // real type by default
-     *
+     *     value = int    // integer type by default
+     *           | float  // real type by default
      *           | string // cstring type by default [allocated by not freed!]
-     *
-     *           | atom // atomatom type by default
-     *
-     *           | array // nested array: valueflex type by default
-     *
+     *           | atom   // atomatom type by default
+     *           | array  // nested array: valueflex type by default
      *     int = { [0-9] }+
-     *
      *     float = C-style floating point; must have . and start with digit
-     *
      *     string = '"' { string-char }+ '"'
-     *
-     *     string-char = not-"\\ \\e \\b \\r \\n \\t \\nnn \\" etc.
-     *
-     *     atom = [alpha] { [^ \\t=:)] }
+     *     string-char = not-"\ \e \b \r \n \t \nnn \\ \" etc.
+     *     atom = [alpha] { [^ \t=:)] }
+     *   \endcode
      *
      *   \param str A pointer to a variable pointing to the string to
      *              interpret.  On successful parse, this will be advanced

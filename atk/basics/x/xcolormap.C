@@ -572,7 +572,7 @@ ddcolor *xcolormap::Alloc(unsigned short r, unsigned short g, unsigned short b) 
 void xcolormap::ObservedChanged(observable  *changed, long  value)
 {
     colormap::ObservedChanged(changed, value);
-    if(value==observable_OBJECTDESTROYED) RemoveObserver(changed);
+    if(value==observable::OBJECTDESTROYED) RemoveObserver(changed);
 }
 
 static void PromptAndStart(xcolormap *self);

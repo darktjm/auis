@@ -215,9 +215,9 @@ long fad::Write(FILE  *f,long  writeid ,int  level)
 	int i;
 	struct fadvector *vv;
 	struct fad_frame *ff;
-    if (this->writeID == writeid)  return (this)->GetID();
-    this->writeID = writeid;
-	fprintf(f,"\\begindata{fad,%ld}\n",this->id);
+    if (this->GetWriteID() == writeid)  return (this)->GetID();
+    this->SetWriteID(writeid);
+	fprintf(f,"\\begindata{fad,%ld}\n",this->GetID());
 	for(i = 1; i < this->topinmp; i++)
 		fprintf(f,"$N %s\n",this->inmp[i]);
 	fprintf(f,"$C %d\n",this->Frames);
@@ -238,7 +238,7 @@ long fad::Write(FILE  *f,long  writeid ,int  level)
 			}
 		}
 	fprintf(f,"$$\n");
-	fprintf(f,"\\enddata{fad,%ld}\n",this->id);
+	fprintf(f,"\\enddata{fad,%ld}\n",this->GetID());
 	return (this)->GetID();
 	}
 long fad::Read(FILE  *f,long  id)
@@ -248,8 +248,7 @@ long fad::Read(FILE  *f,long  id)
 	struct fadvector *vv;
 	struct fad_frame *ff = NULL;
 	struct fadpoint *fp,*lp;
-        if(id != 0L)this->id = (this)->UniqueID();
-        this->modified = 0;
+        /* this->modified = 0; tjm - modified field doesn't work this way */
     /*Not currently concerned with embedded objects */
 	c = s;
 	c++;
@@ -260,7 +259,7 @@ long fad::Read(FILE  *f,long  id)
                     if(strncmp(s,"\\begindata{",11) == 0){
                         char nnm[64]; long foo;
                         sscanf(s,"\\begindata{%s,%ld}",nnm,&foo);
-                        if(strcmp(nnm,"fad") == 0) this->id = foo;
+                        if(strcmp(nnm,"fad") == 0) this->SetID(foo);
                     }
                 }
 		if(*s != '$') continue;
@@ -334,7 +333,7 @@ long fad::Read(FILE  *f,long  id)
 			}
 	}
 	(this)->NotifyObservers(fad_NEWFAD);
-	return dataobject_NOREADERROR;
+	return dataobject::NOREADERROR;
 }
 fad::~fad()
     {/* bug : label strings not currently freed */

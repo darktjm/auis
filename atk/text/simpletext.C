@@ -235,7 +235,6 @@ long simpletext::Read(FILE  *file, long  id)
     this->gapSize += this->length;
     this->lowSize = 0;
     this->length = 0;
-    this->id = (this)->UniqueID();
     if (id == 0 && fileno(file) >= 0)  {
 	struct stat buf;
 
@@ -322,7 +321,7 @@ long simpletext::Read(FILE  *file, long  id)
 	(this)->SetFence( (this)->GetLength() + 1);
 	this->pendingReadOnly = FALSE;
     }
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 static boolean simplewrite(FILE  *file,char  *p,long  len)
 {
@@ -352,12 +351,12 @@ static boolean simplewrite(FILE  *file,char  *p,long  len)
 }
 long simpletext::Write(FILE  *file, long  writeID, int  level)
 {
-    if (this->writeID != writeID)  {
-	this->writeID = writeID;
+    if (this->GetWriteID() != writeID)  {
+	this->SetWriteID(writeID);
 	if (level != 0)  {
-	    fprintf(file, "\\begindata{%s,%ld}", (this)->GetTypeName(), (this)->UniqueID()); 
+	    fprintf(file, "\\begindata{%s,%ld}", (this)->GetTypeName(), (this)->GetID()); 
 	    (this)->WriteSubString( 0, this->length, file, level != 0);
-	    fprintf(file, "\\enddata{%s,%ld}", (this)->GetTypeName(), (this)->UniqueID());
+	    fprintf(file, "\\enddata{%s,%ld}", (this)->GetTypeName(), (this)->GetID());
 	    fflush(file);
 	}
 	else  {
@@ -386,7 +385,7 @@ long simpletext::Write(FILE  *file, long  writeID, int  level)
 		    simplewrite(file, &(this->string[this->lowSize + this->gapSize]),this->length - this->lowSize);
 	}
     }
-    return (this)->UniqueID();
+    return (this)->GetID();
 }
 
 void simpletext::Clear()

@@ -523,7 +523,7 @@ iconview::SetDataObject(class dataobject  * dobj)
 void
 iconview::ObservedChanged(class observable  * data, long  value )
             {  
-    if (value == observable_OBJECTDESTROYED) {
+    if (value == observable::OBJECTDESTROYED) {
 	SlayChild(this);
     } else if (data == (class observable *)(this)->GetDataObject()){
 	switch(value) {

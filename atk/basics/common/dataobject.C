@@ -10,16 +10,27 @@ ATK_IMPL("dataobject.H")
 #include <view.H>
 /* #include "dict.ih" */
 
+/* some code assumes this is larger than your average number */
+static long unique = 1234;
 
 ATKdefineRegistry(dataobject, observable, NULL);
 
 dataobject::dataobject()
         {
-    this->id = (this)->UniqueID();
-    this->writeID = dataobject_UNDEFINEDID;
+    this->id = this->uniqueid = unique++;
+    this->writeID = dataobject::UNDEFINEDID;
     this->modified = 0;
     this->properties = NULL;
     THROWONFAILURE( TRUE);
+}
+
+void dataobject::SetID(long newValue)
+{
+    if(newValue != id && newValue < unique)
+	return; /* ignore non-unique value */
+    if(newValue != id)
+	unique = newValue + 1;
+    id = newValue;
 }
 
 static boolean FreeProps(long rock, class Namespace *self, int x)
@@ -54,16 +65,15 @@ long dataobject::Read(FILE  *file, long  id)
     long objectid;
     class dataobject *newobject;
 
-    (this)->SetID((this)->UniqueID());/* change id to unique number */
     while (endcount != 0)  {
         while ((c = getc(file)) != EOF && c != '\\')  {
 	    if(endcount == 1){
 		/* Place actual read code here */
 	    }
         }
-        if (c == EOF) return dataobject_NOREADERROR;
+        if (c == EOF) return dataobject::NOREADERROR;
         if ((c = getc(file)) == EOF)
-            return dataobject_PREMATUREEOF;
+            return dataobject::PREMATUREEOF;
         if (c == 'b')  {
             begindata = TRUE;
             be = "egindata";
@@ -84,12 +94,12 @@ long dataobject::Read(FILE  *file, long  id)
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
                     *s++ = c;
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
                 *s = '\0';
                 objectid = 0;
                 while ((c = getc(file)) != EOF && c != '}')
                     if(c >= '0' && c <= '9')objectid = objectid * 10 + c - '0';
-                if (c == EOF) return dataobject_PREMATUREEOF;
+                if (c == EOF) return dataobject::PREMATUREEOF;
 		if((c = getc(file))!= '\n') ungetc(c,file);
                 /* Call the New routine for the object */
                 if ((newobject = (class dataobject *) ATK::NewObject(objectname)))  {
@@ -99,11 +109,11 @@ long dataobject::Read(FILE  *file, long  id)
 /*		    dictionary_Insert(NULL,(char *)objectid, (char *)newobject); */
                     /* Call the read routine for the object */
                     status = (newobject)->Read( file, objectid);
-		    if (status != dataobject_NOREADERROR) return status;
+		    if (status != dataobject::NOREADERROR) return status;
 		}
                 else {
                     endcount += 1;
-		    /* return dataobject_OBJECTCREATIONFAILED; */
+		    /* return dataobject::OBJECTCREATIONFAILED; */
 		}
 
 	    }
@@ -118,7 +128,7 @@ long dataobject::Read(FILE  *file, long  id)
         /* 	    Place Handling of characters following \  
            */	}
     }
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 
@@ -185,6 +195,11 @@ const char *dataobject::ViewName() {
 void dataobject::SetAttributes(struct attributes  *attributes) {
 }
 
+struct property {
+    const class atom * type;
+    long data;
+};
+
 
 void dataobject::Put( const class atom  * property, const class atom  * type, long  value )
 {
@@ -233,11 +248,10 @@ int dataobject::ListCurrentViews(class view  **array,int  size)
       Returns the number of views found, which may be greater than size.
       Note that to just get a count of views,
          this routine may be called with array = NULL and size = 0 */
-    int i,count;
-    class observable *ob,**observers;
-    ob = (class observable *)this;
+    int i,count, nObservers;
+    class observable * const *observers;
     count = 0; 
-    for (i = 0, observers = ob->observers; i < ob->nObservers ; i++, observers++)
+    for (i = 0, observers = GetObservers(&nObservers); i < nObservers ; i++, observers++)
 	if(ATK::IsTypeByName((*observers)->GetTypeName(),"view") &&
 	   ((class view *)(*observers))->dataobject == this){
 	    if(count < size) *array++ = (class view *)*observers;
@@ -247,24 +261,16 @@ int dataobject::ListCurrentViews(class view  **array,int  size)
     return count;
 }
 
-long dataobject::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
+long dataobject::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::otherformat usagetype, const char  *boundary)
 {
-    if (usagetype != dataobject_OTHERFORMAT_MAIL) return(dataobject_BADFORMAT);
-#ifdef THREEPART
-    /* This is if we want to go the three-versions mail-stream route */
-    fprintf(file, "\n<nl>[An <bold>Andrew</bold> object (a <italic>'%s'</italic> inset)\nwas included here in the original message,\nbut could not be translated to a non-Andrew mail format.]<nl>\n", (this)->GetTypeName());
-    return 0; /* 0 return means we did NOT write out a real multipart piece.
-		If we DID write it out properly, we should return 
-		dataobject_GetID(self), as in the commented out line above */
-#else
+    if (usagetype != dataobject::OTHERFORMAT_MAIL) return(dataobject::BADFORMAT);
     fprintf(file, "\n--%s\nContent-type: application/andrew-inset\n\n", boundary);
     (this)->Write( file, writeID, 1); /* Make sure it isn't top-level */
     return (this)->GetID();
-#endif
 }
 
 boolean
-dataobject::ReadOtherFormat(FILE  *file, char  *fmt , char  *encoding, char  *description)
+dataobject::ReadOtherFormat(FILE  *file, const char  *fmt , const char  *encoding, const char  *description)
 {
     return(FALSE); /* couldn't read it */
 }

@@ -5525,7 +5525,7 @@ void xim::ObservedChanged(class observable  *changed, long  value)
 {
     struct menuviews **mv, *mv2;
     class view *owner=im::GetSelectionOwner();
-    if(value!=observable_OBJECTDESTROYED) return;
+    if(value!=observable::OBJECTDESTROYED) return;
 
     if(changed==this) return;
     

@@ -186,6 +186,7 @@
   - probably doesn't buy enough to be worthwhile, since most atoms are
     created dynamically.  Maybe using a buffer list for string storage
     would be more worthwhile.
+- search for tjm comments and see if there are any TODOs there
 Long-term:
   - view/adjust styling boundaries (aka view source)?
   - add code snippet inset for literate programming

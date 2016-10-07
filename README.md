@@ -364,7 +364,10 @@ So far, what I've done is:
     assign styles to node labels and the app is in general not
     very user-friendly).  If I don't get cracking on the latex
     output, I'll probably abandon this as well in favor of a plain
-    latex document.
+    latex document.  Also started a doxygen document, with some things
+    actually documented.   I'm not happy with the formatting or
+    contents (excessive in most places), but I'll continue investing
+    in it.
 
   - Fixed org so that it actually almost works.  I don't think org
     was production-ready even in '97.  It still has some usability

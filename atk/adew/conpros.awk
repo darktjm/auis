@@ -168,9 +168,9 @@ END {
 	printf "/* user code begins here for %s */\n","ObservedChanged"
 	printf "/* user code ends here for %s */\n","ObservedChanged"
 	printf "if(observed == (class observable *) this->arbv){\n"
-	printf "\tif (status == observable_OBJECTDESTROYED) this->arbv = NULL;\n"
+	printf "\tif (status == observable::OBJECTDESTROYED) this->arbv = NULL;\n"
 	printf "\t else initself(this,this->v);\n}\n"
-	printf "if (status == observable_OBJECTDESTROYED) {\n"
+	printf "if (status == observable::OBJECTDESTROYED) {\n"
 	for(i in oblist){
 	     if(obtype[i] != "value"){
 		printf "\tif (observed == (class observable *) this->%s) this->%s=NULL;\n", obfunc[i], obfunc[i];

@@ -1660,13 +1660,13 @@ change
 
 if(observed == (struct observable *) self->arbv)\{
 
-	if (status == observable_OBJECTDESTROYED) self->arbv = NULL;
+	if (status == observable::OBJECTDESTROYED) self->arbv = NULL;
 
 	 else initself(self,self->v);
 
 \}
 
-if (status == observable_OBJECTDESTROYED) \{
+if (status == observable::OBJECTDESTROYED) \{
 
 	if (observed == (struct observable *) self->bgView) self->bgView=NULL;
 

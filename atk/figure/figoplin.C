@@ -1105,9 +1105,9 @@ long figoplin::ReadBody(FILE  *fp, boolean  recompute)
     char buf[LINELENGTH+1];
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
-	return dataobject_PREMATUREEOF;
+	return dataobject::PREMATUREEOF;
     ix = sscanf(buf, "$$ %ld %ld %ld %ld", &num2, &num, &numh, &numv);
-    if (ix!=4) return dataobject_BADFORMAT;
+    if (ix!=4) return dataobject::BADFORMAT;
 
     this->SetClosed(num2);
 
@@ -1118,9 +1118,9 @@ long figoplin::ReadBody(FILE  *fp, boolean  recompute)
 
     for (jx=0; jx<this->numpts; jx++) {
 	if (fgets(buf, LINELENGTH, fp) == NULL)
-	    return dataobject_PREMATUREEOF;
+	    return dataobject::PREMATUREEOF;
 	ix = sscanf(buf, "$ %ld %ld", &xp, &yp);
-	if (ix!=2) return dataobject_BADFORMAT;
+	if (ix!=2) return dataobject::BADFORMAT;
 	this->pts[jx].x = xp;
 	this->pts[jx].y = yp;
     }
@@ -1130,7 +1130,7 @@ long figoplin::ReadBody(FILE  *fp, boolean  recompute)
 	(this)->SetModified();
     }
 
-    return dataobject_NOREADERROR;
+    return dataobject::NOREADERROR;
 }
 
 #define FadeColor(col, shad)  (1.0 - (1.0-(shad)) * (1.0-(col)))

@@ -96,7 +96,7 @@ void WorkProc::SetInterval(long i) {
 }
 
 void WorkProc::ObservedChanged(observable *changed, long change) {
-    if(change==observable_OBJECTDESTROYED) {
+    if(change==observable::OBJECTDESTROYED) {
 	RemoveObserver(changed);
 	CancelSchedule();
 	Stop();

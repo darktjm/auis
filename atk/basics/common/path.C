@@ -922,7 +922,7 @@ path::~path()
     }
 
     FreeFilesAndDirs(this);
-    (this)->NotifyObservers( observable_OBJECTDESTROYED);
+    (this)->NotifyObservers( observable::OBJECTDESTROYED);
 
     return;
 } /* path__FinalizeObject */
@@ -1055,7 +1055,7 @@ boolean path::Scan(boolean  statEverything)
                 }
             }
         }
-        (this)->NotifyObservers( observable_OBJECTCHANGED);
+        (this)->NotifyObservers( observable::OBJECTCHANGED);
 
         if (noProblems) {
             this->changetime = changetime;

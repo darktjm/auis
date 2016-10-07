@@ -45,6 +45,6 @@ void pvalfv::UpdateSButton()
 	sbutton::GetFont(prefs) = font;
     }
     (sb)->SetChangeFlag( sbutton_ALLCHANGED|sbutton_FONTCHANGED);
-    (sb)->NotifyObservers( observable_OBJECTCHANGED);
+    (sb)->NotifyObservers( observable::OBJECTCHANGED);
 }
 

@@ -122,11 +122,11 @@ long conob::Read(FILE  *fp, long  id)
 
     while (fgets(LineBuf, sizeof(LineBuf)-1, fp) != NULL) {
 	if (strncmp(LineBuf, "\\enddata{", 9) == 0) {
-	    return(dataobject_NOREADERROR);
+	    return(dataobject::NOREADERROR);
 	}
 	(this)->HandleDataLine( LineBuf);
     }
-    return dataobject_PREMATUREEOF;
+    return dataobject::PREMATUREEOF;
 }
 
 void conob::HandleDataLine(char  *line)

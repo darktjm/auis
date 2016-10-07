@@ -136,7 +136,7 @@ void pvaltv::UpdateValue()
 
 void pvaltv::ObservedChanged(class observable  *changed, long  val)
 {
-    if(changed==(class observable *)DATA(this) && val!=observable_OBJECTDESTROYED) {
+    if(changed==(class observable *)DATA(this) && val!=observable::OBJECTDESTROYED) {
 	(this)->UpdateText( val);
     }
     (this)->textintv::ObservedChanged( changed, val);

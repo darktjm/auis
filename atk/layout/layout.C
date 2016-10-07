@@ -97,8 +97,8 @@ layout::Write(FILE  * f				/* file to be written */, long  writeID				/* unique 
     if (debug)
 	printf("layout_Write(%ld, %d)\n", writeID, level);
 
-    if (getDataObject(this).writeID != writeID) {
-	getDataObject(this).writeID = writeID;
+    if (getDataObject(this).GetWriteID() != writeID) {
+	getDataObject(this).SetWriteID(writeID);
 	fprintf (f, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
 	forallcomponents(this, c) {
 	    fprintf(f, "<%ld,%ld,%ld,%ld", cLeft(c), cTop(c), cWidth(c), cHeight(c));
@@ -195,14 +195,14 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 
 	    case '\0':
 		printf("stopped on zero character");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	    case '<': /* another component coming */
 		c = (self)->CreateComponent();
 		if (fscanf(f, "%ld,%ld,%ld,%ld", &left, &top, &width, &height) != 4) {
 		    objectto(f, "layout:  expected four numbers separated by commas");
 		    (self)->RemoveComponent( c);
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		(self)->SetComponentSize( c, left, top, width, height);
 		c->varies = TRUE;
@@ -224,7 +224,7 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 			    ungetc(ch, f);
 			    objectto(f, "layout:  unknown property or > missing");
 			    (self)->RemoveComponent( c);
-			    return dataobject_BADFORMAT;
+			    return dataobject::BADFORMAT;
 			}
 		    };
 		}
@@ -233,14 +233,14 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 		if (fgetstring(f, "\n") != 0) {
 		    objectto(f, "layout:  trash after coordinates");
 		    (self)->RemoveComponent( c);
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 
 		if (havechild) {
 		    if (fgetstring(f, "\\begindata{") != 0) {
 			objectto(f, "layout:  missing component begindata");
 			(self)->RemoveComponent( c);
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    for (np = dataname; np < dataname + sizeof dataname - 1 && (ch = getc(f)) != EOF && ch != ','; np++)
 			*np = ch;
@@ -248,21 +248,21 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 		    if (fscanf(f, "%ld ", &uniqueID) != 1) {
 			objectto(f, "layout:  missing , after component name");
 			(self)->RemoveComponent( c);
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    if (fgetstring(f, "}") != 0) {
 			objectto(f, "layout:  missing closing brace after begindata");
 			(self)->RemoveComponent( c);
-			return dataobject_BADFORMAT;
+			return dataobject::BADFORMAT;
 		    }
 		    if (fgetstring(f, "\n") != 0)
 			objectto(f, "layout:  extra stuff after begindata");
 		    c->data = (class dataobject *)ATK::NewObject(dataname);
 		    if (cData(c) == NULL) {
 			printf("Could not create %s object.\n", dataname);
-			return dataobject_OBJECTCREATIONFAILED;
+			return dataobject::OBJECTCREATIONFAILED;
 		    }
-		    cData(c)->id = uniqueID;
+		    cData(c)->SetID(uniqueID);
 		    (cData(c))->Read( f, uniqueID);
 
 		}
@@ -274,27 +274,27 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 	    case '\\': /* enddata coming */
 		if (fscanf(f, "enddata{%255[^,}\n],%ld}\n", dataname, &uniqueID) != 2) {
 		    objectto(f, "layout:  expected enddata or another component");
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		else if (strcmp(dataname, (self)->GetTypeName()) != 0) {
 		    objectto(f, "layout: wrong data name in enddata");
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
 		else if (uniqueID != id) {
 		    objectto(f, "layout:  wrong unique ID in enddata");
-		    return dataobject_BADFORMAT;
+		    return dataobject::BADFORMAT;
 		}
-		return dataobject_NOREADERROR;
+		return dataobject::NOREADERROR;
 
 	    default:
 		ungetc(ch, f);
 		objectto(f, "layout:  bad input line");
-		return dataobject_BADFORMAT;
+		return dataobject::BADFORMAT;
 
 	} /* end switch */
     } /* end reading loop */
     printf("layout:  premature EOF");
-    return dataobject_PREMATUREEOF;
+    return dataobject::PREMATUREEOF;
 }
 
 /* read layout from file */
@@ -307,11 +307,10 @@ layout::Read(FILE  * f			    /* input file */, long  id			    /* unique identifi
     if (debug)
 	printf("layout_Read(%ld)\n", id);
 
-    (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
 
     rc = readASCII(this, f, id);
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
     if (debug)
 	printf("layout_Read rc = %ld\n", rc);
 
@@ -328,7 +327,7 @@ void layout::RemoveComponent(struct component  *c		    /* component to be remove
 	printf("layout_RemoveComponent(%s)\n", safename(c));
 
     if (cData(c) != NULL) {
-	/* dataobject_Destroy(cData(c)); */
+	/* dataobject::Destroy(cData(c)); */
 	c->data = NULL;
     }
 
@@ -346,7 +345,7 @@ void layout::RemoveComponent(struct component  *c		    /* component to be remove
     }
     free(c);
     (this)->SetModified();
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 
     if (debug)
 	printf("imbedded remove complete\n");
@@ -365,11 +364,10 @@ void layout::FillInComponent(const char  *name				/* name of dataobject subclass
     if (newobject != NULL) {
 	if (cData(c) != NULL)
 	    (cData(c))->Destroy();
-	newobject->id = (long) newobject;
 	c->data = newobject;
     }
     (this)->SetModified();
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 /* create component */
@@ -411,7 +409,7 @@ void layout::SetComponentSize(struct component  *c			/* component to change */, 
 	c->width = w;
 	c->height = h;
 	(this)->SetModified();
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -475,7 +473,7 @@ void layout::Promote(struct component  *c			/* component to be promoted to front
     }
     if (changed) {
 	(this)->SetModified();
-	(this)->NotifyObservers( observable_OBJECTCHANGED);
+	(this)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -515,7 +513,7 @@ void layout::Demote(struct component  *c			/* component to be demoted to back */
     }
 
     (this)->SetModified();
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 /* make object variable */

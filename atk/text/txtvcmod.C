@@ -207,7 +207,7 @@ void textview_SelfInsertCmd(class textview  *self, char  a)
     (self)->FinishInsertion();
     (self)->SetDotPosition(pos);
     (self)->FrameDot( pos);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -306,7 +306,7 @@ void textview_OpenLineCmd(class textview  *self)
     if ( self->editor == VI )
 	textview_NextLineCmd(self);
 
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -382,7 +382,7 @@ static void yankKillLine (class textview  *self, int		 action)
 	(self)->DeleteCharacters( pos, applen);
 	
     (self->imPtr)->SetLastCmd( lcKill);	/* mark us as a text killing command */
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_YankLineCmd(class textview  *self)
@@ -451,7 +451,7 @@ void textview_InsertInsetCmd (class textview  *self, long  rock)
     (self)->PrepareInsertion( FALSE);
     self->currentViewreference = (Text(self))->InsertObject( (self)->GetDotPosition(), iname,viewname);
     (self)->FinishInsertion();
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -514,7 +514,7 @@ void textview_InsertFile(class textview  *self)
     (self)->SetDotPosition(initialPos);
     (self)->SetDotLength( pos - initialPos);
 /*  im_SetLastCmd(textview_GetIM(self), lcYank); */
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 static void YankCmd(class textview  *self, boolean onlycut)
@@ -548,7 +548,7 @@ static void YankCmd(class textview  *self, boolean onlycut)
     (self)->SetDotPosition(initialPos);
     (self)->SetDotLength( pos - initialPos);
     ((self)->GetIM())->SetLastCmd( lcYank);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_YankCmd(class textview *self)
@@ -671,7 +671,7 @@ void textview::DoCopyRegion(long  pos , long  len, boolean  appendFlag, boolean 
 	fprintf(cutFile, "\\begindata{%s, %d}\n",
 		copyAsText ? "text": (d)->GetTypeName(),
 		/* d->header.dataobject.id */ 999999);
-    d->writeID = im::GetWriteID();
+    d->SetWriteID(im::GetWriteID());
     (d)->WriteSubString( pos, len, cutFile, UseDataStream);
     
     if (UseDataStream)
@@ -698,7 +698,7 @@ void textview_ZapRegionCmd(class textview  *self)
     (self)->DeleteCharacters( pos, len);
     (self)->SetDotLength( 0);
     ((self)->GetIM())->SetLastCmd( lcKill);
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 /* In order to safely allow killing multiple lines of text, each possibly */
@@ -836,7 +836,7 @@ void textview_GetToCol (class textview  *self, int  col)
     }
     (self)->FinishInsertion();
     (self)->SetDotPosition (pos);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -949,7 +949,7 @@ void textview_ViDeleteCmd (class textview  *self)
 	    dsize--;
 	}
 	(self)->FrameDot( pos);
-	(d)->NotifyObservers( observable_OBJECTCHANGED);
+	(d)->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -1141,7 +1141,7 @@ void textview_TwiddleCmd (class textview  *self)
             pos - 2, 1, vr2);
 
     (self)->FrameDot( pos);
-    (text)->NotifyObservers( observable_OBJECTCHANGED);
+    (text)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_RuboutWordCmd (class textview  *self)
@@ -1246,7 +1246,7 @@ static void yankDeleteWord (class textview  *self, int		 action, proctable_fptr 
     }
     ((self)->GetIM())->CloseToCutBuffer( cutFile);
     (self)->FrameDot( pos);
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_YankWordCmd(class textview  *self)
@@ -1347,7 +1347,7 @@ static void viYankDeleteLine(class textview  *self, int		 action)
 	    textview_BeginningOfFirstWordCmd(self);
 	    pos = (self)->GetDotPosition();
 	}
-	(d)->NotifyObservers( observable_OBJECTCHANGED);
+	(d)->NotifyObservers( observable::OBJECTCHANGED);
 	(self)->SetDotPosition( pos);
 	(self)->FrameDot( pos);
 	(self)->WantUpdate( self);
@@ -1455,7 +1455,7 @@ void textview_ReplaceCharCmd(class textview  *self)
     pos	= (self)->GetDotPosition();
     tc = ((self)->GetIM())->GetCharacter();
     (Text(self))->ReplaceCharacters( pos, 1, &tc, 1);
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_SubstituteCharCmd(class textview  *self)
@@ -1528,7 +1528,7 @@ static void AdjustCase(class textview  *self, boolean  upper , boolean  firstOnl
         pos++;
     }
 
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_UppercaseWord(class textview  *self, long  key)
@@ -1566,7 +1566,7 @@ void textview_ToggleCase(class textview  *self, long  key)
         new_c = i;
 
     (Text(self))->ReplaceCharacters( pos, 1, &new_c, 1);
-    (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
+    (Text(self))->NotifyObservers( observable::OBJECTCHANGED);
 
     (self)->SetDotPosition( pos + 1);
 }
@@ -1596,7 +1596,7 @@ void textview_QuoteCmd(class textview  *self)
     }
     (self)->FinishInsertion();
     (self)->SetDotPosition( where+count);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }

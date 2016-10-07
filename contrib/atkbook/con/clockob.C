@@ -67,7 +67,7 @@ clockob::~clockob()
 
 void clockob::ObservedChanged(class observable  *ct, long  code)
 {
-    if (code == observable_OBJECTDESTROYED) {
+    if (code == observable::OBJECTDESTROYED) {
 	clockob_contimer = NULL; /* eliminate pointer to it */
 	(this)->Destroy(); /* can't go on without a timer */
 	return;
@@ -111,7 +111,7 @@ void clockob::ObservedChanged(class observable  *ct, long  code)
 	    (this)->SetNumval( LatestLocalTime->tm_yday);
 	    break;
     }
-    (this)->NotifyObservers( observable_OBJECTCHANGED);
+    (this)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void clockob::SetClockPart(int  part)

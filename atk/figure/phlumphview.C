@@ -311,12 +311,12 @@ view_DSattributes phlumphview::DesiredSize(long  width, long  height, enum view_
 void phlumphview::ObservedChanged(class observable  *observed, long  status)
 {
     if (this->toolset && observed == this->toolset) {
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	    CloseProc(this, 1);
 	}
     }
     else { /* observed == dataobject, we hope */
-	if (status==observable_OBJECTDESTROYED) {
+	if (status==observable::OBJECTDESTROYED) {
 	}
 	else if (status==phlumph_PAGESCHANGED) {
 	    if (this->IconMode) {

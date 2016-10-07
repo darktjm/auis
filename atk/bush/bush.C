@@ -585,10 +585,9 @@ bush::Read( FILE		     *file, long		      id )
       {
   class bush *self=this;
   char			     RootPathIfInset[MAXPATHLEN];
-  long			     status = dataobject_NOREADERROR;
+  long			     status = dataobject::NOREADERROR;
 
   IN(bush_Read);
-  this->dataobject::id = (this)->UniqueID();
   fscanf(file,"%s",GivenDirName);
   im::GetDirectory(RootPathIfInset);
   (this)->InitTree(RootPathIfInset);
@@ -604,25 +603,25 @@ bush::Write( FILE		 *file, long		  id, int		  level )
         {
   class bush *self=this;
   IN(bush_Write);
-  if(this->writeID != id) {
-    this->writeID = id;
+  if(this->GetWriteID() != id) {
+    this->SetWriteID(id);
     if(level) {
       fprintf(file,"\\begindata{%s,%ld}\n",
 	       (this)->GetTypeName(),
-	       (this)->UniqueID());
+	       (this)->GetID());
       fprintf(file,"%s",DIRPATH((this)->TreeRoot()));
       fprintf(file,"\n\\enddata{%s,%ld}\n",
 	       (this)->GetTypeName(),
-	       (this)->UniqueID());
+	       (this)->GetID());
     }
     else {
       fprintf(file,"\\begindata{%s,%ld}\n",
 	       (this)->GetTypeName(),
-	       (this)->UniqueID());
+	       (this)->GetID());
       fprintf(file,"\n%s\n",DIRPATH((this)->TreeRoot()));
       fprintf(file,"\n\\enddata{%s,%ld}\n",
 	       (this)->GetTypeName(),
-	       (this)->UniqueID());
+	       (this)->GetID());
     }
   }
   OUT(bush_Write);

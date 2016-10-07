@@ -73,7 +73,7 @@ CloneFigure(figview *viewer, figure *src, figure *dest,
 	oref = dest->AlwaysInsertObject(o, dest->RootObjRef(), -1);
 	ix = dest->ReadPartial(fp, 0, oref, &tmppt);
 	fclose(fp);
-	if (ix != dataobject_NOREADERROR) {
+	if (ix != dataobject::NOREADERROR) {
 		// xxx ERROR Unable to read figure from cut buffer
 		return FALSE;
 	}

@@ -590,7 +590,7 @@ origin point of the read-in figure. If \italic{origin} is NULL, that
 information is not returned.
 
 This method returns the same kinds of values as figure_Read(). If it returns 
-an error (anything other than dataobject_NOREADERROR), the contents of 
+an error (anything other than dataobject::NOREADERROR), the contents of 
 \italic{self} are not predictable; some of the figobjs may have been read in 
 and inserted, or none; some may have been inserted incorrectly.
 

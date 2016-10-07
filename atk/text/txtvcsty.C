@@ -195,7 +195,7 @@ void textview::DeleteCharacters(long  pos, long  len)
 	    (Text(this))->DeleteCharacters( pos, len);
 	}
 	(this)->FinishDeletion();
-	(Text(this))->NotifyObservers( observable_OBJECTCHANGED);
+	(Text(this))->NotifyObservers( observable::OBJECTCHANGED);
     }
 }
 
@@ -695,7 +695,7 @@ void textview_PlainerCmd(class textview  *self, char  *type)
 	    (d)->SetModified();
     }
     (d)->RegionModified( pos, len);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 void textview_PlainestCmd(class textview  *self)
@@ -718,7 +718,7 @@ void textview_PlainestCmd(class textview  *self)
        pos, len, environment_Style, TRUE))
 	(d)->SetModified();
     (d)->RegionModified( pos, len);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
 /* Inserts a lookz view in front of the current paragraph. */
@@ -750,7 +750,7 @@ void textview_ExposeStyleEditor(class textview  *self)
           (Text(self))->InsertObject( pos, "lookz", "lookzview");
     (self)->FinishInsertion();
     (self)->FrameDot( pos);
-    (d)->NotifyObservers( observable_OBJECTCHANGED);
+    (d)->NotifyObservers( observable::OBJECTCHANGED);
     if (((self)->GetIM())->GetLastCmd() == lcInsertEnvironment) {
 	((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
     }
@@ -849,7 +849,7 @@ void textview_ChangeTemplate(class textview  *self)
         message::DisplayString(self, 100, "Could not read template file.");
     else {
 	(d)->RegionModified( 0, (d)->GetLength());
-	(d)->NotifyObservers( observable_OBJECTCHANGED);
+	(d)->NotifyObservers( observable::OBJECTCHANGED);
         message::DisplayString(self, 0, "Done.");
     }
 }
@@ -1186,7 +1186,7 @@ void textview_InsertEnvironment(class textview  *self, const char  *sName)
 
 		sprintf(message, "Added the style %s", styleName);
 		message::DisplayString(self, 0, message);
-		(d)->NotifyObservers( observable_OBJECTCHANGED);
+		(d)->NotifyObservers( observable::OBJECTCHANGED);
 	    }
 	}
 	else {

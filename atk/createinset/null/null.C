@@ -92,7 +92,7 @@ null::InitializeClass()
 	long
 null::Read(FILE   *file, long   id)
 			{
-	long result = dataobject_BADFORMAT;
+	long result = dataobject::BADFORMAT;
 	char s[MAXFILELINE + 2];
 	long len;
 	long sid, eid;
@@ -100,7 +100,7 @@ null::Read(FILE   *file, long   id)
 	if (id == 0) {
 		if (fscanf(file, "\\begindata{null,%ld", &sid) != 1
 				|| getc(file) != '}' || getc(file) != '\n') 
-			return dataobject_NOTBE2DATASTREAM;
+			return dataobject::NOTATKDATASTREAM;
 	}
 	else {
 		int c;
@@ -126,12 +126,12 @@ null::Read(FILE   *file, long   id)
 		char *nl;
 		if ((fgets(s, MAXFILELINE + 2, file)) == 0) {
 			/* EOF or error */
-			result = dataobject_PREMATUREEOF;
+			result = dataobject::PREMATUREEOF;
 			break;
 		}
 		if (*s == '\\') {
 			/* \enddata */
-			result = dataobject_NOREADERROR;
+			result = dataobject::NOREADERROR;
 			break;
 		}
 
@@ -149,12 +149,12 @@ null::Read(FILE   *file, long   id)
 
 
 	len = strlen("\\enddata{null,");
-	if (result == dataobject_NOREADERROR &&
+	if (result == dataobject::NOREADERROR &&
 			( strncmp(s, "\\enddata{null,", len) != 0
 			  || sscanf(s+len, "%ld}\n", &eid) != 1
 			  || eid != sid
 			) ) 
-		result = dataobject_MISSINGENDDATAMARKER;
+		result = dataobject::MISSINGENDDATAMARKER;
 
 	return result;
 }

@@ -44,5 +44,5 @@ void pvalcv::UpdateSButton()
     sbutton::GetTop((sb)->GetDefaultPrefs()) = (a)->Name();
 
     (sb)->SetChangeFlag(  sbutton_ALLCHANGED|sbutton_SIZECHANGED);
-    (sb)->NotifyObservers( observable_OBJECTCHANGED);
+    (sb)->NotifyObservers( observable::OBJECTCHANGED);
 }
