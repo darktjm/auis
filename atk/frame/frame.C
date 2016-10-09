@@ -181,7 +181,7 @@ static void frame_CacheSettings(class frame  *self)
 {
     const char *fgcolor, *bgcolor;
     unsigned char fg_rgb[3], bg_rgb[3];
-    self->mono = ((self )->DisplayClass() & graphic_Monochrome);
+    self->mono = ((self )->DisplayClass() & graphic::Monochrome);
     if ( self->mono || environ::GetProfileSwitch("frame.MonochromeDialogBoxes", FALSE)) {
 	fgcolor = GetProfileString("frame.DialogBoxMonochromeForeground", BWFGCOLOR);
 	bgcolor = GetProfileString("frame.DialogBoxMonochromeBackground", BWBGCOLOR);
@@ -224,8 +224,8 @@ static void drawButton(class frame  * self,struct rectangle  *rect,const char  *
     offset = 0;
 /*    frame_SetFont(self, self->activefont); */
 
-    (self)->SetTransferMode( graphic_SOURCE);
-    t_op = graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM;
+    (self)->SetTransferMode( graphic::SOURCE);
+    t_op = graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM;
     Rect2.top = rect->top + BUTTONDEPTH + offset;
     Rect2.left = rect->left + BUTTONDEPTH  + offset;
     Rect2.width = rect->width - 2*BUTTONDEPTH ;
@@ -236,23 +236,23 @@ static void drawButton(class frame  * self,struct rectangle  *rect,const char  *
 
     ty = Rect2.top + ( Rect2.height/ 2);
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     if(!borderonly && (!self->mono || !blit)){
 	frame_setShade(self, ((self->mono) ? 0:((pushed)? 0: FORESHADE)));
 	(self)->FillRect( &Rect2, NULL); /* the middle box */
 	if(text && *text){
 	    long len = strlen(text);
 	    frame_setShade(self, 100);
-	    (self)->SetTransferMode( graphic_BLACK); 
+	    (self)->SetTransferMode( graphic::BLACK); 
 	    (self)->MoveTo( tx, ty);
 	    (self)->DrawText( text, len,t_op);
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	}
     }
     if(self->mono && (blit || ((!blit) && pushed))){
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	(self)->FillRect( rect, NULL);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
     }
     if(self->mono){
 	frame_setShade(self, 100);
@@ -271,7 +271,7 @@ static void drawButton(class frame  * self,struct rectangle  *rect,const char  *
 	frame_SetUpperShade(self,pushed) ;
 
 	(self)->FillTrapezoid( rect->left, rect->top, rect->width, Rect2.left, Rect2.top, Rect2.width, NULL); /* upper trapz */
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
     }
 }
 
@@ -1096,7 +1096,7 @@ DoUpdate(class frame  *self)
 	SaveBits(self);
 	if(!self->mono)frame_setShade(self,FORESHADE);
 	(self)->SetFont( self->myfontdesc);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	if(self->DialogBuffer){
 	    (self)->FillRect( &self->bufferrec, pattern);
 	    (self)->FillRect( &self->AnswerBox, pattern);
@@ -1128,7 +1128,7 @@ DoUpdate(class frame  *self)
 	}
 	r = &self->HeightsOfAnswer[0];
 	(self)->MoveTo( r->left + frame_SEPARATION + 3, r->top + frame_SEPARATION + 3);
-	(self)->DrawString( self->MultipleAnswers[0], graphic_ATLEFT | graphic_ATTOP);
+	(self)->DrawString( self->MultipleAnswers[0], graphic::ATLEFT | graphic::ATTOP);
 	(self)->PostCursor( &self->AnswerBox, self->octcursor);
 	if(self->hasDialogMessage){
 	    (self->dialogView)->InsertView( self, &self->mesrec);
@@ -1145,7 +1145,7 @@ DoUpdate(class frame  *self)
 	if ((self)->GetIM() != NULL) {
 	    (self)->SetBGColor(  1.,1.,1.);
 	    (self)->SetFGColor(0.,0.,0.);
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	}
     }
 }

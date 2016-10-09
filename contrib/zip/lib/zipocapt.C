@@ -239,23 +239,23 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
   y_increment = (font )->GetFontSize( ) + 5/*===fudge.s/b FontNewLine===*/;
   left = 2;  top_offset = -y_increment/2;
   if ( figure->zip_figure_mode.zip_figure_mode_top )
-    { mode |= graphic_ATTOP; top_offset = 0; }
+    { mode |= graphic::ATTOP; top_offset = 0; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_middle )
-    { mode |= graphic_BETWEENTOPANDBOTTOM; top_offset = -y_increment/2; }
+    { mode |= graphic::BETWEENTOPANDBOTTOM; top_offset = -y_increment/2; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_baseline )
-    { mode |= graphic_BETWEENTOPANDBASELINE; top_offset = -y_increment/2; }
+    { mode |= graphic::BETWEENTOPANDBASELINE; top_offset = -y_increment/2; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_bottom )
-    { mode |= graphic_ATBOTTOM; top_offset = -y_increment; }
+    { mode |= graphic::ATBOTTOM; top_offset = -y_increment; }
 
   if ( figure->zip_figure_mode.zip_figure_mode_left )
-    { mode |= graphic_ATLEFT; left = 1; }
+    { mode |= graphic::ATLEFT; left = 1; }
   if ( figure->zip_figure_mode.zip_figure_mode_center )
-    { mode |= graphic_BETWEENLEFTANDRIGHT; left = 2; }
+    { mode |= graphic::BETWEENLEFTANDRIGHT; left = 2; }
   if ( figure->zip_figure_mode.zip_figure_mode_right )
-    { mode |= graphic_ATRIGHT; left = 3; }
+    { mode |= graphic::ATRIGHT; left = 3; }
 
   if ( text )
     {
@@ -268,7 +268,7 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
         *buffer_ptr++ = *cursor++;
       *buffer_ptr = 0;
       if ( figure->zip_figure_mode.zip_figure_mode_halo  &&
-	    (transfer_mode = (self->view_object )->GetTransferMode( )) == graphic_BLACK )
+	    (transfer_mode = (self->view_object )->GetTransferMode( )) == graphic::BLACK )
 	{
         width = (font)->StringSize(  (self->view_object)->GetDrawable(), buffer, &xp, &yp );
 	DEBUGdt(Width,width);
@@ -278,7 +278,7 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
 	  case 2: left_offset = -width/2;   break;
 	  case 3: left_offset = -width;	    break;
 	  }
-        (self->view_object)->SetTransferMode(  graphic_WHITE );
+        (self->view_object)->SetTransferMode(  graphic::WHITE );
         (self->view_object)->EraseRectSize(  x + left_offset, y + top_offset,
 			       width + 2, y_increment );
         (self->view_object)->SetTransferMode(  transfer_mode );

@@ -5,11 +5,11 @@
 
 #include <andrewos.h>
 ATK_IMPL("xws.H")
+#include <xgraphic.H>
 #include <X11/Xlib.h>
 #include <xws.H>
 #include <xcursor.H>
 #include <xfontdesc.H>
-#include <xgraphic.H>
 #include <xim.H>
 #include <xddimage.H>
 	

@@ -77,8 +77,8 @@ buttview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  
     }
     if (txt == NULL) txt = "<BEEP>";
     (this)->DrawString( txt,
-	graphic_BETWEENLEFTANDRIGHT
-	| graphic_BETWEENTOPANDBASELINE);
+	graphic::BETWEENLEFTANDRIGHT
+	| graphic::BETWEENTOPANDBASELINE);
 }
 
 void

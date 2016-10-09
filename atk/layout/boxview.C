@@ -243,7 +243,7 @@ boxview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left 
     }
     /* perform the update */
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     ::Update(this, how, &cliprect, TRUE);
     if (how == view_FullRedraw) {
 	this->updateNeeded = FALSE;

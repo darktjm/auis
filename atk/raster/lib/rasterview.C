@@ -8,7 +8,7 @@
 /* Some comments on changes checked in on 8/10/88
 >> SetPixel:
 >>    The pix local variable is modified (somehow) by the
->>    call to graphic_SetBitAtLoc. Line after this call
+>>    call to graphic::SetBitAtLoc. Line after this call
 >>    changed to use the value of raster_GetPix rather then pix.
 >> Changed all occurances of:
 >>    pixelimage_DATACHANGED --> raster_BITSCHANGED
@@ -499,7 +499,7 @@ void rasterview_FinishMovingDisplayBox(class rasterview  *self, long  x , long  
     if (RegionSelect(self))
 	rasterview_CorrectHighlight(self);
     if (Pan(self)) {
-	rasterview_DrawPanHighlight(self, graphic_BLACK); }
+	rasterview_DrawPanHighlight(self, graphic::BLACK); }
 
     rasterview_RealPostMenus(self);
 }
@@ -536,7 +536,7 @@ void rasterview_RegionSelectCommand(class rasterview  *self, long  rock)
     (self)->RetractCursor( self->Cursor[self->Mode]);
 
     if (Pan(self))
-	rasterview_DrawPanHighlight(self, graphic_WHITE);
+	rasterview_DrawPanHighlight(self, graphic::WHITE);
 
     self->Mode = RegionSelectMode;
     rasterview_CorrectHighlight(self);
@@ -562,7 +562,7 @@ void TouchUpCommand(class rasterview  *self, long  rock)
 	 (Tool(self) && !rectangle_IsEmptyRect(&(self->CurSelection))))
 	rasterview_ViewHideHighlight(self);
     else if (Pan(self))
-	rasterview_DrawPanHighlight(self, graphic_WHITE);
+	rasterview_DrawPanHighlight(self, graphic::WHITE);
 
     self->Mode = TouchUpMode;
 
@@ -587,7 +587,7 @@ void PanCommand(class rasterview  *self, long  rock)
 	rasterview_ViewHideHighlight(self);
 
     self->Mode = PanMode;
-    rasterview_DrawPanHighlight(self, graphic_BLACK);
+    rasterview_DrawPanHighlight(self, graphic::BLACK);
 
     (self)->NotifyObservers(0); 
 
@@ -611,7 +611,7 @@ void ToolCommand(class rasterview  *self, long  rock)
 	rasterview_ViewHideHighlight(self);
     }
     else if (Pan(self))
-	rasterview_DrawPanHighlight(self, graphic_WHITE);
+	rasterview_DrawPanHighlight(self, graphic::WHITE);
 
     self->Mode = ToolMode;
 
@@ -870,7 +870,7 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
 	res = mkstemp(filename);
 	close(res);
 	if (rock == MakeWD)
-	    sprintf(cmd, "xwd %s -out %s", ((self)->DisplayClass() & graphic_Monochrome) ? "-xy" : "", filename);
+	    sprintf(cmd, "xwd %s -out %s", ((self)->DisplayClass() & graphic::Monochrome) ? "-xy" : "", filename);
 	else
 	    sprintf(cmd, "asnap -atk -noshow -file %s", filename);
 	res = system(cmd);

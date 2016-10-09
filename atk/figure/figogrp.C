@@ -83,7 +83,7 @@ void figogrp::Sketch(class figview  *v)
 	h = (-h);
 	y -= h;
     }
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 
@@ -96,7 +96,7 @@ void figogrp::Select(class figview  *v)
     (this)->GetBounds( v); /* make sure handles are up-to-date */
 
     if ((this)->GetHandles() && (this)->GetNumHandles()) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 
 	for (ix=0; ix<(this)->GetNumHandles(); ix++) {
 	    x = (v)->ToPixX( point_X(&((this)->GetHandles()[ix])));

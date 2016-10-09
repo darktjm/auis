@@ -1454,9 +1454,9 @@ void helloworldview__Update(hwv) struct helloworldview *hwv; \{
 
 	helloworldview_DrawString(hwv, "hello world",
 
-		graphic_BETWEENTOPANDBASELINE |
+		graphic::BETWEENTOPANDBASELINE |
 
-		graphic_BETWEENLEFTANDRIGHT); 
+		graphic::BETWEENLEFTANDRIGHT); 
 
     
 
@@ -1469,9 +1469,9 @@ void helloworldview__Update(hwv) struct helloworldview *hwv; \{
 
 	helloworldview_DrawString(hwv, "hello world",
 
-		graphic_BETWEENTOPANDBASELINE |
+		graphic::BETWEENTOPANDBASELINE |
 
-		graphic_BETWEENLEFTANDRIGHT); 
+		graphic::BETWEENLEFTANDRIGHT); 
 
     \} \}
 

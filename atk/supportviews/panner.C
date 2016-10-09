@@ -265,7 +265,7 @@ static void update_everything(class panner  *self, boolean  wipeold)
     self->gseenrect.top = self->panrect.top+2+self->seenrect.top;
 
     if (!self->MotifStyle) {
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 
 	if (wipeold) {
 	    if (!EQRECT(&self->seenrect, &oldseenrect)) {
@@ -285,7 +285,7 @@ static void update_everything(class panner  *self, boolean  wipeold)
 	}
     }
     else { /* Motif Style */
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 
 	if (wipeold) {
 	    (self)->FillRectSize( self->panrect.left+1, self->panrect.top+1, self->panrect.width-2, self->panrect.height-2, (self)->GrayPattern( self->PannerShade, 16));

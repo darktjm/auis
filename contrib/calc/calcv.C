@@ -594,7 +594,7 @@ void Highlight_Area( class calcv	      *self, long		       area )
   if ( ! AreaHighlighted(area) )
     {
     AreaHighlighted(area) = true;
-    Fill_Area( self, area, graphic_INVERT );
+    Fill_Area( self, area, graphic::INVERT );
     Normalize_Other_Areas( self, area );
     }
   }
@@ -614,7 +614,7 @@ void Normalize_Area( class calcv	      *self, long			       area )
   if (  AreaHighlighted(area) )
     {
     AreaHighlighted(area) = false;
-    Fill_Area( self, area, graphic_INVERT );
+    Fill_Area( self, area, graphic::INVERT );
     }
   }
 
@@ -624,7 +624,7 @@ void Draw_Calc( class calcv	      *self )
   long		      i, x, y;
 
   IN(Draw_Calc);
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   for ( i = 0; i < AreaCount; i++ )
     {
     y = AreaMiddle(i);
@@ -644,7 +644,7 @@ void Draw_Calc( class calcv	      *self )
 				AreaWidth(i), AreaHeight(i), 8,8 );
 	break;
       }
-    if ( AreaHighlighted(i) )  Fill_Area( self, i, graphic_INVERT );
+    if ( AreaHighlighted(i) )  Fill_Area( self, i, graphic::INVERT );
     }
   OUT(Draw_Calc);
   }
@@ -654,10 +654,10 @@ void Draw_Outline( class calcv	      *self )
     {
   IN(Draw_Outline);
   (self )->ClearClippingRect( );
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   (self)->DrawRRectSize(  Left+1, Top+1, Width-3,Height-3, 10,10 );
   if ( ! InputFocus )
-    (self)->SetTransferMode(  graphic_WHITE );
+    (self)->SetTransferMode(  graphic::WHITE );
   (self)->DrawRRectSize(  Left, Top, Width-1, Height-1, 11,11 );
   OUT(Draw_Outline);
   }

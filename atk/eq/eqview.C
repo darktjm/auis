@@ -114,14 +114,14 @@ void eqview::Update()
     /* undraw */
     switch(this->changed) {
     case EQVIEW_everything:
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	rectangle_SetRectSize(&rect, (this)->GetLogicalLeft(), (this)->GetLogicalTop(), (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
 	pat = (this)->WhitePattern();
 	(this)->FillRect( &rect, pat);
 	break;
     case EQVIEW_eq:
 	(this)->DrawCaret();	/* sigh - caret extends outside following box */
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	rectangle_SetRectSize(&rect, this->off_x+first->posp.x+first->min.x-3,
 	    this->off_y+first->posp.y+first->min.y-1,
 	    first->max.x-first->min.x+4,  first->max.y-first->min.y+2);
@@ -150,7 +150,7 @@ void eqview::Update()
 	first->hot.x =  this->off_x;
 	first->hot.y = this->off_y;
 
-	(this)->SetTransferMode( graphic_INVERT);
+	(this)->SetTransferMode( graphic::INVERT);
 	(this)->Draw( eqptr, first, this->off_x, this->off_y);
 	(this)->CalculateCaret();
 	(this)->DrawCaret();

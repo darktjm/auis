@@ -137,7 +137,7 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
       {
       case  view_LeftDown:
 	(this )->UseInvisibleCursor( );
-        (this)->SetTransferMode(  graphic_INVERT );
+        (this)->SetTransferMode(  graphic::INVERT );
 	y_offset = ITEMY(shadow) - y;
 	initial_y = prior_y = y = ITEMY(shadow);
 	(this)->MoveTo(  Left, y );
@@ -203,7 +203,7 @@ charthst::DrawChart( )
     top = (ITEMY(shadow) < BaseLine) ? ITEMY(shadow) : BaseLine;
     height = abs(BaseLine - ITEMY(shadow));
     (this)->FillRectSize(  ITEMLEFT(shadow) = left, ITEMTOP(shadow) = top,
-	ITEMWIDTH(shadow) = width+fudge, ITEMHEIGHT(shadow) = height, (class graphic *) graphic_BLACK );
+	ITEMWIDTH(shadow) = width+fudge, ITEMHEIGHT(shadow) = height, (class graphic *) graphic::BLACK );
     ITEMTOP(shadow) -= 5;
     ITEMHEIGHT(shadow) += 10;
     left += width + 1 + fudge;

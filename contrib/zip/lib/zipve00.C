@@ -694,7 +694,7 @@ void zipedit::Expose_Point( zip_type_pane		   pane, zip_type_figure		   figure, 
 
   IN(zipedit::Expose_Point);
   sprintf( points, "(%ld,%ld)", x, y );  /*=== optimize ===*/
-  (this->view_object)->SetTransferMode(  graphic_BLACK );
+  (this->view_object)->SetTransferMode(  graphic::BLACK );
   (this->view_object)->MoveTo( (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) - 3), (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) - 3 ));
   (this->view_object)->DrawLineTo(  (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) + 3), (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) - 3 ));
   (this->view_object)->DrawLineTo( (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) + 3), (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) + 3 ));
@@ -712,12 +712,12 @@ void zipedit::Expose_Point( zip_type_pane		   pane, zip_type_figure		   figure, 
     }
   (this->view_object)->SetFont(  PointsFont );
   ((View )->GetFont( ))->StringSize(  (this->view_object)->GetDrawable(), points, &xp, &yp );
-  (this->view_object)->SetTransferMode(  graphic_WHITE );
+  (this->view_object)->SetTransferMode(  graphic::WHITE );
   (this->view_object)->FillRectSize( (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) + 5),  (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) - 5), xp , 10, (View)->WhitePattern( ) );
 			 /*=== compute width and height ===*/
-  (this->view_object)->SetTransferMode(  graphic_BLACK );
+  (this->view_object)->SetTransferMode(  graphic::BLACK );
   (this->view_object)->MoveTo( (long) (5 + ((OriginX) + (x * (Flip) * (Multiplier) / (Divisor)))), (long) ((OriginY) - (y * (Flop) * (Multiplier) / (Divisor)) ));
-  (this->view_object)->DrawString( points, graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM );
+  (this->view_object)->DrawString( points, graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM );
   (this->view_object)->MoveTo( (long) ((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))),
 		(long) ((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) );
   (this->view_object)->SetFont(  current_font );
@@ -830,8 +830,8 @@ zipedit::Highlight_Point( zip_type_pane		   pane, zip_type_pixel		   x , zip_typ
   IN(zipedit_Highlight_Point);
   if ( Ratify_Highlighting( self, pane, x, y ) )
     {
-    if ( (View )->GetTransferMode( ) != graphic_INVERT )
-      (this->view_object)->SetTransferMode(  graphic_INVERT );
+    if ( (View )->GetTransferMode( ) != graphic::INVERT )
+      (this->view_object)->SetTransferMode(  graphic::INVERT );
     if ( IconFont == NULL )
       {
       char			      family_name[257];
@@ -859,8 +859,8 @@ zipedit::Highlight_Handle( zip_type_pane		   pane, zip_type_pixel		   x , zip_ty
   IN(zipedit_Highlight_Handle);
   if ( Ratify_Highlighting( self, pane, x, y ) )
     {
-    if ( (View )->GetTransferMode( ) != graphic_INVERT )
-      (this->view_object)->SetTransferMode(  graphic_INVERT );
+    if ( (View )->GetTransferMode( ) != graphic::INVERT )
+      (this->view_object)->SetTransferMode(  graphic::INVERT );
     (this->view_object)->MoveTo(  x, y );
     (this->view_object)->FillRectSize(  x - 2, y - 2, 5, 5, (View )->WhitePattern( ) );
     }
@@ -894,8 +894,8 @@ zipedit::Normalize_Point( zip_type_pane		   pane, zip_type_pixel		   x , zip_typ
   IN(zipedit::Normalize_Point);
   if ( Ratify_Normalizing( self, pane, x, y ) )
     {
-    if ( (View )->GetTransferMode( ) != graphic_INVERT )
-      (this->view_object)->SetTransferMode(  graphic_INVERT );
+    if ( (View )->GetTransferMode( ) != graphic::INVERT )
+      (this->view_object)->SetTransferMode(  graphic::INVERT );
     if ( IconFont == NULL )
       {
       char			      family_name[257];
@@ -923,8 +923,8 @@ zipedit::Normalize_Handle( zip_type_pane		   pane, zip_type_pixel		   x , zip_ty
   IN(zipedit::Highlight_Handle);
   if ( Ratify_Normalizing( self, pane, x, y ) )
     {
-    if ( (View )->GetTransferMode( ) != graphic_INVERT )
-      (this->view_object)->SetTransferMode(  graphic_INVERT );
+    if ( (View )->GetTransferMode( ) != graphic::INVERT )
+      (this->view_object)->SetTransferMode(  graphic::INVERT );
     (this->view_object)->MoveTo(  x, y );
     (this->view_object)->FillRectSize(  x - 2, y - 2, 5, 5, (View )->WhitePattern( ) );
     }

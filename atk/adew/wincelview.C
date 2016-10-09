@@ -66,9 +66,9 @@ static void DoUpdate(class wincelview  *self)
     enclosingRect.top = 0; enclosingRect.left = 0;
     enclosingRect.width  = (self)->GetLogicalWidth() -1 ;
     enclosingRect.height = (self)->GetLogicalHeight() -1 ;
-    (self)->SetTransferMode(graphic_WHITE);
+    (self)->SetTransferMode(graphic::WHITE);
     (self)->EraseRect(&(enclosingRect));
-    (self)->SetTransferMode(graphic_INVERT);
+    (self)->SetTransferMode(graphic::INVERT);
     enclosingRect.left = enclosingRect.width / 3;
     enclosingRect.top =enclosingRect.height / 3;
     enclosingRect.width  =  enclosingRect.width / 2 ;

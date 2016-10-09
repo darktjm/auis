@@ -196,7 +196,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,
 			  this->x-this->frameX-1,this->y-this->frameY-1,
 			  WIDTH+1,HEIGHT+1);
 
-    (this)->SetTransferMode(graphic_COPY);
+    (this)->SetTransferMode(graphic::COPY);
 
     if(hw->blackOnWhite){
 	(this)->FillRect(&myVisualRect,
@@ -225,7 +225,7 @@ void helloworldview::Update()
 {    
     class helloworld *hw=(class helloworld *)this->dataobject;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if(this->x!=hw->x ||
        this->y!=hw->y ||

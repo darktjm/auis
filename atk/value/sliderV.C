@@ -75,7 +75,7 @@ static void sliderV_HandleStyleString(class sliderV  *self,char  *s)
     boolean go;
     go = TRUE;
     if(self->mono == -10)
-	self->mono = ((self)->DisplayClass() & graphic_Monochrome);
+	self->mono = ((self)->DisplayClass() & graphic::Monochrome);
 
     if(s == NULL) return;
     while(*s != '\0'){
@@ -198,14 +198,14 @@ static void DrawButton(class sliderV  * self,long  x,long  y,long  width,long  h
 static void DrawLabel(class sliderV  * self)
 {
     if(self->label){	
-	(self)->SetTransferMode(  graphic_COPY);
+	(self)->SetTransferMode(  graphic::COPY);
 	(self)->EraseRect( &self->labelrec);
 
-	(self)->SetTransferMode(  graphic_COPY );
+	(self)->SetTransferMode(  graphic::COPY );
 	(self)->MoveTo( self->x + ( self->width / 2),self->y + self->height);
 	(self)->SetFont(  self->activefont );
 	(self)->DrawString (  self->label,
-				   graphic_BETWEENLEFTANDRIGHT | graphic_ATBOTTOM);
+				   graphic::BETWEENLEFTANDRIGHT | graphic::ATBOTTOM);
     }
 
 }
@@ -218,16 +218,16 @@ static void DrawValue(class sliderV  * self)
 {
     const char *buf;   
     buf = (self)->GetValueString();
-    (self)->SetTransferMode(  graphic_COPY);
+    (self)->SetTransferMode(  graphic::COPY);
     (self)->EraseRect( &self->valrec);
 
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
     (self)->MoveTo(  self->x + (self->width / 2), self->y + FUDGE + 4);
 /*
     sliderV_MoveTo( self, self->x + (self->width / 2),self->valrec.height); */
     (self)->SetFont(  self->activefont );
     (self)->DrawString (  buf,
-				graphic_BETWEENLEFTANDRIGHT | graphic_ATTOP);
+				graphic::BETWEENLEFTANDRIGHT | graphic::ATTOP);
 
 }
 #define HGH 3
@@ -264,7 +264,7 @@ static void DrawValue(class sliderV  * self)
 #endif
     }
     else {
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	if(!this->mono){
 	    if(this->prefs->colors[sbutton_FOREGROUND]) 
 		(this)->SetForegroundColor( this->prefs->colors[sbutton_FOREGROUND], 0, 0, 0);
@@ -369,7 +369,7 @@ void sliderV::LookupParameters()
 	{ NULL, NULL }
     };
     if(this->mono == -10)
-	this->mono = ((this)->DisplayClass() & graphic_Monochrome);
+	this->mono = ((this)->DisplayClass() & graphic::Monochrome);
 
     (this)->GetManyParameters( parameters, NULL, NULL);
 

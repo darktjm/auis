@@ -245,13 +245,13 @@ long Draw( class zipofcapt		  *self, zip_type_figure		   figure, zip_type_pane		
     text = figure->zip_figure_image->zip_image_stream->zip_stream_text;
   if ( text )
     {
-    mode |= (figure->zip_figure_mode.zip_figure_mode_top)      ? graphic_ATTOP      : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_middle)   ? graphic_BETWEENTOPANDBOTTOM   : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_baseline) ? graphic_BETWEENTOPANDBASELINE : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_bottom)   ? graphic_ATBOTTOM   : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_left)     ? graphic_ATLEFT     : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_center)   ? graphic_BETWEENLEFTANDRIGHT   : 0;
-    mode |= (figure->zip_figure_mode.zip_figure_mode_right)    ? graphic_ATRIGHT    : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_top)      ? graphic::ATTOP      : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_middle)   ? graphic::BETWEENTOPANDBOTTOM   : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_baseline) ? graphic::BETWEENTOPANDBASELINE : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_bottom)   ? graphic::ATBOTTOM   : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_left)     ? graphic::ATLEFT     : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_center)   ? graphic::BETWEENLEFTANDRIGHT   : 0;
+    mode |= (figure->zip_figure_mode.zip_figure_mode_right)    ? graphic::ATRIGHT    : 0;
     cursor = text;
     while ( *cursor )
       {

@@ -152,7 +152,7 @@ chartpie::HitChart( enum view_MouseAction       action, long			       x , long		
     {
     case  view_LeftDown:
       (this)->SetFont(  (this)->IconFont() );
-      (this)->SetTransferMode(  graphic_INVERT );
+      (this)->SetTransferMode(  graphic::INVERT );
       for ( candidate = 0; candidate < DrawingCount; candidate++ )
 	{
 	end_angle = start_angle + (3.6 * DrawingItemPercent(candidate));
@@ -218,7 +218,7 @@ void Show_Pie_Chart( class chartpie	      *self, long			       medium )
   (self)->SetFont(  font = (self)->BuildFont(  "andysans10", &height ) );
   
   if ( medium == Screen ) {
-      (self)->SetTransferMode(  graphic_BLACK );
+      (self)->SetTransferMode(  graphic::BLACK );
       (self)->DrawOval(  DrawingBounds );
   }
   item = (Data )->ItemAnchor( );

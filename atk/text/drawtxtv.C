@@ -990,7 +990,7 @@ static void DrawBar(class textview  *self, struct lineitem  *tt, long  bx , long
 	short oldtype;
 
 	(self)->GetLineDash( &oldpattern, &oldoffset, &oldtype);
-	(self)->SetLineDash( "\001\001", 0, graphic_LineDoubleDash);
+	(self)->SetLineDash( "\001\001", 0, graphic::LineDoubleDash);
         (self)->MoveTo( bx - 1, by - above + 1);
         (self)->DrawLineTo( bx + width, by - above + 1);
         (self)->DrawLineTo( bx + width, by + below);
@@ -1032,7 +1032,7 @@ static void DrawStringNoTabs(class textview  *self, unsigned char *s, int  ctrl)
         if (*st != '\t')
             *dt++ = *st;
     *dt = '\0';
-    (self)->DrawString( (char *)xbuf, graphic_ATBASELINE);
+    (self)->DrawString( (char *)xbuf, graphic::ATBASELINE);
 }
 
 static void drawcontinued(class textview  *self,struct formattinginfo  *info,long  by)
@@ -1055,10 +1055,10 @@ static void drawcontinued(class textview  *self,struct formattinginfo  *info,lon
     pt[0].x= sx; pt[0].y = by;
     pt[1].x = sx + 10 ; pt[1].y = by - (ht / 2);
     pt[2].x = sx; pt[2].y = by - ht;
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &clearRect, (self)->WhitePattern());
     (self)->FillPolygon(pt, 3,(self)->GrayPattern(12,16));
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->DrawPolygon(pt, 3);
 }
 
@@ -1108,7 +1108,7 @@ static void draw_linenum(textview *self, mark *line_mark, struct rectangle *area
     if (pos == 0 || Text(self)->GetChar(pos-1) == '\n') {
 	sprintf(linebuf, "%ld", Text(self)->GetLineForPos(pos));
 	self->MoveTo(rectangle_Right(area)-3, rectangle_Bottom(area));
-	self->DrawString(linebuf, graphic_ATBASELINE|graphic_ATRIGHT);
+	self->DrawString(linebuf, graphic::ATBASELINE|graphic::ATRIGHT);
     }
 }
 
@@ -1140,7 +1140,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     
     if(spots) *spots=NULL;
     
-    if(type==textview_FullLineRedraw || type==textview_PartialLineRedraw || type==textview_MoveView) (this)->SetTransferMode( graphic_COPY);
+    if(type==textview_FullLineRedraw || type==textview_PartialLineRedraw || type==textview_MoveView) (this)->SetTransferMode( graphic::COPY);
     memset(info, 0, sizeof(*info));
     rectangle_EmptyRect(&info->insetrect);
     info->xDim = xSize;
@@ -1380,7 +1380,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     if (type == textview_FullLineRedraw && search == 0) {
 	struct rectangle clearRect;
 	int skipstart = SkipPredrawn ? SkipPredrawn : para_width;
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	rectangle_SetRectSize(&clearRect,
           skipstart, info->cursorY,
           (this)->GetLogicalWidth()- skipstart,
@@ -1395,7 +1395,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     }
 
     if (! isBlack) {
-	(this)->SetTransferMode( graphic_BLACK);
+	(this)->SetTransferMode( graphic::BLACK);
 	isBlack = TRUE;
     }
     /* If the line number display is up, draw a line number now. */
@@ -1436,7 +1436,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 	    }
 	    GetClippingRect(&oldclipRect);
 	    SetClippingRect(&clearRect);
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	    FillRect(&clearRect,pat);
 	    if (para_fgcolor)
 		SetForegroundColor(para_fgcolor, 0, 0, 0);
@@ -1601,7 +1601,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 			    (this)->SetFont( fontID);
 			    (this)->MoveTo( bx, by);
 			    (this)->DrawString((char *)
-                              sPtr, graphic_ATBASELINE);
+                              sPtr, graphic::ATBASELINE);
 			} else if (info->lineAbove +
                                    info->textBelow <= ySize) {
                             long sw;
@@ -1612,10 +1612,10 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
                             DrawBackground(this, tt, bx, by, sw);
                             (this)->MoveTo( bx, by);
                             if (tt->ti_hasTab)
-                                DrawStringNoTabs(this, sPtr, graphic_ATBASELINE);
+                                DrawStringNoTabs(this, sPtr, graphic::ATBASELINE);
                             else
                                 (this)->DrawString((char *)
-                                        sPtr, graphic_ATBASELINE);
+                                        sPtr, graphic::ATBASELINE);
                             if (tt->ti_styleFlags &
                               (style_Underline | style_StrikeThrough |
                                style_OverBar | style_DottedBox)) {
@@ -1711,10 +1711,10 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 		    if (info->lineAbove + info->textBelow <= ySize) {
 			(this)->MoveTo( bx, by);
                         if (tt->ti_hasTab)
-                            DrawStringNoTabs(this, sPtr, graphic_ATBASELINE);
+                            DrawStringNoTabs(this, sPtr, graphic::ATBASELINE);
                         else
                             (this)->DrawString((char *)
-                                    sPtr, graphic_ATBASELINE);
+                                    sPtr, graphic::ATBASELINE);
 		    }
 		    bx = MovePast(this, bx, tt->ti_fontWidths,
                       info, sPtr);
@@ -1725,11 +1725,11 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 			(this)->MoveTo( bx, by);
                         if (tt->ti_hasTab)
                             DrawStringNoTabs(this,
-                                 &info->lineBuffer[zapPos], graphic_ATBASELINE);
+                                 &info->lineBuffer[zapPos], graphic::ATBASELINE);
                         else
                             (this)->DrawString((char *)
                                     &info->lineBuffer[zapPos],
-                                    graphic_ATBASELINE);
+                                    graphic::ATBASELINE);
 		    }
 		}
 		/* spaceBump has already been incremented */
@@ -1744,14 +1744,14 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
       search == 0 && bx < SkipPredrawn) {
 	/* Clear out garbage that may be at end of line after wrap */
 	struct rectangle clearRect;
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	rectangle_SetRectSize(&clearRect,
           info->totalWidth + initialIndent + para_width, info->cursorY,
           SkipPredrawn - info->totalWidth - initialIndent - para_width,
           MIN(ySize, info->lineAbove + info->below));
 	pat = (this)->WhitePattern();
 	(this)->FillRect( &clearRect, pat);
-	(this)->SetTransferMode( graphic_BLACK);
+	(this)->SetTransferMode( graphic::BLACK);
     }
     if(type == textview_FullLineRedraw && info->continued)
 	drawcontinued(this,info,by);

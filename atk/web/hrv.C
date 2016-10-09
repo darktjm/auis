@@ -23,10 +23,10 @@ void hrv::FullUpdate(enum view_UpdateType type, long left, long top, long width,
     enclosingRect.width  = GetLogicalWidth() /* -1 */ ;
     enclosingRect.height = GetLogicalHeight() /* -1 */ ;
 
-    SetTransferMode(graphic_WHITE);
+    SetTransferMode(graphic::WHITE);
     EraseRect(&(enclosingRect));
 
-    SetTransferMode(graphic_COPY);
+    SetTransferMode(graphic::COPY);
     MoveTo(0,0);
     DrawLineTo(enclosingRect.width, 0);
 }

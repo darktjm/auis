@@ -821,7 +821,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 
     /* the plan: r is in fig coords, old is in pixel coords */
 
-    (self)->SetTransferMode( graphic_INVERT);
+    (self)->SetTransferMode( graphic::INVERT);
     for (hx=0; hx<self->numhighlights; hx++) {
 	self->highlights[hx].focgone = FALSE;
 
@@ -885,7 +885,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 	    }
 	}
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	
 	clipnum = numclips-1;
 	self->currentclipreg = self->clipreglist[clipnum];
@@ -970,7 +970,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 		}
 	    }
 	}
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	for (hx=0; hx<self->numhighlights; hx++) {
 	    if (!self->highlights[hx].focgone) {
 		if (self->highlights[hx].oldon)
@@ -1016,7 +1016,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 	}
     }
 
-    (self)->SetTransferMode( graphic_INVERT);
+    (self)->SetTransferMode( graphic::INVERT);
     for (hx=0; hx<self->numhighlights; hx++) {
 	if (self->highlights[hx].focgone) {
 	    if (self->highlights[hx].oldon)
@@ -1366,7 +1366,7 @@ void figview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
 	UpdateWindowSize(this);
     }
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     /* draw inset border */
     if (this->embedded) {
@@ -1424,12 +1424,12 @@ static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectan
     if (uy->height>0) {
 	(self)->EraseRect( uy);
 	(self)->FullUpdate( view_LastPartialRedraw, uy->left, uy->top, uy->width, uy->height);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
     }
     if (ux->width>0) {
 	(self)->EraseRect( ux);
 	(self)->FullUpdate( view_LastPartialRedraw, ux->left, ux->top, ux->width, ux->height);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
     }
 
     /* is there a better way to detect the case where
@@ -1457,7 +1457,7 @@ static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectan
 	    (self)->EraseRect( &rr);
 
 	    (self)->FullUpdate( view_LastPartialRedraw, rr.left, rr.top, rr.width, rr.height);
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	}	 
     }
     delete vr;
@@ -1509,7 +1509,7 @@ static void DoBlit(class figview  *self, long  diffx , long  diffy)
 	uy.height=d.y-border;
     }
     
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     if (vb) (self)->SetClippingRegion( vb);
     (self)->BitBlt( &s, self, &d, NULL);
     if (vb) {
@@ -1673,7 +1673,7 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		this->rocky = vy;
 		px = (this)->ToPixX( vx);
 		py = (this)->ToPixY( vy);
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, py);
 		(this)->DrawLineTo( vwid-1, py);
 		(this)->MoveTo( px, 0);
@@ -1686,7 +1686,7 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		px = (this)->ToPixX( vx);
 		py = (this)->ToPixY( vy);
 		if (px!=this->lastx || py!=this->lasty) {
-		    (this)->SetTransferMode( graphic_INVERT);
+		    (this)->SetTransferMode( graphic::INVERT);
 		    (this)->MoveTo( 0, this->lasty);
 		    (this)->DrawLineTo( vwid-1, this->lasty);
 		    (this)->MoveTo( this->lastx, 0);
@@ -1701,7 +1701,7 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		break;
 	    case view_LeftUp:
 	    case view_RightUp:
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, this->lasty);
 		(this)->DrawLineTo( vwid-1, this->lasty);
 		(this)->MoveTo( this->lastx, 0);

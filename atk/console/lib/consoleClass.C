@@ -73,7 +73,7 @@ void consoleClass::FullUpdate(enum view_UpdateType  type, long  left, long  top,
 
     mydbg(("entering: consoleClass__FullUpdate\n"));
     is_visible = TRUE;
-    (this)->SetTransferMode(graphic_BLACK);
+    (this)->SetTransferMode(graphic::BLACK);
     if (firstTime)  {
 	((this)->GetIM())->SetTitle( TitleFromFile (ConFile, TRUE));
 	firstTime = FALSE;

@@ -134,7 +134,7 @@ Redraw(class timeodayview  *self)
   if (my_FontSummary) (self)->MoveTo( rect.left + rect.width/2, rect.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 
   if (my_fontdesc) (self)->SetFont( my_fontdesc);
-  (self)->DrawString( tod,  graphic_BETWEENLEFTANDRIGHT | graphic_ATBASELINE);
+  (self)->DrawString( tod,  graphic::BETWEENLEFTANDRIGHT | graphic::ATBASELINE);
 }
 
 

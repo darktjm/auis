@@ -1170,7 +1170,7 @@ static void UpdateCursor(class textview  *self, boolean  oldCursor)
     }
 
     (self)->SetFont(iconFont);
-    (self)->SetTransferMode(graphic_XOR);
+    (self)->SetTransferMode(graphic::XOR);
 
     by = (self->hasApplicationLayer) ? self->by : self->eby;
 
@@ -1235,7 +1235,7 @@ static void UpdateCursor(class textview  *self, boolean  oldCursor)
     }
     else if (csx >= self->para_width) {
 	(self)->MoveTo(csx,csy-csb);
-	(self)->DrawString("|",graphic_NOMOVEMENT);
+	(self)->DrawString("|",graphic::NOMOVEMENT);
     }
     if (! oldCursor)  {
 	InvertRectangles(self);
@@ -1490,11 +1490,11 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 
 		if (cursorVisible && (self->dot)->GetLength() == 0 && self->scrollLine > 0 && 
 		    (self->dot)->GetPos() >= (self->lines[self->scrollLine-1].data)->GetPos() && (self->dot)->GetPos() < (self->lines[self->scrollLine].data)->GetPos()) {
-		    (self)->SetTransferMode(graphic_XOR);
+		    (self)->SetTransferMode(graphic::XOR);
 		    XorCursor(self);
 		}
 
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		yoff = (dy < 0) ? dy : 0;/* clip */
 		rectangle_SetRectSize(&tempSrcRect, 0, sy - yoff, (self)->GetLogicalWidth(), h - yoff );
 		point_SetPt(&tempDstOrigin, 0, dy  - yoff );
@@ -1687,7 +1687,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 		h = 0;
 
 		if(cursorVisible && (self->csyPos<self->scrollDist || self->ceyPos<self->scrollDist || self->csyPos-self->cshPos<self->scrollDist)) {
-		   (self)->SetTransferMode(graphic_XOR);
+		   (self)->SetTransferMode(graphic::XOR);
 		   XorCursor(self);
 		   self->csyPos = BADCURPOS;
 		   self->csxPos = BADCURPOS;
@@ -1702,7 +1702,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 		    h += self->lines[lastLine].height;
 		}
 		
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		yoff = (sy < 0) ? sy : 0; /* clip */
 		rectangle_SetRectSize(&tempSrcRect, 0, sy - yoff, (self)->GetLogicalWidth(), h - yoff);
 		point_SetPt(&tempDstOrigin, 0, dy - yoff);
@@ -1877,7 +1877,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	    (self->lines[line++].data)->SetModified( TRUE);
 	} 
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->GetVisualBounds( &tempSrcRect);
 	pat = (self)->WhitePattern();
 	(self)->FillRect( &tempSrcRect, pat);
@@ -1969,7 +1969,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 
     cStart = (self->dot)->GetPos();
     cEnd = cStart + (self->dot)->GetLength();
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     csx = BADCURPOS;
     csy = BADCURPOS;
     cex = BADCURPOS;
@@ -2114,7 +2114,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	/* consider zapping the rest of the screen */
 
 	if (cury < self->clearFrom)  {
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	    rectangle_SetRectSize(&tempSrcRect, self->para_width, cury, (self)->GetLogicalWidth(), (self)->GetLogicalHeight() - cury);
 	    pat = (self)->WhitePattern();
 	    (self)->FillRect(&tempSrcRect,pat);
@@ -2229,9 +2229,9 @@ void textview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lon
 	 * this point.
 	 */
 	this->showColorStyles = environ::GetProfileSwitch("showcolorstyles",
-				!((this)->DisplayClass() & graphic_Monochrome));
+				!((this)->DisplayClass() & graphic::Monochrome));
 	three_d_display = environ::GetProfileSwitch("LineNumbers3D",
-				 !(DisplayClass() & graphic_Monochrome));
+				 !(DisplayClass() & graphic::Monochrome));
     }
     switch(type){
 	case view_Remove:

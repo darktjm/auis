@@ -477,7 +477,7 @@ class avalueflex : public avalueflex_base {
     /**< Add array elements from a string descriptor.
      *   Parses an array descriptor.  The descriptor has the following
      *   format, loosely in EBNF:
-     *   \code{.unparsed}
+     *   \qcode{.unparsed}
      *     array = '(' [whitespace] { element [whitespace] } ')'
      *     element = [name '=' [whitespace]] value [ ':' type ]
      *     name = atom
@@ -492,7 +492,7 @@ class avalueflex : public avalueflex_base {
      *     string = '"' { string-char }+ '"'
      *     string-char = not-"\ \e \b \r \n \t \nnn \\ \" etc.
      *     atom = [alpha] { [^ \t=:)] }
-     *   \endcode
+     *   \endqcode
      *
      *   \param str A pointer to a variable pointing to the string to
      *              interpret.  On successful parse, this will be advanced

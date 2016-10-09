@@ -292,9 +292,9 @@ static void DoUpdate(class fnotev  *self,boolean  full)
     (self)->GetVisualBounds(&enclosingRect);
     enclosingRect.width--; enclosingRect.height--; 
     enclosingRect.width--; enclosingRect.height--; 
-    (self)->SetTransferMode(graphic_WHITE);
+    (self)->SetTransferMode(graphic::WHITE);
     (self)->EraseRect(&(enclosingRect));
-    (self)->SetTransferMode(graphic_COPY);
+    (self)->SetTransferMode(graphic::COPY);
   /*  fnotev_FillRect(self,&(enclosingRect), fnotev_GrayPattern(self,4,16) );*/
     (self)->PostCursor(&(enclosingRect),self->cursor) ;
 

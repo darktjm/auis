@@ -17,9 +17,6 @@
  *
  */
 
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
 #include <ATK.H>
 
 #define xim_PRORGAMMERVERSION 1
@@ -60,6 +57,9 @@ struct menuviews {
 
 #include <im.H>
 #include <ahash.H>
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 class xim : public  im  {
 public:

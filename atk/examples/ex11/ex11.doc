@@ -951,7 +951,7 @@ long height;
     hwv->blackOnWhite=hw->blackOnWhite;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hw->blackOnWhite)
@@ -965,14 +965,14 @@ helloworldview_WhitePattern(hwv));
 helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv,graphic_INVERT);
+    helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
     helloworldview_MoveTo(hwv, hw->x - hwv->frameX, hw->y - hwv->frameY);
 
     helloworldview_DrawString(hwv,"hello world",
 
-			   graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+			   graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -987,7 +987,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     if (hw->blackOnWhite!=hwv->blackOnWhite) \{
@@ -1031,9 +1031,9 @@ hwv->frameY!=hwv->newFrameY) \{
 
 		name,&id)!=2)\{		  
 
-              graphic_BETWEENTOPANDBASELINE |
+              graphic::BETWEENTOPANDBASELINE |
 
-				  graphic_BETWEENLEFTANDRIGHT);
+				  graphic::BETWEENLEFTANDRIGHT);
 
   
 
@@ -1054,9 +1054,9 @@ hwv->frameY!=hwv->newFrameY) \{
 
 	helloworldview_DrawString(hwv, "hello world",
 
-				  graphic_BETWEENTOPANDBASELINE |
+				  graphic::BETWEENTOPANDBASELINE |
 
-				  graphic_BETWEENLEFTANDRIGHT);
+				  graphic::BETWEENLEFTANDRIGHT);
 
     \}
 

@@ -145,7 +145,7 @@ static boolean Init() {
     return TRUE;
 }
 
-#define TEXTINMIDDLE (graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM)
+#define TEXTINMIDDLE (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
 #define AButtonv_IndicatorBorderType AShadow_Highlight|AShadow_Default
 #define AButtonv_BorderType AShadow_Highlight|AShadow_Default|AShadow_Plain
 
@@ -455,9 +455,9 @@ void AButtonv::DoSelectionHighlight(char *textl, class fontdesc *my_fontdesc, lo
 	    hit->height=r->height;
 	}
 	if(draw) {
-	    SetTransferMode(graphic_INVERT);
+	    SetTransferMode(graphic::INVERT);
 	    FillRectSize(tx, r->top, width, r->height, NULL);
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	}
     }
 }
@@ -474,9 +474,9 @@ void AButtonv::DrawLabelText(class fontdesc  *font, const struct rectangle *inte
 	MoveTo( x - tx/2 + ci.xOriginOffset + 2, y - ty/2 + ci.yOriginOffset +2);
 	DrawText( (char *)text, len, 0);
 	if(HasInputFocus && rsvalid && rsstart==0 && rslen==1) {
-	    SetTransferMode(graphic_INVERT);
+	    SetTransferMode(graphic::INVERT);
 	    FillRectSize(x - tx/2 + ci.xOriginOffset, y - ty/2 + ci.yOriginOffset, tx+4, ty+4, NULL);
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	}
     } else {
 	MoveTo( x, y);

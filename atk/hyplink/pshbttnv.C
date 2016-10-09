@@ -337,7 +337,7 @@ static void DoSelectionHighlight(class pushbuttonview *self,const char *textl, c
 	    hit->height=r->height;
 	}
 	if(draw) {
-	    self->SetTransferMode(graphic_INVERT);
+	    self->SetTransferMode(graphic::INVERT);
 	    self->FillRectSize(tx, r->top, width, r->height, NULL);
 	}
     }
@@ -510,7 +510,7 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       my_FontSummary =  (my_fontdesc)->FontSummary( my_graphic);
     }
 
-    (this)->SetTransferMode( graphic_SOURCE);
+    (this)->SetTransferMode( graphic::SOURCE);
     if ((style != pushbutton_THREEDEE) && (style != pushbutton_MOTIF)) {
 	/* Erase with BG color, only if style is not 3-D (3-D draws all bits) */
 	pushbuttonview_setShade(this, 0.0);
@@ -518,7 +518,7 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
     }
     pushbuttonview_setShade(this, 1.0);
 
-    t_op =  graphic_ATBASELINE;
+    t_op =  graphic::ATBASELINE;
     if(b->GetText()) {
 	textl = (b)->GetText();
     } else {
@@ -543,11 +543,11 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       if (my_FontSummary)
 	ty = TEXTPAD + (Rect2.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 
-      (this)->SetTransferMode( graphic_COPY);
+      (this)->SetTransferMode( graphic::COPY);
       (this)->DrawRect( &Rect);
       (this)->DrawRect( &Rect2);
       (this)->MoveTo( tx, ty);
-      (this)->DrawString( textl, t_op | graphic_BETWEENLEFTANDRIGHT);
+      (this)->DrawString( textl, t_op | graphic::BETWEENLEFTANDRIGHT);
       Rect2.top++;
       Rect2.height--;
       if(cont) DrawContinued(this, &Rect2);
@@ -569,10 +569,10 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       if (my_FontSummary)
 	ty = TEXTPAD + (Rect.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 
-      (this)->SetTransferMode( graphic_COPY);
+      (this)->SetTransferMode( graphic::COPY);
       (this)->DrawRRect( &Rect, &Rect2);
       (this)->MoveTo( tx, ty);
-      (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+      (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
       if(cont) DrawContinued(this, &Rect);
       DoSelectionHighlight(this,textl,my_fontdesc, tx, &Rect, NULL, GetIM()->GetInputFocus()==this);
       break;
@@ -607,7 +607,7 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       }
 
       {
-          (this)->SetTransferMode( graphic_COPY);
+          (this)->SetTransferMode( graphic::COPY);
           pushbuttonview_setShade(this, ulshade);
           (this)->FillRectSize( Rect.left, Rect.top, bdepth, Rect.height, NULL);	/* left bar */
 
@@ -623,19 +623,19 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
 
       }
 
-      (this)->SetTransferMode( graphic_BLACK);
+      (this)->SetTransferMode( graphic::BLACK);
       if (style != pushbutton_MOTIF) {
 	  pushbuttonview_setShade(this, 0.0);
           (this)->MoveTo( tx+1, ty);
-          (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+          (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
           (this)->MoveTo( tx, ty+1);
-          (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+          (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
           (this)->MoveTo( tx+1, ty+1);
-          (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+          (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
       }
       pushbuttonview_setShade(this, 1.0);
       (this)->MoveTo( tx, ty);
-      (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+      (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
       if(cont) DrawContinued(this, &Rect2);
       DoSelectionHighlight(this,textl,my_fontdesc, tx, &Rect2, NULL, GetIM()->GetInputFocus()==this);
       break;
@@ -650,8 +650,8 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       ty = Rect.top + (Rect.height / 2);
 
       (this)->MoveTo( tx, ty);
-      t_op =  graphic_BETWEENTOPANDBOTTOM;
-      (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+      t_op =  graphic::BETWEENTOPANDBOTTOM;
+      (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
       Rect.top++;
       Rect.height--;
       if(cont) DrawContinued(this, &Rect);
@@ -665,9 +665,9 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
       if (my_FontSummary)
 	ty = (Rect.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 
-      (this)->SetTransferMode( graphic_COPY);
+      (this)->SetTransferMode( graphic::COPY);
       (this)->MoveTo( tx, ty);
-      (this)->DrawString( textl, t_op| graphic_BETWEENLEFTANDRIGHT);
+      (this)->DrawString( textl, t_op| graphic::BETWEENLEFTANDRIGHT);
       if(cont) DrawContinued(this, &Rect);
       DoSelectionHighlight(this,textl,my_fontdesc, tx, &Rect, NULL, GetIM()->GetInputFocus()==this);
       break;
@@ -748,7 +748,7 @@ HighlightButton(class pushbuttonview  *self)
     switch (style) {
     case pushbutton_PLAIN:
     case pushbutton_PLAINBOX:
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRect(&Rect,(self)->BlackPattern());
       break;
 
@@ -759,7 +759,7 @@ HighlightButton(class pushbuttonview  *self)
       Rect2.width = Rect.width - 2*BUTTONDEPTH;
       Rect2.height = Rect.height - 2*BUTTONDEPTH;
 
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRect( &Rect,(self)->BlackPattern());
       (self)->FillRect( &Rect2,(self)->BlackPattern());
 
@@ -773,7 +773,7 @@ HighlightButton(class pushbuttonview  *self)
       Rect.width -= 1;
       Rect.height -= BUTTONDEPTH;
 
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRRect( &Rect, &Rect2, (self)->BlackPattern());
 
       break;
@@ -799,7 +799,7 @@ HighlightButton(class pushbuttonview  *self)
       r_bot = (Rect.top)+(Rect.height);
 
       if (style == pushbutton_MOTIF) {
-          (self)->SetTransferMode( graphic_COPY);
+          (self)->SetTransferMode( graphic::COPY);
           pushbuttonview_setShade(self, ulshade);
           (self)->FillRectSize( Rect.left, Rect.top, bdepth, Rect.height, NULL);	/* left bar */
 	  
@@ -822,7 +822,7 @@ HighlightButton(class pushbuttonview  *self)
 	      (self)->SetFont( my_fontdesc);
 	      my_FontSummary =  (my_fontdesc)->FontSummary( my_graphic);
 	  }
-	  t_op = graphic_ATBASELINE;
+	  t_op = graphic::ATBASELINE;
 	  text = (b)->GetText() ? (b)->GetText() : NO_MSG;
 	  // tx = TEXTPAD + (Rect2.left + Rect2.width) / 2;
 	  tx=ComputePos(self, textl, my_fontdesc, Rect2.left, Rect2.width, &cont);
@@ -830,9 +830,9 @@ HighlightButton(class pushbuttonview  *self)
 	    ty = TEXTPAD + (Rect2.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 	  
 	  pushbuttonview_setShade(self, 0.0);
-	  (self)->SetTransferMode( graphic_BLACK);
+	  (self)->SetTransferMode( graphic::BLACK);
 	  (self)->MoveTo( tx, ty);
-	  (self)->DrawString( text, t_op| graphic_BETWEENLEFTANDRIGHT);
+	  (self)->DrawString( text, t_op| graphic::BETWEENLEFTANDRIGHT);
 	  pushbuttonview_setShade(self, 1.0);
 	  if(cont) DrawContinued(self, &Rect);
 	  DoSelectionHighlight(self,textl,my_fontdesc, tx, &Rect, NULL, self->GetIM()->GetInputFocus()==self);
@@ -875,7 +875,7 @@ UnhighlightButton(class pushbuttonview  *self)
     switch (style) {
     case pushbutton_PLAIN:
     case pushbutton_PLAINBOX:
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRect(&Rect,(self)->BlackPattern());
       break;
 
@@ -886,7 +886,7 @@ UnhighlightButton(class pushbuttonview  *self)
       Rect2.width = Rect.width - 2*BUTTONDEPTH;
       Rect2.height = Rect.height - 2*BUTTONDEPTH;
 
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRect( &Rect,(self)->BlackPattern());
       (self)->FillRect( &Rect2,(self)->BlackPattern());
 
@@ -900,7 +900,7 @@ UnhighlightButton(class pushbuttonview  *self)
       Rect.width -= 1;
       Rect.height -= BUTTONDEPTH;
 
-      (self)->SetTransferMode( graphic_INVERT);
+      (self)->SetTransferMode( graphic::INVERT);
       (self)->FillRRect( &Rect, &Rect2, (self)->BlackPattern());
 
       break;
@@ -927,7 +927,7 @@ UnhighlightButton(class pushbuttonview  *self)
       r_bot = (Rect.top)+(Rect.height);
 
       if (style == pushbutton_MOTIF) {
-          (self)->SetTransferMode( graphic_COPY);
+          (self)->SetTransferMode( graphic::COPY);
           pushbuttonview_setShade(self, ulshade);
           (self)->FillRectSize( Rect.left, Rect.top, bdepth, Rect.height, NULL);	/* left bar */
 	  
@@ -950,16 +950,16 @@ UnhighlightButton(class pushbuttonview  *self)
 	      (self)->SetFont( my_fontdesc);
 	      my_FontSummary =  (my_fontdesc)->FontSummary( my_graphic);
 	  }
-	  t_op = graphic_ATBASELINE;
+	  t_op = graphic::ATBASELINE;
 	  text = (b)->GetText() ? (b)->GetText() : NO_MSG;
 	  //  tx = TEXTPAD + (Rect2.left + Rect2.width) / 2;
 	  tx=ComputePos(self, textl, my_fontdesc, Rect2.left, Rect2.width, &cont);
 	  if (my_FontSummary)
 	    ty = TEXTPAD + (Rect2.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 	  
-	  (self)->SetTransferMode( graphic_BLACK);
+	  (self)->SetTransferMode( graphic::BLACK);
 	  (self)->MoveTo( tx, ty);
-	  (self)->DrawString( text, t_op| graphic_BETWEENLEFTANDRIGHT);
+	  (self)->DrawString( text, t_op| graphic::BETWEENLEFTANDRIGHT);
 	  if(cont) DrawContinued(self, &Rect);
 	  DoSelectionHighlight(self,textl,my_fontdesc, tx, &Rect, NULL, self->GetIM()->GetInputFocus()==self);
       } /* MOTIF? */

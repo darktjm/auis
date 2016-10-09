@@ -1471,7 +1471,7 @@ static
 void Highlight_View( class zipview	      *self )
     {
   IN(Highlight_View);
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   (self )->Normalize_Line_Attributes( );
   (self)->DrawRectSize(  0, 0, (self )->GetLogicalWidth(  ) - 1,
 				    (self )->GetLogicalHeight( ) - 1);
@@ -1482,7 +1482,7 @@ static
 void Normalize_View( class zipview	      *self )
     {
   IN(Normalize_View);
-  (self)->SetTransferMode(  graphic_WHITE );
+  (self)->SetTransferMode(  graphic::WHITE );
   (self )->Normalize_Line_Attributes( );
   (self)->DrawRectSize(  0, 0, (self )->GetLogicalWidth(  ) - 1,
 				    (self )->GetLogicalHeight( ) - 1);

@@ -375,7 +375,7 @@ rectangle_Height(&myVisualRect)/2;
 
             helloworldview_DrawString(hwv,"hello world",
 
-	    graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); }   
+	    graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); }   
 
 \}}
 
@@ -599,13 +599,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT); 
+        helloworldview_SetTransferMode(hwv,graphic::INVERT); 
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y); 
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); 
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); 
 
 
         hwv->x = hwv->newX; 
@@ -616,7 +616,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y); 
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); 
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); 
 
    \} \}
 
@@ -625,13 +625,13 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
 In this example, we want to erase the \italic{hello world} string at its 
 current position and redraw it at the new position that we recorded in the 
 \italic{Hit} method.   The statement 
-\italic{helloworldview_SetTransferMode(hwv, graphic_\smaller{INVERT})} 
+\italic{helloworldview_SetTransferMode(hwv, graphic::\smaller{INVERT})} 
 \indexi{Graphic++Transfer mode}
 
 \indexi{ \italic{SetTransferMode}} 
 
 \indexi{Graphic++\italic{SetTransferMode}} 
-\indexi{ \italic{graphic_SetTransferMode}} 
+\indexi{ \italic{graphic::SetTransferMode}} 
 
 sets the graphic transfer mode to \smaller{INVERT}, a mode that causes the 
 window \indexi{Screen inverting}  \indexi{Drawing} manager to draw black 
@@ -810,7 +810,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     helloworldview_DrawString(hwv,"hello world",
 
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -825,13 +825,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT);
+        helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 
         hwv->x = hwv->newX;
@@ -842,7 +842,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
    \}
 

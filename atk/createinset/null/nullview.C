@@ -147,7 +147,7 @@ InvertRectangle(class nullview  *self,long left,long top,long width,long height)
 	/* it will give unpredictable results on color displays */
 	struct rectangle r;
 
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	rectangle_SetRectSize(&r, left, top, width, height);
 	(self)->FillRect( &r, self->bpattern);
 }
@@ -161,8 +161,8 @@ ShowString(class nullview *self, long x ,long y, char *string)
 {
 	(self)->MoveTo( x, y);
 	(self)->DrawString( string,
-			graphic_BETWEENLEFTANDRIGHT |
-			    graphic_BETWEENTOPANDBASELINE);
+			graphic::BETWEENLEFTANDRIGHT |
+			    graphic::BETWEENTOPANDBASELINE);
 }
 
 
@@ -188,10 +188,10 @@ void RedrawView(class nullview  *self, enum view_UpdateType  type,long left,long
 	struct dotlist *d;
 	class null *dobj 
 		= (class null *)self->dataobject;
-	boolean colordpy = ((self)->DisplayClass() & graphic_Color) != 0;
+	boolean colordpy = ((self)->DisplayClass() & graphic::Color) != 0;
 	long fgr, fgg, fgb;
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->GetLogicalBounds( &r);		/* find rectangle bounds */
 	(self)->FillRect( &r, self->wpattern);	/* clear the rectangle */
 
@@ -216,7 +216,7 @@ void RedrawView(class nullview  *self, enum view_UpdateType  type,long left,long
 			d = (dobj)->GetNextDot( d)) {
 		/* display each dot as a ring  */
 		struct rectangle r;
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		rectangle_SetRectSize(&r, (dobj)->GetDotX(d)-4,
 			(dobj)->GetDotY(d)-4, 9, 9);
 		(self)->FillOval(&r, self->bpattern);
@@ -508,7 +508,7 @@ DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 		/* draw the image immediately
 			(It will be redrawn by the Update routine
 			called because of the NotifyObservers) */
-		(this)->SetTransferMode( graphic_COPY);
+		(this)->SetTransferMode( graphic::COPY);
 		rectangle_SetRectSize(&r, x-4, y-4, 9, 9);
 		(this)->FillOval(&r, this->bpattern);
 	}

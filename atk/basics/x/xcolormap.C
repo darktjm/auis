@@ -4,18 +4,18 @@
 \* ********************************************************************** */
 
 #include <andrewos.h>
+#include <xim.H>
 ATK_IMPL("xcolormap.H")
+#include <xcolor.H>
+#include <xcolormap.H>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <X11/Xmd.h>
-#include <xcolor.H>
-#include <xcolormap.H>
 #include <environ.H>
 #include <util.h>
 #include <atoms.h>
-#include <xim.H>
 #undef DisplayString
 #include <message.H>
 static int xcolormap_debug=0;

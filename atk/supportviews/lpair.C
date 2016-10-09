@@ -66,7 +66,7 @@ static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct 
 	else
 		y += self->objcvt[0];
 
-	(self)->SetTransferMode( graphic_BLACK);
+	(self)->SetTransferMode( graphic::BLACK);
 	offset = (self->movable) ? BARWIDTH : 0; /* If not movable, don't put extra space around bar. */
 	if (self->typex == lpair_VERTICAL) {
 		(self)->MoveTo( x + offset, 0);
@@ -134,7 +134,7 @@ void lpair::Update()
 		struct rectangle redrawRectangle;
 		class graphic *pat;
 
-		(this)->SetTransferMode( graphic_COPY);
+		(this)->SetTransferMode( graphic::COPY);
 		(this)->GetLogicalBounds( &redrawRectangle);
 		if (!(this->needsfull & 1)) {
 			if (this->typex == lpair_HORIZONTAL)

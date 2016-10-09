@@ -810,9 +810,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "hello ",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATRIGHT);
+			       graphic::ATRIGHT);
 
     helloworldview_MoveTo(hwv,
 
@@ -822,9 +822,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "world",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATLEFT);
+			       graphic::ATLEFT);
 
 \}
 
@@ -887,7 +887,7 @@ long height;
     hwv->blackOnWhite=hw->blackOnWhite;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hw->blackOnWhite)
@@ -903,7 +903,7 @@ long height;
 		&myVisualRect, helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv,graphic_INVERT);
+    helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
     drawHW(hwv);
@@ -921,7 +921,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     if (hw->blackOnWhite!=hwv->blackOnWhite) \{

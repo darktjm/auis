@@ -32,13 +32,13 @@ butterview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long
 		(b->mycursor)->SetStandard( Cursor_Octagon);
 	    }
 	    (this)->GetLogicalBounds( &Rect);
-	    (this)->SetTransferMode( graphic_WHITE);
+	    (this)->SetTransferMode( graphic::WHITE);
 	    (this)->FillRect( &Rect, (this)->GetDrawable());
 	    (this)->PostCursor( &Rect, b->mycursor);
 	    (this)->SetFont( (b)->GetButtonFont());
-	    (this)->SetTransferMode( graphic_BLACK);
+	    (this)->SetTransferMode( graphic::BLACK);
 	    (this)->MoveTo( (Rect.left + Rect.width) / 2, (Rect.top + Rect.height) / 2);
-	    (this)->DrawString( (b)->GetText() ? (b)->GetText() : "<BEEP>", graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+	    (this)->DrawString( (b)->GetText() ? (b)->GetText() : "<BEEP>", graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
 	}
 }
 

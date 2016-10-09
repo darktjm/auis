@@ -149,7 +149,7 @@ void runbuttonview::FullUpdate(enum view_UpdateType type, long left, long top, l
 	 */
 	b = ButtonData();
 	prefs = b->GetDefaultPrefs();
-	if (DisplayClass() & graphic_Monochrome) {
+	if (DisplayClass() & graphic::Monochrome) {
 	    sbutton::GetStyle(prefs) = sbutton_BOXEDRECT;
 	    sbutton::GetForeground(prefs)=NULL;
 	    sbutton::GetBackground(prefs)=NULL;

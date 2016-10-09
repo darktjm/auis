@@ -326,9 +326,9 @@ struct helloworld *hw;
 
 	helloworld_MoveTo(hw, hw->x - hw->frameX, hw->y - hw->frameY);
 
-	helloworld_DrawString(hw, "hello world", graphic_BETWEENTOPANDBASELINE
+	helloworld_DrawString(hw, "hello world", graphic::BETWEENTOPANDBASELINE
 
-| graphic_BETWEENLEFTANDRIGHT);
+| graphic::BETWEENLEFTANDRIGHT);
 
 	hw->x = hw->newX;
 
@@ -341,9 +341,9 @@ struct helloworld *hw;
 
 	helloworld_MoveTo(hw, hw->x - hw->frameX, hw->y - hw->frameY);
 
-	helloworld_DrawString(hw, "hello world", graphic_BETWEENTOPANDBASELINE
+	helloworld_DrawString(hw, "hello world", graphic::BETWEENTOPANDBASELINE
 
-| graphic_BETWEENLEFTANDRIGHT);
+| graphic::BETWEENLEFTANDRIGHT);
 
  \}
 
@@ -701,7 +701,7 @@ long height;
     \}
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hwv->blackOnWhite)  \{
@@ -719,14 +719,14 @@ helloworldview_BlackPattern(hwv));
     \}
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     helloworldview_MoveTo(hwv, hwv->x - hwv->frameX, hwv->y - hwv->frameY);
 
     helloworldview_DrawString(hwv,"hello world",
 
-			   graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+			   graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -738,7 +738,7 @@ struct helloworldview *hwv;
 
 \{    
 
-    /* TransferMode is graphic_INVERT from the last FullUpdate */
+    /* TransferMode is graphic::INVERT from the last FullUpdate */
 
 
     if (hwv->newBlackOnWhite != hwv->blackOnWhite)  \{
@@ -770,8 +770,8 @@ hwv->y || hwv->frameY != hwv->newFrameY) \{
 
 	helloworldview_MoveTo(hwv, hwv->x - hwv->frameX, hwv->y - hwv->frameY);
 
-	helloworldview_DrawString(hwv, "hello world", graphic_BETWEENTOPANDBASELINE | 
-graphic_BETWEENLEFTANDRIGHT);
+	helloworldview_DrawString(hwv, "hello world", graphic::BETWEENTOPANDBASELINE | 
+graphic::BETWEENLEFTANDRIGHT);
 
 
 	hwv->x = hwv->newX;
@@ -785,8 +785,8 @@ graphic_BETWEENLEFTANDRIGHT);
 
 	helloworldview_MoveTo(hwv, hwv->x - hwv->frameX, hwv->y - hwv->frameY);
 
-	helloworldview_DrawString(hwv, "hello world", graphic_BETWEENTOPANDBASELINE | 
-graphic_BETWEENLEFTANDRIGHT);
+	helloworldview_DrawString(hwv, "hello world", graphic::BETWEENTOPANDBASELINE | 
+graphic::BETWEENLEFTANDRIGHT);
 
     \}
 

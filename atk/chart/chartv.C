@@ -306,7 +306,7 @@ chartv::ReceiveInputFocus( )
 	((class view *)Palette)->PostMenus(  Menu );
     (this)->PostMenus(  Menu );
     }
-  (this)->SetTransferMode(  graphic_BLACK );
+  (this)->SetTransferMode(  graphic::BLACK );
   (this)->DrawRectSize(  Left, Top, Width-1, Height-1 );
   OUT(chartv_ReceiveInputFocus);
   }
@@ -319,7 +319,7 @@ chartv::LoseInputFocus( )
   InputFocus = false; 
   if ( ! IgnoreLoseInputFocus )
     { DEBUG(Do Not Ignore);
-    (this)->SetTransferMode(  graphic_WHITE );
+    (this)->SetTransferMode(  graphic::WHITE );
     (this)->DrawRectSize(  Left, Top, Width-1, Height-1 );
     }
   OUT(chartv_LoseInputFocus);
@@ -652,9 +652,9 @@ static void chartv_ReChart( class chartv      *self, char		      *moniker )
       (ChartViewer)->SetDataObject(  Chart );
       if ( prior_viewer )
 	{ DEBUG(Prior Viewer);
-	(self)->SetTransferMode(  graphic_WHITE );
-	(self)->FillRect(  &bounds, graphic_WHITE );
-	(self)->SetTransferMode(  graphic_BLACK );
+	(self)->SetTransferMode(  graphic::WHITE );
+	(self)->FillRect(  &bounds, graphic::WHITE );
+	(self)->SetTransferMode(  graphic::BLACK );
 	}
 	else
 	{ DEBUG(No Prior Viewer);

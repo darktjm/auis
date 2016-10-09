@@ -49,7 +49,7 @@ void ClearWindow(class consoleClass  *self)
     
     mydbg(("entering: ClearWindow\n"));
     (self)->GetLogicalBounds( &windowRect);
-    ClearRectangle(self, &windowRect, graphic_COPY, (self)->WhitePattern());
+    ClearRectangle(self, &windowRect, graphic::COPY, (self)->WhitePattern());
 }
 
 void InvertWindow(class consoleClass  *self)
@@ -58,7 +58,7 @@ void InvertWindow(class consoleClass  *self)
 
     mydbg(("entering: InvertWindow\n"));
     (self)->GetLogicalBounds( &windowRect);
-    ClearRectangle(self, &windowRect, graphic_INVERT, (self)->BlackPattern());
+    ClearRectangle(self, &windowRect, graphic::INVERT, (self)->BlackPattern());
 }
 
 void InitPstrings()
@@ -80,19 +80,19 @@ void PromptToWindow(class consoleClass  *self)
     ClearWindow(self);
     (self)->SetFont( EventFont);
     (self)->MoveTo( width >> 1, height / 4);
-    (self)->DrawString( Pstring1, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+    (self)->DrawString( Pstring1, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     (self)->MoveTo( width >> 1, height / 2);
-    (self)->DrawString( Pstring2, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+    (self)->DrawString( Pstring2, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     if (!strcmp(Pstring3,"==>> ")){
 	(self)->MoveTo( 10, (int) (height * 0.75));
-	(self)->DrawString( Pstring3, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+	(self)->DrawString( Pstring3, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 	(self)->FlushGraphics();
 	Pposy = (int) ((self)->GetLogicalHeight() *.75);
 	Pposx = 10 + (fontWidth['='] * 2) + (fontWidth['>'] * 2) + fontWidth[' '];
     }
     else{
 	(self)->MoveTo( width >> 1, (int) (height * 0.75));
-	(self)->DrawString( Pstring3, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+	(self)->DrawString( Pstring3, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     }
 }    
 
@@ -115,8 +115,8 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 		    --tempString;
 		    Pposx -= fontWidth[(unsigned char)*tempString];
 		    (self)->MoveTo( Pposx, Pposy);
-		    (self)->SetTransferMode( graphic_INVERT);
-		    (self)->DrawString( tempString, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+		    (self)->SetTransferMode( graphic::INVERT);
+		    (self)->DrawString( tempString, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 		    *tempString = '\0';
 		}
 		break;
@@ -125,8 +125,8 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 		    --tempString;
 		    Pposx -= fontWidth[(unsigned char)*tempString];
 		    (self)->MoveTo( Pposx, Pposy);
-		    (self)->SetTransferMode( graphic_INVERT);
-		    (self)->DrawString( tempString, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+		    (self)->SetTransferMode( graphic::INVERT);
+		    (self)->DrawString( tempString, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 		    *tempString = '\0';
 		}
 		Pstring4[0] = '\0';
@@ -140,11 +140,11 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 		    tempString[1] = '\0';
 		    (self)->MoveTo( Pposx, Pposy);
 		    Pposx += fontWidth[c];
-		    (self)->DrawString( tempString++, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+		    (self)->DrawString( tempString++, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 		}
 	}
         (self)->FlushGraphics();
-        (self)->SetTransferMode( graphic_BLACK);
+        (self)->SetTransferMode( graphic::BLACK);
     }
 }
 
@@ -157,12 +157,12 @@ void RedrawPrompt(class consoleClass  *self)
     ClearWindow(self);
     (self)->SetFont( EventFont);
     (self)->MoveTo( width >> 1, height / 4);
-    (self)->DrawString( Pstring1, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+    (self)->DrawString( Pstring1, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     (self)->MoveTo( width >> 1, height / 2);
-    (self)->DrawString( Pstring2, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+    (self)->DrawString( Pstring2, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     if (!strcmp(Pstring3,"==>> ")){
 	(self)->MoveTo( 10, (int) (height * 0.75));
-	(self)->DrawString( Pstring3, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+	(self)->DrawString( Pstring3, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 	(self)->FlushGraphics();
 	Pposy = (int) ((self)->GetLogicalHeight() *.75);
 	Pposx = 10 + (fontWidth['='] * 2) + (fontWidth['>'] * 2) + fontWidth[' '];
@@ -172,12 +172,12 @@ void RedrawPrompt(class consoleClass  *self)
 	    for(i = 0; Pstring4[i] != '\0'; i++){
 		Pposx += fontWidth[(unsigned char)Pstring4[i]];
 	    }
-	    (self)->DrawString( Pstring4, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+	    (self)->DrawString( Pstring4, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
 	}
     }
     else{
 	(self)->MoveTo( width >> 1, (int) (height * 0.75));
-	(self)->DrawString( Pstring3, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+	(self)->DrawString( Pstring3, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
     }
 }    
 

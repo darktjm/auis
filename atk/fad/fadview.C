@@ -230,7 +230,7 @@ fadview::Update()
     struct fadvector *vc;
     class fad *cp;
     if(this->removed) return;
-    (this)->SetTransferMode(graphic_INVERT);
+    (this)->SetTransferMode(graphic::INVERT);
     this->needUpdate = FALSE;
     if(this->anobj) { doan(this->anobj); return ;}
     if(this->DoAnimation){ if(!::DoAnimation(this)) return; }
@@ -384,7 +384,7 @@ static boolean DoAnimation(class fadview  *self)
     }
     if(self->f != sf){
 	clearfad(self);
-	/* graphic_SetTransferMode(self,graphic_INVERT); */
+	/* graphic::SetTransferMode(self,graphic::INVERT); */
 	for(vc = sf->v; vc != NULL ; vc = vc->v)
 	    vecdraw(self,vc);
     }
@@ -567,9 +567,9 @@ static void picset(class fadview  *self,int  flag)
 }
 static void clearfad(class fadview  *self)
 {
-    (self)->SetTransferMode(graphic_WHITE);
+    (self)->SetTransferMode(graphic::WHITE);
     (self)->EraseVisualRect();	
-    (self)->SetTransferMode(graphic_INVERT);
+    (self)->SetTransferMode(graphic::INVERT);
     if(self->HasFocus){
 	(self)->DrawRectSize(0,0,(self)->GetLogicalWidth()-1,(self)->GetLogicalHeight()-1);
     }
@@ -959,7 +959,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	return this;
     }
     if(this->mode == WAITMODE) return this;
-    (this)->SetTransferMode(graphic_INVERT);
+    (this)->SetTransferMode(graphic::INVERT);
     switch (action) {
 	case view_LeftDown:
 	    if(cpic->fp != NULL){
@@ -970,7 +970,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 		cpic->fp=(cpic)->setpoint(mousex,mousey,NEW,Cframe);
 		cpic->pltnum = 0;
 		cpic->lp = NULL;
-		/* graphic_SetTransferMode(self,graphic_INVERT); */
+		/* graphic::SetTransferMode(self,graphic::INVERT); */
 	    }
 	    break;
 	case view_LeftUp:
@@ -1025,7 +1025,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	      else {
 		  getlist(this,cpic->fp);
 		  cpic->lp = cpic->fp;
-		  /* graphic_SetTransferMode(self,graphic_INVERT); */
+		  /* graphic::SetTransferMode(self,graphic::INVERT); */
 	      }
 	     break;
 	 case  view_RightUp:
@@ -1187,7 +1187,7 @@ static void vecdraw(class fadview  *self,struct fadvector  *v)
 {
     static char cc;
     class fad *cp = findpic(self);
-    /* graphic_SetTransferMode(self,graphic_INVERT); */
+    /* graphic::SetTransferMode(self,graphic::INVERT); */
     (self)->MoveTo(v->p1->x,v->p1->y);
     if(v->label){
 	(self)->SetFont(cp->labelfont);

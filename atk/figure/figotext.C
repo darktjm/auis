@@ -332,7 +332,7 @@ void figotext::Draw(class figview  *v)
     this->fdesc = fontdesc::Create(fam, style, size);
     if (!this->fdesc) return;
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     (v)->SetForegroundColor( col, 0, 0, 0); 
 
@@ -353,15 +353,15 @@ void figotext::Draw(class figview  *v)
     gray = (v)->ToPixY( (this)->PosY());
     switch (textpos) {
 	case figattr_PosCenter:
-	    grapos = graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
 	case figattr_PosLeft:
-	    grapos = graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
 	case figattr_PosRight:
-	    grapos = graphic_ATRIGHT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::ATRIGHT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
     }
@@ -378,7 +378,7 @@ void figotext::Draw(class figview  *v)
 	if (cxend)
 	    cx = cxend+1;
     } while (cxend);
-    /*figview_DrawString(v, self->text, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM);*/
+    /*figview_DrawString(v, self->text, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM);*/
 
     if (viewclip)
 	(v)->SetClippingRegion( viewclip);
@@ -395,7 +395,7 @@ void figotext::Sketch(class figview  *v)
     y = (v)->ToPixY( this->handlerect.top);
     w = (v)->ToPixW( this->handlerect.width);
     h = (v)->ToPixH( this->handlerect.height);
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 

@@ -54,12 +54,11 @@
  *  The data stream is represented as a collection of data object definitions
  *  and views that refer to those data objects.  Data objects can be included
  *  in a file using the construct:
- *
- *  <pre><code>
+ *  \pcode
  *     \\begindata{<em>datatype</em>, <em>dataID</em>}
  *         <em>&lt;data object data&gt;</em>
  *     \\enddata{<em>datatyp</em>e, <em>dataID</em>}
- *  </code></pre>
+ *  \endpcode
  *
  *  The \c \\begindata, \c \\enddata pair mark the extent of the data
  *  included in a particular data object.  The \e datatype is the type of
@@ -187,11 +186,11 @@ public:
 	 *   encoded and written, or application/andrew-inset, in which case
 	 *   the ATK data stream should be encoded and written.  The output
 	 *   from WriteOtherFormat() should start with a newline, followed by:
-	 *   <pre><code>
+	 *   \pcode
 	 *     --<em>boundary</em>
 	 *     Content-type: <em>mime/type</em>
 	 *     Content-Transfer-Encoding: <em>encoding</em>
-	 *   </code></pre>
+	 *   \endpcode
 	 *   The \e encoding is usually one of \c quoted-printable or
 	 *   \c base64.  This header is followed by another newline and the
 	 *   encoded data.

@@ -166,7 +166,7 @@ void figobj::RecomputeBounds()
 
 void figobj::Draw(class figview  *v) 
 {
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
 }
 
 void figobj::Sketch(class figview  *v) 
@@ -178,7 +178,7 @@ void figobj::Sketch(class figview  *v)
     y = (v)->ToPixY( rec->top);
     w = (v)->ToPixW( rec->width);
     h = (v)->ToPixH( rec->height);
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 
@@ -190,7 +190,7 @@ void figobj::Select(class figview  *v)
     class graphic *BlackPattern;
 
     if (this->pts && this->numpts) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 	BlackPattern = (v)->BlackPattern();
 
 	for (ix=0; ix<this->numpts; ix++) {
@@ -306,7 +306,7 @@ void figobj::DrawAttachments(class figview  *v)
     int typ;
 
     if (this->anyattachmentsactive && this->vas && this->numpts) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 
 	for (ix=0; ix<this->numpts; ix++) 
 	    if (this->vas[ix].on) {

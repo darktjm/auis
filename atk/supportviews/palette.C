@@ -146,7 +146,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     maxheight += 2;
 
     if (height > 0 && width > 0 && items > 0) {
-        (this)->SetTransferMode( graphic_COPY);
+        (this)->SetTransferMode( graphic::COPY);
         switch (this->loc) {
             case palette_LEFT:
                 columns = (items * maxheight + height - 1) / height;
@@ -243,7 +243,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
                 case palette_ICON:
                     (this)->MoveTo( item->x + item->w/2, item->y + item->h/2);
                     (this)->SetFont( item->u.icon.font);
-                    (this)->DrawText( &item->u.icon.ch, 1, graphic_NOMOVEMENT);
+                    (this)->DrawText( &item->u.icon.ch, 1, graphic::NOMOVEMENT);
                     break;
                 case palette_VIEW:
                     item->u.view.wants_update = FALSE;
@@ -253,13 +253,13 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
                 case palette_STRING:
                     (this)->MoveTo( item->x + item->w/2, item->y + item->h/2);
                     (this)->SetFont( item->u.str.font);
-                    (this)->DrawString( item->u.str.str, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+                    (this)->DrawString( item->u.str.str, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
                     break;
             }
             if ((item->selected = item->new_selected)) {
-                (this)->SetTransferMode( graphic_INVERT);
+                (this)->SetTransferMode( graphic::INVERT);
                 (this)->FillRectSize( item->x, item->y, item->w,   item->h, black);
-                (this)->SetTransferMode( graphic_COPY);
+                (this)->SetTransferMode( graphic::COPY);
             }
         }
     }
@@ -278,12 +278,12 @@ void palette::Update()
     class graphic *black;
 
     if (this->needs_full) {
-        (this)->SetTransferMode( graphic_SOURCE);
+        (this)->SetTransferMode( graphic::SOURCE);
         (this)->EraseVisualRect();
         (this)->FullUpdate( view_FullRedraw, 0, 0, (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
     }
     else {
-        (this)->SetTransferMode( graphic_INVERT);
+        (this)->SetTransferMode( graphic::INVERT);
         black = (this)->BlackPattern();
         for (item = this->items; item != NULL; item = item->next) {
             if (item->type == palette_VIEW && item->u.view.wants_update) {

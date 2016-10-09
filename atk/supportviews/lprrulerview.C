@@ -172,7 +172,7 @@ RepaintIcon(class lprrulerview   *self, enum lprrulerview_iconcode  icon, short 
 	struct lprrulerview_icondata *i = &(self->iconloc[(short)icon]);
 	(self)->SetTransferMode( color);
 	(self)->MoveTo( i->x, self->icony);
-	(self)->DrawText( &i->icon, 1, graphic_NOMOVEMENT);
+	(self)->DrawText( &i->icon, 1, graphic::NOMOVEMENT);
 }
 static void
 RepaintPark(class lprrulerview   *self, enum lprrulerview_iconcode  icon, short  color)
@@ -184,14 +184,14 @@ RepaintPark(class lprrulerview   *self, enum lprrulerview_iconcode  icon, short 
 	r.left = i->parkx - (PARKWIDTH>>1);
 	(self)->SetTransferMode( color);
 	switch (color) {
-	    case graphic_COPY:
+	    case graphic::COPY:
 		(self)->FillRect( &r, self->Grey25Pattern);
 		break;
-	    case graphic_WHITE:
+	    case graphic::WHITE:
 		(self)->FillRect( &r, self->WhitePattern);
 		break;
-	    case graphic_INVERT:
-	    case graphic_BLACK:
+	    case graphic::INVERT:
+	    case graphic::BLACK:
 	    default:
 		(self)->FillRect( &r, self->BlackPattern);
 		break;
@@ -265,17 +265,17 @@ CleanUpIconArea(class lprrulerview  *self)
 	for (i = &(self->iconloc[(short)leftIcon]), cnt = 3; cnt--; i++)
 		if (i->parkdirty)
 			RepaintPark(self, (enum lprrulerview_iconcode)(i - self->iconloc), 
-				(i->isBlack) ? graphic_WHITE : graphic_COPY);
+				(i->isBlack) ? graphic::WHITE : graphic::COPY);
 	for (i = &(self->iconloc[(short)leftIcon]), cnt = 3; cnt--; i++)
 		if (i->icondirty) {
 			i->icondirty = FALSE;
-			RepaintIcon(self, (enum lprrulerview_iconcode)(i - self->iconloc), graphic_COPY);
+			RepaintIcon(self, (enum lprrulerview_iconcode)(i - self->iconloc), graphic::COPY);
 		}
 	for (i = &(self->iconloc[(short)leftIcon]), cnt = 3; cnt--; i++)
 		if (i->parkdirty) {
 			i->parkdirty = FALSE;
 			if (i->isBlack)
-				RepaintPark(self, (enum lprrulerview_iconcode)(i - self->iconloc), graphic_INVERT);
+				RepaintPark(self, (enum lprrulerview_iconcode)(i - self->iconloc), graphic::INVERT);
 		}
 	self->iconschanged = FALSE;
 }
@@ -287,7 +287,7 @@ RemoveIcon(class lprrulerview  *self, enum lprrulerview_iconcode  icon)
 	struct lprrulerview_icondata *i;
 	long cnt;
 	short xlo, xhi;
-	RepaintIcon(self, icon, graphic_WHITE);
+	RepaintIcon(self, icon, graphic::WHITE);
 	i = &(self->iconloc[(short)icon]);
 	i->icondirty = TRUE;
 	xlo = i->x - 20;		/*C*/
@@ -375,7 +375,7 @@ DoTicks(class lprrulerview  *self, short  zeroloc , short  left, short  right, s
 			else sprintf(buf, "%d", ordval);	/* no sign if ordval==0 */
 			(self)->MoveTo( tickloc-1, self->topline + 7);	/*C*/
 			(self)->DrawString( buf,
-				graphic_BETWEENLEFTANDRIGHT | graphic_ATTOP);
+				graphic::BETWEENLEFTANDRIGHT | graphic::ATTOP);
 			ordval += tbl->one;
 		}
 		if (++cyclecnt >= cycmax) cyclecnt = 0;
@@ -412,7 +412,7 @@ RedrawRuler(class lprrulerview  *self)
 	PARA.parkx = LEFT.parkx - 2 - PARKWIDTH;
 	RIGHT.parkx = self->rightline + 3 + (PARKWIDTH>>1);
 	
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->FillRect( &r, self->WhitePattern);
 
 	/* draw lprruler pieces */
@@ -446,17 +446,17 @@ RedrawText(class lprrulerview   *self)
 	struct rectangle r;
 	r.top = self->topline, r.left = self->textloc;
 	r.height = RULERHEIGHT, r.width = self->leftline - self->textloc;	
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->FillRect( &r, self->WhitePattern);
 	(self)->SetFont( TextFont);
 	(self)->MoveTo( self->textloc, self->bottomline - 6/*C*/);
 	(self)->DrawString( self->TickTbl->unitstring, 
-				graphic_ATLEFT |  graphic_ATBASELINE);
+				graphic::ATLEFT |  graphic::ATBASELINE);
 
 	/* display icon for changing unit */
 	(self)->SetFont( IconFont);
 	(self)->MoveTo( self->textloc - 12, self->bottomline - 12);		/*C*/
-	(self)->DrawText( "\'", 1, graphic_NOMOVEMENT);
+	(self)->DrawText( "\'", 1, graphic::NOMOVEMENT);
 	self->textchanged = FALSE;
 }
 static void
@@ -467,7 +467,7 @@ RedrawIcons(class lprrulerview   *self)
 	struct rectangle r;
 	r.top = self->topline - ICONHEIGHT - 4/*C*/, r.left = 0;
 	r.height = ICONHEIGHT + 4/*C*/, r.width = self->rightline + PARKWIDTH + 4/*C*/;	
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->FillRect( &r, self->WhitePattern);
 	(self)->SetFont( IconFont);
 	BoundIcon(self, leftIcon, self->leftzero, self->leftline, self->middle);
@@ -658,7 +658,7 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 				char buf[10];
 				r.top = this->topline, r.left = this->textloc;
 				r.height = RULERHEIGHT, r.width = this->leftline - this->textloc;	
-				(this)->SetTransferMode( graphic_COPY);
+				(this)->SetTransferMode( graphic::COPY);
 				(this)->FillRect( &r, this->WhitePattern);
 				if (this->leftline <= x && x <= this->rightline)
 					sprintf(buf, this->TickTbl->fmt, 
@@ -668,7 +668,7 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 				(this)->SetFont( TextFont);
 				(this)->MoveTo( this->textloc, this->bottomline - 6/*C*/);
 				(this)->DrawString( buf, 
-					graphic_ATLEFT |  graphic_ATBASELINE);
+					graphic::ATLEFT |  graphic::ATBASELINE);
 		 	}
 		} /* end "down or move */
 	} /* end "above topline" */

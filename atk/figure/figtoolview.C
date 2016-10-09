@@ -2685,13 +2685,13 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
 	    self->rocky = (self->primaryview)->ToPixY( (o)->GetHandleY( ptref));
 	    self->lastx = (self->primaryview)->ToPixX( x);
 	    self->lasty = (self->primaryview)->ToPixY( y);
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
 	    break;
 	case view_LeftMovement:
 	case view_RightMovement:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
 	    self->lastx = (self->primaryview)->ToPixX( x);
@@ -2701,7 +2701,7 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
 	    break;
 	case view_LeftUp:
 	case view_RightUp:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
 
@@ -2850,7 +2850,7 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 	    self->rocky = y;
 	    self->lastx = 0;
 	    self->lasty = 0;
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    for (ix=0; ix<self->rock; ix++) {
 		tmp = &(self->rectlist[ix]);
 		(self->primaryview)->DrawRectSize( self->lastx+tmp->left, self->lasty+tmp->top, tmp->width, tmp->height);
@@ -2858,7 +2858,7 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 	    break;
 	case view_LeftMovement:
 	case view_RightMovement:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    for (ix=0; ix<self->rock; ix++) {
 		tmp = &(self->rectlist[ix]);
 		(self->primaryview)->DrawRectSize( self->lastx+tmp->left, self->lasty+tmp->top, tmp->width, tmp->height);
@@ -2872,7 +2872,7 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 	    break;
 	case view_LeftUp:
 	case view_RightUp:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    for (ix=0; ix<self->rock; ix++) {
 		tmp = &(self->rectlist[ix]);
 		(self->primaryview)->DrawRectSize( self->lastx+tmp->left, self->lasty+tmp->top, tmp->width, tmp->height);
@@ -2908,12 +2908,12 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 	    self->lasty = (self->primaryview)->ToPixY( y);
 	    self->lastw = 0;
 	    self->lasth = 0;
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    break;
 	case view_LeftMovement:
 	case view_RightMovement:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    /* x, y, w, h in fig coords; self->last* in pix coords */
 	    w = x - self->rockx;
@@ -2938,7 +2938,7 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 	    break;
 	case view_LeftUp:
 	case view_RightUp:
-	    (self->primaryview)->SetTransferMode( graphic_INVERT);
+	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    /* x, y, w, h in fig coords */
 	    w = x - self->rockx;

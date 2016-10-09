@@ -96,9 +96,9 @@ void bpv::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width
     enclosingRect.left = 0;
     enclosingRect.width  = (this)->GetLogicalWidth() - 1 ;
     enclosingRect.height = (this)->GetLogicalHeight() - 1 ;
-    (this)->SetTransferMode(graphic_WHITE);
+    (this)->SetTransferMode(graphic::WHITE);
     (this)->EraseRect(&(enclosingRect));
-    (this)->SetTransferMode(  graphic_COPY );
+    (this)->SetTransferMode(  graphic::COPY );
     (this)->FillRect(&(enclosingRect) ,(this)->GrayPattern(graylevel,16));
 
     if (dobj->haspagenum) {
@@ -113,7 +113,7 @@ void bpv::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width
 	(this)->EraseRect(&(enclosingRect));
 	(this)->SetFont( ClassFontDesc);
 	(this)->MoveTo(32, 5);
-	(this)->DrawString(buf, graphic_ATLEFT|graphic_ATTOP);
+	(this)->DrawString(buf, graphic::ATLEFT|graphic::ATTOP);
     }
 }
 

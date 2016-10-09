@@ -834,7 +834,7 @@ void ltv_private::Invert_Enclosure( class ltv *self )
     IN(Invert_Enclosure);
     if ( EnclosureExposed )
     {
-	(self)->SetTransferMode(  graphic_INVERT );
+	(self)->SetTransferMode(  graphic::INVERT );
 	(self)->DrawRectSize(  EnclosureLeft, EnclosureTop, EnclosureWidth, EnclosureHeight );
 	(self)->DrawRectSize(  EnclosureLeft-1, EnclosureTop-1, EnclosureWidth+2, EnclosureHeight+2 );
 	(self )->FlushGraphics( );
@@ -1281,9 +1281,9 @@ ltv_private::Lighten_Background_Command( class ltv  *self )
 void ltv_private::Lighten_Background( class ltv *self )
 {
     if ( WMWM )
-	(self)->SetTransferMode(  graphic_WHITE );
+	(self)->SetTransferMode(  graphic::WHITE );
     else
-	(self)->SetTransferMode(  graphic_AND );
+	(self)->SetTransferMode(  graphic::AND );
     (self)->FillTrapezoid(  Left, Top, Width,  Left, Bottom-ButtonHeight,Width,
 			  (ZipView)->Define_Graphic( 
 						    (Zip)->Define_Font(  "zipshades16", NULL ), BackgroundLight ) );

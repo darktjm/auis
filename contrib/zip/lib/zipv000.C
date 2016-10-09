@@ -33,7 +33,7 @@ HISTORY
   03/31/88	Created (TCP)
   05/15/89	Improve performance by pre-checking TransferMode (TCP)
 		Also avoid unnecessary SetClippingRect usage
-   08/30/89	Adjust zipview_Condition to use graphic_SOURCE and ~graphic_SOURCE instread of graphic_BLACK and graphic_WHITE (SCG)
+   08/30/89	Adjust zipview_Condition to use graphic::SOURCE and ~graphic::SOURCE instread of graphic::BLACK and graphic::WHITE (SCG)
    08/16/90	Add {Ensure,Normalize}_{Fill,Line}_Attributes methods (SCG)
   09/20/90	Optimize usage of FG/BG Color setting (SCG)
 
@@ -149,7 +149,7 @@ zipview::Ensure_Fill_Attributes( zip_type_figure		 figure )
   const char				*def_bg, *def_fg;
   class zipview *self=this;
 
-  if ( (self )->DisplayClass( ) & graphic_Color )
+  if ( (self )->DisplayClass( ) & graphic::Color )
   {
       def_fg = def_bg = NULL;
       graphic::GetDefaultColors(&def_fg, &def_bg);
@@ -168,7 +168,7 @@ zipview::Normalize_Fill_Attributes( )
   const char				*def_bg, *def_fg;
   class zipview *self=this;
 
-  if ( (self )->DisplayClass( ) & graphic_Color )
+  if ( (self )->DisplayClass( ) & graphic::Color )
     {
       def_fg = def_bg = NULL;
       graphic::GetDefaultColors(&def_fg, &def_bg);
@@ -194,7 +194,7 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
     {
     status = zip_ok;
     (self)->SetLineWidth(  lwidth );
-    if ( (self )->DisplayClass( ) & graphic_Color )
+    if ( (self )->DisplayClass( ) & graphic::Color )
     {
 	def_fg = def_bg = NULL;
 	graphic::GetDefaultColors(&def_fg, &def_bg);
@@ -207,15 +207,15 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
     else
     {
       (self)->GetLineDash( NULL, NULL, &dashtype );
-      if ( dashtype != graphic_LineSolid )
-        (self)->SetLineDash(  NULL, 0, graphic_LineSolid );
+      if ( dashtype != graphic::LineSolid )
+        (self)->SetLineDash(  NULL, 0, graphic::LineSolid );
     }
     if (( value = (this->data_object)->Contextual_Figure_Line_Cap(  figure )) != -1 )
       (self)->SetLineCap(  value );
-    else (self)->SetLineCap(  graphic_CapButt );
+    else (self)->SetLineCap(  graphic::CapButt );
     if (( value = (this->data_object)->Contextual_Figure_Line_Join(  figure )) != -1 )
       (self)->SetLineJoin(  value );
-    else (self)->SetLineJoin(  graphic_JoinMiter );
+    else (self)->SetLineJoin(  graphic::JoinMiter );
     }
     return status;
   }
@@ -228,14 +228,14 @@ zipview::Normalize_Line_Attributes( )
 
   IN( zipview::Normalize_Line_Attributes )
   (self)->SetLineWidth(  1 );
-  if ( (self )->DisplayClass( ) & graphic_Color ) {
+  if ( (self )->DisplayClass( ) & graphic::Color ) {
       def_fg = def_bg = NULL;
       graphic::GetDefaultColors(&def_fg, &def_bg);
       (self)->SetForegroundColor(  def_fg, 0, 0, 0);
   }
-  (self)->SetLineDash(  NULL, 0, graphic_LineSolid );
-  (self)->SetLineCap(  graphic_CapButt );
-  (self)->SetLineJoin(  graphic_JoinMiter );
+  (self)->SetLineDash(  NULL, 0, graphic::LineSolid );
+  (self)->SetLineCap(  graphic::CapButt );
+  (self)->SetLineJoin(  graphic::JoinMiter );
   OUT( zipview::Normalize_Line_Attributes )
   }
 
@@ -255,38 +255,38 @@ zipview::Condition( zip_type_pane		   pane, zip_type_figure		   figure, int				 
 	DEBUG(DRAW);
         if ( pane->zip_pane_state.zip_pane_state_inverted )
 	  {
-	  if ( (self )->GetTransferMode( ) != ~graphic_SOURCE )
-            (self)->SetTransferMode(  ~graphic_SOURCE );
+	  if ( (self )->GetTransferMode( ) != ~graphic::SOURCE )
+            (self)->SetTransferMode(  ~graphic::SOURCE );
 	  }
 	else
         if ( pane->zip_pane_state.zip_pane_state_paint_inverted )
 	  {
-	  if ( (self )->GetTransferMode( ) != graphic_INVERT )
-	    (self)->SetTransferMode(  graphic_INVERT );
+	  if ( (self )->GetTransferMode( ) != graphic::INVERT )
+	    (self)->SetTransferMode(  graphic::INVERT );
 	  }
 	else
         if ( pane->zip_pane_state.zip_pane_state_paint_copy )
 	  {
-	  if ( (self )->GetTransferMode( ) != graphic_COPY )
-	    (self)->SetTransferMode(  graphic_COPY );
+	  if ( (self )->GetTransferMode( ) != graphic::COPY )
+	    (self)->SetTransferMode(  graphic::COPY );
 	  }
 	else
 	  {
-  	  if ( (self )->GetTransferMode( ) != graphic_SOURCE )
-	    (self)->SetTransferMode(  graphic_SOURCE );
+  	  if ( (self )->GetTransferMode( ) != graphic::SOURCE )
+	    (self)->SetTransferMode(  graphic::SOURCE );
 	  }
 	break;
       case  zip_clear:
 	DEBUG(CLEAR);
         if ( ! pane->zip_pane_state.zip_pane_state_inverted )
 	  {
-	  if ( (self )->GetTransferMode( ) != graphic_WHITE )
-            (self)->SetTransferMode(  graphic_WHITE );
+	  if ( (self )->GetTransferMode( ) != graphic::WHITE )
+            (self)->SetTransferMode(  graphic::WHITE );
 	  }
 	else
 	  {
-	  if ( (self )->GetTransferMode( ) != graphic_BLACK )
-	    (self)->SetTransferMode(  graphic_BLACK );
+	  if ( (self )->GetTransferMode( ) != graphic::BLACK )
+	    (self)->SetTransferMode(  graphic::BLACK );
 	  }
 	break;
       }

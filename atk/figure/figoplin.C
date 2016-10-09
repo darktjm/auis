@@ -331,12 +331,12 @@ void figoplin::Draw(class figview  *v)
     long ix, shad, dash, lw, asize, ashape, apos;
     const char *col;
 
-    (v)->SetTransferMode(graphic_COPY);
+    (v)->SetTransferMode(graphic::COPY);
 
     col = ((this)->GetVAttributes())->GetColor((this)->GetIVAttributes());
     (v)->SetForegroundColor(col, 0, 0, 0); 
 
-    (v)->SetLineJoin(graphic_JoinBevel);
+    (v)->SetLineJoin(graphic::JoinBevel);
 
     lw = ((this)->GetVAttributes())->GetLineWidth((this)->GetIVAttributes());
     lw = (v)->ToPixW(lw*figview_FigUPerPix);
@@ -347,7 +347,7 @@ void figoplin::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic_LineOnOffDash);
+	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
     }
 
     basex = this->pts[0].x;
@@ -425,8 +425,8 @@ void figoplin::Draw(class figview  *v)
     if (lw != 1)
 	(v)->SetLineWidth(1);
     if (dash!=figattr_LineSolid)
-	(v)->SetLineDash(NULL, 0, graphic_LineSolid);
-    (v)->SetLineJoin(graphic_JoinMiter);
+	(v)->SetLineDash(NULL, 0, graphic::LineSolid);
+    (v)->SetLineJoin(graphic::JoinMiter);
 }
 
 void figoplin::Sketch(class figview  *v) 
@@ -441,7 +441,7 @@ void figoplin::Sketch(class figview  *v)
     basex = this->pts[0].x;
     basey = this->pts[0].y;
 
-    (v)->SetTransferMode(graphic_INVERT);
+    (v)->SetTransferMode(graphic::INVERT);
 
     (v)->MoveTo((v)->ToPixX(basex), (v)->ToPixY(basey));
     for (ix=1; ix<this->numpts; ix++) {
@@ -461,7 +461,7 @@ static void PartialSketch(class figoplin  *self, class figview  *v, long  ptref)
     basex = self->pts[0].x;
     basey = self->pts[0].y;
 
-    (v)->SetTransferMode(graphic_INVERT);
+    (v)->SetTransferMode(graphic::INVERT);
 
     if (ptref==0 || ptref==1) {
 	(v)->MoveTo((v)->ToPixX(basex), (v)->ToPixY(basey));
@@ -503,7 +503,7 @@ void figoplin::Select(class figview  *v)
     class graphic *BlackPattern;
 
     if ((this)->GetHandles() && (this)->GetNumHandles()) {
-	(v)->SetTransferMode(graphic_INVERT);
+	(v)->SetTransferMode(graphic::INVERT);
 	BlackPattern = (v)->BlackPattern(); /* ### should cache this! */
 
 	for (ix=4; ix<(this)->GetNumHandles(); ix++) {
@@ -588,7 +588,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		    this->lastx = this->rockx;
 		    this->lasty = this->rocky;
 		    (this)->RecomputeBounds();
-		    (v)->SetTransferMode(graphic_INVERT);
+		    (v)->SetTransferMode(graphic::INVERT);
 		    (v)->MoveTo(this->rockx, this->rocky);
 		    (v)->DrawLineTo(this->lastx, this->lasty);
 		}
@@ -604,7 +604,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		    }
 		    this->lastx = (v)->ToPixX(x);
 		    this->lasty = (v)->ToPixY(y);
-		    (v)->SetTransferMode(graphic_INVERT);
+		    (v)->SetTransferMode(graphic::INVERT);
 		    (v)->MoveTo(this->rockx, this->rocky);
 		    (v)->DrawLineTo(this->lastx, this->lasty);
 		}
@@ -620,7 +620,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		(this)->Sketch(v);
 	    }
 	    else {
-		(v)->SetTransferMode(graphic_INVERT);
+		(v)->SetTransferMode(graphic::INVERT);
 		(v)->MoveTo(this->rockx, this->rocky);
 		(v)->DrawLineTo(this->lastx, this->lasty);
 		this->lastx = (v)->ToPixX(x);
@@ -666,7 +666,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		    && (apx > -figview_MouseHysteresis)
 		    && (apy > -figview_MouseHysteresis)) {
 		    /* cursor didn't move far enough; we have a point click. */
-		    (v)->SetTransferMode(graphic_INVERT);
+		    (v)->SetTransferMode(graphic::INVERT);
 		    (v)->MoveTo(this->rockx, this->rocky);
 		    (v)->DrawLineTo(this->lastx, this->lasty);
 		    (v)->MoveTo(this->rockx-1, this->rocky-1);

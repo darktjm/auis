@@ -83,7 +83,7 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     h = (self)->GetLogicalHeight() - 1;
 
     /* Draw a frame */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->DrawRectSize( x, y, w, h);
 
     if (self->titlefont == (class fontdesc *)0)
@@ -104,12 +104,12 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     (self)->FillRectSize( x+1, y+1, w-1, handle_height-1, (self)->GrayPattern(4,16));
 
     /* draw the title */
-    (self)->SetTransferMode( graphic_WHITE);
-    (self)->FillRectSize( tx, ty, tw, th, graphic_WHITE);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::WHITE);
+    (self)->FillRectSize( tx, ty, tw, th, graphic::WHITE);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->SetFont( self->titlefont);
     (self)->MoveTo( x + w / 2, y + handle_height / 2);
-    (self)->DrawString( title, (graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM));
+    (self)->DrawString( title, (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM));
 
     /* cacluate place for children */
     cx = x + 1; /* one pixel frame */
@@ -171,9 +171,9 @@ DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  a
     y = (self)->GetLogicalTop();
 
     (self)->SetFont( self->iconfont);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( x + iconx, y + icony);
-    (self)->DrawText( &(self->iconchar), 1, graphic_NOMOVEMENT);
+    (self)->DrawText( &(self->iconchar), 1, graphic::NOMOVEMENT);
 } 
 
 
@@ -363,7 +363,7 @@ iconview::Update()
      {
     struct rectangle r;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     (this)->EraseVisualRect();
     (this)->GetLogicalBounds( &r);
     (this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);

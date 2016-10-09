@@ -112,7 +112,7 @@ main( int	   argc, char   **argv )
 	lookzview_StaticEntry;
 */
 	environ_StaticEntry;
-	graphic_StaticEntry;
+	graphic::StaticEntry;
 	fontdesc_StaticEntry;
 	cursor_StaticEntry;
 	dataobject_StaticEntry;

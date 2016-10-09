@@ -188,7 +188,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
-			vPtr->SetTransferMode(graphic_XOR);
+			vPtr->SetTransferMode(graphic::XOR);
 			reset=TRUE;
 		    }
 		    vPtr->SetBackgroundColor(&p->color);
@@ -271,7 +271,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
-			vPtr->SetTransferMode(graphic_XOR);
+			vPtr->SetTransferMode(graphic::XOR);
 			reset=TRUE;
 		    }
 		    vPtr->SetForegroundColor(&p->bgcolor);

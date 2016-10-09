@@ -219,8 +219,8 @@ void pagev::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  
 	(this)->MoveTo( (Rect.left + Rect.width) / 2,
 			    (Rect.top + Rect.height) / 2);
 	(this)->DrawString( "<No objects>",
-	    graphic_BETWEENLEFTANDRIGHT
-	    | graphic_BETWEENTOPANDBASELINE);
+	    graphic::BETWEENLEFTANDRIGHT
+	    | graphic::BETWEENTOPANDBASELINE);
 	return;
     }
     (this->NowPlaying->v)->InsertView( this, &Rect);

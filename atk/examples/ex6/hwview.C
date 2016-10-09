@@ -88,7 +88,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
 	this->y = this->newY;
     }
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if (this->blackOnWhite)  {
 	(this)->FillRect( &myVisualRect, (this)->WhitePattern());
@@ -97,16 +97,16 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
 	(this)->FillRect( &myVisualRect, (this)->BlackPattern());
     }
 
-    (this)->SetTransferMode( graphic_INVERT);
+    (this)->SetTransferMode( graphic::INVERT);
 
     (this)->MoveTo( this->x - this->frameX, this->y - this->frameY);
-    (this)->DrawString("hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+    (this)->DrawString("hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 }
 
 
 void helloworldview::Update()
 {    
-    /* TransferMode is graphic_INVERT from the last FullUpdate */
+    /* TransferMode is graphic::INVERT from the last FullUpdate */
 
     if (this->newBlackOnWhite != this->blackOnWhite)  {
 	struct rectangle vr;
@@ -118,7 +118,7 @@ void helloworldview::Update()
 
     if (this->newX != this->x || this->frameX != this->newFrameX || this->newY != this->y || this->frameY != this->newFrameY) {
 	(this)->MoveTo( this->x - this->frameX, this->y - this->frameY);
-	(this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+	(this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 	this->x = this->newX;
 	this->y = this->newY;
@@ -126,7 +126,7 @@ void helloworldview::Update()
 	this->frameY = this->newFrameY;
 
 	(this)->MoveTo( this->x - this->frameX, this->y - this->frameY);
-	(this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+	(this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
     }
 }
 

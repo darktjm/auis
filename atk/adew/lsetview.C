@@ -434,14 +434,14 @@ void lsetview::Update()
 	return;
     }
     if(this->HasFocus){
-        (this)->SetTransferMode(graphic_BLACK);
+        (this)->SetTransferMode(graphic::BLACK);
     }
     else
-        (this)->SetTransferMode(graphic_WHITE);
+        (this)->SetTransferMode(graphic::WHITE);
     struct rectangle vb;
     (this)->GetVisualBounds(&vb);
     (this)->FillRect(&vb, (this)->WhitePattern());
-    (this)->SetTransferMode(graphic_INVERT);
+    (this)->SetTransferMode(graphic::INVERT);
    if(!(this->cursorp)->IsPosted()){
        struct rectangle tr;
        (this)->GetVisualBounds(&tr);

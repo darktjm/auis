@@ -394,7 +394,7 @@ DrawRubberBox(class layoutview  *self)
     short savetransfermode;
 
     savetransfermode = (self)->GetTransferMode();
-    (self)->SetTransferMode( graphic_INVERT);
+    (self)->SetTransferMode( graphic::INVERT);
 
     (self)->DrawRectSize( self->rubberleft - 1, self->rubbertop - 1, self->rubberwidth + 1, self->rubberheight + 1);
  
@@ -551,7 +551,7 @@ layoutview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  le
     }
     /* perform the update */
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     ::Update(this, how, &cliprect, TRUE);
     if (how == view_FullRedraw)
 	this->lastUpdate = (getLayout(this))->GetModified();

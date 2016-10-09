@@ -66,7 +66,7 @@ void figorrec::Draw(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
 
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     (v)->SetForegroundColor( col, 0, 0, 0); 
@@ -87,7 +87,7 @@ void figorrec::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic_LineOnOffDash);
+	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
     }
 
     (v)->DrawRRectSize( x, y, w, h, corn, corn); 
@@ -96,7 +96,7 @@ void figorrec::Draw(class figview  *v)
 	(v)->SetLineWidth( 1);
 
     if (dash!=figattr_LineSolid)
-	(v)->SetLineDash(NULL, 0, graphic_LineSolid);
+	(v)->SetLineDash(NULL, 0, graphic::LineSolid);
 }
 
 void figorrec::Sketch(class figview  *v) 
@@ -124,7 +124,7 @@ void figorrec::Sketch(class figview  *v)
     corn = ((this)->GetVAttributes())->GetRRectCorner( (this)->GetIVAttributes());
     corn = (v)->ToPixW( corn*figview_FigUPerPix);
 
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRRectSize( x, y, w, h, corn, corn); 
     /*figview_DrawRectSize(v, x, y, w, h);  */
 }

@@ -120,7 +120,7 @@ void figoins::Draw(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
     (v)->SetForegroundColor( "black", 0, 0, 0); 
     if (this->dobj) {
 	// (v)->DrawRectSize( x-1, y-1, w+1, h+1); 

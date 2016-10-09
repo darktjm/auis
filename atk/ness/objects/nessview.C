@@ -1315,7 +1315,7 @@ LEAVE(nessview::PostKeyState);
 Invert(class nessview  *self) {
 	struct rectangle r;
 
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	(self)->GetVisualBounds( &r);
 	(self)->FillRect( &r, (self)->BlackPattern());
 }

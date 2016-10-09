@@ -478,7 +478,7 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 
     /* XXX need to deal with ras->options */
 
-    (self)->SetTransferMode( graphic_WHITE);
+    (self)->SetTransferMode( graphic::WHITE);
     /* There must have been some reason to special case pan mode when embedded but I (pasieka) can not remember why.  Maybe someone will point out a bug.
 	if (self->embedded && (Pan(self) || type == view_FullRedraw)
 	    ) {
@@ -498,7 +498,7 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
     }
 
     /* XXX Is a TransferMode needed with WritePixImage ??? */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     if (width > 0  &&  height > 0) {
 	class graphic *G = (self)->GetDrawable();
 	(G)->WritePixImage( left, top,
@@ -513,13 +513,13 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
     if (RegionSelect(self) || (Tool(self) && (self->toolset)->WantSelectionHighlighted()))
 	rasterview_CorrectHighlight(self);
     if (Pan(self)) {
-	rasterview_DrawPanHighlight(self, graphic_BLACK); }
+	rasterview_DrawPanHighlight(self, graphic::BLACK); }
 
     if (self->embedded) {
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, graphic_WHITE);
+				       graphic::BLACK, graphic::WHITE);
     }
 
     rectangle_EmptyRect(&self->PixChanged);
@@ -1495,12 +1495,12 @@ void rasterview_ViewHideHighlight(class rasterview  *self)
 	    rectangle_GetRectSize(&self->ViewSelection, &vsl, &vst, &vsw, &vsh); }
 
 	/* we have to do white first, because writepiximage is bogus (because defined transfer modes are bogus). Draw one white line overlapping the black border */
-	DrawHighlight(self, G, CS, graphic_WHITE, -1);
+	DrawHighlight(self, G, CS, graphic::WHITE, -1);
 
 	DEBUG(("CurSel: (%ld,%ld,%ld,%ld)\n", l, t, w, h));
 	DEBUG(("VSel: (%ld,%ld,%ld,%ld)\n", vsl, vst, vsw, vsh));
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 
 	/* repair left edge */
 	leftThick =  (l-vsl <= 1) ? l - vsl : 2;
@@ -1570,7 +1570,7 @@ void rasterview_CorrectHighlight(class rasterview  *self)
 	/* There is no current selection.  This happens when there is no raster.  To show the user where we are, draw a rect.  Use Visual Bounds. */
 	struct rectangle VB;
 	(self)->GetVisualBounds( &VB);
-	(self)->SetTransferMode( graphic_BLACK);
+	(self)->SetTransferMode( graphic::BLACK);
 	SetWidthRect(&VB, rectangle_Width(&VB)-1);
 	SetHeightRect(&VB, rectangle_Height(&VB)-1);
 	(G)->DrawRect( &VB);
@@ -1595,7 +1595,7 @@ void rasterview_CorrectHighlight(class rasterview  *self)
 		rectangle_GetRectSize(&self->DesiredSelection, &l, &t, &w, &h);
 		l -= self->Xoff;  /* convert to screen coords */
 		t -= self->Yoff;
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		(self)->FillRectSize( l-2, t-2, w+4, 2, self->GreyPattern);
 		(self)->FillRectSize( l-2, t+h, w+4, 2, self->GreyPattern);
 		(self)->FillRectSize( l-2, t, 2, h, self->GreyPattern);
@@ -1620,7 +1620,7 @@ void rasterview_DrawPanHighlight(class rasterview  *self, short  g)
     class graphic *G = (self)->GetDrawable();
 
     DEBUG(("Drawing Pan Highlight\n"));
-    if (g == graphic_BLACK) {
+    if (g == graphic::BLACK) {
 	if (self->DisplayBoxHidden) {
 	    struct rectangle PH;
 	    CalculatePanHighlight(self, &PH);
@@ -1645,7 +1645,7 @@ void rasterview_DrawPanHighlight(class rasterview  *self, short  g)
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, -1); }
+				       graphic::BLACK, -1); }
 }
 
 /* Draw a Target across the entire Visual Bounds less a BORDER all around. Target is three pixels wide: a black line surrounded by two white lines.
@@ -1661,7 +1661,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
     w = rectangle_Width(&VB);
     h = rectangle_Height(&VB);
 
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( x, BORDER);
     (self)->DrawLineTo( x, h);
     (self)->MoveTo( BORDER, y);
@@ -1680,7 +1680,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
 	r = l + w;
 	b = t + h;
 	DEBUG(("White Target: (%ld,%ld,%ld,%ld)\n", l, t, w, h));
-	(self)->SetTransferMode( graphic_WHITE);
+	(self)->SetTransferMode( graphic::WHITE);
 	(self)->MoveTo( x+1, t);
 	(self)->DrawLineTo( x+1, y-1);
 	(self)->DrawLineTo( r, y-1);
@@ -1697,7 +1697,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
     }
 
     /* Just in case any of the above white lines or the preceeding Hide overlapped the Start. */
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( self->StartPanX, BORDER);
     (self)->DrawLineTo( self->StartPanX, h);
     (self)->MoveTo( BORDER, self->StartPanY);
@@ -1722,12 +1722,12 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
 
     (self)->GetVisualBounds( &VB);
     InsetRect(&VB, BORDER, BORDER);
-    (self)->SetTransferMode( graphic_WHITE);
+    (self)->SetTransferMode( graphic::WHITE);
     (self)->MoveTo( x, BORDER);
     (self)->DrawLineTo( x, rectangle_Height(&VB));
     (self)->MoveTo( BORDER, y);
     (self)->DrawLineTo( rectangle_Width(&VB), y);
-    rasterview_DrawPanHighlight(self, graphic_BLACK);
+    rasterview_DrawPanHighlight(self, graphic::BLACK);
 
     if (FullSize(self)) {
 	VS = self->ViewSelection;
@@ -1750,7 +1750,7 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
     DEBUG(("Hide Area: (%ld,%ld,%ld,%ld) Scl:(%ld,%ld) \n",
 	    vsl, vst, vsw, vsh, self->Xscroll, self->Yscroll));
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     if (x+1 >= vsl && x-1 <= vsr) {
 	/* Repair Vertical strip */
@@ -1770,7 +1770,7 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
 	ClipAndWritePixImage(clipw, cliph, G, vsl, t, pix,
 			     vsl+self->Xoff, t+self->Yoff, vsw, 3);
     }
-    rasterview_DrawPanHighlight(self, graphic_BLACK);
+    rasterview_DrawPanHighlight(self, graphic::BLACK);
 
     if (! self->DisplayBoxHidden && IsNotEmptyRect(&self->DisplayBox)
 	 && ((x-1 <= rectangle_Left(&self->DisplayBox)-2*BORDER
@@ -1819,7 +1819,7 @@ static void ContinuePanning(class rasterview  *self, long  x , long  y)
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, -1); }
+				       graphic::BLACK, -1); }
 }
 
 static void ClipScroll(class rasterview  *self)
@@ -1915,11 +1915,11 @@ static void SetPixel(class rasterview  *self, long  x , long  y, boolean  bit)
 	rasterview_SetPixelBehindDisplayBox(self, self->Expansion, x, y, bit);
     else {
 	/* The following line does not work in X windows currently.
-	graphic_SetBitAtLoc(rasterview_GetDrawable(self),
+	graphic::SetBitAtLoc(rasterview_GetDrawable(self),
 			    x - self->Xoff, y - self->Yoff, bit); */
 	struct rectangle sub;
 	rectangle_SetRectSize(&sub, x - self->Xoff, y - self->Yoff, 1, 1);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->FillRect( &sub, ((bit) ? self->BlackPattern : self->WhitePattern));
 	((ras)->GetPix())->SetPixel( x, y, ((bit) ? 1 : 0));
     }

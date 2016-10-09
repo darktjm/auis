@@ -197,7 +197,7 @@ long Draw( class ziporang *self, zip_type_figure  figure, zip_type_pane  pane, l
       else
       if ( action == zip_clear )
 	{
-	(self->view_object)->FillRRectSize(  left, top, width, height, radius, radius, graphic_WHITE );
+	(self->view_object)->FillRRectSize(  left, top, width, height, radius, radius, graphic::WHITE );
 	}
     }
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )

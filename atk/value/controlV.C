@@ -125,7 +125,7 @@ void controlV::LookupParameters()
       this->function = "start";
 
     if(bv->mono == -10)
-	bv->mono = ((bv)->DisplayClass() & graphic_Monochrome);
+	bv->mono = ((bv)->DisplayClass() & graphic::Monochrome);
 
     if(!bv->mono){
 

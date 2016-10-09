@@ -55,7 +55,7 @@ static void RedrawView(class fontsample  *self)
 
     (self)->SetFont( fdesc); 
     (self)->MoveTo( x+w/2, y+h/2);
-    (self)->DrawString( self->teststring, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM);
+    (self)->DrawString( self->teststring, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM);
 }
 
 void fontsample::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)

@@ -1184,26 +1184,26 @@ classes defined by X11, plus additional symbols defined by the graphic
 class:
 
 
-\typewriter{\indent{graphic_Monochrome
+\typewriter{\indent{graphic::Monochrome
 
-graphic_Color
+graphic::Color
 
-graphic_PseudoColor
+graphic::PseudoColor
 
-graphic_GrayScale
+graphic::GrayScale
 
-graphic_DirectColor
+graphic::DirectColor
 
-graphic_TrueColor
+graphic::TrueColor
 
-graphic_StaticColor
+graphic::StaticColor
 
-graphic_StaticGray}}
+graphic::StaticGray}}
 
 
-All color displays will have \typewriter{graphic_Color}  or'ed in with the 
+All color displays will have \typewriter{graphic::Color}  or'ed in with the 
 appropriate display class symbol. StaticGray displays with a colormap of 
-size 2 will have \typewriter{graphic_Monochrome} or'ed in.
+size 2 will have \typewriter{graphic::Monochrome} or'ed in.
 
 
 \type{void} \class{view}::\memberfunction{DrawArc}(\type{struct rectangle 
@@ -1783,8 +1783,8 @@ $endatt
 Draws the characters in the nul-terminated \argument{String} in the current 
 font at the current point.  The spacial relationship between the string 
 drawn and the current position is specified by \argument{Operation}.  If 
-the value of \argument{Operation} is 0, \constant{graphic_ATBASELINE} and 
-\constant{graphic_ATLEFT} will be used as defaults.
+the value of \argument{Operation} is 0, \constant{graphic::ATBASELINE} and 
+\constant{graphic::ATLEFT} will be used as defaults.
 
 
 \memberfunction{DrawText} operates identically to 
@@ -1800,15 +1800,15 @@ options are: \
 
 (X, and Y) denote the current X and Y point set in the view and graphic.
 
-\constant{\constant{graphic_NOMOVEMENT}}  -- the origin of the string will 
+\constant{\constant{graphic::NOMOVEMENT}}  -- the origin of the string will 
 be at X.
 
-\constant{graphic_ATRIGHT}  --  the rightmost part of the string will be at 
+\constant{graphic::ATRIGHT}  --  the rightmost part of the string will be at 
 X.
 
-\constant{graphic_ATLEFT}  --  the leftmost part of the string will be at X.
+\constant{graphic::ATLEFT}  --  the leftmost part of the string will be at X.
 
-\constant{graphic_BETWEENLEFTANDRIGHT}  --  the center of the string will 
+\constant{graphic::BETWEENLEFTANDRIGHT}  --  the center of the string will 
 be at X.
 
 
@@ -1816,23 +1816,23 @@ The vertical alignment options are: \
 
 
 
-\constant{graphic_NOMOVEMENT}  --  the origin of the string will be at Y.
+\constant{graphic::NOMOVEMENT}  --  the origin of the string will be at Y.
 
-\constant{graphic_ATTOP}  --  the topmost part of the string will be at Y.
+\constant{graphic::ATTOP}  --  the topmost part of the string will be at Y.
 
-\constant{graphic_ATBOTTOM}  --  the bottommost part of the string, 
+\constant{graphic::ATBOTTOM}  --  the bottommost part of the string, 
 including any descenders, will be at Y.
 
-\constant{graphic_ATBASELINE}  --  the baseline of the string will be at Y.
+\constant{graphic::ATBASELINE}  --  the baseline of the string will be at Y.
 
-\constant{graphic_BETWEENTOPANDBASELINE}  --  the center point of the 
+\constant{graphic::BETWEENTOPANDBASELINE}  --  the center point of the 
 string will be at Y.  The center is calculated from the topmost part of the 
 string to the bottomost part, which will include descenders.
 
-\constant{graphic_BETWEENTOPANDBOTTOM}  --  the center of the string will 
+\constant{graphic::BETWEENTOPANDBOTTOM}  --  the center of the string will 
 be at Y.  The center is calculated from the topmost part of the string to 
 the baseline of the string.  No account is taken of descenders. This is 
-likely to look better than \constant{graphic_BETWEENTOPANDBASELINE} in most 
+likely to look better than \constant{graphic::BETWEENTOPANDBASELINE} in most 
 cases.
 
 
@@ -2539,21 +2539,21 @@ drawn (under X11). The \paramname{\argument{NewLineCap}} argument can be
 any of the following symbols:
 
 
-\constant{graphic_CapButt} -- The line is square at the endpoint 
+\constant{graphic::CapButt} -- The line is square at the endpoint 
 (perpendicular to the slope of the line) with no projection beyond.
 
-\constant{graphic_CapNotLast} -- Same as graphic_CapButt, except for a line 
+\constant{graphic::CapNotLast} -- Same as graphic::CapButt, except for a line 
 width of zero, the final endpoint is not drawn.
 
-\constant{graphic_CapRound} -- The line has a circular arc with the 
+\constant{graphic::CapRound} -- The line has a circular arc with the 
 diameter equal to the line width, centered on the endpoint.
 
-\constant{graphic_CapProjecting} -- The line is square at the end, but the 
+\constant{graphic::CapProjecting} -- The line is square at the end, but the 
 path continues beyond the endpoint for a distance equal to half the line 
 width.
 
 
-The default line cap is \constant{graphic_CapButt}.
+The default line cap is \constant{graphic::CapButt}.
 
  \
 
@@ -2573,12 +2573,12 @@ drawing operation. The \argument{dashType} argument can be any of the
 following symbols:
 
 
-\constant{graphic_LineSolid} -- Solid, non-dashed lines.
+\constant{graphic::LineSolid} -- Solid, non-dashed lines.
 
-\constant{graphic_LineDoubleDash} -- Even and odd elements of the 
+\constant{graphic::LineDoubleDash} -- Even and odd elements of the 
 dashPattern are drawn in the foreground and background colors, respectively.
 
-\constant{graphic_LineOnOffDash}\typewriter{ }-- Only the even elements of 
+\constant{graphic::LineOnOffDash}\typewriter{ }-- Only the even elements of 
 the \italic{dashPattern} are drawn.
 
 
@@ -2595,18 +2595,18 @@ lines (under X11). The \argument{NewLineJoin} argument can be any of the
 following symbols:
 
 
-\constant{graphic_JoinMiter} -- The outer edges of two lines extend to meet 
+\constant{graphic::JoinMiter} -- The outer edges of two lines extend to meet 
 at an angle. If the angle is less than 11 degrees, then a 
-\constant{graphic_JoinBevel} style join is used instead.
+\constant{graphic::JoinBevel} style join is used instead.
 
-\constant{graphic_JoinRound} -- The corner is a circular arc with the 
+\constant{graphic::JoinRound} -- The corner is a circular arc with the 
 diameter equal to the line width, centered on the joinpoint.
 
-\constant{graphic_JoinBevel} -- The corner has \constant{graphic_CapButt} 
+\constant{graphic::JoinBevel} -- The corner has \constant{graphic::CapButt} 
 style endpoints, with the triangular notch filled.
 
 
-The default line join is \constant{graphic_JoinMiter}.
+The default line join is \constant{graphic::JoinMiter}.
 
  \
 
@@ -2654,31 +2654,31 @@ source element, S, and each destination element, D, should combine to
 produce the result.  The source and destination each have four elements, so 
 there are sixteen possible ways to combine them. You can construct the 
 transfer mode by forming boolean combinations from the graphic constants 
-\constant{graphic_SOURCE} and \constant{graphic_DESTINATION} directly.  For 
+\constant{graphic::SOURCE} and \constant{graphic::DESTINATION} directly.  For 
 convenience, the following common combinations have been defined as well: \
 
 
 
-\constant{graphic_COPY}  --  The bit values are from the source
+\constant{graphic::COPY}  --  The bit values are from the source
 
-\constant{graphic_OR}  -- The bit values result from OR-ing the source and 
+\constant{graphic::OR}  -- The bit values result from OR-ing the source and 
 the destination
 
-\constant{graphic_XOR}  -- The bit values result from an exclusive or of 
+\constant{graphic::XOR}  -- The bit values result from an exclusive or of 
 the source and the destination
 
-\constant{graphic_AND}  -- The bit values result from an AND-ing the source 
+\constant{graphic::AND}  -- The bit values result from an AND-ing the source 
 and destination
 
-\constant{graphic_WHITE}  -- The bit values are the foreground.
+\constant{graphic::WHITE}  -- The bit values are the foreground.
 
-\constant{graphic_BLACK}  -- The bit values are the background.
+\constant{graphic::BLACK}  -- The bit values are the background.
 
-\constant{graphic_INVERT}  -- The bit values are the opposite of the 
+\constant{graphic::INVERT}  -- The bit values are the opposite of the 
 destination (if foreground, background; if background, foreground)
 
 
-The default is \constant{graphic_COPY}. \
+The default is \constant{graphic::COPY}. \
 
 
 

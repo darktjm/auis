@@ -172,8 +172,8 @@ static void DrawMe(class flexview  *self)
     (self)->MoveTo( (r.left + r.width) / 2,
 			 (r.top + r.height) / 2);
     (self)->DrawString( "<No objects>",
-	graphic_BETWEENLEFTANDRIGHT
-	| graphic_BETWEENTOPANDBASELINE);
+	graphic::BETWEENLEFTANDRIGHT
+	| graphic::BETWEENTOPANDBASELINE);
 }
 
 class view *flexview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  numberOfClicks)

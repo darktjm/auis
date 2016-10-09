@@ -58,7 +58,7 @@ HISTORY
 		 This bug caused treev graphics ops to be done even when the treev was not
 		 in the viewTree; (GW Keim)
   07/25/89	Remove arg from im_ForceUpdate (TCP)
-  07/26/89	Use graphic_COPY instead of graphic_OR for Pale: X oddities (TCP)
+  07/26/89	Use graphic::COPY instead of graphic::OR for Pale: X oddities (TCP)
   08/24/89	Pass object-type arg to Hit-handlers (TCP)
    10/24/89	Changed the Mark_Child_Exposure call in Expose_Node_Children to 
 	              be recursive. (GW Keim)
@@ -1025,7 +1025,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	Check_Dimensions( this, node );
 	shadow = NodeShadow(node);
 	Clear_Shadow( this, shadow );
-	(this)->SetTransferMode(  graphic_COPY );
+	(this)->SetTransferMode(  graphic::COPY );
 	Draw_Node_Caption( this, shadow, NoHalo );
 	if ( ShadowHighlighted(shadow) )
 	  Highlight_Node_Shadow( this, shadow );
@@ -1037,7 +1037,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	Check_Dimensions( this, node );
     	shadow = NodeShadow(node);
 	Clear_Shadow( this, shadow );
-	(this)->SetTransferMode(  graphic_COPY );
+	(this)->SetTransferMode(  graphic::COPY );
 	Draw_Node_Title( this, shadow );
 	if ( ShadowHighlighted(shadow) )
 	  Highlight_Node_Shadow( this, shadow );
@@ -1212,7 +1212,7 @@ void Clear_Shadow( class treev		 *self, struct node_shadow	 *shadow )
   
   IN(Clear_Shadow);
   treev_FlipColors(self);
-  Fill_Area( self, graphic_COPY, NULL, NodeBorderStyle,
+  Fill_Area( self, graphic::COPY, NULL, NodeBorderStyle,
 	    SL+1, ST+1, (SW-1) - offset, (SH-1) - offset );
   treev_RestoreColors(self);
   OUT(Clear_Shadow);
@@ -1316,7 +1316,7 @@ void Normalize_Node_Shadow( class treev	       *self, struct node_shadow  *shado
     switch ( style )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
 	Clear_Shadow( self, shadow );
@@ -1348,10 +1348,10 @@ void Highlight_Node_Shadow( class treev	       *self, struct node_shadow  *shado
     switch ( NodeHighlightStyle )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
-	Fill_Shadow( self, shadow, graphic_COPY, DottedTile );
+	Fill_Shadow( self, shadow, graphic::COPY, DottedTile );
 	Draw_Node_Title( self, shadow );
 	Draw_Node_Caption( self, shadow, Halo );
 	break;
@@ -1379,10 +1379,10 @@ void Footprint_Node_Shadow( class treev		  *self, struct node_shadow	  *shadow )
     switch ( NodeFootprintStyle )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
-	Fill_Shadow( self, shadow, graphic_COPY, DottedTile );
+	Fill_Shadow( self, shadow, graphic::COPY, DottedTile );
 	Draw_Node_Title( self, shadow );
 	Draw_Node_Caption( self, shadow, Halo );
 	break;
@@ -2525,14 +2525,14 @@ void Draw_Background( class treev	      *self )
     width = Right - left + 1;
     height = Bottom - top + 1;
     if ( BackgroundNonWhite )
-      (self)->SetTransferMode(  graphic_COPY );
+      (self)->SetTransferMode(  graphic::COPY );
     else {
 	treev_FlipColors(self);
     }
     DEBUGdt(l,left);DEBUGdt(t,top);DEBUGdt(w,width);DEBUGdt(h,height);
     (self)->FillRectSize(  left, top, width, height, BackgroundPattern );
     if(!BackgroundNonWhite) treev_RestoreColors(self);
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
     }
   OUT(Draw_Background);
   }
@@ -2545,7 +2545,7 @@ void Fill_Background( class treev	      *self )
     if ( BackgroundNonWhite )
       {
       BackgroundPattern = (self)->GrayPattern(  BackgroundShade, 100 );
-      (self)->SetTransferMode(  graphic_COPY );
+      (self)->SetTransferMode(  graphic::COPY );
       (self)->FillRect(  Bounds, BackgroundPattern );
       }
       else
@@ -2554,7 +2554,7 @@ void Fill_Background( class treev	      *self )
       (self)->FillRect(  Bounds, BackgroundPattern );
       treev_RestoreColors(self);
       }
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
     }
   }
 

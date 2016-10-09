@@ -1060,7 +1060,7 @@ bushv::FullUpdate( enum view_UpdateType  Type, long  left , long  top , long  wi
     }
     (this)->GetVisualBounds(&r);
     (LP)->InsertView((class view*)this,&r);
-    (this)->SetTransferMode(graphic_BLACK);
+    (this)->SetTransferMode(graphic::BLACK);
     (LP)->FullUpdate(Type,0,0,r.width,r.height);
     if(CurrNode || (CurrNode = (DirTreeView)->CurrentNode())) {
       sprintf(NewTitle,"%s%s%s",DirPath(CurrNode),

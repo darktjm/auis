@@ -282,10 +282,10 @@ static void UpdateDrawing(class celview  *self)
 {
     if(self->OldMode != self->drawing || self->child == NULL){
 	if(self->child == NULL){
-	    (self)->SetTransferMode(graphic_WHITE);
+	    (self)->SetTransferMode(graphic::WHITE);
 	    (self)->EraseVisualRect();
 	}
-	(self)->SetTransferMode(graphic_INVERT);
+	(self)->SetTransferMode(graphic::INVERT);
 	(self)->DrawRect(&(self->enclosingRect));
 	if(self->child == NULL && self->HasFocus){
 	    (self)->MoveTo(0,0);
@@ -515,9 +515,9 @@ void celview::Update()
 	if((this)->makeview(vr) )  
 	    (vr)->NotifyObservers(0);
  	if(this->child != NULL) {
-	    (this)->SetTransferMode(graphic_WHITE);
+	    (this)->SetTransferMode(graphic::WHITE);
 	    (this)->ClearClippingRect();
-	    (this)->SetTransferMode(graphic_BLACK);
+	    (this)->SetTransferMode(graphic::BLACK);
 	    (this)->view::WantNewSize(this); 
 	    this->sizepending = TRUE;
 	    (this)->FullUpdate(view_FullRedraw,0,0,0,0); /* ??? */
@@ -555,10 +555,10 @@ void celview::Update()
 #define OFFSET 5
 static void drawshadow(class celview  *self,struct rectangle  *r)
 {
-    (self)->SetTransferMode(graphic_INVERT);
+    (self)->SetTransferMode(graphic::INVERT);
     (self)->FillRectSize(r->left + OFFSET,r->top + r->height,r->width,OFFSET,(self)->GrayPattern(8,16));
     (self)->FillRectSize(r->left + r->width,r->top + OFFSET,OFFSET,r->height - OFFSET,(self)->GrayPattern(8,16));
-    (self)->SetTransferMode(graphic_BLACK);
+    (self)->SetTransferMode(graphic::BLACK);
     (self)->DrawRect(r);
 }
 void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
@@ -595,9 +595,9 @@ void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  w
 	if(type != view_Remove) {
 	    UpdateCursors(this);
 	    if(type != view_MoveNoRedraw){
-		(this)->SetTransferMode(graphic_WHITE);
+		(this)->SetTransferMode(graphic::WHITE);
 		(this)->EraseRect(&(this->enclosingRect));
-		(this)->SetTransferMode(graphic_INVERT);
+		(this)->SetTransferMode(graphic::INVERT);
 
 		if(this->drawing){ 
 		    (this)->DrawRect(&(this->enclosingRect));

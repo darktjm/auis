@@ -138,7 +138,7 @@ static void draw_arrow(class scroll  *self, int  side, struct rectangle  *r, int
     if (self->emulation) {
         int i;
 
-        (self)->SetTransferMode( graphic_WHITE);
+        (self)->SetTransferMode( graphic::WHITE);
         for(i=0;i<10;i++) {
             int offx=0, offy=0, t;
             switch(i) {
@@ -171,7 +171,7 @@ static void draw_arrow(class scroll  *self, int  side, struct rectangle  *r, int
                     offy=(-1);
                     break;
                 case 8:
-                    (self)->SetTransferMode( graphic_BLACK);
+                    (self)->SetTransferMode( graphic::BLACK);
                     break;
                 case 9:
                     offx=(1);
@@ -196,7 +196,7 @@ static void draw_arrow(class scroll  *self, int  side, struct rectangle  *r, int
                     break;
             }
         }
-        (self)->SetTransferMode( graphic_SOURCE);
+        (self)->SetTransferMode( graphic::SOURCE);
     }
     else { /* not emulating motif */
 	class ScrollRegion *s=NULL;
@@ -252,7 +252,7 @@ static void draw_arrow(class scroll  *self, int  side, struct rectangle  *r, int
 
         (self)->GetFGColor( oldfg, oldfg+1, oldfg+2);
         (self)->SetFGColor( self->mattebackground[0], self->mattebackground[1], self->mattebackground[2]);
-        (self)->SetTransferMode( graphic_SOURCE);
+        (self)->SetTransferMode( graphic::SOURCE);
         if (t.width > 0 && t.height > 0) {
             (self)->FillRect( &t, NULL);
         }
@@ -1181,7 +1181,7 @@ static void move_elevator(class scroll  *self, int  side)
     
     (self)->SetFGColor( self->barbackground[0], self->barbackground[1], self->barbackground[2]);
     
-     (self)->SetTransferMode( graphic_SOURCE);
+     (self)->SetTransferMode( graphic::SOURCE);
      
     rectangle_IntersectRect(&r1, &odr, &oer);
     rectangle_IntersectRect(&r2, &odr, &ner);
@@ -1284,7 +1284,7 @@ static void InitPrefs(class scroll  *self)
     boolean graphicIsMono;
     boolean mono;
 
-    graphicIsMono = ((self)->GetDrawable())->DisplayClass() & graphic_Monochrome;
+    graphicIsMono = ((self)->GetDrawable())->DisplayClass() & graphic::Monochrome;
     mono = environ::GetProfileSwitch("MimicOldScrollbar", graphicIsMono ? TRUE : FALSE);
 
     self->drawborder = environ::GetProfileSwitch("ScrollDrawBorders", mono ? MONODRAWBORDERS : COLORDRAWBORDERS);

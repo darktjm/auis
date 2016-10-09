@@ -944,7 +944,7 @@ long height;
 		frameY-1,WIDTH+1,HEIGHT+1);}
 
 
-    helloworldview_SetTransferMode(hwv,graphic_COPY);
+    helloworldview_SetTransferMode(hwv,graphic::COPY);
 
 
     if(hw->blackOnWhite)\{
@@ -1044,7 +1044,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
   
@@ -1905,7 +1905,7 @@ long height;
 		WIDTH+1,HEIGHT+1);
 
 
-    helloworldview_SetTransferMode(hwv,graphic_COPY);
+    helloworldview_SetTransferMode(hwv,graphic::COPY);
 
 
     if(hw->blackOnWhite)\{
@@ -1957,7 +1957,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if(hwv->x!=hw->x ||

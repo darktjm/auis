@@ -210,7 +210,7 @@ AdjustHighlight(class strtblview  *self)
 	struct rectangle rectangle, r;
 	short i, n;
 
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	(self)->GetLogicalBounds( &rectangle);
 	n = (st)->NStrings();
 	for (i = 0; i < n; i++) {
@@ -235,7 +235,7 @@ RedrawTable(class strtblview  *self)
 	if (rectangle.width == 0 || rectangle.height == 0) return;
 	if ( ! self->sizeknown)
 		ComputeOrganization(self, rectangle.width, rectangle.height);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->EraseRect( &rectangle);
 
 	n = (st)->NStrings();
@@ -246,8 +246,8 @@ RedrawTable(class strtblview  *self)
 				r.left + (r.width>>1), 
 				r.top + (r.height>>1));
 		(self)->DrawString( (st)->IthString( i), 
-				graphic_BETWEENLEFTANDRIGHT |
-				   graphic_BETWEENTOPANDBASELINE);
+				graphic::BETWEENLEFTANDRIGHT |
+				   graphic::BETWEENTOPANDBASELINE);
 	}
 	self->tablechanged = FALSE;
 	self->BlackOnes = 0;

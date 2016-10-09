@@ -77,12 +77,12 @@ void GetRecV::DrawFromScratch(long  x,long  y,long  width,long  height)
 	this->height = height;
 	if(width > ((height * 17) / 22) ) {
 	    width = ((height * 17) / 22);
-	    (this)->SetTransferMode(  graphic_COPY );	    
+	    (this)->SetTransferMode(  graphic::COPY );	    
 	    (this)->FillRectSize(x + width,y,this->width - width,height,(this)->GrayPattern(8,16) );
 	}
 	else{
 	    height = ((width * 22 )/17);
-	    (this)->SetTransferMode(  graphic_COPY );	    
+	    (this)->SetTransferMode(  graphic::COPY );	    
 	    (this)->FillRectSize(x,y + height, width,this->height - height,(this)->GrayPattern(8,16) );
 	}
 	if(this->tmpval == NULL){
@@ -109,33 +109,33 @@ void GetRecV::DrawFromScratch(long  x,long  y,long  width,long  height)
 	    }
 	}
 	rectangle_SetRectSize(&(this->tmpval->parent),x,y,width,height);
-	(this)->SetTransferMode(  graphic_INVERT );	    
+	(this)->SetTransferMode(  graphic::INVERT );	    
 	(this)->DrawRect(&(this->tmpval->child));
     }
 }
 
 void GetRecV::DrawDehighlight()
 {
-    (this)->SetTransferMode(  graphic_COPY );
+    (this)->SetTransferMode(  graphic::COPY );
     (this)->EraseRect( &(this->tmpval->parent));
-    (this)->SetTransferMode(  graphic_INVERT );	    
+    (this)->SetTransferMode(  graphic::INVERT );	    
     (this)->DrawRect(&(this->tmpval->child));
 
 }
 void GetRecV::DrawHighlight()
 {
   /*
-    GetRecV_SetTransferMode( self, graphic_COPY );
+    GetRecV_SetTransferMode( self, graphic::COPY );
     GetRecV_EraseRect( self,&(self->tmpval->parent));
-    GetRecV_SetTransferMode( self, graphic_INVERT );	    
+    GetRecV_SetTransferMode( self, graphic::INVERT );	    
     GetRecV_DrawRect(self,&(self->tmpval->child));
 */
 }
 void GetRecV::DrawNewValue( )
 {
-    (this)->SetTransferMode(  graphic_COPY );
+    (this)->SetTransferMode(  graphic::COPY );
     (this)->EraseRect( &(this->tmpval->parent));
-    (this)->SetTransferMode(  graphic_INVERT );	    
+    (this)->SetTransferMode(  graphic::INVERT );	    
     (this)->DrawRect(&(this->tmpval->child));
 
 }
@@ -151,9 +151,9 @@ class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		this->firstx = -1;
 		break;
 	    }
-	    (this)->SetTransferMode(  graphic_COPY );
+	    (this)->SetTransferMode(  graphic::COPY );
 	    (this)->EraseRect( &(this->tmpval->parent)); 
-	    (this)->SetTransferMode(  graphic_INVERT );	    
+	    (this)->SetTransferMode(  graphic::INVERT );	    
 	    this->lasty = this->firsty = y;
 	    this->lastx = this->firstx = x;
 	    break;

@@ -411,7 +411,7 @@ static void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   
     if ( pane->zip_pane_edit  &&  pane->zip_pane_edit->zip_pane_edit_grid_exposed
 	 && self->states.editing )
       (Edit)->Draw_Pane_Grid(  pane );
-/*    zipview_SetTransferMode( self, graphic_BLACK ); */
+/*    zipview_SetTransferMode( self, graphic::BLACK ); */
     (self)->Set_Pane_Clip_Area(  pane );
     }
     else
@@ -460,12 +460,12 @@ zipview::Hide_Pane( zip_type_pane		   pane )
         zipview_Restore_Overlay( self, pane );
         else
         {
-        (self)->SetTransferMode(  graphic_WHITE );
+        (self)->SetTransferMode(  graphic::WHITE );
         (self)->FillRectSize( 
 		    PaneLeft, PaneTop,
 		    PaneWidth, PaneHeight,
 		    (self )->WhitePattern( ) /*===*/ );
-        (self)->SetTransferMode(  graphic_BLACK );
+        (self)->SetTransferMode(  graphic::BLACK );
         }
       zipview_Mark_Pane_Hidden( self, pane );
       }
@@ -492,10 +492,10 @@ zipview::Expose_Pane( zip_type_pane		   pane )
       if ( (self)->Pane_Overlaying(  pane ) )
         zipview_Preserve_Overlay( self, pane );
       (self)->Set_Pane_Clip_Area(  pane );
-      (self)->SetTransferMode(  graphic_COPY );
+      (self)->SetTransferMode(  graphic::COPY );
 /*===      ZIP_WM_RestoreRegion( ZIP_Pane_Saved_Region( pane ),
 		    PaneLeft(pane), PaneTop(pane) );===*/
-      (self)->SetTransferMode(  graphic_BLACK );
+      (self)->SetTransferMode(  graphic::BLACK );
       (self)->Set_Pane_Clip_Area(  pane );
       zipview_Mark_Pane_Exposed( self, pane );
       }
@@ -541,10 +541,10 @@ zipview_Restore_Overlay( class zipview		  *self, zip_type_pane		   pane )
       zipview_Set_Clip_Area( self, pane,
 			     PaneLeft(pane),  PaneTop(pane),
 			     PaneWidth(pane), PaneHeight(pane) );
-      zipview_SetTransferMode( self, graphic_COPY );
+      zipview_SetTransferMode( self, graphic::COPY );
       ZIP_WM_RestoreRegion( pane->zip_pane_other_region_id,
 			    PaneLeft(pane), PaneTop(pane) );
-      zipview_SetTransferMode( self, graphic_BLACK );
+      zipview_SetTransferMode( self, graphic::BLACK );
       zipview_Set_Pane_Clip_Area( self, pane );
       ZIP_WM_DefineRegion( pane->zip_pane_other_region_id, 0, 0, 0,0 );
       ZIP_WM_ForgetRegion( pane->zip_pane_other_region_id );

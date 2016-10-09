@@ -164,14 +164,14 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
 	    boldfont = fontdesc::Create("andy", fontdesc_Bold, 12);
 	}
 	startday = -this->skippedatstart;
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	(this)->GetLogicalBounds( &Rect);
 	(this)->SetFont( plainfont); 
 	xcenter = Rect.left + (Rect.width/2);
 	y = Rect.top + (Rect.height/16);
 	(this)->MoveTo( xcenter, y);
 	sprintf(MyString, "%s %d", MonthNames[this->mymonth], this->FullTimes[1].tm_year+1900);
-	(this)->DrawString( MyString, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+	(this)->DrawString( MyString, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
 	(this)->FillTrapezoid( Rect.left+25, Rect.top, 0, Rect.left+5, Rect.top+8, 20, (this)->BlackPattern());
 	(this)->FillTrapezoid( Rect.left+5, Rect.top+8, 20, Rect.left+25, Rect.top+16, 0, (this)->BlackPattern());
 	(this)->FillTrapezoid( Rect.left+Rect.width - 25, Rect.top, 0, Rect.left+Rect.width-25, Rect.top+8, 20, (this)->BlackPattern());
@@ -193,16 +193,16 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
 			(this)->SetFont( boldfont);
 			if (this->EventCt[startday] > 2) {
 			    (this)->FillRectSize( x-8, y-6, 18, 14, (this)->BlackPattern());
-			    (this)->SetTransferMode( graphic_WHITE);
+			    (this)->SetTransferMode( graphic::WHITE);
 			} else if (this->EventCt[startday] > 1) {
 			    (this)->FillRectSize( x-8, y-6, 18, 14, (this)->GrayPattern( 3, 10));
 			}
 		    }
 		}
 		(this)->MoveTo( x, y);
-		(this)->DrawString( StrToUse, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+		(this)->DrawString( StrToUse, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
 		if (highlight) {
-		    (this)->SetTransferMode( graphic_COPY);
+		    (this)->SetTransferMode( graphic::COPY);
 		    (this)->SetFont( plainfont);
 		}
 		x += Rect.width/7;
@@ -216,7 +216,7 @@ void monthview::Update()
     struct rectangle Rect;
 
     (this)->GetLogicalBounds( &Rect);
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     (this)->FillRect( &Rect, (this)->WhitePattern());
     (this)->FullUpdate( view_FullRedraw, Rect.left, Rect.top, Rect.width, Rect.height);
 }

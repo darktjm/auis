@@ -97,12 +97,12 @@ RedrawTable(class labelview  *self)
 	struct rectangle r;
 	int x, y;
 	
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->GetLogicalBounds( &r);
 	(self)->FillRect( &r, self->WhitePattern);
 
 	if (st->flags & label_BOXED) {
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	    r.top++;
 	    r.left++;
 	    r.width -= 2;
@@ -126,7 +126,7 @@ RedrawTable(class labelview  *self)
 				r.top + 3;
 			(self)->MoveTo( x, y);
 			(self)->DrawString( st->text,
-				 (st->flags == 0) ? graphic_ATLEFT | graphic_ATTOP :
+				 (st->flags == 0) ? graphic::ATLEFT | graphic::ATTOP :
 					            st->flags & ~label_BOXED);
 		}
 		else {
@@ -142,11 +142,11 @@ RedrawTable(class labelview  *self)
 				r.top + charInfo.yOriginOffset
 					+ ((r.height-charInfo.height)>>1)
 			);
-			(self)->DrawString( st->text, graphic_NOMOVEMENT);
+			(self)->DrawString( st->text, graphic::NOMOVEMENT);
 		}
 	}
 	if (self->inverted) {
-		(self)->SetTransferMode( graphic_INVERT);
+		(self)->SetTransferMode( graphic::INVERT);
 		(self)->FillRect( &r, self->BlackPattern);
 	}
 }

@@ -32,6 +32,6 @@ void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
     (this)->MoveTo( Rect.left + Rect.width/2,
 		   Rect.top + Rect.height/2);
     (this)->DrawString( "Hello, world!",
-	graphic_BETWEENTOPANDBASELINE
-	| graphic_BETWEENLEFTANDRIGHT);
+	graphic::BETWEENTOPANDBASELINE
+	| graphic::BETWEENLEFTANDRIGHT);
 }

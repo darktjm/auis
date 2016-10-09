@@ -30,14 +30,14 @@ void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
     struct rectangle Rect;
     class fontdesc *font;
 
-    (this)->SetTransferMode( graphic_COPY); /* set transfer mode to default */
+    (this)->SetTransferMode( graphic::COPY); /* set transfer mode to default */
 
     (this)->GetVisualBounds( &Rect);
     (this)->MoveTo( Rect.left + Rect.width/2,
 		   Rect.top + Rect.height/2);
     (this)->DrawString( "Hello, world!",
-	graphic_BETWEENTOPANDBASELINE
-	| graphic_BETWEENLEFTANDRIGHT);
+	graphic::BETWEENTOPANDBASELINE
+	| graphic::BETWEENLEFTANDRIGHT);
 
     font = fontdesc::Create("andy", fontdesc_Bold, 20);
     /* Note that creating this font on every 
@@ -48,8 +48,8 @@ void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
     (this)->MoveTo( Rect.left + Rect.width/2,
 		   Rect.top + Rect.height/2 + 20);
     (this)->DrawText( "(big stuff)garbage", 11,
-	graphic_BETWEENTOPANDBASELINE
-	| graphic_BETWEENLEFTANDRIGHT);
+	graphic::BETWEENTOPANDBASELINE
+	| graphic::BETWEENLEFTANDRIGHT);
 
     Rect.left = Rect.left + Rect.width/4;
     Rect.width = Rect.width/2;
@@ -77,15 +77,15 @@ void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
 		(this)->BlackPattern());
 
     (this)->MoveTo( Rect.left+Rect.width/4, Rect.top/4);
-    (this)->SetTransferMode( graphic_WHITE);
+    (this)->SetTransferMode( graphic::WHITE);
     (this)->DrawString( "White Left",
-		       graphic_ATLEFT | graphic_ATTOP);
+		       graphic::ATLEFT | graphic::ATTOP);
 
-    (this)->SetTransferMode( graphic_INVERT);
+    (this)->SetTransferMode( graphic::INVERT);
     (this)->MoveTo( Rect.left+(3*Rect.width)/4 - 30,
 		   Rect.top/4);
     (this)->DrawString( "Inverted text example",
-		       graphic_ATLEFT | graphic_ATTOP);
+		       graphic::ATLEFT | graphic::ATTOP);
     
 }
 

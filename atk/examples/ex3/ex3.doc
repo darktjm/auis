@@ -483,7 +483,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     helloworldview_DrawString(hwv,"hello world",
 
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -500,13 +500,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT);
+        helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 
         hwv->x = hwv->newX;
@@ -517,7 +517,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
     
 

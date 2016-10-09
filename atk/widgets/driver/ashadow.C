@@ -101,7 +101,7 @@ color &AShadowColorBlock::operator[](AShadowColors type) {
         if(sbgc==NULL) sbgc=whitename;
 	unsigned short r, g, b;
 	long rr, rg, rb;
-	boolean mono=((target)->DisplayClass()&graphic_Monochrome)?TRUE:FALSE;
+	boolean mono=((target)->DisplayClass()&graphic::Monochrome)?TRUE:FALSE;
 	if(type != AShadowColors_Background 
 			&& type != AShadowColors_Foreground) 
 		(*this)[AShadowColors_Background].HardwareRGB(		      *target->CurrentColormap(), r, g, b);

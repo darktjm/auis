@@ -22,6 +22,6 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
 
     (this)->MoveTo(x,y);
     (this)->DrawString("hello world",
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 }

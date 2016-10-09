@@ -325,8 +325,8 @@ long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane  pane )
     DEBUGdt(Shade,figure->zip_figure_fill.zip_figure_shade);
     if ( (shade = ('0' + ((shade + 10) / 10)) - 1) > '9' )  shade = '9';
     DEBUGdt(Shade-index,shade);
-/*    if ( transfer_mode != graphic_COPY )
-      zipview_SetTransferMode( self->view_object, graphic_COPY ); */
+/*    if ( transfer_mode != graphic::COPY )
+      zipview_SetTransferMode( self->view_object, graphic::COPY ); */
     (self->view_object)->FillTrapezoid(  left, top, width, left, top + height, width,
 	    (self->view_object)->Define_Graphic( 
 		(self->data_object)->Define_Font(  ShadeFontName, NULL ), shade ) );
@@ -334,17 +334,17 @@ long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane  pane )
   if ( OutstandingSurround )
     {
     OutstandingSurround = false;
-    if ( transfer_mode != graphic_INVERT )
-      (self->view_object)->SetTransferMode(  graphic_INVERT );
+    if ( transfer_mode != graphic::INVERT )
+      (self->view_object)->SetTransferMode(  graphic::INVERT );
     (self->view_object)->DrawRectSize(  OutstandingLeft, OutstandingTop, OutstandingWidth, OutstandingHeight );
     }
   if ( self->view_object->mouse_action == view_LeftMovement )
     {
     OutstandingSurround = true;
-    if ( transfer_mode != graphic_WHITE )
-      (self->view_object)->SetTransferMode(  graphic_WHITE );
+    if ( transfer_mode != graphic::WHITE )
+      (self->view_object)->SetTransferMode(  graphic::WHITE );
     (self->view_object)->EraseRectSize(  left-1, top-1, width+2, height+2 );
-    (self->view_object)->SetTransferMode(  graphic_INVERT );
+    (self->view_object)->SetTransferMode(  graphic::INVERT );
     (self->view_object)->DrawRectSize(  OutstandingLeft = left, OutstandingTop = top,
 				OutstandingWidth = width, OutstandingHeight = height );
     }
@@ -565,13 +565,13 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
 	  {
 	  if ( GrayGraphic )
 	    {
-/*	    if ( zipview_GetTransferMode( self->view_object ) != graphic_COPY )
-	      zipview_SetTransferMode( self->view_object, graphic_COPY ); */
+/*	    if ( zipview_GetTransferMode( self->view_object ) != graphic::COPY )
+	      zipview_SetTransferMode( self->view_object, graphic::COPY ); */
 	    (self->view_object)->FillTrapezoid(  x+1, y+1, abs(m - x)-1,
 					 x+1, n-1, abs(m - x)-1, GrayGraphic );
 	    }
-/*	  if ( zipview_GetTransferMode( self->view_object ) != graphic_BLACK )
-	    zipview_SetTransferMode( self->view_object, graphic_BLACK ); */
+/*	  if ( zipview_GetTransferMode( self->view_object ) != graphic::BLACK )
+	    zipview_SetTransferMode( self->view_object, graphic::BLACK ); */
 	  (self->view_object)->DrawRectSize(  x, y, abs(m - x), abs(n - y) );
 	  }
 	break;
@@ -728,7 +728,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
 	  (self->view_object)->MoveTo(  x, y );
 /*===     zipview_SetFont( self->view_object, font );===*/
 	  (self->view_object)->DrawString(  buffer,
-	    graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM );
+	    graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
 	  }
 	break;
       case '(':  DEBUG(Parenthsize);
@@ -1182,14 +1182,14 @@ void Draw_Set_Name( class ziposymbol		  *self, zip_type_pane		   pane, struct sy
           {
   IN(Draw_Set_Name);
   (self->view_object)->Set_Clip_Area(  pane, SVL, SVT + 40, SVW/3, SVH - 50 );
-  (self->view_object)->SetTransferMode(  graphic_WHITE );
+  (self->view_object)->SetTransferMode(  graphic::WHITE );
   (self->view_object)->EraseRectSize(  set->set_left, set->set_top,
 			       set->set_right  - set->set_left,
 		               set->set_bottom - set->set_top );
-  (self->view_object)->SetTransferMode(  graphic_BLACK );
+  (self->view_object)->SetTransferMode(  graphic::BLACK );
   (self->view_object)->SetFont(  font );
   (self->view_object)->MoveTo(  set->set_left, set->set_top );
-  (self->view_object)->DrawString(  set->set_name, graphic_ATLEFT | graphic_ATTOP );
+  (self->view_object)->DrawString(  set->set_name, graphic::ATLEFT | graphic::ATTOP );
   OUT(Draw_Set_Name);
   }
 
@@ -1211,9 +1211,9 @@ Show_Symbol_Dialog( class ziposymbol *self, zip_type_pane pane )
     SVL = (self->view_object)->Pane_Left(  pane ) + 20;  SVT = (self->view_object)->Pane_Top(  pane ) + 20;
     SVW = (self->view_object)->Pane_Width(  pane ) - 40; SVH = (self->view_object)->Pane_Height(  pane ) - 40;
     SVR = SVL + SVW;  SVB = SVT + SVH;
-    (self->view_object)->SetTransferMode(  graphic_WHITE );
+    (self->view_object)->SetTransferMode(  graphic::WHITE );
     (self->view_object)->EraseRectSize(  SVL-1, SVT-1, SVW+2, SVH+2 );
-    (self->view_object)->SetTransferMode(  graphic_BLACK );
+    (self->view_object)->SetTransferMode(  graphic::BLACK );
     (self->view_object)->DrawRRectSize(  SVL, SVT, SVW-1, SVH-1, 10,10 );
     (self->view_object)->DrawRRectSize(  SVL+1, SVT+1, SVW-3, SVH-3, 10,10 );
     (self->view_object)->MoveTo(  SVL + SVW/3, SVT );
@@ -1223,7 +1223,7 @@ Show_Symbol_Dialog( class ziposymbol *self, zip_type_pane pane )
     (self->view_object)->MoveTo(  SVL + SVW/6, SVT + 25 );
     (self->view_object)->SetFont(  (self->data_object)->Define_Font(  "andysans12b", NULL ) );
     (self->view_object)->Set_Clip_Area(  pane, SVL, SVT + 5, SVW/3, 40 );
-    (self->view_object)->DrawString(  "Symbols", graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM );
+    (self->view_object)->DrawString(  "Symbols", graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
     set = SymbolSets;
     normal_font = (class fontdesc *) (self->data_object)->Define_Font(  "andysans10", NULL );
     highlight_font = (class fontdesc *) (self->data_object)->Define_Font(  "andysans10b", NULL );
@@ -1269,9 +1269,9 @@ void Show_Set_Symbols( class ziposymbol		  *self, zip_type_pane		   pane, struct
     Open_Symbol_Set_File( self, set );
   x = SVL + SVW/3 + 4;  y = SVT + 4;
   x_increment = (SVR - x) / 4 - 4;  y_increment = (SVB - y) / 4 - 4;
-  (self->view_object)->SetTransferMode(  graphic_WHITE );
+  (self->view_object)->SetTransferMode(  graphic::WHITE );
   (self->view_object)->EraseRectSize(  x, y, SVR - x - 4, SVB - y - 4 );
-  (self->view_object)->SetTransferMode(  graphic_BLACK );
+  (self->view_object)->SetTransferMode(  graphic::BLACK );
   symbols = set->set_symbols;
   symbols++;
   while ( symbols->symbol_algorithm )
@@ -1322,7 +1322,7 @@ static
 void Invert_Symbol( class ziposymbol		  *self, struct symbol		  *symbol )
       {
   IN(Invert_Symbol);
-  (self->view_object)->SetTransferMode(  graphic_INVERT );
+  (self->view_object)->SetTransferMode(  graphic::INVERT );
   (self->view_object)->FillRectSize(  symbol->symbol_left+2, symbol->symbol_top+2,
 			symbol->symbol_right  - symbol->symbol_left - 3,
 			symbol->symbol_bottom - symbol->symbol_top - 3,
@@ -1416,7 +1416,7 @@ static
 void Decline_Property_Hits( class ziposymbol		  *self, zip_type_pane		   pane )
       {
   IN(Decline_Property_Hits);
-  (self->view_object)->SetTransferMode(  graphic_WHITE );
+  (self->view_object)->SetTransferMode(  graphic::WHITE );
   (self->view_object)->EraseRectSize(  SVL, SVT, SVW, SVH );
   (self->edit_object)->Set_Keyboard_Processor(  0, NULL );
   (self->edit_object)->Set_Pending_Processor(  0, NULL );

@@ -40,8 +40,8 @@ ATK_IMPL("sbuttonv.H")
 #define INSENSITIVELABELPCT 0.8
 #define INSENSITIVETOPPCT 0.8
 
-#define TEXTINMIDDLE (graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM)
-#define TEXTATLEFTMIDDLE (graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM)
+#define TEXTINMIDDLE (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
+#define TEXTATLEFTMIDDLE (graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM)
 
 #define DEFAULTSTYLE(style) ((style<0 || style>sbutton_MOTIF)?sbutton_MOTIF:(style))
 
@@ -87,7 +87,7 @@ static void InitFGBG(class view  *self, struct sbutton_prefs  *prefs, double  *f
 
     (self)->GetBGColor( &bg[0], &bg[1], &bg[2]);
     (self)->GetFGColor( &fg[0], &fg[1], &fg[2]);
-    if((!((self)->DisplayClass() & graphic_Monochrome)) && sbutton::GetBackground(prefs)==NULL && DEFAULTSTYLE(prefs->style)==sbutton_MOTIF && newcolors) {
+    if((!((self)->DisplayClass() & graphic::Monochrome)) && sbutton::GetBackground(prefs)==NULL && DEFAULTSTYLE(prefs->style)==sbutton_MOTIF && newcolors) {
 	if(bg[0]==0.0 && bg[1]==0.0 && bg[2]==0.0) {
 	    bg[0]=0.40;
 	    bg[1]=0.40;
@@ -169,7 +169,7 @@ static void MyNewComputeColor(class view  *self, struct sbutton_prefs  *prefs,do
 {
     long br, bg, bb;
     long rr=0, rg=0, rb=0;
-    boolean mono=((self)->DisplayClass()&graphic_Monochrome)?TRUE:FALSE;
+    boolean mono=((self)->DisplayClass()&graphic::Monochrome)?TRUE:FALSE;
     
     br=(long)(background[0]*65535.0);
     bg=(long)(background[1]*65535.0);
@@ -417,7 +417,7 @@ void sbuttonv::DrawBorder(class view  *self, long  x , long  y , long  w , long 
 
     if(draw) {
 	InitFGBG(self, prefs, &foreground[0], &background[0]);
-	(self)->SetTransferMode( graphic_SOURCE);
+	(self)->SetTransferMode( graphic::SOURCE);
 	if (fill && (style != sbutton_THREEDEE) && (style != sbutton_MOTIF)) {
 	    /* Erase with TOP color, only if style is not 3-D (3-D draws all bits) */
 	    MySetShade(self, prefs,  foreground, background, sbutton_TOP);
@@ -445,7 +445,7 @@ void sbuttonv::DrawBorder(class view  *self, long  x , long  y , long  w , long 
 		interior->height=Rect2.height-2;
 	    }
 	    if(inout && draw) {
-		(self)->SetTransferMode( graphic_INVERT);
+		(self)->SetTransferMode( graphic::INVERT);
 		(self)->FillRect( &r, (self)->BlackPattern());
 		(self)->FillRect( &Rect2, (self)->BlackPattern());
 	    }
@@ -474,7 +474,7 @@ void sbuttonv::DrawBorder(class view  *self, long  x , long  y , long  w , long 
 
 	    if(draw) {
 		{
-		    (self)->SetTransferMode( graphic_SOURCE);
+		    (self)->SetTransferMode( graphic::SOURCE);
 		    MySetShade(self, prefs, foreground, background, ts);
 		    (self)->FillRectSize( r.left, r.top, bdepth, r.height, NULL);	/* left bar */
 
@@ -534,7 +534,7 @@ void sbuttonv::EraseBorder(class view  *self, long  x , long  y , long  w , long
     r.height=h;
 
     InitFGBG(self, prefs, &foreground[0], &background[0]);
-    (self)->SetTransferMode(graphic_COPY);
+    (self)->SetTransferMode(graphic::COPY);
     MySetShade(self, prefs,  foreground, background, sbutton_TOP);
     
     switch (style) {
@@ -570,7 +570,7 @@ void sbuttonv::EraseBorder(class view  *self, long  x , long  y , long  w , long
 
 	   
 	    {
-		(self)->SetTransferMode( graphic_SOURCE);
+		(self)->SetTransferMode( graphic::SOURCE);
 		MySetShade(self, prefs, foreground, background, ts);
 		(self)->FillRectSize( r.left, r.top, bdepth, r.height, NULL);	/* left bar */
 
@@ -668,7 +668,7 @@ static void DrawLabel(class view  *self, const char  *text, boolean  lit, struct
 	slb=sbutton_INSENSITIVELABELBG;
 	slf=sbutton_INSENSITIVELABELFG;
     }
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     switch(style) {
 	case sbutton_THREEDEE:
 	    if(lit) {
@@ -758,7 +758,7 @@ void sbuttonv::DrawButton(class view  *self, struct sbutton_info  *si, struct re
     InitFGBG(self, si->prefs, fg, bg);
        
     int topc=si->sensitive?sbutton_TOP:sbutton_INSENSITIVETOP;
-    (self)->SetTransferMode( graphic_SOURCE);
+    (self)->SetTransferMode( graphic::SOURCE);
     if ((style != sbutton_THREEDEE) && (style != sbutton_MOTIF)) {
 	/* Erase with top color, only if style is not 3-D (3-D draws all bits) */
 	MySetShade(self, si->prefs,  fg, bg, topc);
@@ -778,7 +778,7 @@ void sbuttonv::DrawButton(class view  *self, struct sbutton_info  *si, struct re
 		flags=TEXTATLEFTMIDDLE;
 	    } else tx = TEXTPAD + Rect2.left + ((Rect2.width-1) / 2);
 	    ty = TEXTPAD + Rect2.top + ((Rect2.height-1) /2);
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	    (self)->DrawRectSize( r->left, r->top, r->width -1, r->height - 1);
 	    (self)->DrawRect( &Rect2);
 	    break;
@@ -802,7 +802,7 @@ void sbuttonv::DrawButton(class view  *self, struct sbutton_info  *si, struct re
 	    r_bot = (r->top)+(r->height);
 
 
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	    MySetShade(self, si->prefs,  fg, bg, sbutton_TOPSHADOW);
 	    (self)->FillRectSize( r->left, r->top, bdepth, r->height, NULL);	/* left bar */
 
@@ -828,7 +828,7 @@ void sbuttonv::DrawButton(class view  *self, struct sbutton_info  *si, struct re
 
 	case sbutton_PLAINBOX:
 	    
-	    (self)->SetTransferMode( graphic_BLACK);
+	    (self)->SetTransferMode( graphic::BLACK);
 	    (self)->DrawRectSize( r->left, r->top, r->width-1, r->height-1);
 
 	    if(lwidth>r->width) {
@@ -1069,7 +1069,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
     switch (style) {
 	case sbutton_PLAIN:
 	case sbutton_PLAINBOX:
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	    (self)->FillRect( r, (self)->BlackPattern());
 	    break;
 
@@ -1081,7 +1081,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
 	    Rect2.width = r->width - 2*bdepth;
 	    Rect2.height = r->height - 2*bdepth;
 
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	    (self)->FillRect( r, (self)->BlackPattern());
 	    (self)->FillRect( &Rect2, (self)->BlackPattern());
 
@@ -1104,7 +1104,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
 	    r_bot = (r->top)+(r->height);
 
 	    if (style == sbutton_MOTIF) {
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		MySetShade(self, si->prefs,  fg, bg, sbutton_BOTTOMSHADOW);
 		(self)->FillRectSize( r->left, r->top, bdepth, r->height, NULL);	/* left bar */
 
@@ -1156,7 +1156,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
     switch (style) {
 	case sbutton_PLAIN:
 	case sbutton_PLAINBOX:
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	    (self)->FillRect( r, (self)->BlackPattern());
 	    break;
 
@@ -1168,7 +1168,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
 	    Rect2.width = r->width - 2*bdepth;
 	    Rect2.height = r->height - 2*bdepth;
 
-	    (self)->SetTransferMode( graphic_INVERT);
+	    (self)->SetTransferMode( graphic::INVERT);
 	    (self)->FillRect( r, (self)->BlackPattern());
 	    (self)->FillRect( &Rect2, (self)->BlackPattern());
 
@@ -1192,7 +1192,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
 	    r_bot = (r->top)+(r->height);
 
 	    if (style == sbutton_MOTIF) {
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		MySetShade(self, si->prefs,  fg, bg, sbutton_TOPSHADOW);
 		(self)->FillRectSize( r->left, r->top, bdepth, r->height, NULL);	/* left bar */
 

@@ -284,10 +284,10 @@ long zipprint::Ensure_Line_Attributes( zip_type_figure		 figure )
     else Printing->zip_printing_line_dash_pattern = NULL;
     if (( value = (Data)->Contextual_Figure_Line_Cap(  figure )) != -1 )
       Printing->zip_printing_line_cap = value;
-    else       Printing->zip_printing_line_cap = graphic_CapButt;
+    else       Printing->zip_printing_line_cap = graphic::CapButt;
     if (( value = (Data)->Contextual_Figure_Line_Join(  figure )) != -1 )
       Printing->zip_printing_line_join = value;
-    else Printing->zip_printing_line_join = graphic_JoinMiter;
+    else Printing->zip_printing_line_join = graphic::JoinMiter;
     }
     else Printing->zip_printing_line_dash_pattern = NULL;
     return status;
@@ -303,16 +303,16 @@ zipprint_Line_Attributes_String( class zipprint	          *self )
 
     switch ( Printing->zip_printing_line_cap )
     {
-	case graphic_CapNotLast:
-	case graphic_CapButt: cap = 0; break;
-	case graphic_CapRound: cap = 1; break;
-	case graphic_CapProjecting: cap = 2; break;
+	case graphic::CapNotLast:
+	case graphic::CapButt: cap = 0; break;
+	case graphic::CapRound: cap = 1; break;
+	case graphic::CapProjecting: cap = 2; break;
     }
     switch ( Printing->zip_printing_line_join )
     {
-	case graphic_JoinMiter: join = 0; break;
-	case graphic_JoinRound: join = 1; break;
-	case graphic_JoinBevel: join = 2; break;
+	case graphic::JoinMiter: join = 0; break;
+	case graphic::JoinRound: join = 1; break;
+	case graphic::JoinBevel: join = 2; break;
     }
     sprintf( string, "%s %d setlinecap %d setlinejoin %d setlinewidth\n", PrintPrefix, cap, join, Printing->zip_printing_line_width );
     if ( Printing->zip_printing_line_dash_pattern )

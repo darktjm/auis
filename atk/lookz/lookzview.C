@@ -1679,7 +1679,7 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 			}
 	}
 	if (type == view_FullRedraw && this->embedded && this->OnScreen) {
-		(this)->SetTransferMode( graphic_COPY);
+		(this)->SetTransferMode( graphic::COPY);
 		(this)->MoveTo( 0, 0);
 		(this)->DrawLineTo( r.width-1, 0);
 		(this)->DrawLineTo( r.width-1, r.height-1);

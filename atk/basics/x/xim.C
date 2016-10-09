@@ -12,6 +12,18 @@
 #include <andrewos.h> /* sys/time.h sys/types.h sys/file.h */
 ATK_IMPL("xim.H")
 
+#include <util.h>
+
+#include <point.h>
+#include <rect.h>
+#define INTERACTION_MANAGER
+#include <im.H>
+#undef INTERACTION_MANAGER
+#include <application.H>
+#include <xgraphic.H>
+#include <cmenu.h>
+#include "menubar.h"
+
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
@@ -23,20 +35,6 @@ typedef int (*XErrorHandler) ();
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <X11/Xproto.h>
-
-#include <cmenu.h>
-#include "menubar.h"
-
-#include <util.h>
-
-#include <point.h>
-#include <rect.h>
-#define INTERACTION_MANAGER
-#include <im.H>
-#undef INTERACTION_MANAGER
-#include <application.H>
-#include <graphic.H>
-#include <xgraphic.H>
 #include <xfontdesc.H>
 #include <observable.H>
 #include <view.H>
@@ -5687,7 +5685,7 @@ boolean xim::CreateOffscreenWindow(class im  *o, int  width , int  height)
     rectangle_SetRectSize( &this->drawable->localBounds, 0, 0, width,	 height);
     this->drawable->visualBounds = this->drawable->localBounds;
     point_SetPt(&this->drawable->enclosedOrigin, 0, 0);
-    ((class xgraphic *)xim2graphic(this))->SetTransferMode( graphic_COPY);
+    ((class xgraphic *)xim2graphic(this))->SetTransferMode( graphic::COPY);
     ((xgraphic *)drawable)->DisplayClassVal=o->DisplayClass();
     cmap = (class colormap **) ColormapForDisplay(xDisplay);
     (this)->SetInheritedColormap( cmap);

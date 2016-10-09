@@ -105,6 +105,11 @@ public:
     static class sbutton * CreateFilledSButton(struct sbutton_prefs *prefs, const struct sbutton_list *blist)  ;
     static struct sbutton_prefs * GetNewPrefs(const char *name)  ;
     static void InitPrefs(struct sbutton_prefs *prefs, const char *name);
+    /**< Initialize button style preferences with a given prefix.
+     *   Generally, the prefix is the name of the class for which preferences
+     *   are retrieved.
+     *   \sbuttonpref{sbutton,button,button,button}
+     */
     static void FreePrefs(struct sbutton_prefs *prefs);
     static void WritePrefs(FILE *fp, struct sbutton_prefs *prefs);
     static struct sbutton_prefs * DuplicatePrefs(struct sbutton_prefs *prefs, const char *newname)  ;

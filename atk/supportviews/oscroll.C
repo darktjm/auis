@@ -788,7 +788,7 @@ static void rectangle(class oscroll  *self, int  x1 , int  y1 , int  x2 , int  y
    struct rectangle rect;
 
     rectangle_SetRectSize(&rect, MIN(x1,x2), MIN(y1,y2), ABS(x1-x2) + 1, ABS(y1-y2) + 1);
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     (self)->FillRect( &rect, tile);
 }
@@ -1057,7 +1057,7 @@ static void draw_elevator(class oscroll  *self, int  side)
         rotate(self, side, x2, y2, &x2, &y2);
 
         rectangle(self, x1, y1, x2, y2, self->elevatorFill);
-        (self)->SetTransferMode( graphic_COPY);
+        (self)->SetTransferMode( graphic::COPY);
 	left = (x1<x2 ? x1 : x2);
 	top =  (y1<y2 ? y1 : y2);
 	width = abs(x1-x2);
@@ -1083,7 +1083,7 @@ static void draw_dot(class oscroll  *self, int  side)
 	rotate(self, side, x1, y1, &x1, &y1);
 	rotate(self, side, x2, y2, &x2, &y2);
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	/* drawing 2 zero-width rects should probably be faster 
 	 than the old code that drew one double width rectangle.
 	 Also, this code avoids known bugs in some X servers */
@@ -1105,7 +1105,7 @@ static void normal_draw_whole_bar(class oscroll  *self, int  side)
     int height = bar_height(self, side);
     long x1, y1, x2, y2;
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     /* line between bar and child */
     rotate(self, side, REALBARWIDTH(self) - 1, 0, &x1, &y1);
@@ -1218,7 +1218,7 @@ static void move_elevator(class oscroll  *self, int  side)
             rotate(self, side, right, range[i].bot, &lr_x, &lr_y);
             if (range[i].whitep) {
                 rectangle(self, ul_x, ul_y, lr_x, lr_y, self->elevatorFill);
-                (self)->SetTransferMode( graphic_COPY);
+                (self)->SetTransferMode( graphic::COPY);
 		/* One last pixel hack works for vertical scroll bars but I don't know about horizontal -- these calculations confuse me as to how they work horizontally -- maybe the rotations do work correctly, but it seems strange. */
 		/* end of old way that almost works */
 		/* beginning of new way to be tested */
@@ -1285,7 +1285,7 @@ static void move_elevator(class oscroll  *self, int  side)
 	    } /* end of test for any white part to be drawn */
             else {
                 rectangle(self, ul_x, ul_y, lr_x, lr_y, self->barFill);
-                (self)->SetTransferMode( graphic_COPY);
+                (self)->SetTransferMode( graphic::COPY);
                 if (seen_top == range[i].bot) {
 		    draw_end_line(self,ll_x,ll_y,lr_x,lr_y);
 /*                    scroll_MoveTo(self, ll_x, ll_y);

@@ -663,9 +663,9 @@ helloworldview::FullUpdate(enum view_UpdateType  type, \
 
 	DrawString("hello world",
 
-			graphic_BETWEENTOPANDBASELINE |
+			graphic::BETWEENTOPANDBASELINE |
 
-			graphic_BETWEENLEFTANDRIGHT);
+			graphic::BETWEENLEFTANDRIGHT);
 
 \}}
 
@@ -1039,7 +1039,7 @@ its graphic's visual rectangle.  Whenever such a \italic{view} receives a
 call to do a \italic{FullUpdate} of its part of the screen, it must call 
 \italic{GetVisualBounds} \indexi{ \italic{GetVisualBounds 
 }} \indexi{ \italic{view_GetVisualBounds}} 
-\indexi{ \italic{graphic_GetVisualBounds}} 
+\indexi{ \italic{graphic::GetVisualBounds}} 
 \indexi{View++\italic{GetVisualBounds}} 
 \indexi{Graphic++\italic{GetVisualBounds}} in order to find out the size of 
 its graphic's visual rectangle and get its coordinates. 
@@ -1082,7 +1082,7 @@ reference point.  Drawing is done from the \italic{current point} to a
 specified (x,y) coordinate.  The method \italic{MoveTo} is a \italic{view} 
 method that moves the graphic's \italic{current point} to a specified 
 coordinate.  It takes two arguments, the (x,y) coordinates.  The method 
-\italic{MoveTo} \indexi{ \italic{MoveTo}} \indexi{ \italic{graphic_MoveTo}} 
+\italic{MoveTo} \indexi{ \italic{MoveTo}} \indexi{ \italic{graphic::MoveTo}} 
 \indexi{ \italic{view_MoveTo}} \indexi{Graphic++\italic{MoveTo}} 
 \indexi{View++\italic{MoveTo}}  moves its object's graphic drawing point to 
 (x,y).  Before drawing, a \italic{view} should move the drawing point, then 
@@ -1098,9 +1098,9 @@ moves the \italic{current point}, then calls a string-drawing primitive: \
 
 DrawString("hello world",
 
-		graphic_BETWEENTOPANDBASELINE |
+		graphic::BETWEENTOPANDBASELINE |
 
-		graphic_BETWEENLEFTANDRIGHT); }\
+		graphic::BETWEENLEFTANDRIGHT); }\
 
 
 }

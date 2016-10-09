@@ -55,14 +55,14 @@ doodview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks
 		if (this->lastuphitX != -9999) {
 		    /* white out old line */
 		    (this)->SetTransferMode(
-			graphic_WHITE);
+			graphic::WHITE);
 		    (this)->MoveTo( this->downhitX,
 			this->downhitY);
 		    (this)->DrawLineTo(
 			this->lastuphitX, this->lastuphitY);
 		}
 		/* draw new line */
-		(this)->SetTransferMode( graphic_BLACK);
+		(this)->SetTransferMode( graphic::BLACK);
 		(this)->MoveTo( this->downhitX,
 				  this->downhitY);
 		(this)->DrawLineTo( x, y);
@@ -76,12 +76,12 @@ doodview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks
 		(this)->SetLineWidth( this->linewidth);
 		if (this->lastuphitX != -9999) {
 		    /* white out old rectangle */
-		    DrawMyRect(this, graphic_WHITE, FALSE);
+		    DrawMyRect(this, graphic::WHITE, FALSE);
 		}
 		/* draw new rectangle */
 		this->lastuphitX = x;
 		this->lastuphitY = y;
-		DrawMyRect(this, graphic_BLACK, IsUpHit);
+		DrawMyRect(this, graphic::BLACK, IsUpHit);
 		break;
 	    default: // nomouseevent upmovement *filedrop
 		break;

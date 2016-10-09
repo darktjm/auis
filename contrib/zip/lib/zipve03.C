@@ -658,7 +658,7 @@ void Move_Selection( class zipedit	      *self, zip_type_pane	       pane )
         i++;
      	}
       Enclosure_Bounds( self, pane, &L, &T, &W, &H );
-      (View)->SetTransferMode(  graphic_WHITE );
+      (View)->SetTransferMode(  graphic::WHITE );
       (View)->EraseRectSize(  L-2, T-2, W+4, H+4 );
       EnclosureLeft = L + (EnclosureShadowLastX - EnclosureShadowStartX);
       EnclosureTop  = T + (EnclosureShadowLastY - EnclosureShadowStartY);
@@ -815,7 +815,7 @@ void Show_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane
     {
     Enclosure_Bounds( self, pane, &L, &T, &W, &H );
 /*===*/
-(View)->SetTransferMode(  graphic_INVERT );
+(View)->SetTransferMode(  graphic::INVERT );
 if ( (View )->GetLineWidth( ) != 1 )
   (View)->SetLineWidth(  1 );
 (View)->DrawRectSize( 
@@ -936,7 +936,7 @@ void Show_Enclosure( class zipedit	      *self, zip_type_pane	       pane )
   if ( W > 2  &&  H > 2 )
     {
 /*===*/
-(View)->SetTransferMode(  graphic_INVERT );
+(View)->SetTransferMode(  graphic::INVERT );
 if ( (View )->GetLineWidth( ) != 1 )
   (View)->SetLineWidth(  1 );
 (View)->DrawRectSize(  L, T, W, H );

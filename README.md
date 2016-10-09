@@ -199,14 +199,18 @@ So far, the following incompatibilities have been introduced:
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:
     
-    - Never use unlink; use remove instead.  In fact, anything in c89
-      should be preferred over "POSIX".  Also, only the open Single
-      UNIX specification should be followed, not POSIX (opposite of
-      AndrewCoding.ez).  Note that raise() is POSIX standard, but is
-      so rarely used by real programs that maybe kill() is better.  In
-      general, I indent to rid this code of many portability macros,
-      as the only systems that diverge are too old for me to care about.
-    
+    - Never use unlink; use remove instead.  Yes, unlink is
+      technically safer than remove, since it doesn't remove
+      directories, but remove isn't recursive, so removing an
+      empty directory won't hurt anyone. In fact, anything in
+      c89 should be preferred over "POSIX".  Also, only the open
+      Single UNIX specification should be followed, not POSIX
+      (opposite of AndrewCoding.ez).  Note that raise() is POSIX
+      standard, but is so rarely used by real programs that
+      maybe kill() is better. In general, I intend to rid this
+      code of many portability macros, as the only systems that
+      diverge are too old for me to care about.
+      
     - Never use a BSD function unless it's in Single UNIX (yes, Single
       UNIX was around at the time of AUIS, but named X/Open instead)
 
@@ -227,12 +231,12 @@ So far, the following incompatibilities have been introduced:
       the guidelines in CodeAppearance.ez, so the fact that they violate
       my own guidelines shouldn't matter.  In particular:
       
-      - (1.) I use `} else {' and '} while()' in violation of this rule,
+      * (1.) I use `} else {' and '} while()' in violation of this rule,
         as I find it more readable and intuitive that code belonging to
 	the brace is on the same line as the brace.  They even violate
 	the rule themselves in 7.2.
 
-      - (2.) Capping function complexity based on human short-term memory
+      * (2.) Capping function complexity based on human short-term memory
         studies is retarded.  A function should do one thing that it's
 	supposed to do, and nothing else.  Further breaking up of function
 	should be based on code duplication removal, rather than complexity.
@@ -242,69 +246,69 @@ So far, the following incompatibilities have been introduced:
 	the last few decades.  Adding usable comments does a lot more for
 	that than breaking up the code.
 
-      - (3.1) I use 4-space indentation, and allow my editor to convert
+      * (3.1) I use 4-space indentation, and allow my editor to convert
 	space aligned with 8-space tab stops to tab chars.  Yes, the
 	dreaded "mixed" form, which everyone hates the most.  Bite me.
 	Actually, I use 2-space tabs sometimes as well (e.g. for
 	literate code, or for shell code).  Also, I never use two spaces
-	within ode for separation.  For the usages they provide, I strongly
+	within code for separation.  For the usages they provide, I strongly
 	disagree with && and || and usually use a newline for ; and :.
 
-      - (3.2) I prefer #if 0 over commenting, even though I still use
+      * (3.2) I prefer #if 0 over commenting, even though I still use
         commenting by default out of habit.  #if 0 allows my editor to
 	syntax-highlight the commented-out code, and avoids any issues with
 	embedded comments.
 
-      - (3.3) "Avoid the use of #define".  Wow, I've heard that mantra for
+      * (3.3) "Avoid the use of #define".  Wow, I've heard that mantra for
         30 years now.  Admittedly, using enum in C and const in C++
-        for constants costs little and is in some ways superior, now
+        for constants costs little and is in some ways superior.  Now
 	that some debuggers finally understand macros, there is little
 	incentive not to use them.  Also, re the indentation:  all modern
 	compilers support it (although I don't use it myself).
 
-      - (4.) I guess it's not a bad naming convention, but there's too
+      * (4.) I guess it's not a bad naming convention, but there's too
 	much stuff that doesn't use it to care.  Adding a convention for
 	new code does nothing to alleviate that problem.  Just avoid
 	names which conflict with std::..   It would've been better to
 	have just adopted a namespace for all C++ code than a naming
 	convention that is too little, too late.
 
-      - (4.1) All upper-case needs to die.  Even for C macros.  I still
+      * (4.1) All upper-case needs to die.  Even for C macros.  I still
         use it by habit, though.
 
-      - (4.2-4.4) come out of OO courses.  Screw them.  Some of these are
+      * (4.2-4.4) come out of OO courses.  Screw them.  Some of these are
         just retarded, as well.  "fnd" for "find"?
 
-      - (5) - Adding gratuitous newlines is rarely helpful.  Especially
+      * (5.) Adding gratuitous newlines is rarely helpful.  Especially
         since for some reason monitors have been getting wider instead
-        of longer.
+        of taller.
 
-      - (6) - Avoid goto doesn't belong in the same point, but in any
+      * (6.) Avoid goto doesn't belong in the same point, but in any
 	case, they had a perfect opportunity to promote C++ exceptions,
 	but didn't.  Maybe "avoid longjmp even more" would've helped.
 	Also, as usual, their solution is convoluted and adds nothing
 	over just using goto.
 
-      - (7) - trailing brace comments are worthless.  Use your editor's
+      * (7.) trailing brace comments are worthless.  Use your editor's
         brace matching while editing, and ensure proper indentation when
 	not.
 
-      - (7.3) - I prefer "FALL THROUGH" over "DROP THRU".  Whatever.
+      * (7.3) I prefer "FALL THROUGH" over "DROP THRU".  Whatever.
 	Also, I'll put the default case wherever it makes sense.
 	One of my gripes with Ada was that I couldn't do that any more.
 	Also, I prefer half-dedent for case rather than full-dedent.
 
-      - (8.) - Not placing the type to the left of the function name is
+      * (8.) Not placing the type to the left of the function name is
         the worst aspect of Andrew coding style.  I will remove that
 	everywhere, if possible.  Also, repeating the name of the
 	function you are about to define in the comment above it is
 	redundant and adds maintenance overhead.
 
-      - (9.)  Once again, half-dedent for accessibility keywords.  Also,
+      * (9.)  Once again, half-dedent for accessibility keywords.  Also,
         private types may need to go above the public section.  In fact,
 	I don't see any reason to force the pure binary split at all.
 
-      - (9.2.) There's a reason the friend feature was put in.  Use it if
+      * (9.2.) There's a reason the friend feature was put in.  Use it if
         you need it.
 
 Goals

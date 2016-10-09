@@ -95,3 +95,90 @@ SKIP_FUNCTION_MACROS   = NO
 
 # this sort of forces it by adding every file to a group
 INPUT_FILTER           = ./doxy_preproc
+
+# convenience; doxygen doesn't indent code blocks by default.
+# \qcode[{.ext}] .. \endqcode == blockquoted code
+ALIASES += "qcode=<blockquote>\code" "endqcode=\endcode</blockquote>"
+ALIASES += "qcode{1}=<blockquote>\code{\1}"
+# \pcode .. \endpcode == blockquoted pseudo code w/ HTML markup
+# This conveniently also removes the excess blank line at the top you
+# get when inserting this manually.
+ALIASES += "pcode=<blockquote><code><pre>" "endpcode=</pre></code></blockquote>"
+
+# some custom sections; may split off since they are documented elsewhere.
+ALIASES += "pref{3}=\xrefitem pref \"Preferences Used\" \"Preferences\" \b \1[\e \2]: \3"
+ALIASES += "proctable{2}=\xrefitem proctable \"Named Procedures Defined\" \"Named Procedures for Key Binding and NESS\" \b \1: \2"
+ALIASES += "proctable{3}=\xrefitem proctable \"Named Procedures Defined\" \"Named Procedures for Key Binding and NESS\" \b \1[\e \2]: \3"
+ALIASES += "doattr{3}=\xrefitem doattr \"Attributes Recognized\" \"Data Object Attributes\" \b \1[\e \2]: \3"
+ALIASES += "doprop{3}=\xrefitem doprop \"Properties Used\" \"Data Object Properties\" \b \1[\e \2]: \3"
+# A lot of prefs are based on sbutton.  These are those prefs.
+#\sbuttonpref{class,longname,shortname,whatisrendered}
+ALIASES += "sbuttonpref{4}=\
+\pref{\1Background,String,The background color for this \3.\
+      Defaults to the background color for the application\, as set\
+      by the backgroundcolor preference.\
+      This color will be used to compute several other colors to\
+      provide a \"3D\" effect for the \"Three Dimensional\" and\
+      \"OSF/Motif\"(tm) style \2s.}\
+\pref{\1Foreground,String,The foreground color for this \3.\
+      Defaults to the foreground color for the application\, as set\
+      by the foregroundcolor preference.}\
+      This color will be used to compute several other colors to\
+      provide a \"3D\" effect for the \"Three Dimensional\" and\
+      \"OSF/Motif\"(tm) style \2s.}\
+\pref{\1Top,String,The color which will be used to\
+      draw the background area around the \3's labels.\
+      Defaults to a color computed from the default foreground and\
+      background colors of the application.}\
+\pref{\1TopShadow,String,The color which will be used to\
+      draw the upper shadow of the \2 (for \"OSF/Motif\"(tm)\
+      and \"Three Dimensional\" styles only).}\
+      Defaults to a color computed from the default foreground and\
+      background colors of the application.}\
+\pref{\1BottomShadow,String,The color which will be used to\
+      draw the lower shadow of the \2 (for \"OSF/Motif\"(tm)\
+      and \"Three Dimensional\" styles only).\
+      Defaults to a color computed from the default foreground and\
+      background colors of the application.}\
+\pref{\1LabelForeground,String,The color in which the actual\
+      labels of the \2 will be drawn in.\
+      Defaults to the foreground color for the application\, as set\
+      by the foregroundcolor preference.}\
+\pref{\1LabelBackground,String,The color of the shadow around\
+      labels of the \2 (For the \"3D\"ish \3s).\
+      Defaults to the background color for the application\, as set\
+      by the backgroundcolor preference.}\
+\pref{\1InsensitiveLabelForeground,String,The color in which\
+      the actual labels of the \4 will be drawn in when the\
+      \4 is insensitive (grayed/ghosted out).\
+      Default is computed from the foreground color for the\
+      application\, as set by the ForegroundColor preference.}\
+\pref{\1InsensitiveLabelBackground,String,The color of the\
+      shadow around labels of the \4 (For the \"3D\"ish \4s)\
+      when the \4 is insensitive (grayed/ghosted out).\
+      Defaults is computed from the background color for the\
+      application\, as set by the BackgroundColor preference.}\
+\pref{\1InsensitiveTop,String,The color which will be used to\
+      draw the background area around the \4's labels when\
+      the \4 is insensitive (grayed/ghosted out).\
+      Defaults to a color computed from the default foreground and\
+      background colors of the application.}\
+\pref{\1Style,Integer,This integer preference specifies which\
+      \"look\" should be used for all the components of the \2.\
+      The default of 4 indicates \"OSF/Motif\"(tm) appearance.\
+      The possible values for this preference are:\
+      \n\
+       - 0:  Plain Text.\n\
+       - 1:  Double Boxed.\n\
+       - 2:  Three Dimensional.\n\
+       - 3:  Plain Box.\n\
+       - 4:  \"OSF/Motif\"(tm)}\n\
+\pref{\1Depth,Integer,The width of the beveled edge for\
+      \"3D\"ish styles\, and the double-border for Double Boxed style.\
+      The default is 2 for \"OSF/Motif\"(tm) and 4 otherwise.}\
+\pref{\1Font,String,The font to use for the \4 labels.\
+      The default is andysans12b.}\
+\pref{\1Inherit,Boolean,If set to yes\, the settings will\
+      apply to all instances of \1 objects (for example in\
+      dialog boxes and scrollbars).  When this is no\,\
+      settings only apply to \1s.}"

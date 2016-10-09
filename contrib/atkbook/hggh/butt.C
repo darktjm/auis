@@ -84,8 +84,8 @@ butt::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  widt
 	dtext = this->text;
     }
     (this)->DrawString( dtext,
-		       graphic_BETWEENLEFTANDRIGHT
-		       | graphic_BETWEENTOPANDBASELINE);
+		       graphic::BETWEENLEFTANDRIGHT
+		       | graphic::BETWEENTOPANDBASELINE);
     (this)->PostCursor( &Rect, this->mycursor);
 }
 

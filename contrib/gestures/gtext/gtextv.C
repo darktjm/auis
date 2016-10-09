@@ -254,7 +254,7 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
 
   (this)->GetVisualBounds( &VisualRect);
   
-  (this)->SetTransferMode( graphic_XOR);
+  (this)->SetTransferMode( graphic::XOR);
 
   if(action == view_LeftMovement) { /* Track the mouse movements */
     this->xp[this->index] = x;
@@ -364,7 +364,7 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
     this->index = 0;
   }
 
-  (this)->SetTransferMode( graphic_COPY);
+  (this)->SetTransferMode( graphic::COPY);
   return((class view *)temp);
 }
 

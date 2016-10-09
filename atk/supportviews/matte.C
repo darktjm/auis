@@ -245,7 +245,7 @@ static void UpdateDrawing(class matte  *self)
 {
     if(self->OldMode != self->drawing){
 	struct rectangle enclosingRect;
-	(self)->SetTransferMode(graphic_INVERT);
+	(self)->SetTransferMode(graphic::INVERT);
 	enclosingRect.top = 0; enclosingRect.left = 0;
 	enclosingRect.width  = (self)->GetLogicalWidth() -1 ;
 	enclosingRect.height = (self)->GetLogicalHeight() -1 ;
@@ -286,9 +286,9 @@ void matte::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  wid
     if(type != view_Remove){
 	UpdateCursors(this);
 	if(type != view_MoveNoRedraw){
-	    (this)->SetTransferMode(graphic_WHITE);
+	    (this)->SetTransferMode(graphic::WHITE);
 	    (this)->DrawRect(&enclosingRect);
-	    (this)->SetTransferMode(graphic_INVERT);
+	    (this)->SetTransferMode(graphic::INVERT);
 	    if(this->drawing){ 
 		(this)->DrawRect(&enclosingRect);
 	    }

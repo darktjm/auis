@@ -65,7 +65,6 @@ class atomlist *atomlist::StringToAtomlist(const char  *string)
 	    atomend = strchr(atomstart,'.');
 	    if (atomend != NULL) *atomend = '\0';
             atom = atom::Intern(atomstart);
-	    if (atomend != NULL) *atomend = '.';
             (newlist)->Append( atom);
 	}
     }

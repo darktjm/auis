@@ -334,7 +334,7 @@ PlotLabels(class clockview  *self, double  theta, int  radius, const char  *labe
       (self)->MoveTo( x2, y2);
     }
   }
-  (self)->DrawString( label,  graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM);
+  (self)->DrawString( label,  graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM);
 
   return;
 }
@@ -421,7 +421,7 @@ Redraw(class clockview  *self)
   (self)->GetLogicalBounds( &rect);
   if (self->need_full_update) {
     /* need to redraw face and hands */
-    (self)->SetTransferMode( graphic_SOURCE);
+    (self)->SetTransferMode( graphic::SOURCE);
     (self)->EraseVisualRect();
     min_dimension = MIN(rect.width, rect.height);
     if (options->border_width > 0) {
@@ -452,12 +452,12 @@ Redraw(class clockview  *self)
     if (myfontdesc) (self)->SetFont( myfontdesc);
     FACELOOP(options->num_labels, PlotLabels, -3, options->labels[i]);
 
-    (self)->SetTransferMode( graphic_XOR);
+    (self)->SetTransferMode( graphic::XOR);
     PlotPoints(self, HOURSTORADIANS(clockface->hours), options->hours_length, options->hours_width, options->border_shape);
     PlotPoints(self, MINUTESTORADIANS(clockface->minutes), options->minutes_length, options->minutes_width, options->border_shape);
     PlotPoints(self, MINUTESTORADIANS(clockface->seconds), options->seconds_length, options->seconds_width, options->border_shape);
   } else {
-    (self)->SetTransferMode( graphic_XOR);
+    (self)->SetTransferMode( graphic::XOR);
     if (self->lastclockface.hours != clockface->hours) {
       /* redraw hour hand */
       PlotPoints(self, HOURSTORADIANS(self->lastclockface.hours), options->hours_length, options->hours_width, options->border_shape);

@@ -175,7 +175,7 @@ void figorect::Draw(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
 
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     (v)->SetForegroundColor( col, 0, 0, 0); 
@@ -193,7 +193,7 @@ void figorect::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic_LineOnOffDash);
+	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
     }
 
     (v)->DrawRectSize(x, y, w, h); 
@@ -202,7 +202,7 @@ void figorect::Draw(class figview  *v)
 	(v)->SetLineWidth( 1);
 
     if (dash!=figattr_LineSolid)
-	(v)->SetLineDash(NULL, 0, graphic_LineSolid);
+	(v)->SetLineDash(NULL, 0, graphic::LineSolid);
 }
 
 void figorect::Sketch(class figview  *v) 
@@ -227,7 +227,7 @@ void figorect::Sketch(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h); 
 }
 

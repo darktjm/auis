@@ -512,7 +512,7 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
       {
       case  view_LeftDown:
 	(this )->UseInvisibleCursor( );
-        (this)->SetTransferMode(  graphic_INVERT );
+        (this)->SetTransferMode(  graphic::INVERT );
 	initial_y = y;
 	y = ShadowMiddle(shadow);
 	(this)->MoveTo(  Left, prior_y = y );
@@ -720,9 +720,9 @@ void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long w
   short		  x, x_increment, y, excess, fudge, i = 0;
 
   IN(Draw_Horizontal_Labels);
-  (self)->SetTransferMode(  graphic_WHITE );
-  (self)->FillRectSize(  left, top, width, height, graphic_WHITE );
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::WHITE );
+  (self)->FillRectSize(  left, top, width, height, graphic::WHITE );
+  (self)->SetTransferMode(  graphic::BLACK );
   if ( (Chart )->ItemCount( ) )
     {
     x_increment = width / (Chart )->ItemCount( );
@@ -774,22 +774,22 @@ void Draw_Left_Scale( class chartobj	  *self )
 
   IN(Draw_Left_Scale); /*=== NEEDS WORK ===*/
   Prepare_Vertical_Scale( self );
-  (self)->SetTransferMode(  graphic_WHITE );
+  (self)->SetTransferMode(  graphic::WHITE );
   (self)->FillRectSize(  LeftScaleLeft,  LeftScaleTop,
-			       LeftScaleWidth, LeftScaleHeight, graphic_WHITE );
-  (self)->SetTransferMode(  graphic_COPY );
+			       LeftScaleWidth, LeftScaleHeight, graphic::WHITE );
+  (self)->SetTransferMode(  graphic::COPY );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleBarX, LeftScaleBottom );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleTop );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleBottom );
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleBottom );
-  (self)->SetLineDash(  "\001\004", 0, graphic_LineOnOffDash);
+  (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
   (self)->MoveTo(  LeftScaleRight, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleRight+ChartWidth, LeftScaleTop );
   (self)->MoveTo(  LeftScaleRight, LeftScaleBottom );
   (self)->DrawLineTo(  LeftScaleRight+ChartWidth, LeftScaleBottom );
-  (self)->SetLineDash(  NULL, 0, graphic_LineSolid);
+  (self)->SetLineDash(  NULL, 0, graphic::LineSolid);
   if ( (ScaleTick > 0) && (adjust = (value = (Chart)->ItemValueLeast()) % ScaleTick ) )
     value -= ScaleTick + adjust;
   sprintf( value_string, "%ld", value );
@@ -810,10 +810,10 @@ void Draw_Left_Scale( class chartobj	  *self )
       {
       (self)->MoveTo(  LeftScaleBarX, Y );
       (self)->DrawLineTo(  LeftScaleRight, Y );
-      (self)->SetLineDash(  "\001\004", 0, graphic_LineOnOffDash);
+      (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
       (self)->MoveTo(  LeftScaleRight, Y );
       (self)->DrawLineTo(  LeftScaleRight+ChartWidth, Y );
-      (self)->SetLineDash(  NULL, 0, graphic_LineSolid);
+      (self)->SetLineDash(  NULL, 0, graphic::LineSolid);
       (self)->MoveTo(  LeftScaleBarX, Y + half_y_increment );
       (self)->DrawLineTo(  LeftScaleRight - 5, Y + half_y_increment );
       value -= ScaleTick;

@@ -297,7 +297,7 @@ zip::Set_Stream_Line_Dash( zip_type_stream		 stream, char				 *pattern, int				 
 	      stream->zip_stream_line_dash_offset = offset;
 	      stream->zip_stream_line_dash_type = type;
 	    }
-	  else stream->zip_stream_line_dash_type = graphic_LineSolid;
+	  else stream->zip_stream_line_dash_type = graphic::LineSolid;
       }
       else
 	  status = zip_stream_non_existent;
@@ -870,8 +870,8 @@ Allocate_Stream_Object( class zip		      *self, zip_type_stream	      *stream, c
     self->stream_anchor = stream_link;
     zip_Set_Stream_File_Name( self, *stream, name );
     (self)->Set_Stream_Line_Width(  *stream, 1 );
-    (self)->Set_Stream_Line_Cap(  *stream, graphic_CapButt );
-    (self)->Set_Stream_Line_Join(  *stream, graphic_JoinMiter );
+    (self)->Set_Stream_Line_Cap(  *stream, graphic::CapButt );
+    (self)->Set_Stream_Line_Join(  *stream, graphic::JoinMiter );
     symtab_create( &(*stream)->zip_stream_symbol_table, 100 );
     }
   OUT(Allocate_Stream_Object);

@@ -176,6 +176,7 @@
   - switcher: builds OK.  Not sure what it does
 - figure out what ANSI standard ansitext refers to, and document it
 - get rid of include/ prefix on all headers in doxygen
+- figure out how to get multi-paragraph arguments to custom section commands
 - implement or get rid of alink, ezscan
 - maybe try converting doxy latex output to ez (rtf is hopeless, and
   like the rest of the www, html is javascript-laden bloated mess)

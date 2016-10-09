@@ -12,13 +12,13 @@
 #ifdef SGI_4D_ENV
 #include <sys/stat.h>
 #endif
+ATK_IMPL("xfontdesc.H")
+#include <xgraphic.H>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <cmenu.h>
 
-ATK_IMPL("xfontdesc.H")
-#include <xgraphic.H>
 #include <fontdesc.H>
 #include <im.H>
 #include <xim.H>

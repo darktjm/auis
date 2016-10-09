@@ -262,7 +262,7 @@ long Draw( class zipopolygon  *self, zip_type_figure   figure, zip_type_pane   p
         else
         if ( action == zip_clear )
 	  { DEBUG(Clear Action);
-	  (self->view_object)->FillPolygon(  points, sides + 1, graphic_WHITE );
+	  (self->view_object)->FillPolygon(  points, sides + 1, graphic::WHITE );
 	  }
       }
       if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )

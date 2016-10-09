@@ -64,7 +64,7 @@ zipedit::Draw_Pane_Coordinates( zip_type_pane		   pane )
   pane->zip_pane_border_thickness = ZIP_pane_coordinate_thickness;
 /*===  zipedit_Compute_Pane_Stretch_Factors( self, pane );===*/
   (this->view_object)->Set_Clip_Area(  pane, PaneLeft, PaneTop, PaneWidth, PaneHeight );
-  (this->view_object)->SetTransferMode(  graphic_BLACK );
+  (this->view_object)->SetTransferMode(  graphic::BLACK );
   (this->view_object)->MoveTo(  PaneLeft, PaneTop );
   if ( (View )->GetLineWidth( ) != 1 )
     (this->view_object)->SetLineWidth(  1 );
@@ -135,7 +135,7 @@ long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
     B = PaneBottom;
     x_center = pane->zip_pane_x_origin + pane->zip_pane_x_offset;
     y_center = pane->zip_pane_y_origin - pane->zip_pane_y_offset;
-    (this->view_object)->SetTransferMode(  graphic_BLACK );
+    (this->view_object)->SetTransferMode(  graphic::BLACK );
 	/* Do the center dot */
 	(this->view_object)->MoveTo(  (long)x_center, (long)y_center );
 	(this->view_object)->DrawText(  &big_dot, 1, 0 );
@@ -182,7 +182,7 @@ long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
 static
 void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane )
       {
-  (self->view_object)->SetTransferMode(  graphic_WHITE );
+  (self->view_object)->SetTransferMode(  graphic::WHITE );
   (self->view_object)->FillRectSize(  PaneLeft + 1, PaneTop + 1,
     PaneWidth - 2, pane->zip_pane_border_thickness - 2, (View )->WhitePattern( ) );
   (self->view_object)->FillRectSize(  PaneRight - pane->zip_pane_border_thickness + 1,
@@ -192,7 +192,7 @@ void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane )
     PaneWidth - 2, pane->zip_pane_border_thickness - 2, (View )->WhitePattern( ) );
   (self->view_object)->FillRectSize(  PaneLeft + 1, PaneTop + 1,
     pane->zip_pane_border_thickness - 2, PaneHeight - 2, (View )->WhitePattern( ) );
-  (self->view_object)->SetTransferMode(  graphic_BLACK );
+  (self->view_object)->SetTransferMode(  graphic::BLACK );
   }
 
 static
@@ -341,7 +341,7 @@ void zipedit::Lighten_Pane( zip_type_pane		   pane, char				   density )
         {
   class zipedit *self=this;
   (this->view_object)->Set_Pane_Clip_Area(  pane );
-  (this->view_object)->SetTransferMode(  graphic_WHITE );
+  (this->view_object)->SetTransferMode(  graphic::WHITE );
   if ( density == 0 )
     density = 'G';
   (this->view_object)->FillTrapezoid( 
@@ -349,6 +349,6 @@ void zipedit::Lighten_Pane( zip_type_pane		   pane, char				   density )
 	PaneLeft, PaneBottom, PaneWidth,
 (this->view_object)->WhitePattern()/*===tile===*/ );
   (View )->FlushGraphics( );
-  (this->view_object)->SetTransferMode(  graphic_BLACK );
+  (this->view_object)->SetTransferMode(  graphic::BLACK );
   }
 

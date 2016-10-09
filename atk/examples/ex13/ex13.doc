@@ -241,9 +241,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "hello ",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATRIGHT);
+			       graphic::ATRIGHT);
 
     helloworldview_MoveTo(hwv,
 
@@ -253,9 +253,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "world",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATLEFT);
+			       graphic::ATLEFT);
 
 \}
 
@@ -272,7 +272,7 @@ The text must be drawn in its two component parts, and the font must be
 changed before each \italic{DrawString} call.  Since we want the whole string 
 "hello world" still to be centered around the current location in the X 
 dimension, we move to the current location before each \italic{DrawString} 
-call and use \italic{graphic_ATRIGHT }and \italic{graphic_ATLEFT} to 
+call and use \italic{graphic::ATRIGHT }and \italic{graphic::ATLEFT} to 
 respectively right and left justify the text about the current location. 
 
 
@@ -599,9 +599,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "hello ",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATRIGHT);
+			       graphic::ATRIGHT);
 
     helloworldview_MoveTo(hwv,
 
@@ -611,9 +611,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "world",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATLEFT);
+			       graphic::ATLEFT);
 
 \}
 
@@ -676,7 +676,7 @@ long height;
     hwv->blackOnWhite=hw->blackOnWhite;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hw->blackOnWhite)
@@ -690,7 +690,7 @@ helloworldview_WhitePattern(hwv));
 helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv,graphic_INVERT);
+    helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
     drawHW(hwv);
@@ -708,7 +708,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     if (hw->blackOnWhite!=hwv->blackOnWhite) \{

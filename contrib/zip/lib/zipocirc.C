@@ -209,7 +209,7 @@ long Draw( class zipocirc *self, zip_type_figure figure, zip_type_pane pane, lon
 	{
 #if (!defined(MACH) || !defined(i386))
         (self->view_object)->FillOvalSize(  window_x_point - radius, window_y_point - radius,
-			      (radius << 1)+1, (radius << 1)+1, graphic_WHITE );
+			      (radius << 1)+1, (radius << 1)+1, graphic::WHITE );
 #endif
 	}
     }

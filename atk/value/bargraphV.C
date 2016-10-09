@@ -32,7 +32,7 @@ static void DrawKnurl(class bargraphV  * self,boolean  fullupdate,struct rectang
     int offset;
     ss = (class sliderV *) self;
     offset = FUDGE2;
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     height =  ((ss->tmpval - ss->minval)* (rectangle_Height(rr) - FUDGE2)) /(ss->maxval - ss->minval) ;
     start = rectangle_Height(rr) - height - FUDGE2; 
     rectangle_SetRectSize(&r,rectangle_Left(rr) + FUDGE,

@@ -92,14 +92,14 @@ static void drawHW(class helloworldview  *hwv)
 			   hwv->x-hwv->frameX,hwv->y-hwv->frameY);
     (hwv)->SetFont(italic);
     (hwv)->DrawString( "hello ",
-			       graphic_BETWEENTOPANDBASELINE |
-			       graphic_ATRIGHT);
+			       graphic::BETWEENTOPANDBASELINE |
+			       graphic::ATRIGHT);
     (hwv)->MoveTo(
 			   hwv->x-hwv->frameX,hwv->y-hwv->frameY);
     (hwv)->SetFont(bold);
     (hwv)->DrawString( "world",
-			       graphic_BETWEENTOPANDBASELINE |
-			       graphic_ATLEFT);
+			       graphic::BETWEENTOPANDBASELINE |
+			       graphic::ATLEFT);
 }
 
 void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height )
@@ -128,14 +128,14 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
     this->y=hw->y;
     this->blackOnWhite=hw->blackOnWhite;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if (hw->blackOnWhite)
 	(this)->FillRect( &myVisualRect, (this)->WhitePattern());
     else
 	(this)->FillRect( &myVisualRect, (this)->BlackPattern());
 
-    (this)->SetTransferMode(graphic_INVERT);
+    (this)->SetTransferMode(graphic::INVERT);
 
     drawHW(this);
 }
@@ -145,7 +145,7 @@ void helloworldview::Update()
 {    
     class helloworld *hw=(class helloworld *)this->dataobject;
 
-    (this)->SetTransferMode( graphic_INVERT);
+    (this)->SetTransferMode( graphic::INVERT);
 
     if (hw->blackOnWhite!=this->blackOnWhite) {
 	struct rectangle vr;

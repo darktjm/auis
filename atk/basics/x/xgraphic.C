@@ -11,13 +11,43 @@ ATK_IMPL("xgraphic.H")
 #include <stdio.h>
 #include <util.h>
 
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#include <X11/Xutil.h>
-
 ATK_IMPL("xgraphic.H")
 #include <physical.h>
+/* Damn X and its unqualified namespace pollution */
+/* And damn ATK for choosing to use the same names */
+#define LineSolid gLineSolid
+#define LineOnOffDash gLineOnOffDash
+#define LineDoubleDash gLineDoubleDash
+#define GrayScale gGrayScale
+#define StaticGray gStaticGray
+#define PseudoColor gPseudoColor
+#define DirectColor gDirectColor
+#define TrueColor gTrueColor
+#define StaticColor gStaticColor
+#define CapNotLast gCapNotLast
+#define CapRound gCapRound
+#define CapProjecting gCapProjecting
+#define CapButt gCapButt
+#define JoinRound gJoinRound
+#define JoinBevel gJoinBevel
+#define JoinMiter gJoinMiter
 #include <graphic.H>
+#undef LineSolid
+#undef LineOnOffDash
+#undef LineDoubleDash
+#undef GrayScale
+#undef StaticGray
+#undef CapNotLast
+#undef CapRound
+#undef CapProjecting
+#undef CapButt
+#undef JoinRound
+#undef JoinBevel
+#undef JoinMiter
+#undef PseudoColor
+#undef DirectColor
+#undef TrueColor
+#undef StaticColor
 #include <pixelimage.H>
 #include <fontdesc.H>
 #include <environ.H>
@@ -29,6 +59,10 @@ ATK_IMPL("xgraphic.H")
 #include <xcolormap.H>
 #include <xgraphic.H>
 #include <xddimage.H>
+
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <X11/Xutil.h>
 
 static int regionDebug = 0;
 static int imageDebug = 0;
@@ -315,9 +349,9 @@ transfer mode.
 /* Setup the foreground and background colors right. One would like to do this
  * using the transfer modes, but that is not the way X11 works...
  */
-    if (self->transferMode == graphic_WHITE)  {
+    if (self->transferMode == graphic::WHITE)  {
         xMode = GXcopy;
-        if (prevValue != graphic_WHITE)  {
+        if (prevValue != graphic::WHITE)  {
             XSetBackground((self)->XDisplay(), (self)->XGC(),	self->foregroundpixel);
             XSetBackground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel);
             XSetForeground((self)->XDisplay(), (self)->XGC(),	self->backgroundpixel);
@@ -326,8 +360,8 @@ transfer mode.
         }
     }
 #ifndef PLANEMASK_ENV
-    else if (self->transferMode == graphic_XOR)  {
-        if (prevValue != graphic_XOR)  {
+    else if (self->transferMode == graphic::XOR)  {
+        if (prevValue != graphic::XOR)  {
             XSetBackground((self)->XDisplay(), (self)->XGC(),	0);
             XSetBackground((self)->XDisplay(), (self)->XFillGC(), 0);
             XSetForeground((self)->XDisplay(), (self)->XGC(),	self->foregroundpixel ^ self->backgroundpixel);
@@ -338,25 +372,25 @@ transfer mode.
     }
 #endif /* PLANEMASK_ENV */
     else {
-        if (prevValue == graphic_WHITE || prevValue == graphic_XOR)  {
+        if (prevValue == graphic::WHITE || prevValue == graphic::XOR)  {
             XSetBackground((self)->XDisplay(), (self)->XGC(),	self->backgroundpixel);
             XSetBackground((self)->XDisplay(), (self)->XFillGC(), self->backgroundpixel);
             XSetForeground((self)->XDisplay(), (self)->XGC(),	self->foregroundpixel);
             XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel);
             self->lastFillPixel = self->foregroundpixel;
         }
-        if (self->transferMode == graphic_BLACK)
+        if (self->transferMode == graphic::BLACK)
             xMode = GXcopy;
     }
 
-    if (self->transferMode == graphic_INVERT)  {
-	if (prevValue != graphic_INVERT)  {
+    if (self->transferMode == graphic::INVERT)  {
+	if (prevValue != graphic::INVERT)  {
 	    XSetPlaneMask((self)->XDisplay(), (self)->XGC(), self->foregroundpixel ^ self->backgroundpixel);
 	    XSetPlaneMask((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel ^ self->backgroundpixel);
 	}
     }
     else  {
-	if (prevValue == graphic_INVERT)  {
+	if (prevValue == graphic::INVERT)  {
 	    XSetPlaneMask((self)->XDisplay(), (self)->XGC(), AllPlanes);
 	    XSetPlaneMask((self)->XDisplay(), (self)->XFillGC(), AllPlanes);
 	}
@@ -373,7 +407,7 @@ transfer mode.
                   self->localFillGraphicContext,
 		  xMode);
 
-    if(self->transferMode == graphic_XOR) {
+    if(self->transferMode == graphic::XOR) {
 	class xgraphic *tile=xgraphicGrayShade(self, 16);
 	XSetStipple((self)->XDisplay(),  (self)->XGC(), tile->localWindow);
     } else if(self->lastStipple) XSetStipple((self)->XDisplay(), (self)->XGC(), self->lastStipple->localWindow);
@@ -463,30 +497,30 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
     /* Do we need to generate a count? */
     if (StringMode==xgraphic_NULLTERMINATED) TextLength = strlen(Text);
 
-    if (Operation /* !=graphic_NOMOVEMENT */) {
+    if (Operation /* !=graphic::NOMOVEMENT */) {
         /* GetRealFontDesc is used to load the font cache in fontdesc */
         maxChar =
         &(self->currentFont)->GetRealFontDesc( self)->dummy.max_bounds;
 
         if (Operation&
-	   (graphic_ATTOP|graphic_BETWEENTOPANDBOTTOM|graphic_ATBOTTOM)){
+	   (graphic::ATTOP|graphic::BETWEENTOPANDBOTTOM|graphic::ATBOTTOM)){
 	    y += maxChar->ascent;
         }
-        if (Operation&graphic_BETWEENTOPANDBASELINE) {
+        if (Operation&graphic::BETWEENTOPANDBASELINE) {
             y += maxChar->ascent >> 1;
         }
-        if (Operation&graphic_ATBOTTOM) {
+        if (Operation&graphic::ATBOTTOM) {
 	    y -= maxChar->ascent + maxChar->descent;
         }
-        if (Operation&graphic_BETWEENTOPANDBOTTOM) {
+        if (Operation&graphic::BETWEENTOPANDBOTTOM) {
 	    y -= (maxChar->ascent + maxChar->descent)>>1;
         }
-        if (Operation&(graphic_ATRIGHT|graphic_BETWEENLEFTANDRIGHT)) {
+        if (Operation&(graphic::ATRIGHT|graphic::BETWEENLEFTANDRIGHT)) {
 	    long LastXWidth;
 	    LastXWidth = XTextWidth(
 	        &((self->currentFont)->GetRealFontDesc( self)->dummy),
 	        Text,TextLength);
-	    if (Operation&graphic_ATRIGHT) {
+	    if (Operation&graphic::ATRIGHT) {
 	        x -= LastXWidth;
 	    } else {
 	        x -= LastXWidth>>1;
@@ -794,36 +828,36 @@ class xgraphic * tile = (class xgraphic *)Tile;
 unsigned long	fgPixel;
 
     /* See if transfer mode will take care of it, i.e., mode is source independent. If so, just make sure that a fillsolid mode is picked in the belief that the server won't be smart enough to realize that only the shape matters and not to waste time aligning any random tile that was left over */
-    if ( (self->transferMode == graphic_BLACK) ||
-	 (self->transferMode == graphic_WHITE) ||
-         (self->transferMode == graphic_INVERT) ||
-	 (self->transferMode == graphic_DEST) ) {
+    if ( (self->transferMode == graphic::BLACK) ||
+	 (self->transferMode == graphic::WHITE) ||
+         (self->transferMode == graphic::INVERT) ||
+	 (self->transferMode == graphic::DEST) ) {
 	 /* source independent, just optimize server */
          if (self->lastFillStyle != FillSolid) {
 	    XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillSolid);
 	    self->lastFillStyle = FillSolid;
 	 }
-	 if(self->transferMode==graphic_BLACK && self->fore->name==trans) return FALSE;
-	 else if(self->transferMode==graphic_WHITE && self->back->name==trans) return FALSE;
+	 if(self->transferMode==graphic::BLACK && self->fore->name==trans) return FALSE;
+	 else if(self->transferMode==graphic::WHITE && self->back->name==trans) return FALSE;
 	 return TRUE;
     }
 
     if ( tile == NULL &&
-	(( (self )->DisplayClass( ) & (graphic_Color | graphic_GrayScale)) /* ||
-	 ( xgraphic_DisplayClass( self ) & graphic_StaticGray ) */))
+	(( (self )->DisplayClass( ) & (graphic::Color | graphic::gGrayScale)) /* ||
+	 ( xgraphic_DisplayClass( self ) & graphic::gStaticGray ) */))
       tile = ( class xgraphic * ) (self)->BlackPattern();
     else if ( tile == NULL )
       tile = (self->lastFillTile != NULL) ? self->lastFillTile : (class xgraphic *) (self)->BlackPattern();
 
-    if(self->transferMode == graphic_XOR ) {
+    if(self->transferMode == graphic::XOR ) {
 	if(tile==(class xgraphic *)(self)->BlackPattern()) tile = self->gray_shades[16];
     }
     
     /* Hm, depends on sources, but source may be white or black, so let's special case those as well */
-    if (!((self)->DisplayClass() & graphic_StaticGray)
+    if (!((self)->DisplayClass() & graphic::gStaticGray)
 	&& self->gray_levels[16] != NULL && self->gray_levels[16] == tile) {
 	/* We're using black, make sure context is OK */
-	fgPixel = (self->transferMode == graphic_XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
 
         if (self->lastFillStyle != FillSolid) {
 	    XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillSolid);
@@ -835,7 +869,7 @@ unsigned long	fgPixel;
 	}
 	self->lastFillTile = self->gray_levels[16];
     }
-    else if (!((self)->DisplayClass() & graphic_StaticGray)
+    else if (!((self)->DisplayClass() & graphic::gStaticGray)
 	     && self->gray_levels[0] != NULL && self->gray_levels[0] == tile) {
 	/* We're using white, make sure content is OK */
 
@@ -862,7 +896,7 @@ unsigned long	fgPixel;
 	    grayIndex = ind[i];
 
 	    /* Lucky us, reusing a preloaded gray shade, so just make sure that fill style is set correctly, and see if we have alredy downloaded tile */
-	    fgPixel = (self->transferMode == graphic_XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	    fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
 	    
 	    if (self->lastFillPixel != fgPixel) {
 		XSetForeground((self)->XDisplay(), (self)->XFillGC(),  fgPixel);
@@ -882,7 +916,7 @@ unsigned long	fgPixel;
 	}
 	/* Unknown, or unused tile, so download it and use it */
 	else {
-	    fgPixel = (self->transferMode == graphic_XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	    fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
 
 	    if (self->lastFillPixel != fgPixel) {
 		XSetForeground((self)->XDisplay(), (self)->XFillGC(),  fgPixel);
@@ -1221,7 +1255,7 @@ void xgraphic::SetBitAtLoc(long  XPos ,long  YPos,boolean  NewValue )
 
     XSetForeground((this)->XDisplay(), (this)->XFillGC(), this->lastFillPixel);
     
-    xgraphic_LocalSetTransferFunction(this, graphic_COPY);
+    xgraphic_LocalSetTransferFunction(this, graphic::COPY);
 }
 
 static XImage *PixImage = NULL;
@@ -2143,7 +2177,7 @@ void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		
     int			oldOffset;
     short		oldType;
 
-    if ( dashPattern == NULL ) type = graphic_LineSolid;
+    if ( dashPattern == NULL ) type = graphic::gLineSolid;
     (this)->GetLineDash(  &oldPattern, &oldOffset, &oldType );
     if ( oldPattern && dashPattern && ( strcmp( oldPattern, dashPattern ) == 0 ) && dashOffset == oldOffset && type == oldType );
     else
@@ -2151,9 +2185,9 @@ void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		
       (this)->graphic::SetLineDash(  dashPattern, dashOffset, type );
       switch( type )
       {
-	case graphic_LineOnOffDash: tempGC.line_style = LineOnOffDash; break;
-	case graphic_LineDoubleDash: tempGC.line_style = LineDoubleDash; break;
-	case graphic_LineSolid:
+	case graphic::gLineOnOffDash: tempGC.line_style = LineOnOffDash; break;
+	case graphic::gLineDoubleDash: tempGC.line_style = LineDoubleDash; break;
+	case graphic::gLineSolid:
         default: tempGC.line_style = LineSolid; break;
       }
       XChangeGC( (this)->XDisplay(), (this)->XGC(), GCLineStyle, &tempGC );
@@ -2176,10 +2210,10 @@ void xgraphic::SetLineCap( short		 newLineCap )
       (this)->graphic::SetLineCap(  newLineCap );
       switch( newLineCap )
       {
-	case graphic_CapNotLast: tempGC.cap_style = CapNotLast; break;
-	case graphic_CapRound: tempGC.cap_style = CapRound; break;
-	case graphic_CapProjecting: tempGC.cap_style = CapProjecting; break;
-	case graphic_CapButt:
+	case graphic::gCapNotLast: tempGC.cap_style = CapNotLast; break;
+	case graphic::gCapRound: tempGC.cap_style = CapRound; break;
+	case graphic::gCapProjecting: tempGC.cap_style = CapProjecting; break;
+	case graphic::gCapButt:
         default: tempGC.cap_style = CapButt; break;
       }
       XChangeGC( (this)->XDisplay(), (this)->XGC(), GCCapStyle, &tempGC );
@@ -2195,9 +2229,9 @@ void xgraphic::SetLineJoin( short		 newLineJoin )
       (this)->graphic::SetLineJoin(  newLineJoin );
       switch( newLineJoin )
       {
-          case graphic_JoinRound: tempGC.join_style = JoinRound; break;
-          case graphic_JoinBevel: tempGC.join_style = JoinBevel; break;
-	  case graphic_JoinMiter:
+          case graphic::gJoinRound: tempGC.join_style = JoinRound; break;
+          case graphic::gJoinBevel: tempGC.join_style = JoinBevel; break;
+	  case graphic::gJoinMiter:
 	  default: tempGC.join_style = JoinMiter; break;
       }
       XChangeGC( (this)->XDisplay(), (this)->XGC(), GCJoinStyle, &tempGC );
@@ -2303,7 +2337,7 @@ static void HandleInsertion(class xgraphic  *self, class graphic  *E)
 
 #endif /* PLANEMASK_ENV */
 
-	    xgraphic_LocalSetTransferFunction(self, graphic_COPY);
+	    xgraphic_LocalSetTransferFunction(self, graphic::COPY);
 	    ReallySetFont(self);
 
 	}
@@ -2546,7 +2580,7 @@ class graphic * xgraphic::GrayPattern(short  IntensityNum , short  IntensityDeno
   if (this->gray_levels[IntensityNum]) 
       return (class graphic *) this->gray_levels[IntensityNum];
 
-  if ((this)->DisplayClass() & graphic_StaticGray) {
+  if ((this)->DisplayClass() & graphic::gStaticGray) {
       unsigned short red, blue, green;
       short FGindex, BGindex;
 
@@ -2581,12 +2615,12 @@ class graphic * xgraphic::GrayPattern(short  IntensityNum , short  IntensityDeno
 static void SetFGPixel( class xgraphic  *self, unsigned long  pixel )
         {
     self->lastFillPixel = self->foregroundpixel = pixel;
-    if (self->transferMode == graphic_WHITE)  {
+    if (self->transferMode == graphic::WHITE)  {
 	XSetBackground((self)->XDisplay(), (self)->XGC(), self->foregroundpixel);
 	XSetBackground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel);
     }
 #ifndef PLANEMASK_ENV 
-    else if (self->transferMode == graphic_XOR) {
+    else if (self->transferMode == graphic::XOR) {
 	XSetForeground((self)->XDisplay(), (self)->XGC(), self->foregroundpixel ^ self->backgroundpixel);
 	XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel ^ self->backgroundpixel);
     }
@@ -2604,12 +2638,12 @@ static void SetFGPixel( class xgraphic  *self, unsigned long  pixel )
 static void SetBGPixel( class xgraphic  *self, unsigned long  pixel )
         {
     self->backgroundpixel = pixel;
-    if (self->transferMode == graphic_WHITE)  {
+    if (self->transferMode == graphic::WHITE)  {
 	XSetForeground((self)->XDisplay(), (self)->XGC(), self->backgroundpixel);
 	XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->backgroundpixel);
     }
 #ifndef PLANEMASK_ENV 
-    else if (self->transferMode == graphic_XOR) {
+    else if (self->transferMode == graphic::XOR) {
 	/* At this point background should be 0.  And should remain so */
     }
 #endif /* PLANEMASK_ENV  */
@@ -2633,13 +2667,13 @@ static short xgraphic_ApproximateColor( class xgraphic  *self,unsigned short  *r
   if (cmap == NULL)
       return(ind);
  
-  if ( (self )->DisplayClass( ) & graphic_StaticGray ) {
+  if ( (self )->DisplayClass( ) & graphic::gStaticGray ) {
 	if (( *red == *green ) && ( *green == *blue ))
 	    ind = 16 - ( short )( 16.0 * (( double )*red )/XFullBrightness + .5);
 	else
 	    ind = 16 - (short) (16.0 * (((double) *red) * 0.3 + ((double) *green) * 0.59 + ((double) *blue) * 0.11) / XFullBrightness + .5);
     }
-  else if ( (self )->DisplayClass( ) & graphic_GrayScale ) {
+  else if ( (self )->DisplayClass( ) & graphic::gGrayScale ) {
 	if (( *red == *green ) && ( *green == *blue ));
 	else
 	    *red = (long)(((double) *red) * 0.3 + ((double) *green) * 0.59 + ((double) *blue) * 0.11 + .5 );
@@ -2653,7 +2687,7 @@ static void SetStipple(class xgraphic  *self, long  index)
 
     tile = xgraphicGrayShade (self, index);
     xgraphic_SetupFillGC( self, tile );
-    if (((self)->DisplayClass() & graphic_Monochrome) && (index == 0 || index == 16))
+    if (((self)->DisplayClass() & graphic::Monochrome) && (index == 0 || index == 16))
      {
 	XSetFillStyle((self)->XDisplay(), (self)->XGC(), FillSolid );
 	self->flipforstipple=(index==0);
@@ -2664,7 +2698,7 @@ static void SetStipple(class xgraphic  *self, long  index)
 	self->flipforstipple=FALSE;
 	XSetFillStyle((self)->XDisplay(), (self)->XGC(), FillOpaqueStippled );
 	self->lastStipple=tile;
-	if(self->transferMode==graphic_XOR) XSetStipple((self)->XDisplay(), (self)->XGC(), self->lastFillTile?self->lastFillTile->localWindow:None);
+	if(self->transferMode==graphic::XOR) XSetStipple((self)->XDisplay(), (self)->XGC(), self->lastFillTile?self->lastFillTile->localWindow:None);
 	else XSetStipple((self)->XDisplay(),  (self)->XGC(), tile->localWindow);
     }
 }
@@ -2695,7 +2729,7 @@ void xgraphic::SetForegroundColor(color *c) {
 	SetFGPixel(this, BlackPixel(XDisplay(), XScreen()));
 	return;
     }
-    if ( (this )->DisplayClass( ) & graphic_StaticGray) {
+    if ( (this )->DisplayClass( ) & graphic::gStaticGray) {
 	xc->PixelRef()=BlackPixel(XDisplay(), XScreen());
 	xc->ddcolor::GetRGB(R, G, B);
 	short ind = xgraphic_ApproximateColor( this, &R, &G, &B );
@@ -2725,7 +2759,7 @@ void xgraphic::SetBackgroundColor(color *c) {
 	SetBGPixel(this, WhitePixel(XDisplay(), XScreen()));
 	return;
     }
-    if ( DisplayClass() & graphic_StaticGray) {
+    if ( DisplayClass() & graphic::gStaticGray) {
 	xc->PixelRef()=WhitePixel(XDisplay(), XScreen());
 	xc->ddcolor::GetRGB(R, G, B);
 	short ind = xgraphic_ApproximateColor( this, &R, &G, &B );
@@ -2861,30 +2895,30 @@ static long RealDisplayClass( class xgraphic		     *self )
     
     if ((self)->XDisplay() == NULL)
       return (c_class);
-    if((!XGetWindowAttributes((self)->XDisplay(), (self)->XWindow(), &atts)) || atts.visual==NULL) return graphic_Monochrome | graphic_StaticGray;
+    if((!XGetWindowAttributes((self)->XDisplay(), (self)->XWindow(), &atts)) || atts.visual==NULL) return graphic::Monochrome | graphic::gStaticGray;
 
-    c_class= graphic_Monochrome | graphic_StaticGray;
+    c_class= graphic::Monochrome | graphic::gStaticGray;
     switch (atts.visual->c_class) {
-	  case PseudoColor: c_class = graphic_PseudoColor;
-	      c_class |= graphic_Color;
+	  case PseudoColor: c_class = graphic::gPseudoColor;
+	      c_class |= graphic::Color;
 	      break;
-	  case GrayScale: c_class = graphic_GrayScale;
+	  case GrayScale: c_class = graphic::gGrayScale;
 	      break;
-	  case DirectColor: c_class = graphic_DirectColor;
-	      c_class |= graphic_Color;
+	  case DirectColor: c_class = graphic::gDirectColor;
+	      c_class |= graphic::Color;
 	      break;
-	  case TrueColor: c_class = graphic_TrueColor;
-	      c_class |= graphic_Color;
+	  case TrueColor: c_class = graphic::gTrueColor;
+	      c_class |= graphic::Color;
 	      break;
-	  case StaticColor: c_class = graphic_StaticColor;
-	      c_class |= graphic_Color;
+	  case StaticColor: c_class = graphic::gStaticColor;
+	      c_class |= graphic::Color;
 	      break;
 	  case StaticGray:
-	      c_class = graphic_StaticGray;
-	      if ( DisplayPlanes( (self )->XDisplay( ), (self )->XScreen( )) == 1 ) c_class |= graphic_Monochrome;
+	      c_class = graphic::gStaticGray;
+	      if ( DisplayPlanes( (self )->XDisplay( ), (self )->XScreen( )) == 1 ) c_class |= graphic::Monochrome;
 	      else {
 		  Screen *s = DefaultScreenOfDisplay((self)->XDisplay());
-		  if(CellsOfScreen(s) < environ::GetProfileInt("ForceMonochromeThreshold", 16)) c_class |= graphic_Monochrome ;
+		  if(CellsOfScreen(s) < environ::GetProfileInt("ForceMonochromeThreshold", 16)) c_class |= graphic::Monochrome ;
 		  break;
 	      }
     }

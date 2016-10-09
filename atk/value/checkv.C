@@ -61,7 +61,7 @@ static void Drawcheck(class checkv  * self)
     int side;
     int gap;
     struct rectangle r;
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
 
     if (!self->BlackPattern)
 	self->BlackPattern = (self)->view::BlackPattern();
@@ -69,7 +69,7 @@ static void Drawcheck(class checkv  * self)
     gap  = FUDGE;
     side = side - (gap*2) + 1;
     (self)->EraseRectSize( self->x,self->y,self->width,self->height);
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     (self)->MoveTo( self->x + gap, self->y + gap);
  
     /* Box */
@@ -86,7 +86,7 @@ static void Drawcheck(class checkv  * self)
 		r.left   = self->x + gap*2;
 		r.width  = side - gap*2 - 1;
 		r.height = side - gap*2 - 1;
-		(self)->SetTransferMode(  graphic_COPY );
+		(self)->SetTransferMode(  graphic::COPY );
 		(self)->FillRect( &r, self->BlackPattern);
 		break;
 	    default: /* Cross */
@@ -99,7 +99,7 @@ static void Drawcheck(class checkv  * self)
     if(self->label){
 	(self)->MoveTo( self->x + side + gap*2, self->y + (side+gap)/2);
 	(self)->SetFont( self->normalfont);
-	(self)->DrawString(self->label,graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+	(self)->DrawString(self->label,graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
     }
 }
 

@@ -63,7 +63,7 @@ static class cursor *waitCursor;
 #define IMAGE(self) ((struct image*) (self->scaled ? self->scaled : self->orig))
 
 #define CLEARRECT(self, RectPtr)			\
-    (self)->SetTransferMode( graphic_WHITE);		\
+    (self)->SetTransferMode( graphic::WHITE);		\
     (self)->FillRect( RectPtr, (self)->BlackPattern())
 
 ATKdefineRegistry(imagev, view, imagev::InitializeClass);
@@ -324,7 +324,7 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	if (!haveFocus && click_to_draw) {
 	    /* Do not draw.  Fill with a gray pattern. */
 	    click_skip_update = TRUE;
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	    FillRect(canvas, GrayPattern(1, 2));
         } else if((IMAGE(this))->Data()) {
             if(canvas==NULL) {
@@ -349,7 +349,7 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	    if(clipEstablished)
 		(rgn1)->IntersectRegion( clipRgn, rgn1);
 	    (this)->SetClippingRegion( rgn1);
-	    (this)->SetTransferMode( graphic_COPY);
+	    (this)->SetTransferMode( graphic::COPY);
 
 	    point_SetX(&Dest, MAX(Pix.left, rectangle_Left(this->canvas)));
 	    point_SetY(&Dest, MAX(Pix.top, rectangle_Top(this->canvas)));
@@ -438,7 +438,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    if(this->panStyle == DISCRETE_PAN) {
 		px = ix;
 		py = iy;
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, py);
 		(this)->DrawLineTo( iw-1, py);
 		(this)->MoveTo( px, 0);
@@ -454,7 +454,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 		px =  ix;
 		py = iy;
 		if( px != this->lastx || py != this->lasty ) {
-		    (this)->SetTransferMode( graphic_INVERT);
+		    (this)->SetTransferMode( graphic::INVERT);
 		    (this)->MoveTo( 0, this->lasty);
 		    (this)->DrawLineTo( iw-1, this->lasty);
 		    (this)->MoveTo( this->lastx, 0);
@@ -471,7 +471,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    }
 	case view_RightUp:
 	    if(this->panStyle == DISCRETE_PAN) {
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, this->lasty);
 		(this)->DrawLineTo( iw-1, this->lasty);
 		(this)->MoveTo( this->lastx, 0);
@@ -552,7 +552,7 @@ imagev::PostMenus( class menulist  *menulist )
 	if(strcmp((this->orig)->SaveFormatString(), "jpeg") == 0)
 	    mask |= IMAGEV_JPEGFORMATMENUS;
 	if((this)->DisplayClass() &
-	   (graphic_PseudoColor | graphic_DirectColor | graphic_GrayScale)) {
+	   (graphic::PseudoColor | graphic::DirectColor | graphic::GrayScale)) {
 	    mask |= IMAGEV_CANHAVEPRIVATECMAP;
 	    if(this->havePrivateCmap) {
 		mask |= IMAGEV_HASPRIVATECMAP;

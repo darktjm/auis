@@ -983,12 +983,12 @@ void eqview::DrawCaret()
 	static class fontdesc *icon12;
 	if (!icon12)
 	    icon12 = fontdesc::Create("icon", fontdesc_Plain, 12);
-	(this)->SetTransferMode( graphic_INVERT);
+	(this)->SetTransferMode( graphic::INVERT);
 	(this)->SetFont( icon12);
 	(this)->MoveTo( this->caret_x, this->caret_y);
 	(this)->DrawString("|",view_NOMOVEMENT);
     } else {
-	(this)->SetTransferMode( graphic_INVERT);
+	(this)->SetTransferMode( graphic::INVERT);
 	rectangle_SetRectSize(&rect, this->caret_x, this->caret_y, this->selection_width, this->selection_height);
 	pat = (this)->WhitePattern();
 	(this)->FillRect( &rect, pat);

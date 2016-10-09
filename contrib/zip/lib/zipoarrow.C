@@ -239,7 +239,7 @@ void Draw_Basic_Style( class zipoarrow *self, zip_type_figure		   figure, zip_ty
     if ( fill )
       {
       transfer_mode = (self->view_object)->GetTransferMode( );
-      (self->view_object)->SetTransferMode(  graphic_COPY );
+      (self->view_object)->SetTransferMode(  graphic::COPY );
       (self->view_object)->FillPolygon(  points, 3,
 	(self->view_object)->Define_Graphic(  (self->data_object)->Define_Font(  ShadeFontName, NULL ), fill ) );
       (self->view_object)->SetTransferMode(  transfer_mode );

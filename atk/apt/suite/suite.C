@@ -562,7 +562,7 @@ suite::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  wi
     class suite *self=this;struct rectangle *curse_rect = NULL, title;
 
   IN(suite_FullUpdate);
-  graphicIsMono = ((this)->GetDrawable())->DisplayClass() & graphic_Monochrome;
+  graphicIsMono = ((this)->GetDrawable())->DisplayClass() & graphic::Monochrome;
   if(type != view_FullRedraw && type != view_LastPartialRedraw) 
       return;
   (this)->GetVisualBounds( &Bounds);
@@ -615,7 +615,7 @@ suite::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  wi
       curse_rect->width -= SCROLL_WIDTH;
       ContainerHeight -= SCROLL_WIDTH;
     }
-    SETTRANSFERMODE(this, graphic_COPY);
+    SETTRANSFERMODE(this, graphic::COPY);
     (this)->FillRect( &ScrollRect, (this)->WhitePattern());
 
     (Scroll)->InsertView( this, &ScrollRect);
@@ -648,7 +648,7 @@ DrawTitle( class suite  *self, struct rectangle  *rect )
 
   IN(DrawTitle);
   SetViewColors((class view *) self, &TitleForeground, &TitleBackground);
-  SETTRANSFERMODE(self, graphic_COPY);
+  SETTRANSFERMODE(self, graphic::COPY);
   (self)->FillRect( rect, (self)->WhitePattern());
   if(TitleCaption && *TitleCaption != (char)0) {
     AllocNameSpace(&tmp_title, TitleCaption);
@@ -662,16 +662,16 @@ DrawTitle( class suite  *self, struct rectangle  *rect )
     newlineHeight = (TitleFont)->FontSummary( (self)->GetDrawable())->newlineHeight;
     horiz_point = title.left + title.width/2;
     vert_point = title.top + newlineHeight/2;
-    align = graphic_BETWEENTOPANDBOTTOM;
+    align = graphic::BETWEENTOPANDBOTTOM;
     if(TitleCaptionAlignment & suite_Left) {
       horiz_point = title.left + 1;
-      align |= graphic_ATLEFT;
+      align |= graphic::ATLEFT;
     }
     else if(TitleCaptionAlignment & suite_Right) {
       horiz_point = title.left + title.width - 1;
-      align |= graphic_ATRIGHT;
+      align |= graphic::ATRIGHT;
     }
-    else align |= graphic_BETWEENLEFTANDRIGHT;
+    else align |= graphic::BETWEENLEFTANDRIGHT;
     if(TitleFont) SetFont(self, TitleFont);
     for( i = 0 ; i < title_lines ; i++ ) {
       if((newline = (char*)strrchr(next_str,'\n'))) {
@@ -721,7 +721,7 @@ DrawOutline(class suite  *self, struct rectangle  *rect, short  width, unsigned 
 { long X1 = 0, Y1 = 0, X2 = 0, Y2 = 0;
 
   IN(DrawOutline);
-  SETTRANSFERMODE(self,graphic_COPY);
+  SETTRANSFERMODE(self,graphic::COPY);
   if(style & (suite_Invisible | suite_None)) return;
   else if(style & suite_Line) {
     if(TitlePlacement & suite_Top) {
@@ -2329,7 +2329,7 @@ suite::HighlightTitle( )
   else if(TitleHighlightStyle == suite_Invert) {
     DecrementRect(rect,1);
     DrawOutline(this, rect, TitleBorderSize, TitleBorderStyle, &TitleForeground, &TitleBackground);
-    SETTRANSFERMODE(this,graphic_INVERT);
+    SETTRANSFERMODE(this,graphic::INVERT);
     (this)->FillRect( rect, NULL);
   }
   else if(TitleHighlightStyle == suite_Border) {
@@ -2353,7 +2353,7 @@ suite::NormalizeTitle( )
   }
 #if 0
   else if(TitleHighlightStyle == suite_Invert) {
-    SETTRANSFERMODE(this, graphic_INVERT);
+    SETTRANSFERMODE(this, graphic::INVERT);
     (this)->FillRect( rect, NULL);
   }
 #endif
@@ -2402,7 +2402,7 @@ DrawRect(class suite  *self, struct rectangle  *Rect, int  border_size, class co
 	  free(childrect);
 	  return;
       }
-      (self)->SetTransferMode( graphic_COPY);
+      (self)->SetTransferMode( graphic::COPY);
       DecrementRect(childrect, border_size);
       thebutton.prefs = self->buttonprefs;
       self->buttonprefs->bdepth = border_size;

@@ -498,7 +498,7 @@ orgv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  wid
     Top = (this )->BodyTop( );
     Width = (this )->BodyWidth( );
     Height = (this )->BodyHeight( );
-    (this)->SetTransferMode(  graphic_COPY );
+    (this)->SetTransferMode(  graphic::COPY );
     if ( FirstTime ) { DEBUG(FirstTime);
       FirstTime = false;
       if ( (Tree )->RootNode( ) ) { DEBUG(RootNode);
@@ -834,7 +834,7 @@ Description_Command( class orgv  *self )
       (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_description_exposed) | menu_description_hidden );
   }
   (PairView)->FullUpdate(  view_FullRedraw, 0, 0, Width, Height - (PaletteExposed * PaletteHeight));
-  (self)->SetTransferMode(  graphic_COPY );
+  (self)->SetTransferMode(  graphic::COPY );
   (self)->PostMenus(  Menu );
   OUT(Description_Command);
 }

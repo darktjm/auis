@@ -222,7 +222,7 @@ long Draw( class zipoelli		  *self, zip_type_figure		   figure, zip_type_pane		 
       if ( action == zip_clear )
 	{
 	(self->view_object)->FillOvalSize(  window_x_point - minor_radius, window_y_point - major_radius,
-			      (minor_radius << 1)+1, (major_radius << 1)+1, graphic_WHITE );
+			      (minor_radius << 1)+1, (major_radius << 1)+1, graphic::WHITE );
 	}
     }
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )

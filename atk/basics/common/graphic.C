@@ -380,30 +380,30 @@ void graphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bot
 void graphic::EraseRect(struct rectangle  * Rect)
 {
     short mode=GetTransferMode();
-    if(mode!=graphic_COPY) SetTransferMode(graphic_COPY);
+    if(mode!=graphic::COPY) SetTransferMode(graphic::COPY);
     (this)->FillRect( Rect, (this)->WhitePattern());
-    if(mode!=graphic_COPY) SetTransferMode(mode);
+    if(mode!=graphic::COPY) SetTransferMode(mode);
 }
 
 void graphic::EraseRectSize(long  x, long  y, long  width, long  height)
 {
     short mode=GetTransferMode();
-    if(mode!=graphic_COPY) SetTransferMode(graphic_COPY);
+    if(mode!=graphic::COPY) SetTransferMode(graphic::COPY);
     (this)->FillRectSize( x, y, width, height, (this)->WhitePattern());
-    if(mode!=graphic_COPY) SetTransferMode(mode);
+    if(mode!=graphic::COPY) SetTransferMode(mode);
 }
 
 void graphic::EraseVisualRect()
 {
     short mode=GetTransferMode();
-    if(mode!=graphic_COPY) SetTransferMode(graphic_COPY);
+    if(mode!=graphic::COPY) SetTransferMode(graphic::COPY);
     (this)->FillRectSize(
 			  rectangle_Left(&this->visualBounds),
 			  rectangle_Top(&this->visualBounds),
 			  rectangle_Width(&this->visualBounds),
 			  rectangle_Height(&this->visualBounds),
 			  (this)->WhitePattern());
-    if(mode!=graphic_COPY) SetTransferMode(mode);
+    if(mode!=graphic::COPY) SetTransferMode(mode);
 }
 
 
@@ -495,14 +495,14 @@ void graphic::SetBitAtLoc(long  XPos,long  YPos, boolean  NewValue)
     tempLineJoin = (this )->GetLineJoin( );
 
     if (NewValue==TRUE)
-	(this)->SetTransferMode(graphic_BLACK);
+	(this)->SetTransferMode(graphic::BLACK);
     else if (NewValue==FALSE)
-	(this)->SetTransferMode(graphic_WHITE);
-    else fprintf(stderr, "graphic_SetBitAtLoc: Bad bit value: %d\n",NewValue);
+	(this)->SetTransferMode(graphic::WHITE);
+    else fprintf(stderr, "graphic::SetBitAtLoc: Bad bit value: %d\n",NewValue);
 
     (this)->MoveTo(XPos,YPos);
     (this)->SetLineWidth(1);
-    (this)->SetLineDash(  NULL, 0, graphic_LineSolid );
+    (this)->SetLineDash(  NULL, 0, graphic::LineSolid );
     (this)->SetLineCap(  1 );
     (this)->SetLineJoin(  0);
     (this)->DrawLineTo(XPos,YPos); /* yep, this draws one dot in wm */
@@ -1128,10 +1128,10 @@ long graphic::GetDevice()
 
 long graphic::DisplayClass( )
 {
-    return graphic_Monochrome | graphic_StaticGray;
+    return graphic::Monochrome | graphic::StaticGray;
 }
 
-/* declares whether images pulled back from the server via graphic_ReadPixelImage() are inverted */
+/* declares whether images pulled back from the server via graphic::ReadPixelImage() are inverted */
 boolean graphic::IsImageInverted()
 {
     return FALSE;
@@ -1159,7 +1159,7 @@ graphic::graphic()
 	defaultFont = fontdesc::Create("andysans", 0, 12);
     this->currentFont = defaultFont;
     this->spaceShim = 0;
-    this->transferMode = graphic_COPY;
+    this->transferMode = graphic::COPY;
     this->lineWidth = 1;
     this->lineDashType = 0;
     this->lineDashOffset = 0;

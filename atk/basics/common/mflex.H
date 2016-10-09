@@ -20,7 +20,7 @@
 /** A flexible array of unmanaged objects.
  *
  *  This is an abstract helper class for arrays of arbitrary types
- *  which do not require constructors or destructors.  An mflex array
+ *  which do not require constructors or destructors.  An \ref mflex array
  *  is actually created using the DEFINE_MFLEX_CLASS() macro, which
  *  derives this class into something more usable.
  *
@@ -28,15 +28,15 @@
  *  guarantee that one element is consecutive in memory to the next,
  *  except under specific conditions:
  *
- *  - After calling Insert(n), n elements at the insert positions are
+ *  - After calling \ref Insert(\e i, \e n), \e n elements at the insert position are
  *    guaranteed to be consecutive.
  *
- *  - After calling GetBuf(i, n, &l), l elements starting at i are
+ *  - After calling \ref GetBuf(\e i, \e n, &\e l), \e l elements starting at \e i are
  *    guaranteed to be consecutive.
  *
  *  These guarantees are invalidated, along with the guarantee that an
  *  address corresponds to a specific element, whenever the buffer
- *  is changed using Insert, Append, Remove, or GetBuf.
+ *  is changed using \ref Insert, \ref Append, \ref Remove, or \ref GetBuf.
  *
  *  This is closer to the previous flex implementation, in that arbitrary
  *  types are supported, and the derived class returns results in the
@@ -87,8 +87,8 @@ public:
     /**< Create space for new elements at the end of the array.
      *   \param len The number of elements to append.
      *   \return a pointer to the newly added space.   This
-     *           pointer is invalidated at the next Insert, Append,
-     *           Remove, or GetBuf.
+     *           pointer is invalidated at the next \ref Insert, \ref Append,
+     *           \ref Remove, or \ref GetBuf.
      */
 
     size_t Find( const char &o ) const;
@@ -105,7 +105,7 @@ public:
     inline void Remove( char *o, size_t len=1) {Remove( Find(o), len);}
     /**< Remove elements from the array.
      *   \param o Pointer to a valid array element to remove.
-     *   \param len Number of elements to remove, including and following o.
+     *   \param len Number of elements to remove, including and following \p o.
      */
     /* delete the element o */
     inline void Clear() {
@@ -125,7 +125,7 @@ public:
 
 };
 
-/** Create a function for sorting this mflex array.
+/** Create a function for sorting this \ref mflex-derived array.
  *  \param name The name of the sorting function.  In addition, a static
  *              C comparison function named <em>name</em>_comp will be
  *              created to perform the sorting comparisons with qsort(3).
@@ -147,14 +147,14 @@ size_t dummy; \
 type *buf=mf.GetBuf(0,mf.GetN(), &dummy); \
 qsort(buf, mf.GetN(), sizeof(type), QSORTFUNC(Concat(name,_comp))); \
 }
-/** Derive mflex into a class for a specific element data type.
+/** Derive \ref mflex into a class for a specific element data type.
  *  \param name The name of the new array class.
  *  \param type The type for which the class is built.
  *  \param minsize The default minimum size of the array.  If you like
  *                 the 100-byte default on flex, use 100/sizeof(type).
  */
 #define DEFINE_MFLEX_CLASS(name,type,minsize) \
-/** An mflex array for type elements.  Created by DEFINE_MFLEX_CLASS(). */ \
+/** An \ref mflex array for type elements.  Created by DEFINE_MFLEX_CLASS(). */ \
 class name : public mflex { \
   public: \
     inline name(size_t n=minsize) : mflex(sizeof(type), n) { \
@@ -188,7 +188,7 @@ class name : public mflex { \
     } \
     /**< Remove an object from the array.
      *   \param o A pointer to a valid array element.
-     *   \param len The number of elements to remove, including and following o. */ \
+     *   \param len The number of elements to remove, including and following \p o. */ \
     inline void Remove( size_t i, size_t len=1 ) { \
 	mflex::Remove(i,len); \
     } /**< \copydoc mflex::Remove */ \
@@ -197,7 +197,7 @@ class name : public mflex { \
     } /**< \copydoc mflex::GetBuf */ \
 };
 
-/** Create standard C++ iterators for an mflex-derived array.
+/** Create standard C++ iterators for an \ref mflex-derived array.
  *  \param name The name of the derived class.  The iterator class will
  *              be named <em>name</em>_iter.
  *  \param type The type of the derived class' array element. */

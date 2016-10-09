@@ -457,16 +457,16 @@ static const char * const hdrtv_where[]={"Header","Footer"};
 static const char * const hdrtv_close="Close";
 static const char * const hdrtv_open="Open";
 
-#define ALIGNMENT (graphic_ATLEFT|graphic_ATBASELINE)
+#define ALIGNMENT (graphic::ATLEFT|graphic::ATBASELINE)
 static void DrawBorder(class headrtv  *self,struct rectangle  *vb)
 {
     long width,junk,left;
     const char *type;
    
     type=hdrtv_where[Data(self)->where];
-    (self)->SetTransferMode(graphic_COPY);
+    (self)->SetTransferMode(graphic::COPY);
     (self)->FillRectSize( vb->left+1, vb->top+1, vb->width-2, self->top-1,(self)->WhitePattern());
-    (self)->SetTransferMode(graphic_BLACK);
+    (self)->SetTransferMode(graphic::BLACK);
     (self)->DrawRectSize(vb->left, vb->top,  vb->width-1, vb->height-1);
     (self)->MoveTo(0,self->top-1);
     (self)->DrawLineTo( vb->width-1,self->top-1); 

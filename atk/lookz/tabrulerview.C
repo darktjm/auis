@@ -137,7 +137,7 @@ MoveIcon(class tabrulerview  *self, long  newx, short which)
 {
     RemoveIcon(self, self->Movex, which);
     self->Movex = newx;
-    RepaintIcon(self, newx, which, graphic_COPY);
+    RepaintIcon(self, newx, which, graphic::COPY);
 }
       
 
@@ -161,7 +161,7 @@ RepaintIcon(class tabrulerview   *self, long  position, short which, short  colo
     }
     (self)->SetTransferMode( color);
     (self)->MoveTo( position*self->mul/self->div, self->icony);
-    (self)->DrawText( str, 1, graphic_NOMOVEMENT);
+    (self)->DrawText( str, 1, graphic::NOMOVEMENT);
 }
 
 static void
@@ -170,11 +170,11 @@ RemoveIcon(class tabrulerview  *self, long  pos, short which)
     long dx;
     int i;
 
-    RepaintIcon(self, pos, which, graphic_WHITE);
+    RepaintIcon(self, pos, which, graphic::WHITE);
     for (i = 0; i < self->tabs->number; i++) {
 	dx = self->tabs->Positions[i] - pos;
 	if (dx < 10 && dx > -10) /*C*/
-	    RepaintIcon(self, self->tabs->Positions[i], self->tabs->Types[i], graphic_COPY);
+	    RepaintIcon(self, self->tabs->Positions[i], self->tabs->Types[i], graphic::COPY);
     }
 }
 
@@ -219,7 +219,7 @@ the divisions always come out to exact values
 	    else sprintf(buf, "%d", ordval);	/* no sign if ordval==0 */
 	    (self)->MoveTo( x-1, self->topline + 7);	/*C*/
 	    (self)->DrawString( buf,
-				    graphic_BETWEENLEFTANDRIGHT | graphic_ATTOP);
+				    graphic::BETWEENLEFTANDRIGHT | graphic::ATTOP);
 	    ordval += tbl->one;
 	}
 	if (++cyclecnt >= cycmax) cyclecnt = 0;
@@ -245,7 +245,7 @@ RecomputeAndRedraw(class tabrulerview  *self)
     self->icony = self->topline - 2;
     self->leftzero = self->leftline;
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &r, self->WhitePattern);
 
     RedrawRuler(self);
@@ -267,7 +267,7 @@ RedrawRuler(class tabrulerview  *self)
     r.height = self->bottomline - self->topline;
 
     /* Clean the area */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &r, self->WhitePattern);
 
     /* draw outline */
@@ -293,7 +293,7 @@ RedrawText(class tabrulerview  *self, float  number, boolean  flag)
     r.height = ICONHEIGHT + 4/*C*/;
     r.width = self->clearpos - self->textloc - ICONHEIGHT;
     buttony = self->bottomline + (ICONHEIGHT>>1) + 4;
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &r, self->WhitePattern);
     (self)->SetFont( TextFont);
     (self)->MoveTo( self->textloc, self->bottomline + 2);
@@ -303,12 +303,12 @@ RedrawText(class tabrulerview  *self, float  number, boolean  flag)
     else
 	strcpy(buf, self->TickTbl->unitstring);
 
-    (self)->DrawString( buf, graphic_ATLEFT |  graphic_ATTOP);
+    (self)->DrawString( buf, graphic::ATLEFT |  graphic::ATTOP);
 
     /* display button icons */
     (self)->SetFont( IconFont);
     (self)->MoveTo( self->textloc-ICONHEIGHT, buttony);
-    (self)->DrawText( "\'", 1, graphic_NOMOVEMENT);
+    (self)->DrawText( "\'", 1, graphic::NOMOVEMENT);
     
     self->textchanged = FALSE;
 }    
@@ -336,23 +336,23 @@ RedrawCommands(class tabrulerview  *self)
     r.width = self->rightline - r.left;
     buttony = self->bottomline + (ICONHEIGHT>>1) + 4;
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &r, self->WhitePattern);
     (self)->SetFont( TextFont);
 
     /* The text for AllClear and Cancel */
     (self)->MoveTo( self->cleartxt, self->bottomline + 2);
-    (self)->DrawString( ClearString, graphic_BETWEENLEFTANDRIGHT | graphic_ATTOP);
+    (self)->DrawString( ClearString, graphic::BETWEENLEFTANDRIGHT | graphic::ATTOP);
 
     (self)->MoveTo( self->canceltxt, self->bottomline + 2);
-    (self)->DrawString( CancelString, graphic_ATRIGHT | graphic_ATTOP);
+    (self)->DrawString( CancelString, graphic::ATRIGHT | graphic::ATTOP);
 
     /* display button icons */
     (self)->SetFont( IconFont);
     (self)->MoveTo( self->cancelpos, buttony);
-    (self)->DrawText( "\'", 1, graphic_NOMOVEMENT);
+    (self)->DrawText( "\'", 1, graphic::NOMOVEMENT);
     (self)->MoveTo( self->clearpos, buttony);
-    (self)->DrawText( "\'", 1, graphic_NOMOVEMENT);
+    (self)->DrawText( "\'", 1, graphic::NOMOVEMENT);
 }
 
 static void
@@ -363,7 +363,7 @@ RedrawPark(class tabrulerview  *self)
     /* Redraw the parking lot(s)... */
     /* If we are moving the icon, then we leave that park empty */
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     r. height = ICONHEIGHT+4, r.width = PARKWIDTH;
     r.top = self->bottomline + 2;
@@ -373,7 +373,7 @@ RedrawPark(class tabrulerview  *self)
     if (self->Moving != style_LeftAligned) {
 	(self)->MoveTo( r.left+PARKWIDTH/2,
 			    self->bottomline+ICONHEIGHT+2); 
-	(self)->DrawText( IconStringLeft, 1, graphic_NOMOVEMENT);
+	(self)->DrawText( IconStringLeft, 1, graphic::NOMOVEMENT);
     }
 
     r.left = self->leftline + PARKSPACE + 2;
@@ -381,7 +381,7 @@ RedrawPark(class tabrulerview  *self)
     if (self->Moving != style_RightAligned) {
 	(self)->MoveTo( r.left+PARKWIDTH/2,
 			    self->bottomline+ICONHEIGHT+2); 
-	(self)->DrawText( IconStringRight, 1, graphic_NOMOVEMENT);
+	(self)->DrawText( IconStringRight, 1, graphic::NOMOVEMENT);
     }
 
     r.left = self->leftline + 2*PARKSPACE + 2;
@@ -389,7 +389,7 @@ RedrawPark(class tabrulerview  *self)
     if (self->Moving != style_CenteredOnTab) {
 	(self)->MoveTo( r.left+PARKWIDTH/2,
 			    self->bottomline+ICONHEIGHT+2); 
-	(self)->DrawText( IconStringCentered, 1, graphic_NOMOVEMENT);
+	(self)->DrawText( IconStringCentered, 1, graphic::NOMOVEMENT);
     }
 
 }
@@ -403,17 +403,17 @@ RedrawIcons(class tabrulerview   *self)
     /* Clear the tabstops */
     r.top = self->topline - ICONHEIGHT - 4/*C*/, r.left = 0;
     r.height = ICONHEIGHT + 3/*C*/, r.width = self->rightline;	
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &r, self->WhitePattern);
     (self)->SetFont( IconFont);
 
     if (self->tabs)
 	for (i = 0; i < self->tabs->number; i++)
-	    RepaintIcon(self, self->tabs->Positions[i] + self->leftline, self->tabs->Types[i], graphic_COPY);
+	    RepaintIcon(self, self->tabs->Positions[i] + self->leftline, self->tabs->Types[i], graphic::COPY);
 
     /* The moving icon... */
     if (self->Moving)
-	RepaintIcon(self, self->Movex, self->Moving, graphic_COPY);
+	RepaintIcon(self, self->Movex, self->Moving, graphic::COPY);
 
     RedrawPark(self);
 
@@ -528,7 +528,7 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 			    this->Moving = style_CenteredOnTab;
 			this->Movex = x;
 			this->oldtab = -1; /* Cannot have -ve tabs */
-			RepaintIcon(this, x, this->Moving, graphic_COPY);
+			RepaintIcon(this, x, this->Moving, graphic::COPY);
 			RedrawPark(this);
 		    }
 		}

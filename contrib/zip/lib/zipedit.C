@@ -801,7 +801,7 @@ void zipedit_Display_Background_Pane( class zipedit	      *self, zip_type_pane	 
   if ( pane  &&  BackgroundPane  &&  BackgroundExposed )
     {
     (View)->Set_Pane_Clip_Area(  pane );
-    (View)->SetTransferMode(  graphic_WHITE );
+    (View)->SetTransferMode(  graphic::WHITE );
     (View)->EraseRectSize(  left, top, width, height );
     (BackgroundView)->LinkTree(  View );
     (BackgroundView)->InsertViewSize(  View, left, top, width, height );
@@ -825,9 +825,9 @@ void Lighten_Background( class zipedit	      *self )
   if ( BackgroundExposed )
     {
     if ( strcmp( (View )->GetWindowManagerType( ), "AndrewWM" ) == 0 )
-      (View)->SetTransferMode(  graphic_WHITE );
+      (View)->SetTransferMode(  graphic::WHITE );
       else
-      (View)->SetTransferMode(  graphic_AND );
+      (View)->SetTransferMode(  graphic::AND );
     (View)->FillTrapezoid(  left,top,width, left,top+height,width,
       (View)->Define_Graphic(  (Data)->Define_Font(  ShadeFontName, NULL ), '5' ) );
     if ( !BackgroundSelected )

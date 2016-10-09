@@ -84,7 +84,7 @@ static void DrawFromScratch(class valueview  * self)
 /*  valueview_RestoreGraphicsState( self ); */
   (self )->ClearClippingRect( );
 
-  (self)->SetTransferMode(  graphic_COPY );
+  (self)->SetTransferMode(  graphic::COPY );
 
   if (width < (self->borderPixels << 1) || height < (self->borderPixels << 1))
     {
@@ -147,7 +147,7 @@ valueview::valueview()
   this->back =  NULL;
   this->border =  NULL;
   this->deactivationMask = NULL;
-  this->deactivationTransferMode = graphic_AND;
+  this->deactivationTransferMode = graphic::AND;
   this->active = True;
   this->mouseIsOnTarget = False;
   this->HasInputFocus = FALSE;
@@ -337,7 +337,7 @@ void valueview::DrawBadValue()
   class graphic * black;
   (this )->ClearClippingRect( );
   black = (this)->BlackPattern();
-  (this)->SetTransferMode( graphic_XOR);
+  (this)->SetTransferMode( graphic::XOR);
   (this)->FillRectSize( this->viewx, this->viewy,
 			  this->viewwidth, this->viewheight, black);
   (this)->FillRectSize( this->viewx, this->viewy,

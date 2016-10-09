@@ -107,7 +107,7 @@ void buttonV::HandleStyleString(char  *s)
     boolean go;
     go = TRUE;
     if(this->mono == -10)
-	this->mono = ((this)->DisplayClass() & graphic_Monochrome);
+	this->mono = ((this)->DisplayClass() & graphic::Monochrome);
 
     if(s == NULL) return;
     while(*s != '\0'){
@@ -183,7 +183,7 @@ static int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
     (this->listp)->Clear();
     i = 0;
     chr = this->label;
-    this->mono = ((this )->DisplayClass() & graphic_Monochrome);
+    this->mono = ((this )->DisplayClass() & graphic::Monochrome);
     do{
 	j = 0;
 	rl = (struct buttonV_rl *)
@@ -383,7 +383,7 @@ void buttonV::LookupParameters()
   else
       fontsize = 10;
   if(this->mono == -10)
-      this->mono = ((this)->DisplayClass() & graphic_Monochrome);
+      this->mono = ((this)->DisplayClass() & graphic::Monochrome);
 
  if(!this->mono){
       if (parameters[3].found)

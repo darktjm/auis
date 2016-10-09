@@ -132,8 +132,8 @@ void conview::DrawMyself(struct rectangle  *r, boolean  IsFullUpdate)
     (this)->MoveTo( (r->left + r->width) / 2,
 		      (r->top + r->height) / 2);
     (this)->DrawString( buf,
-	graphic_BETWEENLEFTANDRIGHT
-	| graphic_BETWEENTOPANDBASELINE);
+	graphic::BETWEENLEFTANDRIGHT
+	| graphic::BETWEENTOPANDBASELINE);
     (this)->SetLastString( buf);
 }
 

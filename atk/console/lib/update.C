@@ -73,7 +73,7 @@ void RedrawDisplays(class consoleClass  *self)
 
     (self)->GetLogicalBounds( &clpRect);
     (self)->SetClippingRect( &clpRect);
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRect( &clpRect, (self)->WhitePattern());
     (self)->FlushGraphics();
 
@@ -95,7 +95,7 @@ void RedrawDisplays(class consoleClass  *self)
             disp->XCenter = disp->Xmin + disp->Width / 2;
             disp->YCenter = disp->Ymin + disp->FullHeight / 2;
             if (disp->Boxed && (!disp->DependentUponVariables || IntrnlVars[disp->WhichVariable].Value == disp->AppearIfTrue)) {
-		(self)->SetTransferMode( graphic_BLACK);
+		(self)->SetTransferMode( graphic::BLACK);
 		(self)->DrawRectSize( disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
                 disp->Xmin += 3;
                 disp->Ymin += 3;
@@ -157,7 +157,7 @@ void RedrawDisplays(class consoleClass  *self)
                         switch (disp->IsLabelling) {
                             case BOTTOM_LABEL:
                                 (self)->MoveTo( disp->XCenter, disp->Ymax - k / 2);
-                                (self)->DrawString( ThisLabel, graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+                                (self)->DrawString( ThisLabel, graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
                                 disp->Ymax -= (maxheight + 3);
                                 if (disp->Boxed) {
                                     (self)->MoveTo( disp->Xmin - 3, disp->Ymax);
@@ -167,7 +167,7 @@ void RedrawDisplays(class consoleClass  *self)
                                 break;
                             case TOP_LABEL:
                                 (self)->MoveTo( disp->XCenter, disp->Ymin + k / 2);
-                                (self)->DrawString( ThisLabel, graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+                                (self)->DrawString( ThisLabel, graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
                                 disp->Ymin += maxheight + 3;
                                 if (disp->Boxed) {
                                     (self)->MoveTo( disp->Xmin - 3, disp->Ymin);
@@ -177,7 +177,7 @@ void RedrawDisplays(class consoleClass  *self)
                                 break;
                             case LEFT_LABEL:
                                 (self)->MoveTo( disp->Xmin + j / 2, disp->YCenter);
-                                (self)->DrawString( ThisLabel, graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+                                (self)->DrawString( ThisLabel, graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
                                 disp->Xmin += maxwidth + 3;
                                 if (disp->Boxed) {
                                     (self)->MoveTo( disp->Xmin, disp->Ymin - 3);
@@ -187,7 +187,7 @@ void RedrawDisplays(class consoleClass  *self)
                                 break;
                             case RIGHT_LABEL:
                                 (self)->MoveTo( disp->Xmax - j / 2, disp->YCenter);
-                                (self)->DrawString( ThisLabel, graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+                                (self)->DrawString( ThisLabel, graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
                                 disp->Xmax -= maxwidth + 3;
                                 if (disp->Boxed) {
                                     (self)->MoveTo( disp->Xmax, disp->Ymax + 3);

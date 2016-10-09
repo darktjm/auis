@@ -402,11 +402,11 @@ long Draw( class zipoimbed		  *self, zip_type_figure		   figure, zip_type_pane		
       { DEBUGdt(Shade,shade);
       if ( (shade = ('0' + ((shade + 10) / 10)) - 1) > '9' )  shade = '9';
       DEBUGdt(Shade-index,shade);
-      (self->view_object)->SetTransferMode(  graphic_COPY );
+      (self->view_object)->SetTransferMode(  graphic::COPY );
       (self->view_object)->FillRectSize(  left,top, width,height,
         (self->view_object)->Define_Graphic(  (self->data_object)->Define_Font(  ShadeFontName, NULL ), shade ));
       }
-    (self->view_object)->SetTransferMode(  graphic_BLACK );
+    (self->view_object)->SetTransferMode(  graphic::BLACK );
     (self->view_object)->Set_Pane_Clip_Area(  pane );
     DEBUG(LinkTree);
     (imbed->view_object)->LinkTree(  self->view_object );
@@ -421,7 +421,7 @@ long Draw( class zipoimbed		  *self, zip_type_figure		   figure, zip_type_pane		
     else
     if ( action == zip_clear )
       {
-      (self->view_object)->SetTransferMode(  graphic_WHITE );
+      (self->view_object)->SetTransferMode(  graphic::WHITE );
       (self->view_object)->EraseRectSize(  left+1, top+1, width-1, height-1 );
       }
   (self->view_object)->SetTransferMode(  transfer_mode );

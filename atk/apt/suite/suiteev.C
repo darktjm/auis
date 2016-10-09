@@ -513,7 +513,7 @@ DrawGutterLines(class suiteev  *self)
 #endif
       }
   }
-  SETTRANSFERMODE(self, graphic_COPY);
+  SETTRANSFERMODE(self, graphic::COPY);
   OUT(DrawGutterLines);
 }
 
@@ -1184,7 +1184,7 @@ EraseItems( class suiteev  *self )
 	    if(item == LastVisible) 
 		break;
 	}
-    SETTRANSFERMODE(self,graphic_COPY);
+    SETTRANSFERMODE(self,graphic::COPY);
     OUT(EraseItems);
 }
 
@@ -1245,7 +1245,7 @@ suiteev::Clear( )
 
   (this)->GetVisualBounds( &r);
   (this)->SetBGColorCell(SuiteBackground);
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   (this)->FillRect( &r, (this)->WhitePattern());
 }
 
@@ -1587,7 +1587,7 @@ suiteev::ItemClear( struct suite_item  *item )
   IN(suiteev_ItemClear);
   rectangle_SetRectSize(&r, Left, Top, Width, Height);
   (this)->SetBGColorCell( SuiteBackground);
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   (this)->FillRect( &r, (this)->WhitePattern());
   OUT(suiteev_ItemClear);
 }
@@ -1602,7 +1602,7 @@ suiteev::ItemBlackOut( struct suite_item  *item )
   ::DrawRect(this, item, r, Highlighted(item));
   rectangle_SetRectSize(r, Left + 1, Top + 1, Width - 2, Height - 2);
   DecrementRect(r, item_BorderSize);
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   // huh... presumably r was going to be used for something,
   // but what? how?  -robr 3/15/96
   free(r);
@@ -1701,11 +1701,11 @@ ItemPlaceCaption( class suiteev  *self, struct suite_item  *item, long  captionw
     if(alignment & suite_Top) CaptionRect.top = t;
     if(alignment & suite_Bottom) CaptionRect.top = t + h - captionheight;
   }
-  *place = graphic_BETWEENTOPANDBOTTOM;
-  if(alignment & suite_Middle) *place |= graphic_BETWEENTOPANDBOTTOM;
-  if(alignment & suite_Center) *place |= graphic_BETWEENLEFTANDRIGHT;
-  if(alignment & suite_Left) *place |= graphic_ATLEFT;
-  if(alignment & suite_Right) *place |= graphic_ATRIGHT;
+  *place = graphic::BETWEENTOPANDBOTTOM;
+  if(alignment & suite_Middle) *place |= graphic::BETWEENTOPANDBOTTOM;
+  if(alignment & suite_Center) *place |= graphic::BETWEENLEFTANDRIGHT;
+  if(alignment & suite_Left) *place |= graphic::ATLEFT;
+  if(alignment & suite_Right) *place |= graphic::ATRIGHT;
   OUT(ItemPlaceCaption);
 }
 
@@ -1715,7 +1715,7 @@ suiteev::ItemDrawCaption( struct suite_item  *item )
     class suiteev *self=this;
   long captionwidth = 0, captionheight = 0, totalWidth = 0;
   long X = 0, Y = 0;
-  short tMode = graphic_COPY;
+  short tMode = graphic::COPY;
   unsigned placement = 0;
   unsigned alignment = item_CaptionAlignment;
   long pos = 0, i = 0, j = 0, numLines = 0;
@@ -1773,16 +1773,16 @@ suiteev::ItemDrawCaption( struct suite_item  *item )
       if(i > 0) {
 	if(WrapStyle & suite_LeftIndent) {
           X = Left + CaptionMWidth + (2 * CaptionMWidth);
-	  placement = graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM;
+	  placement = graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM;
 	}
 	else if(WrapStyle & suite_LeftRight) {
 	  X = Left + Width - (2 * CaptionMWidth);
-	  placement = graphic_ATRIGHT | graphic_BETWEENTOPANDBOTTOM;
+	  placement = graphic::ATRIGHT | graphic::BETWEENTOPANDBOTTOM;
 	}
       }
       else {
 	X = Left + CaptionMWidth;
-	placement = graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM;
+	placement = graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM;
       }
       if(item == FirstVisible && i < FirstVisibleSubString) 
 	dontDraw = TRUE;
@@ -1806,7 +1806,7 @@ suiteev::ItemDrawCaption( struct suite_item  *item )
     pos++;
     head = tmp;
   }
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   (this)->ClearClippingRect();
   OUT(suiteev_ItemDrawCaption);
 }
@@ -1891,9 +1891,9 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
     class suiteev *self=this;
   long x = 0, y = 0, count = 0;
   char *tmp = NULL, *head = NULL;
-  short tMode = graphic_COPY;
+  short tMode = graphic::COPY;
   unsigned alignment = 0;
-  unsigned placement = graphic_BETWEENTOPANDBOTTOM;
+  unsigned placement = graphic::BETWEENTOPANDBOTTOM;
   int titlewidth = 0, titleheight = 0;
   long titleLines = 0;
   int newlineHeight = 0;
@@ -1908,9 +1908,9 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
     newlineHeight = (item->titlefont)->FontSummary( (Suite)->GetDrawable())->newlineHeight;
     titleheight = titleLines * newlineHeight;
     alignment = item_TitleCaptionAlignment;
-    if(alignment & suite_Left) placement |= graphic_ATLEFT;
-    else if(alignment & suite_Right) placement |= graphic_ATRIGHT;
-    else placement |= graphic_BETWEENLEFTANDRIGHT;
+    if(alignment & suite_Left) placement |= graphic::ATLEFT;
+    else if(alignment & suite_Right) placement |= graphic::ATRIGHT;
+    else placement |= graphic::BETWEENLEFTANDRIGHT;
     ItemPlaceTitle(this, item, titlewidth, titleheight, newlineHeight);
   }
 #if 0
@@ -1944,7 +1944,7 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
 	(item->titleviewobject)->FullUpdate(view_FullRedraw,0,0,
 			  TitleRect.width,TitleRect.height);
 #endif
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   (this)->ClearClippingRect();
   OUT(suiteev_ItemDrawTitle);
 }
@@ -2047,7 +2047,7 @@ suiteev::DrawItemBorder( struct suite_item  *item )
   struct rectangle *rect = NULL;
 
   IN(suiteev_DrawItemBorder);
-  SETTRANSFERMODE(this, graphic_COPY);
+  SETTRANSFERMODE(this, graphic::COPY);
   rect = rectangle_Duplicate(&Bounds);
   if(item_BorderStyle & suite_Rectangle) {
       ::DrawRect(this, item, rect, Highlighted(item));
@@ -2306,7 +2306,7 @@ DrawRect(class suiteev  *self, struct suite_item  *item, struct rectangle  *Rect
 	  if(re2) delete re2;
 	  return;
       }
-      SETTRANSFERMODE(self, graphic_COPY);
+      SETTRANSFERMODE(self, graphic::COPY);
       DecrementRect(childrect, item_BorderSize);
       self->itemPrefs->bdepth = item_BorderSize;
       self->itemPrefs->colors[sbutton_BACKGROUND] = item_BackgroundColorName;

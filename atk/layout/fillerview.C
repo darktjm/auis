@@ -210,7 +210,7 @@ showhit(class fillerview  *self, struct graphicstuff  *gc)
 
     if (self->hitindex >= 0) {
 	savetransfermode = (self)->GetTransferMode();
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	(self)->DrawRectSize( LEFTMARGIN, TopOfTheMark(self, gc, self->hitindex), gc->linewidth + 3 * LEFTMARGIN, gc->lineheight);
 	(self)->SetTransferMode( savetransfermode);
     }
@@ -274,14 +274,14 @@ UpdateScreen(class fillerview  *self, enum view_UpdateType  how		    /* kind of 
 
     InitializeGraphics(self, gc);
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->SetClippingRect( updateRect);
     (self)->EraseRect( updateRect);
     (self)->MoveTo( LEFTMARGIN, TOPMARGIN);
-    (self)->DrawString( "Select an inset", graphic_ATTOP | graphic_ATLEFT);
+    (self)->DrawString( "Select an inset", graphic::ATTOP | graphic::ATLEFT);
     for (i = 0; Insets[i] != NULL; i++) {
 	(self)->MoveTo( LEFTMARGIN * 2, TOPMARGIN * 2 + (i + 1) * gc->lineheight);
-	(self)->DrawString( Insets[i], graphic_ATTOP | graphic_ATLEFT);
+	(self)->DrawString( Insets[i], graphic::ATTOP | graphic::ATLEFT);
     }
     showhit(self, gc);
 }
