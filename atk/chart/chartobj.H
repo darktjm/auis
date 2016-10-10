@@ -68,9 +68,9 @@ public:
 
 
 
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void SetDataObject( class dataobject *data );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n )	 ;
+   class view * Hit( enum view::MouseAction action, long x, long y, long n )	 ;
    void ObservedChanged( class observable *changed, long value );
    void UnlinkNotification( class view *linkee );
    void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
@@ -84,7 +84,7 @@ public:
   /***  The following Methods are to be Overriden by sub-classes  ***/
   virtual void DrawChart();
   virtual void PrintChart();
-  virtual class view * HitChart( enum view_MouseAction action, long x, long y, long clicks )		 ;
+  virtual class view * HitChart( enum view::MouseAction action, long x, long y, long clicks )		 ;
   virtual void ObserveChart( long change );
   virtual const char * Moniker()					 ;
 

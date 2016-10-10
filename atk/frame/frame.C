@@ -447,12 +447,12 @@ frame::~frame()
 
 
 
-void frame::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void frame::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     if (this->lineHeight == 0) {
 	long dw, dh;
 	this->lineHeight = CalculateLineHeight(this);
-	(this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view_NoSet, &dw, &dh);
+	(this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view::NoSet, &dw, &dh);
 	(this)->VFixed( this->childView, this->messageView, dh, ResizableMessageLine);
 
 	((class lpair *)this)->needsfull=3;
@@ -491,8 +491,8 @@ void frame::WantNewSize(class view  *req)
     
     if(req!=(class view *)this->messageView) return;
 
-    (this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view_NoSet, &dw, &dh);
-    /* (this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view_NoSet &dw, &dh);
+    (this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view::NoSet, &dw, &dh);
+    /* (this->messageView)->DesiredSize( (this)->GetLogicalWidth(), this->lineHeight, view::NoSet &dw, &dh);
 */
     (this)->VFixed( this->childView, this->messageView, dh, ResizableMessageLine);
 
@@ -957,7 +957,7 @@ static void ConsiderReturning(class frame  *self, int  Choice)
 }
 
 class view *
-frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
+frame::Hit(enum view::MouseAction  action, long  x , long  y , long  nclicks)
 {
     int i;
     struct rectangle r;
@@ -983,7 +983,7 @@ frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
 	 * The host is ignored for now.
 	 * An improvement would have a wait cursor appear while files are fetched.
 	 */
-	if (this->commandEnable && (action == view_LeftFileDrop || action == view_RightFileDrop)) {
+	if (this->commandEnable && (action == view::LeftFileDrop || action == view::RightFileDrop)) {
 	    char **files;
 	    int i;
 	    class buffer *b = NULL;
@@ -998,7 +998,7 @@ frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
 		    free(files[0]); /* ignore host for now */
 		for (i = 1; files[i] != NULL; i++) {
 		    b = buffer::GetBufferOnFile(files[i], buffer_MustExist);
-		    if (b != NULL && action == view_RightFileDrop) {
+		    if (b != NULL && action == view::RightFileDrop) {
 			f = frame::GetFrameInWindowForBuffer(b);
 			im = (f)->GetIM();
 			if (im)
@@ -1009,14 +1009,14 @@ frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
 		    }
 		    free(files[i]);
 		}
-		if (b != NULL && action == view_LeftFileDrop)
+		if (b != NULL && action == view::LeftFileDrop)
 		    (void)(this)->SetBuffer( b, TRUE); /* Show last file. */
 		free(files);
 	    }
 	}
 	return v;
     }
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	r = this->HeightsOfAnswer[this->DefaultWildestAnswer];
 	r.width = this->buttonmaxwid + frame_TOTALPADDING - frame_TWOSEPARATIONS;
 	if(!(InRectangle(&r, x, y))){
@@ -1033,7 +1033,7 @@ frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
 	}
 	return((class view *) this);
     }
-    else if (action == view_LeftMovement || action == view_RightMovement) {
+    else if (action == view::LeftMovement || action == view::RightMovement) {
 	if(this->DefaultWildestAnswer != 0){
 	    r = this->HeightsOfAnswer[this->DefaultWildestAnswer];
 	    r.width = this->buttonmaxwid + frame_TOTALPADDING - frame_TWOSEPARATIONS;
@@ -1132,14 +1132,14 @@ DoUpdate(class frame  *self)
 	(self)->PostCursor( &self->AnswerBox, self->octcursor);
 	if(self->hasDialogMessage){
 	    (self->dialogView)->InsertView( self, &self->mesrec);
-	    (self->dialogView)->FullUpdate( view_FullRedraw , 0, 0, 0, 0);
+	    (self->dialogView)->FullUpdate( view::FullRedraw , 0, 0, 0, 0);
 	    (self)->PostCursor( &self->mesrec, self->arrowcursor);
 	    if(self->DialogBuffer){
 		struct rectangle nr;
 		nr = self->bufferrec;
 		nr.top++;nr.left++; nr.width += -2; nr.height += -2;
 		(self->DialogBufferView)->InsertView( self, &nr);
-		(self->DialogBufferView)->FullUpdate( view_FullRedraw , 0, 0, 0, 0);
+		(self->DialogBufferView)->FullUpdate( view::FullRedraw , 0, 0, 0, 0);
 	    }
 	}
 	if ((self)->GetIM() != NULL) {
@@ -1303,7 +1303,7 @@ CannotRestoreBits(class frame  *self)
     struct rectangle r;
 
     (self)->GetLogicalBounds( &r);
-    (self)->lpair::FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+    (self)->lpair::FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 }
 
 void frame::Advice(enum message_Preference  pp)

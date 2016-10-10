@@ -93,22 +93,22 @@ static boolean SelAddProc(class figobj  *o, long  ref, class figure  *fig, class
 static boolean SelTogProc(class figobj  *o, long  ref, class figure  *fig, class figview  *vv);
 static void MakeBoxListProc(class figobj  *o, long  ref, class figview  *vv, struct rectangle  **rec);
 static void MoveObjsProc(class figobj  *o, long  ref, class figview  *vv, struct point  *pt);
-static void Toolsub_Reshape(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, long  oref , long  ptref);
-static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
-static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
-static void Toolsub_Add(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
-static void Toolsub_Del(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
-static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static void Toolsub_Reshape(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, long  oref , long  ptref);
+static void Toolsub_AddAnch(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
+static void Toolsub_DelAnch(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
+static void Toolsub_Add(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
+static void Toolsub_Del(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref);
+static void Toolsub_Drag(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Toolsub_Select(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void FindHitObjProc(class figobj  *o, long  ref, class figview  *vv, struct FHOP_lump  *val);
 static void FindHitObjAnchProc(class figobj  *o, long  ref, class figview  *vv, struct FHOP_lump  *val);
-static class view *Tool_Select(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static class view *Tool_AddPoints(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static class view *Tool_DelPoints(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static class view *Tool_AddAnchor(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static class view *Tool_DelAnchor(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_Select(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_AddPoints(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_DelPoints(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_AddAnchor(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_DelAnchor(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void Toolmod_Select(class figtoolview  *self, long  rock);
-static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static class view *Tool_CreateProc(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void AbortObjectProc(class figtoolview  *self, long  rock);
 static char *CopyString(const char  *str);
 static void LowerString(char  *str);
@@ -2634,24 +2634,24 @@ static void MoveObjsProc(class figobj  *o, long  ref, class figview  *vv, struct
     (o)->StabilizeAttachments( FALSE);
 }
 
-static void Toolsub_Reshape(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, long  oref , long  ptref)
+static void Toolsub_Reshape(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, long  oref , long  ptref)
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    self->rock = (o)->Reshape( action, self->primaryview, x, y, TRUE, ptref);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock)
 		self->rock = (o)->Reshape( action, self->primaryview, x, y, TRUE, ptref);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock) {
 		self->rock = (o)->Reshape( action, self->primaryview, x, y, TRUE, ptref);
@@ -2668,7 +2668,7 @@ static void Toolsub_Reshape(class figtoolview  *self, enum view_MouseAction  act
     }
 }
 
-static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
+static void Toolsub_AddAnch(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
@@ -2679,8 +2679,8 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
     if (!onhandle || ptref==figobj_NULLREF) return;
     (self)->SnapToGrid( x, y);
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    self->rockx = (self->primaryview)->ToPixX( (o)->GetHandleX( ptref));
 	    self->rocky = (self->primaryview)->ToPixY( (o)->GetHandleY( ptref));
 	    self->lastx = (self->primaryview)->ToPixX( x);
@@ -2689,8 +2689,8 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
@@ -2699,8 +2699,8 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->MoveTo( self->rockx, self->rocky);
 	    (self->primaryview)->DrawLineTo( self->lastx, self->lasty);
@@ -2728,7 +2728,7 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
     }
 }
 
-static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
+static void Toolsub_DelAnch(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
@@ -2736,8 +2736,8 @@ static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  act
     if (!onhandle || ptref==figobj_NULLREF) return;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((o)->IsAttachmentActive( ptref)) {
 		fig = (class figure *)(self)->GetDataObject();
 		(o)->SetAttachmentActive( ptref, FALSE);
@@ -2748,35 +2748,35 @@ static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  act
 	    }
 
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    break;
 	default: // filedrop, upmovement, nomouse
 	    break;
     }
 }
 
-static void Toolsub_Add(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
+static void Toolsub_Add(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    self->rock = (o)->AddParts( action, self->primaryview, x, y, onhandle, ptref);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock)
 		self->rock = (o)->AddParts( action, self->primaryview, x, y, onhandle, ptref);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock) {
 		self->rock = (o)->AddParts( action, self->primaryview, x, y, onhandle, ptref);
@@ -2792,24 +2792,24 @@ static void Toolsub_Add(class figtoolview  *self, enum view_MouseAction  action,
     }
 }
 
-static void Toolsub_Del(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
+static void Toolsub_Del(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y, boolean  onhandle, long  oref , long  ptref)
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    self->rock = (o)->DeleteParts( action, self->primaryview, x, y, onhandle, ptref);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock)
 		self->rock = (o)->DeleteParts( action, self->primaryview, x, y, onhandle, ptref);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self)->SnapToGrid( x, y);
 	    if (self->rock) {
 		self->rock = (o)->DeleteParts( action, self->primaryview, x, y, onhandle, ptref);
@@ -2826,7 +2826,7 @@ static void Toolsub_Del(class figtoolview  *self, enum view_MouseAction  action,
 }
 
 /* at this point, we know objects are selected */
-static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Toolsub_Drag(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     long ix;
     struct rectangle *tmp;
@@ -2835,8 +2835,8 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 
     (self)->SnapToGrid( x, y);
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    ix = (self->primaryview)->GetNumSelected();
 	    if (ix > self->rect_size) {
 		while (ix > self->rect_size)
@@ -2856,8 +2856,8 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 		(self->primaryview)->DrawRectSize( self->lastx+tmp->left, self->lasty+tmp->top, tmp->width, tmp->height);
 	    }
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    for (ix=0; ix<self->rock; ix++) {
 		tmp = &(self->rectlist[ix]);
@@ -2870,8 +2870,8 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 		(self->primaryview)->DrawRectSize( self->lastx+tmp->left, self->lasty+tmp->top, tmp->width, tmp->height);
 	    }
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    for (ix=0; ix<self->rock; ix++) {
 		tmp = &(self->rectlist[ix]);
@@ -2892,7 +2892,7 @@ static void ShowName(class figobj  *o, long  ref, class figview  *self, long  ro
 {
     if(o->GetName()) message::DisplayString(self, 0, o->GetName());
 }
-static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Toolsub_Select(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     long w, h;
     struct rectangle area;
@@ -2900,8 +2900,8 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
     if (!fig) return;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = (self->primaryview)->ToPixX( x);
@@ -2911,8 +2911,8 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    /* x, y, w, h in fig coords; self->last* in pix coords */
@@ -2936,8 +2936,8 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 	    }
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (self->primaryview)->SetTransferMode( graphic::INVERT);
 	    (self->primaryview)->DrawRectSize( self->lastx, self->lasty, self->lastw, self->lasth);
 	    /* x, y, w, h in fig coords */
@@ -2963,7 +2963,7 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 			ref = tmpref;
 		}
 		if (ref != figure_NULLREF) {
-		    if (action==view_LeftUp)
+		    if (action==view::LeftUp)
 			(self->primaryview)->SelectByRef( ref);
 		    else
 			(self->primaryview)->ToggleSelectByRef( ref);
@@ -2974,9 +2974,9 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 	    else {
 		rectangle_SetRectSize(&area, x, y, w, h);
 		if (self->selectdeep)
-		    (fig)->EnumerateObjectTree( (self->primaryview)->GetFocusRef(), &area, FALSE, (action==view_LeftUp ? (figure_eofptr)SelAddProc : (figure_eofptr)SelTogProc), (long)self->primaryview);
+		    (fig)->EnumerateObjectTree( (self->primaryview)->GetFocusRef(), &area, FALSE, (action==view::LeftUp ? (figure_eofptr)SelAddProc : (figure_eofptr)SelTogProc), (long)self->primaryview);
 		else
-		    (fig)->EnumerateObjectGroup( (self->primaryview)->GetFocusRef(), &area, FALSE, (action==view_LeftUp ? (figure_eofptr)SelAddProc : (figure_eofptr)SelTogProc), (long)self->primaryview);
+		    (fig)->EnumerateObjectGroup( (self->primaryview)->GetFocusRef(), &area, FALSE, (action==view::LeftUp ? (figure_eofptr)SelAddProc : (figure_eofptr)SelTogProc), (long)self->primaryview);
 		AdjustToSelection(self);
 		(self->primaryview)->WantUpdate( self->primaryview);
 	    }
@@ -3050,13 +3050,13 @@ Left-down in a selected object:
 Left-down in no selected object is select mode.
 If the action is a mouse movement or mouse-up, continue in the mode determined by the mouse-down.
 */
-static class view *Tool_Select(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_Select(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct FHOP_lump val;
     class figure *fig;
 
-    if (action==view_LeftDown || action==view_RightDown) {
-	if (action==view_RightDown) {
+    if (action==view::LeftDown || action==view::RightDown) {
+	if (action==view::RightDown) {
 	    self->submode = 0;
 	    Toolsub_Select(self, action, x, y, numclicks);
 	}
@@ -3109,21 +3109,21 @@ static class view *Tool_Select(class figtoolview  *self, enum view_MouseAction  
     return (class view *)(self->primaryview);
 }
 
-static class view *Tool_AddPoints(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_AddPoints(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct FHOP_lump val;
 
     if (self->creating) {
 	/* this is a safety hack to deal with the figotext re-editing mode. */
-	if (action==view_LeftDown || action==view_RightDown) {
+	if (action==view::LeftDown || action==view::RightDown) {
 	    (self)->AbortObjectBuilding();
 	}
 	self->submode = (-1);
 	return (class view *)(self->primaryview);
     }
 
-    if (action==view_LeftDown || action==view_RightDown) {
-	if (action==view_RightDown) {
+    if (action==view::LeftDown || action==view::RightDown) {
+	if (action==view::RightDown) {
 	    self->submode = 0;
 	    Toolsub_Select(self, action, x, y, numclicks);
 	}
@@ -3164,12 +3164,12 @@ static class view *Tool_AddPoints(class figtoolview  *self, enum view_MouseActio
     return (class view *)(self->primaryview);
 }
 
-static class view *Tool_DelPoints(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_DelPoints(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct FHOP_lump val;
 
-    if (action==view_LeftDown || action==view_RightDown) {
-	if (action==view_RightDown) {
+    if (action==view::LeftDown || action==view::RightDown) {
+	if (action==view::RightDown) {
 	    self->submode = 0;
 	    Toolsub_Select(self, action, x, y, numclicks);
 	}
@@ -3210,12 +3210,12 @@ static class view *Tool_DelPoints(class figtoolview  *self, enum view_MouseActio
     return (class view *)(self->primaryview);
 }
 
-static class view *Tool_AddAnchor(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_AddAnchor(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct FHOP_lump val;
 
-    if (action==view_LeftDown || action==view_RightDown) {
-	if (action==view_RightDown) {
+    if (action==view::LeftDown || action==view::RightDown) {
+	if (action==view::RightDown) {
 	    self->submode = 0;
 	    Toolsub_Select(self, action, x, y, numclicks);
 	}
@@ -3281,12 +3281,12 @@ static class view *Tool_AddAnchor(class figtoolview  *self, enum view_MouseActio
     return (class view *)(self->primaryview);
 }
 
-static class view *Tool_DelAnchor(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_DelAnchor(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct FHOP_lump val;
 
-    if (action==view_LeftDown || action==view_RightDown) {
-	if (action==view_RightDown) {
+    if (action==view::LeftDown || action==view::RightDown) {
+	if (action==view::RightDown) {
 	    self->submode = 0;
 	    Toolsub_Select(self, action, x, y, numclicks);
 	}
@@ -3366,7 +3366,7 @@ static void Toolmod_Select(class figtoolview  *self, long  rock)
     }
 }
 
-static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static class view *Tool_CreateProc(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     enum figobj_Status result;
     class figure *fig = (class figure *)(self)->GetDataObject();
@@ -3376,8 +3376,8 @@ static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseActi
     if (!self->creating) {
 	class figobj *dummy;
 	class figobj *vob;
-	if (action != view_LeftDown) {
-	    if (self->selectonup && (action==view_LeftUp || action==view_RightUp))
+	if (action != view::LeftDown) {
+	    if (self->selectonup && (action==view::LeftUp || action==view::RightUp))
 		SetToolProc(self->tooltbl, self, self->toolacc[2]); /* ### */
 	    self->selectonup = FALSE;
 	    return (class view *)(self->primaryview); 
@@ -3412,7 +3412,7 @@ static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseActi
 	self->creating = NULL;
 	self->selectonup = !self->LockCreateMode;
 	(self->primaryview)->SetBuildKeystate( NULL);
-	if (!self->LockCreateMode && (action==view_LeftUp || action==view_RightUp))
+	if (!self->LockCreateMode && (action==view::LeftUp || action==view::RightUp))
 	    SetToolProc(self->tooltbl, self, self->toolacc[2]); /* ### */
 	RepostMenus(self);
     }
@@ -3441,7 +3441,7 @@ void figtoolview::AbortObjectBuilding()
 	return;
     }
 
-    result = (this->creating)->Build( this->primaryview, view_LeftDown, 0, 0, 0);
+    result = (this->creating)->Build( this->primaryview, view::LeftDown, 0, 0, 0);
 
     if (result == figobj_Done) {
 	message::DisplayString(this->primaryview, 10, "Object completed.");

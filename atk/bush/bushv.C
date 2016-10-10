@@ -269,11 +269,11 @@ static suite_Specification rename_it[] = {
 ATKdefineRegistry(bushv, aptv, bushv::InitializeClass);
 static void PostCursor( class bushv    *self, int		    type );
 static long ResetSelectedState( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long		  datum );
-static class view * EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view_MouseAction  action, long			  x , long			  y , long			  numClicks );
+static class view * EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view::MouseAction  action, long			  x , long			  y , long			  numClicks );
 static void StartDirMove( class bushv     *self, tree_type_node    tn );
 static int FinishDirMove( class bushv	     *self, tree_type_node     tn );
-static class view * TreeHitHandler( class bushv		     *self, class treev		     *tree_view, tree_type_node	      node, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
-static class view * ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
+static class view * TreeHitHandler( class bushv		     *self, class treev		     *tree_view, tree_type_node	      node, long			      object, enum view::MouseAction      action, long			      x , long			      y , long			      numClicks );
+static class view * ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view::MouseAction      action, long			      x , long			      y , long			      numClicks );
 static const char * FileSuffix( const char    *file_name );
 static const char * FileType( char	     *file_name );
 static long SortByName( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
@@ -436,7 +436,7 @@ ResetSelectedState( class bushv		 *self, class suite		 *suite, struct suite_item
 }
 
 static class view *
-EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view_MouseAction  action, long			  x , long			  y , long			  numClicks )
+EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view::MouseAction  action, long			  x , long			  y , long			  numClicks )
             {
   struct Dir_Entry	*dirEntry = NULL;
   int			 numSelected = 0, count = 0, i = 0;
@@ -444,8 +444,8 @@ EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	
   IN(EntriesHitHandler);
   ClearMessageLine();
   if((object == suite_ItemObject) && item && 
-	((action == view_LeftUp) || (action == view_RightUp))) {
-    if(action == view_LeftUp) {
+	((action == view::LeftUp) || (action == view::RightUp))) {
+    if(action == view::LeftUp) {
 	dirEntry = (struct Dir_Entry *) (EntriesView)->ItemAttribute(item,suite_itemdatum);
 	if(EntrySelected(dirEntry) && (NumPrevSelected == 1)) {
 	  PostCursor(self,Cursor_Wait);
@@ -543,7 +543,7 @@ FinishDirMove( class bushv	     *self, tree_type_node     tn )
 }
 
 static class view *
-TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, long object, enum view_MouseAction action, long x, long y, long	numClicks )
+TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, long object, enum view::MouseAction action, long x, long y, long	numClicks )
 {
     tree_type_node	     old_CurrNode = NULL;
     tree_type_node	     peer = NULL;
@@ -552,12 +552,12 @@ TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, 
     IN(TreeHitHandler);
     if(object == treev_NodeObject) {
 	if(node) (tree_view)->HighlightNode(node);
-	if(action == view_RightDown) {
+	if(action == view::RightDown) {
 	    MoveNode = node;
 	    StartDirMove(self,node);
 	    return 0;
 	}
-	else if(action == view_RightUp) {
+	else if(action == view::RightUp) {
 	    if(FinishDirMove(self,node)) {
 		(tree_view)->HighlightNode(CurrNode);
 		MoveNode = NULL;
@@ -566,7 +566,7 @@ TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, 
 	    MoveNode = NULL;
 	    DIRMODE(node).do_rescan = 1;
 	}
-	else if(action != view_LeftUp || !node) return 0;
+	else if(action != view::LeftUp || !node) return 0;
 	ClearMessageLine();
 	PostCursor(self,Cursor_Wait);
 	if(stat(DirPath(node),&stats)) {
@@ -581,7 +581,7 @@ TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, 
 	    peer = Child(Parent(CurrNode));
 	else
 	    peer = CurrNode;
-	if(!DIRMODE(CurrNode).selected || (action == view_RightUp)) {
+	if(!DIRMODE(CurrNode).selected || (action == view::RightUp)) {
 	    if(old_CurrNode) {
 		DIRMODE(old_CurrNode).selected = 0;
 		old_CurrNode = NULL;
@@ -616,12 +616,12 @@ TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, 
 }
 
 static class view *
-ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks )
+ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view::MouseAction      action, long			      x , long			      y , long			      numClicks )
             {
 
   IN(ControlHitHandler);
   ClearMessageLine();
-  if((action == view_LeftUp) || (action == view_RightUp)) {
+  if((action == view::LeftUp) || (action == view::RightUp)) {
     if(item && (object == suite_ItemObject)) {
       struct item_data	*itemData = NULL;
 
@@ -1032,7 +1032,7 @@ bushv::PostMenus( class menulist	 *menulist )
 }
 
 class view *
-bushv::Hit( enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
+bushv::Hit( enum view::MouseAction  action, long  x , long  y , long  numberOfClicks )
       {
   class bushv *self=this;
   IN(bushv_Hit);
@@ -1040,7 +1040,7 @@ bushv::Hit( enum view_MouseAction  action, long  x , long  y , long  numberOfCli
 }
 
 void
-bushv::FullUpdate( enum view_UpdateType  Type, long  left , long  top , long  width , long  height )
+bushv::FullUpdate( enum view::UpdateType  Type, long  left , long  top , long  width , long  height )
       {
   struct rectangle r;
   char RootPathIfInset[MAXPATHLEN];
@@ -1048,7 +1048,7 @@ bushv::FullUpdate( enum view_UpdateType  Type, long  left , long  top , long  wi
   class bushv *self=this;
 
   IN(bushv_FullUpdate);
-  if(Type == view_LastPartialRedraw || Type == view_FullRedraw) {
+  if(Type == view::LastPartialRedraw || Type == view::FullRedraw) {
     (this)->aptv::FullUpdate(Type,left,top,width,height);
     if(!RootPathName) {
 	im::GetDirectory(RootPathIfInset);
@@ -1925,7 +1925,7 @@ Push( class bushv	     *self )
             tn = Right(tn);
 	if(tn) {
 	  TreeHitHandler(self,DirTreeView,tn,
-		      treev_NodeObject,view_LeftUp,0,0,0);
+		      treev_NodeObject,view::LeftUp,0,0,0);
 	  (DirTreeView)->HighlightNode(tn);
 	}
 	else {

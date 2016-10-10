@@ -99,7 +99,7 @@ static void clearfad(class fadview  *self);
 static void AddMenus(class fadview  *self,class menulist  *ml,struct proctable_Entry  *menuProc);
 static void KeyIn(class fadview  *self,long  cr);
 static void nameframe(class fadview  *self);
-static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey);
+static boolean QueueAnimation(class fadview  *self,enum view::MouseAction  action,long  mousex ,long  mousey);
 static void drawlist(class fadview  *self,class fad  *cpic);
 static void getlist(class fadview  *self,struct fadpoint  *ppt);
 static int seticon(class fadview  *self);
@@ -179,19 +179,19 @@ static void UpdateCursor(class fadview  *self)
     else MySetStandardCursor(self,Cursor_Arrow);
 }
 
-view_DSattributes fadview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes fadview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
 {
     class fad *cp;
     cp = findpic(this);
-    if(pass ==  view_NoSet &&  cp!= NULL && cp->desw > 0 && cp->desh > 0){
+    if(pass ==  view::NoSet &&  cp!= NULL && cp->desw > 0 && cp->desh > 0){
 	*desiredheight = min(height,cp->desh) ;
 	*desiredwidth =  min(width,cp->desw); 
-	return( view_WidthFlexible | view_HeightFlexible) ;
+	return( view::WidthFlexible | view::HeightFlexible) ;
     }
     *desiredwidth = width;
     *desiredheight = (height > 2048) ? ((cp) ? cp->desh:STARTHEIGHT) :height;
-    return(view_Fixed);
+    return(view::Fixed);
 }
 
 static void fontinit(class fad  *cp)
@@ -258,13 +258,13 @@ fadview::Update()
 
     (this)->FlushGraphics();
 }
-void fadview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void fadview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
-    if(type == view_MoveNoRedraw){
+    if(type == view::MoveNoRedraw){
 	UpdateCursor(this);
 	return;
     } 
-    if(type == view_Remove){
+    if(type == view::Remove){
 	this->removed = TRUE;
 	return;
     }
@@ -911,13 +911,13 @@ static void nameframe(class fadview  *self)
     sprintf(frs,"at frame #%d",CurrentFrame(self));
     TellUser(self, frs);
 }
-static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey)
+static boolean QueueAnimation(class fadview  *self,enum view::MouseAction  action,long  mousex ,long  mousey)
 {
     struct fadpoint *pt;
     struct fadvector *vc;
     class fad *cp = findpic(self);
     if(self->anobj) return(FALSE);
-    if(action == view_LeftDown){
+    if(action == view::LeftDown){
 	if((pt = (cp)->setpoint(mousex,mousey,OLD,self->f)) != NULL){
 	    for(vc = self->f->v; vc != NULL ; vc = vc->v){
 		if(vc->p1 == pt && vc->mode == ANIMATEMODE){
@@ -928,7 +928,7 @@ static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action
 	}
     }
     else if(self->animationPending ) {
-	if(action == view_LeftUp) {
+	if(action == view::LeftUp) {
 	    self->animationPending = FALSE;
 	    (self)->aniframe(cp->Frames,0,0,cp->frtime);
 	}
@@ -939,7 +939,7 @@ static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action
 
 	   
 
-class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *fadview::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
     static struct fadpoint ptmp;
     struct fadvector *cv;
@@ -954,14 +954,14 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
     }
     if(this->anobj) return(this);
     if(cpic->readonly) {
-	if(action == view_LeftUp || action == view_RightUp)	
+	if(action == view::LeftUp || action == view::RightUp)	
 	    (this)->aniframe(cpic->Frames,0,0,cpic->frtime);
 	return this;
     }
     if(this->mode == WAITMODE) return this;
     (this)->SetTransferMode(graphic::INVERT);
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    if(cpic->fp != NULL){
 		cpic->fp = NULL;
 		cpic->pltnum = 0;
@@ -973,7 +973,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 		/* graphic::SetTransferMode(self,graphic::INVERT); */
 	    }
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    if(cpic->fp == NULL){
 		break;
 	    }
@@ -1016,7 +1016,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	    this->Redraw = FALSE;
 	    (cpic)->NotifyObservers(CurrentFrame(this));
 	    break;
-	 case view_RightDown:
+	 case view::RightDown:
 	     if(cpic->fp != NULL) cpic->fp = NULL;
 	      else if((cpic->fp =(cpic)->setpoint(mousex,mousey,OLD,Cframe)) == NULL){
 		  MySetStandardCursor(this,Cursor_Cross );
@@ -1028,7 +1028,7 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 		  /* graphic::SetTransferMode(self,graphic::INVERT); */
 	      }
 	     break;
-	 case  view_RightUp:
+	 case  view::RightUp:
 	     if(cpic->fp == NULL){
 		 UpdateCursor(this);
 		 break;
@@ -1054,9 +1054,9 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	     (cpic)->SetModified();
 	     (cpic)->NotifyObservers(CurrentFrame(this));
 	     break;
-	 case view_LeftMovement:
+	 case view::LeftMovement:
 	     if(IsMode(this , ICONMODE) && !BOXTEST(this)) break;
-	 case view_RightMovement:
+	 case view::RightMovement:
 	     if(cpic->pltnum == -1 || cpic->fp == NULL) break;
 	     if(mousex < 0 || mousey < 0) break;
 	     if(cpic->lp) drawlist(this,cpic);

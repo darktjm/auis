@@ -43,10 +43,10 @@ public:
   virtual void Set_Edit_Object( class zipedit *edit_object );
   virtual void Set_Print_Object( class zipprint *print_object );
 
-  virtual view_DSattributes Object_DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dHeight ) ;
-  virtual void Object_FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+  virtual view::DSattributes Object_DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dHeight ) ;
+  virtual void Object_FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
   virtual void Object_Update();
-  virtual class view * Object_Hit( zip_type_figure object, enum view_MouseAction action, long x, long y, long clicks ) ;
+  virtual class view * Object_Hit( zip_type_figure object, enum view::MouseAction action, long x, long y, long clicks ) ;
 
   virtual char Object_Icon();
   virtual const char * Object_Icon_Font_Name();
@@ -55,7 +55,7 @@ public:
   virtual char Object_Datastream_Code();
   virtual long Object_Modified( zip_type_figure object );
 
-  virtual long Build_Object( zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
+  virtual long Build_Object( zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
   virtual void Destroy_Object( zip_type_figure object );
   virtual long Show_Object_Properties( zip_type_pane pane, zip_type_figure figure );
   virtual long Read_Object( zip_type_figure object );

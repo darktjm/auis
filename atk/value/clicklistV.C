@@ -17,14 +17,14 @@ ATK_IMPL("clicklistV.H")
 
 
 ATKdefineRegistry(clicklistV, stringV, NULL);
-static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
+static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size);
 #endif /* USEGETCOUNT */
 static void SetArray(class clicklistV  *self,const char  * const *str,long  size);
 
 
-static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
+static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
 {   /* deal with clicks */
     class value *val;
     if(type == cltextview_PREPROCESS){
@@ -33,7 +33,7 @@ static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *po
 	    (val)->SetValue(*numberOfClicks);
 	return;
     }
-    if(*action == view_LeftUp){
+    if(*action == view::LeftUp){
 	char *cp;
 	int start,end,len,tlen;
 	val = (self)->Value();
@@ -177,7 +177,7 @@ class view *clicklistV::GetApplicationLayer()
     if(((class view *)this)->parent != NULL){
 	/* can't call desired size on unlinked text */
 	(ev)->LinkTree(this);
-	(ev)->DesiredSize(500,500,view_NoSet,&w,&h);
+	(ev)->DesiredSize(500,500,view::NoSet,&w,&h);
 	(ev)->UnlinkTree();
     }
     lp = new lpair;

@@ -15,12 +15,12 @@ class iconview : public  view
 
   
     void GetOrigin(long width, long height, long *originX, long *originY);
-    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
     void ReceiveInputFocus();
     void Update();
-    void FullUpdate(enum view_UpdateType type, long left, long top,
+    void FullUpdate(enum view::UpdateType type, long left, long top,
 		    long width, long right);
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass,	long *dWidth, long *dheight) ;
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass,	long *dWidth, long *dheight) ;
     void SetDataObject(class dataobject * d);
     void ObservedChanged(class observable *data, long value);
     void LinkTree(class view *parent);

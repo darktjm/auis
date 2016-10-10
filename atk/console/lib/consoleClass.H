@@ -16,8 +16,8 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-     class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
+     class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void ReceiveInputFocus();
      void LoseInputFocus();
      void Update();

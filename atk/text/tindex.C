@@ -38,7 +38,7 @@ static const char * const indexnames[] = {
 };
 
 static const class atom *A_doindex;
-static struct view_printopt po_doindex;
+static struct view::printopt po_doindex;
 
 ATKdefineRegistry(tindex, ATK, tindex::InitializeClass);
 

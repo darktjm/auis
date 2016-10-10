@@ -37,12 +37,12 @@ class strtblview : public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-	 void FullUpdate( enum view_UpdateType type, 
+	 void FullUpdate( enum view::UpdateType type, 
 		long left, long top, long width, long height );
 	 void Update();
-	 class view * Hit( enum view_MouseAction action, long x, long y, long n)
+	 class view * Hit( enum view::MouseAction action, long x, long y, long n)
 			 ;
-	 view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, 
+	 view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, 
 				long *desiredWidth, long *desiredHeight ) 
 			 ;
 	 void ObservedChanged( class observable *dobj, long status );
@@ -83,7 +83,7 @@ public:
 	strtblview_hitfptr ItemHitProc;		/* called when mouse hits an item */
 		/* ItemHitProc(stringtbl, ItemHitRock, accnum of hit item) */
 	long ItemHitRock;			/* passed as second arg to ItemHitProc */
-	boolean OnScreen;			/* if not view_Removed */
+	boolean OnScreen;			/* if not view::Removed */
 	boolean GaveSize;		/* as DesiredSize succeeded */
 	boolean tablechanged;		/* set by ObservedChanged */
 	boolean sizeknown;			/* set after scanning strings to get maxwidth */

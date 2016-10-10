@@ -2763,7 +2763,7 @@ void xim::HandleRedraw()
 
     if (this->IsOffscreenWindow) {
 	if (this->topLevel != NULL) {
-	    (this->topLevel)->FullUpdate( view_FullRedraw, 0, 0, (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
+	    (this->topLevel)->FullUpdate( view::FullRedraw, 0, 0, (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
 	}
 	return;
     }
@@ -2832,23 +2832,23 @@ Get the size of the window. Note: this size should be good since HandleRedraw is
 		}
 		if ((RedrawBox.x == 0) && (RedrawBox.y == 0) && (RedrawBox.width == width) && (RedrawBox.height == height)) {
 		    if (this->bbarv)
-			this->bbarv->FullUpdate( view_FullRedraw, 0, 0, width, height);
+			this->bbarv->FullUpdate( view::FullRedraw, 0, 0, width, height);
 		    else
-			this->topLevel->FullUpdate( view_FullRedraw, 0, 0, width, height);
+			this->topLevel->FullUpdate( view::FullRedraw, 0, 0, width, height);
 		} else {
 		    if (this->bbarv)
-			this->bbarv->FullUpdate( view_LastPartialRedraw, RedrawBox.x, RedrawBox.y, RedrawBox.width, RedrawBox.height);
+			this->bbarv->FullUpdate( view::LastPartialRedraw, RedrawBox.x, RedrawBox.y, RedrawBox.width, RedrawBox.height);
 		    else
-			this->topLevel->FullUpdate( view_LastPartialRedraw, RedrawBox.x, RedrawBox.y, RedrawBox.width, RedrawBox.height);
+			this->topLevel->FullUpdate( view::LastPartialRedraw, RedrawBox.x, RedrawBox.y, RedrawBox.width, RedrawBox.height);
 		}
 	    }
 			/* Nope, not drawing in response to the hardware exposing 
 				a little piece, so go for a full update */
 	    else {
 		if (this->bbarv)
-		    this->bbarv->FullUpdate(view_FullRedraw, 0, 0, width, height);
+		    this->bbarv->FullUpdate(view::FullRedraw, 0, 0, width, height);
 		else
-		    this->topLevel->FullUpdate(view_FullRedraw, 0, 0, width, height);
+		    this->topLevel->FullUpdate(view::FullRedraw, 0, 0, width, height);
 	    }
 
 	}
@@ -3120,13 +3120,13 @@ ButtonTimerFire(struct mouseStatus  *mfacts, long  now)
 	switch (state) {
 	case msLeftDownPending:
 		mfacts->state = msLeftDown;
-		enQuserMouse(mfacts->xim, view_LeftDown, 
+		enQuserMouse(mfacts->xim, view::LeftDown, 
 			mfacts->xPending, mfacts->yPending, 
 			im_LeftDown);
 		break;
 	case msRightDownPending:
 		mfacts->state = msRightDown;
-		enQuserMouse(mfacts->xim, view_RightDown, 
+		enQuserMouse(mfacts->xim, view::RightDown, 
 			mfacts->xPending, mfacts->yPending, 
 			im_RightDown);
 		break;
@@ -3167,10 +3167,10 @@ SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y)
 		{
 	switch (mfacts->state) {
 	case msLeftDown:
-		enQuserMouse(mfacts->xim, view_LeftUp, x, y, im_AllUp);
+		enQuserMouse(mfacts->xim, view::LeftUp, x, y, im_AllUp);
 		break;
 	case msRightDown:
-		enQuserMouse(mfacts->xim, view_RightUp, x, y, im_AllUp);
+		enQuserMouse(mfacts->xim, view::RightUp, x, y, im_AllUp);
 		break;
 	default:
 	        break; /* can't happen */
@@ -3179,7 +3179,7 @@ SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y)
 }
 
 class view *
-xim::Hit (enum view_MouseAction  action, long  x , long  y , long  clicks)
+xim::Hit (enum view::MouseAction  action, long  x , long  y , long  clicks)
 {
     if (this->popup_active)
 	return (class view *)this;
@@ -3535,18 +3535,18 @@ HandleWindowEvent(Display  *display)
 		mouseY = motionEvent->y;
 		switch (mfacts->state)  {
 		case msLeftDown:
-			enQuserMouse(mfacts->xim, view_LeftMovement, 
+			enQuserMouse(mfacts->xim, view::LeftMovement, 
 				mouseX, mouseY, im_LeftDown);
 			break;
 		case msRightDown:
-			enQuserMouse(mfacts->xim, view_RightMovement, 
+			enQuserMouse(mfacts->xim, view::RightMovement, 
 				mouseX, mouseY, im_RightDown);
 			break;
 		    default:
 			if (motionEvent->state & Button2Mask) 
                               break;  // ignore middle mouse button
 				// `cmenu' exits before middle up
-			enQuserMouse(mfacts->xim, view_UpMovement, 
+			enQuserMouse(mfacts->xim, view::UpMovement, 
 				mouseX, mouseY, im_AllUp);
 			break;
 		}
@@ -3629,7 +3629,7 @@ HandleWindowEvent(Display  *display)
 
 
 class im *
-xim::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButtonState) {
+xim::HandleMouse(enum view::MouseAction  action, long  x, long  y, long  newButtonState) {
     xim *ochild=od_child;
     xim *other=NULL;
     while(ochild) {
@@ -5728,7 +5728,7 @@ HandleDropin(class xim  *self, XClientMessageEvent  *ev)
     unsigned int num_files;
     unsigned int i;
     char *p;
-    enum view_MouseAction action;
+    enum view::MouseAction action;
     class im *im = (class im *)self;
 
     x_root = (ev->data.l[1] >> 16) & 0xffff;
@@ -5780,13 +5780,13 @@ HandleDropin(class xim  *self, XClientMessageEvent  *ev)
 
     switch ((ev->data.l[2] >> 8) & 0x1f) {
 	case 1:
-	    action = view_LeftFileDrop;
+	    action = view::LeftFileDrop;
 	    break;
 	case 2:
-	    action = view_MiddleFileDrop;
+	    action = view::MiddleFileDrop;
 	    break;
 	case 4:
-	    action = view_RightFileDrop;
+	    action = view::RightFileDrop;
 	    break;
 	default:
 	    return;

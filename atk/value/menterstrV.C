@@ -19,9 +19,9 @@ ATK_IMPL("menterstrV.H")
 
 ATKdefineRegistry(menterstrV, buttonV, NULL);
 
-class valueview *menterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview *menterstrV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
                {
-  if (this->etext &&(type == view_RightUp || type == view_LeftUp))
+  if (this->etext &&(type == view::RightUp || type == view::LeftUp))
       (this->etext)->updatebuf();
   return (class buttonV *)this;
 }
@@ -78,7 +78,7 @@ class view *menterstrV::GetApplicationLayer()
     if(((class view *)this)->parent != NULL){
 	/* can't call desired size on unlinked text */
 	(ev)->LinkTree(this);
-	(ev)->DesiredSize(500,500,view_NoSet,&w,&h);
+	(ev)->DesiredSize(500,500,view::NoSet,&w,&h);
 	(ev)->UnlinkTree();
     }
     lp = lpair::Create((ev)->GetApplicationLayer(),this,h);

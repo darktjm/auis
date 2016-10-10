@@ -114,7 +114,7 @@ charthst::SetDebug( boolean		        state )
   }
 
 class view *
-charthst::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+charthst::HitChart( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class charthst *self=this;
   class view		     *hit;
@@ -127,7 +127,7 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
   IN(charthst_HitChart);
   hit = (class view *) this;
   if ( shadow  ||
-	 (action == view_LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
+	 (action == view::LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
     {
     (this)->SetCurrentItem( shadow->item );
     if ( y > Bottom ) y = Bottom;
@@ -135,7 +135,7 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
     y += y_offset;
     switch ( action )
       {
-      case  view_LeftDown:
+      case  view::LeftDown:
 	(this )->UseInvisibleCursor( );
         (this)->SetTransferMode(  graphic::INVERT );
 	y_offset = ITEMY(shadow) - y;
@@ -146,7 +146,7 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
 	value = value_original = (Data)->ItemAttribute(  shadow->item, chart_itemvalue );
 	DEBUGdt(Initial-value,value);
         break;
-      case  view_LeftMovement:
+      case  view::LeftMovement:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( (abs(delta = prior_y - y)) > PIXELSPERINTERVAL )
@@ -154,7 +154,7 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
 	(this)->MoveTo(  Left, prior_y = y );
 	(this)->DrawLineTo(  Right, y );
         break;
-      case  view_LeftUp:
+      case  view::LeftUp:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( abs(delta = initial_y - y) > PIXELSPERINTERVAL )

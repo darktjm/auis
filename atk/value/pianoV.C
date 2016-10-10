@@ -284,12 +284,12 @@ void pianoV::DrawNewValue( )
 
 #define flipbit(A,B) ((A & B)? (A & ~B) : (A | B))
 
-class valueview * pianoV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * pianoV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     int tmp,v,m;
     switch(type){
-	case view_LeftDown:
+	case view::LeftDown:
 	    v = (tt)->GetValue();
 	    m = masks[locateHit(this,x,y)];
 	    this->tmpval =  flipbit(v,m);
@@ -298,7 +298,7 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 #endif /* DEBUG */
 	    Drawpiano(this,FALSE);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    v = (tt)->GetValue();
 	    m = masks[locateHit(this,x,y)];
 	    tmp =  flipbit(v,m);
@@ -307,7 +307,7 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 		Drawpiano(this,FALSE);
 	    }
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    (tt)->SetValue(this->tmpval);
 	    break;
 	default:

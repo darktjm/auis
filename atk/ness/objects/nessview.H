@@ -16,13 +16,13 @@ public:
 
 
 
-	void FullUpdate(enum view_UpdateType type,
+	void FullUpdate(enum view::UpdateType type,
 			long left, long top, long width, long height);
 	void Update();
-	class view * Hit (enum view_MouseAction action, 
+	class view * Hit (enum view::MouseAction action, 
 			long x, long y, long numberOfClicks);
-	view_DSattributes DesiredSize(long width, long height, 
-			enum view_DSpass pass, long *desiredWidth, long *desiredHeight);
+	view::DSattributes DesiredSize(long width, long height, 
+			enum view::DSpass pass, long *desiredWidth, long *desiredHeight);
 	void SetDataObject(class dataobject *dobj);
 
 	void WantInputFocus(class view *requestor);

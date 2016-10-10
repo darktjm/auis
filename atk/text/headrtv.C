@@ -433,9 +433,9 @@ char *headrtv::GetExpandedString(int pos, boolean *rethaspage)
     }
 }
 
-view_DSattributes headrtv::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes headrtv::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 {
-    view_DSattributes result;
+    view::DSattributes result;
     result=(this->sections)->DesiredSize(width, height, pass, desiredwidth, desiredheight);
     *desiredwidth = width;
     if (*desiredwidth<100) *desiredwidth= 100; /* make sure it doesn't vanish if it's adjacent to another header */
@@ -510,7 +510,7 @@ static void headrtv_MoveOn(class headrtv  *self, long  rock)
     (self)->WantInputFocus( Textv(self, self->my_focus));
 }
 
-class view *headrtv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *headrtv::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     if(y>this->top) {
 	int i;
@@ -532,8 +532,8 @@ class view *headrtv::Hit(enum view_MouseAction  action, long  x, long  y, long  
 	
     }
     switch(action) {
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    if(x>this->closebox||!this->open) {
 		if(this->open) {
 		    struct rectangle mvb;
@@ -559,14 +559,14 @@ class view *headrtv::Hit(enum view_MouseAction  action, long  x, long  y, long  
     return View(this);
 }
 
-void headrtv::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void headrtv::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle mvb;
    
     switch(type) {
-	case view_PartialRedraw:
-	case view_LastPartialRedraw:
-	case view_FullRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw:
+	case view::FullRedraw:
 	    (this)->GetVisualBounds(&mvb);
 	   
 	    DrawBorder(this,&mvb);
@@ -578,8 +578,8 @@ void headrtv::FullUpdate(enum view_UpdateType  type, long  left, long  top, long
 		(this->sections)->InsertView(this,&mvb);
 		(this->sections)->FullUpdate( type, left,top, width, height);
 	    }
-	case view_Remove:
-	case view_MoveNoRedraw:
+	case view::Remove:
+	case view::MoveNoRedraw:
 	    break;
     }
 }

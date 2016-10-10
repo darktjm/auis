@@ -411,10 +411,10 @@ class AmenuCardv : public view {
 
     AmenuCardv();
     ~AmenuCardv();
-    view_DSattributes DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height);
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+    view::DSattributes DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();
-    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
     AmenuEntry *highlight, *newhighlight; // tjm - FIXME: used by AmenuOptionv
   private:
     AmenuEntries *ed;
@@ -443,10 +443,10 @@ class AmenuOptionv : public view {
     virtual ATKregistryEntry *ATKregistry();
     AmenuOptionv();
     ~AmenuOptionv();
-    view_DSattributes DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height);
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+    view::DSattributes DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();
-    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
 
     AmenuOptionCardv *card;
     popupwin *win;

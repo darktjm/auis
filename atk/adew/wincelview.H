@@ -13,8 +13,8 @@ public:
 	wincelview();
 
 
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void ObservedChanged (class observable *changed, long value);
 
     virtual void pushchild();

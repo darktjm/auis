@@ -98,7 +98,7 @@ static boolean debug=TRUE;
 #define  FirstTime		      self->states.first_time
 #define  Keystate		      self->keystatep
 #define  Cursor			      self->cursor
-#define	 MouseAction		      self->mouse_action
+#define	 MyMouseAction		      self->mouse_action
 #define	 MouseX			      self->mouse_x
 #define	 MouseY			      self->mouse_y
 #define	 MouseClicks		      self->mouse_clicks
@@ -263,7 +263,7 @@ zipview::zipview( )
   Pane = CurrentPane = NULL;
   CurrentPage = 1;
   Action = 0;
-  MouseAction = view_NoMouseEvent;
+  MyMouseAction = view::NoMouseEvent;
   this->objects = NULL;
   BlockTop = BlockLeft = BlockHeight = BlockWidth = 0;
   this->imPtr = NULL;/*=== WHY DONE ? ===*/
@@ -360,12 +360,12 @@ zipview::SetDataObject( class dataobject		       *data )
   OUT(zipview_SetDataObject );
   }
 
-view_DSattributes
+view::DSattributes
 zipview::DesiredSize( long			       given_width , long			       given_height,
-		      enum view_DSpass	       pass, long			      *desired_width , long			      *desired_height )
+		      enum view::DSpass	       pass, long			      *desired_width , long			      *desired_height )
           {
-  view_DSattributes     result = view_WidthFlexible |
-					       view_HeightFlexible;
+  view::DSattributes     result = view::WidthFlexible |
+					       view::HeightFlexible;
   IN(zipview_DesiredSize);
   DEBUGdt( Given Width, given_width);
   DEBUGdt( Given Height, given_height);
@@ -460,13 +460,13 @@ zipview::WantUpdate( class view		      *requestor )
   }
 
 void 
-zipview::FullUpdate( enum view_UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
+zipview::FullUpdate( enum view::UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
         {
   class zipview *self=this;
   IN(zipview_FullUpdate);
   DEBUGdt( Type, type);
   DEBUGlt( Left,  left);   DEBUGlt( Top,   top);
-  if ( type == view_FullRedraw || type == view_LastPartialRedraw )
+  if ( type == view::FullRedraw || type == view::LastPartialRedraw )
     {
     (this)->GetLogicalBounds(  &Block );
     this->data_object->desired_view_width  = BlockWidth;
@@ -486,7 +486,7 @@ zipview::FullUpdate( enum view_UpdateType	       type, long			       left , long
     (this )->Update( );
     }
   else
-  if ( type == view_MoveNoRedraw )
+  if ( type == view::MoveNoRedraw )
     {
     DEBUG(Move-No-Redraw);
     (this )->Use_Normal_Pane_Cursors( );
@@ -523,7 +523,7 @@ zipview::Update( )
   }
 
 class view *
-zipview::Hit( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipview::Hit( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   zip_type_pane	      pane;
   zip_type_figure	      figure;
@@ -533,9 +533,9 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
   IN(zipview_Hit );
   if ( (CurrentPane = pane = (this)->Which_Pane(  x, y ))  &&  !Abeyant )
     {
-    if ( action == view_LeftDown  ||  action == view_RightDown )
+    if ( action == view::LeftDown  ||  action == view::RightDown )
       (View)->Announce(  " " );
-    MouseAction = action;  MouseX = x;  MouseY = y;  MouseClicks = clicks;
+    MyMouseAction = action;  MouseX = x;  MouseY = y;  MouseClicks = clicks;
     if ( pane->zip_pane_hit_processor )
       { DEBUG(>>> Hit Processor);
       view = (class view *)
@@ -552,7 +552,7 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
     else
     if ( ( figure = (this)->Within_Which_Figure(  x, y ) ) )
       {  DEBUG(Within a Figure);
-      if ( !InputFocus  ||  action == view_LeftDown )
+      if ( !InputFocus  ||  action == view::LeftDown )
         view = (Objects(figure->zip_figure_type))->Object_Hit( 
 				   figure, action, x, y, clicks );
       }
@@ -560,8 +560,8 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
       {
       if ( InputFocus )
 	{ DEBUG(Have InputFocus);
-	if ( action == view_RightDown  ||  action == view_RightMovement  ||
-	     action == view_RightUp )
+	if ( action == view::RightDown  ||  action == view::RightMovement  ||
+	     action == view::RightUp )
 	  { DEBUG(RightButton);
 	  Set_pending_hit;
 	  view = (class view *) this;
@@ -570,7 +570,7 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
 	}
 	else
 	{ DEBUG(Not InputFocus);
-	if ( action == view_LeftDown ) 
+	if ( action == view::LeftDown ) 
 	  { DEBUG(Grab InputFocus);
 	  (this)->WantInputFocus(  this );
 	  view = (class view *) this;
@@ -587,7 +587,7 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
       }
       else  { DEBUG(No Pane ::Hit); }
     }
-  MouseAction = view_NoMouseEvent;
+  MyMouseAction = view::NoMouseEvent;
   OUT(zipview_Hit );
   return  view;
   }
@@ -1311,15 +1311,15 @@ void Pending_Hit( class zipview	    *self )
   IN(Pending_Hit);
   Reset_pending_hit;
   if ( InputFocus )
-    switch ( MouseAction )
+    switch ( MyMouseAction )
       {
-      case view_RightDown:
+      case view::RightDown:
 	(self)->Initiate_Panning(  Pane, MouseX, MouseY, 0/*===*/ );
 	break;
-      case view_RightMovement:
+      case view::RightMovement:
 	(self)->Continue_Panning(  Pane, MouseX, MouseY );
 	break;
-      case view_RightUp:
+      case view::RightUp:
 	Normalize_View( self );
 	(self)->Terminate_Panning(  Pane, MouseX, MouseY, 0, 0, 1 );
 	Highlight_View( self );

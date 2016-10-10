@@ -48,8 +48,8 @@ static int iconopen = TRUE;    /* default initial closed */
 ATKdefineRegistry(iconview, view, iconview::InitializeClass);
 #if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
 #endif /* !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS) */
-static void DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
-static void DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
+static void DrawOpen(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
+static void DrawClosed(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
 static void SlayChild(class iconview  * self);
 static void AdoptNewChild(class iconview  * self,class icon  * dobj);
 static long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic);
@@ -59,7 +59,7 @@ static void iconview__SetIconFontname (class iconview  * self,char  *name);
 
 
 static void
-DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
+DrawOpen(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
                {  
     long x,y,w,h;   /* my coordinate space */
     long cx, cy, cw, ch; /* my "C"hilds coordinate space */
@@ -147,7 +147,7 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
 
 /* Draw the iconview when it is closed (subview invisible) */
 static void
-DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
+DrawClosed(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
                {  
     long x,y;
     struct fontdesc_charInfo iconinfo;
@@ -366,16 +366,16 @@ iconview::Update()
     (this)->SetTransferMode( graphic::COPY);
     (this)->EraseVisualRect();
     (this)->GetLogicalBounds( &r);
-    (this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+    (this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 } /* iconview_Update */
 
 void
-iconview::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , long  h)
+iconview::FullUpdate(enum view::UpdateType  type, long  x , long  y , long  w , long  h)
                {  
     switch(type) {
-	case view_FullRedraw:
-	case view_PartialRedraw:
-	case view_LastPartialRedraw: {
+	case view::FullRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw: {
 	    struct rectangle r;
 	    (this)->GetLogicalBounds( &r);
 	    if (this->isopen)
@@ -384,16 +384,16 @@ iconview::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , l
 		DrawClosed(this, type, r.left, r.top, r.width, r.height);
 	    }
 	    break;
-	case view_MoveNoRedraw:
-	case view_Remove:
+	case view::MoveNoRedraw:
+	case view::Remove:
 	    (this->child)->FullUpdate( type, 0, 0, this->cw, this->ch);
 	    break;
     }
 }
 
 
-view_DSattributes
-iconview::DesiredSize(long  w , long  h, enum view_DSpass  pass, long  *dw , long  *dh)
+view::DSattributes
+iconview::DesiredSize(long  w , long  h, enum view::DSpass  pass, long  *dw , long  *dh)
                 {  
 	struct fontdesc_charInfo iconinfo;
 	if (!this->isopen) {
@@ -401,19 +401,19 @@ iconview::DesiredSize(long  w , long  h, enum view_DSpass  pass, long  *dw , lon
 				 this->iconchar, &iconinfo);
 	    *dw = iconinfo.width;
 	    *dh = iconinfo.height;
-	    return (view_Fixed);
+	    return (view::Fixed);
 	} else {
 	    *dw = this->dw;
 	    *dh = this->dh;
 	    (this)->DecidedSize( this->dw, this->dh);
-	    return (view_WidthFlexible | view_HeightFlexible);
+	    return (view::WidthFlexible | view::HeightFlexible);
 	}
 
 }
 
 
 class view *
-iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
+iconview::Hit(enum view::MouseAction  action, long  x, long  y, long  clicks)
                 {  
     if (this->isopen) {
 	if (this->child != (class view *)0 &&
@@ -426,8 +426,8 @@ iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
 	    return (this->child)->Hit( action, x, y, clicks);
 	} else {     /* tjm - unsure if this is the desired grouping (was (a&&b)||c) */
 	    if (y < this->cy
-		&& ((action == view_LeftUp)
-		|| action == view_RightUp)) {
+		&& ((action == view::LeftUp)
+		|| action == view::RightUp)) {
 		class view *v;
 		(this)->Close();
 		v = (class view *) this;
@@ -440,7 +440,7 @@ iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
 	    return (class view *)this;
 	}
     } else {
-	if (action == view_LeftUp || action == view_RightUp) {
+	if (action == view::LeftUp || action == view::RightUp) {
 	    (this)->Open();
 	    if (this->child != (class view *)0) {
 		(this->bottomview)->WantInputFocus(

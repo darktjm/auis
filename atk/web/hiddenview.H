@@ -18,10 +18,10 @@ class hiddenview : public textview {
     void ReceiveInputFocus();
     void PostMenus(class menulist *menulist);
 
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight);
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight);
     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
     void Update();
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
 
     static boolean InitializeClass();
     hiddenview();

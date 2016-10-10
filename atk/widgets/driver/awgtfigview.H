@@ -27,13 +27,13 @@ class AWgtFigView : public AWidgetView {
 
 	virtual void LinkTree(view *parent);
 	virtual void InitChildren();
-	void FullUpdate(enum view_UpdateType type, 
+	void FullUpdate(enum view::UpdateType type, 
 			long left, long top, long width, long height);
 	void Update();
-	view * Hit(enum view_MouseAction action, 
+	view * Hit(enum view::MouseAction action, 
 			long x, long y, long n);
-	view_DSattributes DesiredSize(long width, long height, 
-			enum view_DSpass pass, 
+	view::DSattributes DesiredSize(long width, long height, 
+			enum view::DSpass pass, 
 			long *desiredWidth, long *desiredHeight);
 	virtual boolean RecSearch(struct SearchPattern *pat, 
 			boolean toplevel);

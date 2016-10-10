@@ -29,7 +29,7 @@ colorv::~colorv( )
 }
 
 void
-colorv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
+colorv::FullUpdate( enum view::UpdateType  type, long  left , long  top , long  width , long  height )
       {
   class color *c = (class color*) (this)->GetDataObject();
   unsigned short R, G, B;
@@ -44,5 +44,5 @@ colorv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  w
 void
 colorv::Update( )
   {
-  (this)->FullUpdate( view_FullRedraw, 0, 0, 0, 0);
+  (this)->FullUpdate( view::FullRedraw, 0, 0, 0, 0);
 }

@@ -15,7 +15,7 @@ public:
     
 	virtual ~prefsbv();
   
-     boolean Touch(int ind, enum view_MouseAction act)  ;
+     boolean Touch(int ind, enum view::MouseAction act)  ;
  };
 /** @} */
 #endif /* _prefsbv_H_ */

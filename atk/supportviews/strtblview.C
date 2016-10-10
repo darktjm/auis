@@ -255,20 +255,20 @@ RedrawTable(class strtblview  *self)
 }
 
 void 
-strtblview::FullUpdate( enum view_UpdateType   type, long   left , long   top , long   width , long   height )
+strtblview::FullUpdate( enum view::UpdateType   type, long   left , long   top , long   width , long   height )
 			{
-	if (type == view_Remove) {
+	if (type == view::Remove) {
 		this->OnScreen = FALSE;
 		return;
 	}
 	if ( ! CheckWindow(this, "FullUpdate")) return;
-	if ((type != view_FullRedraw 
-				&& type != view_LastPartialRedraw)
+	if ((type != view::FullRedraw 
+				&& type != view::LastPartialRedraw)
 			|| (this)->GetLogicalWidth() == 0 
 			|| (this)->GetLogicalHeight() == 0) 
 		return;
 	this->OnScreen = TRUE;
-	if (type == view_FullRedraw) {
+	if (type == view::FullRedraw) {
 	    this->WhitePattern = (this)->view::WhitePattern();
 		this->BlackPattern = (this)->view::BlackPattern();
 		this->sizeknown = FALSE;
@@ -290,12 +290,12 @@ strtblview::Update( )
 }
 
 class view *
-strtblview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+strtblview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 			{
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 	if (! this->OnScreen || ! CheckWindow(this, "Hit")) return NULL;
-	if ( action == view_LeftDown || action == view_RightDown ) {
+	if ( action == view::LeftDown || action == view::RightDown ) {
 		class stringtbl *st 
 				= (class stringtbl *)this->dataobject;
 		short i, n = (st)->NStrings();
@@ -326,8 +326,8 @@ printf("i %d  for hit at (%d, %d)  in box at (%d,%d) of size %dx%d\n",
 	return (class view *)this;		/* where to send subsequent hits */
 }
 
-view_DSattributes
-strtblview::DesiredSize( long  width, long  height, enum view_DSpass  pass, 
+view::DSattributes
+strtblview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
 	class stringtbl *st 
@@ -339,7 +339,7 @@ strtblview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 			give dummy values */
 		*desiredWidth = 85;
 		*desiredHeight = 60;
-		return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+		return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 	}
 
 	/* compute the dimensions of the biggest string */
@@ -347,7 +347,7 @@ strtblview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 		ComputeItemSize(this);
 
 	/* the following three if sections set self->rows and self->cols */
-	if (pass == view_NoSet) {
+	if (pass == view::NoSet) {
 		if (30<width && width<1000 && 30<height && height<1000)
 			ComputeOrganization(this, width, height);
 		else if (this->itemheight < 5)
@@ -366,13 +366,13 @@ strtblview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 			this->cols = (this->maxused + r - 1) / r;
 		}
 	}
-	else if (pass == view_WidthSet) {
+	else if (pass == view::WidthSet) {
 		this->cols = (width - 2*BORDER) / (this->maxwidth + INTER);
 		if (this->cols < 1) this->cols = 1;
 		if (this->cols > this->maxused) this->cols = this->maxused;
 		this->rows = (this->maxused + this->cols - 1) / this->cols;
 	}
-	else /* pass == view_HeightSet */ {
+	else /* pass == view::HeightSet */ {
 		this->rows = (height - 2*BORDER) / (this->itemheight + INTER);
 		if (this->rows < 1) this->rows = 1;
 		if (this->rows > this->maxused) this->rows = this->maxused;
@@ -390,18 +390,18 @@ width, height, self->rows, self->cols, *desiredWidth, *desiredHeight); fflush(st
 	this->GaveSize = TRUE;
 	{
 /* with the following, the compiler complains about incompatible operands to |= 
-*		enum view_DSattributes ret = view_HeightLarger | view_WidthLarger;
-*		if (self->rows > 1) ret |= view_HeightSmaller;
-*		if (self->cols >1) ret |= view_WidthSmaller;
+*		enum view::DSattributes ret = view::HeightLarger | view::WidthLarger;
+*		if (self->rows > 1) ret |= view::HeightSmaller;
+*		if (self->cols >1) ret |= view::WidthSmaller;
 *		return ret;
 */
 		if (this->rows > 1 && this->cols > 1) 
-			return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+			return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 		if (this->rows > 1) 
-			return (view_DSattributes)(view_HeightFlexible | view_WidthLarger);
+			return (view::DSattributes)(view::HeightFlexible | view::WidthLarger);
 		if (this->cols > 1)  
-			return (view_DSattributes)(view_HeightLarger | view_WidthFlexible);
-		return  (view_DSattributes)(view_HeightLarger | view_WidthLarger);
+			return (view::DSattributes)(view::HeightLarger | view::WidthFlexible);
+		return  (view::DSattributes)(view::HeightLarger | view::WidthLarger);
 	}
 }
 

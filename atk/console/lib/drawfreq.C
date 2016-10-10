@@ -888,7 +888,7 @@ void DrawLog(class consoleClass  *self, int  Op, struct display  *disp)
 		    (disp->ScrollLogView)->LinkTree( self);
 		    (disp->ScrollLogView)->InsertViewSize( self, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
 		    (disp->AssociatedLogView)->SetBorder( 3, 0);
-		    (disp->ScrollLogView)->FullUpdate( view_FullRedraw, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
+		    (disp->ScrollLogView)->FullUpdate( view::FullRedraw, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
 		    ScrollToEnd(disp->AssociatedLog, Op);
 		}
 	    }

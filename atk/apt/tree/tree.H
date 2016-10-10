@@ -92,7 +92,7 @@ struct  tree_specification
 
 class tree;
 typedef long (*tree_applyfptr)(char *anchor, class tree *self, tree_type_node node, char *datum );
-typedef void (*tree_hitfptr) (char *anchor, class tree *self, tree_type_node node, int otype, view_MouseAction action, long x, long y, long numberOfClicks);
+typedef void (*tree_hitfptr) (char *anchor, class tree *self, tree_type_node node, int otype, view::MouseAction action, long x, long y, long numberOfClicks);
 class tree : public  apt
   {
 public:

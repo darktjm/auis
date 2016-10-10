@@ -620,7 +620,7 @@ AmenuCardv::~AmenuCardv() {
     delete ed;
 }
 
-view_DSattributes AmenuCardv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height)
+view::DSattributes AmenuCardv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height)
 {
     AmenuCard &cr=*(AmenuCard *)GetDataObject();
     size_t i;
@@ -638,11 +638,11 @@ view_DSattributes AmenuCardv::DesiredSize(long  width, long  height, enum view_D
     *desired_width=mw;
     *desired_height=mh;
     sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, cr.prefs, TRUE, *desired_width, *desired_height, desired_width, desired_height);
-    return (view_DSattributes)(view_HeightFlexible|view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible|view::WidthFlexible);
 }
     
-void AmenuCardv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height) {
-    if(type!=view_FullRedraw && type!=view_LastPartialRedraw) return;
+void AmenuCardv::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height) {
+    if(type!=view::FullRedraw && type!=view::LastPartialRedraw) return;
     AmenuCard *c=(AmenuCard *)GetDataObject();
     if(c==NULL) return;
     AmenuCard &cr=*c;
@@ -716,7 +716,7 @@ void AmenuCardv::Update() {
 	}
 	highlight=newhighlight;
 	FlushGraphics();
-    } // else FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+    } // else FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 }
 
 AmenuEntry *AmenuCardv::FindHit(long x, long y) {
@@ -728,13 +728,13 @@ AmenuEntry *AmenuCardv::FindHit(long x, long y) {
     return NULL;
 }
 
-class view * AmenuCardv::Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  {
+class view * AmenuCardv::Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  {
     AmenuEntry *e=FindHit(x, y);
     newhighlight=e;
-    if(action==view_LeftUp || action==view_RightUp) {
+    if(action==view::LeftUp || action==view::RightUp) {
 	if(e) e->Dispatch();
     }
-    if(action==view_LeftUp || action==view_RightUp) newhighlight=NULL;
+    if(action==view::LeftUp || action==view::RightUp) newhighlight=NULL;
     
     if(newhighlight!=highlight) {
 	WantUpdate(this);
@@ -761,7 +761,7 @@ AmenuOptionv::AmenuOptionv() {
 class NO_DLL_EXPORT AmenuOptionCardv : public AmenuCardv {
   public:
 //    virtual ATKregistryEntry *ATKregistry();
-    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
 };
 
 AmenuOptionv::~AmenuOptionv() {
@@ -774,21 +774,21 @@ AmenuOptionv::~AmenuOptionv() {
 // type, and expects the ATK type info to be accurate.
 //ATKdefineRegistryNoInit(AmenuOptionCardv,AmenuCardv);
 
-class view *AmenuOptionCardv::Hit(enum view_MouseAction action, long x, long y, long numberOfClicks) {
+class view *AmenuOptionCardv::Hit(enum view::MouseAction action, long x, long y, long numberOfClicks) {
     view *ret=this;
     AmenuEntry *e=FindHit(x, y);
-    if(action==view_LeftUp || action==view_RightUp) {
+    if(action==view::LeftUp || action==view::RightUp) {
 	AmenuOption *ao=(AmenuOption *)GetDataObject();
 	if(e) ao->selected=e;
 	ao->NotifyObservers(observable::OBJECTCHANGED);
     }
     ret=AmenuCardv::Hit(action,x,y,numberOfClicks);
-    if(action==view_LeftUp || action==view_RightUp) GetIM()->VanishWindow();
+    if(action==view::LeftUp || action==view::RightUp) GetIM()->VanishWindow();
     return ret;
 }
 
 
-view_DSattributes AmenuOptionv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height) {
+view::DSattributes AmenuOptionv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height) {
     AmenuOption &cr=*(AmenuOption *)GetDataObject();
     size_t i;
     cr.EnsurePrefs();
@@ -806,11 +806,11 @@ view_DSattributes AmenuOptionv::DesiredSize(long  width, long  height, enum view
     *desired_width=mw;
     *desired_height=mh;
     sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, cr.prefs, TRUE, *desired_width, *desired_height, desired_width, desired_height);
-    return (view_DSattributes)(view_HeightFlexible|view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible|view::WidthFlexible);
 }
 
-void AmenuOptionv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height) {
-    if(type!=view_FullRedraw && type!=view_LastPartialRedraw) return;
+void AmenuOptionv::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height) {
+    if(type!=view::FullRedraw && type!=view::LastPartialRedraw) return;
     AmenuOption *c=(AmenuOption *)GetDataObject();
     if(c==NULL) return;
     AmenuOption &cr=*c;
@@ -843,12 +843,12 @@ void AmenuOptionv::FullUpdate(enum view_UpdateType type, long left, long top, lo
 }
 
 void AmenuOptionv::Update() {
-    FullUpdate(view_FullRedraw,0,0,0,0);
+    FullUpdate(view::FullRedraw,0,0,0,0);
 }
 
    
-class view *AmenuOptionv::Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) {
-    if(action==view_LeftDown || action==view_RightUp) {
+class view *AmenuOptionv::Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) {
+    if(action==view::LeftDown || action==view::RightUp) {
 	if(card==NULL) card=new AmenuOptionCardv;
 	if(card)  {
 	    card->SetDataObject(GetDataObject());

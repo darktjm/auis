@@ -42,8 +42,8 @@ END-SPECIFICATION  ************************************************************/
 #define  box			      2
 #define  roundbox		      3
 
-#define  Balanced		     (view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBASELINE)
-#define  RightMiddle		     (view_ATRIGHT | view_BETWEENTOPANDBASELINE)
+#define  Balanced		     (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE)
+#define  RightMiddle		     (graphic::ATRIGHT | graphic::BETWEENTOPANDBASELINE)
 
 #define  Data			    ((class calc *)self->data_object)
 #define  Operand1	    	     (self->operand_1)
@@ -278,13 +278,13 @@ calcv::LoseInputFocus( )
   }
 
 void 
-calcv::FullUpdate( enum view_UpdateType	 type, long		       left , long		       top , long		       width , long		       height )
+calcv::FullUpdate( enum view::UpdateType	 type, long		       left , long		       top , long		       width , long		       height )
         {
     class calcv *self=this;
   long		      i, L, T, W, H;
 
   IN(calcv_FullUpdate);
-  if ( Data  &&  (type == view_FullRedraw || type == view_LastPartialRedraw) )
+  if ( Data  &&  (type == view::FullRedraw || type == view::LastPartialRedraw) )
     {
       (this)->GetLogicalBounds(  Bounds );
       (this)->aptv::FullUpdate(  type, 0,0, Width, Height );
@@ -373,7 +373,7 @@ Which_Area( class calcv	      *self, long		       x , long		       y )
   }
 
 class view *
-calcv::Hit( enum view_MouseAction  action, long		       x , long		       y , long		       clicks )
+calcv::Hit( enum view::MouseAction  action, long		       x , long		       y , long		       clicks )
         {
     class calcv *self=this;
   class view	     *hit = NULL;
@@ -389,12 +389,12 @@ calcv::Hit( enum view_MouseAction  action, long		       x , long		       y , lon
       if ( (which = Which_Area( this, x, y )) < AreaCount )
         switch ( action )
           {
-          case  view_LeftDown:
+          case  view::LeftDown:
 	    (AreaHitHandler(which))( this, which );
             break;
-          case  view_LeftMovement:
+          case  view::LeftMovement:
             break;
-          case  view_LeftUp:
+          case  view::LeftUp:
             break;
 	  default:
 	    break;

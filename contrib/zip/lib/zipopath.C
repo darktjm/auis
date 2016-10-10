@@ -71,7 +71,7 @@ zipopath::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-zipopath::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipopath::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   long				  status = zip_ok;
   static long				  initial_x, initial_y,
@@ -81,7 +81,7 @@ zipopath::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
   IN(zipopath::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       initial_x = x;  initial_y = y;
       initial_X = prior_X = X;  initial_Y = prior_Y = Y;
       if ( (status = (this->data_object)->Create_Figure(  &CurrentFigure, NULL,
@@ -97,7 +97,7 @@ zipopath::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 			      pane->zip_pane_edit->zip_pane_edit_current_shade );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( pane->zip_pane_edit->zip_pane_edit_last_point_id == zip_figure_origin_point )
 	{
 	(this->edit_object)->Delete_Figure(  CurrentFigure, pane );
@@ -106,7 +106,7 @@ zipopath::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
       if ( abs(initial_x - x) <= 10  &&  abs(initial_y - y) <= 10 )
 	{ DEBUG(Close Path); X = initial_X;  Y = initial_Y; }
       /* Fall-thru */
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
 	if ( X != prior_X  ||  Y != prior_Y )
@@ -178,7 +178,7 @@ long Draw( class zipopath		  *self, zip_type_figure		   figure, zip_type_pane		 
     closure = true;
   if ( closure  && (shade = (self->data_object)->Contextual_Figure_Shade(  figure )) )
     {
-    if ( self->view_object->mouse_action != view_LeftMovement  &&  action == zip_draw )
+    if ( self->view_object->mouse_action != view::LeftMovement  &&  action == zip_draw )
       {
       if ( (shade = ('0' + ((shade + 10) / 10)) - 1) > '9' )  shade = '9';
       DEBUGdt(Shade-index,shade);

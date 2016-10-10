@@ -421,20 +421,20 @@ RedrawIcons(class tabrulerview   *self)
 }
 
 void 
-tabrulerview::FullUpdate( enum view_UpdateType   type, long   left , long   top , long   width , long   height )
+tabrulerview::FullUpdate( enum view::UpdateType   type, long   left , long   top , long   width , long   height )
 {
-    if (type == view_Remove) {
+    if (type == view::Remove) {
 	this->OnScreen = FALSE;
 	return;
     }
     if ( ! CheckWindow(this, "FullUpdate")) return;
-    if ((type != view_FullRedraw 
-	  && type != view_LastPartialRedraw)
+    if ((type != view::FullRedraw 
+	  && type != view::LastPartialRedraw)
 	 || (this)->GetLogicalWidth() == 0 
 	 || (this)->GetLogicalHeight() == 0) 
 	return;
     this->OnScreen = TRUE;
-    if (type == view_FullRedraw) {
+    if (type == view::FullRedraw) {
 	/* must recompute graphics info because image
 	 may be on different display hardware */
 	this->Grey25Pattern = (this)->GrayPattern( 4, 16);
@@ -455,14 +455,14 @@ tabrulerview::Update( )
 }
 
 class view *
-tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+tabrulerview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 {
-    if (action == view_NoMouseEvent)
+    if (action == view::NoMouseEvent)
 	return (class view *) this;
     if (!this->OnScreen || !CheckWindow(this, "Hit"))
 	return NULL;
 
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	if (this->Moving) { 
 	    /* Cancel */
 	    RemoveIcon(this, this->Movex, this->Moving);
@@ -540,7 +540,7 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 		    float f = ((float) this->tabs->Positions[i]) /
 		      this->TickTbl->majorpix *
 		      this->TickTbl->one;
-		    if (action == view_LeftDown) {
+		    if (action == view::LeftDown) {
 			/* Hit on a tab - let's move it... */
 			this->Moving = this->tabs->Types[i];
 			this->Movex = this->tabs->Positions[i];
@@ -548,7 +548,7 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 			this->tabs = (this->tabs)->Delete( i);
 			this->oldtab = this->Movex;
 			RedrawText(this, f, TRUE);
-		    } else if (action == view_RightDown) {
+		    } else if (action == view::RightDown) {
 			/* we want to remove a tab */
 			long x = this->tabs->Positions[i];
 			short deltype = this->tabs->Types[i];
@@ -564,7 +564,7 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 	}
     } else {
 	/* Either move or up event */
-	if (action == view_LeftUp && this->Moving) {
+	if (action == view::LeftUp && this->Moving) {
 	    float f;
 	    /* Plant a tab here */
 	    int i;
@@ -605,8 +605,8 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 	    RedrawPark(this);
 	    RedrawText(this, f, TRUE);
 	} else if (this->Moving &&
-		   (action == view_LeftMovement ||
-		    action == view_RightMovement)) {
+		   (action == view::LeftMovement ||
+		    action == view::RightMovement)) {
 	    /* We are still moving the new tab to its position */
 	    float f;
 	    if (x - this->leftline >= 0) {
@@ -619,18 +619,18 @@ tabrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 	    }
 	}
     }
-    if (action == view_LeftDown || action == view_RightDown)
+    if (action == view::LeftDown || action == view::RightDown)
 	(this)->WantInputFocus( this);
     return (class view *) this;
 }
 
-view_DSattributes
-tabrulerview::DesiredSize( long  width, long  height, enum view_DSpass  pass, 
+view::DSattributes
+tabrulerview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 			   long  *desiredWidth, long  *desiredHeight ) 
 {
     *desiredHeight = 80;
     *desiredWidth = 700;
-    return view_Fixed;
+    return view::Fixed;
 }
 
 void

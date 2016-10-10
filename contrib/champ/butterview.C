@@ -17,12 +17,12 @@
 ATKdefineRegistry(butterview, view, NULL);
 
 void
-butterview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+butterview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     class butter *b = (class butter *) (this)->GetDataObject();
 
-    if((type == view_LastPartialRedraw) || (type == view_FullRedraw))
+    if((type == view::LastPartialRedraw) || (type == view::FullRedraw))
 	if (b) {
 	    if (!(b)->GetButtonFont()) {
 		(b)->SetButtonFont( fontdesc::Create(b->myfontname ? b->myfontname : "andy", b->myfonttype, b->myfontsize));
@@ -48,11 +48,11 @@ butterview::Update()
     struct rectangle r;
 
     (this)->GetLogicalBounds( &r);
-    (this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+    (this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 }
 
 class view *
-butterview::Hit(enum view_MouseAction  action , long  x , long  y , long  numclicks  )
+butterview::Hit(enum view::MouseAction  action , long  x , long  y , long  numclicks  )
 {
     class butter *b = (class butter *) (this)->GetDataObject();
 

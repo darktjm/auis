@@ -14,6 +14,9 @@ DeclareFont(donz12)
 DeclareFont(fig12)
 DeclareFont(gofont10)
 DeclareFont(icon12)
+DeclareFont(icn16x16)
+DeclareFont(grticn12)
+DeclareFont(ziticn12)
 DeclareFont(indice12)
 DeclareFont(kalfnt12)
 DeclareFont(mailft12)
@@ -25,12 +28,4 @@ DeclareFont(andyof12)
 DeclareFont(xshape10)
 #endif /* X11_ENV */
 
-#if (defined (VAX_ENV) || defined(PMAX_ENV))
-#if (defined (FONTS_TO_PCF_ENV))
-icon12.pcf:  icn16x16.pcf
-	cp icn16x16.pcf icon12.pcf
-#else /* (defined (FONTS_TO_PCF_ENV)) */
-icon12.snf:  icn16x16.snf
-	cp icn16x16.snf icon12.snf
-#endif /* (defined (FONTS_TO_PCF_ENV)) */
-#endif /* (defined (VAX_ENV) || defined(PMAX_ENV)) */
+InstallDocs(fonts.doc, ${DESTDIR}/doc/ADMINISTRATOR)

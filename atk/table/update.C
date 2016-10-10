@@ -28,14 +28,14 @@ static boolean debug=0;
 
 /* return first pixel value for given cell index */
 
-void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect);
+void spread_PartialUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect);
 void spread_InvertRectangle(class spread  * V, int  left , int  top , int  width , int  height);
 static void SmashSelection (class spread  * V);
 void spread_ClearSelectionBox (class spread  * V );
-static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect);
+static void updateCells(class spread  * V, int  zapped, enum view::UpdateType  how, struct rectangle  *updateClipRect);
 static void updateString (class spread  * V, char  justification, const char  *string, struct rectangle  *cellBounds);
 static void  updateValue (class spread  * V, extended_double  *value, char  format, int  precision, struct rectangle  *cellBounds);
-static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view_UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds);
+static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view::UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds);
 static void updateEdges(class spread  * V, struct rectangle  *updateClipRect);
 static void updateBorder(class spread  * V, struct rectangle  *updateClipRect);
 
@@ -116,7 +116,7 @@ static void FixCursors(class spread  * V)
 
 /* notify children of full update event */
 
-static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+static void NotifyKids(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int r, c, x, y;
@@ -131,7 +131,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 
     V->GetLogicalBounds(&bodyClipRect);
     
-    if(how==view_Remove) {
+    if(how==view::Remove) {
 	for(r0=0;r0<T->NumberOfRows();r0++) {
 	    for(c0=0;c0<T->NumberOfColumns();c0++) {
 		if (!(T)->IsJoinedToAnother( r0, c0)) {
@@ -140,7 +140,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 			child = spread_FindSubview(V, cell);
 			if (child != 0) {
 			    child->InsertViewSize(V, 0,0,0,0);
-			    child->FullUpdate(view_Remove,0,0,0,0);
+			    child->FullUpdate(view::Remove,0,0,0,0);
 			}
 		    }
 
@@ -168,7 +168,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 			for (cc = c + 1, xth = V->colInfo[c].computedWidth - 2 * spread_CELLMARGIN;
 			     (T)->IsJoinedToLeft( r, cc);
 			     NextX(V, cc, xth)) ;
-			if(how!=view_Remove) rectangle_SetRectSize(&cellBounds, x + spread_SPACING + spread_CELLMARGIN, y + spread_SPACING + spread_CELLMARGIN, xth, yth);
+			if(how!=view::Remove) rectangle_SetRectSize(&cellBounds, x + spread_SPACING + spread_CELLMARGIN, y + spread_SPACING + spread_CELLMARGIN, xth, yth);
 			else rectangle_EmptyRect(&cellBounds);
 			(child)->InsertView( V, &cellBounds);
 			rectangle_IntersectRect(&cellClipRect, &cellBounds, &bodyClipRect);
@@ -186,7 +186,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 
 /*  redraw when exposed or size changed, etc */
 
-void spread_update_FullUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+void spread_update_FullUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     if (V->grayPix == NULL)
 	InitializeGraphic(V);
@@ -194,21 +194,21 @@ void spread_update_FullUpdate(class spread  * V, enum view_UpdateType  how, stru
     V->lastTime = -1;
     switch(how) {
 
-	case view_MoveNoRedraw:
-	case view_Remove:
+	case view::MoveNoRedraw:
+	case view::Remove:
 	    NotifyKids(V, how, updateClipRect);
 	    FixCursors(V);
 	    break;
 
 	default:
-	    spread_PartialUpdate(V, view_FullRedraw, updateClipRect);
+	    spread_PartialUpdate(V, view::FullRedraw, updateClipRect);
     }
 }
 
 
 /*  redraw when contents changed */
 
-void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+void spread_PartialUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int zapped;
@@ -317,7 +317,7 @@ void spread_ClearSelectionBox (class spread  * V )
     }
 }
 
-static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+static void updateCells(class spread  * V, int  zapped, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int r, c, x, y;
@@ -479,7 +479,7 @@ static void updateValue (class spread  * V, extended_double  *value, char  forma
     }
 }
 
-static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view_UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds)
+static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view::UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds)
 {
     struct rectangle cellClipRect;
     class view *child;

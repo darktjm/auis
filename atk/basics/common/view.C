@@ -23,8 +23,8 @@ static const class atom * A_atomlist;
 static const class atom * A_context;
 static const class atom *A_printoption, *A_printer, *A_psfile, *A_papersize, *A_file, *A_string;
 
-static struct view_printopt view_printoptels[6]; /* printer; PS file; print to printer/file; landscape/portrait; print scale; paper size */
-static struct view_printoptlist view_printopts = {
+static struct view::printopt view_printoptels[6]; /* printer; PS file; print to printer/file; landscape/portrait; print scale; paper size */
+static struct view::printoptlist view_printopts = {
     view_printoptels,
     6,
     NULL
@@ -123,7 +123,7 @@ void view::ChildLosingInputFocus() {
 void view::ChildReceivingInputFocus() {
 }
 
-//void view::Traverse(enum view_Traversal) {
+//void view::Traverse(enum view::Traversal) {
 //}
 
 void view::ObservedChanged(class observable  *changed, long  value)
@@ -233,7 +233,7 @@ char * view::DescriptionObject(char  * format,long  rock /* supposed to be an ar
     return tmpString;
 }
 
-enum view_DescriberErrs view::Describe(char  * format,FILE  * file,long  rock)
+enum view::DescriberErrs view::Describe(char  * format,FILE  * file,long  rock)
                 {
     class describer * descObject;
     char * descObjectName;
@@ -242,18 +242,18 @@ enum view_DescriberErrs view::Describe(char  * format,FILE  * file,long  rock)
     descObjectName = (this)->DescriptionObject(format,rock);
 
     /* Make sure we have the name of the description object */
-    if (!descObjectName) return(view_NoDescribeString);
+    if (!descObjectName) return(view::NoDescribeString);
 
     /* Try to load the object */
     descObject = (class describer *) ATK::NewObject(descObjectName);
 
     /* Make sure we got the object */
-    if (!descObject) return(view_NoDescribeObject);
+    if (!descObject) return(view::NoDescribeObject);
 
     /* Check to see if the class is correct */
     /* How is this done now adays? Do I have to walk up the classinfo tree myself */
     if (!ATK::IsTypeByName(descObjectName,"describer")) 
-	return(view_WrongSubclassDescription);
+	return(view::WrongSubclassDescription);
 
     /* Everything seems to be in order, call the description procedure */
     return (descObject)->Describe(this,format,file,rock);
@@ -263,7 +263,7 @@ enum view_DescriberErrs view::Describe(char  * format,FILE  * file,long  rock)
 #endif // 0
 
 
-void view::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void view::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
 }
 
@@ -275,16 +275,16 @@ void view::Print(FILE  *file, const char  *processor, const char  *finalFormat, 
                     {
 }
 
-class view *view::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *view::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
                     {
     return this;
 }
 
-view_DSattributes view::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes view::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
                               {
     *dWidth = width;
     *dHeight = (height > 2048) ? view_STARTHEIGHT :height;
-    return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 }
 
 void view::GetOrigin(long  width, long  height, long  *originX, long  *originY)
@@ -636,7 +636,7 @@ void view::InitChildren()
       1. exist and
       2. are linked into the view tree.
  
-      view_InitChild() should be called recursively on all children so 
+      view::InitChild() should be called recursively on all children so 
 	  this call filters down the view tree. 
     */
 }
@@ -706,7 +706,7 @@ void *view::GetPSPrintInterface(const char *printtype)
     return NULL;
 }
 
-void view::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
+void view::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight) 
 {
     /* the default is for the inset to use the same strategy for requesting a print size as it does when requesting a view size. */
     this->DesiredSize(width, height, pass, desiredwidth, desiredheight);
@@ -722,7 +722,7 @@ view::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 	return FALSE;
 }
 
-struct view_printoptlist *view::PrintOptions()
+struct view::printoptlist *view::PrintOptions()
 {
     return &view_printopts;
 }
@@ -806,7 +806,7 @@ long view::GetPrintOption(const class atom *popt)
 }
 
 /* strings (and files) sent to this method are copied into storage */
-void view::SetPrintOption(struct view_printopt *vopt, long newval)
+void view::SetPrintOption(struct view::printopt *vopt, long newval)
 {
     class dataobject *dobj;
 

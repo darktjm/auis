@@ -16,10 +16,10 @@ public:
 	 void SetDataObject(class dataobject *d);
 	 void PostKeyState(class keystate *ks);
 	 void PostMenus(class menulist *ml);
-	 void FullUpdate(enum view_UpdateType type,long left,long top,long width,long height);
+	 void FullUpdate(enum view::UpdateType type,long left,long top,long width,long height);
 	 void Update();
 	 void ReceiveInputFocus();
-	 void GetClickPosition(long pos,long noc,enum view_MouseAction action,long startLeft,long startRight,long *leftPosP,long *rightPosP);
+	 void GetClickPosition(long pos,long noc,enum view::MouseAction action,long startLeft,long startRight,long *leftPosP,long *rightPosP);
     
 	virtual void SetFileMenus(boolean on);
 	virtual boolean ReadShMenus(const char *filename)  ;

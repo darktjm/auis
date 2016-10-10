@@ -21,10 +21,10 @@ public:
 
 
 
-	 void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+	 void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
 	 void Update();
-	 class view * Hit(enum view_MouseAction action, long x, long y, long n)	 ;
-	 view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *desiredWidth, long *desiredHeight) 
+	 class view * Hit(enum view::MouseAction action, long x, long y, long n)	 ;
+	 view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *desiredWidth, long *desiredHeight) 
 				 ;
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();
@@ -53,7 +53,7 @@ public:
 	class graphic  *bpattern;	/* these might differ between instances . . . */
 	class graphic  *wpattern;	/*		. . . on different displays */
 
-	boolean OnScreen;			/* if not view_Removed */
+	boolean OnScreen;			/* if not view::Removed */
 	boolean embedded;		/* TRUE if no call to GetApplicationLayer */
 	boolean HasInputFocus;		/* T if received input focus */
 	boolean ignoreUp;			/* T iff have just asked for InputFocus */

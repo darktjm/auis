@@ -935,7 +935,7 @@ static void EnsureInfo(class sbuttonv  *self)
 #define MAXWIDTH(col, max, left) ((col)<(left)?max+1:max)
 #define MAXHEIGHT(row, max, left) ((row)<(left)?max+1:max)
 
-void sbuttonv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void sbuttonv::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Redisplay this object.  Specifically, set my font, and put my text label
@@ -952,16 +952,16 @@ void sbuttonv::FullUpdate(enum view_UpdateType  type, long  left , long  top , l
   if((b)->GetMattePrefs()) sbuttonv::DrawRectBorder((class view *)this, &vr, (b)->GetMattePrefs(), TRUE, TRUE, &vr);
   
   switch (type) {
-    case view_FullRedraw:
-    case view_LastPartialRedraw:
+    case view::FullRedraw:
+    case view::LastPartialRedraw:
       redraw = 1;
       break;
-    case view_MoveNoRedraw:
+    case view::MoveNoRedraw:
       redraw = 0;
       break;
-  case view_PartialRedraw:
+  case view::PartialRedraw:
       return;
-    case view_Remove:
+    case view::Remove:
      return;
     default:
       redraw = 1;
@@ -1023,7 +1023,7 @@ void sbuttonv::Update()
     if(this->needredraw || this->bcount!=b->count || r.width!=this->lwidth || r.height!=this->lheight) {
 	this->needredraw=FALSE;
 	(this)->EraseRect( &r);
-	(this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+	(this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 	return;
     }
 
@@ -1242,15 +1242,15 @@ int sbuttonv::WhichButton(long  x , long  y)
     } else return -1;
 }
 
-boolean sbuttonv::Touch(int  ind, enum view_MouseAction  action)
+boolean sbuttonv::Touch(int  ind, enum view::MouseAction  action)
 {
     class cursor *wait_cursor;
     class sbutton *b=(this)->ButtonData();
     struct owatch_data *w1, *w2;
-    if(action!=view_LeftUp && action!=view_RightUp) return TRUE;
+    if(action!=view::LeftUp && action!=view::RightUp) return TRUE;
     w1=owatch::Create(this);
     w2=owatch::Create(b);
-    if (ind>=0 && ind<b->count && BUTTONS(this)[ind].lit && ((this->activebuttons&sbuttonv_LEFTBUTTON) || (action==view_RightUp && this->activebuttons&sbuttonv_RIGHTBUTTON))) {
+    if (ind>=0 && ind<b->count && BUTTONS(this)[ind].lit && ((this->activebuttons&sbuttonv_LEFTBUTTON) || (action==view::RightUp && this->activebuttons&sbuttonv_RIGHTBUTTON))) {
 	if ((wait_cursor = cursor::Create(this))) {
 	    (wait_cursor)->SetStandard( Cursor_Wait);
 	    im::SetProcessCursor(wait_cursor);
@@ -1271,7 +1271,7 @@ boolean sbuttonv::Touch(int  ind, enum view_MouseAction  action)
 }
 
 
-class view *sbuttonv::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+class view *sbuttonv::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
     /*
       Handle the button event.  Currently, semantics are:
@@ -1307,10 +1307,10 @@ class view *sbuttonv::Hit(enum view_MouseAction  action, long  x , long  y, long
     }
     if((this)->Touch( this->lastbutton, action)) {
 	switch (action) {
-	    case view_RightMovement:
-	    case view_RightDown:
-	    case view_LeftDown:
-	    case view_LeftMovement: {
+	    case view::RightMovement:
+	    case view::RightDown:
+	    case view::LeftDown:
+	    case view::LeftMovement: {
 
 		if(this->lasthighlight!=this->lastbutton && this->lasthighlight>=0 && this->lasthighlight<b->count) { 
 		    (b)->DeActivateButton( this->lasthighlight);
@@ -1324,8 +1324,8 @@ class view *sbuttonv::Hit(enum view_MouseAction  action, long  x , long  y, long
 		if(!(b)->GetLit( this->lastbutton)) (b)->ActivateButton( this->lastbutton);
 		}
 		break;
-	    case view_RightUp:
-	    case view_LeftUp: {
+	    case view::RightUp:
+	    case view::LeftUp: {
 		if(this->lasthighlight>=0 && this->lasthighlight<b->count) { 
 		    (b)->DeActivateButton( this->lasthighlight);
 		    
@@ -1391,7 +1391,7 @@ void sbuttonv::ObservedChanged(class observable  *ob, long  v)
 }
 
 
-view_DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height)
+view::DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height)
 {
     /* 
       Tell parent that this object  wants to be as big as the box around its
@@ -1410,7 +1410,7 @@ view_DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view_DSp
     if(!b || my_graphic == NULL) {
 	*desired_width=256;
 	*desired_height=256;
-	return (view_DSattributes)(view_HeightFlexible|view_WidthFlexible);
+	return (view::DSattributes)(view::HeightFlexible|view::WidthFlexible);
     }
     
     while(--count>=0) {
@@ -1467,7 +1467,7 @@ view_DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view_DSp
    
     *desired_height=(maxheight+this->vspacing)*b->rows + 2*this->vborder - this->vspacing;
     *desired_width=(maxwidth+this->hspacing)*b->cols + 2*this->hborder - this->hspacing;
-    return view_Fixed;
+    return view::Fixed;
 }
 
 void sbuttonv::GetOrigin(long  width , long  height, long  *originX , long  *originY)

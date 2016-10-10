@@ -13,11 +13,11 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-    class valueview * DoHit(enum view_MouseAction type, long x,long y,long hits)  ;
+    class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;
     void ObservedChanged( class observable * observed, long status );
     void LinkTree(class view *parent);
    void DrawButtonText(char *text,long len,struct rectangle *rect,struct rectangle*rect2,boolean pushd);
- class view * Hit(enum view_MouseAction type, long x, long y, long numberOfClicks)
+ class view * Hit(enum view::MouseAction type, long x, long y, long numberOfClicks)
      ;
 
 

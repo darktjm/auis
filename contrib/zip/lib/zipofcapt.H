@@ -34,7 +34,7 @@ public:
    char Object_Icon_Cursor();
    char Object_Datastream_Code();
 
-   long Build_Object( zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
+   long Build_Object( zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
    long Draw_Object( zip_type_figure object, zip_type_pane pane );
    long Clear_Object( zip_type_figure object, zip_type_pane pane );
    long Proximate_Object_Points( zip_type_figure object, zip_type_pane pane, zip_type_pixel x, zip_type_pixel y );

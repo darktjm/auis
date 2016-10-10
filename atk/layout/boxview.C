@@ -36,7 +36,7 @@ static boolean boxview_debug=0;
 
 ATKdefineRegistry(boxview, view, boxview::InitializeClass);
 static void InitChild(class boxview  *self);
-static void Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
+static void Update(class boxview  *self, enum view::UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
 static void RequestUpdate(class boxview  *self);
 
 
@@ -125,15 +125,15 @@ boxview::BoxWidth()
 
 /* negotiate size of view */
 
-view_DSattributes			/* returns indication of what it wants */
-boxview::DesiredSize(long  width				/* width being offered by parent */, long  height				/* height being offered */, enum view_DSpass  pass			/* what parent is willing to give */, long  *dWidth				/* set to desired width */, long  *dHeight				/* set to desired height */)
+view::DSattributes			/* returns indication of what it wants */
+boxview::DesiredSize(long  width				/* width being offered by parent */, long  height				/* height being offered */, enum view::DSpass  pass			/* what parent is willing to give */, long  *dWidth				/* set to desired width */, long  *dHeight				/* set to desired height */)
 
 /*  boxview asks for space for its child plus the box proper */
 
 {
     long desiredWidth;
     long desiredHeight;
-    view_DSattributes rc;
+    view::DSattributes rc;
     int tw = (this)->BoxWidth();
 
     if (boxview_debug)
@@ -142,7 +142,7 @@ boxview::DesiredSize(long  width				/* width being offered by parent */, long  h
     InitChild(this);
     if (this->child == NULL) {
 	desiredWidth = desiredHeight = 0;
-	rc = view_WidthFlexible | view_HeightFlexible;
+	rc = view::WidthFlexible | view::HeightFlexible;
     }
     else 
 	rc = (this->child)->DesiredSize( width - 2*tw, height - 2*tw, pass, &desiredWidth, &desiredHeight);
@@ -164,7 +164,7 @@ boxview::DrawBox()
 /* update image */
 
 static void
-Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */)
+Update(class boxview  *self, enum view::UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */)
 {
     class region *updateRegion;	/* region for this update */
     class region *remainingRegion;	/* region to be updated */
@@ -219,7 +219,7 @@ Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, st
 	(self->child)->InsertView( self, &r);
 	(childRegion)->OffsetRegion( -tw, -tw);
 	(self->child)->SetVisualRegion( childRegion);
-	(self->child)->FullUpdate( view_FullRedraw, 0, 0, rectangle_Width(&r), rectangle_Height(&r));
+	(self->child)->FullUpdate( view::FullRedraw, 0, 0, rectangle_Width(&r), rectangle_Height(&r));
     }
     delete childRegion;
 }
@@ -227,7 +227,7 @@ Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, st
 /* full update when window changes */
 
 void
-boxview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left , long  top , long  width , long  height		/* updated rectangle (for certain kinds; */)
+boxview::FullUpdate(enum view::UpdateType  how		/* kind of update */, long  left , long  top , long  width , long  height		/* updated rectangle (for certain kinds; */)
 {
     struct rectangle cliprect;		/* actual updated rectangle */
 
@@ -236,7 +236,7 @@ boxview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left 
 
     /* define rectangle actually being updated */
 
-    if (how == view_PartialRedraw || how == view_LastPartialRedraw)
+    if (how == view::PartialRedraw || how == view::LastPartialRedraw)
 	rectangle_SetRectSize(&cliprect, left, top, width, height);
     else {
 	rectangle_SetRectSize(&cliprect, (this)->GetVisualLeft(), (this)->GetVisualTop(), (this)->GetVisualWidth(), (this)->GetVisualHeight());
@@ -245,7 +245,7 @@ boxview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left 
 
     (this)->SetTransferMode( graphic::COPY);
     ::Update(this, how, &cliprect, TRUE);
-    if (how == view_FullRedraw) {
+    if (how == view::FullRedraw) {
 	this->updateNeeded = FALSE;
 	this->lastUpdate = (getBox(this))->GetModified();
     }
@@ -259,7 +259,7 @@ boxview::Update()
     if (boxview_debug)
 	printf("boxview_Update needed=%d\n", this->updateNeeded);
 
-    ::Update(this, view_FullRedraw, NULL, (this->lastUpdate < (getBox(this))->GetModified()));
+    ::Update(this, view::FullRedraw, NULL, (this->lastUpdate < (getBox(this))->GetModified()));
     this->updateNeeded = FALSE;
     this->lastUpdate = (getBox(this))->GetModified();
 }
@@ -267,7 +267,7 @@ boxview::Update()
 /* process mouse hit */
 
 class view *				/* returns view which should get follow-up events*/
-boxview::Hit(enum view_MouseAction  action		/* which button; what it did */, long  x , long  y				/* where the mouse points */, long  numberOfClicks			/* number of hits at same place */)
+boxview::Hit(enum view::MouseAction  action		/* which button; what it did */, long  x , long  y				/* where the mouse points */, long  numberOfClicks			/* number of hits at same place */)
 {
     int tw = (this)->BoxWidth();
 

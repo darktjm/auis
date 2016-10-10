@@ -49,7 +49,7 @@ public:
 
    void DrawChart();
    void PrintChart();
-   class view * HitChart( enum view_MouseAction action, long x, long y, long clicks )	     ;
+   class view * HitChart( enum view::MouseAction action, long x, long y, long clicks )	     ;
    void SetDebug( boolean state );
 
 

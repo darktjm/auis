@@ -67,7 +67,7 @@ ATKdefineRegistry(nullview, view, nullview::InitializeClass);
 static void ComputeArea(class nullview  *self);
 static void  InvertRectangle(class nullview  *self, long left, long top, long width, long height);
 static void ShowString(class nullview  *self, long  x , long  y, char  *string);
-static  void RedrawView(class nullview  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
+static  void RedrawView(class nullview  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height);
 static void nullview_ClearRectangle(class nullview  *self, long  rock);
 static void ToggleDebug(class nullview  *self, long  rock);
 
@@ -182,7 +182,7 @@ ShowString(class nullview *self, long x ,long y, char *string)
 	portion delimited by left, top, width, height. ($$$)
 */
 	static 
-void RedrawView(class nullview  *self, enum view_UpdateType  type,long left,long top,long width,long height)
+void RedrawView(class nullview  *self, enum view::UpdateType  type,long left,long top,long width,long height)
 {
 	struct rectangle r;
 	struct dotlist *d;
@@ -413,25 +413,25 @@ nullview::LoseInputFocus()
 	case the 'type' is a PartialRedraw;  they specify which part to update.)
 */
 	void 
-nullview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
+nullview::FullUpdate(enum view::UpdateType   type, long   left , long   top , long   width , long   height)
 {
 	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", type, left, top, width, height));
-	if (type == view_Remove  
+	if (type == view::Remove  
 			||  (this)->GetLogicalWidth() == 0 
 			|| (this)->GetLogicalHeight() == 0) {
-		/* view_Remove means the view has left the screen.
+		/* view::Remove means the view has left the screen.
 			A zero dimension means the view is not visible */
 		this->OnScreen = FALSE;
 		return;
 	}
-	if (type != view_FullRedraw && type != view_LastPartialRedraw)
+	if (type != view::FullRedraw && type != view::LastPartialRedraw)
 		return;
 	/* we continue only for a FullRedraw or the last of a sequence of PartialRedraw
 		requests.  */
 
 	this->OnScreen = TRUE;
 /* the following line is appropriate, but on 24 April 1988 it tickles a bug in ez 
-	if (type == view_FullRedraw) 
+	if (type == view::FullRedraw) 
 */
 	{
 		/* must recompute graphics info because image
@@ -459,18 +459,18 @@ ENTER(nullview_Update);
 		flashing.  Instead the notes taken in ObservedChanged should be
 		used here to update only the changed portion of the image */
 
-	RedrawView(this, view_FullRedraw, 0, 0, 0, 0);
+	RedrawView(this, view::FullRedraw, 0, 0, 0, 0);
 
 LEAVE(nullview_Update);
 }
 
 	class view *
-nullview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+nullview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 {
 	class null *dobj
 		= (class null *)this->dataobject;
 DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 	if (! this->OnScreen) return NULL;
 
@@ -480,13 +480,13 @@ DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 		at the coordinates of the mouse hit.  It is a convention
 		that permanent actions should take place on Up movement
 		of a mouse button.   */
-	if (action == view_LeftDown || action == view_RightDown) {
+	if (action == view::LeftDown || action == view::RightDown) {
 		if ( ! this->HasInputFocus) {
 			(this)->WantInputFocus( this);
 			this->ignoreUp = TRUE;
 		}
 	}
-	else if (action == view_LeftUp || action == view_RightUp) {
+	else if (action == view::LeftUp || action == view::RightUp) {
 		struct rectangle r;
 
 		if (this->ignoreUp) {
@@ -526,28 +526,28 @@ LEAVE(::Hit);
 	'pass' indicates which of 'width' and 'height' should be considered fixed.
 	If neither is fixed, they may be arbitrary values. 
 */
-	view_DSattributes
-nullview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desiredWidth, long  *desiredHeight) 
+	view::DSattributes
+nullview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desiredWidth, long  *desiredHeight) 
 {
 	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 
 	ComputeArea(this);	/* set self->DesiredArea/Width/Height */
 
-	if (pass == view_NoSet) {
+	if (pass == view::NoSet) {
 		*desiredWidth = this->DesiredWidth;
 		*desiredHeight = this->DesiredHeight;
 	}
-	else if (pass == view_WidthSet) {
+	else if (pass == view::WidthSet) {
 		*desiredWidth = width;
 		*desiredHeight = this->DesiredArea / width;
 	}
-	else /* pass == view_HeightSet */ {
+	else /* pass == view::HeightSet */ {
 		*desiredWidth = this->DesiredArea / height;
 		*desiredHeight = height;
 	}
 
 	DEBUG(("Leave DesiredSize: %ld x %ld\n", *desiredWidth, *desiredHeight));
-	return view_HeightFlexible | view_WidthFlexible;
+	return view::HeightFlexible | view::WidthFlexible;
 }
 
 /* # # # # # # # # # # # # # # 

@@ -1151,7 +1151,7 @@ replaces the former screen image.
 \leftindent{If supplied, this function is called whenever the screen image 
 is  about to be completely replaced.  It may change the value of the 
 screenImage slot.  Arguments supplied are the awidgetview, an integer 
-giving the update type as an enum view_UpdateType, and four integers giving 
+giving the update type as an enum view::UpdateType, and four integers giving 
 the left, top, width, and height of the update rectangle, in the child's 
 coordinate space.}
 
@@ -1440,7 +1440,7 @@ virtual void DeleteApplicationLayer(class view *applicationLayer);
 
 virtual char * DescriptionObject(char * format, long rock);
 
-virtual enum view_DescriberErrs Describe(char *format, FILE *file, long 
+virtual enum view::DescriberErrs Describe(char *format, FILE *file, long 
 rock);
 
 virtual void PostKeyState(class keystate *keystate);
@@ -1500,7 +1500,7 @@ virtual void PrintPSDoc(FILE *outfile, long pagew, long pageh);
 
 virtual void *GetPSPrintInterface(char *printtype);
 
-virtual void DesiredPrintSize(long width, long height, enum view_DSpass 
+virtual void DesiredPrintSize(long width, long height, enum view::DSpass 
 pass, long *desiredwidth, long *desiredheight);
 
 virtual void PrintPSRect(FILE *outfile, long logwidth, long logheight, 
@@ -1508,11 +1508,11 @@ struct rectangle *visrect);
 
 	PS printing is handled by slots already described
 
-virtual struct view_printoptlist *PrintOptions();
+virtual struct view::printoptlist *PrintOptions();
 
 virtual long GetPrintOption(const class atom *popt);
 
-virtual void SetPrintOption(struct view_printopt *vopt, long value);
+virtual void SetPrintOption(struct view::printopt *vopt, long value);
 
 virtual void ReceiveInputFocus()
 
@@ -1530,7 +1530,7 @@ virtual void ChildLosingInputFocus();
 
 virtual void ChildReceivingInputFocus();
 
-virtual void Traverse(enum view_Traversal trav);
+virtual void Traverse(enum view::Traversal trav);
 
 virtual void WantExposure(class view *requestor, struct rectangle 
 *childrect);

@@ -105,7 +105,7 @@ void palette::DeselectItem(struct palette_item  *item)
     (item->palette)->WantUpdate( item->palette);
 }
 
-void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  w , long  h)
+void palette::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  w , long  h)
 {
     struct fontdesc_charInfo info;
     int maxwidth, maxheight, items, columns, col, x, y, tmp;
@@ -114,7 +114,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     struct rectangle child;
     class graphic *black;
 
-    if (type != view_FullRedraw && type != view_LastPartialRedraw)
+    if (type != view::FullRedraw && type != view::LastPartialRedraw)
         return;
 
     this->needs_full = 0;
@@ -248,7 +248,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
                 case palette_VIEW:
                     item->u.view.wants_update = FALSE;
                     (item->u.view.view)->InsertViewSize( this, item->x, item->y, item->w, item->h);
-                    (item->u.view.view)->FullUpdate( view_FullRedraw, 0, 0, item->w, item->h);
+                    (item->u.view.view)->FullUpdate( view::FullRedraw, 0, 0, item->w, item->h);
                     break;
                 case palette_STRING:
                     (this)->MoveTo( item->x + item->w/2, item->y + item->h/2);
@@ -269,7 +269,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     }
 
     (this->child)->InsertView( this, &child);
-    (this->child)->FullUpdate( view_FullRedraw, 0, 0, rectangle_Width(&child), rectangle_Height(&child));
+    (this->child)->FullUpdate( view::FullRedraw, 0, 0, rectangle_Width(&child), rectangle_Height(&child));
 }
 
 void palette::Update()
@@ -280,7 +280,7 @@ void palette::Update()
     if (this->needs_full) {
         (this)->SetTransferMode( graphic::SOURCE);
         (this)->EraseVisualRect();
-        (this)->FullUpdate( view_FullRedraw, 0, 0, (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
+        (this)->FullUpdate( view::FullRedraw, 0, 0, (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
     }
     else {
         (this)->SetTransferMode( graphic::INVERT);
@@ -303,13 +303,13 @@ void palette::Update()
     }
 }
 
-class view *palette::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks)
+class view *palette::Hit(enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct palette_item *item, *ptr;
 
     switch (action) {
-        case view_LeftDown:
-        case view_RightDown:
+        case view::LeftDown:
+        case view::RightDown:
             switch (this->loc) {
                 case palette_LEFT:
                     if (x > this->border) {
@@ -383,8 +383,8 @@ class view *palette::Hit(enum view_MouseAction  action, long  x , long  y , long
             return (class view *)this;
             /* break; */
 
-        case view_LeftUp:
-        case view_RightUp:
+        case view::LeftUp:
+        case view::RightUp:
             if ((item = this->hit_item) != NULL) {
                 if (item->autoselect == palette_FOLLOWMOUSE)
                     palette::DeselectItem(item);

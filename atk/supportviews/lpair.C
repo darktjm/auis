@@ -40,13 +40,13 @@ ATK_IMPL("lpair.H")
 /* Basically, the only reason this routine exists is because the FullUpdate signature does not use rectangles. This routine expects its redrawRectangle argument to be valid know matter what the type argument is. The type arg is just passed through to the children that need to be redrawn. All in all, this, Update, and FullUpdate can probably be simplified. -Z- */
 
 ATKdefineRegistry(lpair, view, NULL);
-static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct rectangle  *redrawRectangle);
+static void DoFullUpdate(class lpair  *self, enum view::UpdateType  type, struct rectangle  *redrawRectangle);
 static void lpair_ComputeSizesFromTotal (class lpair  *l, int	 totalsize);
 static void lpair_ComputeSizes (class lpair  *l);
 static void lpair_ResetDimensions(class lpair  *self);
 
 
-static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct rectangle  *redrawRectangle)
+static void DoFullUpdate(class lpair  *self, enum view::UpdateType  type, struct rectangle  *redrawRectangle)
 {
 	/*  All this code needs changed */
 	int	x, y;
@@ -150,30 +150,30 @@ void lpair::Update()
 		}
 		pat = (this)->WhitePattern();
 		(this)->FillRect( &redrawRectangle, pat);
-		/* I intentionally pass in view_FullRedraw here knowing that the DoFullUpdate
+		/* I intentionally pass in view::FullRedraw here knowing that the DoFullUpdate
  * will still take the rectangle into account.
  */
-		DoFullUpdate(this, view_FullRedraw, &redrawRectangle);
+		DoFullUpdate(this, view::FullRedraw, &redrawRectangle);
 	}
 }
 
 
-void lpair::FullUpdate(enum view_UpdateType  type, long	 left, long	 top, long	 width, long	 height)
+void lpair::FullUpdate(enum view::UpdateType  type, long	 left, long	 top, long	 width, long	 height)
 {
 
 	struct rectangle redrawRectangle;
 
-	/* This really shouldn't be neccesary since the other redraw types should be required to fill in an appropriate recangle. However there are a few places (drawtxtv.c) where view_FullRedraw and view_Remove types get sent with 0 by 0 rectangles. */
+	/* This really shouldn't be neccesary since the other redraw types should be required to fill in an appropriate recangle. However there are a few places (drawtxtv.c) where view::FullRedraw and view::Remove types get sent with 0 by 0 rectangles. */
 	switch (type) {
-	case view_PartialRedraw:
-	case view_LastPartialRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw:
 		rectangle_SetRectSize(&redrawRectangle, left, top, width, height);
 		break;
-	case view_MoveNoRedraw:
+	case view::MoveNoRedraw:
 		/* Need to reinsert views so they get correct coordinate system. */
 		lpair_ResetDimensions(this);
 		/* Intentional fall through. */
-	case view_Remove:
+	case view::Remove:
 		if (this->obj[0] != NULL)
 			(this->obj[0])->FullUpdate( type, 0, 0, 0, 0);
 		if (this->obj[1] != NULL)
@@ -188,7 +188,7 @@ void lpair::FullUpdate(enum view_UpdateType  type, long	 left, long	 top, long	 
 }
 
 
-class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 numberOfClicks)
+class view *lpair::Hit(enum view::MouseAction  action, long	 x , long	 y, long	 numberOfClicks)
 {
 
 	long	dim;
@@ -200,7 +200,7 @@ class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 n
 	}
 
 	if (this->movable && 
-	    (action == view_RightDown || action == view_LeftDown) && 
+	    (action == view::RightDown || action == view::LeftDown) && 
 	    (ABS(dim - this->objcvt[0] - BARWIDTH) <= BARWIDTH + GRAVITY)) {
 		this->lasthit = dim;
 		(((class view *) this)->GetIM())->SetWindowCursor( this->cursor);
@@ -209,7 +209,7 @@ class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 n
 	}
 
 	if (this->ismoving) {
-		if ((action == view_RightUp || action == view_LeftUp)) {
+		if ((action == view::RightUp || action == view::LeftUp)) {
 			if (!this->maybeZero) {
 				if (this->typex == lpair_VERTICAL) {
 					x = max(x, BARWIDTH + GRAVITY);
@@ -296,51 +296,51 @@ void lpair::WantUpdate(class view  *requestor)
 
 
 #define STARTHEIGHT 256
-view_DSattributes lpair::DesiredSize(long	 width , long	 height, enum view_DSpass  pass, long	 *desiredwidth , long	 *desiredheight)
+view::DSattributes lpair::DesiredSize(long	 width , long	 height, enum view::DSpass  pass, long	 *desiredwidth , long	 *desiredheight)
 {
 	long	d0, d1, c0, c1;
 	c0 = this->objcvt[0];
 	c1 = this->objcvt[1];
 	if (this->obj[0] && this->obj[1]) {
 		if (this->typex == lpair_VERTICAL) {
-			if (pass != view_HeightSet) {
+			if (pass != view::HeightSet) {
 				lpair_ComputeSizesFromTotal (this, width);
-				(this->obj[0])->DesiredSize( this->objcvt[0], height, view_WidthSet, desiredwidth, &d0);
-				(this->obj[1])->DesiredSize( this->objcvt[1], height, view_WidthSet, desiredwidth, &d1);
+				(this->obj[0])->DesiredSize( this->objcvt[0], height, view::WidthSet, desiredwidth, &d0);
+				(this->obj[1])->DesiredSize( this->objcvt[1], height, view::WidthSet, desiredwidth, &d1);
 				*desiredwidth = width;
 				this->objcvt[0] = c0;
 				this->objcvt[1] = c1;
 				if (d1 > 2048) {
 					if (d0 > 2048) {
 						*desiredheight = STARTHEIGHT;
-						return(view_Fixed);
+						return(view::Fixed);
 					}
 					*desiredheight = d0;
-					return(view_Fixed);
+					return(view::Fixed);
 				}
 				if (d0 > 2048) {
 					*desiredheight = d1;
-					return(view_Fixed);
+					return(view::Fixed);
 				}
 				*desiredheight = max(d0, d1);
-				return(view_Fixed);
+				return(view::Fixed);
 			}
 		} else {
-			if (pass != view_WidthSet) {
+			if (pass != view::WidthSet) {
 				lpair_ComputeSizesFromTotal (this, height);
-				(this->obj[0])->DesiredSize( width, this->objcvt[0], view_HeightSet, &d0, desiredheight);
-				(this->obj[1])->DesiredSize( width, this->objcvt[1], view_HeightSet, &d1, desiredheight);
+				(this->obj[0])->DesiredSize( width, this->objcvt[0], view::HeightSet, &d0, desiredheight);
+				(this->obj[1])->DesiredSize( width, this->objcvt[1], view::HeightSet, &d1, desiredheight);
 				this->objcvt[0] = c0;
 				this->objcvt[1] = c1;
 				*desiredheight = (height > 2048) ? STARTHEIGHT : height;
 				*desiredwidth = max(d0, d1);
-				return(view_Fixed);
+				return(view::Fixed);
 			}
 		}
 	}
 	*desiredwidth = width;
 	*desiredheight = (height > 2048) ? STARTHEIGHT : height;
-	return(view_Fixed);
+	return(view::Fixed);
 }
 
 

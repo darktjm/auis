@@ -541,7 +541,7 @@ static void RegularizePolygon(class figoplin  *self, long  endx , long  endy)
     }
 }
 
-enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figoplin::Build(class figview  *v, enum view::MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     long px, py, apx, apy;
     int ix;
@@ -558,7 +558,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
     }
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    (v)->BlockUpdates(TRUE);
 	    if (this->regular >= 3) {
 		if (this->buildstate==0) {
@@ -610,7 +610,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		}
 	    }
 	    return figobj_NotDone;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if (this->regular >= 3) {
 		(this)->Sketch(v);
 		px = x - this->cenx;
@@ -629,7 +629,7 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		(v)->DrawLineTo(this->lastx, this->lasty);
 	    }
 	    return figobj_NotDone;
-	case view_LeftUp:
+	case view::LeftUp:
 	    (v)->BlockUpdates(FALSE);
 	    if (this->regular >= 3) {
 		px = x - this->cenx;
@@ -696,9 +696,9 @@ enum figobj_Status figoplin::Build(class figview  *v, enum view_MouseAction  act
 		} else
 		    return figobj_NotDone;
 	    }
-	case view_RightDown:
-	case view_RightMovement:
-	case view_RightUp:
+	case view::RightDown:
+	case view::RightMovement:
+	case view::RightUp:
 	    if (this->numpts<2 || (this->regular>=3 && this->buildstate!=3)) {
 		message::DisplayString(v, 10, "Only one point; object aborted.");
 		return figobj_Failed;
@@ -861,29 +861,29 @@ static void MoveHandle(class figoplin  *self, long  x , long  y , long  ptref)
     }
 }
 
-boolean figoplin::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
+boolean figoplin::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
 {
     if (!handle)
 	return FALSE;
 
     if (ptref>=0 && ptref<4) {
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		if ((this)->GetReadOnly())
 		    return FALSE;
 		if (this->stickysketch)
 		    (this)->Sketch(v);
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		(this)->Sketch(v);
 		::MoveHandle(this, x, y, ptref);
 		(this)->RecomputeBounds();
 		(this)->Sketch(v);
 		break;
-	    case view_LeftUp:
-	    case view_RightUp:
+	    case view::LeftUp:
+	    case view::RightUp:
 		(this)->Sketch(v);
 		::MoveHandle(this, x, y, ptref);
 		(this)->RecomputeBounds();
@@ -896,21 +896,21 @@ boolean figoplin::Reshape(enum view_MouseAction  action, class figview  *v, long
     }
     else {
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		if ((this)->GetReadOnly())
 		    return FALSE;
 		if (this->stickysketch)
 		    PartialSketch(this, v, ptref-4);
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		PartialSketch(this, v, ptref-4);
 		::MoveHandle(this, x, y, ptref);
 		PartialSketch(this, v, ptref-4);
 		break;
-	    case view_LeftUp:
-	    case view_RightUp:
+	    case view::LeftUp:
+	    case view::RightUp:
 		PartialSketch(this, v, ptref-4);
 		::MoveHandle(this, x, y, ptref);
 		(this)->RecomputeBounds();
@@ -932,7 +932,7 @@ void figoplin::MoveHandle(long  x , long  y , long  ptref)
     (this)->RecomputeBounds();
 }
 
-boolean figoplin::AddParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
+boolean figoplin::AddParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
 {
     int ix;
     long offx, offy;
@@ -945,8 +945,8 @@ boolean figoplin::AddParts(enum view_MouseAction  action, class figview  *v, lon
     }
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((this)->GetReadOnly())
 		return FALSE;
 	    if (ptref==0) {
@@ -985,10 +985,10 @@ boolean figoplin::AddParts(enum view_MouseAction  action, class figview  *v, lon
 		this->rock = 4+ptref+1;
 		return (this)->Reshape(action, v, x, y, TRUE, this->rock);
 	    }
-	case view_LeftMovement:
-	case view_RightMovement:
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftMovement:
+	case view::RightMovement:
+	case view::LeftUp:
+	case view::RightUp:
 	    return (this)->Reshape(action, v, x, y, TRUE, this->rock);
 	default:
 	    break;
@@ -996,7 +996,7 @@ boolean figoplin::AddParts(enum view_MouseAction  action, class figview  *v, lon
     return FALSE;
 }
 
-boolean figoplin::DeleteParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
+boolean figoplin::DeleteParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle , long  ptref)
 {
     int ix;
     long offx, offy;
@@ -1019,13 +1019,13 @@ boolean figoplin::DeleteParts(enum view_MouseAction  action, class figview  *v, 
     };
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftDown:
+	case view::RightDown:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    if (ptref==0) {
 		offx = this->pts[1].x;
 		offy = this->pts[1].y;

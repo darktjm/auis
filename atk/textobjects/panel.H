@@ -111,8 +111,8 @@ public:
     inline char *EntryTag(struct panel_Entry *pe) { return ((pe)->tag); }
 
 
-     class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-     void FullUpdate(enum view_UpdateType type, long x, long y, long w, long h);
+     class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+     void FullUpdate(enum view::UpdateType type, long x, long y, long w, long h);
      void PostMenus(class menulist *ml);
      void PostKeyState(class keystate *ks);
      void SetDataObject(class dataobject *dataObj);

@@ -381,7 +381,7 @@ void panel::AssignKey(char  c, panel_keyfptr proc, long  rock)
  * Overrides
  */
 
-void panel::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , long  h)
+void panel::FullUpdate(enum view::UpdateType  type, long  x , long  y , long  w , long  h)
 {
     class graphic *graphic;
 
@@ -406,10 +406,10 @@ void panel::PostKeyState(class keystate  *ks)
     (this->parent)->PostKeyState( this->keystate);
 }
 
-class view *panel::Hit(enum view_MouseAction  action, long  x , long  y , long  numberOfClicks)
+class view *panel::Hit(enum view::MouseAction  action, long  x , long  y , long  numberOfClicks)
 {
     view *res=(this)->textview::Hit( action, x, y, numberOfClicks);
-    if(action==view_LeftDown || action==view_RightDown) {
+    if(action==view::LeftDown || action==view::RightDown) {
 	SelectAtPos(this, (this)->GetDotPosition());
 	(this)->SetDotLength( 0);
 	(this)->LoseInputFocus();

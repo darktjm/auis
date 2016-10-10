@@ -63,18 +63,18 @@ chompview::~chompview()
     (this->mv2)->Destroy();
 }
 
-view_DSattributes chompview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dheight)
+view::DSattributes chompview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dheight)
 {
     *dWidth = 1000;
     *dheight = 250;
-    return(view_WidthFlexible | view_HeightFlexible);
+    return(view::WidthFlexible | view::HeightFlexible);
 }
 
-void chompview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void chompview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle Rect;
 
-    if((type == view_LastPartialRedraw) || (type == view_FullRedraw)) {
+    if((type == view::LastPartialRedraw) || (type == view::FullRedraw)) {
 	(this)->GetLogicalBounds( &Rect);
 	(this)->DrawRectSize( Rect.left, Rect.top, Rect.width-1, Rect.height-1);
 	Rect.left += 2;
@@ -86,7 +86,7 @@ void chompview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
     }
 }
 
-class view *chompview::Hit(enum view_MouseAction  action, long  x , long  y , long  numberOfClicks)
+class view *chompview::Hit(enum view::MouseAction  action, long  x , long  y , long  numberOfClicks)
 {
     return((this->toplpair)->Hit( action, x, y, numberOfClicks));
 }

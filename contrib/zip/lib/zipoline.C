@@ -71,7 +71,7 @@ zipoline::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipoline::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   long				  status = zip_ok;
   zip_type_figure		  figure;
@@ -79,7 +79,7 @@ zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
   IN(zipoline::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
 	(this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_line_figure,
 			   CurrentImage, NULL )) == zip_success )
@@ -90,7 +90,7 @@ zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
         pane->zip_pane_edit->zip_pane_edit_last_point_id = zip_figure_auxiliary_point;
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
         {
 	if ( figure_x_point == figure_x_points(0)  &&
@@ -101,7 +101,7 @@ zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	  }
 	}
       /* Fall-thru */
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );

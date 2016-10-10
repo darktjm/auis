@@ -230,7 +230,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{enum view_DSattributes \bold{textview_DesiredSize }(}\fixedindent{
+\fixedtext{enum view::DSattributes \bold{textview_DesiredSize }(}\fixedindent{
 
 struct textview *\paramname{textview},
 
@@ -238,7 +238,7 @@ long \paramname{width},
 
 long \paramname{height},
 
-enum view_DSpass \paramname{pass},
+enum view::DSpass \paramname{pass},
 
 long *\paramname{dWidth},
 
@@ -261,18 +261,18 @@ parameter  \italic{\paramname{pass}} allows the parent view to tell
 can take on one of three values: 
 
 
-\leftindent{\description{\fixedindent{\smaller{view_NoSe}t\formatnote{@\\}Both 
+\leftindent{\description{\fixedindent{\smaller{view::NoSe}t\formatnote{@\\}Both 
 dimensions are flexible. 
 
 
-\smaller{view_}WidthSet\formatnote{@\\}The width cannot be changed. 
+\smaller{view::}WidthSet\formatnote{@\\}The width cannot be changed. 
 
 
-\smaller{view_}HeightSet\formatnote{@\\}The height cannot be changed.}
+\smaller{view::}HeightSet\formatnote{@\\}The height cannot be changed.}
 
 }
 }
-In response to these three parameters, \paramname{text\italic{view_DesiredSize}} 
+In response to these three parameters, \paramname{text\italic{view::DesiredSize}} 
 sets \italic{\paramname{dWidth}} and \paramname{\paramname{dHeigh}t}\italic{, 
 which indicate }what \paramname{textview} desires as its width and height.
 
@@ -280,8 +280,8 @@ which indicate }what \paramname{textview} desires as its width and height.
 \fieldheading{Return Value}
 
 \fieldtext{The return value is an \smaller{OR-ed} combination two 
-\italic{\paramname{DSattributes}}, \paramname{view_WidthFlexible} | 
-\paramname{view_HeightFlexible}, indicating that both \paramname{textview}'s 
+\italic{\paramname{DSattributes}}, \paramname{view::WidthFlexible} | 
+\paramname{view::HeightFlexible}, indicating that both \paramname{textview}'s 
 width and height are flexible.}
 
 
@@ -296,7 +296,7 @@ negotiate a \paramname{textview}'s size.  You can call it several times.
 \fieldheading{See Also}
 
 \fieldtext{\paramname{textview_GetTextSize}, \paramname{textview_WantNewSize}, 
-and \paramname{view_DesiredSize} (atk/basics/common/view.doc).}
+and \paramname{view::DesiredSize} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,210,0,0}
 ______________________________________________________				
@@ -430,7 +430,7 @@ ______________________________________________________
 
 struct textview *\paramname{textview},
 
-enum view_UpdateType \paramname{type},
+enum view::UpdateType \paramname{type},
 
 long \paramname{left},
 
@@ -463,7 +463,7 @@ method when the parent view gets a \paramname{FullUpdate} request.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{textview_Update}; \paramname{view_FullUpdate} 
+\fieldtext{\paramname{textview_Update}; \paramname{view::FullUpdate} 
 (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,214,0,0}
@@ -530,7 +530,7 @@ long \paramname{position},
 
 long \paramname{numberOfClicks},
 
-enum view_MouseAction \paramname{action},
+enum view::MouseAction \paramname{action},
 
 long \paramname{startLeft},
 
@@ -557,8 +557,8 @@ long *\paramname{rightPos});}
 
 \paramname{numberOfClicks} -- the number of clicks (one, two or three).
 
-\paramname{action} --  the type of mouse action (view_LeftDown or 
-view_LeftMovement)
+\paramname{action} --  the type of mouse action (view::LeftDown or 
+view::LeftMovement)
 
 \paramname{startLeft}  -- the position of the old dot
 
@@ -566,7 +566,7 @@ view_LeftMovement)
 old dot}
 
 
-In response to these parameters, \paramname{text\italic{view_GetClickPosition}} 
+In response to these parameters, \paramname{text\italic{view::GetClickPosition}} 
 sets \paramname{leftPos} to the position of the a new selection region and 
 sets \paramname{rightPos} to the position of a new selection region plus its 
 length.  Note that the method does not actually change \paramname{textview}'s 
@@ -742,7 +742,7 @@ scrollbar interface for \paramname{textview}.}\fieldtext{
 \fieldheading{See Also}
 
 \fieldtext{See \paramname{Example 6, Scroll bars} 
- (atk/examples/ex6/example.doc) and  \paramname{view_GetInterface} 
+ (atk/examples/ex6/example.doc) and  \paramname{view::GetInterface} 
 (atk/basics/common/view.doc) for a discussion of the scroll bar interface.}
 
 
@@ -798,7 +798,7 @@ along a text's baseline.
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{view_GetOrigin} (atk/basics/common/view.doc).}
+\fieldtext{\paramname{view::GetOrigin} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,221,0,0}
 ______________________________________________________				
@@ -938,7 +938,7 @@ ______________________________________________________
 
 struct textview *\paramname{textview},
 
-enum view_MouseAction \paramname{action},
+enum view::MouseAction \paramname{action},
 
 long \paramname{x},
 
@@ -960,27 +960,27 @@ long \paramname{numberOfClicks});}
 and can have the following values: 
 
 
-\formatnote{\fieldtext{\italic{view_NoMouseEvent}\formatnote{@\\}No mouse 
+\formatnote{\fieldtext{\italic{view::NoMouseEvent}\formatnote{@\\}No mouse 
 action.
 
 
-\italic{view_LeftDown}\formatnote{@\\}Left button pressed down.
+\italic{view::LeftDown}\formatnote{@\\}Left button pressed down.
 
 
-\italic{view_LeftUp}\formatnote{@\\}Left button let up.
+\italic{view::LeftUp}\formatnote{@\\}Left button let up.
 
 
-\italic{view_LeftMovement}\formatnote{@\\}Left button down and mouse has 
+\italic{view::LeftMovement}\formatnote{@\\}Left button down and mouse has 
 moved.
 
 
-\italic{view_RightDown}\formatnote{@\\}Right button pressed down.
+\italic{view::RightDown}\formatnote{@\\}Right button pressed down.
 
 
-\italic{view_RightUp}\formatnote{@\\}Right button let up.
+\italic{view::RightUp}\formatnote{@\\}Right button let up.
 
 
-\italic{view_RightMovement}\formatnote{@\\}Right button down and mouse has 
+\italic{view::RightMovement}\formatnote{@\\}Right button down and mouse has 
 moved.}
 
 }
@@ -1009,7 +1009,7 @@ hit to the \paramname{textview} by calling \paramname{textview_Hit}.}
 \fieldheading{See Also}
 
 \fieldtext{For a discussion of parent-child protocols for handling mouse hits, 
-see Example 17 (atk/examples/ex17/example17.doc) and view_Hit 
+see Example 17 (atk/examples/ex17/example17.doc) and view::Hit 
 (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,224,0,0}
@@ -1040,20 +1040,20 @@ struct textview *\paramname{textview});}
 
 \fieldtext{Examines \paramname{textview}'s text for all children and, if 
 appropriate, creates views for them and links them into the view tree. 
- Recursively calls \paramname{view_InitChildren} on all children.
+ Recursively calls \paramname{view::InitChildren} on all children.
 
 
 }
 \fieldheading{Usage}
 
 \fieldtext{Would usually be invoked as a parent if \paramname{textview} is a 
-child by calling \paramname{view_InitChildren}.
+child by calling \paramname{view::InitChildren}.
 
 
 }
 \fieldheading{See Also}
 
-\fieldtext{ \paramname{view_InitChildren} (atk/basics/common/view.doc).}
+\fieldtext{ \paramname{view::InitChildren} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,225,0,0}
 ______________________________________________________				
@@ -1293,7 +1293,7 @@ it, a parent should call \paramname{textview_LinkTree}.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{view_LinkTree} (atk/basics/common/view.doc) for a 
+\fieldtext{\paramname{view::LinkTree} (atk/basics/common/view.doc) for a 
 discussion of view trees.}
 
 \view{bpv,538271560,229,0,0}
@@ -1473,7 +1473,7 @@ lost the input focus by calling this method.
 \fieldheading{See Also}
 
 \fieldtext{\paramname{textview_ReceiveInputFocus}.  For a discussion of the 
-input focus, see \paramname{view_LoseInputFocus} and Example 4 
+input focus, see \paramname{view::LoseInputFocus} and Example 4 
 (examples/ex4/example.doc).}
 
 \view{bpv,538271560,232,0,0}
@@ -1630,7 +1630,7 @@ destroys it.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{view_ObservedChanged}i (atk/basics/common/view.doc).}
+\fieldtext{\paramname{view::ObservedChanged}i (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,235,0,0}
 ______________________________________________________				
@@ -1669,7 +1669,7 @@ boolean \paramname{topLevel});}
 \fieldtext{If \paramname{processor} is "troff" and \paramname{finalFormat} is 
 "PostScript," prints the \paramname{file}, which should be the text file 
 associated with \paramname{textview}.  If \paramname{textview_Print} is being 
-called from another \paramname{view_Print} invocation, the \paramname{topLevel} 
+called from another \paramname{view::Print} invocation, the \paramname{topLevel} 
 parameter should be one more than the caller's level parameter.
 
 
@@ -1695,7 +1695,7 @@ message "Print aborted: could not load class 'texttroff'. "}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{view_Print} (atk/basics/common/view.doc).}
+\fieldtext{\paramname{view::Print} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,236,0,0}
 ______________________________________________________				
@@ -1744,7 +1744,7 @@ received the input focus by calling this method.}
 \fieldheading{See Also}
 
 \fieldtext{\paramname{textview_LoseInputFocus}; For a discussion of the input 
-focus, see \paramname{view_ReceiveInputFocus} and Example 4 
+focus, see \paramname{view::ReceiveInputFocus} and Example 4 
 (examples/ex4/example.doc).}
 
 \view{bpv,538271560,237,0,0}
@@ -1844,7 +1844,7 @@ observers.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{view_SetDataObject} (atk/basics/common/view.doc).}
+\fieldtext{\paramname{view::SetDataObject} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,239,0,0}
 ______________________________________________________				
@@ -2129,7 +2129,7 @@ to be redrawn.}
 
 \fieldheading{See Also}
 
-\fieldtext{\paramname{textview_FullUpdate}; \paramname{view_Update} 
+\fieldtext{\paramname{textview_FullUpdate}; \paramname{view::Update} 
 (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,245,0,0}
@@ -2285,7 +2285,7 @@ calling this method
 \fieldheading{See Also}
 
 \fieldtext{\paramname{textview_DesiredSize}}\fieldtext{; 
-}\fieldtext{\paramname{view_WantNewSize} (atk/basics/common/view.doc).}
+}\fieldtext{\paramname{view::WantNewSize} (atk/basics/common/view.doc).}
 
 \view{bpv,538271560,248,0,0}
 ______________________________________________________				
@@ -2323,13 +2323,13 @@ struct view *\paramname{requestor});}
 \fieldheading{Usage}
 
 \fieldtext{If a view to update its image, it should call 
-\italic{\paramname{view_WantUpdate}} with both arguments set to itself.}
+\italic{\paramname{view::WantUpdate}} with both arguments set to itself.}
 
 
 \fieldheading{See Also}
 
 \fieldtext{\paramname{textview_Update}; for a discussion of update requests, 
-see \paramname{view_WantUpdate} (atk/basics/common/view.doc); for a list}
+see \paramname{view::WantUpdate} (atk/basics/common/view.doc); for a list}
 
 
 \begindata{bp,537558784}

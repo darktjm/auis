@@ -72,7 +72,7 @@ START_ABUTTONV_MOUSE_METHOD(Arm) {
     if((!Armed())!=(!within)) {
 	SetArmed(within);
     }
-    if((action==view_LeftDown || action==view_RightDown) && HasInputFocus) WantInputFocus(this);
+    if((action==view::LeftDown || action==view::RightDown) && HasInputFocus) WantInputFocus(this);
 }
 END_ABUTTONV_MOUSE_METHOD();
 
@@ -288,7 +288,7 @@ START_ABUTTONV_CALLBACK_METHOD(LabelMethod) {
     if(dself->LabelData()) {
 	if(label) {
 	    label->InsertView(this, &linterior);
-	    label->FullUpdate(view_FullRedraw, linterior.left, linterior.top, linterior.width, linterior.top);
+	    label->FullUpdate(view::FullRedraw, linterior.left, linterior.top, linterior.width, linterior.top);
 	}
     } else {
 	ASlot_NAME(labelFG);
@@ -383,7 +383,7 @@ size(this, &sizeact)
     layout.SetMode(AFORMULAACCESS);
     lastfont=NULL;
     swidth=sheight=-1;
-    pass=view_NoSet;
+    pass=view::NoSet;
     size.SetMode(AFORMULAIMMEDIATE);
 }
 
@@ -526,7 +526,7 @@ void AButtonv::LabelDimensions(long &w, long &h, long *below) {
     }
 }
 
-void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
+void AButtonv::FullUpdate(enum view::UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
     CheckIndicator();
     AButton *b=(AButton *)GetDataObject();
     boolean drawing=TRUE;
@@ -543,12 +543,12 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
     if(b->LabelData()) {
 	CheckLabelView();
 	if(label) {
-	    if(type==view_Remove) {
-                label->FullUpdate(view_Remove, 0, 0, 0, 0);
+	    if(type==view::Remove) {
+                label->FullUpdate(view::Remove, 0, 0, 0, 0);
                 label->InsertViewSize(this, 0, 0, 0, 0);
 		return;
 	    }
-	    if(type==view_MoveNoRedraw) {
+	    if(type==view::MoveNoRedraw) {
                 struct rectangle linterior=interior;
                 
                 linterior.left+= (long)((long)b->MarginWidth() * ((double)b->scaleWidth)/uxscale);
@@ -591,7 +591,7 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
 	}
     }
     
-    if(type==view_PartialRedraw || type==view_Remove || type==view_MoveNoRedraw) return;
+    if(type==view::PartialRedraw || type==view::Remove || type==view::MoveNoRedraw) return;
 
     if(border) border->SetHighlighted(HasInputFocus);
 
@@ -611,7 +611,7 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
 
 void AButtonv::Update() {
     updateRequested=FALSE;
-    // FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+    // FullUpdate(view::FullRedraw, 0, 0, 0, 0);
     lformula.Validate();
     iformula.Validate();
     bformula.Validate();
@@ -632,7 +632,7 @@ void AButtonv::SetDataObject(class dataobject *d) {
     layout.Invalidate();
 }
 
-view_DSattributes AButtonv::DesiredSize(long  width, long  height, enum view_DSpass  p, long  *desired_width, long  *desired_height)
+view::DSattributes AButtonv::DesiredSize(long  width, long  height, enum view::DSpass  p, long  *desired_width, long  *desired_height)
 {
     boolean force=FALSE;
     fontdesc *fd=FindFont();
@@ -655,7 +655,7 @@ view_DSattributes AButtonv::DesiredSize(long  width, long  height, enum view_DSp
     }
     size.Validate();
     size.Desired(desired_width, desired_height);
-    return view_Fixed;
+    return view::Fixed;
 }
 
 
@@ -792,7 +792,7 @@ void AButtonv::RecSrchExpose(const struct rectangle &logical, struct rectangle &
 #define FONTTYPE fontdesc_Bold
 #define FONTSIZE 12
 
-void AButtonv::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
+void AButtonv::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight) 
 {
     AButton *dobj = (AButton *)(this->GetDataObject());
     CheckIndicator();

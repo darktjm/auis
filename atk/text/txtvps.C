@@ -1145,7 +1145,7 @@ static void SlurpWord(struct textps_slurp  *slurp)
 	    long in_w, in_h, out_w, out_h;
 	    in_w = 72; /* we ask for one inch square, PS units */
 	    in_h = 72;
-	    v->DesiredPrintSize(in_w, in_h, view_NoSet, &out_w, &out_h);
+	    v->DesiredPrintSize(in_w, in_h, view::NoSet, &out_w, &out_h);
 	    /*printf("### ...asked %d,%d; replied %d,%d (PS units)\n", in_w, in_h, out_w, out_h);*/
 	    /*voffset = vheight - (ts->fontsize * RESOLUTION) + ts->baselineoffset; ### */
 

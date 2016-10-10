@@ -483,11 +483,11 @@ struct dataobject *dobj;
 	return FALSE;
 
 
-    applayer=view_GetApplicationLayer(v);
+    applayer=view::GetApplicationLayer(v);
 
     if(applayer==NULL) \{
 
-	view_Destroy(v);
+	view::Destroy(v);
 
 	return FALSE;
 
@@ -498,7 +498,7 @@ struct dataobject *dobj;
 
     if(frame==NULL) \{
 
-	view_DeleteApplicationLayer(v,applayer);
+	view::DeleteApplicationLayer(v,applayer);
 
 	return FALSE;
 
@@ -516,14 +516,14 @@ struct dataobject *dobj;
     \}
 
 
-    view_SetDataObject(v,dobj);
+    view::SetDataObject(v,dobj);
 
     frame_SetView(frame,applayer);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v,v);
+    view::WantInputFocus(v,v);
 
 
     return TRUE;

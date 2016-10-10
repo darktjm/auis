@@ -180,7 +180,7 @@ static boolean CheckRightSwitchee(class switview  *self, boolean  *NeedFullRedra
     return(FALSE);
 }
 
-void switview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void switview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle Rect;
     boolean NeedFull; /* ignored */
@@ -209,7 +209,7 @@ void switview::Update()
 	struct rectangle Rect;
 	(this)->GetVisualBounds( &Rect);
 	(this)->EraseRect( &Rect);
-	(this)->FullUpdate( view_FullRedraw,
+	(this)->FullUpdate( view::FullRedraw,
 				Rect.left, Rect.top,
 				Rect.width, Rect.height);
 	return;
@@ -217,7 +217,7 @@ void switview::Update()
     if (this->NowPlaying) (this->NowPlaying->v)->Update();
 }
 
-class view *switview::Hit(enum view_MouseAction  action, long	 x, long	 y, long	 numberOfClicks)
+class view *switview::Hit(enum view::MouseAction  action, long	 x, long	 y, long	 numberOfClicks)
 {
     if (!this->NowPlaying) {
 	(this)->WantInputFocus( this);

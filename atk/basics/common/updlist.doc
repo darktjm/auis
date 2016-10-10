@@ -94,7 +94,7 @@ struct view *view;
 
 }
 \leftindent{\bold{Method description.  }  \italic{updatelist_AddTo} adds an 
-update request (a call to \italic{view_Update}) for \italic{view} to the 
+update request (a call to \italic{view::Update}) for \italic{view} to the 
 updatelist pointed to by \italic{ updatelis}. 
 
 
@@ -108,7 +108,7 @@ struct updatelist *updatelis;}
 
 \leftindent{\bold{Method description.  }  \italic{updatelist_Clear} removes 
 all queued views from  the designated update list \italic{updatelis}, calling 
-\italic{view_Update }on each one in turn.  Any views added to updatelis after 
+\italic{view::Update }on each one in turn.  Any views added to updatelis after 
 to the call to this method will not have their Update method called.  A second 
 call will have to be made (as described above). 
 

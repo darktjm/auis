@@ -12,8 +12,8 @@ class hrv: public view {
   public:
     virtual ATKregistryEntry *ATKregistry();
 
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight);
     void LinkTree(class view *parent);
     void ReceiveInputFocus();
     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);

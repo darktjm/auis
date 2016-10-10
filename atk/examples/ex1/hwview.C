@@ -11,7 +11,7 @@ ATK_IMPL("hwview.H")
 
 ATKdefineRegistry(helloworldview, view, NULL);
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     int x,y;
     struct rectangle VisualRect;		

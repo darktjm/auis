@@ -25,7 +25,7 @@ public:
        void WriteBody(FILE *fp);
        long ReadBody(FILE *file, boolean recompute)  ;
        const char * ToolName(class figtoolview *v, long rock)  ;
-       enum figobj_Status Build( class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ; 
+       enum figobj_Status Build( class figview *v, enum view::MouseAction action, long x, long y, long clicks)  ; 
        void Draw(class figview *v); 
        void RecomputeBounds();
 

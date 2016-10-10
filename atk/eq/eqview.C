@@ -89,11 +89,11 @@ void eqview::SetDataObject(class dataobject  *dataObject)
     (this)->SetDotPosition( 4);
 }
 
-void eqview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void eqview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     debug(("FullUpdate here\n"));
 
-    if(type == view_MoveNoRedraw){
+    if(type == view::MoveNoRedraw){
 	this->changed = EQVIEW_caret;
     } 
     else {
@@ -209,19 +209,19 @@ long eqview::GetDotLength()
     return (this->dot)->GetLength();
 }
 
-class view *eqview::Hit(enum view_MouseAction  action, long  x , long  y , long  clicks)
+class view *eqview::Hit(enum view::MouseAction  action, long  x , long  y , long  clicks)
 {
     int i, pos, len;
     class eq *eqptr = Eq(this);
 
     debug(("Hit here\n"));
 
-    if (action == view_LeftDown) {
+    if (action == view::LeftDown) {
 	i = (this)->Find( eqptr, x, y, 0);
 	(this)->SetDotPosition( i);
 	(this)->SetDotLength( 0);
     }
-    else if (action == view_LeftUp || action == view_RightDown) {
+    else if (action == view::LeftUp || action == view::RightDown) {
 	pos = (this)->GetDotPosition();
 	len = (this)->GetDotLength();
 	i = (this)->Find( eqptr, x, y, pos);
@@ -262,7 +262,7 @@ void eqview::LoseInputFocus()
 }
 
 
-view_DSattributes eqview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *widthp , long  *heightp)
+view::DSattributes eqview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *widthp , long  *heightp)
 {
     struct formula *first;
     class eq *eqptr = Eq(this);
@@ -278,7 +278,7 @@ view_DSattributes eqview::DesiredSize(long  width , long  height, enum view_DSpa
     *widthp = width;
     *heightp = first->max.y - first->min.y + 1 + 2*fudge;
 
-    return(view_Fixed);
+    return(view::Fixed);
 }
 
 boolean eqview::InitializeClass()
@@ -305,7 +305,7 @@ void *eqview::GetPSPrintInterface(const char *printtype)
     return NULL;
 }
 
-void eqview::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void eqview::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     class eq *eqptr = Eq(this);
     (eqptr)->Parse(NULL, 'p', desiredwidth, desiredheight);

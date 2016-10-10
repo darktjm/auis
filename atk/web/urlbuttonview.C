@@ -157,14 +157,14 @@ void urlbuttonview::OpenURL(const char  *url)
  *
  * XXX we should perform these actions on the UP transition.
  */
-boolean urlbuttonview::Touch(int ind, enum view_MouseAction action)
+boolean urlbuttonview::Touch(int ind, enum view::MouseAction action)
 {
     urlbutton *b = GetURLButton();
     const char *m, *url;
     char msg[4096];
 
     switch (action) {
-	case view_RightDown:
+	case view::RightDown:
 	    WantInputFocus(this);
 	    url = b->GetURL();
 	    if (url) {
@@ -174,7 +174,7 @@ boolean urlbuttonview::Touch(int ind, enum view_MouseAction action)
 		m = "No URL is defined for this button.";
 	    message::DisplayString(this, 0, m);
 	    break;
-	case view_LeftDown:
+	case view::LeftDown:
 	    OpenURL(b->GetURL());
 	    break;
 	default:

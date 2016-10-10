@@ -30,7 +30,7 @@ public:
 
 
 
-	 void FullUpdate(/* struct bpair *self, */ enum view_UpdateType type, 
+	 void FullUpdate(/* struct bpair *self, */ enum view::UpdateType type, 
 			long left, long top, long width, long height);
 
 

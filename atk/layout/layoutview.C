@@ -163,7 +163,7 @@ static void  InitializeGraphic(class layoutview  *self);
 static const char * GetClassName(class layoutview  *self, class dataobject  *object);
 static void InitComponent(class layoutview  *self);
 static void DrawRubberBox(class layoutview  *self);
-static void Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */);
+static void Update(class layoutview  *self, enum view::UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */);
 static void SetAuthoringMask(class layoutview  *self);
 static void SetRubberBox(class layoutview  *self, long  x			/* current position relative to self->dragx */, long  y			/* current position relative to self->dragy */);
 static struct component *	/* returns component containing x, y or NULL */ FindContainingComponent(class layoutview  *self, long  x				/* point to be found */, long  y, long  thresh			/* tolerance outside component allowed */);
@@ -336,7 +336,7 @@ layoutview::ReplaceComponent(struct component  *c, const char  *dataname)
 	  break;
       }
     if (child != NULL) {
-	(this)->RemoveSubview( child); /* prevents removing component in view_Destroy */
+	(this)->RemoveSubview( child); /* prevents removing component in view::Destroy */
 	(child)->UnlinkTree();
 	(child)->Destroy();
     }
@@ -357,8 +357,8 @@ InitComponent(class layoutview  *self)
 
 /* negotiate size of view */
 
-view_DSattributes			/* returns indication of what it wants */
-layoutview::DesiredSize(long  width				/* width being offered by parent */, long  height				/* height being offered */, enum view_DSpass  pass			/* what parent is willing to give */, long  *dWidth				/* set to desired width */, long  *dHeight				/* set to desired height */)
+view::DSattributes			/* returns indication of what it wants */
+layoutview::DesiredSize(long  width				/* width being offered by parent */, long  height				/* height being offered */, enum view::DSpass  pass			/* what parent is willing to give */, long  *dWidth				/* set to desired width */, long  *dHeight				/* set to desired height */)
 
 /*  layoutview asks for just enough space to display all contained components */
 
@@ -378,12 +378,12 @@ layoutview::DesiredSize(long  width				/* width being offered by parent */, long
 	    desiredHeight = cBottom(c);
     }
 
-    *dWidth = (pass == view_WidthSet) ? width : desiredWidth;
-    *dHeight = (pass == view_HeightSet) ? height : desiredHeight;
+    *dWidth = (pass == view::WidthSet) ? width : desiredWidth;
+    *dHeight = (pass == view::HeightSet) ? height : desiredHeight;
 
-    return (view_DSattributes)
-      ((int)((*dWidth > desiredWidth) ? view_WidthFlexible : view_WidthLarger)
-      | (int)((*dHeight > desiredHeight) ? view_HeightFlexible : view_HeightLarger));
+    return (view::DSattributes)
+      ((int)((*dWidth > desiredWidth) ? view::WidthFlexible : view::WidthLarger)
+      | (int)((*dHeight > desiredHeight) ? view::HeightFlexible : view::HeightLarger));
 }
 
 /* draw rubber-band box */
@@ -403,10 +403,10 @@ DrawRubberBox(class layoutview  *self)
 
 /* update image */
 
-#define ReallyDrawing(how, updateRect) (updateRect == NULL || (how != view_Remove && how != view_MoveNoRedraw))
+#define ReallyDrawing(how, updateRect) (updateRect == NULL || (how != view::Remove && how != view::MoveNoRedraw))
 
 static void
-Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */)
+Update(class layoutview  *self, enum view::UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */)
 {
     struct component *c;
     class view *child;
@@ -421,7 +421,7 @@ Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */,
 
     /* deal with cursors */
 
-    if (self->hasInputFocus && how != view_Remove && (self)->Hitmode() != HIT_EXEC) {
+    if (self->hasInputFocus && how != view::Remove && (self)->Hitmode() != HIT_EXEC) {
 	(self)->GetVisualBounds( &vb);
 	(self)->PostCursor( &vb, self->authoringCursor);
     }
@@ -504,7 +504,7 @@ Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */,
 	    (child)->InsertView( self, &childRect);
 	    (childRegion)->OffsetRegion( -vLeft(self, c), -vTop(self, c));
 	    (child)->SetVisualRegion( childRegion);
-	    (child)->FullUpdate( view_FullRedraw, 0, 0, vWidth(self, c), vHeight(self, c));
+	    (child)->FullUpdate( view::FullRedraw, 0, 0, vWidth(self, c), vHeight(self, c));
 	}
 	delete childRegion;
 
@@ -523,7 +523,7 @@ Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */,
 /* full update when window changes */
 
 void
-layoutview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left				/* updated rectangle (for certain kinds) */, long  top, long  width, long  height)
+layoutview::FullUpdate(enum view::UpdateType  how		/* kind of update */, long  left				/* updated rectangle (for certain kinds) */, long  top, long  width, long  height)
 {
     struct rectangle cliprect;		/* actual updated rectangle */
 
@@ -544,7 +544,7 @@ layoutview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  le
 
     /* define rectangle actually being updated */
 
-    if (how == view_PartialRedraw || how == view_LastPartialRedraw)
+    if (how == view::PartialRedraw || how == view::LastPartialRedraw)
 	rectangle_SetRectSize(&cliprect, left, top, width, height);
     else {
 	rectangle_SetRectSize(&cliprect, (this)->GetVisualLeft(), (this)->GetVisualTop(), (this)->GetVisualWidth(), (this)->GetVisualHeight());
@@ -553,7 +553,7 @@ layoutview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  le
 
     (this)->SetTransferMode( graphic::COPY);
     ::Update(this, how, &cliprect, TRUE);
-    if (how == view_FullRedraw)
+    if (how == view::FullRedraw)
 	this->lastUpdate = (getLayout(this))->GetModified();
 }
 
@@ -565,7 +565,7 @@ layoutview::Update()
     if (layout_debug)
 	printf("layoutview_Update requested=%d\n", this->updateRequested);
 
-    ::Update(this, view_FullRedraw, NULL, (this->lastUpdate < (getLayout(this))->GetModified()));
+    ::Update(this, view::FullRedraw, NULL, (this->lastUpdate < (getLayout(this))->GetModified()));
     this->lastUpdate = (getLayout(this))->GetModified();
 }
 
@@ -702,7 +702,7 @@ FindContainingComponent(class layoutview  *self, long  x				/* point to be found
 /* process mouse hit */
 
 class view *			/* returns view which should get follow-up events*/
-layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, long  x				/* where the mouse points */, long  y, long  numberOfClicks		/* number of hits at same place */)
+layoutview::Hit(enum view::MouseAction  action	/* which button; what it did */, long  x				/* where the mouse points */, long  y, long  numberOfClicks		/* number of hits at same place */)
 {
     struct component *c;
     class view *result;
@@ -723,7 +723,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 	(this)->SetAuthoringMode();
 	(this)->SetSelection( c);
     }
-    if ((this)->Hitmode() == HIT_AUTHORING && (action == view_LeftDown || action == view_RightDown) && c != NULL && numberOfClicks > 1) {
+    if ((this)->Hitmode() == HIT_AUTHORING && (action == view::LeftDown || action == view::RightDown) && c != NULL && numberOfClicks > 1) {
 	(this)->SetInitMode();
 	numberOfClicks -= 1;
     }
@@ -753,7 +753,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 
     /* create new component or drag existing one */
 
-    else if ((action == view_LeftDown || action == view_RightDown) && (this)->Hitmode() == HIT_AUTHORING) { // tjm - changed logic
+    else if ((action == view::LeftDown || action == view::RightDown) && (this)->Hitmode() == HIT_AUTHORING) { // tjm - changed logic
 	c = FindContainingComponent(this, x, y, POINTINGTHRESHHOLD);
 	(this)->SetSelection( c);
 	this->dragx = x;
@@ -782,8 +782,8 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 
     /* continue creating or dragging */
 
-    else if ((action == view_RightUp || action == view_RightMovement // tjm - changed logic
-	       || action == view_LeftUp || action == view_LeftMovement) &&
+    else if ((action == view::RightUp || action == view::RightMovement // tjm - changed logic
+	       || action == view::LeftUp || action == view::LeftMovement) &&
 	      ((this)->Hitmode() == HIT_CREATING || (this)->Hitmode() == HIT_DRAGGING
 	       || (this)->Hitmode() == HIT_AUTHORING)
 	       && (x < this->dragx - MOTIONTHRESHHOLD
@@ -817,7 +817,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 
 	    this->rubberwidth = (this)->ApplyGranularity( x - this->dragx);
 	    this->rubberheight = (this)->ApplyGranularity( y - this->dragy);
-	    if (action == view_LeftUp || action == view_RightUp) {
+	    if (action == view::LeftUp || action == view::RightUp) {
 
 		/* finish creating */
 
@@ -850,7 +850,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 	    /* continue dragging */
 
 	    SetRubberBox(this, x, y);
-	    if (action == view_LeftUp || action == view_RightUp) {
+	    if (action == view::LeftUp || action == view::RightUp) {
 
 		/* finish dragging */
 
@@ -951,7 +951,7 @@ layoutview::WantNewSize(class view  *requestor			/* view requesting a new size *
     forallsubviews(this, vl) {
 	if (vChild(vl) == requestor) {
 	    c = vComponent(vl);
-	    (requestor)->DesiredSize( vWidth(this, c), vHeight(this, c), view_NoSet, &dWidth, &dHeight);
+	    (requestor)->DesiredSize( vWidth(this, c), vHeight(this, c), view::NoSet, &dWidth, &dHeight);
 	    if (layout_debug)
 		printf(" .. ignored %ld %ld\n", dWidth, dHeight);
 	}
@@ -980,7 +980,7 @@ layoutview::DestroyComponent()
 	  break;
       }
     if (child != NULL) {
-	(this)->RemoveSubview( child); /* prevents removing component in view_Destroy */
+	(this)->RemoveSubview( child); /* prevents removing component in view::Destroy */
 	(child)->UnlinkTree();
 	(child)->Destroy();
     }

@@ -259,13 +259,13 @@ overrides:
 
     SetDataObject(struct helloworld *hw);
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 
 returns struct view *;
 
@@ -436,13 +436,13 @@ struct dataobject *dobj;
 
     if(hwv->view!=NULL)\{
 
-	view_UnlinkTree(hwv->applayer);
+	view::UnlinkTree(hwv->applayer);
 
 	if(hwv->view!=hwv->applayer)
 
-	    view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	    view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	    view_Destroy(hwv->view);
+	    view::Destroy(hwv->view);
 
     \}
 
@@ -451,16 +451,16 @@ struct dataobject *dobj;
 	hwv->view=(struct view*)class_NewObject(dataobject::ViewName(dobj));
 
 
-	hwv->applayer=view_GetApplicationLayer(hwv->view);
+	hwv->applayer=view::GetApplicationLayer(hwv->view);
 
 	if(hwv->applayer==NULL)
 
 	    hwv->applayer=hwv->view;
 
-	view_SetDataObject(hwv->view,dobj);
+	view::SetDataObject(hwv->view,dobj);
 
 
-	view_LinkTree(hwv->applayer,hwv);
+	view::LinkTree(hwv->applayer,hwv);
 
     \}else
 
@@ -979,12 +979,12 @@ overrides:
 
     SetDataObject(struct helloworld *hw);
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -1148,9 +1148,9 @@ struct helloworldview *hwv;
 
     if(hwv->view!=NULL)\{
 
-	view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	view_Destroy(hwv->view);
+	view::Destroy(hwv->view);
 
     \}
 
@@ -1167,7 +1167,7 @@ struct view *parent;
 
     if(hwv->applayer!=NULL)
 
-	view_LinkTree(hwv->applayer,hwv);
+	view::LinkTree(hwv->applayer,hwv);
 
     super_LinkTree(hwv,parent);
 
@@ -1184,13 +1184,13 @@ struct dataobject *dobj;
 
     if(hwv->view!=NULL)\{
 
-	view_UnlinkTree(hwv->applayer);
+	view::UnlinkTree(hwv->applayer);
 
 	if(hwv->view!=hwv->applayer)
 
-	    view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	    view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	view_Destroy(hwv->view);
+	view::Destroy(hwv->view);
 
     \}
 
@@ -1200,17 +1200,17 @@ struct dataobject *dobj;
 	hwv->view=(struct view *)class_NewObject(dataobject::ViewName(dobj));
 
 
-	hwv->applayer=view_GetApplicationLayer(hwv->view);
+	hwv->applayer=view::GetApplicationLayer(hwv->view);
 
 	if(hwv->applayer==NULL)
 
 	    hwv->applayer=hwv->view;
 
 
-	view_SetDataObject(hwv->view,dobj);
+	view::SetDataObject(hwv->view,dobj);
 
 
-	view_LinkTree(hwv->applayer,hwv);
+	view::LinkTree(hwv->applayer,hwv);
 
     \}else
 
@@ -1313,7 +1313,7 @@ void helloworldview__FullUpdate(hwv,type,left,top,width,height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -1407,11 +1407,11 @@ long height;
     rec.height--;
 
 
-    view_InsertView(hwv->applayer,hwv,&rec);
+    view::InsertView(hwv->applayer,hwv,&rec);
 
 	
 
-    view_FullUpdate(hwv->applayer,view_FullRedraw,0,0,WIDTH,HEIGHT);
+    view::FullUpdate(hwv->applayer,view::FullRedraw,0,0,WIDTH,HEIGHT);
 
     hwv->redrawSubView=FALSE;
 
@@ -1515,7 +1515,7 @@ struct helloworldview *hwv;
 
 		hwv->y-hwv->frameY, WIDTH,HEIGHT);
 
-	view_InsertView(hwv->applayer,hwv,&rec);
+	view::InsertView(hwv->applayer,hwv,&rec);
 
 
 	if(hw->blackOnWhite)
@@ -1524,7 +1524,7 @@ struct helloworldview *hwv;
 
 		hwv->y-hwv->frameY-1,WIDTH+1,HEIGHT+1);
 
-	view_FullUpdate(hwv->applayer,view_FullRedraw,0,0,
+	view::FullUpdate(hwv->applayer,view::FullRedraw,0,0,
 
 			WIDTH,HEIGHT);
 
@@ -1532,7 +1532,7 @@ struct helloworldview *hwv;
 
     \}else
 
-	view_Update(hwv->applayer);
+	view::Update(hwv->applayer);
 
 \}
 
@@ -1542,7 +1542,7 @@ struct view *helloworldview__Hit(hwv,action,x,y,numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -1561,7 +1561,7 @@ long numberOfClicks;
 
          y>=(hwv->y-hwv->frameY) && y<(hwv->y-hwv->frameY+HEIGHT))
 
-	return view_Hit(hwv->applayer,action,x-(hwv->x-hwv->frameX),
+	return view::Hit(hwv->applayer,action,x-(hwv->x-hwv->frameX),
 
 		y-(hwv->y-hwv->frameY),numberOfClicks);
 
@@ -1570,13 +1570,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -1588,7 +1588,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -1598,7 +1598,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -1617,7 +1617,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->hitX=x;
 
@@ -1625,7 +1625,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 
@@ -2177,12 +2177,12 @@ struct view *v;
 
     else\{
 
-	struct view *al=view_GetApplicationLayer(v);
+	struct view *al=view::GetApplicationLayer(v);
 
 
 	if(al==NULL)\{
 
-	    view_Destroy(v);
+	    view::Destroy(v);
 
 	    return NULL;
 
@@ -2226,9 +2226,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(al2==NULL) \{
 
-	view_DeleteApplicationLayer(v1,al1);
+	view::DeleteApplicationLayer(v1,al1);
 
-    	view_Destroy(v1);
+    	view::Destroy(v1);
 
 	return FALSE;
 
@@ -2239,9 +2239,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(lpAl==NULL) \{
 
-	view_DeleteApplicationLayer(v2,al2);
+	view::DeleteApplicationLayer(v2,al2);
 
-    	view_Destroy(v2);
+    	view::Destroy(v2);
 
 	return FALSE;
 
@@ -2281,16 +2281,16 @@ struct dataobject *dobj1,*dobj2;
     \}
 
 
-    view_SetDataObject(v1,dobj1);
+    view::SetDataObject(v1,dobj1);
 
-    view_SetDataObject(v2,dobj2);
+    view::SetDataObject(v2,dobj2);
 
     frame_SetView(frame,lpAl);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v1,v1);
+    view::WantInputFocus(v1,v1);
 
 
     return TRUE;

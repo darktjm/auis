@@ -9,14 +9,14 @@
 
 ATKdefineRegistry(hrv, view, NULL);
 
-view_DSattributes hrv::DesiredSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+view::DSattributes hrv::DesiredSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     *desiredwidth = width;
     *desiredheight = 1;
-    return (view_HeightFlexible | view_WidthFlexible);
+    return (view::HeightFlexible | view::WidthFlexible);
 }
 
-void hrv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height)
+void hrv::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height)
 {
     struct rectangle enclosingRect;
     enclosingRect.top = 0; enclosingRect.left = 0;

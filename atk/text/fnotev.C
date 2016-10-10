@@ -143,10 +143,10 @@ void *fnotev::GetPSPrintInterface(const char *printtype)
 
 
 
-class view *fnotev::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *fnotev::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
 
-    if(action == view_LeftUp || action == view_RightUp){
+    if(action == view::LeftUp || action == view::RightUp){
 /*	fnotev_WantInputFocus(self,self); */
 #if 0
 	if(this->fnotetype == -1)
@@ -189,7 +189,7 @@ fnotev_FindLoc(class fnotev  *self,class text  *parent)
     
 }
 #endif
-view_DSattributes fnotev::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes fnotev::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 {
 /*    *desiredwidth = 17;
     *desiredheight = 14; */
@@ -199,7 +199,7 @@ view_DSattributes fnotev::DesiredSize(long  width , long  height, enum view_DSpa
     else *desiredwidth = 13;
     if(this->ci[0].height != 0) *desiredheight = this->ci[0].height  + SHIM + 1/* + SHIM */;
     else *desiredheight = 11;
-    return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 }
 static struct impair *findwindow(class fnotev  *self,class text  *pc)
 {
@@ -331,10 +331,10 @@ static void DoUpdate(class fnotev  *self,boolean  full)
 	(self)->SetFont(self->fd);
 	(self)->MoveTo(/*self->ci[0].xOriginOffset + */1,/*self->ci[0].yOriginOffset + */1);
     }
-    (self)->DrawString(self->displaystr,(view_ATTOP | view_ATLEFT)); 
+    (self)->DrawString(self->displaystr,(graphic::ATTOP | graphic::ATLEFT)); 
     (self)->DrawRect(&(enclosingRect)); 
     /*	fnotev_MoveTo(self,enclosingRect.width / 2,enclosingRect.height / 2);
-     fnotev_DrawString(self,"*",(view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM)); */
+     fnotev_DrawString(self,"*",(graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)); */
 
 
 #endif
@@ -394,7 +394,7 @@ void fnotev::ObservedChanged(class observable  *changed, long  value)
     }
     (this)->WantUpdate(this);
 }
-void fnotev::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void fnotev::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     DoUpdate(this,TRUE);
 }

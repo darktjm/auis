@@ -138,7 +138,7 @@ void lsetview::SetDataObject(class dataobject  *ls)
    this->mode = lsetview_NeedLink;
 }
 
-class view *lsetview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  numberOfClicks)
+class view *lsetview::Hit(enum view::MouseAction  action,long  x ,long  y ,long  numberOfClicks)
 {
 long size;
 int pct;
@@ -180,7 +180,7 @@ class view *vw;
             if(!(this->HasFocus)) (this)->WantInputFocus(this);
             return((class view *)this);
     }
-    if(action != view_LeftDown) return((class view *)this);
+    if(action != view::LeftDown) return((class view *)this);
     v1 = lsetview::Create(this->level+1,NULL,(class view *)this);
     v2 = lsetview::Create(this->level+1,NULL,(class view *)this);
     /* update dataobject */
@@ -260,9 +260,9 @@ static void lsetview_DestroyView(class lsetview  *self)
     dolink(self);
     (self)->WantInputFocus(self);
 /*    if (lp->obj[0] != NULL)
-        view_UnlinkTree(lp->obj[0]);
+        view::UnlinkTree(lp->obj[0]);
     if (lp->obj[1] != NULL)
-        view_UnlinkTree(lp->obj[1]);
+        view::UnlinkTree(lp->obj[1]);
 */
 }
 static int lsetview_PlaceView(class lsetview  *self)
@@ -398,8 +398,8 @@ void lsetview::Update()
 	    (this)->GetVisualBounds(&rr);
 	    (this->app)->InsertView( this, &rr);
 	    (this->app)->RetractViewCursors(this->app);
-	    (this->app)->DesiredSize(rr.width,rr.height,view_NoSet,&foo1,&foo2);
-	    (this->app)->FullUpdate( view_FullRedraw,0,0,0,0);
+	    (this->app)->DesiredSize(rr.width,rr.height,view::NoSet,&foo1,&foo2);
+	    (this->app)->FullUpdate( view::FullRedraw,0,0,0,0);
 
 	    if(this->mode == lsetview_FirstUpdate && ls->application == CEL &&
 	       this->HasFocus)
@@ -448,7 +448,7 @@ void lsetview::Update()
        (this)->PostCursor(&tr,this->cursorp);
    }
 }
-void lsetview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void lsetview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     if(this->mode == lsetview_NeedLink)
 	dolink(this);
@@ -460,7 +460,7 @@ void lsetview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  
 	(this)->GetLogicalBounds(&rr);
 	(this->app)->InsertView( this, &rr);
 	(this->app)->RetractViewCursors(this->app);
-	(this->app)->DesiredSize(width,height,view_NoSet,&foo1,&foo2);
+	(this->app)->DesiredSize(width,height,view::NoSet,&foo1,&foo2);
 	(this->app)->FullUpdate(type,left,top,width,height);
     }
     else if (this->mode == lsetview_IsSplit){
@@ -557,8 +557,8 @@ boolean lsetview::Unsplit(class lsetview  *who)
     (oldll)->NotifyObservers(0);
    /*
     savedlp = (struct lpair *) saved;
-    view_UnlinkTree(lp->obj[0]);
-    view_UnlinkTree(lp->obj[1]);
+    view::UnlinkTree(lp->obj[0]);
+    view::UnlinkTree(lp->obj[1]);
     lp->obj[0] = lp->obj[1] = NULL;
     self->mode = saved->mode;
     self->level = saved->level;
@@ -575,8 +575,8 @@ boolean lsetview::Unsplit(class lsetview  *who)
 	    lsetview_VSplit(self,v1,v2,lp->pct,TRUE);
     }
     else if(self->child){
-	view_UnlinkTree(self->child);
-	view_LinkTree(self->child,self);
+	view::UnlinkTree(self->child);
+	view::LinkTree(self->child,self);
     }
     lsetview_Destroy(saved);
     lsetview_Destroy(who);

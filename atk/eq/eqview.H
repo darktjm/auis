@@ -26,16 +26,16 @@ class eqview : public  view {
     virtual ATKregistryEntry *ATKregistry();
 
 
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *widthp, long *heightp)  ;
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *widthp, long *heightp)  ;
     void Update();
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void ReceiveInputFocus();
     void LoseInputFocus();
-    class view * Hit (enum view_MouseAction action, long x, long y, long clicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long clicks)  ;
     void SetDataObject(class dataobject *dataObject);
     void Print(FILE *f, const char *process, const char *final, int toplevel);
     void *GetPSPrintInterface(const char *printtype);
-    void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+    void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
     void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
 

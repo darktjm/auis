@@ -24,7 +24,7 @@ class urlbuttonview : public sbuttonv {
     static boolean InitializeClass();
 
     // overrides
-    boolean Touch(int ind, enum view_MouseAction action);
+    boolean Touch(int ind, enum view::MouseAction action);
     void ReceiveInputFocus();
     void *GetPSPrintInterface(const char *printtype);
 

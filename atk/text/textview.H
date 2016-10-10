@@ -139,7 +139,7 @@ struct textview_insetdata {
 
 /* Line number callback types. */
 typedef void (*textview_drawCB)(textview *tv, mark *line, struct rectangle *draw_rect, void *rock);
-typedef void (*textview_hitCB)(textview *tv, mark *line, enum view_MouseAction action, long x, long y, long numberOfClicks, void *rock);
+typedef void (*textview_hitCB)(textview *tv, mark *line, enum view::MouseAction action, long x, long y, long numberOfClicks, void *rock);
 
 #define textview_UNKNOWNVIEW 1
 #define textview_REMOVEVIEW 0L
@@ -188,9 +188,9 @@ class textview : public  view {
 
       void WantUpdate(class view *requestor);
       void SetDataObject(class dataobject *dataObject);
-      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
       void Update();
-      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
       void ReceiveInputFocus();
       void LoseInputFocus();
       class view * GetApplicationLayer()  ;
@@ -200,7 +200,7 @@ class textview : public  view {
       void WantNewSize(class view *requestor);
       void ObservedChanged (class observable *changed, long value);
       void LinkTree(class view *parent);
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
       void GetOrigin(long width, long height, long *originX, long *originY);
       void InitChildren();
       boolean CanView(const char *TypeName)  ;
@@ -215,7 +215,7 @@ class textview : public  view {
       void *GetPSPrintInterface(const char *printtype);
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
-      struct view_printoptlist *PrintOptions();
+      struct view::printoptlist *PrintOptions();
       long GetPrintOption(const class atom *popt);
 
       virtual void SetDotPosition(long newPosition);
@@ -227,7 +227,7 @@ class textview : public  view {
       virtual void SetBorder(long xBorder, long yBorder);
       virtual void SetEmbeddedBorder(long xBorder, long yBorder);
       virtual long CollapseDot()  ;
-      virtual void GetClickPosition(long position, long numberOfClicks, enum view_MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
+      virtual void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
       virtual boolean Visible(long pos)  ;
       virtual long Locate(long x, long y, class view **view)  ;
       virtual void GetTextSize(long *width, long *height);

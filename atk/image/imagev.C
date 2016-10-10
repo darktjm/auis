@@ -301,10 +301,10 @@ DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *i
 }
 
 void
-imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, long height )
+imagev::FullUpdate( enum view::UpdateType type, long left, long top, long width, long height )
 {
     this->isLinked = TRUE;
-    if(type == view_FullRedraw || type == view_LastPartialRedraw) {
+    if(type == view::FullRedraw || type == view::LastPartialRedraw) {
 	class region *clipRgn = region::CreateEmptyRegion();
 	class region *clipEstablished;
 
@@ -391,11 +391,11 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	    (this)->ClearClippingRect();
 	delete clipRgn;
     }
-    else if(type == view_MoveNoRedraw) {
+    else if(type == view::MoveNoRedraw) {
 	(this)->RetractCursor( this->cursor);
 	::PostCursor(this, Cursor_Arrow);
     }
-    else if(type == view_Remove) {
+    else if(type == view::Remove) {
 	if(this->canvas) {
 	    free(this->canvas);
 	    this->canvas = NULL;
@@ -417,7 +417,7 @@ static void ConstrainPanning(imagev *iv) {
 }
 
 class view *
-imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfClicks)
+imagev::Hit( enum view::MouseAction  action, long  ix, long  iy, long  numberOfClicks)
 {
     long iw, ih, px, py;
     if(canvas==NULL) return this;
@@ -429,9 +429,9 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
     }
 
     switch(action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    break;
-	case view_RightDown:
+	case view::RightDown:
 	    ::PostCursor(this, Cursor_CrossHairs);
 	    this->rockx = ix;
 	    this->rocky = iy;
@@ -447,9 +447,9 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    this->lastx = ix;
 	    this->lasty = iy;
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    break;
-	case view_RightMovement:
+	case view::RightMovement:
 	    if(this->panStyle == DISCRETE_PAN) {
 		px =  ix;
 		py = iy;
@@ -469,7 +469,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 
 		break;
 	    }
-	case view_RightUp:
+	case view::RightUp:
 	    if(this->panStyle == DISCRETE_PAN) {
 		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, this->lasty);
@@ -485,7 +485,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    this->do_renderupdate = TRUE;
 	    (this)->WantUpdate( this);
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	default:
 	    break;
     }
@@ -524,8 +524,8 @@ imagev::LoseInputFocus( )
     }
 }
 
-view_DSattributes 
-imagev::DesiredSize( long  width , long  height, enum view_DSpass  pass, long  *desiredWidth , long  *desiredHeight )
+view::DSattributes 
+imagev::DesiredSize( long  width , long  height, enum view::DSpass  pass, long  *desiredWidth , long  *desiredHeight )
 {
     class image *image = orig;
     *desiredWidth = (image)->Width() > 0 ?
@@ -538,7 +538,7 @@ imagev::DesiredSize( long  width , long  height, enum view_DSpass  pass, long  *
 	sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, buttonprefs, haveFocus, *desiredWidth, *desiredHeight, desiredWidth, desiredHeight);
 	sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, buttonprefs, !haveFocus, *desiredWidth, *desiredHeight, desiredWidth, desiredHeight);
     }
-    return(view_Fixed);
+    return(view::Fixed);
 }
 
 void
@@ -619,10 +619,10 @@ imagev::Update( )
 	struct rectangle r;
 	(this)->GetVisualBounds( &r);
 	CLEARRECT(this, &r);
-	(this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+	(this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
     }
     else { /* do_renderupdate */
-	(this)->FullUpdate( view_FullRedraw, 0, 0, 0, 0);
+	(this)->FullUpdate( view::FullRedraw, 0, 0, 0, 0);
     }
 }
 
@@ -1082,7 +1082,7 @@ void imagev::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct re
     writePS(this, outfile, &wpts, &hpts, imagev_REGISTERED_POSTSCRIPT);
 }
 
-void imagev::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void imagev::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     this->view::DesiredPrintSize(width, height, pass, desiredwidth, desiredheight);
 }

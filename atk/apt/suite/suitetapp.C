@@ -35,17 +35,17 @@ ATK_IMPL("suitetapp.H")
   
 ATKdefineRegistry(suitetapp, application, NULL);
 static class view * Change_Test( class suitetapp  *self );
-static class view * First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Number_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Next_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Prior_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Quit_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-static class view * RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
+static class view * First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Number_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Next_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Prior_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Quit_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+static class view * RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
 static class view * Text_Object_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type );
 static class view * TextView_Object_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type );
-static class view * Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
+static class view * Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
           
 
 #define NUM_NAMES 27
@@ -591,9 +591,9 @@ Change_Test( class suitetapp  *self )
 }
 
 static class view *
-First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if (action == view_LeftUp) {
+  if (action == view::LeftUp) {
     current_test = 0;
     Change_Test(self);
     (suite)->NormalizeItem( item);
@@ -602,10 +602,10 @@ First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *ite
 }
 
 static class view *
-Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
 
-  if (action == view_LeftUp) {
+  if (action == view::LeftUp) {
     current_test = last_test;
     Change_Test(self);
     (suite)->NormalizeItem( item);
@@ -614,11 +614,11 @@ Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item
 }
 
 static class view *
-Number_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Number_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
   long test;
 
-  if(action == view_LeftDown)
+  if(action == view::LeftDown)
     (suite)->ChangeItemAttribute( item, suite_ItemCaption(""));
   else {
       if((suite)->ItemAttribute( item, suite_itemcaption)) {
@@ -634,9 +634,9 @@ Number_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *it
 }
 
 static class view *
-Next_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Next_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if(action == view_LeftUp) {
+  if(action == view::LeftUp) {
       if(current_test < last_test && test_suites[current_test+1])
 	  current_test++;
       else
@@ -648,9 +648,9 @@ Next_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item
 }
 
 static class view *
-Prior_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Prior_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if(action == view_LeftUp) {
+  if(action == view::LeftUp) {
     if(current_test > 0)
 	current_test--;
     else
@@ -662,9 +662,9 @@ Prior_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *ite
 }
 
 static class view *
-Quit_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Quit_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if(action == view_LeftUp) {
+  if(action == view::LeftUp) {
     (suite)->NormalizeItem( item);
     exit(0);
     return(0);
@@ -673,7 +673,7 @@ Quit_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item
 }
 
 static class view *
-Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
   printf("Title Caption '%s' Item Caption '%s'\n",
 	    (char *)(suite)->SuiteAttribute( suite_titlecaption),
@@ -682,7 +682,7 @@ Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *it
 }
 
 static class view *
-RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
   printf("Title Caption '%s'  Item Caption '%s'\n",
 	    (char *)(suite)->SuiteAttribute( suite_titlecaption),
@@ -706,13 +706,13 @@ TextView_Object_Handler( class suitetapp  *self, class suite  *suite, struct sui
 }
 
 static class view *
-Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks ) 
+Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks ) 
             {
   static long sort = suite_Ascend;
   static const char *sorted, *forward = "Sorted Ascending",
   *backward = "Sorted Descending";
 
-  if(action == view_RightUp) {
+  if(action == view::RightUp) {
       if(sort == suite_Ascend) {
 	  sort = suite_Descend;
 	  sorted = backward;

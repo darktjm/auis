@@ -2544,7 +2544,7 @@ position) returns long;
 	The following insert objects into text.
 
     text_InsertObject(struct text *self,long pos, char *dataobject_name,char 
-*view_name) returns struct viewref *;
+*view::name) returns struct viewref *;
 
     text_AddView(struct text *self,long pos, char *viewtype, struct dataobject 
 *dataobject) returns struct environment *;
@@ -3718,7 +3718,7 @@ struct view *\bold{MouseProc}(cv, action, x, y, numberofclicks, rock)
 
 	struct celview *cv; 	/* the celview */
 
-	enum view_MouseAction action;
+	enum view::MouseAction action;
 
 	long x, y, numberofclicks;
 
@@ -3728,7 +3728,7 @@ struct view *\bold{MouseProc}(cv, action, x, y, numberofclicks, rock)
 
 	struct view *vw;
 
-	vw = view_Hit(celview_GetApplication(cv),action, x, y, numberofclicks)
+	vw = view::Hit(celview_GetApplication(cv),action, x, y, numberofclicks)
 
 	/* code deal with the hit goes here */
 

@@ -104,7 +104,7 @@ static long Show_Symbol_Dialog( class ziposymbol *self, zip_type_pane pane );
 static void Show_Set_Symbols( class ziposymbol *self, zip_type_pane pane, struct symbol_set *set );
 static void Highlight_Symbol( class ziposymbol *self, struct symbol_set *set, struct symbol *symbol );
 static void Invert_Symbol( class ziposymbol *self, struct symbol *symbol );
-static enum view_MouseAction Accept_Property_Hit( class ziposymbol *self, zip_type_pane pane, char c, enum view_MouseAction	   action, long x , long y , long clicks );
+static enum view::MouseAction Accept_Property_Hit( class ziposymbol *self, zip_type_pane pane, char c, enum view::MouseAction	   action, long x , long y , long clicks );
 static void Decline_Property_Hits( class ziposymbol *self, zip_type_pane pane );
 static char * Skip_Colon( char *string );
 static char * String( class ziposymbol *self, char *string, char **s );
@@ -206,7 +206,7 @@ ziposymbol::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   
   }
 
 long
-ziposymbol::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x , long y , long clicks, zip_type_point X , zip_type_point Y )
+ziposymbol::Build_Object( zip_type_pane pane, enum view::MouseAction action, long x , long y , long clicks, zip_type_point X , zip_type_point Y )
 {
   class ziposymbol		 *self=this;
   long				  status = zip_ok;
@@ -216,7 +216,7 @@ ziposymbol::Build_Object( zip_type_pane pane, enum view_MouseAction action, long
   IN(ziposymbol_Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( SelectedSymbol )
 	{
         sprintf( symbol_string, "%s;%s", SelectedSymbolSetName, SelectedSymbolIndexName );
@@ -237,7 +237,7 @@ ziposymbol::Build_Object( zip_type_pane pane, enum view_MouseAction action, long
 	}
 	else  (this->view_object)->Announce(  "No Symbol Selected." );
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       (this->view_object)->Set_Pane_Cursor(  pane, 'B', CursorFontName ); /*=== ?? ===*/
       if ( SelectedSymbol  &&  (figure = CurrentFigure) )
 	{
@@ -250,7 +250,7 @@ ziposymbol::Build_Object( zip_type_pane pane, enum view_MouseAction action, long
 	  else (this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	}
         break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( SelectedSymbol  &&  CurrentFigure )
 	{
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
@@ -317,7 +317,7 @@ long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane  pane )
   (self->view_object)->Set_Pane_Clip_Area(  pane );
   transfer_mode = (self->view_object )->GetTransferMode( );
   if ( figure->zip_figure_mode.zip_figure_mode_shaded  &&
-       self->view_object->mouse_action != view_LeftMovement  &&
+       self->view_object->mouse_action != view::LeftMovement  &&
       (shade = figure->zip_figure_fill.zip_figure_shade) >= 1  &&
           shade <= 100 )
     {
@@ -338,7 +338,7 @@ long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane  pane )
       (self->view_object)->SetTransferMode(  graphic::INVERT );
     (self->view_object)->DrawRectSize(  OutstandingLeft, OutstandingTop, OutstandingWidth, OutstandingHeight );
     }
-  if ( self->view_object->mouse_action == view_LeftMovement )
+  if ( self->view_object->mouse_action == view::LeftMovement )
     {
     OutstandingSurround = true;
     if ( transfer_mode != graphic::WHITE )
@@ -1330,8 +1330,8 @@ void Invert_Symbol( class ziposymbol		  *self, struct symbol		  *symbol )
   OUT(Invert_Symbol);
   }
 
-static enum view_MouseAction
-Accept_Property_Hit( class ziposymbol		  *self, zip_type_pane		   pane, char				   c, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
+static enum view::MouseAction
+Accept_Property_Hit( class ziposymbol		  *self, zip_type_pane		   pane, char				   c, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks )
             {
   struct symbol_set		 *set = SymbolSets;
   struct symbol		 *symbols;
@@ -1339,7 +1339,7 @@ Accept_Property_Hit( class ziposymbol		  *self, zip_type_pane		   pane, char				
   static boolean			  exit_on_up;
 
   IN(Accept_Property_Hit)
-  if ( action == view_LeftDown )
+  if ( action == view::LeftDown )
     {
     if ( x >= SVL  &&  x <= SVR &&  y >= SVT   &&  y <= SVB )
       { DEBUG(Inside Symbol-view);
@@ -1397,17 +1397,17 @@ Accept_Property_Hit( class ziposymbol		  *self, zip_type_pane		   pane, char				
     }
     else
     {
-    if ( action == view_LeftUp )
+    if ( action == view::LeftUp )
       {
       if ( SymbolSelected  ||  exit_on_up )
         Decline_Property_Hits( self, pane );
       }
-      else if ( action == view_NoMouseEvent  ||  action == view_RightDown )
+      else if ( action == view::NoMouseEvent  ||  action == view::RightDown )
         Decline_Property_Hits( self, pane );
     exit_on_up = false;
     }
-  if ( action != view_RightDown )
-    action = view_NoMouseEvent;
+  if ( action != view::RightDown )
+    action = view::NoMouseEvent;
   OUT(Accept_Property_Hit);
   return  action;
   }

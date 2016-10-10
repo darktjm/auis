@@ -67,12 +67,16 @@ Again, atk writes ASCII files, so you should be able to read it anyway.
 The following known dependencies currently exist:
 
   - X and other UNIX utilities scattered throughout.
+    in particular, imake, even though it's not used much by X anymore.
   - ImageMagick.  You can change this at build-time to DevIL or
     FreeImage by changing IMAGEIO in config/site.mcr.
   - GNU roff.
   - gv. This can be overridden with the PSCPreviewCommand preference.
   - xditview.  This can be overridden with the PreviewCommand
-    preference.
+    preference.  See below for replacing this with gv.
+  - GNU make, or at least a make capable of dealing with GNU-style
+    `$(shell ..)` and `ifeq` .. `endif`, such as makepp.
+  - URW Nimbus fonts, installed in your X font path.
 
 I recommend the following preference settings in ~/.preferences:
 
@@ -99,6 +103,10 @@ I recommend the following preference settings in ~/.preferences:
   
     Replace W and H by something other than the weird default of
     512x512.
+
+  - `*.UseXLFDNames: No`
+  
+    Use URW scaled fonts.
 
 Incompatibilities
 -----------------
@@ -196,6 +204,20 @@ So far, the following incompatibilities have been introduced:
     here; compile your code and if it fails, do the work to figure out
     why yourself.
 
+  - I have changed the default font aliases file to use URW Nimbus
+    fonts instead of Adobe fonts.  Adobe fonts shiped by MIT and
+    AUIS are not scalable, so this allows scalable (unpixelated)
+    fonts. The menus do not do the same font searching that the
+    rest of the system uses.  I added fixed aliases for the few
+    fonts used by default by the menus, but any preference
+    overrides may now fail.  Use full X font names instead, or add
+    your own aliases to the font path.  Similarly, if you don't
+    want to edit fonts.alias yourself to use a different set of
+    scaled fonts, you can add an override to your font path before
+    the AUIS directory.  If you're using a dumb X terminal, you
+    can probably get a font server to give you the appropriate
+    fonts.
+
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:
     
@@ -214,6 +236,13 @@ So far, the following incompatibilities have been introduced:
     - Never use a BSD function unless it's in Single UNIX (yes, Single
       UNIX was around at the time of AUIS, but named X/Open instead)
 
+    - C++ has been around long enough now that using multiple
+      inheritance, nested types, exceptions, RTTI, and templates is probably
+      fine.   The main thing to research is that they are compatible
+      with dynamic loading, and how to portably instantiate templates
+      at particular locations.  In particular, nested types are
+      completely safe.
+   
     - Leaving the burden of space ownership to the callee is safe, but
       inefficient.  Instead, document space ownership.  For example,
       if a function takes a string, it's likely the string is a constant
@@ -226,7 +255,7 @@ So far, the following incompatibilities have been introduced:
       compiler.  NO_DLL_EXPORT is different, in that it is a
       non-portable way to control symbol exports.  There is no portable
       way to do this, unfortunately.
-   
+
     - Only slightly related: almost none of the code in AUIS matches
       the guidelines in CodeAppearance.ez, so the fact that they violate
       my own guidelines shouldn't matter.  In particular:
@@ -282,7 +311,7 @@ So far, the following incompatibilities have been introduced:
       * (5.) Adding gratuitous newlines is rarely helpful.  Especially
         since for some reason monitors have been getting wider instead
         of taller.
-
+	
       * (6.) Avoid goto doesn't belong in the same point, but in any
 	case, they had a perfect opportunity to promote C++ exceptions,
 	but didn't.  Maybe "avoid longjmp even more" would've helped.

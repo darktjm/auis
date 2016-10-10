@@ -954,7 +954,7 @@ coordinate system.  (When called on the child view.)
 
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -972,27 +972,27 @@ drops, but this support is fairly rudimentary and may be changed.)
 The cases are distinguished by the type parameter as follows:
 
 
-\indent{\constant{view_LeftDown} --  The left mouse button was pressed.
+\indent{\constant{view::LeftDown} --  The left mouse button was pressed.
 
-\constant{view_LeftUp} -- The left mouse button was released.
+\constant{view::LeftUp} -- The left mouse button was released.
 
-\constant{view_LeftMovement} -- The mouse was moved with the left mouse 
+\constant{view::LeftMovement} -- The mouse was moved with the left mouse 
 button pressed.
 
-\constant{view_RightDown} -- The right mouse button was pressed.
+\constant{view::RightDown} -- The right mouse button was pressed.
 
-\constant{view_RightUp} -- The right mouse button was released.
+\constant{view::RightUp} -- The right mouse button was released.
 
-\constant{view_RightMovement} -- The mouse was moved with the right mouse 
+\constant{view::RightMovement} -- The mouse was moved with the right mouse 
 button pressed.
 
-\constant{view_LeftFileDrop} -- A file was dropped with the left mouse 
+\constant{view::LeftFileDrop} -- A file was dropped with the left mouse 
 button.
 
-\constant{view_MiddleFileDrop} -- A file was dropped with the middle mouse 
+\constant{view::MiddleFileDrop} -- A file was dropped with the middle mouse 
 button.
 
-\constant{view_RightFileDrop} -- A file was dropped with the right mouse 
+\constant{view::RightFileDrop} -- A file was dropped with the right mouse 
 button.
 
 }
@@ -2721,7 +2721,7 @@ determine the effect of applying the \classobject{pixelimage}.
 \type{
 void} \class{view}::\virtualmemberfunction{FullUpdate}(
 
-	\type{enum view_UpdateType} \argument{type},
+	\type{enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -2769,32 +2769,32 @@ when it has been removed from the screen entirely.  The cases are
 distinguished by the\indent{ }\argument{type} parameter as follows:
 
 
-\indent{\constant{view_FullRedraw} --  The \class{view} should be 
+\indent{\constant{view::FullRedraw} --  The \class{view} should be 
 completely redrawn, any cursors should retracted and then reposted. The 
 parameters \argument{left}, \argument{top}, \argument{width} and 
 \argument{height} are ignored.
 
 
-\constant{view_PartialRedraw}  --  The \class{view} should be redrawn 
+\constant{view::PartialRedraw}  --  The \class{view} should be redrawn 
 within the rectangle specified by the parameters \argument{left}, 
 \argument{top}, \argument{width}, and \argument{height}.   Further partial 
 redraws will follow.  A \italic{\class{view}} receiving this call may defer 
-the update until it receives the \constant{view_LastPartialRedraw}.
+the update until it receives the \constant{view::LastPartialRedraw}.
 
 
-\constant{view_LastPartialRedraw}  --  The \class{view} should be redrawn 
+\constant{view::LastPartialRedraw}  --  The \class{view} should be redrawn 
 within the rectangle specified by the parameters \argument{left}, 
 \argument{top}, \argument{width}, and \argument{height}.  This is the last 
 partial redraw.
 
 
-\constant{view_MoveNoRedraw}  --  The redraw request is occurring because 
+\constant{view::MoveNoRedraw}  --  The redraw request is occurring because 
 the \italic{\class{view}} is being moved.  If the \class{view} has posted 
 cursors they should be rectracted and then reposted.  (So that they will be 
 moved to the new location.)
 
 
-\constant{view_Remove}  --  The redraw request is occurring because the 
+\constant{view::Remove}  --  The redraw request is occurring because the 
 \italic{\bold{view}} is being removed from the screen.   The \class{view} 
 should retract all cursors that it has posted.  (Otherwise they will remain 
 on screen.)}
@@ -2831,7 +2831,7 @@ The simplest implementation of \virtualmemberfunction{Update} is:
 
 \type{void} \class{testview}::\virtualmemberfunction{Update}() \{
 
-	\virtualmemberfunction{FullUpdate}(\constant{view_FullRedraw}, 0, 0, 0, 0);
+	\virtualmemberfunction{FullUpdate}(\constant{view::FullRedraw}, 0, 0, 0, 0);
 
 \}
 
@@ -2886,7 +2886,7 @@ ATKregistryEntry  *}\argument{type});
 *}\argument{requestor});
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -2898,7 +2898,7 @@ view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x},
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{Traverse}(\type{\keyword{enum} 
-view_Traversal} \argument{trav});
+view::Traversal} \argument{trav});
 
 (\virtualmemberfunction{Traverse} is not implemented anywhere yet.)
 
@@ -3232,7 +3232,7 @@ a user's action.  For example, a click in the view should usually trigger a
 
 
 \example{\type{\class{view} *}\class{helloworldview}::Hit 
-(\type{\keyword{enum} view_MouseAction} \argument{action}, 
+(\type{\keyword{enum} view::MouseAction} \argument{action}, 
 \keyword{\type{long}} \argument{x}, \keyword{\type{long}} \argument{y}, 
 \keyword{\type{long}} \argument{numberOfClicks}) \{
 
@@ -3242,9 +3242,9 @@ a user's action.  For example, a click in the view should usually trigger a
 
 		// ...
 
-		case view_LeftDown:
+		case view::LeftDown:
 
-		case view_RightDown:
+		case view::RightDown:
 
 		// ...
 
@@ -3814,7 +3814,7 @@ In the future this document should be extended to cover deriving new
 \type{void} 
 \class{view}::\virtualmemberfunction{DesiredSize}(\keyword{\type{long}} 
 \argument{width}, \keyword{\type{long}} \argument{height}, 
-\type{\keyword{enum} view_DSpass} \argument{pass}, \type{\keyword{long} 
+\type{\keyword{enum} view::DSpass} \argument{pass}, \type{\keyword{long} 
 *}\argument{dWidth}, \type{\keyword{long} *}\globalvariable{dheight});
 
 \type{void} 
@@ -3878,32 +3878,32 @@ and \argument{height} parameters indicate the parent's preference.
  Typically the parent doesn't care and just passes in maximum values.  The 
 \argument{pass} argument indicates which of \argument{width} and 
 \argument{height} are fixed by the parent and which are flexible.  The 
-possible values for pass are \constant{view_NOSET} (meaning both width and 
-height are flexible), \constant{view_WIDTHSET}, \constant{view_HEIGHTSET}. 
+possible values for pass are \constant{view::NOSET} (meaning both width and 
+height are flexible), \constant{view::WIDTHSET}, \constant{view::HEIGHTSET}. 
  The *\argument{desiredWidth} and *\argument{desiredHeight} arguments must 
 be filled in with the child's desired size.  The return value is the 
 bit-wise 'or' of the following values:
 
 \indent{
-\constant{view_FIXED				}The size is fixed, that is, not flexible.
+\constant{view::FIXED				}The size is fixed, that is, not flexible.
 
 
-\constant{view_WIDTHSMALLER		}The width could be made smaller.
+\constant{view::WIDTHSMALLER		}The width could be made smaller.
 
 
-\constant{view_WIDTHLARGER		}The width could be made larger.
+\constant{view::WIDTHLARGER		}The width could be made larger.
 
 
-\constant{view_WIDTHFLEXIBLE}		The width is flexible.
+\constant{view::WIDTHFLEXIBLE}		The width is flexible.
 
 
-\constant{view_HEIGHTSMALLER	}The height could be made smaller.
+\constant{view::HEIGHTSMALLER	}The height could be made smaller.
 
 
-\constant{view_HEIGHTLARGER		}The height could be made larger.
+\constant{view::HEIGHTLARGER		}The height could be made larger.
 
 
-\constant{view_HEIGHTFLEXIBLE	}The height is flexible.
+\constant{view::HEIGHTFLEXIBLE	}The height is flexible.
 
 }
 \virtualmemberfunction{WantNewSize} is called by a child view when it needs 
@@ -3932,7 +3932,7 @@ such as FullUpdates, or WantExposures, or recursive searches.
 
 \type{void} \class{view}::\virtualmemberfunction{FullUpdate}(
 
-	\type{enum view_UpdateType} \argument{type},
+	\type{enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -3952,7 +3952,7 @@ testview:
 
 \example{void testview::FullUpdate(\type{
 
-	enum view_UpdateType} \argument{type},
+	enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -3964,8 +3964,8 @@ testview:
 
 // ...
 
-if(child->GetIM()!=GetIM() && (type==view_FullRedraw || 
-type==view_PartialRedraw || type=view_LastPartialRedraw)) \{
+if(child->GetIM()!=GetIM() && (type==view::FullRedraw || 
+type==view::PartialRedraw || type=view::LastPartialRedraw)) \{
 
 	// Link it into the view tree.  This may also
 
@@ -4002,32 +4002,32 @@ On the basis of the type parameter the remaining responsibilities are:
 // all of the following fragments are typically under a switch(type)
 
 }
-\indent{\constant{view_FullRedraw} --  The FullUpdate method of any visible 
-children should be called with a view_UpdateType of view_FullRedraw or 
-view_LastPartialRedraw.  E.g.:
+\indent{\constant{view::FullRedraw} --  The FullUpdate method of any visible 
+children should be called with a view::UpdateType of view::FullRedraw or 
+view::LastPartialRedraw.  E.g.:
 
 
-\example{case view_FullRedraw:}
+\example{case view::FullRedraw:}
 
-\example{child->FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+\example{child->FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 
 
 // or
 
 
-child->FullUpdate(view_LastPartialRedraw, 0, 0, child->GetVisualWidth(), 
+child->FullUpdate(view::LastPartialRedraw, 0, 0, child->GetVisualWidth(), 
 child->GetVisualHeight());
 
 }
-\constant{view_PartialRedraw}  --  If the given area intersects the area of 
+\constant{view::PartialRedraw}  --  If the given area intersects the area of 
 a child the partial redraw should be passed to the child.  E.g.:
 
 	\
 
 
-\example{case view_PartialRedraw:
+\example{case view::PartialRedraw:
 
-case view_LastPartialRedraw:}
+case view::LastPartialRedraw:}
 
 \example{struct rectangle childvisualbounds;
 
@@ -4058,26 +4058,26 @@ Alternatively the redraw may be postponed until the last partial redraw
 arrives.
 
 
-\constant{view_LastPartialRedraw}  --  If view_PartialRedraws are passed to 
-the child then this should behave just like a view_PartialRedraw. 
+\constant{view::LastPartialRedraw}  --  If view::PartialRedraws are passed to 
+the child then this should behave just like a view::PartialRedraw. 
  Otherwise this should either call FullUpdate on the child with a type of 
-view_FullRedraw.  Alternately it may make one or more FullUpdate calls on 
-the child with types of view_PartialRedraw or view_LastPartialRedraw such 
-that all the areas which have been given view_PartialRedraw or 
-view_LastPartialRedraw calls are covered in the update calls passed to the 
+view::FullRedraw.  Alternately it may make one or more FullUpdate calls on 
+the child with types of view::PartialRedraw or view::LastPartialRedraw such 
+that all the areas which have been given view::PartialRedraw or 
+view::LastPartialRedraw calls are covered in the update calls passed to the 
 child.
 
 
-\constant{view_MoveNoRedraw}  --  This should be passed on to any children. 
+\constant{view::MoveNoRedraw}  --  This should be passed on to any children. 
  The left, top, width, and height may be ignored.
 
 
-\constant{view_Remove}  --  This also should be passed on to any children. 
+\constant{view::Remove}  --  This also should be passed on to any children. 
  The left, top, width, and height may be ignored.}
 
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -4349,7 +4349,7 @@ ar} *}\argument{printtype});
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{DesiredPrintSize}(\keyword{\type{long}} 
 \argument{width}, \keyword{\type{long}} \argument{height}, 
-\type{\keyword{enum} view_DSpass} \argument{pass}, \type{\keyword{long} 
+\type{\keyword{enum} view::DSpass} \argument{pass}, \type{\keyword{long} 
 *}\argument{desiredwidth}, \type{\keyword{long} *}\argument{desiredheight});
 
 \keyword{\type{void}} 
@@ -4358,7 +4358,7 @@ ar} *}\argument{printtype});
 \keyword{\type{long}} \argument{logheight}, \type{\keyword{struct} 
 rectangle *}\argument{visrect});
 
-\type{\keyword{struct} view_printoptlist 
+\type{\keyword{struct} view::printoptlist 
 *}\class{view}::\virtualmemberfunction{PrintOptions}();
 
 \keyword{\type{long}} 
@@ -4367,14 +4367,14 @@ rectangle *}\argument{visrect});
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{SetPrintOption}(\type{\keyword{struct} 
-view_printopt *}\argument{vopt}, \keyword{\type{long}} \argument{value});
+view::printopt *}\argument{vopt}, \keyword{\type{long}} \argument{value});
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{Print}(\type{FILE *}\argument{file}, 
 \type{\keyword{char} *}\argument{processor}, \type{\keyword{char} 
 *}\argument{finalFormat}, \type{boolean} \argument{topLevel});
 
-\type{\class{view} *}Hit (\type{\keyword{enum} view_MouseAction} 
+\type{\class{view} *}Hit (\type{\keyword{enum} view::MouseAction} 
 \argument{action}, \keyword{\type{long}} \argument{x}, \keyword{\type{long}} 
 \argument{y}, \keyword{\type{long}} \argument{numberOfClicks});\section{
 

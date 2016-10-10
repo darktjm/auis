@@ -219,7 +219,7 @@ htmlview_SetLink(class htmlview * self, long  key)
 }
 
 class view*
-htmlview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+htmlview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class html* html = (class html*) this->view::dataobject;
     long pos;
@@ -230,7 +230,7 @@ htmlview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfCli
     /* Will only determine anchor details if there was a mouse click */
 
     if (retv == (class view*) this && 
-	(action==view_LeftDown || action==view_RightDown)) {
+	(action==view::LeftDown || action==view::RightDown)) {
 	pos = (this)->GetDotPosition();
 	if ((s = (html)->GetAnchorDest( pos))) {
 	    message::DisplayString(this, 0, s);

@@ -113,7 +113,7 @@ main(int argc, char **argv) {
 	(dview)->SetDataObject( dobj );
 
 	/* generate postscript for the image */
-	struct view_printopt po;
+	struct view::printopt po;
 	po.label = NULL;
 	po.name = atom::Intern("psfile");
 	po.type = atom::Intern("file");

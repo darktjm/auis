@@ -31,13 +31,13 @@ class ltv : public  view {
 public:
   virtual ATKregistryEntry *ATKregistry();
 
-   view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dwidth, long *dheight )
+   view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dwidth, long *dheight )
 	 ;
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void LinkTree ( class view *parent );
    void Update();
    void ObservedChanged( class observable *changed, long value );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n );
+   class view * Hit( enum view::MouseAction action, long x, long y, long n );
    void SetDataObject( class dataobject *data );
    void ReceiveInputFocus();
    void LoseInputFocus();

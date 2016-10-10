@@ -54,16 +54,16 @@ possible to create a fairly complex panel of views.
 \fixedtext{struct lpair *\bold{lpair_}Create }\fixedindent{(struct view 
 *\paramname{l1}, struct view *\paramname{l2}, long \paramname{x});} 
 
-\fixedtext{enum view_DSattributes \bold{lpair_}DesiredSize 
+\fixedtext{enum view::DSattributes \bold{lpair_}DesiredSize 
 }\fixedindent{(struct lpair *\paramname{lpair}, long \paramname{width}, long 
-\paramname{height}, enum view_DSpass \paramname{pass}, long 
+\paramname{height}, enum view::DSpass \paramname{pass}, long 
 *\paramname{dWidth}, long *\paramname{dheight});} 
 
 \fixedtext{void \bold{lpair_}FinalizeObject }\fixedindent{(struct lpair 
 *\paramname{self});} 
 
 \fixedtext{void \bold{lpair_}FullUpdate }\fixedindent{(struct lpair 
-*\paramname{lpair}, enum view_UpdateType \paramname{type}, long 
+*\paramname{lpair}, enum view::UpdateType \paramname{type}, long 
 \paramname{left}, long \paramname{top}, long \paramname{width}, long 
 \paramname{right});} 
 
@@ -82,7 +82,7 @@ possible to create a fairly complex panel of views.
 int \paramname{bsize}, int \paramname{moveable});} 
 
 \fixedtext{struct view *\bold{lpair_}Hit }\fixedindent{(struct lpair 
-*\paramname{lpair}, enum view_MouseAction \paramname{action}, long 
+*\paramname{lpair}, enum view::MouseAction \paramname{action}, long 
 \paramname{x}, long \paramname{y}, long \paramname{numberOfClicks});} 
 
 \fixedtext{struct lpair *\bold{lpair_}HSplit }\fixedindent{(struct lpair 

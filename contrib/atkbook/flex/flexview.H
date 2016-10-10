@@ -32,15 +32,15 @@ public:
       
 	virtual ~flexview();
     
-       void FullUpdate(enum view_UpdateType type, long left, long top,
+       void FullUpdate(enum view::UpdateType type, long left, long top,
 		  long width, long right);
        void Update();
-       class view * Hit (enum view_MouseAction action, long x, long y,
+       class view * Hit (enum view::MouseAction action, long x, long y,
 	    long numberOfClicks)  ;
        void PostKeyState(class keystate *keystate);
        void PostMenus(class menulist *ml);
-       view_DSattributes DesiredSize(long width, long height,
-		   enum view_DSpass pass,
+       view::DSattributes DesiredSize(long width, long height,
+		   enum view::DSpass pass,
 		   long *dWidth, long *dheight)
 	 ;
     

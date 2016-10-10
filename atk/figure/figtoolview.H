@@ -15,7 +15,7 @@ struct figtoolview_tool_t {
     long rock; /* rock passed to Instantiate() */
 };
 
-typedef class view *(*figtoolview_layout_f)(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+typedef class view *(*figtoolview_layout_f)(class figtoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 typedef void (*figtoolview_mod_f)(class figtoolview  *self, long  rock);
 typedef void (*figtoolview_comm_f)(class figtoolview  *self, const char  *rock);
 

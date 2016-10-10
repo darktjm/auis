@@ -162,7 +162,7 @@ static void extendCurrentCell(class spread  * V, Chunk  chunk)
 
 /* Handle mouse hit */
 
-class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
+class view * MouseHit (class spread  * V, enum view::MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
 {
     struct chunk chunk;
     struct cell * hitcell;
@@ -226,7 +226,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
  
     switch (action) {
 
-    case view_LeftDown:
+    case view::LeftDown:
 	switch (V->movemode) {
 	case 1:
 	    movecolcancel (V);
@@ -249,7 +249,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightDown:
+    case view::RightDown:
 	switch (V->movemode) {
 	case 1:
 	    movecolcancel (V);
@@ -280,7 +280,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	    
 	break;
 
-    case view_LeftUp:
+    case view::LeftUp:
 	switch (V->movemode) {
 	case 0:
 	    extendCurrentCell(V, &chunk);
@@ -294,7 +294,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightUp:
+    case view::RightUp:
 	switch (V->movemode) {
 	case 1:
 	    movecolup (V, x, y);
@@ -305,7 +305,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_LeftMovement:
+    case view::LeftMovement:
 	switch (V->movemode) {
 	case 0:
 	    extendCurrentCell(V, &chunk);
@@ -319,7 +319,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightMovement:
+    case view::RightMovement:
 	switch (V->movemode) {
 	case 0:
 	    if (V->bufferstatus != BUFFERHASINPUT)

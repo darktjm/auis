@@ -23,7 +23,7 @@ helloworldview::helloworldview()
 }
 
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     struct rectangle myVisualRect; 
 
@@ -56,13 +56,13 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
                     {
-    if (action == view_LeftDown)  {  
+    if (action == view::LeftDown)  {  
         this->HaveDownTransition = TRUE;
     }
     else if (this ->HaveDownTransition) {
-	if (action == view_LeftUp)  {
+	if (action == view::LeftUp)  {
 	    this->newX = x;
 	    this->newY = y;
 	    this->HaveDownTransition = FALSE;

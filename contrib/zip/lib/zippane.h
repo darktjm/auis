@@ -143,7 +143,7 @@ struct zip_pane
   long						  zip_pane_display_processor_anchor;
   long						(*zip_pane_hit_processor)( long anchor,
 									  zip_type_pane pane,
-									  enum view_MouseAction action,
+									  enum view::MouseAction action,
 									  long x, long y, long clicks ),
 						(*zip_pane_display_preprocessor)( long anchor,
 										 zip_type_pane pane,

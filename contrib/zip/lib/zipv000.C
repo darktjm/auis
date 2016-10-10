@@ -190,7 +190,7 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
   class zipview *self=this;
 
   if (( lwidth = (this->data_object)->Contextual_Figure_Line_Width(  figure )) > 0  ||
-       self->mouse_action == view_LeftMovement  )
+       self->mouse_action == view::LeftMovement  )
     {
     status = zip_ok;
     (self)->SetLineWidth(  lwidth );

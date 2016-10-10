@@ -50,7 +50,7 @@ struct zipedit_states
 
 #include <ATK.H>
 
-typedef enum view_MouseAction (*zip_keyboardfptr)(long anchor, zip_type_pane pane, char c, enum view_MouseAction action, long x, long y, long clicks);
+typedef enum view::MouseAction (*zip_keyboardfptr)(long anchor, zip_type_pane pane, char c, enum view::MouseAction action, long x, long y, long clicks);
 typedef long (*zip_pendingfptr)(class ziposymbol *self, zip_type_pane pane);
 
 class zipedit : public ATK 
@@ -67,7 +67,7 @@ public:
 
   virtual void Set_Debug( boolean state );
   virtual void Update();
-  virtual int Accept_Hit( zip_type_pane pane, enum view_MouseAction action, long x, long y, long n );
+  virtual int Accept_Hit( zip_type_pane pane, enum view::MouseAction action, long x, long y, long n );
 
   virtual long Set_Data_Object( class zip *data_object );
   virtual long Set_View_Object( class zipview *view_object );

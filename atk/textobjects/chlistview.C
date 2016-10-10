@@ -57,7 +57,7 @@ chlistview::~chlistview()
     }
 }
 
-class view *chlistview::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
+class view *chlistview::Hit(enum view::MouseAction  action, long  x , long  y , long  nclicks)
 {
     long pos;
     long index, region;
@@ -86,7 +86,7 @@ void chlistview::ActivateItem(int  pos)
     if (index >= 0) {
 	(this)->HighlightItem( index);
 	if (l->ItemList[index].proc) {
-	    (l->ItemList[index].proc)(l->ItemList[index].rock, l, view_LeftDown, 1, index, region);
+	    (l->ItemList[index].proc)(l->ItemList[index].rock, l, view::LeftDown, 1, index, region);
 	}
     }
    (this)->WantInputFocus( this);

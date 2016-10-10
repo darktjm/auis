@@ -14,7 +14,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 
     

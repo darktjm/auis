@@ -91,7 +91,7 @@ cursors.
 Only one window cursor and one process cursor is allowed per window.  Views 
 that use either of these kinds of cursors should make sure to retract them 
 when their input focus is lost.  Parent views should call 
-\italic{view_RetractViewCursors} on their children before calling their 
+\italic{view::RetractViewCursors} on their children before calling their 
 child's \italic{FullUpdate} routine, but view cursors are automatically 
 retracted (but not destroyed) during a \italic{FullUpdate}.  It is up to the 
 view's FullUpdate method to repost view cursors if necessary.  If a cursor is 
@@ -107,10 +107,10 @@ to the interaction manager which keeps a list of the cursors.
 Process cursors are set by the interaction manager with a call to 
 \italic{im_SetProcessCursor}, window cursors are posted by a call to 
 \italic{im_SetWindowCursor}, and view cursors are posted with a call to 
-\italic{view_PostCursor}.  Cursor posts are time dependent, and the last post 
+\italic{view::PostCursor}.  Cursor posts are time dependent, and the last post 
 made will always have precedence over previous posts.  However, reposting an 
 already posted cursor will not affect its precedence. To give a reposted 
-cursor priority over other cursors, you  first call \italic{view_RetractCursor} 
+cursor priority over other cursors, you  first call \italic{view::RetractCursor} 
  to take the cursor out completely, then repost it.  
 
 
@@ -147,7 +147,7 @@ cursor; \smaller{NULL} on failure.
 
 \bold{Usage.}  You would call this procedure to create the cursor, and use the 
 methods below to set its shape, then use one of \italic{im_SetProcessCursor}, 
-\italic{im_SetWindowCursor}, or \italic{view_PostCursor} to post it. 
+\italic{im_SetWindowCursor}, or \italic{view::PostCursor} to post it. 
 
 }
 \begindata{bp,538928456}
@@ -310,13 +310,13 @@ The following routines are used to post cursors. See the documentation on
 Views and Im for details and examples. 
 
 
-\example{void \bold{view_PostCursor}(view, rect, cursor)
+\example{void \bold{view::PostCursor}(view, rect, cursor)
 
 }
-\example{void \bold{view_RetractCursor}(view, cursor)
+\example{void \bold{view::RetractCursor}(view, cursor)
 
 }
-\example{void \bold{view_RetractViewCursors}(view, requestor)
+\example{void \bold{view::RetractViewCursors}(view, requestor)
 
 }
 \example{im_\bold{SetWindowCursor} (im, cursor)

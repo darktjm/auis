@@ -77,7 +77,7 @@ zipoplin::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-zipoplin::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipoplin::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   long				  status = zip_ok;
   static long				  initial_x, initial_y,
@@ -86,17 +86,17 @@ zipoplin::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 					  prior_x, prior_y;
 
   IN(zipoplin::Build_Object);
-  if ( action == (long)view_LeftDown  &&
+  if ( action == (long)view::LeftDown  &&
        (abs(x - prior_x) < this->tolerance  &&  abs(y - prior_y) < this->tolerance) )
     {
-    action = view_NoMouseEvent;
+    action = view::NoMouseEvent;
     CurrentFigure = NULL;
     prior_x = prior_y = prior_X = prior_Y = initial_x = initial_y = initial_X = initial_Y = 0;
     pane->zip_pane_edit->zip_pane_edit_build_figure = true;
     }
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       prior_x = x;  prior_y = y;
       (this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
       if ( pane->zip_pane_edit->zip_pane_edit_build_figure )
@@ -134,14 +134,14 @@ zipoplin::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	  }
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( CurrentFigure )
 	{
         prior_x = x;  prior_y = y;
         (this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	}
       break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure  &&  !pane->zip_pane_edit->zip_pane_edit_build_figure  )
 	{
         (this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );

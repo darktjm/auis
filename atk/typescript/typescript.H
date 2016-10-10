@@ -26,13 +26,13 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void Update();
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void ReceiveInputFocus();
      void ObservedChanged (class observable *changed, long value);
      void PostMenus(class menulist *menulistp);
-     void GetClickPosition(long position, long numberOfClicks, enum view_MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
+     void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
      void SetDataObject(class dataobject *dataObject);
 
 

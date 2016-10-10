@@ -399,7 +399,7 @@ void psview::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
     fprintf(file, "end\n\n");
 }
 
-void psview::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void psview::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     class ps *psobj;
 

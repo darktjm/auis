@@ -58,7 +58,7 @@ static union stackelement * unstackObject(union stackelement  *NSP, unsigned cha
 		class valueview  **pObj, struct ATKregistryEntry   *type);
 void neventInfo(unsigned char op, unsigned char *iar, class ness  *ness);
 void InterpretEvent(class view  *obj, struct eventnode  *enode);
-static class view * MouseProcStub(class view  *obj, enum view_MouseAction  action, 
+static class view * MouseProcStub(class view  *obj, enum view::MouseAction  action, 
 		long  x , long  y , long  nclicks, struct eventnode  *enode);
 static void MenuProcStub(class view  *obj, char  *enodeptr);
 static void KeyProcStub(class view  *obj, char  *enodeptr);
@@ -336,22 +336,22 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 
 	switch (op) {
 	case 'a':
-		v = (long)view_LeftDown;
+		v = (long)view::LeftDown;
 		goto stackLong;
 	case 'b':
-		v = (long)view_LeftUp;
+		v = (long)view::LeftUp;
 		goto stackLong;
 	case 'c':
-		v = (long)view_LeftMovement;
+		v = (long)view::LeftMovement;
 		goto stackLong;
 	case 'd':
-		v = (long)view_RightDown;
+		v = (long)view::RightDown;
 		goto stackLong;
 	case 'e':
-		v = (long)view_RightUp;
+		v = (long)view::RightUp;
 		goto stackLong;
 	case 'f':
-		v = (long)view_RightMovement;
+		v = (long)view::RightMovement;
 		goto stackLong;
 	case 'k':
 		if (LastKeys == NULL)
@@ -470,7 +470,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 	case 'H':  {	/* DoHit(inset, action, x, y) */
 		/* XXX ought to guarantee an up for every transmitted down */
 		long x, y;
-		enum view_MouseAction act;
+		enum view::MouseAction act;
 		class view *inset;
 		static class view *hitee = NULL, *hiteesource = NULL;
 		NSP = unstackLong(NSP, iar, &y);
@@ -491,7 +491,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 				inset = ((class celview *)inset)->GetTrueChild();
 		}
 
-		if (hiteesource != inset  ||  act == (long)view_LeftDown  ||  act == (long)view_RightDown) {
+		if (hiteesource != inset  ||  act == (long)view::LeftDown  ||  act == (long)view::RightDown) {
 			hiteesource = inset;
 			hitee = (inset)->Hit( act, x, y, SavedClickCount);  /* XXX do we need a click count? */
 		}
@@ -651,12 +651,12 @@ InterpretEvent(class view  *obj, struct eventnode  *enode) {
 	This procedure is called by a mouse event.
 	From the xattr it gets everything it needs to initiate the proper Ness stmtList.
 	 	these are the possible mouse actions:
-			view_NoMouseEvent,
-			view_LeftDown, view_LeftUp, view_LeftMovement,
-			view_RightDown, view_RightUp, view_RightMovement
+			view::NoMouseEvent,
+			view::LeftDown, view::LeftUp, view::LeftMovement,
+			view::RightDown, view::RightUp, view::RightMovement
 */
 	static class view *
-MouseProcStub(class view  *obj	/* the celview */, enum view_MouseAction  action, 
+MouseProcStub(class view  *obj	/* the celview */, enum view::MouseAction  action, 
 		long  x , long  y , long  nclicks, struct eventnode  *enode) {
 	/* XXX we need to scan xattr looking for other mouse event handlers */
 	MouseX = x;

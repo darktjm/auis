@@ -423,12 +423,12 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -622,7 +622,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -766,7 +766,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -783,13 +783,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -801,7 +801,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -811,7 +811,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -830,7 +830,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->hitX=x;
 
@@ -838,7 +838,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 
@@ -1354,11 +1354,11 @@ struct dataobject *dobj;
 	return FALSE;
 
 
-    applayer=view_GetApplicationLayer(v);
+    applayer=view::GetApplicationLayer(v);
 
     if(applayer==NULL) \{
 
-	view_Destroy(v);
+	view::Destroy(v);
 
 	return FALSE;
 
@@ -1369,7 +1369,7 @@ struct dataobject *dobj;
 
     if(frame==NULL) \{
 
-	view_DeleteApplicationLayer(v,applayer);
+	view::DeleteApplicationLayer(v,applayer);
 
 	return FALSE;
 
@@ -1387,14 +1387,14 @@ struct dataobject *dobj;
     \}
 
 
-    view_SetDataObject(v,dobj);
+    view::SetDataObject(v,dobj);
 
     frame_SetView(frame,applayer);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v,v);
+    view::WantInputFocus(v,v);
 
 
     return TRUE;

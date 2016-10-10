@@ -189,7 +189,7 @@ scrolling.  In this example, the \italic{im} view is the parent of the
 If you are creating a subclass of view that will be scrollable, you must 
 override view's \italic{GetInterface} \indexi{ \italic{GetInterface}}
 
-\indexi{ \italic{view_GetInterface}}
+\indexi{ \italic{view::GetInterface}}
 
 \indexi{Methods++\italic{GetInterface}}
 
@@ -212,13 +212,13 @@ class helloworldview [hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 
 returns struct view *;
 
@@ -565,14 +565,14 @@ struct view *v;
 
 int zone;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 }
 
 The endzone routine gets called when the user clicks in the scrollbar endzone; 
 \italic{zone} is either \smaller{scroll_TOPENDZONE} or 
 \smaller{scroll_BOTTOMENDZONE}, for the top or bottom zone, and \italic{action} 
-is how the user clicked (enum view_MouseAction, see View, Vol. 2).  If the 
+is how the user clicked (enum view::MouseAction, see View, Vol. 2).  If the 
 pointer to this procedure in the \italic{scrollfns} structure is 
 \smaller{NULL}, this procedure defaults to scrolling the view to the 
 beginning/end.  This is the case in the \italic{helloworldview} example, 
@@ -710,7 +710,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -877,7 +877,7 @@ graphic::BETWEENTOPANDBASELINE| graphic::BETWEENLEFTANDRIGHT);
 
 \indexi{ \italic{GetInterface}}
 
-\indexi{ \italic{view_GetInterface}}
+\indexi{ \italic{view::GetInterface}}
 
 
 The GetInterface method is what the scrollbar calls to get the pointers to the 
@@ -1071,12 +1071,12 @@ class helloworldview[hellov] : view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -1207,7 +1207,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -1350,7 +1350,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -1364,13 +1364,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hwv->newX=x-hwv->distX;
 
@@ -1378,7 +1378,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -1388,7 +1388,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -1407,7 +1407,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->distX=x-hwv->x;
 
@@ -1415,7 +1415,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 

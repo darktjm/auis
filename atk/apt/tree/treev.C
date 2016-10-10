@@ -296,7 +296,7 @@ struct  node_shadow
 				      exploded	:1;
   };
 
-#define  Balanced		    (view_BETWEENTOPANDBOTTOM | view_BETWEENLEFTANDRIGHT)
+#define  Balanced		    (graphic::BETWEENTOPANDBOTTOM | graphic::BETWEENLEFTANDRIGHT)
 #define  Halo			    true
 #define  NoHalo			    false
 
@@ -819,13 +819,13 @@ void Check_Dimensions( class treev	      *self, tree_type_node      node )
   OUT(Check_Dimensions);
   }
 
-view_DSattributes
+view::DSattributes
 treev::DesiredSize( long			    given_width , long			    given_height,
-		      enum view_DSpass	    pass, long			   *desired_width , long			   *desired_height )
+		      enum view::DSpass	    pass, long			   *desired_width , long			   *desired_height )
 {
     class treev *self=this;
-  view_DSattributes  result = view_WidthFlexible |
-					       view_HeightFlexible;
+  view::DSattributes  result = view::WidthFlexible |
+					       view::HeightFlexible;
 
   IN(treev_DesiredSize);
   if ( ScrolledView )
@@ -845,11 +845,11 @@ treev::DesiredSize( long			    given_width , long			    given_height,
   }
 
 void 
-treev::FullUpdate( enum view_UpdateType    type, long			   left , long			   top , long			   width , long			   height )
+treev::FullUpdate( enum view::UpdateType    type, long			   left , long			   top , long			   width , long			   height )
 {
     class treev *self=this;
   IN(treev_FullUpdate);
-  if ( Tree  &&  (type == view_FullRedraw || type == view_LastPartialRedraw) )
+  if ( Tree  &&  (type == view::FullRedraw || type == view::LastPartialRedraw) )
     {
     if ( ScrollView )
       { DEBUG(Use Scrolled View);
@@ -966,7 +966,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	if ( parent ) {
 	    if(inExplosion) {
 		ShadowExposed(NodeShadow(node)) = true;
-		(this)->FullUpdate(view_FullRedraw,0,0,Width,Height);
+		(this)->FullUpdate(view::FullRedraw,0,0,Width,Height);
 	    }
 	    else {
 		Check_Dimensions( this, node );
@@ -999,7 +999,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 		  Erase_Node_Children(this,NodeShadowNode(parent));
 	  }
 	  if(inExplosion)
-	      (this)->FullUpdate(view_FullRedraw,0,0,Width,Height);
+	      (this)->FullUpdate(view::FullRedraw,0,0,Width,Height);
 	  else {
 	      Redisplay_Node_Children(this,parent ? NodeShadowNode(parent) : NULL);
 	  }
@@ -1106,7 +1106,7 @@ Which_Node_Hit( class treev	       *self, long		        x , long		        y )
   }
 
 class view *
-treev::Hit( enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
+treev::Hit( enum view::MouseAction    action, long			    x , long			    y , long			    clicks )
 {
     class treev *self=this;
   struct tree_node	  *node = NULL;

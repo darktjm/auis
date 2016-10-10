@@ -190,7 +190,7 @@ static struct suite_item * NPixelsPrior(class suiteev  *self, struct suite_item 
 static void DrawGutterLines(class suiteev  *self);
 static long ResetItemBreaks(class suite  *self, class suite  *suite, struct suite_item  *item, long  datum);
 static void getinfo(class suiteev  *self, struct range  *total , struct range  *seen , struct range  *dot);
-static void endzone(class suiteev  *self, int  zone, enum view_MouseAction  action);
+static void endzone(class suiteev  *self, int  zone, enum view::MouseAction  action);
 static long ywhatis(class suiteev  *self, long  num , long  denom);
 static long xwhatis(class suiteev  *self, long  num , long  denom);
 static void ysetframe(class suiteev  *self, long  posn , long  coord , long  outof);
@@ -203,11 +203,11 @@ static char * WalkBackwardBlackSpace( class suiteev	 *self, struct suite_item	 *
 static void PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight );
 static void DetermineVisibleListItems( class suiteev  *self, long  height );
 static void EraseItems( class suiteev  *self );
-static void suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks );
+static void suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y, long  numberOfClicks );
 static void suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last );
-static void suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
-static void suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
-static void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_UpdateType  type, long  left , long  top , long  width , long  height );
+static void suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y , long  numberOfClicks );
+static void suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y , long  numberOfClicks );
+static void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view::UpdateType  type, long  left , long  top , long  width , long  height );
 static void ItemPlaceCaption( class suiteev  *self, struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place );
 static void ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth , long  titleheight, int  newlineHeight);
 static void ReadWriteHandler( long  anchor, class suite  *suite, struct suite_item  *item );
@@ -531,13 +531,13 @@ ResetItemBreaks(class suite  *self, class suite  *suite, struct suite_item  *ite
 }
 
 void
-suiteev::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+suiteev::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     class suiteev *self=this;
   struct rectangle r;
   
     IN(suiteev_FullUpdate);
-    if((type == view_FullRedraw) || (type == view_LastPartialRedraw)) {
+    if((type == view::FullRedraw) || (type == view::LastPartialRedraw)) {
 	(this)->GetVisualBounds( &r);
 	if(List) 
 	    (Suite)->Apply((suite_applyfptr)ResetItemBreaks, (long)Suite, 0);
@@ -578,16 +578,16 @@ getinfo(class suiteev  *self, struct range  *total , struct range  *seen , struc
 }
 
 static void
-endzone(class suiteev  *self, int  zone, enum view_MouseAction  action)
+endzone(class suiteev  *self, int  zone, enum view::MouseAction  action)
       {
   int numVisible = 0, EndOffset = 0;
   struct suite_item *LastItem = NULL;
 
     IN(endzone);
     if(Items && ITEM(0)) {
-	if(action != view_LeftDown && action != view_RightDown)
+	if(action != view::LeftDown && action != view::RightDown)
 	    return;
-	if(action == view_LeftDown) {
+	if(action == view::LeftDown) {
 	    if(zone == scroll_BOTTOMENDZONE) {
 		numVisible = (self)->NumberExposed();
 		if((LastItem = ITEM((Items)->Count() - 1)) != LastVisible) {
@@ -618,7 +618,7 @@ endzone(class suiteev  *self, int  zone, enum view_MouseAction  action)
 		if(Items && ITEM(0))
 		    NewFirstVisible = ITEM(0);
 	}
-	else if(action == view_RightDown) {
+	else if(action == view::RightDown) {
 	    if((numVisible = (self)->NumberExposed()) > 1) {
 		if(zone == scroll_BOTTOMENDZONE)
 		    NewFirstVisible = NthAfter(self, FirstVisible, 1);
@@ -1161,7 +1161,7 @@ suiteev::DrawItems( struct rectangle  *rect )
     i = (Items)->Subscript((long) FirstVisible);
     while((item = ITEM(i++)))
 	if(Exposed(item)) {
-	    ItemFullUpdate(this, item, view_FullRedraw, 0, 0, 0, 0);
+	    ItemFullUpdate(this, item, view::FullRedraw, 0, 0, 0, 0);
 	    if(item == LastVisible) 
 		break;
 	}
@@ -1284,11 +1284,11 @@ SetViewColors(				\
   item_BackgroundColor )
 
 static void
-suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks )
+suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y, long  numberOfClicks )
           {
     IN(suiteev_HandleExclusiveHit);
     switch(action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    if(Highlighted(item))
 		break;
 	    else {
@@ -1296,16 +1296,16 @@ suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 		(self)->ItemHighlight( item);
 	    }
 	    break;
-	case view_LeftUp:
-	case view_LeftMovement:
+	case view::LeftUp:
+	case view::LeftMovement:
 	    if(LastHit != item) {
 		(Suite)->Reset( suite_Normalize);
 		(self)->ItemHighlight( item);
 	    }
 	    break;
 	default:
-	case view_RightUp:  break;
-	case view_RightMovement:
+	case view::RightUp:  break;
+	case view::RightMovement:
 	    if(LastHit != item) {
 		if(Highlighted(item)) {
 		    (self)->ItemNormalize( item);
@@ -1316,7 +1316,7 @@ suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 		}
 	    }
 	    break;
-	case view_RightDown:
+	case view::RightDown:
 	    if(Highlighted(item)) {
 		(self)->ItemNormalize( item);
 	    }
@@ -1375,15 +1375,15 @@ suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, s
 }
 
 static void
-suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
+suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleInclusiveHit);
     switch(action) {
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if(LastHit != item)
 		suiteev_HighlightFirstToLast(self, FirstHit, item);
 	    break;
-	case view_LeftDown:
+	case view::LeftDown:
 	    if(FirstHit != LastHit || FirstHit != item)
 		(Suite)->Reset( suite_Normalize);
 	    if(Normalized(item)) {
@@ -1391,15 +1391,15 @@ suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 	    }
 	    FirstHit = item;
 	    break;
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 	default:
 	    break;
-	case view_RightMovement:
+	case view::RightMovement:
 	    if(LastHit != item) 
 		(self)->ItemToggle( item);
 	    break;
-	case view_RightDown:
+	case view::RightDown:
 	    FirstHit = item;
 	    (self)->ItemToggle( item);
 	    break;
@@ -1409,16 +1409,16 @@ suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 }
 
 static void
-suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
+suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view::MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleToggleHit);
-    if((action == view_LeftDown) || (action == view_RightDown))
+    if((action == view::LeftDown) || (action == view::RightDown))
 	(self)->ItemToggle( item);
     OUT(suiteev_HandleToggleHit);
 }
 
 class view *
-suiteev::Hit( enum view_MouseAction  action, long  x , long  y , long  numClicks )
+suiteev::Hit( enum view::MouseAction  action, long  x , long  y , long  numClicks )
 {
     class suiteev *self=this;
     struct suite_item *item = NULL;
@@ -1443,7 +1443,7 @@ suiteev::Hit( enum view_MouseAction  action, long  x , long  y , long  numClicks
 	    }
 	    if(HitHandler && !item->hithandler)
 		HitHandler(ClientAnchor, Suite, item, suite_ItemObject, action, x, y, numClicks);
-	    if(action != view_LeftUp && action != view_RightUp) {
+	    if(action != view::LeftUp && action != view::RightUp) {
 		if(CVIF && (CVIF != item->viewobject))
 		    CVIF = NULL;
 		if(item->viewobject)
@@ -1459,7 +1459,7 @@ suiteev::Hit( enum view_MouseAction  action, long  x , long  y , long  numClicks
 }
 
 static
-void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_UpdateType  type, long  left , long  top , long  width , long  height )
+void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view::UpdateType  type, long  left , long  top , long  width , long  height )
         {
   struct rectangle *r = NULL;
 
@@ -1545,13 +1545,13 @@ suiteev::ItemUpdate( struct suite_item  *item )
   else {
       (this)->ItemClear(item);
       SetItemColor(this, item);
-      ItemFullUpdate(this,item,view_FullRedraw,0,0,0,0);
+      ItemFullUpdate(this,item,view::FullRedraw,0,0,0,0);
   }
   OUT(suiteev_ItemUpdate);
 }
 
 class view *
-suiteev::ItemHit( struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numClicks )
+suiteev::ItemHit( struct suite_item  *item, enum view::MouseAction  action, long  x , long  y , long  numClicks )
 {
     class suiteev *self=this;
   class view *retval = (class view*)this;
@@ -1670,7 +1670,7 @@ suiteev::ItemNormalize( struct suite_item  *item )
   if(item->title) 
       (this)->ItemDrawTitle( item);
   if(item->viewobject) 
-    (item->viewobject)->FullUpdate( view_FullRedraw, 0, 0, Width, Height);
+    (item->viewobject)->FullUpdate( view::FullRedraw, 0, 0, Width, Height);
   else if(item_Caption)
       (this)->ItemDrawCaption( item);
   OUT(suiteev_ItemNormalize);
@@ -1941,7 +1941,7 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
   }
 #if 0
     else if(item->titleviewobject)
-	(item->titleviewobject)->FullUpdate(view_FullRedraw,0,0,
+	(item->titleviewobject)->FullUpdate(view::FullRedraw,0,0,
 			  TitleRect.width,TitleRect.height);
 #endif
   SETTRANSFERMODE(this, graphic::COPY);

@@ -23,9 +23,9 @@ class runbuttonview : public sbuttonv {
     static boolean InitializeClass();
 
     // overrides
-    boolean Touch(int ind, enum view_MouseAction action);
+    boolean Touch(int ind, enum view::MouseAction action);
     void ReceiveInputFocus();
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
     void *GetPSPrintInterface(const char *printtype);
 
     // This returns TRUE if rbv is still valid.  It is used by the dataobject

@@ -23,7 +23,7 @@ helloworldview::helloworldview()
 }
 
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     struct rectangle myVisualRect; 
 
@@ -58,23 +58,23 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action,long  x,long  y,long  numberOfClicks)
 {
     if(this->HaveDownTransition)
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		this->newX=x-this->distX;
 		this->newY=y-this->distY;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		this->newX=x;
 		this->newY=y;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -84,11 +84,11 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 
     if(!this->HaveDownTransition)
 	switch(action){
-	    case view_RightDown:
+	    case view::RightDown:
 		this->distX=x-this->x;
 		this->distY=y-this->y;
 		/* fall through */
-	    case view_LeftDown:
+	    case view::LeftDown:
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;

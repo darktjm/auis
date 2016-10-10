@@ -438,12 +438,12 @@ chartv::SetDebug( boolean		        state )
   }
 
 void 
-chartv::FullUpdate( enum view_UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
+chartv::FullUpdate( enum view::UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
         {
   class chartv *self=this;
   IN(chartv_FullUpdate);
   if ( (!IgnoreFullUpdate)  &&  Chart  &&
-       (type == view_FullRedraw || type == view_LastPartialRedraw) )
+       (type == view::FullRedraw || type == view::LastPartialRedraw) )
     {
     (this)->aptv::FullUpdate(  type, left, top, width, height );
     (this )->ClearClippingRect( );
@@ -496,7 +496,7 @@ void Initialize( class chartv      *self )
   }
 
 class view *
-chartv::Hit( enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
+chartv::Hit( enum view::MouseAction    action, long			    x , long			    y , long			    clicks )
         {
   class chartv *self=this;
   class view		  *hit;
@@ -507,7 +507,7 @@ chartv::Hit( enum view_MouseAction    action, long			    x , long			    y , long
     { DEBUG(Accept ::Hit);
     if ( ChartViewer  &&  (this)->Within(  x, y, PairBounds ) )
       { DEBUG(Pair ::Hit);
-      if ( !InputFocus  &&  action == view_LeftDown )
+      if ( !InputFocus  &&  action == view::LeftDown )
         (this)->WantInputFocus(  this );
       hit = (class view *) (PairView)->Hit(  action,
 	    (PairView)->EnclosedXToLocalX(  x ),
@@ -663,7 +663,7 @@ static void chartv_ReChart( class chartv      *self, char		      *moniker )
 	(PairView)->InsertViewSize(  self,
 	    (self)->BodyLeft()+4,  (self)->BodyTop()+4,
 	    (self)->BodyWidth()-8, ((self)->BodyHeight() - 8) );
-        (PairView)->FullUpdate(  view_FullRedraw, 0,0,
+        (PairView)->FullUpdate(  view::FullRedraw, 0,0,
 	    (self)->BodyWidth()-8, ((self)->BodyHeight() - 8) );
 	(PairView)->GetEnclosedBounds(  PairBounds );
 	Activate_Viewer( self );

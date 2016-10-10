@@ -17,18 +17,18 @@ class phlumphview : public view {
     phlumphview(boolean iconmode = TRUE);
     virtual ~phlumphview();
 
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();
     void ObservedChanged(class observable  *observed, long  status);
     void SetDataObject(class dataobject *dobj);
     void LinkTree( class view  *parent );
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *desiredWidth, long *desiredHeight);
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *desiredWidth, long *desiredHeight);
     void WantInputFocus(class view *requestor);
     void ReceiveInputFocus();
     void LoseInputFocus();
     void PostMenus(class menulist *ml);
     void PostKeyState(class keystate *ks);
-    class view *Hit(enum view_MouseAction action, long x, long y, long numberOfClicks);
+    class view *Hit(enum view::MouseAction action, long x, long y, long numberOfClicks);
     void *GetPSPrintInterface(const char *printtype);
 
     class menulist *Menus;

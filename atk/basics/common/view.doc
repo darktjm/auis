@@ -69,479 +69,479 @@ only create subclasses of \italic{view}.
 
 
 
-\fixedtext{\bold{view_}BitBltSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}BitBltSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{srcX}, \paramname{srcY}, \paramname{dstX}, 
 \paramname{dstY}, \paramname{Width}, \paramname{Height}, 
 \paramname{DstView}, \paramname{clipX}, \paramname{clipY}, 
 \paramname{clipWidth}, \paramname{clipHeight});} 
 
-\fixedtext{\bold{view_}BitBlt }\fixedindent{(struct view *\paramname{view}, 
+\fixedtext{\bold{view::}BitBlt }\fixedindent{(struct view *\paramname{view}, 
 \paramname{SrcRect}, \paramname{DestView}, \paramname{DstOrigin}, 
 \paramname{ClipRectList});} 
 
-\fixedtext{\bold{view_}BlackPattern }\fixedindent{(struct view 
+\fixedtext{\bold{view::}BlackPattern }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{boolean \bold{view_}CanView }\fixedindent{(struct view 
+\fixedtext{boolean \bold{view::}CanView }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{TypeName});} 
 
-\fixedtext{\bold{view_}ClearClippingRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}ClearClippingRect }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}ColorPattern }\fixedindent{(struct view 
+\fixedtext{\bold{view::}ColorPattern }\fixedindent{(struct view 
 *\paramname{view}, \paramname{red}, \paramname{blue}, \paramname{green});} 
 
-\fixedtext{void \bold{view_}DeleteApplicationLayer }\fixedindent{(struct 
+\fixedtext{void \bold{view::}DeleteApplicationLayer }\fixedindent{(struct 
 view *\paramname{view}, struct view *\paramname{applicationLayer});} 
 
-\fixedtext{enum view_DescriberErrs \bold{view_}Describe 
+\fixedtext{enum view::DescriberErrs \bold{view::}Describe 
 }\fixedindent{(struct view *\paramname{view}, char *\paramname{format}, 
 FILE *\paramname{file}, long \paramname{rock});} 
 
-\fixedtext{char *\bold{view_}DescriptionObject }\fixedindent{(struct view 
+\fixedtext{char *\bold{view::}DescriptionObject }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{format}, long \paramname{rock});} 
 
-\fixedtext{enum view_DSattributes \bold{view_}DesiredSize 
+\fixedtext{enum view::DSattributes \bold{view::}DesiredSize 
 }\fixedindent{(struct view *\paramname{view}, long \paramname{width}, long 
-\paramname{height}, enum view_DSpass \paramname{pass}, long 
+\paramname{height}, enum view::DSpass \paramname{pass}, long 
 *\paramname{dWidth}, long *\paramname{dheight});} 
 
-\fixedtext{\bold{view_}DrawArcSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawArcSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{StartAngle}, \paramname{OffsetAngle});} 
 
-\fixedtext{\bold{view_}DrawArc }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawArc }\fixedindent{(struct view 
 *\paramname{view}, \paramname{EnclRect}, \paramname{StartAngle}, 
 \paramname{OffsetAngle});} 
 
-\fixedtext{\bold{view_}DrawLineToPt }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawLineToPt }\fixedindent{(struct view 
 *\paramname{view}, \paramname{LineEnd});} 
 
-\fixedtext{\bold{view_}DrawLineTo }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawLineTo }\fixedindent{(struct view 
 *\paramname{view}, \paramname{XEnd}, \paramname{YEnd});} 
 
-\fixedtext{\bold{view_}DrawLine }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawLine }\fixedindent{(struct view 
 *\paramname{view}, \paramname{DeltaX}, \paramname{DeltaY});} 
 
-\fixedtext{\bold{view_}DrawOvalSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawOvalSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}DrawOval }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawOval }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}DrawPath }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawPath }\fixedindent{(struct view 
 *\paramname{view}, \paramname{PointArray}, \paramname{PointCount});} 
 
-\fixedtext{\bold{view_}DrawPolygon }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawPolygon }\fixedindent{(struct view 
 *\paramname{view}, \paramname{PointArray}, \paramname{PointCount});} 
 
-\fixedtext{\bold{view_}DrawRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}DrawRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}DrawRgn }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawRgn }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rgn});} 
 
-\fixedtext{\bold{view_}DrawRRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawRRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{cornerWidth}, \paramname{cornerHeight});} 
 
-\fixedtext{\bold{view_}DrawRRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawRRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{OuterBox}, \paramname{InnerBox});} 
 
-\fixedtext{\bold{view_}DrawString }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawString }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Text}, \paramname{Operation});} 
 
-\fixedtext{\bold{view_}DrawText }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawText }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Text}, \paramname{TextLength}, 
 \paramname{Operation});} 
 
-\fixedtext{\bold{view_}DrawTrapezoid }\fixedindent{(struct view 
+\fixedtext{\bold{view::}DrawTrapezoid }\fixedindent{(struct view 
 *\paramname{view}, \paramname{topX}, \paramname{topY}, 
 \paramname{topWidth}, \paramname{bottomX}, \paramname{bottomY}, 
 \paramname{bottomWidth});} 
 
-\fixedtext{\bold{view_}EnclosedXToLocalX }\fixedindent{(struct view 
+\fixedtext{\bold{view::}EnclosedXToLocalX }\fixedindent{(struct view 
 *\paramname{view}, \paramname{xvalue});} 
 
-\fixedtext{\bold{view_}EnclosedYToLocalY }\fixedindent{(struct view 
+\fixedtext{\bold{view::}EnclosedYToLocalY }\fixedindent{(struct view 
 *\paramname{view}, \paramname{yvalue});} 
 
-\fixedtext{\bold{view_}EraseRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}EraseRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}EraseRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}EraseRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}EraseVisualRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}EraseVisualRect }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}FillArcSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillArcSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{StartAngle}, \paramname{OffsetAngle}, 
 \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillArc }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillArc }\fixedindent{(struct view 
 *\paramname{view}, \paramname{EnclRect}, \paramname{StartAngle}, 
 \paramname{OffsetAngle}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillOvalSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillOvalSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillOval }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillOval }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillPolygon }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillPolygon }\fixedindent{(struct view 
 *\paramname{view}, \paramname{PointArray}, \paramname{PointCount}, 
 \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillRgn }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillRgn }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rgn}, \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillRRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillRRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{cornerWidth}, \paramname{cornerHeight}, 
 \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillRRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillRRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{OuterBox}, \paramname{InnerBox}, 
 \paramname{Tile});} 
 
-\fixedtext{\bold{view_}FillTrapezoid }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FillTrapezoid }\fixedindent{(struct view 
 *\paramname{view}, \paramname{topX}, \paramname{topY}, 
 \paramname{topWidth}, \paramname{bottomX}, \paramname{bottomY}, 
 \paramname{bottomWidth}, \paramname{Tile});} 
 
-\fixedtext{void \bold{view_}FinalizeObject }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}FinalizeObject }\fixedindent{(struct view 
 *\paramname{self});} 
 
-\fixedtext{\bold{view_}FlushGraphics }\fixedindent{(struct view 
+\fixedtext{\bold{view::}FlushGraphics }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{void \bold{view_}FullUpdate }\fixedindent{(struct view 
-*\paramname{view}, enum view_UpdateType \paramname{type}, long 
+\fixedtext{void \bold{view::}FullUpdate }\fixedindent{(struct view 
+*\paramname{view}, enum view::UpdateType \paramname{type}, long 
 \paramname{left}, long \paramname{top}, long \paramname{width}, long 
 \paramname{right});} 
 
-\fixedtext{struct view *\bold{view_}GetApplicationLayer 
+\fixedtext{struct view *\bold{view::}GetApplicationLayer 
 }\fixedindent{(struct view *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetBackgroundColor }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetBackgroundColor }\fixedindent{(struct view 
 *\paramname{view}, \paramname{retred}, \paramname{retblue}, 
 \paramname{retgreen});} 
 
-\fixedtext{struct atomlist *\bold{view_}GetClass }\fixedindent{(struct view 
+\fixedtext{struct atomlist *\bold{view::}GetClass }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetClippingRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetClippingRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{retx}, \paramname{rety}, 
 \paramname{retwidth}, \paramname{retheight});} 
 
-\fixedtext{\bold{view_}GetClippingRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetClippingRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}GetCurrentPt }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetCurrentPt }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Pt});} 
 
-\fixedtext{\bold{view_}GetDataObject }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetDataObject }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{long \bold{view_}GetDevice }\fixedindent{(struct view 
+\fixedtext{long \bold{view::}GetDevice }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetDrawable }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetDrawable }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedBottom }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedBottom }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedBoundsSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedBoundsSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}GetEnclosedBounds }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedBounds }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}GetEnclosedHeight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedHeight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedLeft }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedLeft }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedRight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedRight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedTop }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedTop }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetEnclosedWidth }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetEnclosedWidth }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetFont }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetFont }\fixedindent{(struct view 
 *\paramname{view});} 
 
 
 
-\fixedtext{\bold{view_}GetForegroundColor }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetForegroundColor }\fixedindent{(struct view 
 *\paramname{view}, \paramname{retred}, \paramname{retblue}, 
 \paramname{retgreen});} 
 
-\fixedtext{\bold{view_}GetHorizontalResolution }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetHorizontalResolution }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetIM }\fixedindent{(struct view *\paramname{view});} 
+\fixedtext{\bold{view::}GetIM }\fixedindent{(struct view *\paramname{view});} 
 
-\fixedtext{char *\bold{view_}GetInterface }\fixedindent{(struct view 
+\fixedtext{char *\bold{view::}GetInterface }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{type});} 
 
-\fixedtext{\bold{view_}GetLineWidth }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLineWidth }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalBottom }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalBottom }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalBoundsSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalBoundsSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}GetLogicalBounds }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalBounds }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}GetLogicalHeight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalHeight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalLeft }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalLeft }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalRight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalRight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalTop }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalTop }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetLogicalWidth }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetLogicalWidth }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{void \bold{view_}GetManyParameters }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}GetManyParameters }\fixedindent{(struct view 
 *\paramname{view}, struct resourceList *\paramname{resources}, struct 
 atomlist *\paramname{name}, struct atomlist *\paramname{class});} 
 
-\fixedtext{struct atomlist *\bold{view_}GetName }\fixedindent{(struct view 
+\fixedtext{struct atomlist *\bold{view::}GetName }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{void \bold{view_}GetOrigin }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}GetOrigin }\fixedindent{(struct view 
 *\paramname{view}, long \paramname{width}, long \paramname{height}, long 
 *\paramname{originX}, long *\paramname{originY});} 
 
-\fixedtext{short \bold{view_}GetParameter }\fixedindent{(struct view 
+\fixedtext{short \bold{view::}GetParameter }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{name}, const struct atom 
 *\paramname{type}, long *\paramname{data});} 
 
-\fixedtext{short \bold{view_}GetResource }\fixedindent{(struct view 
+\fixedtext{short \bold{view::}GetResource }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{name}, struct atomlist 
 *\paramname{class}, const struct atom *\paramname{type}, long *\paramname{data});} 
 
-\fixedtext{\bold{view_}GetSpaceShim }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetSpaceShim }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetTransferMode }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetTransferMode }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVerticalResolution }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVerticalResolution }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualBottom }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualBottom }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualBoundsSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualBoundsSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}GetVisualBounds }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualBounds }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view_}GetVisualHeight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualHeight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualLeft }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualLeft }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualRight }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualRight }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualTop }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualTop }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}GetVisualWidth }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GetVisualWidth }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{char *\bold{view_}GetWindowManagerType }\fixedindent{(struct 
+\fixedtext{char *\bold{view::}GetWindowManagerType }\fixedindent{(struct 
 view *\paramname{view});} 
 
-\fixedtext{\bold{view_}GrayPattern }\fixedindent{(struct view 
+\fixedtext{\bold{view::}GrayPattern }\fixedindent{(struct view 
 *\paramname{view}, \paramname{IntensityNum}, \paramname{IntensityDenom});} 
 
-\fixedtext{struct view *\bold{view_}Hit }\fixedindent{(struct view 
-*\paramname{view}, enum view_MouseAction \paramname{action}, long 
+\fixedtext{struct view *\bold{view::}Hit }\fixedindent{(struct view 
+*\paramname{view}, enum view::MouseAction \paramname{action}, long 
 \paramname{x}, long \paramname{y}, long \paramname{numberOfClicks});} 
 
-\fixedtext{void \bold{view_}InitChildren }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}InitChildren }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{boolean \bold{view_}InitializeClass }\fixedindent{();} 
+\fixedtext{boolean \bold{view::}InitializeClass }\fixedindent{();} 
 
-\fixedtext{boolean \bold{view_}InitializeObject }\fixedindent{(struct view 
+\fixedtext{boolean \bold{view::}InitializeObject }\fixedindent{(struct view 
 *\paramname{self});} 
 
-\fixedtext{void \bold{view_}InsertViewSize }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}InsertViewSize }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{EnclosingView}, long 
 \paramname{xOriginInParent}, long \paramname{yOriginInParent}, long 
 \paramname{width}, long \paramname{height});} 
 
-\fixedtext{void \bold{view_}InsertView }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}InsertView }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{parent}, struct rectangle 
 *\paramname{enclosingRect});} 
 
-\fixedtext{boolean \bold{view_}IsAncestor }\fixedindent{(struct view 
+\fixedtext{boolean \bold{view::}IsAncestor }\fixedindent{(struct view 
 *\paramname{view}, \paramname{possibleAncestor});} 
 
-\fixedtext{void \bold{view_}LinkTree }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}LinkTree }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{parent});} 
 
-\fixedtext{void \bold{view_}LoseInputFocus }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}LoseInputFocus }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view_}MoveLogicalOrigin }\fixedindent{(struct view 
+\fixedtext{\bold{view::}MoveLogicalOrigin }\fixedindent{(struct view 
 *\paramname{view}, \paramname{DeltaX}, \paramname{DeltaY});} 
 
-\fixedtext{\bold{view_}MoveToPt }\fixedindent{(struct view 
+\fixedtext{\bold{view::}MoveToPt }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Pt});} 
 
-\fixedtext{\bold{view_}MoveTo }\fixedindent{(struct view *\paramname{view}, 
+\fixedtext{\bold{view::}MoveTo }\fixedindent{(struct view *\paramname{view}, 
 \paramname{NewX}, \paramname{NewY});} 
 
-\fixedtext{\bold{view_}Move }\fixedindent{(struct view *\paramname{view}, 
+\fixedtext{\bold{view::}Move }\fixedindent{(struct view *\paramname{view}, 
 \paramname{DeltaX}, \paramname{DeltaY});} 
 
-\fixedtext{void \bold{view_}ObservedChanged }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}ObservedChanged }\fixedindent{(struct view 
 *\paramname{view}, struct thisobject *\paramname{changed}, long 
 \paramname{value});} 
 
-\fixedtext{void \bold{view_}PostCursor }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}PostCursor }\fixedindent{(struct view 
 *\paramname{view}, struct rectangle *\paramname{rec}, struct cursor 
 *\paramname{cursor});} 
 
-\fixedtext{void \bold{view_}PostDefaultHandler }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}PostDefaultHandler }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{handlerName}, struct basicobject 
 *\paramname{handler});} 
 
-\fixedtext{void \bold{view_}PostKeyState }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}PostKeyState }\fixedindent{(struct view 
 *\paramname{view}, struct keystate *\paramname{keystate});} 
 
-\fixedtext{void \bold{view_}PostMenus }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}PostMenus }\fixedindent{(struct view 
 *\paramname{view}, struct menulist *\paramname{menulist});} 
 
-\fixedtext{void \bold{view_}PostResource }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}PostResource }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{path}, const struct atom 
 *\paramname{type}, long \paramname{data});} 
 
-\fixedtext{void \bold{view_}Print }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}Print }\fixedindent{(struct view 
 *\paramname{view}, FILE *\paramname{file}, char *\paramname{processor}, 
 char *\paramname{finalFormat}, boolean \paramname{topLevel});} 
 
-\fixedtext{void \bold{view_}ReceiveInputFocus }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}ReceiveInputFocus }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{void \bold{view_}RetractCursor }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}RetractCursor }\fixedindent{(struct view 
 *\paramname{view}, struct cursor *\paramname{cursor});} 
 
-\fixedtext{void \bold{view_}RetractViewCursors }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}RetractViewCursors }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{requestor});} 
 
-\fixedtext{\bold{view_}SetBackgroundColor }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetBackgroundColor }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{colorName}, \paramname{red}, 
 \paramname{blue}, \paramname{green});} 
 
-\fixedtext{\bold{view_}SetBitAtLoc }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetBitAtLoc }\fixedindent{(struct view 
 *\paramname{view}, \paramname{XPos}, \paramname{YPos}, 
 \paramname{NewValue});} 
 
 
 
-\fixedtext{\bold{view_}SetClippingRectSize }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetClippingRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height});} 
 
-\fixedtext{\bold{view_}SetClippingRect }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetClippingRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{ClipRect});} 
 
-\fixedtext{void \bold{view_}SetDataObject }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}SetDataObject }\fixedindent{(struct view 
 *\paramname{view}, struct dataobject *\paramname{dataobject});} 
 
-\fixedtext{\bold{view_}SetFont }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetFont }\fixedindent{(struct view 
 *\paramname{view}, \paramname{ChosenFont});} 
 
-\fixedtext{\bold{view_}SetForegroundColor }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetForegroundColor }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{colorName}, \paramname{red}, 
 \paramname{blue}, \paramname{green});} 
 
-\fixedtext{\bold{view_}SetLineWidth }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetLineWidth }\fixedindent{(struct view 
 *\paramname{view}, \paramname{NewLineWidth});} 
 
-\fixedtext{\bold{view_}SetLogicalOriginPt }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetLogicalOriginPt }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Pt});} 
 
-\fixedtext{\bold{view_}SetLogicalOrigin }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetLogicalOrigin }\fixedindent{(struct view 
 *\paramname{view}, \paramname{NewX}, \paramname{NewY});} 
 
-\fixedtext{void \bold{view_}SetName }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}SetName }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{name});} 
 
-\fixedtext{\bold{view_}SetSpaceShim }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetSpaceShim }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Amount});} 
 
-\fixedtext{\bold{view_}SetTransferMode }\fixedindent{(struct view 
+\fixedtext{\bold{view::}SetTransferMode }\fixedindent{(struct view 
 *\paramname{view}, \paramname{NewTransferMode});} 
 
-\fixedtext{void \bold{view_}UnlinkNotification }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}UnlinkNotification }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{unlinkedTree});} 
 
-\fixedtext{void \bold{view_}UnlinkTree }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}UnlinkTree }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{void \bold{view_}Update }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}Update }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{struct basicobject *\bold{view_}WantHandler 
+\fixedtext{struct basicobject *\bold{view::}WantHandler 
 }\fixedindent{(struct view *\paramname{view}, char 
 *\paramname{handlerName});} 
 
-\fixedtext{char *\bold{view_}WantInformation }\fixedindent{(struct view 
+\fixedtext{char *\bold{view::}WantInformation }\fixedindent{(struct view 
 *\paramname{view}, char *\paramname{key});} 
 
-\fixedtext{void \bold{view_}WantInputFocus }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}WantInputFocus }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{requestor});} 
 
-\fixedtext{void \bold{view_}WantNewSize }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}WantNewSize }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{requestor});} 
 
-\fixedtext{void \bold{view_}WantUpdate }\fixedindent{(struct view 
+\fixedtext{void \bold{view::}WantUpdate }\fixedindent{(struct view 
 *\paramname{view}, struct view *\paramname{requestor});} 
 
-\fixedtext{\bold{view_}WhitePattern }\fixedindent{(struct view 
+\fixedtext{\bold{view::}WhitePattern }\fixedindent{(struct view 
 *\paramname{view});} 
 
 
@@ -597,7 +597,7 @@ must override many of the \italic{view} methods.
 When \italic{spreadsheetview_New} is called, it initializes all the data 
 associated with an instance of \italic{spreadsheetview}, including the data 
 associated with the class \italic{view}.  The system first calls 
-\italic{view_InitializeObject}, then 
+\italic{view::InitializeObject}, then 
 \italic{spreadsheetview_InitializeObject}.   All the 
 \italic{InitializeObject} routines are called automatically in the 
 \italic{New} class procedures; you never call them directly.  If you were 
@@ -680,16 +680,16 @@ if (ssv->keystate != NULL)
 
 \indexi{View++Associated data object} 
 
-\indexi{ \italic{view_SetDataObject}} 	
+\indexi{ \italic{view::SetDataObject}} 	
 
-\example{void view_SetDataObject(v, dataobj) 
+\example{void view::SetDataObject(v, dataobj) 
 
 struct view *v;  
 
 struct dataobject *dataobj;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_SetDataObject} 
+\leftindent{\bold{Method description. }\italic{view::SetDataObject} 
 associates the view \italic{v} with the dataobject \italic{dataobj}. 
 
 
@@ -698,7 +698,7 @@ observers.
 
 
 \bold{Usage.}  Before drawing in a newly created instance of a 
-\italic{view}, you should call \italic{view_SetDataObject} in order to 
+\italic{view}, you should call \italic{view::SetDataObject} in order to 
 associate the data object with the view and to add the view to the data 
 object's list of observers.  A \italic{view} may have only one data object 
 at a time, but you can reassign a view to another data object.  When 
@@ -711,7 +711,7 @@ method.
  
 
 \bold{Example.}  Before drawing the data object \italic{txt} in the newly 
-created view \italic{txtview}, the call to \italic{view_SetDataObject} 
+created view \italic{txtview}, the call to \italic{view::SetDataObject} 
 associates \italic{txtview} with \italic{txt} and adds \italic{txtview} to 
 \italic{txt}'s list of observers. 
 
@@ -744,16 +744,16 @@ tree have a pointer to the \italic{im} view that is the root of the tree.
 
 \indexi{View++Adding to view tree}\indexi{ tree++Adding view}
 
-\indexi{ \italic{view_LinkTree}}
+\indexi{ \italic{view::LinkTree}}
 
-\example{void view_LinkTree(childview, parentview) 
+\example{void view::LinkTree(childview, parentview) 
 
 struct view *childview;  
 
 struct view *parentview;} 
 
 
-\leftindent{\bold{Method description.  }\italic{view_LinkTree} links 
+\leftindent{\bold{Method description.  }\italic{view::LinkTree} links 
 \italic{childview} (and its descendants) into \italic{parentview}'s view 
 tree.  This sets the parent pointer in the child to point to the parent. 
  It sets \italic{childview}'s \italic{im} pointer to be the same as 
@@ -761,7 +761,7 @@ tree.  This sets the parent pointer in the child to point to the parent.
 object with the child that is of the same type as the parent. 
 
 
-\italic{view_LinkTree} can also be called with a \smaller{NULL} parentview. 
+\italic{view::LinkTree} can also be called with a \smaller{NULL} parentview. 
  This is used to invalidate the \italic{graphic} and \italic{im} pointer 
 associated with \italic{childview}.  When \italic{parentview} is 
 \smaller{NULL}, the parent field for the view should not be reset. 
@@ -782,17 +782,17 @@ defined by the \italic{im} object.
 
 \indexi{View++Removing from view tree} 
 
-\example{void view_UnlinkTree(rview) 
+\example{void view::UnlinkTree(rview) 
 
 struct view *rview;} 
 
 
-\leftindent{\bold{Method description.  }\italic{view_UnlinkTree} removes 
+\leftindent{\bold{Method description.  }\italic{view::UnlinkTree} removes 
 \italic{rview} (and its descendants) from its current view tree.  This 
 method begins a notification procedure that notifies other views in the 
 view tree that this subtree is being removed.  It also must invalidate the 
 \italic{graphic} objects associated with each of its children.  The default 
-\italic{UnlinkTree} method calls \italic{view_UnlinkNotification} on its 
+\italic{UnlinkTree} method calls \italic{view::UnlinkNotification} on its 
 parent, sets its parent pointer to \smaller{NULL}, then calls 
 \italic{LinkTree} on itself with a \smaller{NULL} parent parameter. 
 
@@ -812,19 +812,19 @@ unlinked using this method.
 
 \indexi{View tree++Changes in}  
 
-\indexi{ \italic{view_UnlinkNotification}}\example{void 
-view_UnlinkNotification(v, unlinkedview) 
+\indexi{ \italic{view::UnlinkNotification}}\example{void 
+view::UnlinkNotification(v, unlinkedview) 
 
 struct view *v;  
 
 struct view unlinkedview;} 
 
 
-\leftindent{\bold{Method description.  }\italic{view_UnlinkNotification} is 
+\leftindent{\bold{Method description.  }\italic{view::UnlinkNotification} is 
 used to notify the view \italic{v} that the subtree \italic{unlinkedview} 
 is being removed from the view tree.  If \italic{v} has cached any pointers 
 to views in the view tree, it must determine if any of those cached views 
-are being removed.  This is done via a call to the \italic{view_IsAncestor} 
+are being removed.  This is done via a call to the \italic{view::IsAncestor} 
 method of the cached views with \italic{unlinkedview} as the second 
 parameter.  If that method returns true, the cached information must be 
 invalidated.  The \italic{UnlinkNotification} must also be passed up the 
@@ -844,7 +844,7 @@ The default action for this method is to call the
 
 \indexi{View++Finding ancestor} \indexi{Ancestors} 
 
-\indexi{ \italic{view_IsAncestor}}\example{boolean view_IsAncestor(v, 
+\indexi{ \italic{view::IsAncestor}}\example{boolean view::IsAncestor(v, 
 ancestor) 
 
 struct view *v;  
@@ -852,7 +852,7 @@ struct view *v;
 struct view *ancestor;} 
 
 
-\leftindent{\bold{Method description.}   \italic{view_IsAncestor} returns 
+\leftindent{\bold{Method description.}   \italic{view::IsAncestor} returns 
 true if \italic{ancestor} equals \italic{v} or is an ancestor of 
 \italic{v}.  The default method returns true if the two parameters are 
 equal or the value of a recursive call to the parent of \italic{v}.  This 
@@ -863,18 +863,18 @@ method is normally not overridden.
 \subsection{Bringing a view onto the screen
 
 }
-\example{void view_ExposeSelf(v, recurse)
+\example{void view::ExposeSelf(v, recurse)
 
 struct view *v;
 
 boolean recurse;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_ExposeSelf} causes 
+\leftindent{\bold{Method description.}   \italic{view::ExposeSelf} causes 
 \italic{v} to request that its parent make it visible. This is done by 
 calling the parent's \italic{ExposeChild} method. (See below.)
 
-If \italic{recurse} is TRUE, \italic{view_ExposeSelf} then calls the 
+If \italic{recurse} is TRUE, \italic{view::ExposeSelf} then calls the 
 parent's \italic{ExposeSelf} method, with \italic{recurse} TRUE. This makes 
 the parent in turn visible, and so on up the view tree, until (hopefully) 
 the original is visible in every level up to the top window.
@@ -886,12 +886,12 @@ when writing new subclasses of view.
 
 }
 
-\example{void view_ExposeChild(v, childv)
+\example{void view::ExposeChild(v, childv)
 
 struct view *v, *childv;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_ExposeChild} causes 
+\leftindent{\bold{Method description.}   \italic{view::ExposeChild} causes 
 \italic{v} to bring its child view \italic{childv} into its visible region 
 -- usually by panning or scrolling itself. 
 
@@ -907,7 +907,7 @@ supports both insets and any kind of scrolling.
 \subsection{Recursively searching the view tree
 
 }
-\example{boolean view_RecSearch(v, pat, toplevel)
+\example{boolean view::RecSearch(v, pat, toplevel)
 
 struct view *v;
 
@@ -916,7 +916,7 @@ struct SearchPattern *pat;
 boolean toplevel;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_RecSearch} causes 
+\leftindent{\bold{Method description.}   \italic{view::RecSearch} causes 
 \italic{v} to begin searching itself and all of its child views for the 
 pattern \italic{pat}. (The \italic{search} class contains the methods which 
 use struct SearchPattern *; see that class for details.) The method returns 
@@ -929,7 +929,7 @@ selection point. If FALSE, the search is entering from the parent view, and
 the view should begin searching at the beginning.
 
 \bold{Usage.}   By anyone who wants. One usually calls 
-\italic{view_RecSrchExpose(v)} after a successful \italic{view_RecSearch}, 
+\italic{view::RecSrchExpose(v)} after a successful \italic{view::RecSearch}, 
 in order to make the match visible on the screen.
 
 \bold{Overriding.}   Any subclass of view which wants to support recursive 
@@ -944,22 +944,22 @@ location of the result, so that RecSrchResume and RecSrchReplace calls can
 be handled properly.
 
 }
-\example{boolean view_RecSrchResume(v, pat)
+\example{boolean view::RecSrchResume(v, pat)
 
 struct view *v;
 
 struct SearchPattern *pat;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_RecSrchResume} causes 
+\leftindent{\bold{Method description.}   \italic{view::RecSrchResume} causes 
 \italic{v} to continue a recursive search. The method returns TRUE if the 
 search is successful (for \italic{v} or any child), FALSE otherwise.
 
 \bold{Usage.}   By anyone who wants. The search must already have been 
-started with a successful call to \italic{view_RecSearch} or 
-\italic{view_RecSrchResume}. One usually calls 
-\italic{view_RecSrchExpose(v)} after a successful 
-\italic{view_RecSrchResume}, in order to make the match visible on the 
+started with a successful call to \italic{view::RecSearch} or 
+\italic{view::RecSrchResume}. One usually calls 
+\italic{view::RecSrchExpose(v)} after a successful 
+\italic{view::RecSrchResume}, in order to make the match visible on the 
 screen.
 
 \bold{Overriding.}   Any subclass of view which wants to support recursive 
@@ -970,12 +970,12 @@ should call this method on its child(ren) and return the result.
 
 A view that actually contains data should continue its search, starting at 
 the location that was cached by a previous RecSearch or RecSrchResume. If 
-this location is inside a child view, \italic{view_RecSrchResume} should be 
+this location is inside a child view, \italic{view::RecSrchResume} should be 
 called on that child and the result returned. Otherwise, continue searching 
 as RecSearch did.
 
 }
-\example{boolean view_RecSrchReplace(v, srcob, srcpos, srclen)
+\example{boolean view::RecSrchReplace(v, srcob, srcpos, srclen)
 
 struct view *v;
 
@@ -984,7 +984,7 @@ struct dataobject *srcob;
 long srcpos, srclen;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_RecSrchReplace} 
+\leftindent{\bold{Method description.}   \italic{view::RecSrchReplace} 
 causes \italic{v} to replace the result of a previous recursive search. It 
 is replaced with part of the contents of \italic{srcob}, as defined by 
 \italic{srcpos} and \italic{srclen}. (The meaning of these values depends 
@@ -996,10 +996,10 @@ the method will return FALSE. (Note that the view being modified may be
 \italic{v}, or any descendant of \italic{v}.)
 
 \bold{Usage.}   By anyone who wants. The search must already have been 
-started with a successful call to \italic{view_RecSearch} or 
-\italic{view_RecSrchResume}. One usually calls 
-\italic{view_RecSrchExpose(v)} after a successful 
-\italic{view_RecSrchReplace}, in order to make the new match visible on the 
+started with a successful call to \italic{view::RecSearch} or 
+\italic{view::RecSrchResume}. One usually calls 
+\italic{view::RecSrchExpose(v)} after a successful 
+\italic{view::RecSrchReplace}, in order to make the new match visible on the 
 screen.
 
 \bold{Overriding.}   Any subclass of view which wants to support recursive 
@@ -1016,19 +1016,19 @@ should perform the replacement. The cached rec-search result should be
 updated to point to the new length of the replacement.
 
 
-}\example{boolean view_RecSrchExpose(v)
+}\example{boolean view::RecSrchExpose(v)
 
 struct view *v;
 
 }
-\leftindent{\bold{Method description.}   \italic{view_RecSrchExpose} causes 
+\leftindent{\bold{Method description.}   \italic{view::RecSrchExpose} causes 
 \italic{v} to make visible the results of a successful recursive search. 
 The method returns TRUE if the search is successful (for \italic{v} or any 
 child), FALSE otherwise.
 
 \bold{Usage.}   By anyone who wants. The search must already have been 
-started with a successful call to \italic{view_RecSearch} or 
-\italic{view_RecSrchResume}. 
+started with a successful call to \italic{view::RecSearch} or 
+\italic{view::RecSrchResume}. 
 
 \bold{Overriding.}   Any subclass of view which wants to support recursive 
 search must override this method. The default simply returns FALSE.
@@ -1052,10 +1052,10 @@ size}
 
 \indexi{View++Setting child size} 
 
-\indexi{ \italic{view_InsertView}}
+\indexi{ \italic{view::InsertView}}
 
 
-\example{void view_InsertView(childv, parentv, enclosedRectangle) struct 
+\example{void view::InsertView(childv, parentv, enclosedRectangle) struct 
 view *childv;  
 
 struct view *parentv;  
@@ -1063,7 +1063,7 @@ struct view *parentv;
 struct rectangle *enclosedRectangle;} 
 
 
-\leftindent{\bold{Method description.  }\italic{view_InsertView} inserts 
+\leftindent{\bold{Method description.  }\italic{view::InsertView} inserts 
 the child view, \italic{childv}, into the parent view, \italic{parentv}. 
 
 
@@ -1072,7 +1072,7 @@ rectangles are set to the values provided by \italic{enclosedRectangle}.
 
 
 \bold{Usage.}  If you are creating a child view, the parent should call 
-\italic{view_InsertView} to set rectangle parameters for the child. 
+\italic{view::InsertView} to set rectangle parameters for the child. 
  Normally you would make the call at the end of a size negotiation and 
 before calling the child's \italic{FullUpdate} method. 
 
@@ -1084,10 +1084,10 @@ before calling the child's \italic{FullUpdate} method.
 
 \indexi{View++Desired size} 
 
-\indexi{ \italic{view_DesiredSize}}
+\indexi{ \italic{view::DesiredSize}}
 
 
-\example{enum view_DSattributes view_DesiredSize(childv, width, height, 
+\example{enum view::DSattributes view::DesiredSize(childv, width, height, 
 pass,desiredWidth, desiredHeight) 
 
 struct view *childv;  
@@ -1096,7 +1096,7 @@ long width;
 
 long height;  
 
-enum view_DSpass pass;  
+enum view::DSpass pass;  
 
 long *desiredWidth;  
 
@@ -1104,7 +1104,7 @@ long *desiredHeight;
 
 }
 
-\leftindent{\bold{Method description.}  \italic{view_DesiredSize} is used 
+\leftindent{\bold{Method description.}  \italic{view::DesiredSize} is used 
 to conduct size negotiations between a parent and child view.  The 
 parameters for \italic{height} and \italic{width} are filled with the 
 parent's preferred values; the \italic{pass} parameter tells the child 
@@ -1113,25 +1113,25 @@ which parameters are flexible and which are fixed.  The
 child to pass back what it would like for its size. 
 
 
-\italic{view_DesiredSize} may be called several times as the parent 
+\italic{view::DesiredSize} may be called several times as the parent 
 negotiates with its child.   The parameter \italic{pass} can take on one of 
 three values: 
 
 
 
 
-\leftindent{\description{\smaller{view_NOSET}\formatnote{  --  }Both 
+\leftindent{\description{\smaller{view::NOSET}\formatnote{  --  }Both 
 dimensions are flexible. 
 
 
-\smaller{view_WIDTHSET}\formatnote{  --  }The width cannot be changed. 
+\smaller{view::WIDTHSET}\formatnote{  --  }The width cannot be changed. 
 
 
-\smaller{view_HEIGHTSET}\formatnote{  --  }The height cannot be changed. 
+\smaller{view::HEIGHTSET}\formatnote{  --  }The height cannot be changed. 
 
 }
 }
-In response to these three parameters, \italic{view_DesiredSize} sets the 
+In response to these three parameters, \italic{view::DesiredSize} sets the 
 \italic{desiredWidth} and \italic{desiredHeight}. 
 
 
@@ -1139,42 +1139,42 @@ In response to these three parameters, \italic{view_DesiredSize} sets the
 be set to an \smaller{OR-ed} combination of any of the following values:
 
 
-\leftindent{\formatnote{\smaller{view_FIXED}\formatnote{  --  }The size is 
+\leftindent{\formatnote{\smaller{view::FIXED}\formatnote{  --  }The size is 
 fixed, that is, not flexible.
 
 
-\smaller{view_WIDTHSMALLER}\formatnote{  --  }The width could be made 
+\smaller{view::WIDTHSMALLER}\formatnote{  --  }The width could be made 
 smaller.
 
 
-\smaller{view_WIDTHLARGER}\formatnote{  --  }The width could be made 
+\smaller{view::WIDTHLARGER}\formatnote{  --  }The width could be made 
 larger.
 
 
-\smaller{view_WIDTHFLEXIBLE}\formatnote{  --  }The width is flexible.
+\smaller{view::WIDTHFLEXIBLE}\formatnote{  --  }The width is flexible.
 
 
-\smaller{view_HEIGHTSMALLER}\formatnote{  --  }The height could be made 
+\smaller{view::HEIGHTSMALLER}\formatnote{  --  }The height could be made 
 smaller.
 
 
-\smaller{view_HEIGHTLARGER}\formatnote{  --  }The height could be made 
+\smaller{view::HEIGHTLARGER}\formatnote{  --  }The height could be made 
 larger.
 
 
-\smaller{view_HEIGHTFLEXIBLE}\formatnote{  --  }The height is flexible.
+\smaller{view::HEIGHTFLEXIBLE}\formatnote{  --  }The height is flexible.
 
 }}
 
-\italic{view_DesiredSize} returns \smaller{view_HEIGHTFLEXIBLE | 
-view_WIDTHFLEXIBLE}.  If you are creating a subclass of the class 
+\italic{view::DesiredSize} returns \smaller{view::HEIGHTFLEXIBLE | 
+view::WIDTHFLEXIBLE}.  If you are creating a subclass of the class 
 \italic{view} named \italic{x} and you want to negotiate the size of 
 \italic{x}, you should return a value that is appropriate. 
 
 
 The default method sets \italic{desiredWidth} and \italic{desiredHeight} to 
 \italic{width} and \italic{height} respectively.  It returns 
-\smaller{view_NOSET}. 
+\smaller{view::NOSET}. 
 
 
 \bold{Usage.}  The process of negotiating between the parent's proposal and 
@@ -1193,9 +1193,9 @@ view \italic{childv} must be set prior to the parent calling the
 
 \indexi{View++Getting origin} 
 
-\indexi{ \italic{view_GetOrigin}} 	
+\indexi{ \italic{view::GetOrigin}} 	
 
-\example{void view_GetOrigin(childview, width, height, originX, originY) 
+\example{void view::GetOrigin(childview, width, height, originX, originY) 
 
 struct view *childview;  
 
@@ -1208,19 +1208,19 @@ long *originX;
 long *originY;} 
 
 
-\leftindent{\bold{Method description. } view_GetOrigin provides a method 
+\leftindent{\bold{Method description. } view::GetOrigin provides a method 
 for the child view, childview, to communicate with the parent about the 
 placement of the origin of its rectangle.  At the end of the size 
-negotiation process, the parent view should call view_GetOrigin for the 
+negotiation process, the parent view should call view::GetOrigin for the 
 child view, childview.  The parameters width and height should be set to 
 the width and height that the parent is allocating for the child. 
- \italic{view_GetOrigin} should set \italic{originX} and \italic{originY} 
+ \italic{view::GetOrigin} should set \italic{originX} and \italic{originY} 
 to the (x,y) coordinate where it would like the parent to place its origin. 
  The default method sets \italic{originX} to 0 and \italic{originY} to 0. 
 
 
 \bold{Usage.}  If you are creating a subclass of the class view named 
-\italic{x}, you might want to override \italic{view_GetOrigin}. 
+\italic{x}, you might want to override \italic{view::GetOrigin}. 
  \italic{x_GetOrigin} should set \italic{originX} and \italic{originY} to 
 appropriate values.   This method is used when the parent view wants to 
 line up the child view to a reference point.  For example lines of text 
@@ -1234,16 +1234,16 @@ positioned properly along that baseline.
 
 \indexi{View++Request new size} 
 
-\indexi{ \italic{view_WantNewSize}}
+\indexi{ \italic{view::WantNewSize}}
 
-\example{void view_WantNewSize(requestor, requestee) 
+\example{void view::WantNewSize(requestor, requestee) 
 
 struct view *requestor;  
 
 struct view *requestee;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_WantNewSize}  provides 
+\leftindent{\bold{Method description.}  \italic{view::WantNewSize}  provides 
 a method for a view, \italic{requestor} to request the view 
 \italic{requestee} to begin a desired size negotiation. 
 
@@ -1288,13 +1288,13 @@ method will be made; your class must provide a \italic{FullUpdate} method.
 
 \paragraph{Working with full update requests} \indexi{View++Full updates}
 
-\indexi{ \italic{view_FullUpdate}}
+\indexi{ \italic{view::FullUpdate}}
 
-\example{void view_FullUpdate(v, type, left, top, width, height) 
+\example{void view::FullUpdate(v, type, left, top, width, height) 
 
 struct view *v;  
 
-enum view_UpdateType type;  
+enum view::UpdateType type;  
 
 long left;  
 
@@ -1305,7 +1305,7 @@ long width;
 long height;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_FullUpdate} provides a 
+\leftindent{\bold{Method description.}  \italic{view::FullUpdate} provides a 
 method for communicating about the need for full updates.  For example, if 
 \italic{v} were a view in a window and the window changed size, a call to 
 the view's \italic{FullUpdate} method is made to notify the view \italic{v 
@@ -1313,11 +1313,11 @@ the view's \italic{FullUpdate} method is made to notify the view \italic{v
 type of update to be done.  It can be one of the following: 
 
 \formatnote{
-\italic{view_FullRedraw}\formatnote{  --  }The view should be completely 
+\italic{view::FullRedraw}\formatnote{  --  }The view should be completely 
 redrawn.  The parameters left, top, width and height are ignored.
 
 
-\italic{view_PartialRedraw}\formatnote{  --  }The view should be redrawn 
+\italic{view::PartialRedraw}\formatnote{  --  }The view should be redrawn 
 within the rectangle
 
 specified by the parameters \italic{left}, \italic{top}, \italic{width}, 
@@ -1328,7 +1328,7 @@ further partial redraws will follow.  A view receiving this call may
 defer the update until it receives the LastPartialRedraw.
 
 
-\italic{view_LastPartialRedraw}\formatnote{  --  }The view should be 
+\italic{view::LastPartialRedraw}\formatnote{  --  }The view should be 
 redrawn within the rectangle
 
 specified by the parameters \italic{left}, \italic{top}, \italic{width}, 
@@ -1337,13 +1337,13 @@ and \italic{height};
 this is the last partial redraw.
 
 
-\italic{view_MoveNoRedraw}\formatnote{  --  }The redraw request is 
+\italic{view::MoveNoRedraw}\formatnote{  --  }The redraw request is 
 occurring because the view
 
 is being moved.  If the view has posted cursors they should be reposted.
 
 
-\italic{view_Remove}\formatnote{  --  }The redraw request is occurring 
+\italic{view::Remove}\formatnote{  --  }The redraw request is occurring 
 because the view is
 
 being removed from the screen.   The view should remove all cursors
@@ -1354,7 +1354,7 @@ that it has posted.
 \bold{Usage.}  If you are creating a subclass of the class \italic{view}, 
 you should override \italic{view}'s \italic{FullUpdate} method.  If you 
 fail to supply this method, it will default to its parent method.  The 
-default method \italic{view_FullUpdate} is a no-op.  A view must call 
+default method \italic{view::FullUpdate} is a no-op.  A view must call 
 \italic{FullUpdate} for all of its child views. 
 
 }
@@ -1364,7 +1364,7 @@ default method \italic{view_FullUpdate} is a no-op.  A view must call
 
 \indexi{View++Requesting updates}
 
-\indexi{ \italic{view_WantUpdate}}\example{void view_WantUpdate(v, 
+\indexi{ \italic{view::WantUpdate}}\example{void view::WantUpdate(v, 
 updateView) 
 
 
@@ -1373,15 +1373,15 @@ struct view *v;
 struct view *updateView;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_WantUpdate} reqeusts 
+\leftindent{\bold{Method description.}  \italic{view::WantUpdate} reqeusts 
 an update for view \italic{updateView} from view \italic{v}.  This will 
 result in a later call to \italic{v}'s \italic{Update} method. 
 
 
 \bold{Usage.} If a view to update its image, it should call 
-\italic{view_WantUpdate} with both arguments set to itself.  You should 
-always use the \italic{view_WantUpdate} procedure to notify a parent view 
-that a view needs an update, rather than calling \italic{view_Update} 
+\italic{view::WantUpdate} with both arguments set to itself.  You should 
+always use the \italic{view::WantUpdate} procedure to notify a parent view 
+that a view needs an update, rather than calling \italic{view::Update} 
 directly.  \italic{WantUpdate} requests are passed up the view tree.  If a 
 view is interested in controlling the order of updates of its descendants, 
 it intercepts the update request, caching a pointer to the 
@@ -1423,10 +1423,10 @@ static void Center(hwv, key)
 
 \indexi{Updates} \indexi{View++Updates}
 
-\indexi{ \italic{view_Update}}\example{void view_Update(v) struct view *v;} 
+\indexi{ \italic{view::Update}}\example{void view::Update(v) struct view *v;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_Update} is used to do 
+\leftindent{\bold{Method description.}  \italic{view::Update} is used to do 
 an incremental update to a view's image.  The size of the view and its 
 graphics characteristics will not have changed since the last call to 
 \italic{FullUpdate}. 
@@ -1436,7 +1436,7 @@ graphics characteristics will not have changed since the last call to
 \italic{Update} directly; instead, you should call \italic{WantUpdate} to 
 request an update from your parent.  This will eventually result in a call 
 to the view's \italic{Update} method.  The default method 
-\italic{view_Update} is a no-op. 
+\italic{view::Update} is a no-op. 
 
 
 \bold{Example.}  The following method is the \italic{Update} method for the 
@@ -1484,8 +1484,8 @@ void helloworldview__Update(hwv) struct helloworldview *hwv; \{
 
 \indexi{Data objects++Observing} 
 
-\indexi{ \italic{view_ObservedChange}}\example{void 
-view_ObservedChanged(v,changedobj, status) 
+\indexi{ \italic{view::ObservedChange}}\example{void 
+view::ObservedChanged(v,changedobj, status) 
 
 struct view *v;  
 
@@ -1494,12 +1494,12 @@ struct observable *changedobj;
 long status;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_ObservedChanged} 
+\leftindent{\bold{Method description.}  \italic{view::ObservedChanged} 
 checks the value of \italic{status}.  If \italic{status} has the value 
-\italic{observable}_\smaller{OBJECTDESTROYED}, \italic{view_ObservedChanged} 
+\italic{observable}_\smaller{OBJECTDESTROYED}, \italic{view::ObservedChanged} 
 removes the \italic{changedobj} from \italic{v}; otherwise it calls 
-\italic{view_WantUpdate} to request an update for \italic{v}. 
- \italic{view_ObservedChanged} overrides 
+\italic{view::WantUpdate} to request an update for \italic{v}. 
+ \italic{view::ObservedChanged} overrides 
 \italic{observable_ObservedChanged}. 
 
 }
@@ -1517,7 +1517,7 @@ At any one instance, a single view in the view tree has the input focus.
 
 \indexi{View++Requesting input focus} 
 
-\indexi{ \italic{view_WantInputFocus}}\example{void view_WantInputFocus(v, 
+\indexi{ \italic{view::WantInputFocus}}\example{void view::WantInputFocus(v, 
 requester) 
 
 struct view *v;  
@@ -1525,7 +1525,7 @@ struct view *v;
 struct view *requester;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_WantInputFocus}  is 
+\leftindent{\bold{Method description. }\italic{view::WantInputFocus}  is 
 used when the view wants the input focus. 
 
 
@@ -1544,13 +1544,13 @@ default method is not overridden.
 
 \indexi{View++Receiving input focus} 
 
-\indexi{ \italic{view_ReceiveInputFocus}}\example{void 
-view_ReceiveInputFocus(v) 
+\indexi{ \italic{view::ReceiveInputFocus}}\example{void 
+view::ReceiveInputFocus(v) 
 
 struct view *v;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_ReceiveInputFocus} 
+\leftindent{\bold{Method description.}  \italic{view::ReceiveInputFocus} 
 provides a way for the \italic{Interaction Manager} to inform an object 
 that it has received the input focus.  This method must post the keystates 
 and menus associated with the view.  This method should also set a flag in 
@@ -1590,14 +1590,14 @@ the menus.
 
 \indexi{View++Losing input focus} 
 
-\indexi{ \italic{view_LoseInputFocus}}\example{void view_LoseInputFocus (v) 
+\indexi{ \italic{view::LoseInputFocus}}\example{void view::LoseInputFocus (v) 
 
 struct view *v;} 
 
 
 \leftindent{\bold{Method description. }The \italic{Interaction Manger} will 
-call a view's \italic{view_LoseInputFocus} to notify the view \italic{v} 
-that it is losing the input focus.  The method \italic{view_LoseInputFocus} 
+call a view's \italic{view::LoseInputFocus} to notify the view \italic{v} 
+that it is losing the input focus.  The method \italic{view::LoseInputFocus} 
 need only cause the view to dehighlight itself, indicating that it no 
 longer has the input focus. 
 
@@ -1634,13 +1634,13 @@ mouse movement when no buttons are depressed.
 
 \paragraph{Mouse hits} \indexi{Mouse hits} \indexi{View++Mouse hits}
 
-\indexi{ \italic{view_Hit}}
+\indexi{ \italic{view::Hit}}
 
-\example{struct view *view_Hit(v, action, x, y, numberOfClicks)
+\example{struct view *view::Hit(v, action, x, y, numberOfClicks)
 
 struct view *v;  
 
-enum view_MouseAction action;  
+enum view::MouseAction action;  
 
 long x;  
 
@@ -1649,32 +1649,32 @@ long y;
 long numberOfClicks;} 
 
 
-\leftindent{\bold{Method description.}  \italic{view_Hit} notifies view 
+\leftindent{\bold{Method description.}  \italic{view::Hit} notifies view 
 \italic{v} that a mouse hit has occurred within the boundaries of its 
 visual rectangle.  The parameter \italic{action} defines the type of mouse 
 input that has occurred and can have the following values: 
 
 
-\formatnote{\italic{view_NoMouseEvent}\formatnote{  --  }No mouse action.
+\formatnote{\italic{view::NoMouseEvent}\formatnote{  --  }No mouse action.
 
 
-\italic{view_LeftDown}\formatnote{  --  }Left button pressed down.
+\italic{view::LeftDown}\formatnote{  --  }Left button pressed down.
 
 
-\italic{view_LeftUp}\formatnote{  --  }Left button let up.
+\italic{view::LeftUp}\formatnote{  --  }Left button let up.
 
 
-\italic{view_LeftMovement}\formatnote{  --  }Left button down and mouse has 
+\italic{view::LeftMovement}\formatnote{  --  }Left button down and mouse has 
 moved.
 
 
-\italic{view_RightDown}\formatnote{  --  }Right button pressed down.
+\italic{view::RightDown}\formatnote{  --  }Right button pressed down.
 
 
-\italic{view_RightUp}\formatnote{  --  }Right button let up.
+\italic{view::RightUp}\formatnote{  --  }Right button let up.
 
 
-\italic{view_RightMovement}\formatnote{  --  }Right button down and mouse 
+\italic{view::RightMovement}\formatnote{  --  }Right button down and mouse 
 has moved.
 
 }
@@ -1684,11 +1684,11 @@ mouse event, relative to the views own coordinate system.  The parameter
 at that location. 
 
 
-The method \italic{view_Hit} is a no-op method  that accepts the mouse 
+The method \italic{view::Hit} is a no-op method  that accepts the mouse 
 event, takes no action and returns a pointer to itself. 
 
 
-\bold{Return value.}  \italic{view_Hit} returns the view that accepted the 
+\bold{Return value.}  \italic{view::Hit} returns the view that accepted the 
 mouse event.  The return value is used to pass all subsequent mouse events, 
 until and including the up transition to that view.  If the view accepts 
 the mouse event it should return itself.  If it passes the event to one of 
@@ -1698,17 +1698,17 @@ method.
 
 \bold{Usage.}  If you are creating a subclass of the class \italic{view} 
 and you want to respond to any of the mouse actions specified by 
-\italic{view_MouseAction}, you must override this method.  If a view is 
+\italic{view::MouseAction}, you must override this method.  If a view is 
 passing a mouse event to one of its children it must translate the 
 coordinates from its coordinate space to its child's coordinate space 
-(using the methods \italic{view_EnclosedXToLocalX} and 
-\italic{view_EnclosedYToLocalY}, described in \bold{Graphics}).  See 
-Example 2, Vol. I for more information about \italic{view_Hit}. 
+(using the methods \italic{view::EnclosedXToLocalX} and 
+\italic{view::EnclosedYToLocalY}, described in \bold{Graphics}).  See 
+Example 2, Vol. I for more information about \italic{view::Hit}. 
 
 
 \bold{Example.}  The example below concerns mouse input for the view 
 \italic{helloworldview}.  When either mouse button is hit 
-(\smaller{view_LeftDown, view_RightDown}), \italic{newx}, \italic{newy} is 
+(\smaller{view::LeftDown, view::RightDown}), \italic{newx}, \italic{newy} is 
 calculated and made the new "current" position for the text string.  Then, 
 the procedure requests an update so that the string can be redrawn in the 
 new position. 
@@ -1717,11 +1717,11 @@ new position.
 \programexample{
 struct helloworldview *helloworldview__Hit(hwv, action, x, y,
 
-	numberOfClicks) struct helloworldview *hwv;  enum view_MouseAction action; 
+	numberOfClicks) struct helloworldview *hwv;  enum view::MouseAction action; 
  long x;  long y;  long numberOfClicks; /* unused */ \{
 
 
-    if (action == view_LeftDown || action == view_RightDown)  \{
+    if (action == view::LeftDown || action == view::RightDown)  \{
 
 	hwv->movingString = TRUE; 
 
@@ -1729,7 +1729,7 @@ struct helloworldview *helloworldview__Hit(hwv, action, x, y,
 
     else if (hwv->movingString)  \{
 
-	if (action == view_LeftUp || action == view_RightUp)  \{
+	if (action == view::LeftUp || action == view::RightUp)  \{
 
 	    hwv->newX = x; 
 
@@ -1765,16 +1765,16 @@ method is called it can add in its own keystate that overrides the keystate
 being passed up by its child. 
 
 
-\example{void view_PostKeyState(v, kstate)
+\example{void view::PostKeyState(v, kstate)
 
 \indexi{View++Posting key state}  
 
-\indexi{ \italic{view_PostKeyState}}
+\indexi{ \italic{view::PostKeyState}}
 
 struct view *v;  struct keystate *kstate;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_PostKeyState} posts the 
+\leftindent{\bold{Method description. }\italic{view::PostKeyState} posts the 
 keystate \italic{kstate} for the view \italic{v}. 
 
 
@@ -1799,16 +1799,16 @@ control the set of menus posted by its descendants by adding in its own
 menus and passing the combined set up the tree. 
 
 
-\example{void view_PostMenus(v, menulist)
+\example{void view::PostMenus(v, menulist)
 
 \indexi{View++Posting menus} 
 
-\indexi{ \italic{view_PostMenus}}
+\indexi{ \italic{view::PostMenus}}
 
 struct view *v;  struct menulist *menulist;} 
 
 
-\leftindent{\bold{Method description.  }  \italic{view_PostMenus}  is used 
+\leftindent{\bold{Method description.  }  \italic{view::PostMenus}  is used 
 to post the menus in\italic{ menulist} for the view \italic{v}. 
 
 
@@ -1841,7 +1841,7 @@ and \bold{Scroll}.
 
 \indexi{View++Posting cursors} 
 
-\indexi{ \italic{view_PostCursor}}\example{void view_PostCursor(v, rect, c) 
+\indexi{ \italic{view::PostCursor}}\example{void view::PostCursor(v, rect, c) 
 
 struct view *v;  
 
@@ -1850,7 +1850,7 @@ struct rectangle *rect;
 struct cursor *c;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_PostCursor} requests 
+\leftindent{\bold{Method description. }\italic{view::PostCursor} requests 
 the display of the cursor \italic{c} whenever the user moves the mouse 
 within the \italic{v}'s rectangle \italic{rect}.  The view can only post a 
 cursor over its assigned rectangle.  This request is passed up the view 
@@ -1892,16 +1892,16 @@ myview__FinalizeObject(...)  \{ ...  cursor_Destroy(mv->myCursor);  ...  \}
 }
 }\paragraph{Retracting a cursor}  \indexi{View++Retracting cursors}
 
-\indexi{ \italic{view_RetractCursor}}
+\indexi{ \italic{view::RetractCursor}}
 
-\example{void view_RetractCursor(v, c) 
+\example{void view::RetractCursor(v, c) 
 
 struct view *v;
 
 struct cursor *c;} 
 
 \leftindent{
-\bold{Method description.}  \italic{view_RetractCursor}  retracts 
+\bold{Method description.}  \italic{view::RetractCursor}  retracts 
 \italic{v}'s cursor \italic{c}. 
 
 }
@@ -1911,10 +1911,10 @@ struct cursor *c;}
 
 \indexi{View++Retracting all cursors} 
 
-\indexi{ \italic{view_RetractViewCursors}}
+\indexi{ \italic{view::RetractViewCursors}}
 
 
-\example{void view_RetractViewCursors(v, requestor) 
+\example{void view::RetractViewCursors(v, requestor) 
 
 struct view *v;  
 
@@ -1922,7 +1922,7 @@ struct view *requestor;}
 
 
 \leftindent{
-\bold{Method Description.}  \italic{view_RetractViewCursors} retracts all 
+\bold{Method Description.}  \italic{view::RetractViewCursors} retracts all 
 of the cursors associated with the view \italic{requestor} (but not with 
 its children). 
 
@@ -1935,7 +1935,7 @@ before calling the child's \italic{FullUpdate} routine.
 \italic{v}: 
 
 
-\example{view_RetractViewCursors(v, v);} 
+\example{view::RetractViewCursors(v, v);} 
 
 }
 
@@ -1969,15 +1969,15 @@ providing the handler.
 
 \indexi{View++Requesting handler}  
 
-\indexi{ \italic{view_WantHandler}}\example{struct basicobject 
-*view_WantHandler(v, handlerName)
+\indexi{ \italic{view::WantHandler}}\example{struct basicobject 
+*view::WantHandler(v, handlerName)
 
 struct view *v;  
 
 char *handlerName;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_WantHandler} requests 
+\leftindent{\bold{Method description. }\italic{view::WantHandler} requests 
 the handler, \italic{handlerName}.  The default method is to pass the 
 request up the view tree.  This method is normally overridden if the view 
 is going to provide a handler. 
@@ -1997,8 +1997,8 @@ is going to provide a handler.
 
 \indexi{View++Posting default handler}  
 
-\indexi{ \italic{view_PostDefaultHandler}}\example{void 
-view_PostDefaultHandler(v, handlerName, handler)
+\indexi{ \italic{view::PostDefaultHandler}}\example{void 
+view::PostDefaultHandler(v, handlerName, handler)
 
 struct view *v;  
 
@@ -2007,7 +2007,7 @@ char *handlerName;
 struct basicobject *handler;} 
 
 \leftindent{
-\bold{Method description.}  \italic{view_PostDefaultHandler} posts a 
+\bold{Method description.}  \italic{view::PostDefaultHandler} posts a 
 default handler to the parent view.  The default method passes this 
 information to its parent.  This method is overridden only if a view is 
 posting its own default handles and want to prevent its children from 
@@ -2057,15 +2057,15 @@ created earlier.
 \indexi{View++Getting application layer} 
 
 \indexi{ \italic{view _GetApplicationLayer}}\example{struct view 
-*view_GetApplicationLayer(v) 
+*view::GetApplicationLayer(v) 
 
 struct view *v;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_GetApplicationLayer} 
+\leftindent{\bold{Method description. }\italic{view::GetApplicationLayer} 
 provides a method that allows a view \italic{v} to  present one view when 
 used in an application and another when used as a component in a program. 
- \italic{view_GetApplicationLayer} assumes that the program component view 
+ \italic{view::GetApplicationLayer} assumes that the program component view 
 of \italic{v} and the application view are the same. 
 
 
@@ -2100,14 +2100,14 @@ struct view *textview__GetApplicationLayer(txtview) struct textview
 \paragraph{Deleting the application layer} \indexi{View++Deleting 
 application layer}
 
-\indexi{ \italic{view_DeleteApplicationLayer}}
+\indexi{ \italic{view::DeleteApplicationLayer}}
 
-\example{void view_DeleteApplicationLayer(v) 
+\example{void view::DeleteApplicationLayer(v) 
 
 struct view *v;} 
 
 
-\leftindent{\bold{Method description. }\italic{view_DeleteApplicationLayer} 
+\leftindent{\bold{Method description. }\italic{view::DeleteApplicationLayer} 
 destroys the view \italic{v}'s application layer. 
 
 
@@ -2118,7 +2118,7 @@ method with a definition tailored to your application.
 
 
 \bold{Example.}   Since \italic{textview} overrides 
-\italic{view_GetApplicationLayer}, it must provide an appropriate 
+\italic{view::GetApplicationLayer}, it must provide an appropriate 
 \italic{textview_DeleteApplicationLayer}: 
 
 \example{
@@ -2154,7 +2154,7 @@ views.  The following describes the current call used for printing.
 
 \indexi{View++Printing} 
 
-\indexi{ \italic{view_Print}}\example{void view_Print(v, file, processor, 
+\indexi{ \italic{view::Print}}\example{void view::Print(v, file, processor, 
 finalFormat, topLevel) struct view *v;  
 
 FILE *file;  
@@ -2167,7 +2167,7 @@ boolean topLevel;}
 
 
 
-\leftindent{\bold{Method description.  }\italic{view_Print} is called when 
+\leftindent{\bold{Method description.  }\italic{view::Print} is called when 
 a view is to be printed out.  The view is to generate a description of 
 itself that can be sent through \italic{ditroff}.  The flag 
 \italic{topLevel} is set to true if this is the top level view being 
@@ -2175,7 +2175,7 @@ printed.
 
 
 \bold{Usage.}  If  you want to print a view \italic{v}, you would call 
-\italic{view_Print} with the name of the view, its file, the processor and 
+\italic{view::Print} with the name of the view, its file, the processor and 
 the final format to be used, and whether it is a top level view or not. 
 
 
@@ -2189,9 +2189,9 @@ the final format to be used, and whether it is a top level view or not.
 \paragraph{Getting a view's scroll bar interface}\indexi{View++Scroll bar} 
  
 
-\indexi{ \italic{view_GetInterface}}
+\indexi{ \italic{view::GetInterface}}
 
-\example{char *view_GetInterface(v, type)
+\example{char *view::GetInterface(v, type)
 
 struct view *v;  
 
@@ -2221,10 +2221,10 @@ The following methods provide the interface between views and the resource
 facility. 
 
 
-\paragraph{Setting the name for a view} \indexi{ \italic{view_SetName}}
+\paragraph{Setting the name for a view} \indexi{ \italic{view::SetName}}
 
 
-\example{void view_SetName (v, name) 
+\example{void view::SetName (v, name) 
 
 struct view  *v;  
 
@@ -2237,10 +2237,10 @@ name for the view is automatically generated.
 
 }
 
-\paragraph{Getting the name for a view} \indexi{ \italic{view_GetName}}
+\paragraph{Getting the name for a view} \indexi{ \italic{view::GetName}}
 
 
-\example{struct atomlist *view_GetName (v) 
+\example{struct atomlist *view::GetName (v) 
 
 struct view  *v;} 
 
@@ -2252,10 +2252,10 @@ contains a reference to the name associated with the view \italic{v}.
 \begindata{bp,17303392}
 \enddata{bp,17303392}
 \view{bpv,17303392,15,0,0}
-\paragraph{Getting a class for a view} \indexi{ \italic{view_GetClass}}
+\paragraph{Getting a class for a view} \indexi{ \italic{view::GetClass}}
 
 
-\example{struct atomlist *view_GetClass (v) 
+\example{struct atomlist *view::GetClass (v) 
 
 struct view  *v;} 
 
@@ -2267,10 +2267,10 @@ contains a pointer to the name of \italic{v}'s class.
 
 
 \paragraph{Getting a parameter for a view} 
-\indexi{ \italic{view_GetParameter}}
+\indexi{ \italic{view::GetParameter}}
 
 
-\example{short view_GetParameter (v, name, type, data) 
+\example{short view::GetParameter (v, name, type, data) 
 
 struct view  *v;  
 
@@ -2289,10 +2289,10 @@ if at all possible.  This method need not be overridden.
 
 }
 
-\paragraph{Getting a resource for a view} \indexi{ \italic{view_GetResource}}
+\paragraph{Getting a resource for a view} \indexi{ \italic{view::GetResource}}
 
 
-\example{short view_GetResource(v, name, class, type, data )
+\example{short view::GetResource(v, name, class, type, data )
 
 struct view *v;  
 
@@ -2318,9 +2318,9 @@ provide its own resource manager.
 \enddata{bp,17372768}
 \view{bpv,17372768,16,0,0}
 \paragraph{Getting more than one parameter for a view} 
-\indexi{ \italic{view_GetManyParameters}}
+\indexi{ \italic{view::GetManyParameters}}
 
-\example{void view_GetManyParameters(v, resources, name, class)
+\example{void view::GetManyParameters(v, resources, name, class)
 
 struct view * v;  
 
@@ -2331,7 +2331,7 @@ struct atomlist * name;
 struct atomlist * class;} 
 
 \leftindent{
-\bold{Method description.}  \italic{view_GetManyParameters}  provides a 
+\bold{Method description.}  \italic{view::GetManyParameters}  provides a 
 mechanism for requesting multiple resources.  The parameter 
 \italic{resources} is a list of items containing the \italic{name} and 
 \italic{type} of resource desired, as well as a \italic{data} and 
@@ -2341,10 +2341,10 @@ whether the resource was found.  This method is rarely overridden.
 }
 
 \paragraph{Posting a resource for a view} 
-\indexi{ \italic{view_PostResource}}
+\indexi{ \italic{view::PostResource}}
 
 
-\example{void view_PostResource (v, path, type, data) 
+\example{void view::PostResource (v, path, type, data) 
 
 struct view *v;  
 
@@ -2367,12 +2367,12 @@ own resource manager.
 
 \paragraph{Getting the interaction manager for a view tree}
 
-\indexi{ \italic{view_GetIM}}  
+\indexi{ \italic{view::GetIM}}  
 
 \indexi{View++Getting interaction manager}  
 
 \indexi{View tree++Getting  interaction manage}\example{struct im 
-*view_GetIM (v) 
+*view::GetIM (v) 
 
 struct view *v;} 
 

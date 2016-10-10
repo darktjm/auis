@@ -117,20 +117,20 @@ static /*===*/class ltv *SELF;
 #define  EnclosureHeight	    (self->enclosure.height)
 
 struct NO_DLL_EXPORT ltv_private {
-  static void Begin_Chain_Button( class ltv *self, class suite  *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks );
-  static void End_Chain_Button( class ltv  *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void Begin_Chain_Button( class ltv *self, class suite  *suite, struct suite_item     *item, long type, enum view::MouseAction  action, long x, long y, long clicks );
+  static void End_Chain_Button( class ltv  *self, class suite  *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks );
   static void End_Chain( class ltv *self );
-  static void Delete_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-  static void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-  static void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-  static void Right_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void Delete_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks );
+  static void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks );
+  static void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks );
+  static void Right_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks );
 
   static void Detect( class ltv  *self, class suite *suite, struct suite_item *item, long    datum );
   static void Initialize( class ltv  *self );
-  static void Build_Chain( class ltv  *self, enum view_MouseAction action, long  x, long	 y, long clicks );
+  static void Build_Chain( class ltv  *self, enum view::MouseAction action, long  x, long	 y, long clicks );
   static int Which_Figure_Point( class ltv *self, zip_type_figure figure, zip_type_pane       pane, zip_type_pixel x , zip_type_pixel y );
-  static void Modify_Chain( class ltv *self, enum view_MouseAction action, long x, long	 y, long clicks );
-  static void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x, long y , long  clicks );
+  static void Modify_Chain( class ltv *self, enum view::MouseAction action, long x, long	 y, long clicks );
+  static void Track_Enclosure( class ltv *self, enum view::MouseAction action, long x, long y , long  clicks );
   static void Cancel_Enclosure( class ltv *self );
   static void Clear_Enclosure( class ltv *self );
   static void Draw_Enclosure( class ltv  *self );
@@ -355,22 +355,22 @@ ltv::LoseInputFocus( )
     OUT(ltv_LoseInputFocus);
 }
 
-view_DSattributes 
-ltv::DesiredSize( long given_width , long  given_height, enum view_DSpass pass, long *desired_width , long *desired_height )
+view::DSattributes 
+ltv::DesiredSize( long given_width , long  given_height, enum view::DSpass pass, long *desired_width , long *desired_height )
 {
     IN(ltv_DesiredSize);
     *desired_width  = 50;
     *desired_height = 100;
     OUT(ltv_DesiredSize);
-    return  view_Fixed;
+    return  view::Fixed;
 }
 
 void
-ltv::FullUpdate( enum view_UpdateType type, long left , long top , long width , long height )
+ltv::FullUpdate( enum view::UpdateType type, long left , long top , long width , long height )
 {
     class ltv *self=this;
     IN(ltv_FullUpdate);
-    if ( type == view_FullRedraw || type == view_LastPartialRedraw )
+    if ( type == view::FullRedraw || type == view::LastPartialRedraw )
     {
 	ltv_private::Cancel_Enclosure( this );
 	(this)->GetVisualBounds(  Block );
@@ -493,7 +493,7 @@ ltv::Update( )
 }
 
 class view *
-ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
+ltv::Hit( enum view::MouseAction action, long  x , long  y , long clicks )
 {
     long x_delta, y_delta;
     class view *hit = (class view *) this;
@@ -504,7 +504,7 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
     if ( y < 0 ) y = 0;
     if ( x > Left+Width ) x = Left+Width;
     if ( y > Top+Height ) y = Top+Height;
-    if ( y < ButtonTop  &&  !InputFocus  &&  action == view_LeftDown )
+    if ( y < ButtonTop  &&  !InputFocus  &&  action == view::LeftDown )
 	(this)->WantInputFocus(  this );
     if ( InputFocus )
     { DEBUG(InputFocus);
@@ -518,10 +518,10 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
     {
 	switch ( action )
 	{
-	    case view_LeftDown:
+	    case view::LeftDown:
 		ltv_private::Clear_Chain_Names( this );
-	    case view_LeftMovement:
-	    case view_LeftUp:
+	    case view::LeftMovement:
+	    case view::LeftUp:
 		if ( Building )
 		{ DEBUG(Building);
 		ltv_private::Build_Chain( this, action, x, y, clicks );
@@ -529,7 +529,7 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
 		else
 		{ DEBUG(NotBuilding);
 		ltv_private::Passivate( this, end_code );
-		if ( Modifying  ||  (action == view_LeftDown  &&  
+		if ( Modifying  ||  (action == view::LeftDown  &&  
 				     (Figure = (ZipView)->Which_Pane_Figure(  x, y, ForegroundPane ))) )
 		{ DEBUGst(Figure-name, Figure->zip_figure_name);
 		ltv_private::Modify_Chain( this, action, x, y, clicks );
@@ -551,14 +551,14 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
 		    ltv_private::Passivate( this, rename_code );
 		}
 		break;
-	    case view_RightDown:
+	    case view::RightDown:
 		ltv_private::Cancel_Enclosure( this );
 		(ZipView)->Initiate_Panning(  ForegroundPane, x, y, 0 );
 		break;
-	    case view_RightMovement:
+	    case view::RightMovement:
 		(ZipView)->Continue_Panning(  ForegroundPane, x, y );
 		break;
-	    case view_RightUp:
+	    case view::RightUp:
 		(ZipView)->Terminate_Panning(  ForegroundPane, x, y, &x_delta, &y_delta, 0 );
 		if ( abs(x_delta)  ||  abs(y_delta) )
 		{
@@ -582,7 +582,7 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
     return  hit;
 }
 
-void ltv_private::Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y , long clicks )
+void ltv_private::Build_Chain( class ltv *self, enum view::MouseAction action, long	x , long y , long clicks )
 {
     long		      X, Y, status = 0;
     long neighbor = 0;
@@ -594,11 +594,11 @@ void ltv_private::Build_Chain( class ltv *self, enum view_MouseAction action, lo
     IN(Build_Chain);
     X = (ZipView)->X_Pixel_To_Point(  ForegroundPane, NULL, x );
     Y = (ZipView)->Y_Pixel_To_Point(  ForegroundPane, NULL, y );
-    if ( action != view_LeftMovement )
+    if ( action != view::LeftMovement )
 	neighbor = Neighbor( self, x, y, &neighbor_figure, &neighbor_x, &neighbor_y, &neighbor_point );
     switch ( action )
     {
-	case view_LeftDown:
+	case view::LeftDown:
 	    DEBUG(LeftDown);
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, invisible_cursor, "aptcsr20" );
 	    if ( Build )
@@ -630,10 +630,10 @@ void ltv_private::Build_Chain( class ltv *self, enum view_MouseAction action, lo
 		++Point;
 	    }
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DEBUG(LeftMovement);
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    DEBUG(LeftUp);
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, build_cursor, "icon12" );
 	    if ( Figure  &&  neighbor )
@@ -697,7 +697,7 @@ ltv_private::Which_Figure_Point( class ltv	*self, zip_type_figure figure, zip_ty
 }
 
 
-void ltv_private::Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long y , long clicks )
+void ltv_private::Modify_Chain( class ltv *self, enum view::MouseAction action, long	 x , long y , long clicks )
 {
     long		      X, Y, status = 0;
     static long		      down_x, down_y, down_X, down_Y, moved;
@@ -707,7 +707,7 @@ void ltv_private::Modify_Chain( class ltv *self, enum view_MouseAction action, l
     Y = (ZipView)->Y_Pixel_To_Point(  ForegroundPane, NULL, y );
     switch ( action )
     {
-	case view_LeftDown:
+	case view::LeftDown:
 	    DEBUG(LeftDown);
 	    Cancel_Enclosure( self );
 	    moved = false;
@@ -730,12 +730,12 @@ void ltv_private::Modify_Chain( class ltv *self, enum view_MouseAction action, l
 		}
 	    }
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DEBUG(LeftMovement);
 	    if ( abs(x - down_x) > tolerance  ||  abs(y - down_y) > tolerance )
 		moved = true;
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    DEBUG(LeftUp);
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, normal_cursor, "aptcsr20" );
 	    Modifying = false;
@@ -757,13 +757,13 @@ void ltv_private::Modify_Chain( class ltv *self, enum view_MouseAction action, l
     OUT(Modify_Chain);
 }
 
-void ltv_private::Track_Enclosure( class ltv *self, enum view_MouseAction action, long x , long		       y , long clicks )
+void ltv_private::Track_Enclosure( class ltv *self, enum view::MouseAction action, long x , long		       y , long clicks )
 {
     IN(Track_Enclosure);
     Clear_Enclosure( self );
     switch ( action )
     {
-	case view_LeftDown:
+	case view::LeftDown:
 	    Tracking = true;
 	    EnclosureExposed = false;
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, enclosure_cursor, "aptcsr20" );
@@ -771,7 +771,7 @@ void ltv_private::Track_Enclosure( class ltv *self, enum view_MouseAction action
 	    EnclosureTop = y;
 	    EnclosureWidth = EnclosureHeight = 0;
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if ( Tracking  &&
 		(abs(x - EnclosureLeft) > tolerance  ||  abs(y - EnclosureTop) > tolerance)  )
 	    {
@@ -780,7 +780,7 @@ void ltv_private::Track_Enclosure( class ltv *self, enum view_MouseAction action
 		EnclosureHeight = y - EnclosureTop;
 	    }
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    Tracking = false;
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, normal_cursor, "aptcsr20" );
 	    if ( EnclosureExposed )
@@ -1070,10 +1070,10 @@ void ltv_private::Clear_Chain_Names( class ltv  *self )
 OUT(Clear_Chain_Names);
 }
 
-void ltv_private::Begin_Chain_Button( class ltv  *self, class suite   *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks )
+void ltv_private::Begin_Chain_Button( class ltv  *self, class suite   *suite, struct suite_item     *item, long type, enum view::MouseAction  action, long x, long y, long clicks )
 {
     IN(Begin_Chain_Button);
-    if ( type == suite_ItemObject  &&  action == view_LeftUp )
+    if ( type == suite_ItemObject  &&  action == view::LeftUp )
     {
 	(self)->WantInputFocus(  self );
 	Cancel_Enclosure( self );
@@ -1088,10 +1088,10 @@ void ltv_private::Begin_Chain_Button( class ltv  *self, class suite   *suite, st
     OUT(Begin_Chain_Button);   
 }
 
-void ltv_private::End_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::End_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks )
 {
     IN(End_Chain_Button);
-    if ( Building  &&  type == suite_ItemObject  &&  action == view_LeftUp )
+    if ( Building  &&  type == suite_ItemObject  &&  action == view::LeftUp )
     {
 	(self)->WantInputFocus(  self );
 	End_Chain( self );
@@ -1112,13 +1112,13 @@ void ltv_private::End_Chain( class ltv  *self )
     OUT(End_Chain);
 }
 
-void ltv_private::Delete_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Delete_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks )
 {
     IN(Delete_Chain_Button);
     Building = false;
     if ( Figure )
     {
-	if ( type == suite_ItemObject  &&  action == view_LeftUp )
+	if ( type == suite_ItemObject  &&  action == view::LeftUp )
 	{
 	    (self)->WantInputFocus(  self );
 	    (ZipView)->Clear_Figure(  Figure, ForegroundPane );
@@ -1169,10 +1169,10 @@ ltv_private::Rename_Exception( class ltv  *self, char *facility, long  status  )
      return  0;
 }
 
-void ltv_private::Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks )
 {
     IN(Rename_Chain_Button);
-    if ( type == suite_ItemObject  &&  action == view_LeftUp )
+    if ( type == suite_ItemObject  &&  action == view::LeftUp )
     {
 	(self)->WantInputFocus(  self );
 	Name_Chain( self );
@@ -1180,10 +1180,10 @@ void ltv_private::Rename_Chain_Button( class ltv *self, class suite *suite, stru
     OUT(Rename_Chain_Button); 
 }
 
-void ltv_private::Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view::MouseAction action, long x, long y, long clicks )
 {
     IN(Left_Chain_Button);
-    if ( type == suite_ItemObject  &&  action == view_LeftUp )
+    if ( type == suite_ItemObject  &&  action == view::LeftUp )
     {
 /*===*/
 	(self)->WantInputFocus(  self );
@@ -1192,10 +1192,10 @@ void ltv_private::Left_Chain_Button( class ltv *self, class suite *suite, struct
     OUT(Left_Chain_Button); 
 }
 
-void ltv_private::Right_Chain_Button( class ltv *self, class suite	  *suite, struct suite_item	      *item, long type, enum view_MouseAction   action, long x, long y, long clicks )
+void ltv_private::Right_Chain_Button( class ltv *self, class suite	  *suite, struct suite_item	      *item, long type, enum view::MouseAction   action, long x, long y, long clicks )
 {
     IN(Right_Chain_Button);
-    if ( type == suite_ItemObject  &&  action == view_LeftUp )
+    if ( type == suite_ItemObject  &&  action == view::LeftUp )
     {
 /*===*/
 	(self)->WantInputFocus(  self );
@@ -1339,7 +1339,7 @@ void ltv_private::Show_Background( class ltv *self )
     {
 	(RasterView)->InsertViewSize(  self,
 				     BackgroundLeftX, BackgroundTopY, BackgroundWidth, height );
-	(RasterView)->FullUpdate(  view_FullRedraw,
+	(RasterView)->FullUpdate(  view::FullRedraw,
 				 BackgroundLeftX, BackgroundTopY, BackgroundWidth, height );
 	if ( BackgroundLight )
 	    Lighten_Background( self );

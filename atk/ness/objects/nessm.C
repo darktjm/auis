@@ -30,7 +30,7 @@ static const char keys[]="keys";
 
 ATKdefineRegistry(nessm, ATK, nessm::InitializeClass);
 
-static const char *mousehits(enum view_MouseAction  act);
+static const char *mousehits(enum view::MouseAction  act);
 static long InsertKey(class ness  *n, class mark  *m, long  pos, char  key);
 static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *proc, long  rock);
 static void RegionToPrintable(class ness  *n, long  pos , long  len);
@@ -38,19 +38,19 @@ static struct action *QueueAnswers(class ness  *n, struct action  *look, class m
 static void DoConv(class view  *self, long  rock);
 
 
-static const char *mousehits(enum view_MouseAction  act) {
+static const char *mousehits(enum view::MouseAction  act) {
     switch(act) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    return "mouseleftdown";
-	case view_LeftUp:
+	case view::LeftUp:
 	    return "mouseleftup";
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    return "mouseleftmove";
-	case view_RightDown:
+	case view::RightDown:
 	    return "mouserightdown";
-	case view_RightUp:
+	case view::RightUp:
 	    return "mouserightup";
-	case view_RightMovement:
+	case view::RightMovement:
 	    return "mouserightmove";
 	default:
 	    return "ERROR";

@@ -557,13 +557,13 @@ suite::Update( )
 }
 
 void
-suite::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
+suite::FullUpdate( enum view::UpdateType  type, long  left , long  top , long  width , long  height )
 {
     class suite *self=this;struct rectangle *curse_rect = NULL, title;
 
   IN(suite_FullUpdate);
   graphicIsMono = ((this)->GetDrawable())->DisplayClass() & graphic::Monochrome;
-  if(type != view_FullRedraw && type != view_LastPartialRedraw) 
+  if(type != view::FullRedraw && type != view::LastPartialRedraw) 
       return;
   (this)->GetVisualBounds( &Bounds);
   (this)->GetVisualBounds( &Container);
@@ -620,12 +620,12 @@ suite::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  wi
 
     (Scroll)->InsertView( this, &ScrollRect);
     SetViewColors((class view *) Scroll, &SuiteForeground, &SuiteBackground);
-    (Scroll)->FullUpdate( view_FullRedraw, 0, 0, ScrollRect.width, ScrollRect.height);
+    (Scroll)->FullUpdate( view::FullRedraw, 0, 0, ScrollRect.width, ScrollRect.height);
   }
   else {
       (SetView)->InsertView( this, &Container);
       SetViewColors((class view *) SetView, &SuiteForeground, &SuiteForeground);
-      (SetView)->FullUpdate( view_FullRedraw, 0, 0, ContainerWidth, ContainerHeight);
+      (SetView)->FullUpdate( view::FullRedraw, 0, 0, ContainerWidth, ContainerHeight);
   }
   if(Cursor) 
       (this)->PostCursor( curse_rect, Cursor);
@@ -707,10 +707,10 @@ DrawTitle( class suite  *self, struct rectangle  *rect )
     (TitleViewObject)->LinkTree( self);
     (TitleViewObject)->InsertView( self, rect);
     SetViewColors((class view *) TitleViewObject, &TitleForeground, &TitleBackground);
-    (TitleViewObject)->FullUpdate( view_FullRedraw, 0, 0, rect->width, rect->height);
+    (TitleViewObject)->FullUpdate( view::FullRedraw, 0, 0, rect->width, rect->height);
   }
   else {
-    (self)->FullUpdate( view_FullRedraw, 0, 0, Bounds.width, Bounds.height);
+    (self)->FullUpdate( view::FullRedraw, 0, 0, Bounds.width, Bounds.height);
   }
   (self)->ClearClippingRect();
   OUT(DrawTitle);
@@ -751,7 +751,7 @@ DrawOutline(class suite  *self, struct rectangle  *rect, short  width, unsigned 
 }
 
 class view *
-suite::Hit( enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
+suite::Hit( enum view::MouseAction  action, long  x , long  y , long  numberOfClicks )
 {
     class suite *self=this;class view *retval = (class view *) this;
 
@@ -844,12 +844,12 @@ suite::Reset( long  state )
   if(doFullRedraw && IsLinked) {
       SetViewColors((class view *) SetView, &SuiteForeground, &SuiteBackground);
       (SetView)->Clear();
-      (this)->FullUpdate(view_FullRedraw,0,0,0,0);
+      (this)->FullUpdate(view::FullRedraw,0,0,0,0);
   }
   else if(doContainerRedraw && IsLinked) {
       SetViewColors((class view *) SetView, &SuiteForeground, &SuiteBackground);
       (SetView)->Clear();
-      (SetView)->FullUpdate( view_FullRedraw,
+      (SetView)->FullUpdate( view::FullRedraw,
 			0, 0, ContainerWidth, ContainerHeight);
       if(Scroll)
 	  (Scroll)->Update();
@@ -1183,7 +1183,7 @@ suite::Sort( unsigned  mode , suite_sortfptr handler)
     CheckForNewFirstVisible(this);
     LastVisible = ITEM((Items)->Count() - 1);
     SetViewColors((class view *) SetView, &SuiteForeground, &SuiteBackground);
-    (SetView)->FullUpdate( view_FullRedraw, 0, 0, ContainerWidth, ContainerHeight);
+    (SetView)->FullUpdate( view::FullRedraw, 0, 0, ContainerWidth, ContainerHeight);
     if(Scroll)
 	(Scroll)->Update();
   }
@@ -1695,7 +1695,7 @@ ChangeSuiteAttribute( class suite  *self, long  attribute , long  value     )
 	case suite_wrappingstyle:
 	    SetViewColors((class view *) self, &SuiteForeground, &SuiteBackground);
 	    (SetView)->Clear();
-	    (SetView)->FullUpdate(view_FullRedraw,0,0,
+	    (SetView)->FullUpdate(view::FullRedraw,0,0,
 		ContainerWidth,ContainerHeight);
 	    if(Scroll) (Scroll)->Update();
 	    break;
@@ -1721,7 +1721,7 @@ ChangeSuiteAttribute( class suite  *self, long  attribute , long  value     )
 	case suite_titlefontname:
 	    SetViewColors((class view *) self, &SuiteForeground, &SuiteBackground);
 	    (SetView)->Clear();
-	    (self)->FullUpdate(view_FullRedraw,0,0,Bounds.width,Bounds.height);
+	    (self)->FullUpdate(view::FullRedraw,0,0,Bounds.width,Bounds.height);
 	    break;
 	case suite_sortmode:
 	case suite_sorthandler:
@@ -1820,7 +1820,7 @@ suite::ExposeItem( struct suite_item  *item )
     if( IsLinked ) {
 	SetViewColors((class view *) this, &SuiteForeground, &SuiteBackground);
 	(SetView)->Clear();
-	(SetView)->FullUpdate(view_FullRedraw,0,0, ContainerWidth, ContainerHeight);
+	(SetView)->FullUpdate(view::FullRedraw,0,0, ContainerWidth, ContainerHeight);
 	if(Scroll) (Scroll)->Update();
     }
 }
@@ -1833,7 +1833,7 @@ suite::HideItem( struct suite_item  *item )
     if( IsLinked ) {
 	SetViewColors((class view *) this, &SuiteForeground, &SuiteBackground);
 	(SetView)->Clear();
-	(SetView)->FullUpdate(view_FullRedraw,0,0, ContainerWidth, ContainerHeight);
+	(SetView)->FullUpdate(view::FullRedraw,0,0, ContainerWidth, ContainerHeight);
 	if(Scroll) (Scroll)->Update();
     }
 }

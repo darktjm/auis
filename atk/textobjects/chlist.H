@@ -9,7 +9,7 @@
 #include <text.H>
 #include <view.H>
 
-typedef void (*chlist_itemfptr)(long rock, class chlist *l, enum view_MouseAction action, long nclicks, long index, int region);
+typedef void (*chlist_itemfptr)(long rock, class chlist *l, enum view::MouseAction action, long nclicks, long index, int region);
 typedef void (*chlist_freefptr)(long rock);
 typedef boolean (*chlist_efptr)(chlist *self, struct listitem *it, long index, long rock);
 

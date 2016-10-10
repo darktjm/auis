@@ -230,15 +230,15 @@ void checkv::DrawNewValue( )
 
 
 
-class valueview * checkv::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * checkv::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     switch(type){
-	case view_LeftDown:
+	case view::LeftDown:
 	    this->tmpval = !(tt)->GetValue();
 	    Drawcheck(this);
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    (tt)->SetValue(this->tmpval);
 	    break;
 	default:

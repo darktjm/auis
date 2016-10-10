@@ -184,10 +184,10 @@ static boolean chartobj_debug = 0;
 #define  DashedGraphic		(self->dashed_graphic)
 #define  DashedIcon		('5')
 
-#define  RightTop		(view_ATRIGHT | view_ATTOP)
-#define  RightBottom		(view_ATRIGHT | view_ATBOTTOM)
-#define  RightMiddle		(view_ATRIGHT | view_BETWEENTOPANDBOTTOM)
-#define  Balanced	        (view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM)
+#define  RightTop		(graphic::ATRIGHT | graphic::ATTOP)
+#define  RightBottom		(graphic::ATRIGHT | graphic::ATBOTTOM)
+#define  RightMiddle		(graphic::ATRIGHT | graphic::BETWEENTOPANDBOTTOM)
+#define  Balanced	        (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
 
 #define  ScalesSuppressed	(self->suppress_scales)
 #define  LabelsSuppressed	(self->suppress_labels)
@@ -278,7 +278,7 @@ chartobj::ObservedChanged( class observable	      *changed, long			       value 
       break;
     }
   (this )->ClearBody( );
-  (this)->FullUpdate(  view_FullRedraw, Left, Top, Width, Height );
+  (this)->FullUpdate(  view::FullRedraw, Left, Top, Width, Height );
   OUT(chartobj_ObservedChanged);
   }
 
@@ -333,7 +333,7 @@ chartobj::Moniker( )
   }
 
 void 
-chartobj::FullUpdate( enum view_UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
+chartobj::FullUpdate( enum view::UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
         {
   class chartobj *self=this;
   char				  value_string[25];
@@ -342,7 +342,7 @@ chartobj::FullUpdate( enum view_UpdateType	   type, long			   left , long			   t
   IN(chartobj_FullUpdate);
   (this)->aptv::FullUpdate(  type, left, top, width, height );
   if ( ! (this)->BypassUpdate()  &&  Height > 0  &&
-	(type == view_FullRedraw || type == view_LastPartialRedraw) )
+	(type == view::FullRedraw || type == view::LastPartialRedraw) )
     { DEBUG(Not Bypassed);
     ChartLeft = Left;  ChartTop = Top;  ChartWidth = Width;  ChartHeight = Height;
     Generate_Shadows( this );
@@ -481,7 +481,7 @@ chartobj::DrawChart( )
   }
 
 class view *
-chartobj::Hit( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+chartobj::Hit( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class view		     *hit;
 
@@ -493,7 +493,7 @@ chartobj::Hit( enum view_MouseAction       action, long			       x , long			    
   }
 
 class view *
-chartobj::HitChart( enum view_MouseAction     action, long			     x , long			     y , long			     clicks )
+chartobj::HitChart( enum view::MouseAction     action, long			     x , long			     y , long			     clicks )
         {
   class chartobj *self=this;
   static struct chart_item_shadow  *shadow;
@@ -503,14 +503,14 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 
   IN(chartobj_HitChart);
   if ( shadow  ||
-	 (action == view_LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
+	 (action == view::LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
     {
     CURRENTITEM = shadow->item;
     if ( y > Bottom )	y = Bottom;
     if ( y < Top )	y = Top;
     switch ( action )
       {
-      case  view_LeftDown:
+      case  view::LeftDown:
 	(this )->UseInvisibleCursor( );
         (this)->SetTransferMode(  graphic::INVERT );
 	initial_y = y;
@@ -521,7 +521,7 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 	value = value_original = (Chart)->ItemAttribute(  shadow->item, chart_itemvalue );
 	DEBUGdt(Initial-value,value);
         break;
-      case  view_LeftMovement:
+      case  view::LeftMovement:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( abs(delta = prior_y - y) > PIXELSPERINTERVAL )
@@ -529,7 +529,7 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 	(this)->MoveTo(  Left, prior_y = y );
 	(this)->DrawLineTo(  Right, y );
         break;
-      case  view_LeftUp:
+      case  view::LeftUp:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( abs(delta = initial_y - y) > PIXELSPERINTERVAL )

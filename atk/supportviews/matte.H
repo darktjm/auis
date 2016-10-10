@@ -16,11 +16,11 @@ public:
 
      void WantNewSize(class view *requestor);
      void PostMenus(class menulist *menulist);
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void Update();
      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
      void GetOrigin(long width, long height, long *originX, long *originY);
      void GetPrintOrigin(long width, long height, long *originX, long *originY);
      void WantInputFocus(class view *requestor);
@@ -35,7 +35,7 @@ public:
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void PrintPSDoc(FILE *outfile, long pagew, long pageh);
      void *GetPSPrintInterface(const char *printtype);
-     void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+     void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
      void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
      void ChildLosingInputFocus();
      void ChildReceivingInputFocus();

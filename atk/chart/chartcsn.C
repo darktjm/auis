@@ -98,7 +98,7 @@ chartcsn::SetDebug( boolean			   state )
   }
 
 class view *
-chartcsn::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+chartcsn::HitChart( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
 
   IN(chartcsn_HitChart);

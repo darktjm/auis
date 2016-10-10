@@ -252,11 +252,11 @@ void sbttnav::PostMenus(class menulist  *ml)
     (this)->sbuttonv::PostMenus( this->ml);
 }
 
-boolean sbttnav::Touch(int  ind, enum view_MouseAction  action)
+boolean sbttnav::Touch(int  ind, enum view::MouseAction  action)
 {
     class sbutton *b=(this)->ButtonData();
     switch(action) {
-	case view_RightDown:
+	case view::RightDown:
 	    this->dragging=(this)->LastButton();
 	    (this)->WantInputFocus( this);
 	    if((this)->GetIM()) {
@@ -267,7 +267,7 @@ boolean sbttnav::Touch(int  ind, enum view_MouseAction  action)
 		}
 	    }
 	    break;
-	case view_RightUp:
+	case view::RightUp:
 	    (b)->DeActivateButton( (this)->LastButton());
 	    if((this)->LastButton()!=this->dragging) (b)->Swap( (this)->LastButton(), this->dragging);
 	    if((this)->GetIM() && this->cursor) {

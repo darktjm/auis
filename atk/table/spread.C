@@ -261,7 +261,7 @@ void spread::ComputeSizes() {
              if any of the insets in a column report that their size is 'fixed' give the column the maximum of the
              'fixed' width.
              divide any remaining space among columns whose insets indicate that their width is flexible. */
-            if(child) child->DesiredSize(150, rh?rh:16384, rh?view_HeightSet:view_NoSet, &dWidth, &dHeight);
+            if(child) child->DesiredSize(150, rh?rh:16384, rh?view::HeightSet:view::NoSet, &dWidth, &dHeight);
             else dWidth=dHeight=0;
             dHeight += 2 * spread_CELLMARGIN + spread_SPACING;
             dWidth += 2 * spread_CELLMARGIN + spread_SPACING;
@@ -340,7 +340,7 @@ void ComputeRowSizes(class spread  *V)
 			}
 			child = spread_FindSubview(V, cell);
 			if (child)
-			    (child)->DesiredSize( width , V->rowInfo[r].computedHeight, view_WidthSet, &dWidth, &dHeight);
+			    (child)->DesiredSize( width , V->rowInfo[r].computedHeight, view::WidthSet, &dWidth, &dHeight);
 			else
 			    dWidth = dHeight = 0;
 			if (debug)
@@ -449,7 +449,7 @@ void spread::WantUpdate(class view  *requestor)
 
 /* negotiate size of view */
 
-view_DSattributes spread::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *dWidth , long  *dHeight)
+view::DSattributes spread::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *dWidth , long  *dHeight)
 {
     long GrossWidth;
     long GrossHeight;
@@ -466,12 +466,12 @@ view_DSattributes spread::DesiredSize(long  width , long  height, enum view_DSpa
     GrossHeight = spread_Height(this, 0, (MyTable(this))->NumberOfRows()) + spread_BORDER(this) + spread_SPACING;
 
     GrossWidth+=5; GrossHeight+=5; /* leave enough room to avoid having to chop off two of the borders -RSK*/
-    *dWidth = (pass == view_WidthSet) ? width : GrossWidth;
-    *dHeight = (pass == view_HeightSet) ? height : GrossHeight;
+    *dWidth = (pass == view::WidthSet) ? width : GrossWidth;
+    *dHeight = (pass == view::HeightSet) ? height : GrossHeight;
 
-    return (view_DSattributes)
-      ((int)((*dWidth > GrossWidth) ? view_WidthFlexible : view_WidthLarger)
-       | (int)((*dHeight > GrossHeight) ? view_HeightFlexible : view_HeightLarger));
+    return (view::DSattributes)
+      ((int)((*dWidth > GrossWidth) ? view::WidthFlexible : view::WidthLarger)
+       | (int)((*dHeight > GrossHeight) ? view::HeightFlexible : view::HeightLarger));
 }
 
 /* handle child's request for a new size */
@@ -499,7 +499,7 @@ void spread::Print(FILE  * f, const char  *proc /* processor */, const char  *fo
 
 /* full update when window changes */
 
-void spread::FullUpdate(enum view_UpdateType  how, long  left , long  top , long  width , long  height)
+void spread::FullUpdate(enum view::UpdateType  how, long  left , long  top , long  width , long  height)
 {
     struct rectangle cliprect;
     long k;
@@ -508,7 +508,7 @@ void spread::FullUpdate(enum view_UpdateType  how, long  left , long  top , long
     if (grayPix == NULL)
 	InitializeGraphic(this);
 
-    if(how==view_FullRedraw && !rectangle_IsEqualRect(&lb,&crect)) {
+    if(how==view::FullRedraw && !rectangle_IsEqualRect(&lb,&crect)) {
         crect=lb;
         ComputeSizes();
 	k=CtoX(this, MyTable(this)->cols);
@@ -520,7 +520,7 @@ void spread::FullUpdate(enum view_UpdateType  how, long  left , long  top , long
     }
     if (debug)
 	printf("spread_FullUpdate(%p, %d, %ld, %ld, %ld, %ld)\n", this, (int)how, left, top, width, height);
-    if (how == view_PartialRedraw || how == view_LastPartialRedraw)
+    if (how == view::PartialRedraw || how == view::LastPartialRedraw)
 	rectangle_SetRectSize(&cliprect, left, top, width, height);
     else
 	rectangle_SetRectSize(&cliprect, GetVisualLeft(), GetVisualTop(), GetVisualWidth(), GetVisualHeight());
@@ -535,14 +535,14 @@ void spread::Update()
     if (debug)
 	printf("spread_Update(%p)\n", this);
     rectangle_SetRectSize(&cliprect, GetVisualLeft(), GetVisualTop(), GetVisualWidth(), GetVisualHeight());
-    spread_PartialUpdate(this, view_FullRedraw, &cliprect);
+    spread_PartialUpdate(this, view::FullRedraw, &cliprect);
 }
 
 /* process mouse hit */
 
 
 
-class view * spread::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfClicks)
+class view * spread::Hit(enum view::MouseAction  action, long  x , long  y, long  numberOfClicks)
 {
     if (debug)
 	printf("spread_Hit(%p, %d, %ld, %ld, %ld)\n", this, (int) action, x, y, numberOfClicks);

@@ -195,19 +195,19 @@ General view methods
 
 	void InitChildren();
 
-	void FullUpdate(enum view_UpdateType type, \
+	void FullUpdate(enum view::UpdateType type, \
 
 
 		long left, long top, long width, long height);
 
 	void Update();
 
-	view * Hit(enum view_MouseAction action, long x, long y, long n);
+	view * Hit(enum view::MouseAction action, long x, long y, long n);
 
-	view_DSattributes DesiredSize(long width, long height, \
+	view::DSattributes DesiredSize(long width, long height, \
 
 
-		enum view_DSpass pass, long *desiredWidth, long *desiredHeight) ;
+		enum view::DSpass pass, long *desiredWidth, long *desiredHeight) ;
 
 	void WantUpdate(view *requestor);
 

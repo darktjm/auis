@@ -63,11 +63,11 @@ the right side of the window are panel objects.
 *\paramname{self});} 
 
 \fixedtext{void \bold{panel_}FullUpdate }\fixedindent{(struct panel 
-*\paramname{panel}, enum view_UpdateType \paramname{type}, long \paramname{x}, 
+*\paramname{panel}, enum view::UpdateType \paramname{type}, long \paramname{x}, 
 long \paramname{y}, long \paramname{w}, long \paramname{h});} 
 
 \fixedtext{struct view *\bold{panel_}Hit }\fixedindent{(struct panel 
-*\paramname{panel}, enum view_MouseAction \paramname{action}, long 
+*\paramname{panel}, enum view::MouseAction \paramname{action}, long 
 \paramname{x}, long \paramname{y}, long \paramname{numberOfClicks});} 
 
 \fixedtext{boolean \bold{panel_}InitializeClass }\fixedindent{();} 

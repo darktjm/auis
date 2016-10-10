@@ -34,7 +34,7 @@
  * Used Stringize and concat macros.
  *
  * Revision 1.4  1993/09/28  04:52:23  rr2b
- * Fixed view_DSattributes to be an int not an enum.
+ * Fixed view::DSattributes to be an int not an enum.
  *
  * Revision 1.3  1993/07/23  00:23:42  rr2b
  * Split off a version of CopyText which will copy surrounding
@@ -1321,18 +1321,18 @@ Invert(class nessview  *self) {
 }
 
 	void
-nessview::FullUpdate(enum view_UpdateType   type, long   left , 
+nessview::FullUpdate(enum view::UpdateType   type, long   left , 
 		long   top , long   width , long   height) {
 	class ness *dobj = (class ness *)this->dataobject;
 	
 	DEBUG(("FullUpdate(%d)\n", type));
 
-	if (type == view_FullRedraw || type == view_LastPartialRedraw) {
+	if (type == view::FullRedraw || type == view::LastPartialRedraw) {
 		if ( ! this->inverted)
 			(this)->scroll::FullUpdate( type, left, top, width, height);
 		else {
 			/* is inverted */
-			(this)->scroll::FullUpdate( view_FullRedraw, left, top, width, height);
+			(this)->scroll::FullUpdate( view::FullRedraw, left, top, width, height);
 			if (this->dialogboxup)
 				Invert(this);
 			else
@@ -1341,7 +1341,7 @@ nessview::FullUpdate(enum view_UpdateType   type, long   left ,
 		if (dobj != NULL  &&  dobj->DisplayDialogBox)
 			(this)->WantUpdate( this);
 	}
-	else if (type != view_PartialRedraw || ! this->inverted)
+	else if (type != view::PartialRedraw || ! this->inverted)
 		(this)->scroll::FullUpdate( type, left, top, width, height);
 
 
@@ -1384,17 +1384,17 @@ nessview::Update() {
 	checks to see if there is a click on a button in novice text mode
 */
 	class view *
-nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfClicks) {
+nessview::Hit(enum view::MouseAction  action, long  x , long  y, long  numberOfClicks) {
 	class ness *dobj = (class ness *)this->dataobject;
 	static long initialx, initialy;
 
 	if ( ! dobj->hasWarningText || 
-			(action != view_LeftDown
-			&& action != view_LeftMovement
-			&& action != view_LeftUp) )
+			(action != view::LeftDown
+			&& action != view::LeftMovement
+			&& action != view::LeftUp) )
 		return (this)->scroll::Hit( action, x, y, numberOfClicks);
 
-	if (action == view_LeftDown) {
+	if (action == view::LeftDown) {
 		/* left mouse down and there is a warning text.
 			If the down is near a button, set ButtonPending
 		*/
@@ -1436,18 +1436,18 @@ nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfCl
 	if (this->ButtonPending == 0)
 		return (this)->scroll::Hit( action, x, y, numberOfClicks);
 
-	if (action == view_LeftMovement) {
+	if (action == view::LeftMovement) {
 		if (x - initialx > 5 || initialx - x > 5 || y - initialy > 5 || initialy - y > 5) {
 				DEBUG(("Move too far:  x %ld  y %ld    #clicks %ld\n", 
 				x, y, numberOfClicks));
 			this->ButtonPending = 0;
-			(this)->scroll::Hit( view_LeftDown, initialx, initialy, numberOfClicks);
+			(this)->scroll::Hit( view::LeftDown, initialx, initialy, numberOfClicks);
 			return (this)->scroll::Hit( action, x, y, numberOfClicks);
 		}
 	}
-	else if (action == view_LeftUp) {
+	else if (action == view::LeftUp) {
 		if (x - initialx > 3  ||  initialx - x > 3 || y - initialy > 3  ||  initialy - y > 3) {
-			(this)->scroll::Hit( view_LeftDown, initialx, initialy, numberOfClicks);
+			(this)->scroll::Hit( view::LeftDown, initialx, initialy, numberOfClicks);
 			return (this)->scroll::Hit( action, x, y, numberOfClicks);
 		}
 
@@ -1479,8 +1479,8 @@ nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfCl
 	'pass' indicates which of 'width' and 'height' should be considered fixed.
 	If neither is fixed, they may be arbitrary values. 
 */
-	view_DSattributes
-nessview::DesiredSize(long  width, long  height, enum view_DSpass  pass, 
+	view::DSattributes
+nessview::DesiredSize(long  width, long  height, enum view::DSpass  pass, 
 		long  *desiredWidth, long  *desiredHeight)  {
 	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 
@@ -1488,7 +1488,7 @@ nessview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 	*desiredHeight = 200;
 
 	DEBUG(("Leave DesiredSize: %ld x %ld\n", *desiredWidth, *desiredHeight));
-	return view_HeightFlexible | view_WidthFlexible;
+	return view::HeightFlexible | view::WidthFlexible;
 }
 
 	void

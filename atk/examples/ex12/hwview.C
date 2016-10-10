@@ -82,7 +82,7 @@ void helloworldview::DeleteApplicationLayer(class view *v)
     (scrollbar)->Destroy();
 }
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height )
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height )
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
     struct rectangle myVisualRect;
@@ -163,27 +163,27 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
 
     if(this->HaveDownTransition)
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		hw->x+=x-this->hitX;
 		hw->y+=y-this->hitY;
 		this->hitX=x;
 		this->hitY=y;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		hw->x=x+this->frameX;
 		hw->y=y+this->frameY;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -193,11 +193,11 @@ class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y,
 
     if(!this->HaveDownTransition)
 	switch(action){
-	    case view_RightDown:
+	    case view::RightDown:
 		this->hitX=x;
 		this->hitY=y;
 		/* fall through */
-	    case view_LeftDown:
+	    case view::LeftDown:
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;

@@ -17,7 +17,7 @@ public:
       
 	virtual ~chlistview();
     
-       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+       class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
        class environment * GetStyleInformation(struct text_statevector *sv, long pos, long *length)  ;
     
       virtual void ActivateItem(int pos);

@@ -477,7 +477,7 @@ void rasterview_ImprintInsetProc(class rasterview  *self, long  rock)
     }
 
     (offim)->SetView( self->inset);
-    (self->inset)->FullUpdate( view_FullRedraw, 0, 0, -1 ,-1);
+    (self->inset)->FullUpdate( view::FullRedraw, 0, 0, -1 ,-1);
     offgr = (offim)->GetDrawable();
 
     (pix2)->Resize( self->InsetBox.width, self->InsetBox.height);

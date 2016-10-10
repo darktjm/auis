@@ -484,20 +484,20 @@ RedrawIcons(class lprrulerview   *self)
 }
 
 void 
-lprrulerview::FullUpdate( enum view_UpdateType   type, long   left , long   top , long   width , long   height )
+lprrulerview::FullUpdate( enum view::UpdateType   type, long   left , long   top , long   width , long   height )
 			{
-	if (type == view_Remove) {
+	if (type == view::Remove) {
 		this->OnScreen = FALSE;
 		return;
 	}
 	if ( ! CheckWindow(this, "FullUpdate")) return;
-	if ((type != view_FullRedraw 
-				&& type != view_LastPartialRedraw)
+	if ((type != view::FullRedraw 
+				&& type != view::LastPartialRedraw)
 			|| (this)->GetLogicalWidth() == 0 
 			|| (this)->GetLogicalHeight() == 0) 
 		return;
 	this->OnScreen = TRUE;
-	if (type == view_FullRedraw) {
+	if (type == view::FullRedraw) {
 		/* must recompute graphics info because image
 			may be on different display hardware */
 	    this->WhitePattern = (this)->view::WhitePattern();
@@ -521,15 +521,15 @@ lprrulerview::Update( )
 }
 
 class view *
-lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+lprrulerview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 {
     class lprrulerview *self=this;
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 	if (! this->OnScreen || ! CheckWindow(this, "Hit")) return NULL;
 	if (this->MovingIcon == noIcon  &&  y > this->topline) {
 		/* must be in text area or ruler */
-		if (action == view_LeftDown || action == view_RightDown ) {
+		if (action == view::LeftDown || action == view::RightDown ) {
 			/* iconAt(self, self->textloc - 12, self->bottomline - 12, "'"); */
 			short delx, dely;
 			delx = x - (this->textloc -12);
@@ -564,7 +564,7 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 
 		(this)->SetFont( IconFont);
 
-		if (action == view_LeftUp) {
+		if (action == view::LeftUp) {
 			struct lprrulerview_icondata *i = &(this->iconloc[(short)this->MovingIcon]);
 			long t = 0;	/* passed to the ValueChangeProc */
 			switch (this->MovingIcon) {
@@ -602,7 +602,7 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 		}
 		else {  /* Down or Move */
 			short relx = 0;	/* used later to display numeric value */
-			if (action == view_LeftDown) {
+			if (action == view::LeftDown) {
 				struct lprrulerview_icondata *i;
 				long cnt;
 				this->MovingIcon = noIcon;
@@ -672,18 +672,18 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 		 	}
 		} /* end "down or move */
 	} /* end "above topline" */
-	if (action == view_LeftDown || action == view_RightDown)
+	if (action == view::LeftDown || action == view::RightDown)
 		(this)->WantInputFocus( this);
 	return ( class view * )this;		/* where to send subsequent hits */
 }
 
-view_DSattributes
-lprrulerview::DesiredSize( long  width, long  height, enum view_DSpass  pass, 
+view::DSattributes
+lprrulerview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
 	*desiredHeight = 80;
 	*desiredWidth = 700;
-	return view_Fixed;
+	return view::Fixed;
 }
 
 

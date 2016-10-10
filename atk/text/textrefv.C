@@ -62,7 +62,7 @@ void textrefv::Print(FILE  *f, const char  *process, const char  *final, int  to
     }
 }
 
-class view *textrefv::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *textrefv::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
     class textref *ref;
     char buf[256];
@@ -71,7 +71,7 @@ class view *textrefv::Hit(enum view_MouseAction  action,long  mousex ,long  mous
  /*   long cpos,clen; */
     ref = Data(this);
     this->loc = -1;
-    if( action == view_LeftUp && 
+    if( action == view::LeftUp && 
 	((ref)->IsOpen() == FALSE) &&
 	((txt = (this)->GetParentText()) != NULL) &&
 	((tv = (this)->GetParentTextview()) != NULL) &&

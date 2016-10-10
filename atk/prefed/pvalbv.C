@@ -35,15 +35,15 @@ pvalbv::~pvalbv()
 }
 
 
-class view *pvalbv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *pvalbv::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
-    if(action==view_LeftDown) this->activated=(this)->GetSButton()->activated;
+    if(action==view::LeftDown) this->activated=(this)->GetSButton()->activated;
 
     (this)->pvalsbv::Hit( action, x, y, numberOfClicks);
     
     if((DATA(this))->GetValue()==NULL) return (class view *)this;
 
-    if((action == view_LeftUp) && (this->activated!=(this)->GetSButton()->activated)) {
+    if((action == view::LeftUp) && (this->activated!=(this)->GetSButton()->activated)) {
 
 	(DATA(this))->GetValue()->v.bval=((this)->GetSButton()->activated==ON);
 	(DATA(this))->SetModified();

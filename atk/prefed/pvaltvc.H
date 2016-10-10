@@ -25,7 +25,7 @@ public:
      void UpdateText(long val);
      void UpdateValue();
      class keystate * Keys()  ;
-     class view * Hit(enum view_MouseAction act, long x, long y, long numclicks)  ;
+     class view * Hit(enum view::MouseAction act, long x, long y, long numclicks)  ;
 
 
     class keystate *ks;

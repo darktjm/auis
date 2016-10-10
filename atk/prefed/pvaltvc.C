@@ -172,12 +172,12 @@ void pvaltvc::SetDataObject(class dataobject  *d)
     (TEXT(this))->AddObserver( this);
 }
 
-class view *pvaltvc::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *pvaltvc::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class view *result = (this)->pvaltv::Hit( action, x, y, numberOfClicks);
     class textview *tv=(this)->GetTextView();
 
-    if(action==view_LeftUp) {
+    if(action==view::LeftUp) {
 	(this)->Select( (this)->Locate( (tv)->GetDotPosition()));
     }
     return (result!=(class view *)tv)?result:(class view *)this;

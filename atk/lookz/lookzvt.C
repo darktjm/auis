@@ -102,7 +102,7 @@ main( int	   argc, char   **argv )
 	printf("Init done\n"); fflush(stdout);
 
 	im_StaticEntry;
-	view_StaticEntry;
+	view::StaticEntry;
 	frame_StaticEntry;
 	lpair_StaticEntry;
 	stylesheet_StaticEntry;

@@ -53,7 +53,7 @@ buttview::~buttview()
 }
 
 void
-buttview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+buttview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     class butt *b = (class butt *)
@@ -98,13 +98,13 @@ buttview::Update()
     }
     if (HasChanged) {
 	(this)->GetLogicalBounds( &r);
-	(this)->FullUpdate( view_FullRedraw, r.left, r.top,
+	(this)->FullUpdate( view::FullRedraw, r.left, r.top,
 			      r.width, r.height);
     } /* Otherwise the text didn't change, no need to redraw */
 }
 
 class view *
-buttview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks)
+buttview::Hit(enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class butt *b = (class butt *)
       (this)->GetDataObject();

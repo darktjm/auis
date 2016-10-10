@@ -77,7 +77,7 @@ figobj_PrintObject(struct figview *v, FILE *file, char *prefix);
 
 figobj_SetNumHandles(long num);
 
-figobj_Build(enum view_MouseAction action, struct figview *v, long x, long y, 
+figobj_Build(enum view::MouseAction action, struct figview *v, long x, long y, 
 long clicks) returns enum figobj_Status;
 
 figobj_HitMe(long x, long y, long delta, long *ptref) returns enum 
@@ -86,13 +86,13 @@ figobj_HitVal;
 figobj_BasicHitMe(long x, long y, long delta, long *ptref) returns enum 
 figobj_HitVal;
 
-figobj_Reshape(enum view_MouseAction action, struct figview *v, long x, long 
+figobj_Reshape(enum view::MouseAction action, struct figview *v, long x, long 
 y, boolean handle, long ptref) returns boolean;
 
-figobj_AddParts(enum view_MouseAction action, struct figview *v, long x, long 
+figobj_AddParts(enum view::MouseAction action, struct figview *v, long x, long 
 y, boolean handle, long ptref) returns boolean;
 
-figobj_DeleteParts(enum view_MouseAction action, struct figview *v, long x, 
+figobj_DeleteParts(enum view::MouseAction action, struct figview *v, long x, 
 long y, boolean handle, long ptref) returns boolean;
 
 figobj_MoveHandle(x, y, ptref);
@@ -549,7 +549,7 @@ struct figobj *self;
 
 struct figview *v;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x, y; 
 
@@ -590,7 +590,7 @@ should be deleted and destroyed.
 
 struct figobj *self;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 struct figview *v;
 
@@ -625,7 +625,7 @@ figobj_Reshape() will be made.
 
 struct figobj *self;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 struct figview *v;
 
@@ -640,7 +640,7 @@ long ptref;
 
 struct figobj *self;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 struct figview *v;
 

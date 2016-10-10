@@ -92,10 +92,10 @@ public:
 
 
    void SetDataObject( class dataobject *calc );
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void Update();
    void ObservedChanged( class observable *changed, long value );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n )	 ;
+   class view * Hit( enum view::MouseAction action, long x, long y, long n )	 ;
    void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
    void ReceiveInputFocus();
    void LoseInputFocus();

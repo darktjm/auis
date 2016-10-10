@@ -22,7 +22,7 @@
 
 #include <view.H>
 class celview;
-typedef class view *(*celview_hitfptr)(class celview *self, enum view_MouseAction, long x, long y, long clicks, long rock);
+typedef class view *(*celview_hitfptr)(class celview *self, enum view::MouseAction, long x, long y, long clicks, long rock);
 class celview: public view {
     public:
       virtual ATKregistryEntry *ATKregistry();
@@ -32,15 +32,15 @@ class celview: public view {
       void PostMenus(class menulist *menulistp);
       void PostKeyState(class keystate *keystate);
       void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
-      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
       void Update();
-      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
       void ReceiveInputFocus();
       void LoseInputFocus();
       void SetDataObject(class dataobject *ls);
       void ObservedChanged (class observable *changed, long value);
       void GetManyParameters( struct resourceList * resources, class atomlist * name, class atomlist * class_c );		      
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
       void LinkTree(class view *parent);
       void InitChildren();
       boolean CanView(const char *TypeName)  ;

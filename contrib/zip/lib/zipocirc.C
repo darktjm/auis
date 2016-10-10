@@ -76,7 +76,7 @@ zipocirc::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 x, long y, long clicks, zip_type_point X, zip_type_point Y )
+zipocirc::Build_Object( zip_type_pane pane, enum view::MouseAction action, long	 x, long y, long clicks, zip_type_point X, zip_type_point Y )
 {
   long				  status = zip_ok;
   long				  radial_point = 0;
@@ -85,7 +85,7 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
   IN(zipocirc::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
 	(this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_circle_figure,
 			   CurrentImage, NULL )) == zip_ok )
@@ -98,7 +98,7 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
         {
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
@@ -112,7 +112,7 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
 	  }
 	}
 	break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( ( figure = CurrentFigure ) )
 	{
 	(this->view_object)->Draw_Figure(  figure, pane );
@@ -187,7 +187,7 @@ long Draw( class zipocirc *self, zip_type_figure figure, zip_type_pane pane, lon
   radius = abs( side - window_x_point );
   if ( figure->zip_figure_mode.zip_figure_mode_shaded )
     { DEBUGdt(Shade,figure->zip_figure_fill.zip_figure_shade);
-    if ( (self->view_object)->mouse_action != view_LeftMovement  &&  action == zip_draw )
+    if ( (self->view_object)->mouse_action != view::LeftMovement  &&  action == zip_draw )
       {
       /* Shade of '0' means Transparent --- Shade of '1' means White */
       if ( (shade = figure->zip_figure_fill.zip_figure_shade) >= 1  &&

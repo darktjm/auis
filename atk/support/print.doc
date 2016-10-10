@@ -741,7 +741,7 @@ enough that there are methods in class view to support it. \
 }\leftindent{\keyword{long} width, \keyword{long} height, \keyword{\
 
 
-enum} view_DSpass pass, \keyword{\
+enum} view::DSpass pass, \keyword{\
 
 
 long} *desiredwidth, \keyword{long} *desiredheight)

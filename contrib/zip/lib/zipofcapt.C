@@ -36,7 +36,7 @@ END-SPECIFICATION  ************************************************************/
 
 ATKdefineRegistry(zipofcapt, zipocapt, NULL);
 
-static enum view_MouseAction Accept_Caption_Character( long anchor, zip_type_pane pane, char c, enum view_MouseAction action, long x, long y, long clicks );
+static enum view::MouseAction Accept_Caption_Character( long anchor, zip_type_pane pane, char c, enum view::MouseAction action, long x, long y, long clicks );
 static long Draw( class zipofcapt *self, zip_type_figure figure, zip_type_pane pane );
 static void Compute_Handle_Positions( class zipofcapt *self, zip_type_figure figure, zip_type_pane pane, zip_type_pixel *X1, zip_type_pixel *X2 , zip_type_pixel *X3, zip_type_pixel *Y1 , zip_type_pixel *Y2 , zip_type_pixel *Y3 );
 
@@ -66,7 +66,7 @@ zipofcapt::Object_Datastream_Code( )
   }
 
 long
-zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x , long y , long clicks, zip_type_point X , zip_type_point Y )
+zipofcapt::Build_Object( zip_type_pane pane, enum view::MouseAction action, long x , long y , long clicks, zip_type_point X , zip_type_point Y )
 {
   zip_type_figure			figure;
   long					status = zip_ok;
@@ -75,7 +75,7 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
   IN(zipofcapt::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       (this->view_object)->Set_Pane_Cursor(  pane, 'C', CursorFontName );
       if ( (status =
         (this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_flexible_caption_figure,
@@ -94,7 +94,7 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
 			      pane->zip_pane_edit->zip_pane_edit_current_shade );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
 	{
 	if ( figure_x_point == figure_x_points(0)  &&
@@ -106,14 +106,14 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
 	  else  (this->edit_object)->Set_Keyboard_Processor(  (long) this, (zip_keyboardfptr) Accept_Caption_Character );
 	}
       /* Fall-thru */
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
         (this->edit_object)->Normalize_Figure_Points(  CurrentFigure, pane );
 	(this->view_object)->Clear_Figure(  CurrentFigure, pane );
         (this)->Set_Object_Point(  CurrentFigure, 5, X, Y );
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
-	if ( action != view_LeftUp )
+	if ( action != view::LeftUp )
 	  (this->edit_object)->Highlight_Figure_Points(  CurrentFigure, pane );
 	}
       break;
@@ -124,8 +124,8 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
   return  status;
   }
 
-static enum view_MouseAction
-Accept_Caption_Character( long anchor, zip_type_pane pane, char c, enum view_MouseAction action, long	 x, long y, long clicks )
+static enum view::MouseAction
+Accept_Caption_Character( long anchor, zip_type_pane pane, char c, enum view::MouseAction action, long	 x, long y, long clicks )
 {
   class zipofcapt		  *self = (class zipofcapt *) anchor;
   zip_type_figure		  figure = pane->zip_pane_current_figure;
@@ -133,8 +133,8 @@ Accept_Caption_Character( long anchor, zip_type_pane pane, char c, enum view_Mou
   char				 *text_cursor;
 
   IN(Accept_Caption_Character)
-  if ( action == view_LeftUp  ||  action == view_LeftMovement )
-    action = view_NoMouseEvent;
+  if ( action == view::LeftUp  ||  action == view::LeftMovement )
+    action = view::NoMouseEvent;
     else if ( CurrentFigure )
       { DEBUG(Current Figure Exists);
       strcpy( text, figure->zip_figure_datum.zip_figure_text );/*===*/

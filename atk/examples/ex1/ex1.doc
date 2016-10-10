@@ -421,7 +421,7 @@ public:
 
 	virtual ATKregistryEntry *ATKregistry();
 
-	void FullUpdate(enum view_UpdateType type, \
+	void FullUpdate(enum view::UpdateType type, \
 
 
 			long left, long top, long width, long height);
@@ -641,7 +641,7 @@ parts: \
 }\example{\programexample{	void \
 
 
-helloworldview::FullUpdate(enum view_UpdateType  type, \
+helloworldview::FullUpdate(enum view::UpdateType  type, \
 
 
 		long  left, long  top, long  width, long  height) \{
@@ -681,7 +681,7 @@ for view's \italic{FullUpdate} method: \
 
 
 
-\programexample{\leftindent{enum view_UpdateType  type \
+\programexample{\leftindent{enum view::UpdateType  type \
 
 
 long  left \
@@ -1038,7 +1038,7 @@ center of the display, \italic{helloworldview} will scale its drawing to
 its graphic's visual rectangle.  Whenever such a \italic{view} receives a 
 call to do a \italic{FullUpdate} of its part of the screen, it must call 
 \italic{GetVisualBounds} \indexi{ \italic{GetVisualBounds 
-}} \indexi{ \italic{view_GetVisualBounds}} 
+}} \indexi{ \italic{view::GetVisualBounds}} 
 \indexi{ \italic{graphic::GetVisualBounds}} 
 \indexi{View++\italic{GetVisualBounds}} 
 \indexi{Graphic++\italic{GetVisualBounds}} in order to find out the size of 
@@ -1083,7 +1083,7 @@ specified (x,y) coordinate.  The method \italic{MoveTo} is a \italic{view}
 method that moves the graphic's \italic{current point} to a specified 
 coordinate.  It takes two arguments, the (x,y) coordinates.  The method 
 \italic{MoveTo} \indexi{ \italic{MoveTo}} \indexi{ \italic{graphic::MoveTo}} 
-\indexi{ \italic{view_MoveTo}} \indexi{Graphic++\italic{MoveTo}} 
+\indexi{ \italic{view::MoveTo}} \indexi{Graphic++\italic{MoveTo}} 
 \indexi{View++\italic{MoveTo}}  moves its object's graphic drawing point to 
 (x,y).  Before drawing, a \italic{view} should move the drawing point, then 
 call a drawing primitive.  For example, to draw the string \italic{hello 

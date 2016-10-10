@@ -231,7 +231,7 @@ static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
     return figobj_Done;
 }
 
-enum figobj_Status figoins::Build(class figview  *v, enum view_MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figoins::Build(class figview  *v, enum view::MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     enum figobj_Status res;
 

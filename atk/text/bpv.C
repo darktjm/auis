@@ -70,22 +70,22 @@ void bpv::SetDataObject(class dataobject *dobj)
     }
 }
 
-view_DSattributes bpv::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes bpv::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 {
     *desiredwidth = width;
     if (this->NowBig)
 	*desiredheight = 28;
     else
 	*desiredheight = 8;
-    return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 }
 
 void bpv::Update()
 {
-    this->FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+    this->FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 }
 
-void bpv::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void bpv::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     struct rectangle enclosingRect;
     class bp *dobj = (class bp *)(this)->GetDataObject();
@@ -175,7 +175,7 @@ void bpv::PostMenus(class menulist  *ml)
     (this)->view::PostMenus( this->Menus);
 }
 
-class view *bpv::Hit(enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+class view *bpv::Hit(enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     if (!this->HasInputFocus) {
 	(this)->WantInputFocus( this);

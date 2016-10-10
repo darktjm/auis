@@ -24,7 +24,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-       void FullUpdate(enum view_UpdateType utype, long left, long top, long width, long right);
+       void FullUpdate(enum view::UpdateType utype, long left, long top, long width, long right);
 };
 
 #endif /* _hwview_H_ */

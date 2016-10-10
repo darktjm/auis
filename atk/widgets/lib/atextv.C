@@ -103,9 +103,9 @@ START_ATEXTV_MOUSE_METHOD(HitMethod) {
             long mx=physical_LogicalXToGlobalX(drawable, ToPixX(x));
             long my=physical_LogicalYToGlobalY(drawable, ToPixY(y));
             nf=(mouseFocus)->Hit( action,                          physical_GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical_GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
-            if(action==view_LeftUp || action==view_RightUp || action==view_UpMovement) nf=NULL;
+            if(action==view::LeftUp || action==view::RightUp || action==view::UpMovement) nf=NULL;
         } else nf=child->Hit(action, child->EnclosedXToLocalX(ToPixX(x)), child->EnclosedYToLocalY(ToPixY(y)), num_clicks);
-        if(nf!=mouseFocus && (action==view_LeftDown || action==view_RightDown || nf==NULL)) {
+        if(nf!=mouseFocus && (action==view::LeftDown || action==view::RightDown || nf==NULL)) {
             if(mouseFocus) mouseFocus->RemoveObserver(this);
             if(nf) nf->AddObserver(this);
             mouseFocus=nf;
@@ -242,7 +242,7 @@ START_ATEXTV_CALLBACK_METHOD(TextMethod) {
     dataViewFormula.Validate();
 
     child->InsertView(this, &interior);
-    child->FullUpdate(view_FullRedraw, interior.left, interior.top, interior.width, interior.top);
+    child->FullUpdate(view::FullRedraw, interior.left, interior.top, interior.width, interior.top);
 }
 END_ATEXTV_CALLBACK_METHOD();
 
@@ -314,7 +314,7 @@ size(this, &sizeact, &newsizeact)
     mouseFocus=NULL;
     forcelink=0;
     swidth=sheight=-1;
-    pass=view_NoSet;
+    pass=view::NoSet;
 }
 
 ATextv::~ATextv() {
@@ -369,23 +369,23 @@ void ATextv::TextDimensions(long &w, long &h, long lrm, long tbm) {
     }
 }
 
-void ATextv::FullUpdate(enum view_UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
+void ATextv::FullUpdate(enum view::UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
     struct rectangle bounds;
     GetLogicalBounds(&bounds);
     if(border) {
         border->InteriorRect(&bounds, &interior);
     } else interior=bounds;
-    if(type==view_Remove) {
-        child->FullUpdate(view_Remove, 0, 0, 0, 0);
+    if(type==view::Remove) {
+        child->FullUpdate(view::Remove, 0, 0, 0, 0);
         child->InsertViewSize(this, 0, 0, 0, 0);
         return;
     }
-    if(type==view_MoveNoRedraw) {
+    if(type==view::MoveNoRedraw) {
         if(child) child->InsertView(this, &interior);
         return;
     }
     
-    if(type==view_PartialRedraw) return;
+    if(type==view::PartialRedraw) return;
 
     if(border) border->SetHighlighted(HasInputFocus);
 
@@ -414,7 +414,7 @@ void ATextv::SetDataObject(class dataobject *d) {
     dataViewFormula.Invalidate();
 }
 
-view_DSattributes ATextv::DesiredSize(long  width, long  height, enum view_DSpass  p, long  *desired_width, long  *desired_height)
+view::DSattributes ATextv::DesiredSize(long  width, long  height, enum view::DSpass  p, long  *desired_width, long  *desired_height)
 {
     boolean force=FALSE;
     if(swidth<0 || swidth!=width || sheight!=height || pass!=p) {
@@ -432,7 +432,7 @@ view_DSattributes ATextv::DesiredSize(long  width, long  height, enum view_DSpas
     }
     size.Validate();
     size.Desired(desired_width, desired_height);
-    return view_Fixed;
+    return view::Fixed;
 }
 
 void ATextv::ObservedChanged(class observable  *changed, long  status)  {
@@ -514,7 +514,7 @@ void ATextv::RecSrchExpose(const struct rectangle &logical, struct rectangle &hi
 }
 
 
-void ATextv::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
+void ATextv::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight) 
 {
     dataViewFormula.Validate();
     if(child) {

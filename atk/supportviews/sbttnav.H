@@ -21,7 +21,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     boolean Touch(int ind, enum view_MouseAction action)  ;
+     boolean Touch(int ind, enum view::MouseAction action)  ;
      void PostMenus(class menulist *ml);
 
     

@@ -517,21 +517,21 @@ void sliderV::DrawNewValue( )
 
 
 
-class valueview * sliderV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * sliderV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     long myval;
     static int moved;
     if(this->readonly) return this;
     switch(type){
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    this->tmpval = (tt)->GetValue();
 	    this->lasty = y;
 	    moved = 0;
 	    break;
-	case view_LeftMovement	:
-	case view_RightMovement:
+	case view::LeftMovement	:
+	case view::RightMovement:
 	    moved++;
 	    if(this->granular){
 		myval = this->tmpval;
@@ -561,10 +561,10 @@ class valueview * sliderV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		(tt)->SetValue(this->tmpval);
 
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    if(moved == 0){
-		myval = (type == view_RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
+		myval = (type == view::RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
 		if(myval <= this->maxval &&  myval >= this->minval){
 		    this->tmpval = myval;
 		    DrawValue(this);

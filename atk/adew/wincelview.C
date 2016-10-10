@@ -21,9 +21,9 @@ ATKdefineRegistry(wincelview, view, NULL);
 static void DoUpdate(class wincelview  *self);
 
 
-class view *wincelview::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *wincelview::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
-    if(action == view_LeftUp){
+    if(action == view::LeftUp){
 	if(this->celviewp == NULL)(this)->pushchild();
 	else (this)->popchild();
     }	
@@ -100,7 +100,7 @@ void wincelview::ObservedChanged(class observable  *changed, long  value)
 	this->window = NULL;
     }
 }
-void wincelview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void wincelview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     DoUpdate(this);
 }

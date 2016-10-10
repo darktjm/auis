@@ -484,12 +484,12 @@ Redraw(class clockview  *self)
 
 
 void
-clockview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+clockview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Do an update.
 */
-  if ((type == view_FullRedraw) || (type == view_LastPartialRedraw)) {
+  if ((type == view::FullRedraw) || (type == view::LastPartialRedraw)) {
     this->need_full_update = TRUE;
     Redraw(this);
   }
@@ -504,7 +504,7 @@ clockview::Update()
 
 
 class view *
-clockview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+clockview::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
 /*
   Handle the button event.  Currently, semantics are:

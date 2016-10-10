@@ -152,20 +152,20 @@ RedrawTable(class labelview  *self)
 }
 
 	void 
-labelview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
+labelview::FullUpdate(enum view::UpdateType   type, long   left , long   top , long   width , long   height)
 			{
-	if (type == view_Remove) {
+	if (type == view::Remove) {
 		this->OnScreen = FALSE;
 		return;
 	}
 	if ( ! CheckWindow(this, "FullUpdate")) return;
-	if ((type != view_FullRedraw 
-				&& type != view_LastPartialRedraw)
+	if ((type != view::FullRedraw 
+				&& type != view::LastPartialRedraw)
 			|| (this)->GetLogicalWidth() == 0 
 			|| (this)->GetLogicalHeight() == 0) 
 		return;
 	this->OnScreen = TRUE;
-	if (type == view_FullRedraw  || type == view_LastPartialRedraw) {
+	if (type == view::FullRedraw  || type == view::LastPartialRedraw) {
 	    this->WhitePattern = (this)->view::WhitePattern();
 	    this->BlackPattern = (this)->view::BlackPattern();
 	}
@@ -183,9 +183,9 @@ labelview::Update()
 }
 
 	class view *
-labelview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+labelview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 			{
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 	if (! this->OnScreen || ! CheckWindow(this, "Hit")) return NULL;
 	if (this->hitproc)
@@ -193,8 +193,8 @@ labelview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_
 	return (class view *)this;		/* where to send subsequent hits */
 }
 
-	view_DSattributes
-labelview::DesiredSize( long  width, long  height, enum view_DSpass  pass, 
+	view::DSattributes
+labelview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
 	if ( ! this->GaveSize ) {
@@ -209,7 +209,7 @@ labelview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 				give dummy values */
 			*desiredWidth = 144;
 			*desiredHeight = 20;
-			return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+			return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 		}
 		this->minwidth = this->minheight = 0;
 		g = (this)->GetDrawable();
@@ -237,7 +237,7 @@ labelview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 fprintf(stderr, "input %dx%d    output %dx%d\n", 
 width, height, *desiredWidth, *desiredHeight); fflush(stderr);
 */
-	return (view_DSattributes)(view_HeightLarger | view_WidthLarger);
+	return (view::DSattributes)(view::HeightLarger | view::WidthLarger);
 }
 
 	void

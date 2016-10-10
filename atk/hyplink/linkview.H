@@ -16,7 +16,7 @@ public:
 	virtual ~linkview();
  	
 	void PostMenus(class menulist *ml);
-	class view *Hit (enum view_MouseAction action, 
+	class view *Hit (enum view::MouseAction action, 
 			long x, long y, long numberOfClicks)  ;
 
 	virtual void Link();

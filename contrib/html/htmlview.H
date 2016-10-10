@@ -34,7 +34,7 @@ public:
   
      void PostKeyState(class keystate* ks);
      void PostMenus(class menulist* menulist);
-     class view* Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view* Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
 
   
     

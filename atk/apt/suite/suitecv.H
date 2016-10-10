@@ -49,7 +49,7 @@ public:
 	
 	virtual ~suitecv();
 
-	 void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+	 void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
 	 void PostKeyState(class keystate *kstate);
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();

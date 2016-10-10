@@ -68,6 +68,14 @@
   - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
   - TOC is a nasty mess
 - enable mouse scroll wheel
+- implement addbutton init command properly (or remove)
+  - current implementation just saves the commands in an unused list
+    - need to check that it is unused in AMS as well, but probably is
+  - Need to figure out what this command should do.  I suppose similar
+    to the ness "on mouse" hook.  Need to find out when it's executed.
+  - Need to at least provide a way to swap buttons w/o resorting to xmodmap.
+- implement call-like command, to execute a command on document load
+  [especially useful if this command is ness]
 - add help-type hyperlink or other help button of some sort
   - add support for loading files directly in help, instead of just indexed
 - fix lack of updates when resizing windows
@@ -176,7 +184,6 @@
   - switcher: builds OK.  Not sure what it does
 - figure out what ANSI standard ansitext refers to, and document it
 - get rid of include/ prefix on all headers in doxygen
-- figure out how to get multi-paragraph arguments to custom section commands
 - implement or get rid of alink, ezscan
 - maybe try converting doxy latex output to ez (rtf is hopeless, and
   like the rest of the www, html is javascript-laden bloated mess)

@@ -16,7 +16,7 @@ public:
 
       void PostMenus(class menulist *menulist);
       void SetDotPosition(long newpos);
-      void GetClickPosition(long position, long numberOfClicks, enum view_MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
+      void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
 
     contentv();
     ~contentv();

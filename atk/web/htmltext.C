@@ -3875,7 +3875,7 @@ htmltext::GififyInset(long pos, htmlenv *env, const char *giffile) {
 
 	if (errmsg) {
 		// determine size and choose gifify method
-		v->DesiredSize(15*72/2, 10*72, view_NoSet,
+		v->DesiredSize(15*72/2, 10*72, view::NoSet,
 			&width, &height);
 		if (width <= 7.5*72 && height <= 10*72) 
 			errmsg = GififyViaView(v, giffile, width, height);
@@ -3884,7 +3884,7 @@ htmltext::GififyInset(long pos, htmlenv *env, const char *giffile) {
 		// inset refuses to be small enough to print (or View failed)
 		// use scaling and GififyViaPS
 
-		v->DesiredPrintSize(15*72/2, 10*72, view_NoSet,
+		v->DesiredPrintSize(15*72/2, 10*72, view::NoSet,
 			&width, &height);
 		// determine scaling factor
 		scale = 100;				// default scape

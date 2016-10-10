@@ -36,7 +36,7 @@ LineStyle: long: figattr_LineSolid, figattr_LineSingle, figattr_LineDouble, figa
 */
 
 #define figattr_ShadeClear  (-1)
-/* denominator for view_GrayPattern() calls */
+/* denominator for view::GrayPattern() calls */
 #define figattr_ShadeDenom  (8)
 
 /* values for the ArrowPos attribute */

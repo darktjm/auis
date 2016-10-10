@@ -194,9 +194,9 @@ DisplayLinkMsg(linkview *self) {
 }
 
 	class view *
-linkview::Hit (enum view_MouseAction action, 
+linkview::Hit (enum view::MouseAction action, 
 			long x, long y, long numberOfClicks)  {
-	if (action == view_RightDown) 
+	if (action == view::RightDown) 
 		DisplayLinkMsg(this);
 	return pushbuttonview::Hit(action, x, y, numberOfClicks);
 }

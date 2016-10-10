@@ -63,8 +63,8 @@ static boolean initialExposeStyles;
 static boolean alwaysDisplayStyleMenus;
 static boolean highlightToBorders;
 
-static struct view_printopt textview_printoptels[6]; /* table of contents; index; footnotes/endnotes; swap headers; enumerate contents; two columns */
-static struct view_printoptlist textview_printopts = {
+static struct view::printopt textview_printoptels[6]; /* table of contents; index; footnotes/endnotes; swap headers; enumerate contents; two columns */
+static struct view::printoptlist textview_printopts = {
     textview_printoptels,
     6,
     NULL /* this will be adjusted to be a pointer to the parent list */
@@ -76,10 +76,10 @@ ATKdefineRegistry(textview, view, textview::InitializeClass);
 static void getinfo(class textview  *self, struct range  *total , struct range  *seen , struct range  *dot);
 static long whatisat(class textview  *self, long  numerator , long  denominator);
 static void setframe(class textview  *self, long  position , long  numerator , long  denominator);
-static void endzone(class textview  *self, int  end, enum view_MouseAction  action);
+static void endzone(class textview  *self, int  end, enum view::MouseAction  action);
 static void hgetinfo(textview *self, struct range *total, struct range *seen, struct range *dot);
 static void hsetframe(textview *self, long position, long numerator, long denominator);
-static void hendzone(textview *self, int end, enum view_MouseAction action);
+static void hendzone(textview *self, int end, enum view::MouseAction action);
 static long hwhatisat(textview *self, long numerator, long denominator);	
 
 #include "shared.h"
@@ -1267,7 +1267,7 @@ static void CopyLineInfo(class textview  *self, struct linedesc  *newline, struc
         (newline->data)->SetObjectFree( (line->data)->ObjectFree());
         newline->height = line->height;
 	// not used: newline->xMax = line->xMax;
-	// maybe we should do a view_remove if newline contained a view -rr2b 3/9/95
+	// maybe we should do a view::remove if newline contained a view -rr2b 3/9/95
 	newline->containsView = line->containsView;
 	newline->childwantsupdate=line->childwantsupdate;
 	DeleteSpots(newline->spots);
@@ -2219,7 +2219,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
     }
 }
 
-void textview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void textview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     long dotpos;
     long line = 0;
@@ -2234,14 +2234,14 @@ void textview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lon
 				 !(DisplayClass() & graphic::Monochrome));
     }
     switch(type){
-	case view_Remove:
+	case view::Remove:
 	    while (line < this->nLines)  {
 		if(this->lines[line].containsView)
 		    (this)->ViewMove(&this->lines[line],textview_REMOVEVIEW); 
 		line++;
 	    } 
 	    break;
-	case view_MoveNoRedraw:
+	case view::MoveNoRedraw:
 	    while (line < this->nLines)  {
 		if(this->lines[line].containsView)
 		    (this)->ViewMove(&this->lines[line],textview_MOVEVIEW); 
@@ -2274,7 +2274,7 @@ void textview::Update()
     DoUpdate(this, TRUE);
 }
 
-class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *textview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
                     {
     long newPos, oldPos, oldLen, oldMid;
     class view *vptr;
@@ -2300,7 +2300,7 @@ class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long 
 	    }
 	}
 	/* By default simulate a triple click with the left button (line select). */
-	if (action == view_LeftDown)
+	if (action == view::LeftDown)
 	    numberOfClicks = 3;
     }
 
@@ -2312,15 +2312,15 @@ class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long 
     if (vptr != NULL)
 	    return (vptr)->Hit( action, (vptr)->EnclosedXToLocalX( x), 
 			(vptr)->EnclosedYToLocalY( y), numberOfClicks);
-    if (action == view_UpMovement) return NULL;
+    if (action == view::UpMovement) return NULL;
 
-    if (action == view_LeftDown || action == view_RightDown)  {
+    if (action == view::LeftDown || action == view::RightDown)  {
  	if (! this->hasInputFocus)
 	    (this)->WantInputFocus( this);
 	
 	(this)->GetClickPosition( newPos, numberOfClicks, action, oldPos, oldPos + oldLen, &newLeftPos, &newRightPos);
 	
-	if (action == view_LeftDown)  {
+	if (action == view::LeftDown)  {
 	    (this->dot)->SetPos( newLeftPos);
 	    HandleSelection(this,newRightPos - newLeftPos, TRUE);
 	    /* (this->dot)->SetLength( newRightPos - newLeftPos); */
@@ -2359,7 +2359,7 @@ class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long 
 	}
     }
     else {
-	if (action == view_LeftMovement || action == view_RightMovement || (numberOfClicks == 1 && (action == view_LeftUp || action == view_RightUp)))  {
+	if (action == view::LeftMovement || action == view::RightMovement || (numberOfClicks == 1 && (action == view::LeftUp || action == view::RightUp)))  {
 	    int lPos = leftStartPos;
 	    int rPos = rightStartPos;
 
@@ -2377,7 +2377,7 @@ class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long 
 		lPos=t;
 	    }
 	    
-	    if(action==view_LeftUp || action==view_RightUp) HandleSelection(this, rPos - lPos, FALSE);
+	    if(action==view::LeftUp || action==view::RightUp) HandleSelection(this, rPos - lPos, FALSE);
 	    
 	    if (lPos != oldPos || rPos != oldPos + oldLen)  {
 		(this->dot)->SetPos( lPos);
@@ -2391,7 +2391,7 @@ class view *textview::Hit(enum view_MouseAction  action, long  x, long  y, long 
 	}
     }
 
-    if (action == view_LeftMovement || action == view_RightMovement)  {
+    if (action == view::LeftMovement || action == view::RightMovement)  {
 	if (redrawCursor)
 	    DoUpdate(this, FALSE);
     }
@@ -2570,7 +2570,7 @@ long textview::CollapseDot()
     return pos;
 }
 
-void textview::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
+void textview::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
                                 {
     int pos;
     int testType;
@@ -2607,7 +2607,7 @@ void textview::GetClickPosition(long  position, long  numberOfClicks, enum view_
 	    else  {
 		/* No word either side */
 		
-		if (action == view_LeftDown)  {
+		if (action == view::LeftDown)  {
 		    *rightPos = *leftPos = position;
 		}
 		else  {
@@ -2628,7 +2628,7 @@ void textview::GetClickPosition(long  position, long  numberOfClicks, enum view_
 	case 0:
 	    /* Triple Click - Paragraph select */
 
-	extEnd = (action == view_LeftDown || action == view_LeftMovement);
+	extEnd = (action == view::LeftDown || action == view::LeftMovement);
 
 	*leftPos = (text)->GetBeginningOfLine( position);
 	pos = (text)->GetEndOfLine( position);
@@ -3225,7 +3225,7 @@ static void CalculateLineHeight(class textview  *self, unsigned short *cw=NULL, 
 #define MAXWIDTH 2048
 #define MINWIDTH 125
 #define UNLIMITED 3000000
-view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes textview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 {
     class mark *tm;
     long  len, txheight,totheight,curx,cury,xs,ys = 0,newwidth;
@@ -3257,7 +3257,7 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
         // settings just return now..
         *desiredheight=fheight;
         *desiredwidth=fwidth;
-        return (view_HeightFlexible | view_WidthFlexible);
+        return (view::HeightFlexible | view::WidthFlexible);
     }
     
     if(Text(this) == NULL || ((len = (Text(this))->GetLength())== 0)) {
@@ -3265,27 +3265,27 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
         // space for one line of 30 characters in the default font.
         *desiredwidth = fwidth?fwidth:(cw*30 + bx + bxm);
         *desiredheight = fheight?fheight:(lh+2*by);
-	return(view_HeightFlexible | view_WidthFlexible);
+	return(view::HeightFlexible | view::WidthFlexible);
     }
 
     if(len>32768) len=32768; // limit the size computation to the first 32K
     
-    if(pass==view_HeightSet) {
+    if(pass==view::HeightSet) {
         // accept the imposed height
         fheight=height;
     } else if(fheight!=0) {
         // if height was set by a row request and not overridden
-        // by view_HeightSet in pass then fix height to the
+        // by view::HeightSet in pass then fix height to the
         // height needed for the requested number of rows.
         height=fheight;
     }
 
-    if(pass==view_WidthSet) {
+    if(pass==view::WidthSet) {
         // accept the imposed width
         fwidth=width;
     } else if(fwidth!=0) {
         // if width was set by a column request and not overridden
-        // by view_WidthSet in pass then fix width to the
+        // by view::WidthSet in pass then fix width to the
         // width needed for the requested number of columns.
         width=fwidth;
     }
@@ -3312,7 +3312,7 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
             if(newwidth>0 && newwidth!=width) width=newwidth;
              if(*desiredwidth==0) *desiredwidth = fwidth>0?fwidth:width;
              if(*desiredheight==0) *desiredheight = lh+2*by;
-	     return(view_HeightFlexible | view_WidthFlexible);
+	     return(view::HeightFlexible | view::WidthFlexible);
          }
          if( fwidth==0 && newwidth<MAXWIDTH && (info.totalWidth > newwidth - bx - bxm)) {
              // width is not explicitly limited and it looks like we could use more...
@@ -3353,7 +3353,7 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
     delete tm;
     *desiredwidth = width;
     *desiredheight = totheight + by + by;
-    return(view_HeightFlexible | view_WidthFlexible);
+    return(view::HeightFlexible | view::WidthFlexible);
 }
 
 void textview::GetOrigin(long  width, long  height, long  *originX, long  *originY)
@@ -3585,11 +3585,11 @@ static void setframe(class textview  *self, long  position , long  numerator , l
     (self)->SetTopOffTop( newpos, off);
 }
 
-static void endzone(class textview  *self, int  end, enum view_MouseAction  action)
+static void endzone(class textview  *self, int  end, enum view::MouseAction  action)
 {
-    if(action != view_LeftDown && action != view_RightDown) return;
+    if(action != view::LeftDown && action != view::RightDown) return;
     
-    if (action == view_LeftDown &&
+    if (action == view::LeftDown &&
          (end == scroll_TOPENDZONE || end == scroll_BOTTOMENDZONE)) {
 	    if (end == scroll_TOPENDZONE)
 		setframe(self, 0, 0, (self)->GetLogicalHeight());
@@ -3658,13 +3658,13 @@ static void hsetframe(textview *self, long position, long numerator, long denomi
     }
 }
 
-static void hendzone(textview *self, int end, enum view_MouseAction action)
+static void hendzone(textview *self, int end, enum view::MouseAction action)
 {
     int width = self->GetLogicalWidth() - ((self->hasApplicationLayer) ? self->bx : self->ebx) * 2;
 
-    if(action != view_LeftDown && action != view_RightDown) return;
+    if(action != view::LeftDown && action != view::RightDown) return;
     
-    if (action == view_LeftDown &&
+    if (action == view::LeftDown &&
          (end == scroll_TOPENDZONE || end == scroll_BOTTOMENDZONE)) {
 	/* Non-Motif endzone.  Jump to end. */
 	if (end == scroll_TOPENDZONE)
@@ -3786,7 +3786,7 @@ long textview::GetPrintOption(const class atom *popt)
     }
 }
 
-struct view_printoptlist *textview::PrintOptions()
+struct view::printoptlist *textview::PrintOptions()
 {
     textview_printopts.parent = this->view::PrintOptions();
     return &textview_printopts;

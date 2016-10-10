@@ -15,7 +15,7 @@ public:
     
 	virtual ~pvalbv();
 
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void UpdateSButton();
 
     int activated;

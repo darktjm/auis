@@ -15,11 +15,11 @@ class fnotev: public  view {
     fnotev();
     virtual ~fnotev();
 
-    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
     void Update();
-    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+    class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
     void ObservedChanged (class observable *changed, long value);
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
     void LinkTree(class view *parent);
     void GetOrigin(long width, long height, long *originX, long *originY);
     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);

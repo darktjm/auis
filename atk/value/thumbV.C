@@ -393,20 +393,20 @@ void thumbV::DrawNewValue( )
 
 
 
-class valueview * thumbV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * thumbV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     long myval;
     static int moved;
     switch(type){
-	case view_RightDown:
-	case view_LeftDown:
+	case view::RightDown:
+	case view::LeftDown:
 	    this->tmpval = (tt)->GetValue();
 	    this->lasty = y;
 	    moved = 0;
 	    break;
-	case view_RightMovement:
-	case view_LeftMovement	:
+	case view::RightMovement:
+	case view::LeftMovement	:
 	    moved++;
 	    if(this->granular){
 		myval = this->tmpval;
@@ -434,10 +434,10 @@ class valueview * thumbV::DoHit( enum view_MouseAction  type,long  x,long  y,lon
 	    this->lasty = y;
 	    DrawThumbwheel(this,FALSE);
 	    break;
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 	    if(moved == 0){
-		myval = (type == view_RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
+		myval = (type == view::RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
 		if(myval > this->maxval) this->tmpval = this->minval;
 		else if(myval < this->minval) this->tmpval = this->maxval;
 		else this->tmpval = myval;

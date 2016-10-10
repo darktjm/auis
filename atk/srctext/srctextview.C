@@ -919,7 +919,7 @@ static view *PutInAnotherWindow(srctextview *view, buffer *buffer, int forceWind
 	frame = frame::Create(buffer);
 	(newIM)->SetView(frame);
 
-	/* This is here because the frame_Create call can't set the input focus because the frame didn't have a parent when it called view_WantInputFocus.  This is bogus but hard to fix... */
+	/* This is here because the frame_Create call can't set the input focus because the frame didn't have a parent when it called view::WantInputFocus.  This is bogus but hard to fix... */
 	((frame)->GetView())->WantInputFocus((frame)->GetView());
     } else {
 	im *im;

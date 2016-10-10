@@ -251,7 +251,7 @@ static class view *TagsCreateWindow(class buffer  *buffer )
     (frame)->PostDefaultHandler( "message", (frame)->WantHandler( "message"));
 
 /* This is here because the frame_Create call can't set the input focus
- * because the frame didn't have a parent when it called view_WantInputFocus.
+ * because the frame didn't have a parent when it called view::WantInputFocus.
  * This is bogus but hard to fix...
  */
     view = (frame)->GetView();

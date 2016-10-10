@@ -409,7 +409,7 @@ static void IncreaseNumChars(class figotext  *self, int  val)
     }
 }
 
-enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figotext::Build(class figview  *v, enum view::MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     int ix;
 
@@ -428,7 +428,7 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
     }
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    if (this->buildstate==0) {
 		(this)->PosX() = x;
 		(this)->PosY() = y;
@@ -451,7 +451,7 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
 		(v)->WantUpdate( v);
 		return figobj_NotDone;
 	    }
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if ((this)->PosX() != x || (this)->PosY() != y) {
 		(this)->PosX() = x;
 		(this)->PosY() = y;
@@ -460,9 +460,9 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
 		(v)->WantUpdate( v);
 	    }
 	    return figobj_NotDone;
-	case view_LeftUp:
+	case view::LeftUp:
 	    return figobj_NotDone;
-	case view_RightDown:
+	case view::RightDown:
 	    KillDotProc(this);
 	    ix = strlen(this->text);
 	    if (ix)  {
@@ -711,11 +711,11 @@ static void MoveHandle(class figotext  *self, long  x , long  y , long  ptref)
     /* figotext_Reposition(self, x - pt->x, y - pt->y); */
 }
 
-boolean figotext::AddParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figotext::AddParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     int len = strlen(this->text);
     
-    if (action==view_LeftDown) {
+    if (action==view::LeftDown) {
 
 	if (!v->toolset)
 	    return FALSE;
@@ -748,26 +748,26 @@ boolean figotext::AddParts(enum view_MouseAction  action, class figview  *v, lon
     }
 }
 
-boolean figotext::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figotext::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     if (!handle)
 	return FALSE;
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((this)->GetReadOnly())
 		return FALSE;
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();

@@ -29,7 +29,7 @@ public:
       
 	virtual ~doodview();
     
-       class view * Hit(enum view_MouseAction action, long x, long y,
+       class view * Hit(enum view::MouseAction action, long x, long y,
 	   long numberOfClicks)  ;
     
       int downhitX, downhitY, lastuphitX, lastuphitY, linewidth;

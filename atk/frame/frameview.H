@@ -21,7 +21,7 @@ public:
          void LoseInputFocus();
          void PostMenus(class menulist *menulistp);
          void PostKeyState(class keystate *keystatep);
-	 view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+	 view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
 	 void WantNewSize(class view *requestor);
 	 void LinkTree(class view *parent);
 	

@@ -48,9 +48,9 @@ class imagev : public  view {
     virtual ~imagev();
 
 
-    class view * Hit( enum view_MouseAction action, long x, long y, long numberOfClicks )  ;
-    view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dheight )  ;
-    void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+    class view * Hit( enum view::MouseAction action, long x, long y, long numberOfClicks )  ;
+    view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dheight )  ;
+    void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
     void PostMenus( class menulist *menulist )  ;
     void PostKeyState( class keystate *ks )  ;
     void ObservedChanged( class observable *changed, long value )  ;
@@ -69,7 +69,7 @@ class imagev : public  view {
     void PrintPSDoc(FILE *outfile, long pagew, long pageh);
     void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
-    void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+    void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
 
     virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);

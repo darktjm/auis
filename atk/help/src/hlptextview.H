@@ -13,7 +13,7 @@ public:
 
  
   
-     void GetClickPosition(long position,long numberOfClicks,enum view_MouseAction action,long startLeft,long startRight,long *leftPos,long *rightPos);
+     void GetClickPosition(long position,long numberOfClicks,enum view::MouseAction action,long startLeft,long startRight,long *leftPos,long *rightPos);
 
   
  
@@ -30,12 +30,12 @@ public:
     inline void SetHyperlinkCheck(boolean newValue) { ((this)->checkForHyperlinks = (newValue)); }
     inline boolean   GetHyperlinkCheck() { return ((this)->checkForHyperlinks); }
     inline char  * GetHyperTopic() { return ((this)->hyperTopic); }
-    inline view_MouseAction   GetMouseAction() { return ((this)->action); }
+    inline view::MouseAction   GetMouseAction() { return ((this)->action); }
 
   
     boolean checkForHyperlinks;	    /* TRUE when watching for hypertext styles */
     char *hyperTopic;		    /* Non-NULL if checkForHyperlinks & we found one. */
-    enum view_MouseAction action;   /* Action that set hyperTopic */
+    enum view::MouseAction action;   /* Action that set hyperTopic */
 };
 /** @} */
 #endif /* _hlptextview_H_ */

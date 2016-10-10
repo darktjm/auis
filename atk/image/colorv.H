@@ -14,7 +14,7 @@ public:
   
 	virtual ~colorv();
 
-   void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+   void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
    void Update();
 };
 

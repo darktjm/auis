@@ -1528,7 +1528,7 @@ for (pos = 0; pos <= (textp)->GetLength(); pos ++) {
 		NSP = popValue(NSP);
 		/* ??? If the pointer is to a cel, and the type is not celview,
 			we use the object in the cel.
-			XXX should use view_CanView(), but it is not fully implemented */
+			XXX should use view::CanView(), but it is not fully implemented */
 		if ((objval)->IsType( celClass) && strcmp(cstring, "celview") != 0)
 			objval = (ATK  *)((class cel *)objval)->GetObject();
 

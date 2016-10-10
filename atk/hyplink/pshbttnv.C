@@ -438,7 +438,7 @@ static void LocateHit(class pushbuttonview *pv, const struct rectangle &logical,
 }
 
 void
-pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+pushbuttonview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Redisplay this object.  Specifically, set my font, and put my text label
@@ -464,8 +464,8 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
   (this)->GetLogicalBounds( &Rect);
 
   switch (type) {
-    case view_FullRedraw:
-    case view_LastPartialRedraw:
+    case view::FullRedraw:
+    case view::LastPartialRedraw:
 #if CURSORON
 	if(!rectangle_IsEqualRect(&Rect,&crect)) {
 	    if(!rectangle_IsEmptyRect(&crect)) {
@@ -477,17 +477,17 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
 #endif
       redraw = 1;
       break;
-    case view_MoveNoRedraw:
+    case view::MoveNoRedraw:
 #if CURSORON
 	crect=Rect;
       (this)->PostCursor( &Rect, this->cursor);
 #endif /* CURSORON */
       redraw = 0;
       break;
-    case view_PartialRedraw:
+    case view::PartialRedraw:
       redraw = 0;
       break;
-    case view_Remove:
+    case view::Remove:
 #if CURSORON
 	rectangle_EmptyRect(&crect);	
       (this)->RetractCursor( this->cursor);
@@ -693,7 +693,7 @@ pushbuttonview::Update()
     (this)->EraseVisualRect();
 #endif /* 0 */
     (this)->GetLogicalBounds( &r);
-    (this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+    (this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 }
 
 void pushbuttonview::ReceiveInputFocus()
@@ -972,7 +972,7 @@ UnhighlightButton(class pushbuttonview  *self)
 
 
 class view *
-pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+pushbuttonview::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
 /*
   Handle the button event.  Currently, semantics are:
@@ -987,11 +987,11 @@ pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numc
   class cursor *wait_cursor;
   
   switch (action) {
-  case view_LeftDown: 
+  case view::LeftDown: 
     HighlightButton(this);
     (this)->WantInputFocus(this);
     break;
-  case view_LeftMovement:
+  case view::LeftMovement:
     {
       struct rectangle r;
 
@@ -1002,7 +1002,7 @@ pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numc
 	UnhighlightButton(this);
     }
     break;
-  case view_LeftUp:
+  case view::LeftUp:
     {
       short litp = this->lit;
 
@@ -1019,7 +1019,7 @@ pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numc
       }
     }
     break;
-  case view_RightDown:
+  case view::RightDown:
     (this)->WantInputFocus( this);
     break;
   default:
@@ -1037,8 +1037,8 @@ pushbuttonview::ObservedChanged(class observable  *b, long  v)
 }
 
 
-view_DSattributes 
-pushbuttonview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height)
+view::DSattributes 
+pushbuttonview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height)
 {
 /* 
   Tell parent that this object  wants to be as big as the box around its
@@ -1089,7 +1089,7 @@ pushbuttonview::DesiredSize(long  width, long  height, enum view_DSpass  pass, l
   Ugly?  What to do, what to do....
 */
 
-  return(view_Fixed); /* (BUG) should disable user sizing, but this doesn't */
+  return(view::Fixed); /* (BUG) should disable user sizing, but this doesn't */
 }
 
 

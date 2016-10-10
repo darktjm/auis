@@ -275,7 +275,7 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
         {
   struct rectangle			  rectangle;
   struct point				  point;
-  class graphic		 *graphic::op;
+  class graphic		 *graphic_op;
 
   IN(Blit_Pane);
   (self)->SetTransferMode(  graphic::COPY );
@@ -307,12 +307,12 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
   if ( pane->zip_pane_state.zip_pane_state_inverted )
     {
     (self)->SetTransferMode(  graphic::BLACK );
-    graphic::op = (self )->BlackPattern( );
+    graphic_op = (self )->BlackPattern( );
     }
     else
     {
     (self)->SetTransferMode(  graphic::WHITE );
-    graphic::op = (self )->WhitePattern( );
+    graphic_op = (self )->WhitePattern( );
     }
   (self)->FillRectSize(  
 	(x_offset > 0) ?
@@ -321,7 +321,7 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
 	   (self)->Pane_Right(  pane ) - (BorderThickness + abs(x_offset)),
 	(self)->Pane_Top(  pane ) + BorderThickness,
 	abs(x_offset),
-	(self)->Pane_Height(  pane ) - 2 * BorderThickness, graphic::op );
+	(self)->Pane_Height(  pane ) - 2 * BorderThickness, graphic_op );
   (self)->FillRectSize(  
 	(self)->Pane_Left(  pane ) + BorderThickness,
 	(y_offset > 0) ?
@@ -329,7 +329,7 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
 	   :
 	   (self)->Pane_Top(  pane ) + BorderThickness,
 	(self)->Pane_Width(  pane ) - 2 * BorderThickness,
-	abs(y_offset), graphic::op );
+	abs(y_offset), graphic_op );
   (self)->SetTransferMode(  graphic::BLACK );
   OUT(Blit_Pane);
   return zip_success;

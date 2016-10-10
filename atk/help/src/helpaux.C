@@ -558,11 +558,11 @@ void help::PostKeyState(class keystate  *keyState)
 /*
  * mouse action handler
  */
-class view *help::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfClicks)
+class view *help::Hit(enum view::MouseAction  action, long  x , long  y, long  numberOfClicks)
 {
     class view *ret;
     char *topic;
-    enum view_MouseAction hyp_action;
+    enum view::MouseAction hyp_action;
 
     if(this->showing) return((class view *) this);
 
@@ -582,7 +582,7 @@ class view *help::Hit(enum view_MouseAction  action, long  x , long  y, long  nu
 		((class hlptextview *)(this->info->view))->SetDotLength( 0);
 		message::DisplayString(this, 0, mess);
 		im::ForceUpdate();
-		ShowHelp(this, topic, hyp_action == view_RightDown);
+		ShowHelp(this, topic, hyp_action == view::RightDown);
 		message::DisplayString(this, 0, "");
 		return((class view *) this);    /* We have a new topic. */
 	    }
@@ -613,7 +613,7 @@ void help::LinkTree(class view  *parent)
 /*
  * refreshing!
  */
-void help::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  right)
+void help::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  right)
 {
     struct rectangle childRect;
 
@@ -641,7 +641,7 @@ void help::Update()
     DEBUG(("IN update\n"));
     /* clear out the region, then do a full redraw */
     (this)->EraseVisualRect();
-    (this)->FullUpdate( view_FullRedraw, (this)->GetLogicalTop(), (this)->GetLogicalLeft(),
+    (this)->FullUpdate( view::FullRedraw, (this)->GetLogicalTop(), (this)->GetLogicalLeft(),
         (this)->GetLogicalWidth(), (this)->GetLogicalHeight());
     DEBUG(("OUT update\n"));
 }

@@ -52,9 +52,9 @@ public:
 	virtual ~suiteev();
 
     
-	 void FullUpdate(enum view_UpdateType type,long left,long top,long width,long height);
+	 void FullUpdate(enum view::UpdateType type,long left,long top,long width,long height);
 	 const void* GetInterface(const char *type)  ;
-	 class view * Hit(enum view_MouseAction action,long x,long y,long numClicks)  ;
+	 class view * Hit(enum view::MouseAction action,long x,long y,long numClicks)  ;
 	 void Update();
 	 void PostMenus(class menulist *menulistp);
 	 void LinkTree( class view *parent );
@@ -70,7 +70,7 @@ public:
 	virtual void Clear()  ;
 	virtual struct suite_item * WhichItem(long x,long y)  ;
 	virtual void ItemUpdate(struct suite_item *item);
-	virtual class view * ItemHit(struct suite_item *item,enum view_MouseAction action,long x,long y,long numClicks)  ;
+	virtual class view * ItemHit(struct suite_item *item,enum view::MouseAction action,long x,long y,long numClicks)  ;
 	virtual void ItemClear(struct suite_item *item);
 	virtual void ItemBlackOut(struct suite_item *item);
 	virtual void ItemToggle(struct suite_item *item);

@@ -69,7 +69,7 @@ class celview *arbiterview::lookupname(const char  *ViewName)
     return NULL;
 }
 
-void arbiterview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void arbiterview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
 /*
     if(self->NeedsInit ){

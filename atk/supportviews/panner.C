@@ -33,9 +33,9 @@ static void calc_desired(class panner  *self);
 static void update_everything(class panner  *self, boolean  wipeold);
 static void draw_everything(class panner  *self, boolean  wipeback);
 static void move_panner(class panner  *self);
-static void HandleDragging(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
-static void HandleThumbing(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
-static void HandleDownHit(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
+static void HandleDragging(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks);
+static void HandleThumbing(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks);
+static void HandleDownHit(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks);
 
 
 boolean panner::InitializeClass()
@@ -347,7 +347,7 @@ static void move_panner(class panner  *self)
     /* ask for update in old region */
     if (self->oldvisible) {
 	(self)->EraseRect( &self->oldpanrect);
-	(self->child)->FullUpdate( view_LastPartialRedraw, self->oldpanrect.left, self->oldpanrect.top, self->oldpanrect.width, self->oldpanrect.height);
+	(self->child)->FullUpdate( view::LastPartialRedraw, self->oldpanrect.left, self->oldpanrect.top, self->oldpanrect.width, self->oldpanrect.height);
     }
     self->oldpanrect = self->panrect;
     self->oldvisible = self->visible;
@@ -358,7 +358,7 @@ static void move_panner(class panner  *self)
     (self)->PostCursor( &(self->gseenrect), self->cursors[3]);
 }
 
-void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void panner::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle r;
     int i;
@@ -377,7 +377,7 @@ void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
         }
     }
 
-    if (type!=view_Remove 
+    if (type!=view::Remove 
 	 && (this->lastwidth!=r.width ||
 	     this->lastheight!=r.height)
 	 && this->child) {
@@ -385,29 +385,29 @@ void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
 	this->lastheight=r.height;
 	this->childrect=r;
 	recompute_panrect(this);
-	/* view_InsertView(this->child, self, &this->childrect); */
+	/* view::InsertView(this->child, self, &this->childrect); */
 	move_panner(this);
     }
 
     this->force_full_update = FALSE;
     switch(type) {
-	case view_Remove:
+	case view::Remove:
 	    (this)->RetractCursor( this->cursors[0]);
 	    if(this->child) (this->child)->FullUpdate( type, left, top, width, height);
 	    return;
-	case view_MoveNoRedraw:
-	    if(this->child) (this->child)->FullUpdate( view_MoveNoRedraw, left, top, width, height);
+	case view::MoveNoRedraw:
+	    if(this->child) (this->child)->FullUpdate( view::MoveNoRedraw, left, top, width, height);
 	    break;
-	case view_PartialRedraw:
+	case view::PartialRedraw:
 	    if(this->child) (this->child)->FullUpdate( type, (this->child)->EnclosedXToLocalX( left),  (this->child)->EnclosedYToLocalY(top), width, height);
 	    break;
-	case view_LastPartialRedraw:
+	case view::LastPartialRedraw:
 	    if(this->child) (this->child)->FullUpdate( type, (this->child)->EnclosedXToLocalX( left),  (this->child)->EnclosedYToLocalY(top), width, height);
 	    calc_desired(this);
 	    draw_everything(this, FALSE);
 	    break;
-	case view_FullRedraw:
-	    if(this->child) (this->child)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+	case view::FullRedraw:
+	    if(this->child) (this->child)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 	    calc_desired(this);
 	    draw_everything(this, FALSE);
 	    break;
@@ -415,7 +415,7 @@ void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
 	    break;
     }
 
-    if(type!=view_Remove && type!=view_PartialRedraw) {
+    if(type!=view::Remove && type!=view::PartialRedraw) {
 	(this)->RetractCursor( this->cursors[0]);
 	(this)->RetractCursor( this->cursors[3]);
 	(this)->PostCursor( &(this->panrect), this->cursors[0]);
@@ -440,7 +440,7 @@ void panner::Update()
 
     if (this->current.location != this->desired.location || this->force_full_update) {
 	(this)->EraseVisualRect();
-	(this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+	(this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
     } 
     else {
 	if (this->panrectchanged) 
@@ -462,9 +462,9 @@ void panner::Update()
     }
 }
 
-static void HandleDragging(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static void HandleDragging(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
-    if (action==view_RightUp || action==view_LeftUp) {
+    if (action==view::RightUp || action==view::LeftUp) {
 	self->panrect.left = x - self->rockx;
 	self->panrect.top = y - self->rocky;
 	self->panrect.width = self->idealwidth;
@@ -481,7 +481,7 @@ static void HandleDragging(class panner  *self, enum view_MouseAction  action, l
     }
 }
 
-static void HandleThumbing(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static void HandleThumbing(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     scroll_setframefptr SetFrame;
     struct scrollbar *tmp;
@@ -515,9 +515,9 @@ static void HandleThumbing(class panner  *self, enum view_MouseAction  action, l
     }
 }
 
-static void HandleDownHit(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static void HandleDownHit(class panner  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
-    if (action==view_RightDown) {
+    if (action==view::RightDown) {
 	self->rockx = x - self->panrect.left;
 	self->rocky = y - self->panrect.top;
 	self->visible = FALSE;
@@ -529,7 +529,7 @@ static void HandleDownHit(class panner  *self, enum view_MouseAction  action, lo
 	return;
     }
     
-    if (action==view_LeftDown) {
+    if (action==view::LeftDown) {
 	x -= self->panrect.left+2+self->seenrect.left;
 	y -= self->panrect.top+2+self->seenrect.top;
 	/* x and y are now coordinates in the seen rectangle */
@@ -552,7 +552,7 @@ static void HandleDownHit(class panner  *self, enum view_MouseAction  action, lo
     self->mousestate=scroll_NOTHING;
 }
 
-class view *panner::Hit(enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+class view *panner::Hit(enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     switch (this->mousestate) {
 	case scroll_DRAGGING:
@@ -562,7 +562,7 @@ class view *panner::Hit(enum view_MouseAction  action, long  x , long  y , long 
 	    HandleThumbing(this, action, x, y, num_clicks);
 	    break;
 	case scroll_NOTHING:
-	    if (action==view_LeftUp || action==view_RightUp || action==view_LeftMovement || action==view_RightMovement) return (class view *)this;
+	    if (action==view::LeftUp || action==view::RightUp || action==view::LeftMovement || action==view::RightMovement) return (class view *)this;
 	    if (x >= this->panrect.left 
 		&& x < this->panrect.left+this->panrect.width
 		&& y >= this->panrect.top 
@@ -577,7 +577,7 @@ class view *panner::Hit(enum view_MouseAction  action, long  x , long  y , long 
 	    break;
     }
 
-    if (action==view_RightUp || action==view_LeftUp) {
+    if (action==view::RightUp || action==view::LeftUp) {
 	switch (this->mousestate) {
 	    case scroll_THUMBING:
 		((this)->GetIM())->SetWindowCursor( NULL);

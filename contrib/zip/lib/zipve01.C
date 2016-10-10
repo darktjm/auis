@@ -245,7 +245,7 @@ void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane 
     (self->view_object)->MoveTo(  (int)(center +
 		       ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD)),  middle );
     (self->view_object)->DrawString(  point_value,
-			((i%2) ? view_ATTOP : view_ATBOTTOM) | view_BETWEENLEFTANDRIGHT );
+			((i%2) ? graphic::ATTOP : graphic::ATBOTTOM) | graphic::BETWEENLEFTANDRIGHT );
     if ( i == 0 )
       (self->view_object)->FillRectSize(  center - 1, edge - 2, 3, 5, (View )->WhitePattern( ) ); 
       else
@@ -255,7 +255,7 @@ void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane 
     (self->view_object)->MoveTo(  (int)(center - ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD)),
 		   middle );
     (self->view_object)->DrawString(  point_value,
-			((i%2) ? view_ATTOP : view_ATBOTTOM) | view_BETWEENLEFTANDRIGHT );
+			((i%2) ? graphic::ATTOP : graphic::ATBOTTOM) | graphic::BETWEENLEFTANDRIGHT );
     (self->view_object)->FillRectSize(  (int)(center - ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD)),
 		    edge, 1, 3, (View )->WhitePattern( ) ); 
     }
@@ -277,7 +277,7 @@ void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane 
     (self->view_object)->MoveTo(   center,
 		    (int)(middle + ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD)) );
     (self->view_object)->DrawString(  point_value,
-		    view_BETWEENTOPANDBOTTOM | view_BETWEENLEFTANDRIGHT );
+		    graphic::BETWEENTOPANDBOTTOM | graphic::BETWEENLEFTANDRIGHT );
     if ( i == 0 )
       (self->view_object)->FillRectSize(  edge - 2, middle - 1, 5, 3, (View )->WhitePattern( ) ); 
       else
@@ -286,7 +286,7 @@ void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane 
 	 3, 1, (View )->WhitePattern( ) ); 
     (self->view_object)->MoveTo(  center,
 		    (int)(middle - ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD))  );
-    (self->view_object)->DrawString(  point_value, view_BETWEENTOPANDBOTTOM | view_BETWEENLEFTANDRIGHT );
+    (self->view_object)->DrawString(  point_value, graphic::BETWEENTOPANDBOTTOM | graphic::BETWEENLEFTANDRIGHT );
     (self->view_object)->FillRectSize(  edge,
 	 (int)(middle - ((i * pane->zip_pane_edit->zip_pane_edit_mark_point_delta) * SM / SD)),
 	 3,1, (View )->WhitePattern( ) ); 

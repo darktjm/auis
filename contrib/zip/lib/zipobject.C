@@ -109,8 +109,8 @@ zipobject::Object_Modified( zip_type_figure	   object )
   return  0;
   }
 
-view_DSattributes
-zipobject::Object_DesiredSize( long width, long height, enum view_DSpass pass, long *desired_width , long *desired_height )
+view::DSattributes
+zipobject::Object_DesiredSize( long width, long height, enum view::DSpass pass, long *desired_width , long *desired_height )
 {
   IN(zipobject::Object_DesiredSize);
   /*===*/
@@ -119,7 +119,7 @@ zipobject::Object_DesiredSize( long width, long height, enum view_DSpass pass, l
 }
 
 void 
-zipobject::Object_FullUpdate( enum view_UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
+zipobject::Object_FullUpdate( enum view::UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
         {
   IN(zipobject::Object_FullUpdate);
   /*=== NULL ===*/
@@ -135,7 +135,7 @@ zipobject::Object_Update( )
   }
 
 class view *
-zipobject::Object_Hit( zip_type_figure	       figure, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipobject::Object_Hit( zip_type_figure	       figure, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   IN(zipobject::Object_Hit );
   /*=== NULL ===*/
@@ -187,7 +187,7 @@ zipobject::Object_Datastream_Code( )
   }
 
 long
-zipobject::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks, zip_type_point X , zip_type_point Y )
+zipobject::Build_Object( zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks, zip_type_point X , zip_type_point Y )
   {
   IN(zipobject::Build_Object);
   /****   NULL  ****/

@@ -13,7 +13,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-    class valueview * DoHit(enum view_MouseAction type, long x,long y,long hits)  ;
+    class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;
     void ObservedChanged( class observable * observed, long status );
     class view * GetApplicationLayer()  ;
     void WantInputFocus(class view *requestor);

@@ -141,12 +141,12 @@ void GetRecV::DrawNewValue( )
 }
 #define CREC(rec,self) rectangle_SetRectSize(&rec,MIN(self->firstx,self->lastx),MIN(self->firsty,self->lasty),ABS(self->firstx - self->lastx),ABS(self->firsty - self->lasty))
 #define OutBounds(SELF,X,Y)((X  + rectangle_Left(&(SELF->tmpval->parent))> rectangle_Width(&(SELF->tmpval->parent))) || (Y + rectangle_Top(&(SELF->tmpval->parent)))> rectangle_Height(&(SELF->tmpval->parent)))
-class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * GetRecV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     struct rectangle rec;
     switch(type){
-	case view_LeftDown:
+	case view::LeftDown:
 	    if(OutBounds(this,x,y)){
 		this->firstx = -1;
 		break;
@@ -157,9 +157,9 @@ class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 	    this->lasty = this->firsty = y;
 	    this->lastx = this->firstx = x;
 	    break;
-	case view_LeftMovement	:   
+	case view::LeftMovement	:   
 	    if( OutBounds(this,x,y)) break;
-	case view_LeftUp:
+	case view::LeftUp:
             if(this->firstx == -1) break;
 	    if(this->lastx != this->firstx || this->lasty != this->firsty){
 		CREC(rec,this);
@@ -169,14 +169,14 @@ class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		this->lastx = x;
 		this->lasty = y;
 	    }
-	    if(type == view_LeftUp && this->lastx == this->firstx && this->lasty == this->firsty){
+	    if(type == view::LeftUp && this->lastx == this->firstx && this->lasty == this->firsty){
 		CopyRect(&(this->tmpval->child),&(this->tmpval->parent));
 		(tt)->SetValue((long)this->tmpval);
 		break;
 	    }
 	    CREC(rec,this);
 	    (this)->DrawRect(&rec);
-	    if(type ==  view_LeftMovement) break;
+	    if(type ==  view::LeftMovement) break;
 	    CREC((this->tmpval->child),this);
 	    (tt)->SetValue((long)this->tmpval);
 	    break;

@@ -129,7 +129,7 @@ printopts::~printopts()
     }
 }
 
-struct view_printoptlist *printopts::PrintOptions()
+struct view::printoptlist *printopts::PrintOptions()
 {
     /* This makes extra-sure nobody tries anything stupid with recursive dialog boxes. */
     return NULL;
@@ -298,7 +298,7 @@ static void HandleClick(class printopts *self, class environment *env)
     }
 }
 
-class view *printopts::Hit(enum view_MouseAction action, long x, long y, long   num_clicks)
+class view *printopts::Hit(enum view::MouseAction action, long x, long y, long   num_clicks)
 {
     long pos;
     class environment *env;
@@ -312,7 +312,7 @@ class view *printopts::Hit(enum view_MouseAction action, long x, long y, long   
     }
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    pos = this->Locate(x, y, NULL);
 	    env = (this)->GetEnclosedStyleInformation( pos, &textlen);
 	    while (env) {
@@ -327,7 +327,7 @@ class view *printopts::Hit(enum view_MouseAction action, long x, long y, long   
 	    }
 	    this->hitenv = env;
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    if (!this->hitenv)
 		break;
 	    pos = this->Locate(x, y, NULL);
@@ -354,12 +354,12 @@ class view *printopts::Hit(enum view_MouseAction action, long x, long y, long   
     return this;
 }
 
-view_DSattributes printopts::DesiredSize( long  width, long  height, enum view_DSpass  pass, long  *desiredWidth, long  *desiredHeight ) 
+view::DSattributes printopts::DesiredSize( long  width, long  height, enum view::DSpass  pass, long  *desiredWidth, long  *desiredHeight ) 
 {
     *desiredWidth = 550;
     *desiredHeight = 322;
     DEBUG(("Desired Size %ld x %ld\n", *desiredWidth, *desiredHeight));
-    return view_Fixed;
+    return view::Fixed;
 }
 
 /* We use this to override newline self-insert. */
@@ -558,7 +558,7 @@ static void CreateWindow(class view  *callview, long  rock)
     class text *tx;
     class im *vp_IM, *im;
     class frame *framep;
-    struct view_printoptlist *opl, *otmp;
+    struct view::printoptlist *opl, *otmp;
     int ix, num, num2, num3;
     const char *label;
     class style *optionstyle, *answerstyle;

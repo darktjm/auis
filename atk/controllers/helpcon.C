@@ -41,7 +41,7 @@ ATKdefineRegistry(helpcon, ATK, helpcon::InitializeClass);
 static void NoteHistory(class helpcon  *self);
 static void settopics(class helpcon  *self);
 static boolean GetHelpOn(class helpcon  *self,char  *buf,char  *type,boolean SaveHistory);
-static void handleclicks(class helpcon  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
+static void handleclicks(class helpcon  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 static class helpcon *FindSelf(class view  *v);
 static void topicschoiceCallBack(class helpcon  *self,class value  *val,long  r1,long  r2);
 static void choicelabelCallBack(class helpcon  *self,class value  *val,long  r1,long  r2);
@@ -118,7 +118,7 @@ static boolean GetHelpOn(class helpcon  *self,char  *buf,char  *type,boolean Sav
     }
     return TRUE;
 }
-static void handleclicks(class helpcon  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
+static void handleclicks(class helpcon  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
 {   /* deal with clicks */
     char buf[256],*cp;
     int len;
@@ -129,7 +129,7 @@ static void handleclicks(class helpcon  *self,class cltextview  *cv,long  *posit
     }
     *numberOfClicks = 1;
     len = *rightPos - *leftPos;
-    if(*action == view_LeftUp &&  len > 0 && len < 256){	
+    if(*action == view::LeftUp &&  len > 0 && len < 256){	
 	if(which != 0){
 	    (self->choice)->CopySubString(*leftPos, len,self->CurrentType,FALSE);
 	    if(strcmp(self->CurrentType,"History") == 0){

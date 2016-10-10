@@ -55,11 +55,11 @@ class spread: public  view {
       void *GetPSPrintInterface(const char *printtype);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
       void PrintPSRect(FILE *file, long logwidth, long logheight, struct rectangle *visrect);
-      void FullUpdate(enum view_UpdateType how, long left, long top, long width, long height);
+      void FullUpdate(enum view::UpdateType how, long left, long top, long width, long height);
       void Update();
       void WantUpdate(class view *requestor);
-      class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+      class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
       void WantNewSize(class view *requestor);
       void ReceiveInputFocus();
       void LoseInputFocus();

@@ -30,11 +30,11 @@ class figotext : public  figobj {
       const char * ToolName(class figtoolview *v, long rock)  ;
       void Draw(class figview *v); 
       void Sketch(class figview *v); 
-      enum figobj_Status Build(class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ; 
+      enum figobj_Status Build(class figview *v, enum view::MouseAction action, long x, long y, long clicks)  ; 
       enum figobj_HitVal HitMe(long x, long y, long delta, long *ptref)  ;
       void MoveHandle(long x, long y, long ptref);
-      boolean Reshape(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
-      boolean AddParts(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+      boolean Reshape(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+      boolean AddParts(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
       void RecomputeBounds();
       struct rectangle * GetBounds(class figview *vv)  ;
       void InheritVAttributes(class figattr *attr, unsigned long mask);

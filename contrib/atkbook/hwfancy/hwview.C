@@ -25,7 +25,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ATKdefineRegistry(hwview, view, NULL);
 
 
-void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void hwview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     class fontdesc *font;

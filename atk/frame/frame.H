@@ -70,13 +70,13 @@ public:
 
 	/* Make it hard for people to access our lpair functions. */
 	void Update();
-	void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+	void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
 	const char * WantInformation(const char *key)  ;
 	ATK  * WantHandler(const char *handlerName)  ;
 	void PostKeyState(class keystate *keystate);
 	void PostMenus(class menulist *menulist);
 	void ObservedChanged(class observable *changed, long value);
-	class view * Hit(enum view_MouseAction action, long x, long y, long nclicks)  ;
+	class view * Hit(enum view::MouseAction action, long x, long y, long nclicks)  ;
 	void WantUpdate(class view *v);
 	void WantNewSize(class view *requestor);
 	void LinkTree(class view *parent);

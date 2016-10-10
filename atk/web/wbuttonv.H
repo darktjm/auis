@@ -11,7 +11,7 @@ public:
 	wbuttonv();
 	static boolean InitializeClass();
 
-	void FullUpdate(enum view_UpdateType type, 
+	void FullUpdate(enum view::UpdateType type, 
 		long left, long top, long width, long right);
 	void Update();
 

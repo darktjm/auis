@@ -19,7 +19,7 @@ public:
 	virtual ~phelpv();
 
      void SetDotPosition(long pos);
-     class view * Hit(enum view_MouseAction action, long x, long y, long clicks)  ;
+     class view * Hit(enum view::MouseAction action, long x, long y, long clicks)  ;
 
 
 

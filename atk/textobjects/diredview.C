@@ -567,7 +567,7 @@ void diredview::SetDataObject(class dataobject   *object)
     (dired)->NotifyObservers( 0);
 }
 
-class view *diredview::Hit(enum view_MouseAction  action, long  x , long  y , long  numberOfClicks)
+class view *diredview::Hit(enum view::MouseAction  action, long  x , long  y , long  numberOfClicks)
 {
     int button;
 
@@ -575,12 +575,12 @@ class view *diredview::Hit(enum view_MouseAction  action, long  x , long  y , lo
         default:
             button = 0;
             break;
-        case view_LeftDown:
-        case view_LeftMovement:
+        case view::LeftDown:
+        case view::LeftMovement:
             button = 1;     /* Left button; select */
             break;
-        case view_RightDown:
-        case view_RightMovement:
+        case view::RightDown:
+        case view::RightMovement:
             button = 2;     /* Right button; deselect */
             break;
     }

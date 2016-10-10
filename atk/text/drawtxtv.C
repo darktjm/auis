@@ -303,7 +303,7 @@ static void AllocateLineItem(class textview  *self, class text  *text, long  pos
          * more than we can deliver, based on clp->height */
 
 	(view)->DesiredSize( aw,
-          16384, view_NoSet, &desw, &desh);
+          16384, view::NoSet, &desw, &desh);
 	// tlp->vi_width = (desw > aw) ? aw: desw;
 	tlp->vi_width=desw;
 	tlp->vi_height = desh;
@@ -1500,7 +1500,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 		    (tt->vi_view)->InsertView( this, &enclosingRect);
 		    (this)->RetractViewCursors( tt->vi_view);
 		    (tt->vi_view)->FullUpdate(
-                      view_FullRedraw, 0, 0, 0, 0);
+                      view::FullRedraw, 0, 0, 0, 0);
 		}		
 		info->foundView = tt->vi_view;
 	    } else if (type == textview_GetPosition) {
@@ -1894,19 +1894,19 @@ void textview::ViewMove(struct linedesc  *lineStructure, long  movement)
 	    if (movement == textview_REMOVEVIEW) {
 		rectangle_SetRectSize(&enclosingRect, 0, 0, 0, 0);
 		(CurView)->InsertView( this, &enclosingRect);
-		(CurView)->FullUpdate( view_Remove, 0, 0, 0, 0);
+		(CurView)->FullUpdate( view::Remove, 0, 0, 0, 0);
 	    }
 	    else if( movement == textview_MOVEVIEW){
 		(CurView)->GetEnclosedBounds( &enclosingRect);
 		(CurView)->InsertView( this, &enclosingRect);
-		(CurView)->FullUpdate( view_MoveNoRedraw, 0, 0, 0, 0);
+		(CurView)->FullUpdate( view::MoveNoRedraw, 0, 0, 0, 0);
 	    }
 	    else {
 		(CurView)->GetEnclosedBounds( &enclosingRect);
 		rectangle_Top(&enclosingRect) += movement;
 		(CurView)->InsertView( this, &enclosingRect);
 		(CurView)->FullUpdate(
-				view_MoveNoRedraw, 0, 0, 0, 0);
+				view::MoveNoRedraw, 0, 0, 0, 0);
 	    }
 	}
 	elen += i;

@@ -16,10 +16,10 @@ class compressv: public view {
     compressv();
     virtual ~compressv();
 
-    view_DSattributes DesiredSize(long width,long height,enum view_DSpass pass,long *dWidth,long *dheight);
-    void FullUpdate(enum view_UpdateType type,long left,long top,long width,long right);
+    view::DSattributes DesiredSize(long width,long height,enum view::DSpass pass,long *dWidth,long *dheight);
+    void FullUpdate(enum view::UpdateType type,long left,long top,long width,long right);
     void GetOrigin(long width, long height, long *originX, long *originY);
-    view *Hit(enum view_MouseAction action,long x,long y,long numberOfClicks);
+    view *Hit(enum view::MouseAction action,long x,long y,long numberOfClicks);
     void LinkTree(view *parent);
     void ObservedChanged(observable *changed,long value);
     void Print(FILE *file,const char *processor,const char *finalFormat,boolean topLevel);

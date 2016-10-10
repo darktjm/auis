@@ -49,7 +49,7 @@ void wrapv::InitChildren()
     else (this)->view::InitChildren();
 }
 
-void wrapv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void wrapv::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle r;
     
@@ -70,13 +70,13 @@ void wrapv::Update()
 }
 
 
-class view *wrapv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *wrapv::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     if(this->intv) return (this->intv)->Hit( action, x, y, numberOfClicks);
     else return (this)->view::Hit( action, x, y, numberOfClicks);
 }
 
-view_DSattributes wrapv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes wrapv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
     if(this->intv) return (this->intv)->DesiredSize( width, height, pass, dWidth, dHeight);
     else return (this)->view::DesiredSize( width, height, pass, dWidth, dHeight);

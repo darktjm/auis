@@ -63,22 +63,22 @@ static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  w
 static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad, const unsigned char *pattern);
 static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, const unsigned char *pattern);
 static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  wid , long  hgt, const unsigned char *pattern , const unsigned char *brush);
-static void Tool_SolidRect(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Paint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Line(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Circle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Ellipse(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Rectangle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_SolidRect(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_SolidCircle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_SolidEllipse(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Paint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Line(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Circle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Ellipse(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Rectangle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Text(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static class raster *GetPasted(class rastoolview  *self);
-static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_FloodFill(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_Paste(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_FloodFill(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void FloodSplot(class rastoolview  *self);
-static void Tool_SprayPaint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_SprayPaint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void SpraySplot(class rastoolview  *self);
-static void Tool_CurvePaint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+static void Tool_CurvePaint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 static void CurveSplot(class rastoolview  *self);
 static void PasteDownProc(class rastoolview  *self, char  *rock);
 static void Toolmod_Paste(class rastoolview  *self, char  *rock);
@@ -1080,25 +1080,25 @@ static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  w
 	DrawLine(rself, x0, y0+hgt, x0, y0+1, pattern, brush);
 }
 
-static void Tool_SolidRect(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_SolidRect(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0;
 	    self->lasty = 0;
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, 0, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x - self->rockx;
 	    self->lasty = y - self->rocky;
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x - self->rockx;
 	    self->lasty = y - self->rocky;
@@ -1110,19 +1110,19 @@ static void Tool_SolidRect(class rastoolview  *self, enum view_MouseAction  acti
     }
 }
 
-static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_SolidCircle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     int rad;
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0; /* 0 radius */
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    rad = ((y-self->rocky)*(y-self->rocky)+(x-self->rockx)*(x-self->rockx));
 	    rad = (int)(sqrt((double)rad));
 	    if (rad == self->lastx)
@@ -1131,7 +1131,7 @@ static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  ac
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, rad, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = rad;
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    rad = ((y-self->rocky)*(y-self->rocky)+(x-self->rockx)*(x-self->rockx));
 	    rad = (int)(sqrt((double)rad));
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, self->lastx, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
@@ -1143,20 +1143,20 @@ static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  ac
     }
 }
 
-static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_SolidEllipse(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     int xrad, yrad;
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0; /* 0 radius */
 	    self->lasty = 0; /* 0 radius */
 	    DrawEllipse(self->primaryview, self->rockx, self->rocky, 0, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    xrad = x-self->rockx;
 	    yrad = y-self->rocky;
 	    if (xrad<0) xrad = (-xrad);
@@ -1166,7 +1166,7 @@ static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  a
 	    self->lastx = xrad;
 	    self->lasty = yrad;
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    xrad = x-self->rockx;
 	    yrad = y-self->rocky;
 	    if (xrad<0) xrad = (-xrad);
@@ -1180,49 +1180,49 @@ static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  a
     }
 }
 
-static void Tool_Paint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Paint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, self->pattern, self->brush);
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, self->pattern, self->brush);
 	    self->rockx = x;
 	    self->rocky = y;
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    break;
 	default:
 	    break;
     }
 }
 
-static void Tool_Line(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Line(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x;
 	    self->lasty = y;
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DrawLine(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x;
 	    self->lasty = y;
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    DrawLine(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, self->pattern, self->brush);
 	    pix = ((class raster *)self->primaryobj)->GetPix();
@@ -1233,19 +1233,19 @@ static void Tool_Line(class rastoolview  *self, enum view_MouseAction  action, l
     }
 }
 
-static void Tool_Circle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Circle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix;
     int rad;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0; /* 0 radius */
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    rad = ((y-self->rocky)*(y-self->rocky)+(x-self->rockx)*(x-self->rockx));
 	    rad = (int)(sqrt((double)rad));
 	    if (rad == self->lastx)
@@ -1254,7 +1254,7 @@ static void Tool_Circle(class rastoolview  *self, enum view_MouseAction  action,
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, rad, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = rad;
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    rad = ((y-self->rocky)*(y-self->rocky)+(x-self->rockx)*(x-self->rockx));
 	    rad = (int)(sqrt((double)rad));
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, self->lastx, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
@@ -1267,20 +1267,20 @@ static void Tool_Circle(class rastoolview  *self, enum view_MouseAction  action,
     }
 }
 
-static void Tool_Ellipse(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Ellipse(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix;
     long xrad, yrad;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0;
 	    self->lasty = 0;
 	    DrawEllipse(self->primaryview, self->rockx, self->rocky, 0, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    xrad = x-self->rockx;
 	    yrad = y-self->rocky;
 	    if (xrad<0) xrad = (-xrad);
@@ -1292,7 +1292,7 @@ static void Tool_Ellipse(class rastoolview  *self, enum view_MouseAction  action
 	    self->lastx = xrad;
 	    self->lasty = yrad;
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    xrad = x-self->rockx;
 	    yrad = y-self->rocky;
 	    if (xrad<0) xrad = (-xrad);
@@ -1307,25 +1307,25 @@ static void Tool_Ellipse(class rastoolview  *self, enum view_MouseAction  action
     }
 }
 
-static void Tool_Rectangle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Rectangle(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 0;
 	    self->lasty = 0;
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, 0, 0, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x - self->rockx;
 	    self->lasty = y - self->rocky;
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    DrawRectangle(self->primaryview, self->rockx, self->rocky, self->lastx, self->lasty, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    self->lastx = x - self->rockx;
 	    self->lasty = y - self->rocky;
@@ -1338,7 +1338,7 @@ static void Tool_Rectangle(class rastoolview  *self, enum view_MouseAction  acti
     }
 }
 
-static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Text(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     struct rectangle *VS, *sel;
     long w, h;
@@ -1352,7 +1352,7 @@ static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, l
     if (y >= VS->top+VS->height) y = VS->top+VS->height;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = 1;
@@ -1360,7 +1360,7 @@ static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, l
 	    rectangle_SetRectSize(sel, x, y, 1, 1);
 	    (self->primaryview)->SetDesiredSelection( sel);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if (x >= self->rockx) {
 		w = x-self->rockx;
 		x = self->rockx;
@@ -1380,7 +1380,7 @@ static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, l
 	    rectangle_SetRectSize(sel, x, y, w, h);
 	    (self->primaryview)->SetDesiredSelection( sel);
 	    break;
-	case view_LeftUp: 
+	case view::LeftUp: 
 	    if (x >= self->rockx) {
 		w = x-self->rockx;
 		x = self->rockx;
@@ -1455,7 +1455,7 @@ static class raster *GetPasted(class rastoolview  *self)
     return ras;
 }
 
-static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_Paste(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     class rasterimage *pix, *pix2, *pix3;
     struct point pt;
@@ -1468,8 +1468,8 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
     pix = (ras)->GetPix();
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    pras = GetPasted(self);
 	    if (!pras) {
 		message::DisplayString(self->primaryview, 0, "No raster found in cut buffer.");
@@ -1551,8 +1551,8 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
 	    /* maybe ought to call RepostMenus(self) here, but the user isn't too likely to call for a menu while dragging the mouse in another window */
 	    break;
 
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    if (!self->rock) return;
 	    x -= self->rockx;
 	    y -= self->rocky;
@@ -1588,8 +1588,8 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
 		self->lasty = y;
 	    }
 	    break;
-	case view_LeftUp: 
-	case view_RightUp: 
+	case view::LeftUp: 
+	case view::RightUp: 
 	    if (!self->rock) return;
 	    x -= self->rockx;
 	    y -= self->rocky;
@@ -1622,7 +1622,7 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
 		(pix)->NotifyObservers( raster_BITSCHANGED);
 	    }
 
-	    if (action==view_LeftUp)
+	    if (action==view::LeftUp)
 		self->unpaste = TRUE;
 	    else
 		self->unpaste = FALSE;
@@ -1640,7 +1640,7 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
     }
 }
 
-static void Tool_FloodFill(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_FloodFill(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     int bit;
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
@@ -1650,7 +1650,7 @@ static void Tool_FloodFill(class rastoolview  *self, enum view_MouseAction  acti
     struct span *tmp;
     struct rectangle R;
 
-    if (action!=view_LeftDown && action!=view_RightDown)
+    if (action!=view::LeftDown && action!=view::RightDown)
 	return;
 
     if (x<0 || y<0 || x>=wid || y>=hgt) {
@@ -1811,21 +1811,21 @@ static void FloodSplot(class rastoolview  *self)
     /*rasterimage_NotifyObservers(pix, raster_BITSCHANGED);*/
 }
 
-static void Tool_SprayPaint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_SprayPaint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->rock = 1;
 	    im::EnqueueEvent((event_fptr)SpraySplot, (char *)self, (event_MSECtoTU(20)));
 
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    self->rockx = x;
 	    self->rocky = y;
 	    break;
 
-	case view_LeftUp:
+	case view::LeftUp:
 	    self->rock = 0;
 	    break;
 	default:
@@ -1856,10 +1856,10 @@ static void SpraySplot(class rastoolview  *self)
     }
 }
 
-static void Tool_CurvePaint(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
+static void Tool_CurvePaint(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    self->rockx = x;
 	    self->rocky = y;
 	    self->lastx = x;
@@ -1869,12 +1869,12 @@ static void Tool_CurvePaint(class rastoolview  *self, enum view_MouseAction  act
 	    self->rock = 1;
 	    im::EnqueueEvent((event_fptr)CurveSplot, (char *)self, (event_MSECtoTU(20)));
 
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    self->rockx = x;
 	    self->rocky = y;
 	    break;
 
-	case view_LeftUp:
+	case view::LeftUp:
 	    self->rock = 0;
 	    break;
 	default:

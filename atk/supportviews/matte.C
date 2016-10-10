@@ -88,9 +88,9 @@ void matte::Print(FILE  *file, const char  *processor, const char  *finalFormat,
 	(this->child)->Print(file, processor, finalFormat, topLevel);
 }
 
-view_DSattributes matte::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes matte::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
-    view_DSattributes val;
+    view::DSattributes val;
     long pwidth , pheight ;
     int fudge;
     if (width <= BIGSIZE || height <= BIGSIZE)
@@ -107,32 +107,32 @@ view_DSattributes matte::DesiredSize(long  width, long  height, enum view_DSpass
     pheight = (this->desh != UNSET) ? this->desh : height - fudge;
     pwidth = (this->desw != UNSET) ? this->desw : width - fudge;
     switch(pass){
-	case view_HeightSet:
+	case view::HeightSet:
 	    pheight = height -fudge;
 	    if(this->desw != UNSET){
 		*dWidth = this->desw;
-		return view_Fixed;
+		return view::Fixed;
 	    }
 	    break;
-	case view_WidthSet:
+	case view::WidthSet:
 	    pwidth = width - fudge;
 	    if(this->desh != UNSET ){
 		*dHeight = this->desh;
-		return view_Fixed;
+		return view::Fixed;
 	    }
 	    break;
-	case view_NoSet:	
+	case view::NoSet:	
 	    if(this->desh != UNSET && this->desw != UNSET){
 		*dHeight = this->desh;
 		*dWidth = this->desw;
-		return view_Fixed;
+		return view::Fixed;
 	    }
-	    if(this->desh != UNSET) pass = view_HeightSet;
-	    else if(this->desw != UNSET) pass = view_WidthSet;
+	    if(this->desh != UNSET) pass = view::HeightSet;
+	    else if(this->desw != UNSET) pass = view::WidthSet;
     }
     if(this->child )val = (this->child)->DesiredSize( pwidth , pheight , pass, dWidth, dHeight);
     else{
-	val = (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+	val = (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 	*dHeight = height - fudge; 
 	*dWidth = width - fudge;
     }
@@ -185,15 +185,15 @@ void matte::LoseInputFocus()
     (this)->WantUpdate(this);
 }
 
-class view *matte::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *matte::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
     int fudge;
     if((this->child && !this->resizing) || this->ref == NULL)	
 	return (this->child)->Hit(action,(this->child)->EnclosedXToLocalX( mousex), (this->child)->EnclosedYToLocalY( mousey),numberOfClicks);
 
     switch(action){
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    {
 	    long width = (this)->GetLogicalRight();
 	    long height = (this)->GetLogicalBottom();
@@ -209,8 +209,8 @@ class view *matte::Hit(enum view_MouseAction  action,long  mousex ,long  mousey 
 	    UpdateCursors(this);
 	    return (class view *) this;
 	    }
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 
 	    if(this->Moving){
 		int move = this->Moving;
@@ -268,10 +268,10 @@ void matte::Update()
     UpdateCursors(this);
     UpdateDrawing(this);
 }
-void matte::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void matte::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     struct rectangle enclosingRect;
-    if(type == view_FullRedraw && this->ref && (this->desw != this->ref->desw || this->desh != this->ref->desh)){
+    if(type == view::FullRedraw && this->ref && (this->desw != this->ref->desw || this->desh != this->ref->desh)){
 	this->desw = this->ref->desw ;
 	this->desh = this->ref->desh ;
 	if(!this->sizepending) {
@@ -283,9 +283,9 @@ void matte::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  wid
     enclosingRect.top = 0; enclosingRect.left = 0;
     enclosingRect.width  = (this)->GetLogicalWidth() -1 ;
     enclosingRect.height = (this)->GetLogicalHeight() -1 ;
-    if(type != view_Remove){
+    if(type != view::Remove){
 	UpdateCursors(this);
-	if(type != view_MoveNoRedraw){
+	if(type != view::MoveNoRedraw){
 	    (this)->SetTransferMode(graphic::WHITE);
 	    (this)->DrawRect(&enclosingRect);
 	    (this)->SetTransferMode(graphic::INVERT);
@@ -559,7 +559,7 @@ void *matte::GetPSPrintInterface(const char *printtype)
 	return this->child->GetPSPrintInterface(printtype); 
     return NULL;
 }
-void matte::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void matte::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     if (this->child)
 	this->child->DesiredPrintSize(width, height, pass, desiredwidth, desiredheight);

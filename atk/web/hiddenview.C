@@ -23,13 +23,13 @@ static struct bind_Description hiddenBindings[]={
     NULL
 };
 
-view_DSattributes hiddenview::DesiredSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+view::DSattributes hiddenview::DesiredSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     if (((hidden *)GetDataObject())->IsVisible()) {
 	if (((hidden *)GetDataObject())->IsFullScreen())
 	    return this->textview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
 	else {
-	    view_DSattributes retval;
+	    view::DSattributes retval;
 	    long fracwidth= 50;
 	    do  {
 		/* keep trying to widen box until it's TOO wide, or short ENOUGH, to be a cute inset */
@@ -43,7 +43,7 @@ view_DSattributes hiddenview::DesiredSize(long width, long height, enum view_DSp
     }
     *desiredwidth = 0;
     *desiredheight = 0;
-    return (view_HeightFlexible | view_WidthFlexible);
+    return (view::HeightFlexible | view::WidthFlexible);
 }
 
 void hiddenview::LoseInputFocus()
@@ -96,7 +96,7 @@ static void DoUpdate(hiddenview *self, boolean full)
     }
 }
 
-void hiddenview::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height)
+void hiddenview::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height)
 {
     if (((hidden *)GetDataObject())->IsVisible())
 	(this)->textview::FullUpdate(type, left, top, width, height);

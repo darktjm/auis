@@ -177,7 +177,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{enum view_DSattributes \bold{eqview_DesiredSize }(}\fixedindent{
+\fixedtext{enum view::DSattributes \bold{eqview_DesiredSize }(}\fixedindent{
 
 struct eqview *\paramname{eqview},
 
@@ -185,7 +185,7 @@ long \paramname{width},
 
 long \paramname{height},
 
-enum view_DSpass \paramname{pass},
+enum view::DSpass \paramname{pass},
 
 long *\paramname{widthp},
 
@@ -207,7 +207,7 @@ with the parent view.}\fieldtext{
 
 \fieldheading{Return Value}
 
-\fieldtext{This function returns view_Fixed, a view_DSattribute which 
+\fieldtext{This function returns view::Fixed, a view::DSattribute which 
 describes the flexibility of the view's borders.}
 
 
@@ -220,7 +220,7 @@ describes the flexibility of the view's borders.}
 
  \fieldheading{See Also}
 
-\fieldtext{view_DesiredSize}
+\fieldtext{view::DesiredSize}
 
 
 
@@ -289,9 +289,9 @@ views.  Should enable scrolling function.}
 
 \fieldtext{eqview_FullUpdate
 
-view_WantUpdate
+view::WantUpdate
 
-view_Update}
+view::Update}
 
 
 
@@ -315,7 +315,7 @@ ______________________________________________________
 
 struct eqview *\paramname{eqview},
 
-enum view_UpdateType \paramname{type},
+enum view::UpdateType \paramname{type},
 
 long \paramname{left},
 
@@ -363,9 +363,9 @@ have not been corrected yet.}
 
 \fieldtext{eqview_Update
 
-view_WantUpdate
+view::WantUpdate
 
-view_FullUpdate}
+view::FullUpdate}
 
 
 
@@ -421,9 +421,9 @@ WantInputFocus is received.
 
 \fieldtext{eqview_LoseInputFocus
 
-view_ReceiveInputFocus
+view::ReceiveInputFocus
 
-view_WantInputFocus}
+view::WantInputFocus}
 
 
 
@@ -478,7 +478,7 @@ requested the input focus.
 
 \fieldtext{eqview_ReceiveInputFocus
 
-view_LoseInputFocus}
+view::LoseInputFocus}
 
 
 
@@ -502,7 +502,7 @@ ______________________________________________________
 
 struct eqview *\paramname{eqview},
 
-enum view_MouseAction \paramname{action},
+enum view::MouseAction \paramname{action},
 
 long \paramname{x},
 
@@ -540,7 +540,7 @@ been received.
 
 \fieldheading{See Also}
 
-\fieldtext{view_Hit}
+\fieldtext{view::Hit}
 
 
 
@@ -601,7 +601,7 @@ function will report an error if called with a non-eq data object.}
 
 \fieldheading{See Also}
 
-\fieldtext{view_SetDataObject}
+\fieldtext{view::SetDataObject}
 
 
 
@@ -670,7 +670,7 @@ using a postscript representation rather than eqn and troff.}
 
 \fieldheading{See Also}
 
-\fieldtext{view_Print
+\fieldtext{view::Print
 
 eq_Parse}
 

@@ -122,13 +122,13 @@ circlepiview::LinkTree(class view  *parent)
 
 
 void
-circlepiview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+circlepiview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Do an update.
 */
 
-  if ((type == view_FullRedraw) || (type == view_LastPartialRedraw)) {
+  if ((type == view::FullRedraw) || (type == view::LastPartialRedraw)) {
     this->need_full_update = TRUE;
     (this)->WantUpdate( this);
   }
@@ -234,14 +234,14 @@ circlepiview::Update()
 
 
 class view *
-circlepiview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+circlepiview::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
 /*
   Handle the button event.  Currently, semantics are:
   left up  --  receive input focus (to post menus)
 */
     switch (action) {
-      case view_LeftUp:
+      case view::LeftUp:
 	(this)->WantInputFocus(this);
 	break;
       default:

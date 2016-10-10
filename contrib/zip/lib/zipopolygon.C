@@ -94,7 +94,7 @@ zipopolygon::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		  
   }
 
 long
-zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipopolygon::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   long				  status = zip_ok,
 					  radial_point = 0;
@@ -103,7 +103,7 @@ zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   a
   IN(zipopolygon::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
         (this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_polygon_figure,
 			   CurrentImage, 0 )) == zip_success )
@@ -121,7 +121,7 @@ zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   a
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
 	{
 	DEBUGdt(Radius,figure_x_points(0));
@@ -139,7 +139,7 @@ zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   a
 	  }
 	}
 	break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( (figure = CurrentFigure)  &&  status == zip_ok )
 	{
 	(this->view_object)->Draw_Figure(  figure, pane );
@@ -238,7 +238,7 @@ long Draw( class zipopolygon  *self, zip_type_figure   figure, zip_type_pane   p
     if ( (figure->zip_figure_mode.zip_figure_mode_shaded  ||
           figure->zip_figure_mode.zip_figure_mode_patterned) )
       {
-      if ( self->view_object->mouse_action != view_LeftMovement  &&  action == zip_draw )
+      if ( self->view_object->mouse_action != view::LeftMovement  &&  action == zip_draw )
         {
         if ( figure->zip_figure_mode.zip_figure_mode_patterned  &&
 	     (pattern = (self->data_object)->Contextual_Figure_Pattern(  figure )) )
