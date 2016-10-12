@@ -17,9 +17,6 @@
  *
  */
 
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
 #include <ATK.H>
 
 #define xim_PRORGAMMERVERSION 1
@@ -60,6 +57,9 @@ struct menuviews {
 
 #include <im.H>
 #include <ahash.H>
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 class xim : public  im  {
 public:
@@ -98,7 +98,7 @@ public:
 	virtual boolean CreateTransientWindow(class im *other, int flags, im_configurefptr cfp, long crock)  ;
 	virtual boolean CreateOverrideWindow(class im *other, im_configurefptr cfp, long crock)  ;
 	virtual void RedrawWindow();
-	virtual class view * Hit (enum view_MouseAction action, long x, long y, long clicks)  ;
+	virtual class view * Hit (enum view::MouseAction action, long x, long y, long clicks)  ;
 
 	/* These are part of the transient and overide support. */
 	virtual boolean SupportsTransient()  ;
@@ -131,7 +131,7 @@ public:
 	
 	virtual ~xim();
 
-	class im *HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButtonState);
+	class im *HandleMouse(enum view::MouseAction  action, long  x, long  y, long  newButtonState);
 	
 	class im * DoKey(long  key);
 	static boolean HandleFiles(long WaitTime, boolean beCheap)  ;

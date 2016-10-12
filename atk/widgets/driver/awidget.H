@@ -159,8 +159,8 @@ AACTION_METHOD(name,ViewClass) {\
 long x=in[1].Integer(); \
 long y=in[2].Integer(); \
 boolean within=(boolean)in[3].Integer(); \
-view_MouseAction action \
-= (view_MouseAction)in[4].Integer(); \
+view::MouseAction action \
+= (view::MouseAction)in[4].Integer(); \
 long num_clicks=in[5].Integer(); \
 DataClass *dself=(DataClass *)GetDataObject();
 #define END_MOUSE_METHOD() }
@@ -170,8 +170,8 @@ AACTION_METHOD(name,DataClass) {\
 long x=in[1].Integer(); \
 long y=in[2].Integer(); \
 boolean within=(boolean)in[3].Integer(); \
-view_MouseAction action \
-= (view_MouseAction)in[4].Integer(); \
+view::MouseAction action \
+= (view::MouseAction)in[4].Integer(); \
 long num_clicks=in[5].Integer(); \
 ViewClass *vself=(ViewClass *)GetDataObject();
 
@@ -183,8 +183,8 @@ ViewClass *self=(ViewClass *)in[0].ATKObject(); \
 long x=in[1].Integer(); \
 long y=in[2].Integer(); \
 boolean within=(boolean)in[3].Integer(); \
-view_MouseAction action \
-= (view_MouseAction)in[4].Integer(); \
+view::MouseAction action \
+= (view::MouseAction)in[4].Integer(); \
 long num_clicks=in[5].Integer();
 #define END_MOUSE_FUNC() }
 
@@ -194,8 +194,8 @@ ViewClass *vself=(ViewClass *)in[0].ATKObject(); \
 long x=in[1].Integer(); \
 long y=in[2].Integer(); \
 boolean within=(boolean)in[3].Integer(); \
-view_MouseAction action \
-= (view_MouseAction)in[4].Integer(); \
+view::MouseAction action \
+= (view::MouseAction)in[4].Integer(); \
 long num_clicks=in[5].Integer();
 
 /*    $Log: awidget.H,v $

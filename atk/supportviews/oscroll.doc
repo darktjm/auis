@@ -59,7 +59,7 @@ horizontal scroll bar that appears on the top or bottom edge of a rectangle.
 *\paramname{self});} 
 
 \fixedtext{void \bold{scroll_}FullUpdate }\fixedindent{(struct scroll 
-*\paramname{scroll}, enum view_UpdateType \paramname{type}, long 
+*\paramname{scroll}, enum view::UpdateType \paramname{type}, long 
 \paramname{left}, long \paramname{top}, long \paramname{width}, long 
 \paramname{right});} 
 
@@ -80,7 +80,7 @@ horizontal scroll bar that appears on the top or bottom edge of a rectangle.
 *\paramname{scroll});} 
 
 \fixedtext{struct view *\bold{scroll_}Hit }\fixedindent{(struct scroll 
-*\paramname{scroll}, enum view_MouseAction \paramname{action}, long 
+*\paramname{scroll}, enum view::MouseAction \paramname{action}, long 
 \paramname{x}, long \paramname{y}, long \paramname{numberOfClicks});} 
 
 \fixedtext{boolean \bold{scroll_}InitializeClass }\fixedindent{();} 
@@ -316,14 +316,14 @@ int side;
 
 int end;
 
-enum view_MouseAction action;} 
+enum view::MouseAction action;} 
 
 
 \leftindent{
 The endzone routine gets called when the user clicks in the scrollbar endzone; 
 \italic{zone} is either \smaller{scroll_TOPENDZONE} or 
 \smaller{scroll_BOTTOMENDZONE}, for the top or bottom zone, and \italic{action} 
-is how the user clicked (enum view_MouseAction, see View, Vol. 2).  If the 
+is how the user clicked (enum view::MouseAction, see View, Vol. 2).  If the 
 pointer to this procedure in the \italic{scrollfns} structure is 
 \smaller{NULL}, this procedure defaults to scrolling the view to the 
 beginning/end. 

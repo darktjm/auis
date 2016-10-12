@@ -178,15 +178,15 @@ void celview::Print(FILE  *file, const char  *processor, const char  *finalForma
     if(this->truechild) 
 	(this->truechild)->Print(file, processor, finalFormat, topLevel);
 }
-view_DSattributes celview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes celview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
-    view_DSattributes val;
+    view::DSattributes val;
     long pwidth , pheight ,offset;
     this->sizepending = FALSE;
     if(this->vismode == cel_INVISIBLE) {
 	*dWidth = 0;
 	*dHeight = 0;
-	return(view_Fixed);
+	return(view::Fixed);
     }
     if((Cel(this))->GetReadCount() == 0 &&
 	((Cel(this))->GetDefaultStream() != NULL ||
@@ -196,7 +196,7 @@ view_DSattributes celview::DesiredSize(long  width, long  height, enum view_DSpa
     }
 /*
     if(self->child && self->mode == celview_FirstUpdate){
-	view_LinkTree(self->child,self);
+	view::LinkTree(self->child,self);
 	self->mode = celview_HasView;
     }
 */
@@ -213,38 +213,38 @@ view_DSattributes celview::DesiredSize(long  width, long  height, enum view_DSpa
     pheight = (this->desh != UNSET) ? this->desh : height - offset;
     pwidth = (this->desw != UNSET) ? this->desw : width - offset;
     switch(pass){
-	case view_HeightSet:
+	case view::HeightSet:
 	    pheight = height -offset;
 	    if(this->desw != UNSET){
 		*dWidth = this->desw;
-		return view_Fixed;
+		return view::Fixed;
 	    }
 	    break;
-	case view_WidthSet:
+	case view::WidthSet:
 	    pwidth = width - offset;
 	    if(this->desh != UNSET ){
 		*dHeight = this->desh;
-		return view_Fixed;
+		return view::Fixed;
 	    }
 	    break;
-	case view_NoSet:	
+	case view::NoSet:	
 	    if(this->desh != UNSET && this->desw != UNSET){
 		*dHeight = this->desh;
 		*dWidth = this->desw;
-		return view_Fixed;
+		return view::Fixed;
 	    }
-	    if(this->desh != UNSET) pass = view_HeightSet;
-	    else if(this->desw != UNSET) pass = view_WidthSet;
+	    if(this->desh != UNSET) pass = view::HeightSet;
+	    else if(this->desw != UNSET) pass = view::WidthSet;
     }
     if(this->child )val = (this->child)->DesiredSize( pwidth , pheight , pass, dWidth, dHeight);
     else if( (Data(this))->GetDefaultStream() || (Data(this))->GetInitFile() ){
-	val = (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+	val = (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 	 *dWidth = width;
 	 *dHeight = height;
 	 return val;
     }
     else{
-	val = (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+	val = (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 /*
 	*dHeight =(self->desh != UNSET) ? self->desh :  height - offset; 
 	if(*dHeight  > 1024) *dHeight = 200;
@@ -282,10 +282,10 @@ static void UpdateDrawing(class celview  *self)
 {
     if(self->OldMode != self->drawing || self->child == NULL){
 	if(self->child == NULL){
-	    (self)->SetTransferMode(graphic_WHITE);
+	    (self)->SetTransferMode(graphic::WHITE);
 	    (self)->EraseVisualRect();
 	}
-	(self)->SetTransferMode(graphic_INVERT);
+	(self)->SetTransferMode(graphic::INVERT);
 	(self)->DrawRect(&(self->enclosingRect));
 	if(self->child == NULL && self->HasFocus){
 	    (self)->MoveTo(0,0);
@@ -478,17 +478,17 @@ void celview::Update()
     if(this->mode == celview_NoUpdate) return;
     if(this->mode == celview_DoFull ){
 	this->mode = celview_HasView;
-	(this)->FullUpdate(view_FullRedraw,0,0,0,0);
-/*	view_InsertView(self->child, self, self->olist->rect);
-	view_FullUpdate(self->child,view_FullRedraw,0,0,0,0);
-	view_WantInputFocus(self->child,self->child);
+	(this)->FullUpdate(view::FullRedraw,0,0,0,0);
+/*	view::InsertView(self->child, self, self->olist->rect);
+	view::FullUpdate(self->child,view::FullRedraw,0,0,0,0);
+	view::WantInputFocus(self->child,self->child);
 	UpdateCursors(self);
 	UpdateDrawing(self); */
 	return;
     }
     if(this->mode == celview_UpdateView){
 	this->mode = celview_HasView;
-	(this)->FullUpdate(view_FullRedraw,0,0,0,0);
+	(this)->FullUpdate(view::FullRedraw,0,0,0,0);
 	return;
     }
 /*    if(self->mode == INITNOW){ */
@@ -502,7 +502,7 @@ void celview::Update()
 #endif /* DEBUG */
  	if( (this)->PromptForInfo(this->arb,TRUE,FALSE)== -1){
 	    this->NeedsReinit = TRUE;
-/*	    if(Parent(self)) view_WantInputFocus(Parent(self),Parent(self)); */
+/*	    if(Parent(self)) view::WantInputFocus(Parent(self),Parent(self)); */
 	    return; 
 	}
 #ifdef DEBUG
@@ -515,12 +515,12 @@ void celview::Update()
 	if((this)->makeview(vr) )  
 	    (vr)->NotifyObservers(0);
  	if(this->child != NULL) {
-	    (this)->SetTransferMode(graphic_WHITE);
+	    (this)->SetTransferMode(graphic::WHITE);
 	    (this)->ClearClippingRect();
-	    (this)->SetTransferMode(graphic_BLACK);
+	    (this)->SetTransferMode(graphic::BLACK);
 	    (this)->view::WantNewSize(this); 
 	    this->sizepending = TRUE;
-	    (this)->FullUpdate(view_FullRedraw,0,0,0,0); /* ??? */
+	    (this)->FullUpdate(view::FullRedraw,0,0,0,0); /* ??? */
 	    this->NeedsRemade = FALSE;
 	}
 	else {
@@ -544,7 +544,7 @@ void celview::Update()
 		::PostParameters(this);
 		((class valueview *)this->truechild)->LookupParameters();
 	    }
-	    (this->child)->FullUpdate(view_FullRedraw,0,0,0,0);
+	    (this->child)->FullUpdate(view::FullRedraw,0,0,0,0);
 	}
 	else (this->child)->Update();
     }
@@ -555,13 +555,13 @@ void celview::Update()
 #define OFFSET 5
 static void drawshadow(class celview  *self,struct rectangle  *r)
 {
-    (self)->SetTransferMode(graphic_INVERT);
+    (self)->SetTransferMode(graphic::INVERT);
     (self)->FillRectSize(r->left + OFFSET,r->top + r->height,r->width,OFFSET,(self)->GrayPattern(8,16));
     (self)->FillRectSize(r->left + r->width,r->top + OFFSET,OFFSET,r->height - OFFSET,(self)->GrayPattern(8,16));
-    (self)->SetTransferMode(graphic_BLACK);
+    (self)->SetTransferMode(graphic::BLACK);
     (self)->DrawRect(r);
 }
-void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void celview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     struct rectangle currec,tmprec;
     struct overlay *ov,*lastov;
@@ -576,7 +576,7 @@ void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  w
 	(this->arb = arbiterview::FindArb(this->parent)) != NULL){
 	(this->arb)->InitCell(this);
     }
-    if(type == view_FullRedraw && Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh)){
+    if(type == view::FullRedraw && Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh)){
 	this->desw = Cel(this)->desw ;
 	this->desh = Cel(this)->desh ;
 	if(!this->sizepending) {
@@ -592,12 +592,12 @@ void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  w
 	(this->enclosingRect.width)--;
 	(this->enclosingRect.height)--; 
 /*    } */
-	if(type != view_Remove) {
+	if(type != view::Remove) {
 	    UpdateCursors(this);
-	    if(type != view_MoveNoRedraw){
-		(this)->SetTransferMode(graphic_WHITE);
+	    if(type != view::MoveNoRedraw){
+		(this)->SetTransferMode(graphic::WHITE);
 		(this)->EraseRect(&(this->enclosingRect));
-		(this)->SetTransferMode(graphic_INVERT);
+		(this)->SetTransferMode(graphic::INVERT);
 
 		if(this->drawing){ 
 		    (this)->DrawRect(&(this->enclosingRect));
@@ -636,7 +636,7 @@ void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  w
 	scaleoverlay(this,ov,&currec);
 	(ov->view)->InsertView( this, &ov->rect);
 	(this)->RetractViewCursors(ov->view);
-	(ov->view)->FullUpdate(view_FullRedraw,0,0,0,0);
+	(ov->view)->FullUpdate(view::FullRedraw,0,0,0,0);
 	(this)->SetClippingRect(&(this->enclosingRect));
 	tmprec = ov->rect;
 	if(tmprec.top < 0) tmprec.top--;
@@ -1446,7 +1446,7 @@ void celview::ObservedChanged(class observable  *changed, long  value)
     }
 }
 
-class view *celview::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *celview::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
     class view *vw;
     static boolean lasthit;
@@ -1496,8 +1496,8 @@ class view *celview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	(this)->WantInputFocus(this);
     }
     switch(action){
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    {
 	    long width = (this)->GetLogicalRight();
 	    long height = (this)->GetLogicalBottom();
@@ -1515,8 +1515,8 @@ class view *celview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 	    UpdateCursors(this);
 	    return (class view *) this;
 	    }
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 	    if(this->Moving){
 		int move = this->Moving;
 		this->Moving = 0;
@@ -1563,7 +1563,7 @@ void celview::GetOrigin(long  width, long  height, long  *originX, long  *origin
     else (this)->view::GetOrigin( width, height, originX, originY);
 }
 
-boolean celview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean celview::RecSearch(class search *pat, boolean toplevel)
 {
     boolean res;
 
@@ -1576,7 +1576,7 @@ boolean celview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean celview::RecSrchResume(struct SearchPattern *pat)
+boolean celview::RecSrchResume(class search *pat)
 {
     boolean res;
 

@@ -19,13 +19,13 @@ class headrtv: public  view {
       void Print(FILE *file,const char *processor, const char *finalFormat, boolean topLevel);
       void WantInputFocus(class view *requestor);
       void LinkTree(class view *parent);
-      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
       void SetDataObject(class dataobject *object);
       void Update();
       void ReceiveInputFocus();
       void LoseInputFocus();
-      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
       void GetOrigin(long width, long height, long *originX, long *originY);
       void *GetPSPrintInterface(const char *printtype);
 

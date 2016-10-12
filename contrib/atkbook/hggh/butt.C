@@ -48,7 +48,7 @@ butt::~butt()
 }
 
 class view *
-butt::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks)
+butt::Hit(enum view::MouseAction  action, long  x , long  y , long  numclicks)
 {
     if (this->HitFunction) {
 	this->HitFunction(this->rock1, this->rock2,
@@ -64,12 +64,12 @@ butt::Update()
 
     (this)->GetLogicalBounds( &r);
     (this)->EraseRect( &r);
-    (this)->FullUpdate( view_FullRedraw, r.left,
+    (this)->FullUpdate( view::FullRedraw, r.left,
 		       r.top, r.width, r.height);
 }
 
 void
-butt::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+butt::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     const char *dtext;
@@ -84,8 +84,8 @@ butt::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  widt
 	dtext = this->text;
     }
     (this)->DrawString( dtext,
-		       graphic_BETWEENLEFTANDRIGHT
-		       | graphic_BETWEENTOPANDBASELINE);
+		       graphic::BETWEENLEFTANDRIGHT
+		       | graphic::BETWEENTOPANDBASELINE);
     (this)->PostCursor( &Rect, this->mycursor);
 }
 

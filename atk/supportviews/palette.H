@@ -15,7 +15,7 @@ enum palette_itemtype {palette_ICON = 0, palette_VIEW = 1, palette_STRING = 2};
 
 #include <view.H>
 
-	typedef void (*palette_hitfptr)(long rock, struct palette_item *info, enum view_MouseAction act, long numclicks);
+	typedef void (*palette_hitfptr)(long rock, struct palette_item *info, enum view::MouseAction act, long numclicks);
 
 class palette: public  view {
 public:
@@ -32,9 +32,9 @@ public:
     static void DeselectItem(struct palette_item *item);
 
     
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
      void Update();
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
 
      void WantUpdate(class view *requestor);
 

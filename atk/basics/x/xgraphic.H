@@ -15,6 +15,8 @@
 #define xgraphic_PROGRAMMERVERSION	1
 #include <image.H>
 
+#include <graphic.H>
+
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -32,7 +34,6 @@ typedef struct {
 
 class ddimage;
 
-#include <graphic.H>
 class xgraphic : public  graphic {
 public:
 	virtual ATKregistryEntry *ATKregistry();

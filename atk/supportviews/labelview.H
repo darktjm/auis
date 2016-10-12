@@ -25,20 +25,20 @@ labelview.H
 
 #include <view.H>
 
-	typedef void (*labelview_hitfptr)(class labelview *self, enum view_MouseAction action, char *rock);
+	typedef void (*labelview_hitfptr)(class labelview *self, enum view::MouseAction action, char *rock);
 
 class labelview : public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-	 void FullUpdate(/* struct labelview *self, */ enum view_UpdateType type, 
+	 void FullUpdate(/* struct labelview *self, */ enum view::UpdateType type, 
 			long left, long top, long width, long height );
 	 void Update(/* struct labelview *self, */);
-	 class view * Hit(/* struct labelview *self, */ enum view_MouseAction action, 
+	 class view * Hit(/* struct labelview *self, */ enum view::MouseAction action, 
 			long x, long y, long n)	 ;
-	 view_DSattributes DesiredSize(/* struct labelview *self, */ long width, long height, 
-			enum view_DSpass pass, long *desiredWidth, long *desiredHeight ) 
+	 view::DSattributes DesiredSize(/* struct labelview *self, */ long width, long height, 
+			enum view::DSpass pass, long *desiredWidth, long *desiredHeight ) 
 			 ;
 	 void ObservedChanged(/* struct labelview *self, */ class observable *dobj, long status );
 	 void Print(/* struct labelview *self, */ FILE *file, 
@@ -74,7 +74,7 @@ public:
 	class graphic  *WhitePattern;	/*		. . . on different displays */
 
 	boolean embedded;		/* TRUE if no call to GetApplicationLayer */
-	boolean OnScreen;			/* if not view_Removed */
+	boolean OnScreen;			/* if not view::Removed */
 
 	labelview_hitfptr hitproc;			/* called for a mouse hit */
 	char *hitrock;				/* passed to the hit proc */

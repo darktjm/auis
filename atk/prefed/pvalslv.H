@@ -16,7 +16,7 @@ public:
 	virtual ~pvalslv();
 
      long WhatIsAt(long num, long denom)  ;
-     void Endzone(int end, enum view_MouseAction act);
+     void Endzone(int end, enum view::MouseAction act);
      void SetFrame(long pos, long num, long denom);
      void GetInfo(struct range *total, struct range *seen, struct range *dot);
 

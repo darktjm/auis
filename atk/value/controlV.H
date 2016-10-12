@@ -13,7 +13,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-       class valueview * DoHit(enum view_MouseAction type, long x,long y,long hits)  ;
+       class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;
        void LookupParameters();
        void DrawFromScratch(long x,long y,long width,long height);
     

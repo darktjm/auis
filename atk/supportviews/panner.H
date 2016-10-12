@@ -33,9 +33,9 @@ public:
 
     
        void SetLocation(int location);
-       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+       void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
        void Update();
-       class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+       class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
        void PostCursor(struct rectangle *rec, class cursor *cursor);
 
     

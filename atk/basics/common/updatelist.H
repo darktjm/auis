@@ -21,7 +21,7 @@ public:
 
     virtual void AddTo(class view *view); /* Adds an update request. */
     virtual void DeleteTree(class view *tree); /* Removes update requests for views below the named view. */
-    virtual void Clear(); /* Calls view_Update on all views that have been added and deletes them from the list. */
+    virtual void Clear(); /* Calls view::Update on all views that have been added and deletes them from the list. */
 
     inline boolean UpdatesPending() { return (this->updates != NULL); }
 

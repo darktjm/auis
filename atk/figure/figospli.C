@@ -361,12 +361,12 @@ void figospli::Draw(class figview  *v)
 	num++;
     }
 
-    (v)->SetTransferMode(graphic_COPY);
+    (v)->SetTransferMode(graphic::COPY);
 
     col = ((this)->GetVAttributes())->GetColor((this)->GetIVAttributes());
     (v)->SetForegroundColor(col, 0, 0, 0); 
 
-    (v)->SetLineJoin(graphic_JoinBevel);
+    (v)->SetLineJoin(graphic::JoinBevel);
 
     lw = ((this)->GetVAttributes())->GetLineWidth((this)->GetIVAttributes());
     lw = (v)->ToPixW(lw*figview_FigUPerPix);
@@ -377,7 +377,7 @@ void figospli::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic_LineOnOffDash);
+	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
     }
 
     for (ix=0; ix<figospli_Segments*(num-1)+1; ix++) {
@@ -432,8 +432,8 @@ void figospli::Draw(class figview  *v)
     if (lw != 1)
 	(v)->SetLineWidth(1);
     if (dash!=figattr_LineSolid)
-	(v)->SetLineDash(NULL, 0, graphic_LineSolid);
-    (v)->SetLineJoin(graphic_JoinMiter);
+	(v)->SetLineDash(NULL, 0, graphic::LineSolid);
+    (v)->SetLineJoin(graphic::JoinMiter);
 }
 
 static int FindLineHit(class figospli  *self, long  x , long  y, long  delta)

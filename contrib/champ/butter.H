@@ -9,7 +9,7 @@
 #include <dataobject.H>
 #include <view.H>
 class butter;
-typedef void (*butter_hitfptr)(char *rockptr, long rocklong, class butter *self, enum view_MouseAction act);
+typedef void (*butter_hitfptr)(char *rockptr, long rocklong, class butter *self, enum view::MouseAction act);
 class butter: public  dataobject {
 public:
 	virtual ATKregistryEntry *ATKregistry();

@@ -306,7 +306,7 @@ typedef struct suite_item *suite_type_item;
 class suite;
 typedef void (*suite_dataobjectfptr)(long ClientAnchor,class suite *self,struct suite_item *item,int otype);
 typedef void (*suite_viewobjectfptr)(long ClientAnchor,class suite *self,struct suite_item *item,int otype);
-typedef void (*suite_hitfptr)(long ClientAnchor, class suite *self, struct suite_item *item, int otype, view_MouseAction action, long x, long y, long numberOfClicks);
+typedef void (*suite_hitfptr)(long ClientAnchor, class suite *self, struct suite_item *item, int otype, view::MouseAction action, long x, long y, long numberOfClicks);
 typedef long (*suite_sortfptr)(long clientanchor, class suite *self, struct suite_item *i1, struct suite_item *i2);
 typedef long (*suite_applyfptr)(long ca, class suite *self, struct suite_item *i, long datum);
 typedef void (*suite_exceptfptr)(long ca, class suite *self, struct suite_item *i, long es);
@@ -373,9 +373,9 @@ public:
 
     
 
-	 void FullUpdate(enum view_UpdateType type,long left,long top,long width,long height);
+	 void FullUpdate(enum view::UpdateType type,long left,long top,long width,long height);
 	 void Update();
-	 class view * Hit(enum view_MouseAction action,long x,long y,long numberOfClicks)  ;
+	 class view * Hit(enum view::MouseAction action,long x,long y,long numberOfClicks)  ;
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();
 	 void LinkTree( class view *parent );

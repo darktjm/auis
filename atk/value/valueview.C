@@ -84,7 +84,7 @@ static void DrawFromScratch(class valueview  * self)
 /*  valueview_RestoreGraphicsState( self ); */
   (self )->ClearClippingRect( );
 
-  (self)->SetTransferMode(  graphic_COPY );
+  (self)->SetTransferMode(  graphic::COPY );
 
   if (width < (self->borderPixels << 1) || height < (self->borderPixels << 1))
     {
@@ -147,7 +147,7 @@ valueview::valueview()
   this->back =  NULL;
   this->border =  NULL;
   this->deactivationMask = NULL;
-  this->deactivationTransferMode = graphic_AND;
+  this->deactivationTransferMode = graphic::AND;
   this->active = True;
   this->mouseIsOnTarget = False;
   this->HasInputFocus = FALSE;
@@ -157,12 +157,12 @@ valueview::valueview()
 }
 
 
-view_DSattributes valueview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes valueview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
 {
     *desiredwidth = 75;
     *desiredheight = 75;
-    return (view_DSattributes)( view_WidthFlexible | view_HeightFlexible) ;
+    return (view::DSattributes)( view::WidthFlexible | view::HeightFlexible) ;
 }
 
 void valueview::RequestUpdateFunction(updateq_fptr fp)
@@ -179,18 +179,18 @@ void valueview::RequestFullUpdate( )
 }
 
 
-void valueview::FullUpdate( enum view_UpdateType  type, long  x, long  y, long  width, long  height )
+void valueview::FullUpdate( enum view::UpdateType  type, long  x, long  y, long  width, long  height )
                {
-  if (/* type == view_NewParameters  ||  */ this->back == NULL) 
+  if (/* type == view::NewParameters  ||  */ this->back == NULL) 
     ::LookupParameters(this);
   switch (type) {
-      case view_FullRedraw:
-      case view_LastPartialRedraw:
+      case view::FullRedraw:
+      case view::LastPartialRedraw:
 	  ::DrawFromScratch(this);
 	  break;
-      case view_PartialRedraw:
-      case view_MoveNoRedraw:
-      case view_Remove:
+      case view::PartialRedraw:
+      case view::MoveNoRedraw:
+      case view::Remove:
       default:
 	  break;
   }
@@ -337,7 +337,7 @@ void valueview::DrawBadValue()
   class graphic * black;
   (this )->ClearClippingRect( );
   black = (this)->BlackPattern();
-  (this)->SetTransferMode( graphic_XOR);
+  (this)->SetTransferMode( graphic::XOR);
   (this)->FillRectSize( this->viewx, this->viewy,
 			  this->viewwidth, this->viewheight, black);
   (this)->FillRectSize( this->viewx, this->viewy,
@@ -411,7 +411,7 @@ void valueview::Destroyed()
 }
 
 
-class valueview * valueview::DoHit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
+class valueview * valueview::DoHit(enum view::MouseAction  type, long  x , long  y , long  numberOfClicks)
 {
     /* this is a subclass responsability */
     return this;
@@ -426,7 +426,7 @@ boolean valueview::OnTarget(long  x,long  y)
 /* Highlight the value that's handling events */
 /* Dehighlight it and stop sending movement events if the mouse cursor */
 /* wanders off.  Dehighlight it on an up transition. */
-class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
+class view * valueview::Hit(enum view::MouseAction  type, long  x , long  y , long  numberOfClicks)
                {
 #if 0
   short sendEvent;
@@ -434,21 +434,21 @@ class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , lon
     {
       switch (type)
 	{
-	case view_NoMouseEvent:
+	case view::NoMouseEvent:
 	  sendEvent = False;
 	  break;
-	case view_LeftDown:
+	case view::LeftDown:
 	  this->mouseState = valueview_LeftIsDown;
 	  (this)->Highlight();
 	  sendEvent = True;
 	  break;
-	case view_RightDown:
+	case view::RightDown:
 	  this->mouseState = valueview_RightIsDown;
 	  (this)->Highlight();
 	  sendEvent = True;
 	  break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	  if (this->mouseIsOnTarget)
 	    {
 	      (this)->Dehighlight();
@@ -456,8 +456,8 @@ class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , lon
 	    }
 	  else sendEvent = False;
 	  break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    if((this)->OnTarget(x,y))
 	    {
 	      (this)->Highlight();
@@ -485,15 +485,15 @@ class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , lon
     {
       switch (type)
       {
-	  case view_NoMouseEvent:
+	  case view::NoMouseEvent:
 	      return this;
 	      /* break; */
-	  case view_LeftDown:
-	  case view_RightDown:
+	  case view::LeftDown:
+	  case view::RightDown:
 	      (this)->Highlight();
 	      break;
-	  case view_LeftUp:
-	  case view_RightUp:
+	  case view::LeftUp:
+	  case view::RightUp:
 	      (this)->Dehighlight();
 	      break;
 	  default:

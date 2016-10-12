@@ -80,10 +80,10 @@ public:
 
   
      void ObservedChanged (class observable *changed, long value);
-     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long * desired_width, long * desired_height)  ;
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long * desired_width, long * desired_height)  ;
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
      void Update();
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void LinkTree(class view *parent);
      void WantUpdate(class view *requestor);
      void GetOrigin(long width, long height, long *originX, long *originY);
@@ -94,7 +94,7 @@ public:
   
     virtual int WhichButton(long x, long y)  ;
     virtual unsigned char SetActiveMouseButtons(unsigned char active, unsigned char deactive)  ;
-    virtual boolean Touch(int ind, enum view_MouseAction action)  ;
+    virtual boolean Touch(int ind, enum view::MouseAction action)  ;
     
   
     inline int GetVBorder() { return ((this)->vborder); }

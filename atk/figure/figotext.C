@@ -332,7 +332,7 @@ void figotext::Draw(class figview  *v)
     this->fdesc = fontdesc::Create(fam, style, size);
     if (!this->fdesc) return;
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     (v)->SetForegroundColor( col, 0, 0, 0); 
 
@@ -353,15 +353,15 @@ void figotext::Draw(class figview  *v)
     gray = (v)->ToPixY( (this)->PosY());
     switch (textpos) {
 	case figattr_PosCenter:
-	    grapos = graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
 	case figattr_PosLeft:
-	    grapos = graphic_ATLEFT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::ATLEFT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
 	case figattr_PosRight:
-	    grapos = graphic_ATRIGHT | graphic_BETWEENTOPANDBOTTOM;
+	    grapos = graphic::ATRIGHT | graphic::BETWEENTOPANDBOTTOM;
 	    grax = (v)->ToPixX( (this)->PosX());
 	    break;
     }
@@ -378,7 +378,7 @@ void figotext::Draw(class figview  *v)
 	if (cxend)
 	    cx = cxend+1;
     } while (cxend);
-    /*figview_DrawString(v, self->text, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM);*/
+    /*figview_DrawString(v, self->text, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM);*/
 
     if (viewclip)
 	(v)->SetClippingRegion( viewclip);
@@ -395,7 +395,7 @@ void figotext::Sketch(class figview  *v)
     y = (v)->ToPixY( this->handlerect.top);
     w = (v)->ToPixW( this->handlerect.width);
     h = (v)->ToPixH( this->handlerect.height);
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 
@@ -409,7 +409,7 @@ static void IncreaseNumChars(class figotext  *self, int  val)
     }
 }
 
-enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figotext::Build(class figview  *v, enum view::MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     int ix;
 
@@ -428,7 +428,7 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
     }
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    if (this->buildstate==0) {
 		(this)->PosX() = x;
 		(this)->PosY() = y;
@@ -451,7 +451,7 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
 		(v)->WantUpdate( v);
 		return figobj_NotDone;
 	    }
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    if ((this)->PosX() != x || (this)->PosY() != y) {
 		(this)->PosX() = x;
 		(this)->PosY() = y;
@@ -460,9 +460,9 @@ enum figobj_Status figotext::Build(class figview  *v, enum view_MouseAction  act
 		(v)->WantUpdate( v);
 	    }
 	    return figobj_NotDone;
-	case view_LeftUp:
+	case view::LeftUp:
 	    return figobj_NotDone;
-	case view_RightDown:
+	case view::RightDown:
 	    KillDotProc(this);
 	    ix = strlen(this->text);
 	    if (ix)  {
@@ -711,11 +711,11 @@ static void MoveHandle(class figotext  *self, long  x , long  y , long  ptref)
     /* figotext_Reposition(self, x - pt->x, y - pt->y); */
 }
 
-boolean figotext::AddParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figotext::AddParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     int len = strlen(this->text);
     
-    if (action==view_LeftDown) {
+    if (action==view::LeftDown) {
 
 	if (!v->toolset)
 	    return FALSE;
@@ -748,26 +748,26 @@ boolean figotext::AddParts(enum view_MouseAction  action, class figview  *v, lon
     }
 }
 
-boolean figotext::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figotext::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     if (!handle)
 	return FALSE;
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((this)->GetReadOnly())
 		return FALSE;
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();
@@ -977,7 +977,7 @@ void figotext::PrintObject(class figview  *v, FILE  *file, const char  *prefix, 
     fprintf(file, "%s  grestore\n", prefix);
 }
 
-boolean figotext::ORecSearch(struct SearchPattern *pat)
+boolean figotext::ORecSearch(class search *pat)
 {
     char *ts;
     int substart, pos;
@@ -988,11 +988,11 @@ boolean figotext::ORecSearch(struct SearchPattern *pat)
     }
 
     pos = 0;
-    substart = search::MatchPatternStr((unsigned char *)ts, pos, strlen(ts), pat);
+    substart = pat->MatchPatternStr((unsigned char *)ts, pos, strlen(ts));
     if (substart>=0) {
 	this->recsearchvalid = TRUE;
 	this->recsearchsubstart = substart;
-	this->recsearchsublen = search::GetMatchLength();
+	this->recsearchsublen = pat->GetMatchLength();
 	return TRUE;
     }
 
@@ -1000,7 +1000,7 @@ boolean figotext::ORecSearch(struct SearchPattern *pat)
     return FALSE;
 }
 
-boolean figotext::ORecSrchResume(struct SearchPattern *pat)
+boolean figotext::ORecSrchResume(class search *pat)
 {
     char *ts;
     int substart, pos;
@@ -1012,11 +1012,11 @@ boolean figotext::ORecSrchResume(struct SearchPattern *pat)
 
     pos = this->recsearchsubstart+this->recsearchsublen;
 
-    substart = search::MatchPatternStr((unsigned char *)ts, pos, strlen(ts), pat);
+    substart = pat->MatchPatternStr((unsigned char *)ts, pos, strlen(ts));
     if (substart>=0) {
 	this->recsearchvalid = TRUE;
 	this->recsearchsubstart = substart;
-	this->recsearchsublen = search::GetMatchLength();
+	this->recsearchsublen = pat->GetMatchLength();
 	return TRUE;
     }
 

@@ -680,12 +680,12 @@ webview::movehist(class view  *self, int  which,  class view  *v) {
 
 #if 0
 static	void 
-webview_back(class view  *v, enum view_MouseAction  action,  
+webview_back(class view  *v, enum view::MouseAction  action,  
 				view  *self) {
-	if (action == view_LeftUp) {
+	if (action == view::LeftUp) {
 		webview::movehist(self, BACK, v);
 	}
-	else if (action == view_RightUp) {
+	else if (action == view::RightUp) {
 		webview::movehist(self, FORWARD, v);
 	}
 }
@@ -847,7 +847,7 @@ static boolean FindImage(htmltext *self, long pos, htmlenv *env, dataobject *dob
     return FALSE;
 }
 
-class view *webview::Hit(enum view_MouseAction  action, long  x,  long  y,  long  numberOfClicks) {
+class view *webview::Hit(enum view::MouseAction  action, long  x,  long  y,  long  numberOfClicks) {
     ATK_CLASS(htmltext);
     ATK_CLASS(htmltextview);
     ATK_CLASS(htmlimagev);
@@ -872,9 +872,9 @@ class view *webview::Hit(enum view_MouseAction  action, long  x,  long  y,  long
         
     hit=nf;
     
-    if(action==view_LeftUp || action==view_RightUp || action==view_UpMovement) nf=NULL;
+    if(action==view::LeftUp || action==view::RightUp || action==view::UpMovement) nf=NULL;
     
-    if(nf!=mouseFocus && (action==view_LeftDown || action==view_RightDown || nf==NULL)) {
+    if(nf!=mouseFocus && (action==view::LeftDown || action==view::RightDown || nf==NULL)) {
         if(mouseFocus) mouseFocus->RemoveObserver(this);
         if(nf) nf->AddObserver(this);
         mouseFocus=nf;
@@ -882,7 +882,7 @@ class view *webview::Hit(enum view_MouseAction  action, long  x,  long  y,  long
     
     if(hit==NULL || web->Imbedded()) return this;
     
-    if(numberOfClicks!=1 || action!=view_LeftUp) return this;
+    if(numberOfClicks!=1 || action!=view::LeftUp) return this;
     
     if(hit->IsType(class_htmlimagev)) {
 	htmlimagev *iv=(htmlimagev *)hit;

@@ -127,7 +127,7 @@ AWgtFigView::InitChildren() {
 }
 
 
-void AWgtFigView::FullUpdate(enum view_UpdateType   type, 
+void AWgtFigView::FullUpdate(enum view::UpdateType   type, 
 			long left, long top, long width, long height)  {
 	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", 
 					type, left, top, width, height));
@@ -212,7 +212,7 @@ void AWgtFigView::FullUpdate(enum view_UpdateType   type,
 		needToPrepImage = FALSE;
 	}
 
-	if (type != view_Remove) 
+	if (type != view::Remove) 
 		viewer->InsertView(this, &inner); 
 
 	viewer->FullUpdate(type, left, top, width, height);
@@ -229,7 +229,7 @@ void AWgtFigView::Update() {
 	updateRequested = FALSE;
 
 	if (needToPrepImage) 
-		FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+		FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 	else {
 		viewer->Update();
 		AWidgetView::Update();	// do border
@@ -238,18 +238,18 @@ void AWgtFigView::Update() {
 	LEAVE(AWgtFigView_Update);
 }
 
-view *AWgtFigView::Hit(enum view_MouseAction action, long x, long y, long n) {
+view *AWgtFigView::Hit(enum view::MouseAction action, long x, long y, long n) {
 	AWgtFig *dobj = (class AWgtFig *)GetDataObject();
 	if((long)dobj->passMouse && viewer) viewer->Hit(action, x, y, n);
 	return AWidgetView::Hit(action, x, y, n);
 }
 
-	view_DSattributes
+	view::DSattributes
 AWgtFigView::DesiredSize(long  width, long  height, 
-			enum view_DSpass  pass, 
+			enum view::DSpass  pass, 
 			long  *dWidth, long  *dHeight)  {
 	class AWidget *dobj = (class AWidget *)GetDataObject();
-	view_DSattributes retval;
+	view::DSattributes retval;
 	long oldw, oldh;
 
 	oldw = dobj->desiredWidth;
@@ -271,12 +271,12 @@ AWgtFigView::DesiredSize(long  width, long  height,
  *  # # # # # # # # # # # # # # # #  */
 
 boolean
-AWgtFigView::RecSearch(struct SearchPattern *pat, boolean toplevel) {
+AWgtFigView::RecSearch(class search *pat, boolean toplevel) {
 	return viewer->RecSearch(pat, toplevel);
 }
 
 boolean
-AWgtFigView::RecSrchResume(struct SearchPattern *pat) {
+AWgtFigView::RecSrchResume(class search *pat) {
 	return viewer->RecSrchResume(pat);
 }
 

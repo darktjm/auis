@@ -12,7 +12,7 @@ class htmlimagev : public imagev {
     htmlimagev();
     virtual ~htmlimagev();
     
-    view *Hit(enum view_MouseAction action,long x, long y, long numberOfClicks);
+    view *Hit(enum view::MouseAction action,long x, long y, long numberOfClicks);
     inline void GetHitPos(long *xp, long *yp) {
 	*xp=x;
 	*yp=y;

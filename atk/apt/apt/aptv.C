@@ -74,7 +74,7 @@ ATK_IMPL("aptv.H")
 #include <aptv.H>
 #include <ctype.h>
 
-#define  Balanced		    (view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM)
+#define  Balanced		    (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
 
 #define  Initialized		      self->states.initialized
 
@@ -514,14 +514,14 @@ class aptv *self=this;
   }
 
 void 
-aptv::FullUpdate( enum view_UpdateType	  type, long			  left , long			  top , long			  width , long			  height )
+aptv::FullUpdate( enum view::UpdateType	  type, long			  left , long			  top , long			  width , long			  height )
         {
 class aptv *self=this;
 
   long			 e;
 
   IN(aptv_FullUpdate);
-  if ( Data  &&  (type == view_FullRedraw || type == view_LastPartialRedraw) )
+  if ( Data  &&  (type == view::FullRedraw || type == view::LastPartialRedraw) )
     {
     Size_Enclosures( this );
     for ( e = 0; e < EnclosureCount; e++ )
@@ -607,14 +607,14 @@ aptv::Within( long		       x , long		       y, struct rectangle   *bounds )
   }
 
 class view *
-aptv::Hit( enum view_MouseAction   action, long			   x , long			   y , long			   clicks )
+aptv::Hit( enum view::MouseAction   action, long			   x , long			   y , long			   clicks )
         {
 class aptv *self=this;
 
   class view		 *hit = NULL;
 
   IN(aptv_Hit );
-  if ( Shrunk  &&  action == view_LeftDown )
+  if ( Shrunk  &&  action == view::LeftDown )
     {
     DEBUG(De-Shrinking);
     (this )->Expand( );
@@ -631,7 +631,7 @@ class aptv *self=this;
   if ( ! (this)->Within(  x, y, Bounds(Body) ) )
     switch ( action )
       {
-      case  view_LeftDown:
+      case  view::LeftDown:
 	if ( ! ControlSuppressed  && (this)->Within(  x, y, Bounds(Control) ) )
 	  {
 	  if ( (this)->Within(  x, y, ShrinkerBounds ) )
@@ -649,11 +649,11 @@ class aptv *self=this;
 	    }
 	  }
         break;
-      case  view_LeftMovement:
+      case  view::LeftMovement:
 
         break;
       default:
-      case  view_LeftUp:
+      case  view::LeftUp:
 
         break;
       }
@@ -667,9 +667,9 @@ aptv::ClearBody( )
 class aptv *self=this;
 
   IN(aptv_ClearBody);
-  (this)->SetTransferMode(  graphic_WHITE );
-  (this)->FillRect(  Bounds(Body), graphic_WHITE );
-  (this)->SetTransferMode(  graphic_BLACK );
+  (this)->SetTransferMode(  graphic::WHITE );
+  (this)->FillRect(  Bounds(Body), graphic::WHITE );
+  (this)->SetTransferMode(  graphic::BLACK );
   OUT(aptv_ClearBody);
   }
 
@@ -1136,13 +1136,13 @@ place = "centerstring";
 			PrintPrefix, PRF(x), PRF(y), string, place );
   }
 
-view_DSattributes
+view::DSattributes
 aptv::DesiredSize( long		       given_width , long		       given_height,
-		      enum view_DSpass    pass, long		      *desired_width , long		      *desired_height )
+		      enum view::DSpass    pass, long		      *desired_width , long		      *desired_height )
           {
 class aptv *self=this;
 
-  view_DSattributes result = (view_DSattributes)(view_WidthFlexible |       view_HeightFlexible);
+  view::DSattributes result = (view::DSattributes)(view::WidthFlexible |       view::HeightFlexible);
 
   IN(aptv_DesiredSize);
   if ( Shrinking  ||  Shrunk )
@@ -1280,14 +1280,14 @@ static
 void Help_FullUpdate( class aptv	      *self )
     {
   (self )->ClearClippingRect( );
-  (self)->SetTransferMode(  graphic_WHITE );
+  (self)->SetTransferMode(  graphic::WHITE );
   (self)->EraseRect(  Bounds(Title) );
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   (self)->DrawRect(  Bounds(Title) );
   (HelpTextView)->LinkTree(  self );
   (HelpTextView)->InsertViewSize(  self,
 		       Left(Title)+1, Top(Title)+1, Width(Title)-3, Height(Title)-3 );
-  (HelpTextView)->FullUpdate(  view_FullRedraw,
+  (HelpTextView)->FullUpdate(  view::FullRedraw,
 		       Left(Title)+1, Top(Title)+1, Width(Title)-3, Height(Title)-3 );
   (HelpTextView)->WantInputFocus(  HelpTextView );
   }
@@ -1301,11 +1301,11 @@ void Unhelp( class aptv	      *self )
   (self)->WantInputFocus(  self );
   im::ForceUpdate();
   (self )->ClearClippingRect( );
-  (HelpTextView)->FullUpdate(  view_Remove, 0,0,0,0 );
-  (self)->SetTransferMode(  graphic_WHITE );
+  (HelpTextView)->FullUpdate(  view::Remove, 0,0,0,0 );
+  (self)->SetTransferMode(  graphic::WHITE );
   (self)->EraseRectSize(  Left(Title),    Top(Title),
 			    Width(Title)+1, Height(Title)+1 );
-  (self)->FullUpdate(  view_FullRedraw,
+  (self)->FullUpdate(  view::FullRedraw,
 	    Left(Outer), Top(Outer), Width(Outer), Height(Outer) );
   (self )->UseNormalCursor( );
   }
@@ -1354,7 +1354,7 @@ aptv::DrawBoundedString( const char		      *string, class fontdesc    *font, str
   IN(aptv_DrawBoundedString);
   if ( string  &&  *string )
     {
-    (this)->SetTransferMode(  graphic_BLACK );
+    (this)->SetTransferMode(  graphic::BLACK );
     Draw_String( this, string, font, bounds, x, y, mode );
     }
   OUT(aptv_DrawBoundedString);
@@ -1366,7 +1366,7 @@ aptv::ClearBoundedString( char		      *string, class fontdesc    *font, struct r
   IN(aptv_ClearBoundedString);
   if ( string  &&  *string )
     {
-    (this)->SetTransferMode(  graphic_WHITE );
+    (this)->SetTransferMode(  graphic::WHITE );
     Draw_String( this, string, font, bounds, x, y, mode );
     }
   OUT(aptv_ClearBoundedString);
@@ -1401,7 +1401,7 @@ void Draw_Enclosures( class aptv	      *self )
   struct rectangle  *bounds;
 
   IN(Draw_Enclosures);
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   (self )->ClearClippingRect( );
   if ( Shrunk )
     {

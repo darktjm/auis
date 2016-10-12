@@ -824,7 +824,7 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 	    case SIMPLE:
 		(this)->SetFont( this_c->font);
 		(this)->MoveTo( x + this_c->posp.x, y + this_c->posp.y);
-		(this)->DrawString( this_c->symbol->string, view_ATLEFT|view_ATBASELINE);
+		(this)->DrawString( this_c->symbol->string, graphic::ATLEFT|graphic::ATBASELINE);
 		if (!in_align && !(prev && prev->symbol->type==SCRIPT))
 		    this_c->has_hot_spot = TRUE;
 		break;
@@ -838,7 +838,7 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 		    struct fontdesc_charInfo info;
 
 		    while (*s != '\0')  {
-			(this)->DrawText( s, 1, view_ATLEFT|view_ATBASELINE);
+			(this)->DrawText( s, 1, graphic::ATLEFT|graphic::ATBASELINE);
 			(this_c->font)->CharSummary( (this)->GetDrawable(), *s, &info);
 			xPos += info.xSpacing;
 			yPos += exHeightTable[(unsigned char)*s];
@@ -847,7 +847,7 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 		    }
 		}
 		else  {
-		    (this)->DrawString( this_c->string, view_ATLEFT|view_ATBASELINE);
+		    (this)->DrawString( this_c->string, graphic::ATLEFT|graphic::ATBASELINE);
 		}
 		if (!in_align		/* close parens do not get hot spots */
 		  && !(this_c->symbol->genre==CLOSE && prev
@@ -983,12 +983,12 @@ void eqview::DrawCaret()
 	static class fontdesc *icon12;
 	if (!icon12)
 	    icon12 = fontdesc::Create("icon", fontdesc_Plain, 12);
-	(this)->SetTransferMode( graphic_INVERT);
+	(this)->SetTransferMode( graphic::INVERT);
 	(this)->SetFont( icon12);
 	(this)->MoveTo( this->caret_x, this->caret_y);
-	(this)->DrawString("|",view_NOMOVEMENT);
+	(this)->DrawString("|",graphic::NOMOVEMENT);
     } else {
-	(this)->SetTransferMode( graphic_INVERT);
+	(this)->SetTransferMode( graphic::INVERT);
 	rectangle_SetRectSize(&rect, this->caret_x, this->caret_y, this->selection_width, this->selection_height);
 	pat = (this)->WhitePattern();
 	(this)->FillRect( &rect, pat);

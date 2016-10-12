@@ -25,7 +25,7 @@ void texttagv::Print(FILE  *f, const char  *process, const char  *final, int  to
     (tag)->GetTag(255,buf);
     fprintf(f,".iy \"TEXTTAG %s\"\n",buf);
 }
-class view *texttagv::Hit(enum view_MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
+class view *texttagv::Hit(enum view::MouseAction  action,long  mousex ,long  mousey ,long  numberOfClicks) 
 {
     return (this)->fnotev::Hit(action,mousex,mousey,numberOfClicks) ;
 }

@@ -26,7 +26,7 @@ class psview : public  iconview
     void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, 
 			long logwidth, long logheight, struct rectangle *visrect);
-    void DesiredPrintSize(long width, long height, enum view_DSpass pass, 
+    void DesiredPrintSize(long width, long height, enum view::DSpass pass, 
 			long *desiredwidth, long *desiredheight);
     boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);

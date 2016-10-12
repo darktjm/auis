@@ -65,11 +65,11 @@ void rasterview::SetPixel(class raster  *ras, long  x , long  y, int  bit)
 	rasterview_SetPixelBehindDisplayBox(this, this->Expansion, x, y, bit);
     else {
 	/* The following line does not work in X windows currently.
-	 graphic_SetBitAtLoc(rasterview_GetDrawable(self),
+	 graphic::SetBitAtLoc(rasterview_GetDrawable(self),
 			    x - self->Xoff, y - self->Yoff, bit); */
 	struct rectangle sub;
 	rectangle_SetRectSize(&sub, x - this->Xoff, y - this->Yoff, 1, 1);
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	(this)->FillRect( &sub, ((bit) ? this->BlackPattern : this->WhitePattern));
 	(pix)->SetPixel( x, y, ((bit) ? 1 : 0)); 
     }
@@ -109,11 +109,11 @@ void rasterview::PatternSetPixel(long  x , long  y, const unsigned char *pattern
 	rasterview_SetPixelBehindDisplayBox(this, this->Expansion, x, y, bit);
     else {
 	/* The following line does not work in X windows currently.
-	 graphic_SetBitAtLoc(rasterview_GetDrawable(self),
+	 graphic::SetBitAtLoc(rasterview_GetDrawable(self),
 			     x - self->Xoff, y - self->Yoff, bit); */
 	struct rectangle sub;
 	rectangle_SetRectSize(&sub, x - this->Xoff, y - this->Yoff, 1, 1);
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	(this)->FillRect( &sub, ((bit) ? this->BlackPattern : this->WhitePattern));
 	(pix)->SetPixel( x, y, ((bit) ? 1 : 0)); 
     }
@@ -477,7 +477,7 @@ void rasterview_ImprintInsetProc(class rasterview  *self, long  rock)
     }
 
     (offim)->SetView( self->inset);
-    (self->inset)->FullUpdate( view_FullRedraw, 0, 0, -1 ,-1);
+    (self->inset)->FullUpdate( view::FullRedraw, 0, 0, -1 ,-1);
     offgr = (offim)->GetDrawable();
 
     (pix2)->Resize( self->InsetBox.width, self->InsetBox.height);

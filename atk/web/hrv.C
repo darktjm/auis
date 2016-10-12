@@ -9,24 +9,24 @@
 
 ATKdefineRegistry(hrv, view, NULL);
 
-view_DSattributes hrv::DesiredSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+view::DSattributes hrv::DesiredSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     *desiredwidth = width;
     *desiredheight = 1;
-    return (view_HeightFlexible | view_WidthFlexible);
+    return (view::HeightFlexible | view::WidthFlexible);
 }
 
-void hrv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height)
+void hrv::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height)
 {
     struct rectangle enclosingRect;
     enclosingRect.top = 0; enclosingRect.left = 0;
     enclosingRect.width  = GetLogicalWidth() /* -1 */ ;
     enclosingRect.height = GetLogicalHeight() /* -1 */ ;
 
-    SetTransferMode(graphic_WHITE);
+    SetTransferMode(graphic::WHITE);
     EraseRect(&(enclosingRect));
 
-    SetTransferMode(graphic_COPY);
+    SetTransferMode(graphic::COPY);
     MoveTo(0,0);
     DrawLineTo(enclosingRect.width, 0);
 }

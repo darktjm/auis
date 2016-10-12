@@ -162,7 +162,7 @@ static void extendCurrentCell(class spread  * V, Chunk  chunk)
 
 /* Handle mouse hit */
 
-class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
+class view * MouseHit (class spread  * V, enum view::MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
 {
     struct chunk chunk;
     struct cell * hitcell;
@@ -226,7 +226,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
  
     switch (action) {
 
-    case view_LeftDown:
+    case view::LeftDown:
 	switch (V->movemode) {
 	case 1:
 	    movecolcancel (V);
@@ -249,7 +249,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightDown:
+    case view::RightDown:
 	switch (V->movemode) {
 	case 1:
 	    movecolcancel (V);
@@ -280,7 +280,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	    
 	break;
 
-    case view_LeftUp:
+    case view::LeftUp:
 	switch (V->movemode) {
 	case 0:
 	    extendCurrentCell(V, &chunk);
@@ -294,7 +294,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightUp:
+    case view::RightUp:
 	switch (V->movemode) {
 	case 1:
 	    movecolup (V, x, y);
@@ -305,7 +305,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_LeftMovement:
+    case view::LeftMovement:
 	switch (V->movemode) {
 	case 0:
 	    extendCurrentCell(V, &chunk);
@@ -319,7 +319,7 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
-    case view_RightMovement:
+    case view::RightMovement:
 	switch (V->movemode) {
 	case 0:
 	    if (V->bufferstatus != BUFFERHASINPUT)
@@ -366,7 +366,7 @@ static void movecolmove (class spread  * V, int      x  , int      y)
 {
     if (debug)
 	printf("movecolmove\n");
-    (V)->SetTransferMode ( graphic_INVERT);
+    (V)->SetTransferMode ( graphic::INVERT);
     spread_InvertRectangle (V, V->currentoffset, V->icy, V->icx - V->currentoffset, 2);
     V->icx = x;
     V->icy = y;
@@ -386,7 +386,7 @@ static void movecolcancel (class spread  * V)
     if (debug)
 	printf("movecolcancel\n");
     V->movemode = 0;
-    (V)->SetTransferMode ( graphic_INVERT);
+    (V)->SetTransferMode ( graphic::INVERT);
     spread_InvertRectangle (V, V->currentoffset, V->icy, V->icx - V->currentoffset, 2);
 }
 
@@ -407,7 +407,7 @@ static void moverowdown (class spread  * V, int      x  , int      y, Chunk  chu
 	V->currentoffset = RtoY (V, index + 1) + spread_SPACING/2;
 	V->icx = x;
 	V->icy = y;
-	(V)->SetTransferMode ( graphic_INVERT);
+	(V)->SetTransferMode ( graphic::INVERT);
 	spread_InvertRectangle (V, V->icx, V->currentoffset, 2, V->icy - V->currentoffset);
     }
 }
@@ -417,7 +417,7 @@ static void moverowmove (class spread  * V, int      x , int      y)
 {
     if (debug)
 	printf("moverowmove\n");
-    (V)->SetTransferMode ( graphic_INVERT);
+    (V)->SetTransferMode ( graphic::INVERT);
     spread_InvertRectangle (V, V->icx, V->currentoffset, 2, V->icy - V->currentoffset);
     V->icx = x;
     V->icy = y;
@@ -438,7 +438,7 @@ static void moverowcancel (class spread  * V)
     if (debug)
 	printf("moverowcancel\n");
     V->movemode = 0;
-    (V)->SetTransferMode ( graphic_INVERT);
+    (V)->SetTransferMode ( graphic::INVERT);
     spread_InvertRectangle (V, V->icx, V->currentoffset, 2, V->icy - V->currentoffset);
 }
 

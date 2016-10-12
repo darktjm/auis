@@ -385,16 +385,16 @@ zipview::Clear_Pane( zip_type_pane		   pane )
     {
     (self)->Set_Pane_Clip_Area(  pane );
     if ( pane->zip_pane_state.zip_pane_state_inverted )
-      (self)->SetTransferMode(  graphic_BLACK );
+      (self)->SetTransferMode(  graphic::BLACK );
       else
-      (self)->SetTransferMode(  graphic_WHITE );
+      (self)->SetTransferMode(  graphic::WHITE );
     (self)->FillRectSize( 
 	  PaneLeft(pane) + pane->zip_pane_border_thickness,
 	  PaneTop(pane)  + pane->zip_pane_border_thickness,
 	  PaneWidth(pane)  - (2 * pane->zip_pane_border_thickness),
 	  PaneHeight(pane) - (2 * pane->zip_pane_border_thickness),
 	  (self )->WhitePattern( )/*===*/ );
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     }
   (self )->FlushGraphics( );
   ZIP_STATUS(this->data_object);
@@ -413,14 +413,14 @@ zipview::Invert_Pane( zip_type_pane		   pane )
   if ( pane )
     {
     (self)->Set_Pane_Clip_Area(  pane );
-    (self)->SetTransferMode(  graphic_INVERT );
+    (self)->SetTransferMode(  graphic::INVERT );
     (self)->FillRectSize( 
 	  PaneLeft(pane) + pane->zip_pane_border_thickness,
 	  PaneTop(pane)  + pane->zip_pane_border_thickness,
 	  PaneWidth(pane)  - (2 * pane->zip_pane_border_thickness),
 	  PaneHeight(pane) - (2 * pane->zip_pane_border_thickness),
 	  (self )->WhitePattern( ) /*===*/ );
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     pane->zip_pane_state.zip_pane_state_inverted ^= 1;
     }
   (self )->FlushGraphics( );

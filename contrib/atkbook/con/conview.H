@@ -29,13 +29,13 @@ public:
       
 	virtual ~conview();
     
-       view_DSattributes DesiredSize(long width, long height,
-	enum view_DSpass pass, long *dWidth,
+       view::DSattributes DesiredSize(long width, long height,
+	enum view::DSpass pass, long *dWidth,
 	long *dheight)  ;
-       void FullUpdate(enum view_UpdateType type, long left,
+       void FullUpdate(enum view::UpdateType type, long left,
 	long top, long width, long right);
        void Update();
-       class view * Hit (enum view_MouseAction action, long x,
+       class view * Hit (enum view::MouseAction action, long x,
 	long y, long numberOfClicks)  ;
     
       virtual void DrawMyself(struct rectangle *r, boolean IsFullUpdate);

@@ -1247,7 +1247,7 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 		/* XXX should cache the view */
 		/*  XXX should set data object  in the view to NULL,
 			but view.c is broken:
-			view_SetDataObject(v, NULL);  */
+			view::SetDataObject(v, NULL);  */
 		(v)->Destroy();
 	}
 

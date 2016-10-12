@@ -51,7 +51,7 @@
        about - I just copied the code from ScaleCommand.
 */
 
-static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
+static void RedrawRaster(class rasterview  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height);
 
 static void x_getinfo(class rasterview   *self, struct range   *total , struct range   *seen , struct range   *dot);
 static long x_whatisat(class rasterview   *self, long   coordinate , long   outof);
@@ -360,7 +360,7 @@ void rasterview::WantUpdate(class view  *requestor)
 
 
 
-static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+static void RedrawRaster(class rasterview  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     class raster *ras = (class raster *)(self)->GetDataObject();
     class rasterimage *pix;
@@ -414,7 +414,7 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 	    self->Yoff += self->Yscroll;
     }
 
-    if (type == view_FullRedraw) rectangle_EmptyRect(&self->CurSelection);
+    if (type == view::FullRedraw) rectangle_EmptyRect(&self->CurSelection);
     else rasterview_ViewHideHighlight(self);	/* (requires Xoff and Yoff) */
 
     /* compute VB, the displayed portion of the image.  It is the intersection of the visual rectangle with LB */
@@ -426,7 +426,7 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 	    rectangle_Height(&VB), self->Xoff, self->Yoff));
 
     /* compute SRC, a rectangle showing which bits of the image need to be replotted.  First we map the parameters given above into the pixel image coordinates, offsetting by the subraster amount.  Then we take the union with the PixChanged rect. */
-    if (type == view_FullRedraw)
+    if (type == view::FullRedraw)
 	SRC = VB;
     else {
 	/* set T to pixels changed in view coords */
@@ -478,16 +478,16 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 
     /* XXX need to deal with ras->options */
 
-    (self)->SetTransferMode( graphic_WHITE);
+    (self)->SetTransferMode( graphic::WHITE);
     /* There must have been some reason to special case pan mode when embedded but I (pasieka) can not remember why.  Maybe someone will point out a bug.
-	if (self->embedded && (Pan(self) || type == view_FullRedraw)
+	if (self->embedded && (Pan(self) || type == view::FullRedraw)
 	    ) {
 	    rasterview_GetVisualBounds(self, &VB);
 	    InsetRect(&VB, BORDER, BORDER);
 	    rasterview_FillRect(self, &VB, self->WhitePattern);
 	}
 	else */
-    if (type == view_FullRedraw) {
+    if (type == view::FullRedraw) {
 	(self)->GetVisualBounds( &VB);
 	if (self->embedded) InsetRect(&VB, BORDER, BORDER);
 	(self)->FillRect( &VB, self->WhitePattern);
@@ -498,7 +498,7 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
     }
 
     /* XXX Is a TransferMode needed with WritePixImage ??? */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     if (width > 0  &&  height > 0) {
 	class graphic *G = (self)->GetDrawable();
 	(G)->WritePixImage( left, top,
@@ -513,13 +513,13 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
     if (RegionSelect(self) || (Tool(self) && (self->toolset)->WantSelectionHighlighted()))
 	rasterview_CorrectHighlight(self);
     if (Pan(self)) {
-	rasterview_DrawPanHighlight(self, graphic_BLACK); }
+	rasterview_DrawPanHighlight(self, graphic::BLACK); }
 
     if (self->embedded) {
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, graphic_WHITE);
+				       graphic::BLACK, graphic::WHITE);
     }
 
     rectangle_EmptyRect(&self->PixChanged);
@@ -527,18 +527,18 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 
 }
 
-void rasterview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
+void rasterview::FullUpdate(enum view::UpdateType   type, long   left , long   top , long   width , long   height)
 {
     class raster *ras = (class raster *)(this)->GetDataObject();
     struct rectangle VB;
 
     (this)->GetVisualBounds( &VB);
-    if((type == view_Remove) || (type == view_MoveNoRedraw)) {
-	if(type == view_Remove) {
+    if((type == view::Remove) || (type == view::MoveNoRedraw)) {
+	if(type == view::Remove) {
 	    this->OnScreen = FALSE;
 	    (this)->RetractCursor( this->Cursor[this->Mode]);
 	}
-	else if(type == view_MoveNoRedraw) {
+	else if(type == view::MoveNoRedraw) {
 	    (this)->RetractCursor( this->Cursor[this->Mode]);
 	    (this)->PostCursor( &VB, this->Cursor[this->Mode]);
 	}
@@ -575,7 +575,7 @@ void rasterview::FullUpdate(enum view_UpdateType   type, long   left , long   to
 		    (pix)->SetRO( ras->readOnly = TRUE);
 		break; } }
 	DEBUG(("Done Checking parents.\n")); }
-    if (type == view_FullRedraw || type == view_LastPartialRedraw) {
+    if (type == view::FullRedraw || type == view::LastPartialRedraw) {
 	/* must recompute graphics info because image
 	 may be on different display hardware */
 	this->WhitePattern = (this)->view::WhitePattern();
@@ -615,7 +615,7 @@ void rasterview::FullUpdate(enum view_UpdateType   type, long   left , long   to
 
     if (this->inset && FullSize(this)) {
 	(this)->EraseRectSize( this->InsetBox.left-this->Xoff, this->InsetBox.top-this->Yoff, this->InsetBox.width, this->InsetBox.height); 
-	(this->inset)->FullUpdate( view_FullRedraw, 0, 0, -1, -1);
+	(this->inset)->FullUpdate( view::FullRedraw, 0, 0, -1, -1);
     }
     }
 
@@ -628,19 +628,19 @@ void rasterview::Update()
 
     if (this->UpdateWanted) {
 	if (this->needsFullUpdate)
-	    RedrawRaster(this, view_FullRedraw, 0, 0, -1, -1);
+	    RedrawRaster(this, view::FullRedraw, 0, 0, -1, -1);
 	else
-	    RedrawRaster(this, view_LastPartialRedraw, 0, 0, -1, -1);
+	    RedrawRaster(this, view::LastPartialRedraw, 0, 0, -1, -1);
     }
 
     if (this->inset && FullSize(this)) {
 	(this->inset)->InsertViewSize( this, this->InsetBox.left-this->Xoff, this->InsetBox.top-this->Yoff, this->InsetBox.width, this->InsetBox.height);
-	(this->inset)->FullUpdate( view_FullRedraw, 0, 0, -1, -1);
+	(this->inset)->FullUpdate( view::FullRedraw, 0, 0, -1, -1);
 	this->InsetUpdateWanted = FALSE;
     }
     }
 
-view_DSattributes rasterview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
+view::DSattributes rasterview::DesiredSize(long  width, long  height, enum view::DSpass  pass,
 						long  *desiredWidth, long  *desiredHeight) 
 {
     class raster *ras = (class raster *)(this)->GetDataObject();
@@ -664,7 +664,7 @@ view_DSattributes rasterview::DesiredSize(long  width, long  height, enum view_D
 
     DEBUG(("Leave DesiredSize: %ld x %ld\n", *desiredWidth, *desiredHeight));
 
-    return view_Fixed;
+    return view::Fixed;
 }
 
 static const char * const MouseEvent[] = {
@@ -677,13 +677,13 @@ static const char * const MouseEvent[] = {
     "Right Movement" };
 enum { DragCorner, DragTop, DragBottom, DragLeft, DragRight };
 
-class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+class view * rasterview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 {
     class raster *ras = (class raster *)(this)->GetDataObject();
     struct point truepoint;
 
     DEBUG(("rasterview_Hit %s at (%ld, %ld)\n", MouseEvent[(long)action], x, y));
-    if (ras == NULL || action == view_NoMouseEvent)
+    if (ras == NULL || action == view::NoMouseEvent)
 	return (class view *)this;
     if (! this->OnScreen)
 	return NULL;
@@ -692,7 +692,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 
     /* Ignore all hits until next up transition. */
     if (this->IgnoreUntilNextUpTransition) {
-	if (action == view_LeftUp || action == view_RightUp) {
+	if (action == view::LeftUp || action == view::RightUp) {
 	    this->IgnoreUntilNextUpTransition = FALSE;
 	    return NULL; }
 	else
@@ -713,7 +713,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 
     /* this tests for clicking in the overlaid inset */
     else if (this->inset 
-	      && (action==view_LeftDown || action==view_RightDown) 
+	      && (action==view::LeftDown || action==view::RightDown) 
 	      && (FullSize(this))
 	      && rectangle_IsPtInRect(&truepoint, &this->InsetBox)) {
 	long sx = (this->inset)->EnclosedXToLocalX( x);
@@ -727,7 +727,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 	this->IgnoreUntilNextUpTransition = TRUE; }
 
     else if (this->MovingDisplayBox) {
-	if (action == view_LeftUp) {
+	if (action == view::LeftUp) {
 	    rasterview_FinishMovingDisplayBox(this, x, y);
 	    return NULL; }
 	else
@@ -735,7 +735,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 
     /* This tests for clicking left within the Display Box. */
     else if (! this->DisplayBoxHidden
-	      && NotFullSize(this) && action == view_LeftDown
+	      && NotFullSize(this) && action == view::LeftDown
 	      && x > rectangle_Left(&this->DisplayBox) - 2*BORDER
 	      && x < rectangle_Right(&this->DisplayBox) + 2*BORDER
 	      && y > rectangle_Top(&this->DisplayBox) - 2*BORDER
@@ -745,9 +745,9 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 
     /* If in Pan Mode then do functions of panning. */
     else if (Pan(this)) {
-	if (action == view_LeftDown || action == view_RightDown)
+	if (action == view::LeftDown || action == view::RightDown)
 	    StartPanning(this, x, y);
-	else if (action == view_LeftUp || action == view_RightUp) {
+	else if (action == view::LeftUp || action == view::RightUp) {
 	    FinishPanning(this, x, y);
 	    return NULL; }
 	else
@@ -801,13 +801,13 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 		message::DisplayString(this, 0, cb);
 	    }
 
-	    if (action == view_LeftDown)
+	    if (action == view::LeftDown)
 		::SetPixel(this, x, y, TRUE);
-	    else if (action == view_LeftMovement)
+	    else if (action == view::LeftMovement)
 		::DrawLineTo(this, x, y, TRUE);
-	    else if (action == view_RightDown)
+	    else if (action == view::RightDown)
 		::SetPixel(this, x, y, FALSE);
-	    else if (action == view_RightMovement)
+	    else if (action == view::RightMovement)
 		::DrawLineTo(this, x, y, FALSE);
 	    else {
 		class rasterimage *pix;
@@ -821,13 +821,13 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 	    long farx, fary;
 
 	    /* while mouse is down, have raster cursor throughout the window */
-	    if (action == view_RightDown || action == view_LeftDown) {
+	    if (action == view::RightDown || action == view::LeftDown) {
 		((this)->GetIM())->SetWindowCursor( this->Cursor[this->Mode]);
 	    }
-	    else if (action == view_RightUp || action == view_LeftUp)
+	    else if (action == view::RightUp || action == view::LeftUp)
 		((this)->GetIM())->SetWindowCursor( NULL);
 
-	    if (action == view_LeftUp) {
+	    if (action == view::LeftUp) {
 		if (num_clicks == 2) {
 		    /* Double Left Click selects entire raster. */
 		    rectangle_GetRectSize(&SR, &l, &t, &w, &h);
@@ -835,11 +835,11 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 		    y = t;
 		    this->Xdown = x + w - 1;
 		    this->Ydown = y + h - 1; } }
-	    else if (action == view_LeftDown) {
+	    else if (action == view::LeftDown) {
 		/* Single Left Click sets the desired selection to the single point under the mouse. */
 		this->Xdown = x;
 		this->Ydown = y; }
-	    else if (action == view_RightDown) {
+	    else if (action == view::RightDown) {
 		/* Drag either a corner or an edge while right down. */
 		struct rectangle *R = &this->DesiredSelection;
 		long l, t, w, h;
@@ -896,14 +896,14 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 	    }
 
 	    /* if rightup or leftup then update the scroll bars. */
-	    if (action == view_LeftUp  ||  action == view_RightUp) {
+	    if (action == view::LeftUp  ||  action == view::RightUp) {
 		this->DraggingEdge = 0;
 		this->needsFullUpdate=FALSE;
 		(this)->WantUpdate( this); }
 	    rasterview_CorrectHighlight(this);
 	} }
 
-    if (action == view_LeftUp  ||  action == view_RightUp)
+    if (action == view::LeftUp  ||  action == view::RightUp)
 	rasterview_RealPostMenus(this);
 
     /*  XXX when we have drawing operations,
@@ -1140,7 +1140,7 @@ void rasterview::PrintPSRect(FILE *outfile, long logwidth, long logheight, struc
     free(buf);
 }
 
-void rasterview::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void rasterview::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     class raster *ras = (class raster *)(this)->GetDataObject();
     class rasterimage *pix;
@@ -1495,12 +1495,12 @@ void rasterview_ViewHideHighlight(class rasterview  *self)
 	    rectangle_GetRectSize(&self->ViewSelection, &vsl, &vst, &vsw, &vsh); }
 
 	/* we have to do white first, because writepiximage is bogus (because defined transfer modes are bogus). Draw one white line overlapping the black border */
-	DrawHighlight(self, G, CS, graphic_WHITE, -1);
+	DrawHighlight(self, G, CS, graphic::WHITE, -1);
 
 	DEBUG(("CurSel: (%ld,%ld,%ld,%ld)\n", l, t, w, h));
 	DEBUG(("VSel: (%ld,%ld,%ld,%ld)\n", vsl, vst, vsw, vsh));
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 
 	/* repair left edge */
 	leftThick =  (l-vsl <= 1) ? l - vsl : 2;
@@ -1570,7 +1570,7 @@ void rasterview_CorrectHighlight(class rasterview  *self)
 	/* There is no current selection.  This happens when there is no raster.  To show the user where we are, draw a rect.  Use Visual Bounds. */
 	struct rectangle VB;
 	(self)->GetVisualBounds( &VB);
-	(self)->SetTransferMode( graphic_BLACK);
+	(self)->SetTransferMode( graphic::BLACK);
 	SetWidthRect(&VB, rectangle_Width(&VB)-1);
 	SetHeightRect(&VB, rectangle_Height(&VB)-1);
 	(G)->DrawRect( &VB);
@@ -1595,7 +1595,7 @@ void rasterview_CorrectHighlight(class rasterview  *self)
 		rectangle_GetRectSize(&self->DesiredSelection, &l, &t, &w, &h);
 		l -= self->Xoff;  /* convert to screen coords */
 		t -= self->Yoff;
-		(self)->SetTransferMode( graphic_COPY);
+		(self)->SetTransferMode( graphic::COPY);
 		(self)->FillRectSize( l-2, t-2, w+4, 2, self->GreyPattern);
 		(self)->FillRectSize( l-2, t+h, w+4, 2, self->GreyPattern);
 		(self)->FillRectSize( l-2, t, 2, h, self->GreyPattern);
@@ -1620,7 +1620,7 @@ void rasterview_DrawPanHighlight(class rasterview  *self, short  g)
     class graphic *G = (self)->GetDrawable();
 
     DEBUG(("Drawing Pan Highlight\n"));
-    if (g == graphic_BLACK) {
+    if (g == graphic::BLACK) {
 	if (self->DisplayBoxHidden) {
 	    struct rectangle PH;
 	    CalculatePanHighlight(self, &PH);
@@ -1645,7 +1645,7 @@ void rasterview_DrawPanHighlight(class rasterview  *self, short  g)
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, -1); }
+				       graphic::BLACK, -1); }
 }
 
 /* Draw a Target across the entire Visual Bounds less a BORDER all around. Target is three pixels wide: a black line surrounded by two white lines.
@@ -1661,7 +1661,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
     w = rectangle_Width(&VB);
     h = rectangle_Height(&VB);
 
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( x, BORDER);
     (self)->DrawLineTo( x, h);
     (self)->MoveTo( BORDER, y);
@@ -1680,7 +1680,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
 	r = l + w;
 	b = t + h;
 	DEBUG(("White Target: (%ld,%ld,%ld,%ld)\n", l, t, w, h));
-	(self)->SetTransferMode( graphic_WHITE);
+	(self)->SetTransferMode( graphic::WHITE);
 	(self)->MoveTo( x+1, t);
 	(self)->DrawLineTo( x+1, y-1);
 	(self)->DrawLineTo( r, y-1);
@@ -1697,7 +1697,7 @@ static void DrawTarget(class rasterview  *self, long  x , long  y)
     }
 
     /* Just in case any of the above white lines or the preceeding Hide overlapped the Start. */
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( self->StartPanX, BORDER);
     (self)->DrawLineTo( self->StartPanX, h);
     (self)->MoveTo( BORDER, self->StartPanY);
@@ -1722,12 +1722,12 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
 
     (self)->GetVisualBounds( &VB);
     InsetRect(&VB, BORDER, BORDER);
-    (self)->SetTransferMode( graphic_WHITE);
+    (self)->SetTransferMode( graphic::WHITE);
     (self)->MoveTo( x, BORDER);
     (self)->DrawLineTo( x, rectangle_Height(&VB));
     (self)->MoveTo( BORDER, y);
     (self)->DrawLineTo( rectangle_Width(&VB), y);
-    rasterview_DrawPanHighlight(self, graphic_BLACK);
+    rasterview_DrawPanHighlight(self, graphic::BLACK);
 
     if (FullSize(self)) {
 	VS = self->ViewSelection;
@@ -1750,7 +1750,7 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
     DEBUG(("Hide Area: (%ld,%ld,%ld,%ld) Scl:(%ld,%ld) \n",
 	    vsl, vst, vsw, vsh, self->Xscroll, self->Yscroll));
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     if (x+1 >= vsl && x-1 <= vsr) {
 	/* Repair Vertical strip */
@@ -1770,7 +1770,7 @@ static void HideTarget(class rasterview  *self, long  x , long  y)
 	ClipAndWritePixImage(clipw, cliph, G, vsl, t, pix,
 			     vsl+self->Xoff, t+self->Yoff, vsw, 3);
     }
-    rasterview_DrawPanHighlight(self, graphic_BLACK);
+    rasterview_DrawPanHighlight(self, graphic::BLACK);
 
     if (! self->DisplayBoxHidden && IsNotEmptyRect(&self->DisplayBox)
 	 && ((x-1 <= rectangle_Left(&self->DisplayBox)-2*BORDER
@@ -1819,7 +1819,7 @@ static void ContinuePanning(class rasterview  *self, long  x , long  y)
 	(self)->GetVisualBounds( &VB);
 	InsetRect(&VB, BORDER, BORDER);
 	DrawHighlightScreenCoordinates(self, (self)->GetDrawable(), VB,
-				       graphic_BLACK, -1); }
+				       graphic::BLACK, -1); }
 }
 
 static void ClipScroll(class rasterview  *self)
@@ -1915,11 +1915,11 @@ static void SetPixel(class rasterview  *self, long  x , long  y, boolean  bit)
 	rasterview_SetPixelBehindDisplayBox(self, self->Expansion, x, y, bit);
     else {
 	/* The following line does not work in X windows currently.
-	graphic_SetBitAtLoc(rasterview_GetDrawable(self),
+	graphic::SetBitAtLoc(rasterview_GetDrawable(self),
 			    x - self->Xoff, y - self->Yoff, bit); */
 	struct rectangle sub;
 	rectangle_SetRectSize(&sub, x - self->Xoff, y - self->Yoff, 1, 1);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	(self)->FillRect( &sub, ((bit) ? self->BlackPattern : self->WhitePattern));
 	((ras)->GetPix())->SetPixel( x, y, ((bit) ? 1 : 0));
     }

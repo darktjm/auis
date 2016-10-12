@@ -18,7 +18,7 @@ ATKdefineRegistry(recsearch, ATK, recsearch::InitializeClass);
 
 #define SRCHSTRLEN 100
 static view *lastStart;
-static struct SearchPattern *lastPattern = NULL;
+static class search lastPattern;
 static char searchString[SRCHSTRLEN] = "";
 static class simpletext *replacement;
 
@@ -71,7 +71,7 @@ static void DoRecSearch(class im  *self, class view *start, char *givenstr)
     }
 
     if (!defaultExists || *searchString != '\0') {
-	tp = search::CompilePattern(searchString, &lastPattern);
+	tp = lastPattern.CompilePattern(searchString);
 	if (tp) {
 	    message::DisplayString(self, 0, tp);
 	    return;
@@ -80,7 +80,7 @@ static void DoRecSearch(class im  *self, class view *start, char *givenstr)
 
     /*printf("### recsearch: starting at |%s|\n", start->GetTypeName());*/
     lastStart = start;
-    res = lastStart->RecSearch(lastPattern, TRUE);
+    res = lastStart->RecSearch(&lastPattern, TRUE);
     if (res) {
 	struct rectangle dummy,hit;
 	lastStart->GetLogicalBounds(&dummy);
@@ -129,7 +129,7 @@ static void RecSearchResumeCmd(class im  *self, long rock)
     }
 
     /*printf("### recsearch: starting at |%s|\n", lastStart->GetTypeName());*/
-    res = lastStart->RecSrchResume(lastPattern);
+    res = lastStart->RecSrchResume(&lastPattern);
 
     if (res) {
 	struct rectangle dummy,hit;

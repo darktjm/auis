@@ -21,7 +21,7 @@ public:
      void ObservedChanged (class observable *changed, long value);
      void SetDataObject(class dataobject *ls);
      ATK  * WantHandler(const char *handlerName)  ;
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void LinkTree(class view *parent);
 
     virtual const char * GetDataName()  ;

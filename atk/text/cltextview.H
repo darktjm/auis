@@ -13,13 +13,13 @@
 
 #include <textview.H>
  
-	typedef void (*cltextview_hitfptr)(class ATK *observer, class cltextview *self, long *position, long *numClicks, enum view_MouseAction *act, long *startLeft, long *startRight, long *leftPos, long *rightPos, long rock, int prepost);
+	typedef void (*cltextview_hitfptr)(class ATK *observer, class cltextview *self, long *position, long *numClicks, enum view::MouseAction *act, long *startLeft, long *startRight, long *leftPos, long *rightPos, long rock, int prepost);
 
 class cltextview : public  textview  {
 public:
 	virtual ATKregistryEntry *ATKregistry(); 
-       void GetClickPosition(long position, long numberOfClicks, enum view_MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
-       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+       void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
+       void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
 
     
       virtual void AddClickObserver( ATK  * observer,

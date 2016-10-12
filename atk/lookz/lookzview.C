@@ -123,7 +123,7 @@ static void HitSpacing(class stringtbl  *st, class lookzview  *self, long  accnu
 static void HitSpread(class stringtbl  *st, class lookzview  *self, long  accnum);
 static void HitColor(class stringtbl  *st, class lookzview  *self, long  accnum);
 static void HitTabFill(class stringtbl  *st, class lookzview  *self, long  accnum);
-static void HitShrink(class labelview  *shrink, enum view_MouseAction   action, class lookzview  *self);
+static void HitShrink(class labelview  *shrink, enum view::MouseAction   action, class lookzview  *self);
 static void ChooseShrinkIcon(class lookzview  *self);
 
 enum dir {H, V};
@@ -1146,10 +1146,10 @@ HitTabFill(class stringtbl  *st, class lookzview  *self, long  accnum)
 }
 
 	static void
-HitShrink(class labelview  *shrink, enum view_MouseAction   action, class lookzview  *self)
+HitShrink(class labelview  *shrink, enum view::MouseAction   action, class lookzview  *self)
 			{
 	class lookz *lookz;
-	if (action != view_LeftDown && action != view_RightDown)
+	if (action != view::LeftDown && action != view::RightDown)
 		return;
 	lookz = (class lookz *) (self)->GetDataObject();
 	if (! (self)->GetVisibility() ||  (lookz)->GetCanClose()) {
@@ -1646,16 +1646,16 @@ LEAVE(lookzview::LoseInputFocus);
 }
 
 	void 
-lookzview::FullUpdate(enum view_UpdateType   type, long  left , long  top , long  width , long  height)
+lookzview::FullUpdate(enum view::UpdateType   type, long  left , long  top , long  width , long  height)
 			{
 	struct rectangle r;
 	int i;
-	enum view_UpdateType lpairtype;
+	enum view::UpdateType lpairtype;
 
-	this->OnScreen = (type != view_Remove);
+	this->OnScreen = (type != view::Remove);
 	if (! this->Linked)
 		(this)->LinkTree( this->parent);
-	if (type == view_FullRedraw)
+	if (type == view::FullRedraw)
 		(this)->GetLogicalBounds( &r);
 	else 
 		rectangle_SetRectSize(&r, left, top, width, height);
@@ -1665,7 +1665,7 @@ DEBUG(("FullUpdate type %d  redraw (%d,%d,%d,%d) within (%d,%d,%d,%d)\n",
 DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 			((this)->GetVisibility()) ? "yes" : "no"));
 
-	if ((type == view_FullRedraw || type == view_LastPartialRedraw)
+	if ((type == view::FullRedraw || type == view::LastPartialRedraw)
 			 && ! this->foundstylesheet) {
 		/* BOGOSITY ALERT:  we grub around in the parent to
 		  find its stylesheet */
@@ -1678,8 +1678,8 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 				break;
 			}
 	}
-	if (type == view_FullRedraw && this->embedded && this->OnScreen) {
-		(this)->SetTransferMode( graphic_COPY);
+	if (type == view::FullRedraw && this->embedded && this->OnScreen) {
+		(this)->SetTransferMode( graphic::COPY);
 		(this)->MoveTo( 0, 0);
 		(this)->DrawLineTo( r.width-1, 0);
 		(this)->DrawLineTo( r.width-1, r.height-1);
@@ -1690,8 +1690,8 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 	}
 
 	if ((this)->GetVisibility()) {
-		if (type != view_PartialRedraw 
-			/* && type != view_LastPartialRedraw */) {
+		if (type != view::PartialRedraw 
+			/* && type != view::LastPartialRedraw */) {
 			(this->image)->InsertView( this, &r);
 		}
 		/* Now that we are here, the strtbl's have been instantiated,
@@ -1703,12 +1703,12 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 			this->OnceOnlyInUpdate = TRUE;
 		}
 
-		lpairtype = (type == view_LastPartialRedraw) ? view_FullRedraw : type;
+		lpairtype = (type == view::LastPartialRedraw) ? view::FullRedraw : type;
 		DEBUG(("	FullUpdate lpair with type %d\n", lpairtype));
 		(this->image)->FullUpdate( lpairtype, left, top, width, height);
 	} else {
-		if (type != view_PartialRedraw 
-			 && type != view_LastPartialRedraw) 
+		if (type != view::PartialRedraw 
+			 && type != view::LastPartialRedraw) 
 			(this->shrinkicon)->InsertView( this, &r);
 		(this->shrinkicon)->FullUpdate(  type, left, top, width, height);
 	}
@@ -1721,7 +1721,7 @@ lookzview::Update( )
 ENTER(lookzview::Update);
 	if (! this->OnScreen) return;
 	if ( ! this->Linked)
-		(this)->FullUpdate( view_FullRedraw, 0, 0,
+		(this)->FullUpdate( view::FullRedraw, 0, 0,
 				(this)->GetLogicalWidth(),
 				(this)->GetLogicalHeight());
 	else if ((this)->GetVisibility()) {
@@ -1735,12 +1735,12 @@ LEAVE(lookzview::Update);
 }
 
 	class view *
-lookzview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
+lookzview::Hit(enum view::MouseAction   action, long   x , long   y , long   num_clicks)
 			{
 	class view *ret;
 	boolean oldvis=(this)->GetVisibility();
 ENTER(lookzview::Hit);
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 	if ( ! this->OnScreen) return NULL;
 DEBUG(("	OldVis %d\n", oldvis));
@@ -1755,8 +1755,8 @@ LEAVE(lookzview::Hit);
 	else return (class view *)this;	/* visibility changed */
 }
 
-	view_DSattributes
-lookzview::DesiredSize( long  width, long  height, enum view_DSpass  pass, 
+	view::DSattributes
+lookzview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
 	if ((this)->GetVisibility()) 
@@ -1764,7 +1764,7 @@ lookzview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 	else
 		*desiredWidth = 26,  *desiredHeight = 20;
 DEBUG(("Desired Size %d x %d\n", *desiredWidth, *desiredHeight));
-	return view_Fixed;
+	return view::Fixed;
 }
 
 	void
@@ -1876,7 +1876,7 @@ UpdateDocument(class lookzview  *self)
 				/* this is exceedingly dangerous XXX XXX
 					 We call a FullUpdate 
 					 without establishing any environment */
-				(v)->FullUpdate( view_FullRedraw, 0, 0, 0, 0);
+				(v)->FullUpdate( view::FullRedraw, 0, 0, 0, 0);
 				break;
 			}
 	}

@@ -166,7 +166,7 @@ void figobj::RecomputeBounds()
 
 void figobj::Draw(class figview  *v) 
 {
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
 }
 
 void figobj::Sketch(class figview  *v) 
@@ -178,7 +178,7 @@ void figobj::Sketch(class figview  *v)
     y = (v)->ToPixY( rec->top);
     w = (v)->ToPixW( rec->width);
     h = (v)->ToPixH( rec->height);
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 
@@ -190,7 +190,7 @@ void figobj::Select(class figview  *v)
     class graphic *BlackPattern;
 
     if (this->pts && this->numpts) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 	BlackPattern = (v)->BlackPattern();
 
 	for (ix=0; ix<this->numpts; ix++) {
@@ -306,7 +306,7 @@ void figobj::DrawAttachments(class figview  *v)
     int typ;
 
     if (this->anyattachmentsactive && this->vas && this->numpts) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 
 	for (ix=0; ix<this->numpts; ix++) 
 	    if (this->vas[ix].on) {
@@ -333,7 +333,7 @@ void figobj::DrawAttachments(class figview  *v)
 }
 
 /* zero clicks means user hit ctrl-G or switched modes. Build may draw further bits on the screen. */
-enum figobj_Status figobj::Build(class figview  *v, enum view_MouseAction action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figobj::Build(class figview  *v, enum view::MouseAction action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     if (clicks==0) {
 	message::DisplayString(v, 10, "Object aborted.");
@@ -403,36 +403,36 @@ void figobj::MoveHandle(long  x , long  y , long  ptref)
     
 }
 
-boolean figobj::AddParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figobj::AddParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     return FALSE;
 }
 
-boolean figobj::DeleteParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figobj::DeleteParts(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     return FALSE;
 }
 
-boolean figobj::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figobj::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     if (!handle)
 	return FALSE;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((this)->GetReadOnly())
 		return FALSE;
 	    /*figobj_Sketch(self, v);*/
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (this)->Sketch( v);
 	    (this)->MoveHandle( x, y, ptref);
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (this)->Sketch( v);
 	    (this)->MoveHandle( x, y, ptref);
 	    (this)->SetModified();
@@ -625,12 +625,12 @@ void figobj::PrintObject(class figview  *v, FILE  *file, const char  *prefix, bo
 {
 }
 
-boolean figobj::ORecSearch(struct SearchPattern *pat)
+boolean figobj::ORecSearch(class search *pat)
 {
     return FALSE;
 }
 
-boolean figobj::ORecSrchResume(struct SearchPattern *pat)
+boolean figobj::ORecSrchResume(class search *pat)
 {
     return FALSE;
 }

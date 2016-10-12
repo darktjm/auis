@@ -157,7 +157,7 @@ symbols should be nodes
 plain nodes should have fewer fields 
 
 
-view__DefaultObject so ESC-TAB can ask for view
+view::_DefaultObject so ESC-TAB can ask for view
 
 	can edit to change object
 

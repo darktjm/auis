@@ -67,16 +67,16 @@ void compressv::Print(FILE *f, const char *process, const char *final, int tople
     fprintf(f, "\\(br \\s-2%s \\s+2\\(br\\l'|0\\(rn'\\l'|0\\(ul'", BoxText());
 }
 
-view *compressv::Hit(enum view_MouseAction action, long mousex, long mousey, long numberOfClicks)
+view *compressv::Hit(enum view::MouseAction action, long mousex, long mousey, long numberOfClicks)
 {
     text *txt=(text *)this->parenttext;
     compress *fn=(compress *)GetDataObject();
-    if (action==view_LeftUp || action==view_RightUp) {
+    if (action==view::LeftUp || action==view::RightUp) {
 	long mod=(txt)->GetModified();
 	(fn)->DecompressBox(txt);
 	(txt)->RestoreModified(mod);
 	(txt)->NotifyObservers(0);
-	if (action==view_LeftUp) {
+	if (action==view::LeftUp) {
 	    /* put cursor around decompressed text for easy re-compression */
 	    (this->parentview)->SetDotPosition(fn->loc);
 	    (this->parentview)->SetDotLength((fn)->GetLength());
@@ -85,12 +85,12 @@ view *compressv::Hit(enum view_MouseAction action, long mousex, long mousey, lon
     return (view *)this;
 }
 
-view_DSattributes compressv::DesiredSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+view::DSattributes compressv::DesiredSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     (boxfont)->StringSize(GetDrawable(), BoxText(), desiredwidth,desiredheight);
     *desiredwidth= (boxwidth>0) ? boxwidth : *desiredwidth+8; 
     *desiredheight= (boxfont)->FontSummary(GetDrawable()) -> maxHeight;
-    return (view_HeightFlexible | view_WidthFlexible);
+    return (view::HeightFlexible | view::WidthFlexible);
 }
 
 static void DoUpdate(compressv *self, boolean full)
@@ -107,7 +107,7 @@ static void DoUpdate(compressv *self, boolean full)
 
     /* draw string in center of box */
     (self)->MoveTo((enclosingRect.width+1)/2, (enclosingRect.height-1)/2);
-    (self)->DrawString((self)->BoxText(),(view_BETWEENTOPANDBOTTOM | view_BETWEENLEFTANDRIGHT));
+    (self)->DrawString((self)->BoxText(),(graphic::BETWEENTOPANDBOTTOM | graphic::BETWEENLEFTANDRIGHT));
 }
 
 void compressv::LinkTree(view *parent)
@@ -127,7 +127,7 @@ void compressv::LinkTree(view *parent)
 	(fn)->SetLines((fn)->GetLineForPos((fn)->GetLength())); /* I wanted to do this in compress_Compress, but the value didn't get copied when the compress box got copied. */
 }
 
-void compressv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height)
+void compressv::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height)
 {
     DoUpdate(this,TRUE);
 }

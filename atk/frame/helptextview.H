@@ -15,9 +15,9 @@ public:
 
     
        void WantInputFocus( class view *requestor);
-       void GetClickPosition(long position, long numberOfClicks, enum view_MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
-       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+       void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
+       class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+       void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     
       
 	virtual ~helptextview();

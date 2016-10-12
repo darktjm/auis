@@ -318,19 +318,19 @@ boolean pintv::InitializeClass()
     return TRUE;
 }
 
-void pintv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void pintv::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle bounds;
     (this)->GetVisualBounds( &bounds);
     if(this->redosizes) {
 	long dw=bounds.width, dh=40;
-	(this->buttons)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
+	(this->buttons)->DesiredSize( bounds.width, bounds.height, view::WidthSet, &dw, &dh);
 	this->redosizes=FALSE;
 	if(dh<bounds.height) {
 	    (this)->GetObjSize( 1)=dh;	
 	    ((class lpair *)this)->needsfull=TRUE;
 	}
-	(this->catlabel)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
+	(this->catlabel)->DesiredSize( bounds.width, bounds.height, view::WidthSet, &dw, &dh);
 	if(dh<bounds.height-(this)->GetObjSize( 1)) {
 	    (this->leftpair)->GetObjSize( 0)=dh;
 	    (this->rightpair)->GetObjSize( 0)=dh;
@@ -1231,7 +1231,7 @@ static void ReProcess(class pintv  *self)
     self->lockdown=FALSE;
 }
 
-class view *pintv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *pintv::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     char buf[1024];
     class view *result;

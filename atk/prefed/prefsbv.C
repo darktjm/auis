@@ -21,9 +21,9 @@ prefsbv::~prefsbv()
 {
 }
 
-boolean prefsbv::Touch(int  ind, enum view_MouseAction  act)
+boolean prefsbv::Touch(int  ind, enum view::MouseAction  act)
 {
     if(!(this)->sbuttonv::Touch( ind, act)) return FALSE;
-    if(act!=view_LeftUp) return TRUE;
+    if(act!=view::LeftUp) return TRUE;
     else return FALSE;
 }

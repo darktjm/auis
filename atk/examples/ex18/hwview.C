@@ -166,7 +166,7 @@ void helloworldview::ObservedChanged(class observable *obj, long  val)
 #define WIDTH 100
 #define HEIGHT 100
 
-void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height )
+void helloworldview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height )
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
     struct rectangle myVisualRect,rec;
@@ -196,7 +196,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,
 			  this->x-this->frameX-1,this->y-this->frameY-1,
 			  WIDTH+1,HEIGHT+1);
 
-    (this)->SetTransferMode(graphic_COPY);
+    (this)->SetTransferMode(graphic::COPY);
 
     if(hw->blackOnWhite){
 	(this)->FillRect(&myVisualRect,
@@ -217,7 +217,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,
 
     (this->applayer)->InsertView(this,&rec);
 	
-    (this->applayer)->FullUpdate(view_FullRedraw,0,0,WIDTH,HEIGHT);
+    (this->applayer)->FullUpdate(view::FullRedraw,0,0,WIDTH,HEIGHT);
     this->redrawSubView=FALSE;
 }
 
@@ -225,7 +225,7 @@ void helloworldview::Update()
 {    
     class helloworld *hw=(class helloworld *)this->dataobject;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if(this->x!=hw->x ||
        this->y!=hw->y ||
@@ -278,7 +278,7 @@ void helloworldview::Update()
 	if(hw->blackOnWhite)
 	    (this)->DrawRectSize(this->x-this->frameX-1,
 		this->y-this->frameY-1,WIDTH+1,HEIGHT+1);
-	(this->applayer)->FullUpdate(view_FullRedraw,0,0,
+	(this->applayer)->FullUpdate(view::FullRedraw,0,0,
 			WIDTH,HEIGHT);
 	this->redrawSubView=FALSE;
     }else
@@ -286,7 +286,7 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action,long  x,long  y,long  numberOfClicks)
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
 
@@ -298,21 +298,21 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 
     if(this->HaveDownTransition)
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		hw->x+=x-this->hitX;
 		hw->y+=y-this->hitY;
 		this->hitX=x;
 		this->hitY=y;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		hw->x=x+this->frameX;
 		hw->y=y+this->frameY;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -322,11 +322,11 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 
     if(!this->HaveDownTransition)
 	switch(action){
-	    case view_RightDown:
+	    case view::RightDown:
 		this->hitX=x;
 		this->hitY=y;
 		/* fall through */
-	    case view_LeftDown:
+	    case view::LeftDown:
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;

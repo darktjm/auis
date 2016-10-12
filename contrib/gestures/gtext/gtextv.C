@@ -236,7 +236,7 @@ static int CalcMiddle(int  *xp, int  *yp, int  length, int  *middlex, int  *midd
  *
  *****************************************************************************/
 
-class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  numclicks)
+class view *gtextv::Hit(enum view::MouseAction  action, long  x, long  y , long  numclicks)
                {
   int i;
   class view *temp;
@@ -254,9 +254,9 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
 
   (this)->GetVisualBounds( &VisualRect);
   
-  (this)->SetTransferMode( graphic_XOR);
+  (this)->SetTransferMode( graphic::XOR);
 
-  if(action == view_LeftMovement) { /* Track the mouse movements */
+  if(action == view::LeftMovement) { /* Track the mouse movements */
     this->xp[this->index] = x;
     this->yp[this->index] = y;
     (this)->MoveTo( this->xp[this->index - 1], this->yp[this->index - 1]);
@@ -264,7 +264,7 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
     this->index++;
     FvAddPoint(fvb, x, VisualRect.height - y, ts_timer, 0);
 
-  } else if(action == view_LeftDown) { /* signals the start of an action */
+  } else if(action == view::LeftDown) { /* signals the start of an action */
     this->xp[this->index] = x;
     this->yp[this->index] = y;
     (this)->MoveTo( x, y);
@@ -274,7 +274,7 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
     FvAddPoint(fvb, x, VisualRect.height - y, ts_timer, 0);
     (this)->WantInputFocus( this);
 
-  } else if(action == view_LeftUp) {  /* signals the end of an action */
+  } else if(action == view::LeftUp) {  /* signals the end of an action */
     i=0;
     (this)->MoveTo( this->xp[i], this->yp[i]);
     for(i=0; i<this->index; i++) {
@@ -364,7 +364,7 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
     this->index = 0;
   }
 
-  (this)->SetTransferMode( graphic_COPY);
+  (this)->SetTransferMode( graphic::COPY);
   return((class view *)temp);
 }
 

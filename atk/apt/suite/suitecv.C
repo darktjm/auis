@@ -139,7 +139,7 @@ suitecv::ReceiveInputFocus( )
 }
 
 void
-suitecv::FullUpdate( enum view_UpdateType type, long left, long top, long width, long height )
+suitecv::FullUpdate( enum view::UpdateType type, long left, long top, long width, long height )
 {
   Update_Caption( this );
   textview::FullUpdate(type, left, top, width, height);
@@ -166,9 +166,9 @@ suitecv::LoseInputFocus( )
     }
     item->caption[len] = '\0';
     if(item->hithandler) 
-	item->hithandler(suite->anchor,suite,item,suite_ItemObject,view_NoMouseEvent, 0,0,0);
+	item->hithandler(suite->anchor,suite,item,suite_ItemObject,view::NoMouseEvent, 0,0,0);
     else if(suite->hithandler) 
-	suite->hithandler(suite->anchor,suite,item,suite_ItemObject,view_NoMouseEvent, 0,0,0);
+	suite->hithandler(suite->anchor,suite,item,suite_ItemObject,view::NoMouseEvent, 0,0,0);
 }
 
 

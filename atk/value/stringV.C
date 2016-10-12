@@ -62,7 +62,7 @@ static void DrawLabel(class stringV  * self)
 {
     if(self->foreground) (self)->SetForegroundColor( self->foreground, 0, 0, 0);
     if(self->background) (self)->SetBackgroundColor( self->background, 0, 0, 0);
-    (self)->SetTransferMode(  graphic_COPY);
+    (self)->SetTransferMode(  graphic::COPY);
     (self)->EraseRectSize( self->x,self->y, self->width,self->height);
 
     if(self->label){	
@@ -70,7 +70,7 @@ static void DrawLabel(class stringV  * self)
 	(self)->MoveTo(  self->width / 2 + self->x,self->height/2 + self->y);
 	(self)->SetFont(  self->activefont );
 	(self)->DrawString (  self->label,
-				   graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM);
+				   graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM);
     }
 
 }

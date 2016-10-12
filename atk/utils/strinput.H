@@ -24,8 +24,8 @@ public:
 	static boolean InitializeClass();
 
 
-   void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
-   class view * Hit(enum view_MouseAction action, long x, long y, long clicks)  ;
+   void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
+   class view * Hit(enum view::MouseAction action, long x, long y, long clicks)  ;
    void ReceiveInputFocus();
    void LinkTree(class view *parent);
 

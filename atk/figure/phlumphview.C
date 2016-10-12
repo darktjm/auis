@@ -163,10 +163,10 @@ static void DrawIcon(class phlumphview *self)
     sprintf(buf, "%d page%s", dat->GetNumPages(), (dat->GetNumPages()==1 ? "" : "s"));
     self->SetFont(IconFontDesc);
     self->MoveTo(5, 5);
-    self->DrawString(buf, graphic_ATLEFT|graphic_ATTOP);
+    self->DrawString(buf, graphic::ATLEFT|graphic::ATTOP);
 }
 
-void phlumphview::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height)
+void phlumphview::FullUpdate(enum view::UpdateType type, long left, long top, long width, long height)
 {
     if (this->IconMode)
 	DrawIcon(this);
@@ -296,12 +296,12 @@ void phlumphview::PostKeyState(class keystate  *ks)
     (this)->view::PostKeyState( newch);
 }
 
-view_DSattributes phlumphview::DesiredSize(long  width, long  height, enum view_DSpass pass, long  *dwidth, long  *dheight)
+view::DSattributes phlumphview::DesiredSize(long  width, long  height, enum view::DSpass pass, long  *dwidth, long  *dheight)
 {
     if (this->IconMode) {
 	*dwidth = 80;
 	*dheight = 32;
-	return view_Fixed;
+	return view::Fixed;
     }
     else {
 	return this->view::DesiredSize(width, height, pass, dwidth, dheight);
@@ -353,7 +353,7 @@ void phlumphview::LinkTree( class view  *parent )
     }
 }
 
-class view *phlumphview::Hit(enum view_MouseAction action, long x, long y, long numclicks)
+class view *phlumphview::Hit(enum view::MouseAction action, long x, long y, long numclicks)
 {
     class view *res;
     if (this->IconMode) {
@@ -526,7 +526,7 @@ static void AdjustToCurnum(class phlumphview  *self)
 	    self->GetLogicalBounds(&currec);
 	    self->curview->SetDataObject(pag);
 	    self->curview->WantInputFocus(self->curview);
-	    self->curview->FullUpdate(view_FullRedraw, 0, 0, currec.width, currec.height);
+	    self->curview->FullUpdate(view::FullRedraw, 0, 0, currec.width, currec.height);
 	}
 	else {
 	    struct rectangle currec;
@@ -536,7 +536,7 @@ static void AdjustToCurnum(class phlumphview  *self)
 	    self->curview->LinkTree( self);
 	    self->curview->InsertView( self, &currec);
 	    self->curview->WantInputFocus(self->curview);
-	    self->curview->FullUpdate(view_FullRedraw, 0, 0, currec.width, currec.height);
+	    self->curview->FullUpdate(view::FullRedraw, 0, 0, currec.width, currec.height);
 	}
     }
 

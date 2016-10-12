@@ -406,7 +406,7 @@ zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, in
 	      figure->zip_figure_line_dash_offset = offset;
 	      figure->zip_figure_line_dash_type = type;
 	    }
-	  else figure->zip_figure_line_dash_type = graphic_LineSolid;
+	  else figure->zip_figure_line_dash_type = graphic::LineSolid;
 	  SetStreamModified;
       }
       else

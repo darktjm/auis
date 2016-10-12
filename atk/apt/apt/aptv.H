@@ -112,10 +112,10 @@ public:
 
 
 
-   view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dheight )
+   view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dheight )
 	 ;
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n )	 ;
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
+   class view * Hit( enum view::MouseAction action, long x, long y, long n )	 ;
    void SetDataObject( class dataobject *d );
 
 
@@ -238,7 +238,7 @@ public:
 // BUG
 //
  * Revision 1.5  1993/09/28  04:52:23  rr2b
- * Fixed view_DSattributes to be an int not an enum.
+ * Fixed view::DSattributes to be an int not an enum.
  *
  * Revision 1.4  1993/06/10  20:21:03  rr2b
  * Great atk_inited removal.

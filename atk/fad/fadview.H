@@ -14,12 +14,12 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-	 view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+	 view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
 	 void Update();
-    	 void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+    	 void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
    	 void ReceiveInputFocus();
     	 void LoseInputFocus();
-    	 class view * Hit (enum view_MouseAction action, long mousex, long mousey, long numberOfClicks)  ;
+    	 class view * Hit (enum view::MouseAction action, long mousex, long mousey, long numberOfClicks)  ;
 	 void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 	 void ObservedChanged( class observable *changed, long value);
 	 void SetDataObject(class dataobject *dataObject);

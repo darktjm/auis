@@ -114,7 +114,7 @@ zipoimbed::Show_Object_Properties( zip_type_pane  pane, zip_type_figure  figure 
   }
 
 long
-zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipoimbed::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   long				  status = zip_ok;
   zip_type_figure		  figure;
@@ -123,7 +123,7 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
   IN(zipoimbed::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
         (this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_imbed_figure,
 			   CurrentImage, 0 )) == zip_success )
@@ -136,7 +136,7 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	    CurrentFigure->zip_figure_style = 1;
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       (this->view_object)->Set_Pane_Cursor(  pane, 'B', CursorFontName );
       if ( ( figure = CurrentFigure ) )
 	{
@@ -160,7 +160,7 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	  }
 	}
       /* Fall-thru */
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure  &&  status == zip_ok )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
@@ -178,7 +178,7 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
   }
 
 class view *
-zipoimbed::Object_Hit( zip_type_figure		   figure, enum view_MouseAction	   action, long			           x , long			           y , long			           clicks )
+zipoimbed::Object_Hit( zip_type_figure		   figure, enum view::MouseAction	   action, long			           x , long			           y , long			           clicks )
           {
   struct imbed			 *imbed = (struct imbed *)
 						   figure->zip_figure_datum.zip_figure_anchor;
@@ -393,7 +393,7 @@ long Draw( class zipoimbed		  *self, zip_type_figure		   figure, zip_type_pane		
     { top  = T = window_y_points(0);   height = H = -height; }
   DEBUGdt(L,L);DEBUGdt(T,T);DEBUGdt(W,W);DEBUGdt(H,H);
   transfer_mode = (self->view_object )->GetTransferMode( );
-  if ( self->view_object->mouse_action != view_LeftMovement  &&
+  if ( self->view_object->mouse_action != view::LeftMovement  &&
        (imbed = (struct imbed *)figure->zip_figure_datum.zip_figure_anchor)  &&
        action == zip_draw )
     {
@@ -402,11 +402,11 @@ long Draw( class zipoimbed		  *self, zip_type_figure		   figure, zip_type_pane		
       { DEBUGdt(Shade,shade);
       if ( (shade = ('0' + ((shade + 10) / 10)) - 1) > '9' )  shade = '9';
       DEBUGdt(Shade-index,shade);
-      (self->view_object)->SetTransferMode(  graphic_COPY );
+      (self->view_object)->SetTransferMode(  graphic::COPY );
       (self->view_object)->FillRectSize(  left,top, width,height,
         (self->view_object)->Define_Graphic(  (self->data_object)->Define_Font(  ShadeFontName, NULL ), shade ));
       }
-    (self->view_object)->SetTransferMode(  graphic_BLACK );
+    (self->view_object)->SetTransferMode(  graphic::BLACK );
     (self->view_object)->Set_Pane_Clip_Area(  pane );
     DEBUG(LinkTree);
     (imbed->view_object)->LinkTree(  self->view_object );
@@ -414,19 +414,19 @@ long Draw( class zipoimbed		  *self, zip_type_figure		   figure, zip_type_pane		
     (imbed->view_object)->InsertViewSize(  self->view_object,
 			 L + 1, T + 1, W - 2, H - 2 );
     DEBUG(FullUpdate); /*=== FORCE CLIPING TO INSIDE PANE SOMEHOW ===*/
-    (imbed->view_object)->FullUpdate(  view_FullRedraw,
+    (imbed->view_object)->FullUpdate(  view::FullRedraw,
 		     L + 1, T + 1, W - 2, H - 2 );
     (self->view_object)->Set_Pane_Clip_Area(  pane );
     }
     else
     if ( action == zip_clear )
       {
-      (self->view_object)->SetTransferMode(  graphic_WHITE );
+      (self->view_object)->SetTransferMode(  graphic::WHITE );
       (self->view_object)->EraseRectSize(  left+1, top+1, width-1, height-1 );
       }
   (self->view_object)->SetTransferMode(  transfer_mode );
   if ( ((self->data_object)->Contextual_Figure_Line_Width(  figure ) > 0  &&  figure->zip_figure_style == 0)  ||
-       self->view_object->mouse_action == view_LeftMovement )
+       self->view_object->mouse_action == view::LeftMovement )
     (self->view_object)->DrawRectSize(  left, top, width, height );
   if ( ExposePoints )
     (self)->Expose_Object_Points(  figure, pane );

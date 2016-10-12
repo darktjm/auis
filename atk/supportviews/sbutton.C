@@ -190,7 +190,7 @@ void sbutton::InitPrefs(struct sbutton_prefs  *prefs, const char  *name)
     strncpy(buf, name, sizeof(buf)-6); /* reserve space for the word style too. */
     strcat(buf,"style");
     prefs->style=environ::GetProfileInt(buf, prefs->style);
-    strncpy(buf, name, sizeof(buf)-6); /* reserve space for the word style too. */
+    strncpy(buf, name, sizeof(buf)-6); /* reserve space for the word Depth too. */
     strcat(buf,"Depth");
     prefs->bdepth=environ::GetProfileInt(buf, prefs->bdepth);
     strncpy(buf, name, sizeof(buf)-5); /* reserve space for the word font too. */

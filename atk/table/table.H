@@ -35,11 +35,12 @@ typedef enum dimension Dimension;
 
 /* "colors" of cell boundary lines */
 
-typedef char Color;
-#define SUPPRESSED 0	/* suppressed when not input focus */
-#define JOINED 1	/* joined cells */
-#define GHOST 2		/* dotted line, not printed */
-#define BLACK 3		/* black line */
+enum Color {
+    SUPPRESSED,	/* suppressed when not input focus */
+    JOINED,	/* joined cells */
+    GHOST,		/* dotted line, not printed */
+    BLACK		/* black line */
+};
 
 /* a chunk is a subrectangle of the spreadsheet */
 

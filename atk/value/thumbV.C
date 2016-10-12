@@ -107,14 +107,14 @@ static void getsizes(class thumbV  * self)
 static void DrawLabel(class thumbV  * self)
 {
     if(self->label){	
-	(self)->SetTransferMode(  graphic_COPY);
+	(self)->SetTransferMode(  graphic::COPY);
 	(self)->EraseRect( &self->labelrec);
 
-	(self)->SetTransferMode(  graphic_BLACK );
+	(self)->SetTransferMode(  graphic::BLACK );
 	(self)->MoveTo( self->x + ( self->width / 2),self->y + self->height);
 	(self)->SetFont(  self->activefont );
 	(self)->DrawString (  self->label,
-				   graphic_BETWEENLEFTANDRIGHT | graphic_ATBOTTOM);
+				   graphic::BETWEENLEFTANDRIGHT | graphic::ATBOTTOM);
     }
 
 }
@@ -127,14 +127,14 @@ static void DrawValue(class thumbV  * self)
 {
     const char *buf;   
     buf = (self)->GetValueString();
-    (self)->SetTransferMode(  graphic_COPY);
+    (self)->SetTransferMode(  graphic::COPY);
     (self)->EraseRect( &self->valrec);
 
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     (self)->MoveTo(  self->x + self->width / 2, self->y + FUDGE);
     (self)->SetFont(  self->activefont );
     (self)->DrawString (  buf,
-				graphic_BETWEENLEFTANDRIGHT | graphic_ATTOP);
+				graphic::BETWEENLEFTANDRIGHT | graphic::ATTOP);
 
 }
 #define HGH 3
@@ -144,7 +144,7 @@ static void DrawKnurl(class thumbV  * self)
 #ifdef USELINES
     long y,x1,x2,end,nl, hn,change,inc,minx,maxx;
     inc =  (self->rv % SPACE);
-    (self)->SetTransferMode(  graphic_INVERT );
+    (self)->SetTransferMode(  graphic::INVERT );
     minx =  10000;
     maxx = 0 ;
     end = rectangle_Bottom(&self->inwheelrec) - 1;
@@ -190,11 +190,11 @@ static void DrawKnurl(class thumbV  * self)
 
 static void DrawThumbwheel(class thumbV  * self,boolean DoAll)
 {
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
 #if 0
     if(DoAll){
 	(self)->EraseRect( &self->wheelrec);
-	(self)->SetTransferMode(  graphic_BLACK );
+	(self)->SetTransferMode(  graphic::BLACK );
 	/*	thumbV_DrawRect( self,&self->wheelrec); 
 	 thumbV_MoveTo(self,rectangle_Left(&self->wheelrec),rectangle_Top(&self->wheelrec));
 	 thumbV_DrawLine(self,0,rectangle_Height(&self->wheelrec));
@@ -393,20 +393,20 @@ void thumbV::DrawNewValue( )
 
 
 
-class valueview * thumbV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * thumbV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     long myval;
     static int moved;
     switch(type){
-	case view_RightDown:
-	case view_LeftDown:
+	case view::RightDown:
+	case view::LeftDown:
 	    this->tmpval = (tt)->GetValue();
 	    this->lasty = y;
 	    moved = 0;
 	    break;
-	case view_RightMovement:
-	case view_LeftMovement	:
+	case view::RightMovement:
+	case view::LeftMovement	:
 	    moved++;
 	    if(this->granular){
 		myval = this->tmpval;
@@ -434,10 +434,10 @@ class valueview * thumbV::DoHit( enum view_MouseAction  type,long  x,long  y,lon
 	    this->lasty = y;
 	    DrawThumbwheel(this,FALSE);
 	    break;
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 	    if(moved == 0){
-		myval = (type == view_RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
+		myval = (type == view::RightUp)? this->tmpval - this->increment : this->tmpval + this->increment ;
 		if(myval > this->maxval) this->tmpval = this->minval;
 		else if(myval < this->minval) this->tmpval = this->maxval;
 		else this->tmpval = myval;

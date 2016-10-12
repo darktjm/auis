@@ -20,17 +20,17 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 \* ***************************************************** */
 #include <view.H>
 
-typedef int (*buttview_hit_fptr)(void * rock1, void * rock2, class butt * self, enum view_MouseAction action);
+typedef int (*buttview_hit_fptr)(void * rock1, void * rock2, class butt * self, enum view::MouseAction action);
 
 class buttview: public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-       void FullUpdate(enum view_UpdateType type, long left, long top,
+       void FullUpdate(enum view::UpdateType type, long left, long top,
 		  long width, long height);
        void Update();
-       class view * Hit (enum view_MouseAction action, long x, long y,
+       class view * Hit (enum view::MouseAction action, long x, long y,
 	    long numberOfClicks)  ;
     
       

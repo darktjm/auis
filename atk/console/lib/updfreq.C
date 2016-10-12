@@ -60,8 +60,8 @@ void UpdateDisplay(class consoleClass  *self, struct display  *disp)
                     disp->InRange = FALSE;
                     if (disp->WhiteOut) {
                         rectangle_SetRectSize(&clpRect, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight + 1);
-                        ClearRectangle(self, &clpRect, graphic_COPY, (self)->WhitePattern());
-                        (self)->SetTransferMode( graphic_BLACK);
+                        ClearRectangle(self, &clpRect, graphic::COPY, (self)->WhitePattern());
+                        (self)->SetTransferMode( graphic::BLACK);
                     }
                 }
             }
@@ -69,8 +69,8 @@ void UpdateDisplay(class consoleClass  *self, struct display  *disp)
         if (!disp->InRange) {
             disp->InRange = TRUE;
             rectangle_SetRectSize(&clpRect, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight + 1);
-            ClearRectangle(self, &clpRect, graphic_COPY, (self)->WhitePattern());
-            (self)->SetTransferMode( graphic_BLACK);
+            ClearRectangle(self, &clpRect, graphic::COPY, (self)->WhitePattern());
+            (self)->SetTransferMode( graphic::BLACK);
             disp->Inverted = FALSE;
             (*(disp->DrawFunction))(self, REDRAW, disp);
         }
@@ -199,8 +199,8 @@ static void Invert(class consoleClass  *self,struct display  *disp)
 
     mydbg(("entering: Invert\n"));
     rectangle_SetRectSize(&invertRect, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
-        ClearRectangle(self, &invertRect, graphic_INVERT, (self)->BlackPattern());
-    (self)->SetTransferMode( graphic_BLACK);
+        ClearRectangle(self, &invertRect, graphic::INVERT, (self)->BlackPattern());
+    (self)->SetTransferMode( graphic::BLACK);
 }
 
 #define HIGHLIGHTTHICKNESS 3
@@ -218,7 +218,7 @@ void HighlightDisplay(class consoleClass  *self, struct display  *dp)
 	shape10 = SetupFont("shape10");
     }
     (self)->SetFont( shape10);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     i = dp->Xmax - dp->Xmin;
     j = dp->Ymax - dp->Ymin;
     if (i>j) i=j;
@@ -230,8 +230,8 @@ void HighlightDisplay(class consoleClass  *self, struct display  *dp)
         if (! Highlight) {
             /* This causes BOGUS FLASHING -- must be improved */
             rectangle_SetRectSize(&highlightRect, dp->Xmin, dp->Ymin, dp->Width, dp->FullHeight + 1);
-            ClearRectangle(self, &highlightRect, graphic_COPY, (self)->WhitePattern());
-            (self)->SetTransferMode( graphic_BLACK);
+            ClearRectangle(self, &highlightRect, graphic::COPY, (self)->WhitePattern());
+            (self)->SetTransferMode( graphic::BLACK);
             (*(dp->DrawFunction))(self, REDRAW, dp);
             return;
         }
@@ -242,13 +242,13 @@ void HighlightDisplay(class consoleClass  *self, struct display  *dp)
                 Invert(self,dp);
             } else {
                 rectangle_SetRectSize(&highlightRect, dp->Xmin, dp->Ymin, 3, dp->FullHeight);
-                ClearRectangle(self, &highlightRect, graphic_COPY, (self)->BlackPattern());
+                ClearRectangle(self, &highlightRect, graphic::COPY, (self)->BlackPattern());
                 rectangle_SetRectSize(&highlightRect, dp->Xmin, dp->Ymin, dp->Width, 3);
-                ClearRectangle(self, &highlightRect, graphic_COPY, (self)->BlackPattern());
+                ClearRectangle(self, &highlightRect, graphic::COPY, (self)->BlackPattern());
                 rectangle_SetRectSize(&highlightRect, dp->Xmin, dp->Ymax - 3, dp->Width, 3);
-                ClearRectangle(self, &highlightRect, graphic_COPY, (self)->BlackPattern());
+                ClearRectangle(self, &highlightRect, graphic::COPY, (self)->BlackPattern());
                 rectangle_SetRectSize(&highlightRect, dp->Xmax - 3, dp->Ymin, 3, dp->FullHeight);
-                ClearRectangle(self, &highlightRect, graphic_COPY, (self)->BlackPattern());
+                ClearRectangle(self, &highlightRect, graphic::COPY, (self)->BlackPattern());
             }
     } else if (dp->FlashStyle == 2) {
         /* This code put a little notch in the upper left corner -- did not look good with

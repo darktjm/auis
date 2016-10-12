@@ -41,12 +41,12 @@ conview::~conview()
     }
 }
 
-view_DSattributes conview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes conview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
 {
     *desiredwidth = 200;
     *desiredheight = 50;
-    return(view_WidthFlexible | view_HeightFlexible);
+    return(view::WidthFlexible | view::HeightFlexible);
 }
 
 void conview::SetLastString(char  *buf)
@@ -65,9 +65,9 @@ void conview::SetLastString(char  *buf)
     if (this->laststring != NULL) strcpy(this->laststring, buf);
 }
 
-class view *conview::Hit(enum view_MouseAction  action, long  x , long  y , long  nc)
+class view *conview::Hit(enum view::MouseAction  action, long  x , long  y , long  nc)
 {
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	char buf[1000];
 	class conob *c;
 
@@ -79,7 +79,7 @@ class view *conview::Hit(enum view_MouseAction  action, long  x , long  y , long
     return((class view *) this);
 }
 
-void conview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void conview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     class conob *co;
@@ -132,8 +132,8 @@ void conview::DrawMyself(struct rectangle  *r, boolean  IsFullUpdate)
     (this)->MoveTo( (r->left + r->width) / 2,
 		      (r->top + r->height) / 2);
     (this)->DrawString( buf,
-	graphic_BETWEENLEFTANDRIGHT
-	| graphic_BETWEENTOPANDBASELINE);
+	graphic::BETWEENLEFTANDRIGHT
+	| graphic::BETWEENTOPANDBASELINE);
     (this)->SetLastString( buf);
 }
 

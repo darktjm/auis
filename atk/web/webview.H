@@ -18,7 +18,7 @@ public:
 
     virtual void SetRemote(class im *im);
 
-     class view* Hit(enum view_MouseAction action, 
+     class view* Hit(enum view::MouseAction action, 
 		long x, long y, long numberOfClicks)  ;
      class view * GetApplicationLayer()  ;
      void PostMenus(class menulist *menulist);

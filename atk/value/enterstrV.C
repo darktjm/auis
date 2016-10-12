@@ -20,9 +20,9 @@ ATK_IMPL("enterstrV.H")
 
 ATKdefineRegistry(enterstrV, buttonV, NULL);
 
-class valueview *enterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview *enterstrV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
                {
-  if (this->etext &&(type == view_RightUp || type == view_LeftUp))
+  if (this->etext &&(type == view::RightUp || type == view::LeftUp))
       (this->etext)->updatebuf();
   return (class buttonV *)this;
 }
@@ -83,7 +83,7 @@ void enterstrV::DrawButtonText(char  *text,long  len,struct rectangle  *rect,str
     sbuttonv::DrawRectBorder(this,&r2,ss->prefs,TRUE,TRUE,&r);
     (this->etextviewp)->InsertView( this, &r);
     (this)->RetractViewCursors( this->etextviewp);
-    (this->etextviewp)->FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+    (this->etextviewp)->FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 }
 
 enterstrV::enterstrV()
@@ -109,7 +109,7 @@ void enterstrV::LinkTree(class view *parent)
     (this)->buttonV::LinkTree(parent);
     (this->etextviewp)->LinkTree(this);
 }
-class view * enterstrV::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
+class view * enterstrV::Hit(enum view::MouseAction  type, long  x , long  y , long  numberOfClicks)
 {
     if(this->etextviewp) 
 	(this->etextviewp)->WantInputFocus(this->etextviewp);

@@ -79,7 +79,7 @@ void DrawDialHand(class consoleClass  *self, struct display  *disp, int  DialPos
     Ypart = disp->YCenter - (Bend * CosineMult[HandPosition]) / 10000;
     (self)->DrawLineTo( Xpart, Ypart);
     (self)->DrawLineTo( disp->XCenter, disp->YCenter);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
 }
 
 void DrawDial(class consoleClass  *self, int  Op, struct display  *disp)
@@ -102,16 +102,16 @@ void DrawDial(class consoleClass  *self, int  Op, struct display  *disp)
         }
         if (Op == NEWVAL) {
             DialPosition = 360 * disp->displayparam2 / disp->ValueMax;
-	    (self)->SetTransferMode( graphic_WHITE);
+	    (self)->SetTransferMode( graphic::WHITE);
 	    DrawDialHand(self, disp, DialPosition, Bend, CHL);
 (self)->WantUpdate( self);
         }
-	(self)->SetTransferMode( graphic_BLACK);
+	(self)->SetTransferMode( graphic::BLACK);
 	if (disp->HandLength >= 10) disp->HandLength = 9;
 	/* above is hack to keep hand lengths from erasing the tic's on the clock dial */
 
         if (Op == REDRAW) {
-            (self)->SetTransferMode( graphic_BLACK);
+            (self)->SetTransferMode( graphic::BLACK);
             CHL = disp->displayparam1 = (Radius * disp->HandLength) / 11;
             Bend = Radius * 6 / 10;
             if (Bend > CHL * 8 / 10) {
@@ -150,8 +150,8 @@ void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp)
     mydbg(("entering: DrawIndicator\n"));
     if (!PauseEnqueuedEvents && !RingingAlarm){
         if (Op == NEWVAL) {
-	    ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight + 1, graphic_COPY, (self)->WhitePattern());
-            (self)->SetTransferMode( graphic_BLACK);
+	    ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight + 1, graphic::COPY, (self)->WhitePattern());
+            (self)->SetTransferMode( graphic::BLACK);
             (self)->SetFont( drawfont = disp->Textfont);
             if (disp->ParseDisplayText) {
                 maketext(self, TextDum, disp, 0);
@@ -159,7 +159,7 @@ void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp)
             else {
                 strcpy(TextDum, disp->disptext);
             }
-            (self)->SetTransferMode( graphic_BLACK);
+            (self)->SetTransferMode( graphic::BLACK);
 	}
         if (Op == REDRAW) {
             if (disp->ParseDisplayText) {
@@ -204,7 +204,7 @@ void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp)
 	if ((Op == NEWVAL || Op == REDRAW)
 	    && (TextDum[0] != '\0')
 	    && drawfont) {
-	    (self)->SetTransferMode( graphic_BLACK);
+	    (self)->SetTransferMode( graphic::BLACK);
 	    if (disp->DisplayStyle == LOGINDICATOR) {
 		strcpy(TextDum, "DisplayStyle LogIndicator is obsolete and no longer works\n");
             }
@@ -223,19 +223,19 @@ void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp)
                     TextDum[1] = '\0';
                     (self)->MoveTo( (disp->XCenter - xoff), (disp->YCenter - yoff));
                     (self)->SetFont( drawfont);
-                    (self)->DrawString( TextDum, graphic_ATLEFT | graphic_ATBASELINE);
+                    (self)->DrawString( TextDum, graphic::ATLEFT | graphic::ATBASELINE);
                     inc += drawfont->summary.maxWidth;
                 }
                 else {
                     if (disp->DisplayStyle == LEFTINDICATOR) {
                         (self)->MoveTo( disp->Xmin + inc, disp->YCenter);
                         (self)->SetFont( drawfont);
-                        (self)->DrawString( TextDum, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
+                        (self)->DrawString( TextDum, graphic::ATLEFT | graphic::BETWEENTOPANDBASELINE);
                     }
                     else {
                         (self)->MoveTo( disp->XCenter + inc, disp->YCenter);
                         (self)->SetFont( drawfont);
-                        (self)->DrawString( TextDum, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+                        (self)->DrawString( TextDum, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
                     }
                     (drawfont)->StringSize( (self)->GetDrawable(), TextDum, &i, &k);
                     inc += i;
@@ -309,10 +309,10 @@ void DrawBarGraph(class consoleClass  *self, int  Op, struct display  *disp)
                 if (BarSize > disp->Width)
                     BarSize = disp->Width;
 		if (disp->displayparam2 > dat->Value) {
-		    ClearBox(self, disp->Xmin + BarSize, disp->Ymin, disp->Width - BarSize, disp->FullHeight, graphic_COPY, (self)->WhitePattern());
+		    ClearBox(self, disp->Xmin + BarSize, disp->Ymin, disp->Width - BarSize, disp->FullHeight, graphic::COPY, (self)->WhitePattern());
                 }
                 else {
-                    ClearBox(self, disp->Xmin, disp->Ymin, BarSize, disp->FullHeight, graphic_COPY, (self)->BlackPattern());
+                    ClearBox(self, disp->Xmin, disp->Ymin, BarSize, disp->FullHeight, graphic::COPY, (self)->BlackPattern());
                 }
   (self)->WantUpdate( self);
 	    }
@@ -321,10 +321,10 @@ void DrawBarGraph(class consoleClass  *self, int  Op, struct display  *disp)
                 if (BarSize > disp->FullHeight)
                     BarSize = disp->FullHeight;
                 if (disp->displayparam2 > dat->Value) {
-                    ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, (disp->FullHeight - BarSize) + 1, graphic_COPY, (self)->WhitePattern());
+                    ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, (disp->FullHeight - BarSize) + 1, graphic::COPY, (self)->WhitePattern());
                 }
                 else {
-                    ClearBox(self, disp->Xmin, disp->Ymax - BarSize, disp->Width, BarSize, graphic_COPY, (self)->BlackPattern());
+                    ClearBox(self, disp->Xmin, disp->Ymax - BarSize, disp->Width, BarSize, graphic::COPY, (self)->BlackPattern());
                 }
             }
             disp->displayparam2 = dat->Value;
@@ -336,13 +336,13 @@ void DrawBarGraph(class consoleClass  *self, int  Op, struct display  *disp)
                 BarSize = disp->Width * dat->Value / disp->ValueMax;
                 if (BarSize > disp->Width)
                     BarSize = disp->Width;
-                ClearBox(self, disp->Xmin, disp->Ymin, BarSize, disp->FullHeight, graphic_COPY, (self)->BlackPattern());
+                ClearBox(self, disp->Xmin, disp->Ymin, BarSize, disp->FullHeight, graphic::COPY, (self)->BlackPattern());
             }
             else {
                 BarSize = disp->FullHeight * dat->Value / disp->ValueMax;
                 if (BarSize > disp->FullHeight)
                     BarSize = disp->FullHeight;
-                ClearBox(self, disp->Xmin, disp->Ymax - BarSize, disp->Width, BarSize, graphic_COPY, (self)->BlackPattern());
+                ClearBox(self, disp->Xmin, disp->Ymax - BarSize, disp->Width, BarSize, graphic::COPY, (self)->BlackPattern());
             }
   (self)->WantUpdate( self);
 	}
@@ -408,7 +408,7 @@ void DrawEKGGraph(class consoleClass  *self, int  Op, struct display  *disp)
             thisheight = dat->Value*fh/vmax;
             if (oldheight > fh) oldheight = fh;
             if (thisheight > fh) thisheight = fh;
-            (self)->SetTransferMode( graphic_BLACK);
+            (self)->SetTransferMode( graphic::BLACK);
             (self)->MoveTo( disp->Xmin+xinc*(counter -omitted+1), disp->Ymax-oldheight);
             (self)->DrawLineTo( disp->Xmin+xinc*(counter+2-omitted), disp->Ymax-thisheight);
             disp->displayparam1 +=1;
@@ -416,8 +416,8 @@ void DrawEKGGraph(class consoleClass  *self, int  Op, struct display  *disp)
 	}
         if (Op == REDRAW) {
             disp->displayparam1 = dat->ValueCtr;
-            ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, fh + 1, graphic_COPY, (self)->WhitePattern());
-            (self)->SetTransferMode( graphic_BLACK);
+            ClearBox(self, disp->Xmin, disp->Ymin, disp->Width, fh + 1, graphic::COPY, (self)->WhitePattern());
+            (self)->SetTransferMode( graphic::BLACK);
             thisheight = dat->Valuelist[omitted]*fh/vmax;
             if (thisheight > fh) thisheight = fh;
             xm = disp->Xmin;
@@ -888,7 +888,7 @@ void DrawLog(class consoleClass  *self, int  Op, struct display  *disp)
 		    (disp->ScrollLogView)->LinkTree( self);
 		    (disp->ScrollLogView)->InsertViewSize( self, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
 		    (disp->AssociatedLogView)->SetBorder( 3, 0);
-		    (disp->ScrollLogView)->FullUpdate( view_FullRedraw, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
+		    (disp->ScrollLogView)->FullUpdate( view::FullRedraw, disp->Xmin, disp->Ymin, disp->Width, disp->FullHeight);
 		    ScrollToEnd(disp->AssociatedLog, Op);
 		}
 	    }

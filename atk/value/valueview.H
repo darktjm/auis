@@ -22,12 +22,12 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-   void FullUpdate( enum view_UpdateType type, long x, long y, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long x, long y, long width, long height );
    void Update();
    void ObservedChanged( class observable * observed, long status );
-   class view * Hit(enum view_MouseAction type, long x, long y, long numberOfClicks)
+   class view * Hit(enum view::MouseAction type, long x, long y, long numberOfClicks)
      ;
-   view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
    void GetManyParameters( struct resourceList * resources,
 		     class atomlist * name,
 		     class atomlist * class_c );
@@ -62,7 +62,7 @@ public:
   virtual void NoChange();			/* override if nec. noop by defult */
   virtual void Changed(long status);		/* for status not understood by ObservedChanged */
   virtual void Destroyed();
-  virtual class valueview * DoHit(enum view_MouseAction type, long x, long y, long numberOfClicks)
+  virtual class valueview * DoHit(enum view::MouseAction type, long x, long y, long numberOfClicks)
      ; /* override hook. def. noop */
   virtual boolean OnTarget(long x , long y)  ;
 

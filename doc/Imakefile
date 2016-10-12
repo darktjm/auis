@@ -39,9 +39,14 @@ dox/latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_
 	$(RM) -rf dox
 	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -
 
+#if 0 /* until this document is useful, no point in generating - takes forever */
 ATK-API.pdf: dox/latex/hierarchy.tex
 	(cd dox/latex; make)
 	$(CP) dox/latex/refman.pdf ATK-API.pdf
+#else
+ATK-API.pdf: dox/latex/hierarchy.tex
+	touch ATK-API.pdf
+#endif
 
 InstallFile(ATK-API.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 CleanTarget(-r dox ATK-API.pdf)

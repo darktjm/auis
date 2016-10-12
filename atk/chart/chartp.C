@@ -76,7 +76,7 @@ static long Initialize_Palette( class chartv	  *self );
 NO_DLL_EXPORT void Destroy_Palette( class chartv	   *self );
 NO_DLL_EXPORT void Expose_Palette( class chartv	   *self );
 NO_DLL_EXPORT void Hide_Palette( class chartv	   *self );
-static class view * Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
+static class view * Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view::MouseAction    action, long			    x , long			    y , long			    clicks );
 static long Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    action );
 NO_DLL_EXPORT void Activate_Viewer( class chartv	  *self );
 static void Activate( class chartv	  *self, long			   code );
@@ -509,13 +509,13 @@ Hide_Palette( class chartv	   *self )
   }
 
 static class view *
-Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
+Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view::MouseAction    action, long			    x , long			    y , long			    clicks )
               {
   char				   msg[512];
 
   IN(Palette_Hit);
   DEBUGdt(Action,action);
-  if ( type == suite_ItemObject  &&  action == view_LeftUp )
+  if ( type == suite_ItemObject  &&  action == view::LeftUp )
     {
     switch ( (suite)->ItemAttribute(  item, suite_itemdatum ) )
       {

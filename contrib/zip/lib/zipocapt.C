@@ -40,7 +40,7 @@ END-SPECIFICATION  ************************************************************/
 
 ATKdefineRegistry(zipocapt, zipobject, NULL);
 
-static enum view_MouseAction Accept_Caption_Character( class zipocapt *self, zip_type_pane pane, char c, enum view_MouseAction action, long x, long y, long clicks );
+static enum view::MouseAction Accept_Caption_Character( class zipocapt *self, zip_type_pane pane, char c, enum view::MouseAction action, long x, long y, long clicks );
 static long Draw( class zipocapt *self, zip_type_figure figure, zip_type_pane pane );
 static void Compute_Handle_Positions( class zipocapt *self, zip_type_figure figure, zip_type_pane pane, zip_type_pixel *X1, zip_type_pixel *X2, zip_type_pixel *X3, zip_type_pixel *Y1, zip_type_pixel *Y2, zip_type_pixel *Y3 );
 
@@ -77,7 +77,7 @@ zipocapt::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-zipocapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y )
+zipocapt::Build_Object( zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y )
             {
   zip_type_figure			  figure;
   long				  status = zip_ok;
@@ -86,7 +86,7 @@ zipocapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x
   IN(zipocapt_Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
 	(this->data_object)->Create_Figure(  &figure, NULL, zip_caption_figure,
 			   pane->zip_pane_current_image, NULL )) == zip_ok )
@@ -104,8 +104,8 @@ zipocapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x
         (this->view_object)->Set_Pane_Cursor(  pane, 'D', CursorFontName );
 	}
       break;
-    case view_LeftUp:
-    case view_LeftMovement:
+    case view::LeftUp:
+    case view::LeftMovement:
       break;
     default:
       break;
@@ -114,8 +114,8 @@ zipocapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x
   return  status;
   }
 
-static enum view_MouseAction
-Accept_Caption_Character( class zipocapt		  *self, zip_type_pane		   pane, char				   c, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
+static enum view::MouseAction
+Accept_Caption_Character( class zipocapt		  *self, zip_type_pane		   pane, char				   c, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks )
             {
   zip_type_figure		  figure = pane->zip_pane_current_figure;
   char					  text[4097];/*===*/
@@ -123,8 +123,8 @@ Accept_Caption_Character( class zipocapt		  *self, zip_type_pane		   pane, char	
 
   IN(Accept_Caption_Character)
   (self->edit_object)->Normalize_Figure_Points(  figure, pane );
-  if ( action == view_LeftUp  ||  action == view_LeftMovement )
-    action = view_NoMouseEvent;
+  if ( action == view::LeftUp  ||  action == view::LeftMovement )
+    action = view::NoMouseEvent;
     else
     {
     strcpy( text, figure->zip_figure_datum.zip_figure_text );/*===*/
@@ -239,23 +239,23 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
   y_increment = (font )->GetFontSize( ) + 5/*===fudge.s/b FontNewLine===*/;
   left = 2;  top_offset = -y_increment/2;
   if ( figure->zip_figure_mode.zip_figure_mode_top )
-    { mode |= graphic_ATTOP; top_offset = 0; }
+    { mode |= graphic::ATTOP; top_offset = 0; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_middle )
-    { mode |= graphic_BETWEENTOPANDBOTTOM; top_offset = -y_increment/2; }
+    { mode |= graphic::BETWEENTOPANDBOTTOM; top_offset = -y_increment/2; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_baseline )
-    { mode |= graphic_BETWEENTOPANDBASELINE; top_offset = -y_increment/2; }
+    { mode |= graphic::BETWEENTOPANDBASELINE; top_offset = -y_increment/2; }
   else
   if ( figure->zip_figure_mode.zip_figure_mode_bottom )
-    { mode |= graphic_ATBOTTOM; top_offset = -y_increment; }
+    { mode |= graphic::ATBOTTOM; top_offset = -y_increment; }
 
   if ( figure->zip_figure_mode.zip_figure_mode_left )
-    { mode |= graphic_ATLEFT; left = 1; }
+    { mode |= graphic::ATLEFT; left = 1; }
   if ( figure->zip_figure_mode.zip_figure_mode_center )
-    { mode |= graphic_BETWEENLEFTANDRIGHT; left = 2; }
+    { mode |= graphic::BETWEENLEFTANDRIGHT; left = 2; }
   if ( figure->zip_figure_mode.zip_figure_mode_right )
-    { mode |= graphic_ATRIGHT; left = 3; }
+    { mode |= graphic::ATRIGHT; left = 3; }
 
   if ( text )
     {
@@ -268,7 +268,7 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
         *buffer_ptr++ = *cursor++;
       *buffer_ptr = 0;
       if ( figure->zip_figure_mode.zip_figure_mode_halo  &&
-	    (transfer_mode = (self->view_object )->GetTransferMode( )) == graphic_BLACK )
+	    (transfer_mode = (self->view_object )->GetTransferMode( )) == graphic::BLACK )
 	{
         width = (font)->StringSize(  (self->view_object)->GetDrawable(), buffer, &xp, &yp );
 	DEBUGdt(Width,width);
@@ -278,7 +278,7 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
 	  case 2: left_offset = -width/2;   break;
 	  case 3: left_offset = -width;	    break;
 	  }
-        (self->view_object)->SetTransferMode(  graphic_WHITE );
+        (self->view_object)->SetTransferMode(  graphic::WHITE );
         (self->view_object)->EraseRectSize(  x + left_offset, y + top_offset,
 			       width + 2, y_increment );
         (self->view_object)->SetTransferMode(  transfer_mode );

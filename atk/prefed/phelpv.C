@@ -93,11 +93,11 @@ void phelpv::SetDotPosition(long  pos)
     DoGroupHelp(this);
 }
 
-class view *phelpv::Hit(enum view_MouseAction  action, long  x , long  y , long  clicks)
+class view *phelpv::Hit(enum view::MouseAction  action, long  x , long  y , long  clicks)
 {
     class view *result=(this)->textview::Hit( action, x, y, clicks);
     /* tjm - unsure if this is the desired grouping (was (a&&b)||c) */
-    if(result==(class view *)this && (action==view_LeftUp || action==view_RightUp)) {
+    if(result==(class view *)this && (action==view::LeftUp || action==view::RightUp)) {
 	long pos=(this)->GetDotPosition();
 	long len=(this)->GetDotLength();
 	(this)->SetDotPosition( pos);

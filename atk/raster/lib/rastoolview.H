@@ -28,7 +28,7 @@ struct span {
 
 #include <lpair.H>
 
-typedef void (*rastoolview_toolfptr)(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
+typedef void (*rastoolview_toolfptr)(class rastoolview  *self, enum view::MouseAction  action, long  x , long  y , long  numclicks);
 typedef void (*rastoolview_toolmodfptr)(class rastoolview *self, char *rock);
 typedef void (*rastoolview_procfptr)(class rastoolview *self, char *rock);
 
@@ -46,7 +46,6 @@ public:
 	virtual ~rastoolview();
     
        void ObservedChanged(class observable *observed, long status);
-       void UnlinkTree();
        void PostMenus(class menulist *ml);
        void PostKeyState(class keystate *ks);
     

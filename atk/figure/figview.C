@@ -668,7 +668,7 @@ void figview::LoseInputFocus()
 }
 
 /* kind of dull right now, but we may want to change it later */
-view_DSattributes figview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dwidth, long  *dheight)
+view::DSattributes figview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dwidth, long  *dheight)
 {
     return (this)->view::DesiredSize( width, height, pass, dwidth, dheight);
 }
@@ -821,7 +821,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 
     /* the plan: r is in fig coords, old is in pixel coords */
 
-    (self)->SetTransferMode( graphic_INVERT);
+    (self)->SetTransferMode( graphic::INVERT);
     for (hx=0; hx<self->numhighlights; hx++) {
 	self->highlights[hx].focgone = FALSE;
 
@@ -885,7 +885,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 	    }
 	}
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	
 	clipnum = numclips-1;
 	self->currentclipreg = self->clipreglist[clipnum];
@@ -939,7 +939,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 		    if (drawfull) {
 			(self)->SetBackgroundColor( self->BackgroundColor, 65535, 65535, 65535);
 			(self)->EraseRect(  &(self->objs[ix].insetb));
-			(self->objs[ix].insetv)->FullUpdate( view_FullRedraw, 0, 0, -1, -1);
+			(self->objs[ix].insetv)->FullUpdate( view::FullRedraw, 0, 0, -1, -1);
 		    }
 		    else
 			(self->objs[ix].insetv)->Update();
@@ -970,7 +970,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 		}
 	    }
 	}
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	for (hx=0; hx<self->numhighlights; hx++) {
 	    if (!self->highlights[hx].focgone) {
 		if (self->highlights[hx].oldon)
@@ -1016,7 +1016,7 @@ static void RedrawView(class figview  *self, boolean  recterased)
 	}
     }
 
-    (self)->SetTransferMode( graphic_INVERT);
+    (self)->SetTransferMode( graphic::INVERT);
     for (hx=0; hx<self->numhighlights; hx++) {
 	if (self->highlights[hx].focgone) {
 	    if (self->highlights[hx].oldon)
@@ -1329,33 +1329,33 @@ static void FixPixelPanning(class figview  *self)
     self->ppany=(self)->ToPixH( (self)->pany);
 }
 
-void figview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void figview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     this->UpdateCached = FALSE;
 
     if ((this)->GetIM()) FixPixelPanning(this);
     
-    if (type == view_Remove  
+    if (type == view::Remove  
 	 ||  (this)->GetLogicalWidth() == 0 
 	 || (this)->GetLogicalHeight() == 0) {
-	/* view_Remove means the view has left the screen.
+	/* view::Remove means the view has left the screen.
 	 A zero dimension means the view is not visible */
 	this->OnScreen = FALSE;
 	long ix;
 	for (ix=0; ix<this->objs_size; ix++) {
 	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->parent==this) {
-		objs[ix].insetv->FullUpdate(view_Remove, 0, 0, 0, 0);
+		objs[ix].insetv->FullUpdate(view::Remove, 0, 0, 0, 0);
 	    }
 	}
 	return;
     }
 
-    if(type == view_MoveNoRedraw) {
+    if(type == view::MoveNoRedraw) {
 	long ix;
 	for (ix=0; ix<this->objs_size; ix++) {
 	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->parent==this) {
 		(objs[ix].insetv)->InsertView(this, &(objs[ix].insetb));
-		objs[ix].insetv->FullUpdate(view_MoveNoRedraw, 0, 0, 0, 0);
+		objs[ix].insetv->FullUpdate(view::MoveNoRedraw, 0, 0, 0, 0);
 	    }
 	}
 	return;
@@ -1366,7 +1366,7 @@ void figview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
 	UpdateWindowSize(this);
     }
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     /* draw inset border */
     if (this->embedded) {
@@ -1377,7 +1377,7 @@ void figview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     }
 
     switch (type) {
-	case view_FullRedraw:
+	case view::FullRedraw:
 	    this->OnScreen = TRUE;
 	    this->DoingFullUpdate = TRUE;
 	    OldUpdateCache(this);
@@ -1386,8 +1386,8 @@ void figview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
 	    (this)->EraseRect( &this->UpdateRect); 
 	    RedrawView(this, TRUE); /* area is already erased */
 	    break;
-	case view_PartialRedraw:
-	case view_LastPartialRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw:
 	    this->OnScreen = TRUE;
 	    rectangle_SetRectSize(&this->UpdateRect, left, top, width, height);
 	    (this)->SetBackgroundColor( this->FigBackColor, 65535, 65535, 65535);
@@ -1423,13 +1423,13 @@ static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectan
     UpdateCache(self, TRUE);
     if (uy->height>0) {
 	(self)->EraseRect( uy);
-	(self)->FullUpdate( view_LastPartialRedraw, uy->left, uy->top, uy->width, uy->height);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->FullUpdate( view::LastPartialRedraw, uy->left, uy->top, uy->width, uy->height);
+	(self)->SetTransferMode( graphic::COPY);
     }
     if (ux->width>0) {
 	(self)->EraseRect( ux);
-	(self)->FullUpdate( view_LastPartialRedraw, ux->left, ux->top, ux->width, ux->height);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->FullUpdate( view::LastPartialRedraw, ux->left, ux->top, ux->width, ux->height);
+	(self)->SetTransferMode( graphic::COPY);
     }
 
     /* is there a better way to detect the case where
@@ -1456,8 +1456,8 @@ static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectan
 	if (rr.width>0 && rr.height>0) {
 	    (self)->EraseRect( &rr);
 
-	    (self)->FullUpdate( view_LastPartialRedraw, rr.left, rr.top, rr.width, rr.height);
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->FullUpdate( view::LastPartialRedraw, rr.left, rr.top, rr.width, rr.height);
+	    (self)->SetTransferMode( graphic::COPY);
 	}	 
     }
     delete vr;
@@ -1509,7 +1509,7 @@ static void DoBlit(class figview  *self, long  diffx , long  diffy)
 	uy.height=d.y-border;
     }
     
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     if (vb) (self)->SetClippingRegion( vb);
     (self)->BitBlt( &s, self, &d, NULL);
     if (vb) {
@@ -1617,11 +1617,11 @@ static boolean TEI_Splot(class figobj  *o, long  ref, class figure  *self, long 
     return FALSE;
 }
 
-class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+class view *figview::Hit(enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     if (! this->OnScreen) return NULL;
 
-    /*if (action == view_NoMouseEvent)
+    /*if (action == view::NoMouseEvent)
 	return (struct view *)self;*/
     if (!this->toolset || this->toolset->toolnum==1) /* 1==pan ### */ {
 	long px, py, vwid, vhgt, oref[3];
@@ -1633,7 +1633,7 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 	vx = (this)->ToFigX( x+(this)->ToPixW(1)/2);
 	vy = (this)->ToFigY( y+(this)->ToPixH(1)/2);
 
-	if (action==view_LeftDown || action==view_RightDown) {
+	if (action==view::LeftDown || action==view::RightDown) {
 	    fig = (class figure *)(this)->GetDataObject();
 
 	    oref[0] = figure_NULLREF;
@@ -1660,20 +1660,20 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 	    return (class view *)this;
 	}
 	if (this->InputFocusClick) {
-	    if (action==view_LeftUp || action==view_RightUp)
+	    if (action==view::LeftUp || action==view::RightUp)
 		this->InputFocusClick = FALSE;
 	    return (class view *)this;
 	}
 
 	/* do panning */
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		this->rockx = vx;
 		this->rocky = vy;
 		px = (this)->ToPixX( vx);
 		py = (this)->ToPixY( vy);
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, py);
 		(this)->DrawLineTo( vwid-1, py);
 		(this)->MoveTo( px, 0);
@@ -1681,12 +1681,12 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		this->lastx = px;
 		this->lasty = py;
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		px = (this)->ToPixX( vx);
 		py = (this)->ToPixY( vy);
 		if (px!=this->lastx || py!=this->lasty) {
-		    (this)->SetTransferMode( graphic_INVERT);
+		    (this)->SetTransferMode( graphic::INVERT);
 		    (this)->MoveTo( 0, this->lasty);
 		    (this)->DrawLineTo( vwid-1, this->lasty);
 		    (this)->MoveTo( this->lastx, 0);
@@ -1699,9 +1699,9 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		    this->lasty = py;
 		}
 		break;
-	    case view_LeftUp:
-	    case view_RightUp:
-		(this)->SetTransferMode( graphic_INVERT);
+	    case view::LeftUp:
+	    case view::RightUp:
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, this->lasty);
 		(this)->DrawLineTo( vwid-1, this->lasty);
 		(this)->MoveTo( this->lastx, 0);
@@ -1727,7 +1727,7 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 	    return (class view *)this;
 	}
 	if (this->InputFocusClick) {
-	    if (action==view_LeftUp || action==view_RightUp)
+	    if (action==view::LeftUp || action==view::RightUp)
 		this->InputFocusClick = FALSE;
 	    return (class view *)this;
 	}
@@ -1736,13 +1736,13 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 	x = (this)->ToFigX( x+(this)->ToPixW(1)/2);
 	y = (this)->ToFigY( y+(this)->ToPixH(1)/2);
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		this->lastx = x;
 		this->lasty = y;
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		if (this->lastx == x && this->lasty == y)
 		    proc = NULL;
 		else {
@@ -2904,7 +2904,7 @@ void *figview::GetPSPrintInterface(const char *printtype)
     return NULL;
 }
 
-void figview::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void figview::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     class figure *fig = (class figure *)this->GetDataObject();
     boolean landscape;
@@ -3157,7 +3157,7 @@ void figview::LinkTree( class view  *parent )
     }
 }
 
-static boolean figview_RecSearchLoop(class figview *self, long pos, struct SearchPattern *pat)
+static boolean figview_RecSearchLoop(class figview *self, long pos, class search *pat)
 {
     long ix;
     class figobj *o;
@@ -3189,14 +3189,14 @@ static boolean figview_RecSearchLoop(class figview *self, long pos, struct Searc
     return FALSE;
 }
 
-boolean figview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean figview::RecSearch(class search *pat, boolean toplevel)
 {
     this->FlushDataChanges();
 
     return figview_RecSearchLoop(this, 0, pat);
 }
 
-boolean figview::RecSrchResume(struct SearchPattern *pat)
+boolean figview::RecSrchResume(class search *pat)
 {
     long pos;
 

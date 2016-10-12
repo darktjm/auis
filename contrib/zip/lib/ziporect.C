@@ -92,7 +92,7 @@ ziporect::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , long  x , long  y , long  clicks, zip_type_point X , zip_type_point  Y )
+ziporect::Build_Object( zip_type_pane   pane, enum view::MouseAction  action , long  x , long  y , long  clicks, zip_type_point X , zip_type_point  Y )
 {
   zip_type_figure		  figure;
   long				  status = zip_ok;
@@ -100,7 +100,7 @@ ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , lo
   IN(ziporect::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
         (this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_rectangle_figure,
 			   CurrentImage, NULL )) == zip_ok )
@@ -114,7 +114,7 @@ ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , lo
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
@@ -129,7 +129,7 @@ ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , lo
   	  }
 	}
       break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
@@ -184,7 +184,7 @@ long Draw( class ziporect *self, zip_type_figure  figure, zip_type_pane  pane, s
     { top = window_y_points(0);   height = -height;  }
     if ( (figure->zip_figure_mode.zip_figure_mode_shaded  ||
 	  figure->zip_figure_mode.zip_figure_mode_patterned) ) {
-	if ( self->view_object->mouse_action != view_LeftMovement  &&  action == zip_draw ) {
+	if ( self->view_object->mouse_action != view::LeftMovement  &&  action == zip_draw ) {
 	    if ( figure->zip_figure_mode.zip_figure_mode_patterned  &&
 		(pattern = (self->data_object)->Contextual_Figure_Pattern(  figure )) )
 	    { DEBUGct(Pattern,pattern);

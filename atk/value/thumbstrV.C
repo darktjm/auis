@@ -24,7 +24,7 @@ const char *thumbstrV::GetValueString()
     }
     return(arr[val]);
 }
-class valueview * thumbstrV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * thumbstrV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     int mv = ((this)->Value())->GetArraySize();
     class thumbV *sf = (class thumbV *) this;

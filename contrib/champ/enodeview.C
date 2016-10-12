@@ -26,18 +26,18 @@ static const char * const BooleanChoices[] = {"Yes", "No", NULL};
 
 ATKdefineRegistry(enodeview, lpair, NULL);
 
-static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view_MouseAction  action);
+static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view::MouseAction  action);
 static void ResetButterTexts(class enodeview  *self);
 
 
-static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view_MouseAction  action)
+static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view::MouseAction  action)
 {
     long result, pos, len;
     struct eventnode *en;
     class enode *enode;
     char buf[1500], *dbuf;
 
-    if (action == view_LeftUp || action == view_RightUp) {
+    if (action == view::LeftUp || action == view::RightUp) {
 	enode = (class enode *) (self)->GetDataObject();
 	if (!enode) {
 	    message::DisplayString(self, 10, "No event is currently on display.");

@@ -45,7 +45,7 @@ END-SPECIFICATION  ************************************************************/
 
 #include <aptv.H>
 class orgv;
-typedef class view * (*org_hitfptr)( long anchor, class orgv *orgv, struct tree_node *node, enum view_MouseAction action, long x, long y, long clicks );
+typedef class view * (*org_hitfptr)( long anchor, class orgv *orgv, struct tree_node *node, enum view::MouseAction action, long x, long y, long clicks );
 class orgv : public  aptv
   {
 public:
@@ -54,12 +54,12 @@ public:
 
 
    void SetDataObject( class dataobject *data );
-   view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dheight )
+   view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dheight )
 								 ;
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void ReceiveInputFocus();
    void LoseInputFocus();
-   class view * Hit( enum view_MouseAction action, long x, long y, long n)	 ;
+   class view * Hit( enum view::MouseAction action, long x, long y, long n)	 ;
    void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
    void ObservedChanged( class observable *changed, long value );
    void LinkTree( class view *parent );
@@ -118,7 +118,7 @@ public:
 // Start of Imakefile cleanup and pragma implementation/interface hack for g++
 //
 // Revision 1.5  1993/09/28  04:52:23  rr2b
-// Fixed view_DSattributes to be an int not an enum.
+// Fixed view::DSattributes to be an int not an enum.
 //
  * Revision 1.4  1993/06/10  20:34:15  rr2b
  * Great atk_inited removal.

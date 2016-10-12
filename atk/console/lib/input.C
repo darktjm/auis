@@ -459,7 +459,7 @@ struct display *FindInstrument(class consoleClass  *self, int  x, int  y)
     if (!mydisp) {
 	InvertWindow(self);
 	InvertWindow(self);
-        (self)->SetTransferMode( graphic_BLACK);
+        (self)->SetTransferMode( graphic::BLACK);
         return(NULL);
     }
     mydisp->LastClickValue = mydisp->WhatToDisplay->Value;

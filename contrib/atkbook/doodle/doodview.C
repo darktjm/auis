@@ -37,51 +37,51 @@ doodview::~doodview()
 }
 
 class view *
-doodview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks  )
+doodview::Hit(enum view::MouseAction  action, long  x , long  y , long  numclicks  )
 {
     boolean IsUpHit = FALSE;
 
     switch(action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		this->linewidth= (2*numclicks) - 1;
 		this->downhitX = x;
 		this->downhitY = y;
 		this->lastuphitX = this->lastuphitY = -9999;
 		break;
-	    case view_LeftUp:
-	    case view_LeftMovement:
+	    case view::LeftUp:
+	    case view::LeftMovement:
 		(this)->SetLineWidth( this->linewidth);
 		if (this->lastuphitX != -9999) {
 		    /* white out old line */
 		    (this)->SetTransferMode(
-			graphic_WHITE);
+			graphic::WHITE);
 		    (this)->MoveTo( this->downhitX,
 			this->downhitY);
 		    (this)->DrawLineTo(
 			this->lastuphitX, this->lastuphitY);
 		}
 		/* draw new line */
-		(this)->SetTransferMode( graphic_BLACK);
+		(this)->SetTransferMode( graphic::BLACK);
 		(this)->MoveTo( this->downhitX,
 				  this->downhitY);
 		(this)->DrawLineTo( x, y);
 		this->lastuphitX = x;
 		this->lastuphitY = y;
 		break;
-	    case view_RightUp:
+	    case view::RightUp:
 		IsUpHit = TRUE;
 		/* Drop through to next case */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		(this)->SetLineWidth( this->linewidth);
 		if (this->lastuphitX != -9999) {
 		    /* white out old rectangle */
-		    DrawMyRect(this, graphic_WHITE, FALSE);
+		    DrawMyRect(this, graphic::WHITE, FALSE);
 		}
 		/* draw new rectangle */
 		this->lastuphitX = x;
 		this->lastuphitY = y;
-		DrawMyRect(this, graphic_BLACK, IsUpHit);
+		DrawMyRect(this, graphic::BLACK, IsUpHit);
 		break;
 	    default: // nomouseevent upmovement *filedrop
 		break;

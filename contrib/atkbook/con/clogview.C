@@ -52,13 +52,13 @@ clogview::~clogview()
 }
 
 class view *
-clogview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks  )
+clogview::Hit(enum view::MouseAction  action, long  x , long  y , long  numclicks  )
 {
     return((this->s)->Hit( action, x, y, numclicks));
 }
 
 void
-clogview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+clogview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
     (this)->GetVisualBounds( &Rect);

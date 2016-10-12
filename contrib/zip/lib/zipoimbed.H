@@ -33,10 +33,10 @@ public:
    char Object_Icon_Cursor();
    char Object_Datastream_Code();
 
-   class view * Object_Hit( zip_type_figure figure, enum view_MouseAction action, long x , long  y, long clicks );
+   class view * Object_Hit( zip_type_figure figure, enum view::MouseAction action, long x , long  y, long clicks );
    long Object_Modified( zip_type_figure object );
 
-   long Build_Object( zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
+   long Build_Object( zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks, zip_type_point X, zip_type_point Y );
    void Destroy_Object( zip_type_figure object );
    long Show_Object_Properties( zip_type_pane pane, zip_type_figure figure );
    long Read_Object( zip_type_figure object );

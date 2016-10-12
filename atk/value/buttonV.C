@@ -107,7 +107,7 @@ void buttonV::HandleStyleString(char  *s)
     boolean go;
     go = TRUE;
     if(this->mono == -10)
-	this->mono = ((this)->DisplayClass() & graphic_Monochrome);
+	this->mono = ((this)->DisplayClass() & graphic::Monochrome);
 
     if(s == NULL) return;
     while(*s != '\0'){
@@ -183,7 +183,7 @@ static int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
     (this->listp)->Clear();
     i = 0;
     chr = this->label;
-    this->mono = ((this )->DisplayClass() & graphic_Monochrome);
+    this->mono = ((this )->DisplayClass() & graphic::Monochrome);
     do{
 	j = 0;
 	rl = (struct buttonV_rl *)
@@ -383,7 +383,7 @@ void buttonV::LookupParameters()
   else
       fontsize = 10;
   if(this->mono == -10)
-      this->mono = ((this)->DisplayClass() & graphic_Monochrome);
+      this->mono = ((this)->DisplayClass() & graphic::Monochrome);
 
  if(!this->mono){
       if (parameters[3].found)
@@ -446,7 +446,7 @@ void buttonV::DrawNewValue( )
     this->valueset = TRUE;
 }
 
-class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * buttonV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     struct buttonV_rl *rl;
     long v;
@@ -454,8 +454,8 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
     if(this->count == 1){
 	class valueview *vself = (class valueview *) this;
 	switch(type){
-	    case view_RightUp:
-	    case view_LeftUp:
+	    case view::RightUp:
+	    case view::LeftUp:
 		if(rl){
 		    rl->pushed = FALSE;
 		    DrawButton(this,rl,0,0,0,0,FALSE,TRUE); 
@@ -463,11 +463,11 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		((this)->Value())->SetValue(((this)->Value())->GetValue() + 1);
 		this->current = NULL;
 		return this;
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		if(rl && !vself->mouseIsOnTarget){
 		    rl->pushed = FALSE;
 		    DrawButton(this,rl,0,0,0,0,FALSE,TRUE); 
@@ -479,17 +479,17 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 	}
     }
     switch(type){
-	case view_RightUp:
-	case view_LeftUp:
+	case view::RightUp:
+	case view::LeftUp:
 	    if(rl) v = rl->key;
 	    else v = -1;
 	    if(((this)->Value())->GetValue() != v)
 		((this)->Value())->SetValue(v);
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftMovement:
+	case view::RightMovement:
+	case view::LeftDown:
+	case view::RightDown:
 	    if(rl == NULL || !enclosed(rl,x,y)){
 		this->x = x;
 		this->y = y;
@@ -517,7 +517,7 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
     return this;
 }
 
-class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
+class view * buttonV::Hit(enum view::MouseAction  type, long  x , long  y , long  numberOfClicks)
                     {/* should probably just restore this functionality to valueview,
 	with a way to optionly set it */
 	 short sendEvent = FALSE;
@@ -529,23 +529,23 @@ class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long 
 	 {
 	     switch (type)
 	     {
-		 case view_NoMouseEvent:
+		 case view::NoMouseEvent:
 		     sendEvent = FALSE;
 		     break;
-		 case view_LeftDown:
+		 case view::LeftDown:
 		     vself->mouseState = valueview_LeftIsDown;
 		     (this)->Highlight();
 		     sendEvent = TRUE;
 		     this->movedoff = FALSE;
 		     break;
-		 case view_RightDown:
+		 case view::RightDown:
 		     vself->mouseState = valueview_RightIsDown;
 		     (this)->Highlight();
 		     sendEvent = TRUE;
 		     this->movedoff = FALSE;
 		     break;
-		 case view_LeftUp:
-		 case view_RightUp:
+		 case view::LeftUp:
+		 case view::RightUp:
 		     if(this->movedoff) sendEvent = FALSE;
 		     else if (vself->mouseIsOnTarget)
 		     {
@@ -554,8 +554,8 @@ class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long 
 		     }
 		     else sendEvent = TRUE;
 		     break;
-		 case view_LeftMovement:
-		 case view_RightMovement:
+		 case view::LeftMovement:
+		 case view::RightMovement:
 		     if(this->movedoff) sendEvent = FALSE;
 		     else  if((this)->OnTarget(x,y))
 		     {

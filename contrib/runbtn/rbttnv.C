@@ -111,14 +111,14 @@ void runbuttonview::ReceiveInputFocus()
  *
  * XXX we should perform these actions on the UP transition.
  */
-boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
+boolean runbuttonview::Touch(int ind, enum view::MouseAction action)
 {
     class runbutton *b = (runbutton *)ButtonData();
     const char *m, *cmd;
     char msg[4096];
 
     switch (action) {
-	case view_RightDown:
+	case view::RightDown:
 	    WantInputFocus(this);
 	    cmd = b->GetCommandString();
 	    if (cmd) {
@@ -128,7 +128,7 @@ boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
 		m = "No command will be executed when this button is pushed.";
 	    message::DisplayString(this, 0, m);
 	    break;
-	case view_LeftDown:
+	case view::LeftDown:
 	    b->ExecuteCommand(this);
 	    break;
 	default:
@@ -137,7 +137,7 @@ boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
     return FALSE;
 }
 
-void runbuttonview::FullUpdate(enum view_UpdateType type, long left, long top, long width, long right)
+void runbuttonview::FullUpdate(enum view::UpdateType type, long left, long top, long width, long right)
 {
     sbutton *b;
     struct sbutton_prefs *prefs;
@@ -149,7 +149,7 @@ void runbuttonview::FullUpdate(enum view_UpdateType type, long left, long top, l
 	 */
 	b = ButtonData();
 	prefs = b->GetDefaultPrefs();
-	if (DisplayClass() & graphic_Monochrome) {
+	if (DisplayClass() & graphic::Monochrome) {
 	    sbutton::GetStyle(prefs) = sbutton_BOXEDRECT;
 	    sbutton::GetForeground(prefs)=NULL;
 	    sbutton::GetBackground(prefs)=NULL;

@@ -48,8 +48,8 @@ static int iconopen = TRUE;    /* default initial closed */
 ATKdefineRegistry(iconview, view, iconview::InitializeClass);
 #if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
 #endif /* !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS) */
-static void DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
-static void DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
+static void DrawOpen(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
+static void DrawClosed(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
 static void SlayChild(class iconview  * self);
 static void AdoptNewChild(class iconview  * self,class icon  * dobj);
 static long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic);
@@ -59,7 +59,7 @@ static void iconview__SetIconFontname (class iconview  * self,char  *name);
 
 
 static void
-DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
+DrawOpen(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
                {  
     long x,y,w,h;   /* my coordinate space */
     long cx, cy, cw, ch; /* my "C"hilds coordinate space */
@@ -83,7 +83,7 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     h = (self)->GetLogicalHeight() - 1;
 
     /* Draw a frame */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->DrawRectSize( x, y, w, h);
 
     if (self->titlefont == (class fontdesc *)0)
@@ -104,12 +104,12 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     (self)->FillRectSize( x+1, y+1, w-1, handle_height-1, (self)->GrayPattern(4,16));
 
     /* draw the title */
-    (self)->SetTransferMode( graphic_WHITE);
-    (self)->FillRectSize( tx, ty, tw, th, graphic_WHITE);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::WHITE);
+    (self)->FillRectSize( tx, ty, tw, th, graphic::WHITE);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->SetFont( self->titlefont);
     (self)->MoveTo( x + w / 2, y + handle_height / 2);
-    (self)->DrawString( title, (graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM));
+    (self)->DrawString( title, (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM));
 
     /* cacluate place for children */
     cx = x + 1; /* one pixel frame */
@@ -147,7 +147,7 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
 
 /* Draw the iconview when it is closed (subview invisible) */
 static void
-DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
+DrawClosed(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */)
                {  
     long x,y;
     struct fontdesc_charInfo iconinfo;
@@ -171,9 +171,9 @@ DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  a
     y = (self)->GetLogicalTop();
 
     (self)->SetFont( self->iconfont);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->MoveTo( x + iconx, y + icony);
-    (self)->DrawText( &(self->iconchar), 1, graphic_NOMOVEMENT);
+    (self)->DrawText( &(self->iconchar), 1, graphic::NOMOVEMENT);
 } 
 
 
@@ -363,19 +363,19 @@ iconview::Update()
      {
     struct rectangle r;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     (this)->EraseVisualRect();
     (this)->GetLogicalBounds( &r);
-    (this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+    (this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
 } /* iconview_Update */
 
 void
-iconview::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , long  h)
+iconview::FullUpdate(enum view::UpdateType  type, long  x , long  y , long  w , long  h)
                {  
     switch(type) {
-	case view_FullRedraw:
-	case view_PartialRedraw:
-	case view_LastPartialRedraw: {
+	case view::FullRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw: {
 	    struct rectangle r;
 	    (this)->GetLogicalBounds( &r);
 	    if (this->isopen)
@@ -384,16 +384,16 @@ iconview::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , l
 		DrawClosed(this, type, r.left, r.top, r.width, r.height);
 	    }
 	    break;
-	case view_MoveNoRedraw:
-	case view_Remove:
+	case view::MoveNoRedraw:
+	case view::Remove:
 	    (this->child)->FullUpdate( type, 0, 0, this->cw, this->ch);
 	    break;
     }
 }
 
 
-view_DSattributes
-iconview::DesiredSize(long  w , long  h, enum view_DSpass  pass, long  *dw , long  *dh)
+view::DSattributes
+iconview::DesiredSize(long  w , long  h, enum view::DSpass  pass, long  *dw , long  *dh)
                 {  
 	struct fontdesc_charInfo iconinfo;
 	if (!this->isopen) {
@@ -401,19 +401,19 @@ iconview::DesiredSize(long  w , long  h, enum view_DSpass  pass, long  *dw , lon
 				 this->iconchar, &iconinfo);
 	    *dw = iconinfo.width;
 	    *dh = iconinfo.height;
-	    return (view_Fixed);
+	    return (view::Fixed);
 	} else {
 	    *dw = this->dw;
 	    *dh = this->dh;
 	    (this)->DecidedSize( this->dw, this->dh);
-	    return (view_WidthFlexible | view_HeightFlexible);
+	    return (view::WidthFlexible | view::HeightFlexible);
 	}
 
 }
 
 
 class view *
-iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
+iconview::Hit(enum view::MouseAction  action, long  x, long  y, long  clicks)
                 {  
     if (this->isopen) {
 	if (this->child != (class view *)0 &&
@@ -426,8 +426,8 @@ iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
 	    return (this->child)->Hit( action, x, y, clicks);
 	} else {     /* tjm - unsure if this is the desired grouping (was (a&&b)||c) */
 	    if (y < this->cy
-		&& ((action == view_LeftUp)
-		|| action == view_RightUp)) {
+		&& ((action == view::LeftUp)
+		|| action == view::RightUp)) {
 		class view *v;
 		(this)->Close();
 		v = (class view *) this;
@@ -440,7 +440,7 @@ iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
 	    return (class view *)this;
 	}
     } else {
-	if (action == view_LeftUp || action == view_RightUp) {
+	if (action == view::LeftUp || action == view::RightUp) {
 	    (this)->Open();
 	    if (this->child != (class view *)0) {
 		(this->bottomview)->WantInputFocus(
@@ -580,7 +580,7 @@ iconview::SetTitleFont(const char  * titlefont,int  titlestyle,int  titlepts)
     this->titlefont = fontdesc::Create(titlefont, titlestyle, titlepts);
 }
 
-boolean iconview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean iconview::RecSearch(class search *pat, boolean toplevel)
 {
     boolean res;
 
@@ -594,7 +594,7 @@ boolean iconview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean iconview::RecSrchResume(struct SearchPattern *pat)
+boolean iconview::RecSrchResume(class search *pat)
 {
     boolean res;
 

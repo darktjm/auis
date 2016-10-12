@@ -33,13 +33,13 @@ public:
 
 	 void SetDataObject(class dataobject *ras);
 		/* establishes data object */
-	 void FullUpdate(enum view_UpdateType type, 
+	 void FullUpdate(enum view::UpdateType type, 
 			long left, long top, long width, long height);
 	 void Update();
-	 class view * Hit(enum view_MouseAction action, 
+	 class view * Hit(enum view::MouseAction action, 
 			long x, long y, long n)	 ;
-	 view_DSattributes DesiredSize(long width, long height, 
-			enum view_DSpass pass, long *desiredWidth, long *desiredHeight) 
+	 view::DSattributes DesiredSize(long width, long height, 
+			enum view::DSpass pass, long *desiredWidth, long *desiredHeight) 
 			 ;
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();
@@ -55,7 +55,7 @@ public:
 
 	 void PrintPSDoc(FILE *outfile, long pagew, long pageh);
 	 void *GetPSPrintInterface(const char *printtype);
-	 void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+	 void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
 	 void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
 	 virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
@@ -112,7 +112,7 @@ public:
 	boolean UpdateWanted;		/* set TRUE by WantUpdate */
 	boolean InsetUpdateWanted;
 	boolean needsFullUpdate;		/* TRUE is Update should use FullRedraw */
-	boolean OnScreen;			/* if not view_Removed */
+	boolean OnScreen;			/* if not view::Removed */
 	boolean embedded;		/* TRUE if no call to GetApplicationLayer */
 	short DraggingEdge;	/* Non-Zero when dragging an edge. */
 

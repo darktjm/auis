@@ -12,7 +12,7 @@
 #include <init.H>
 
 /** Generic application.
- * In ATK new applications don't usually define their own main() function.
+ * In %ATK new applications don't usually define their own main() function.
  * Instead each %application (e.g. ez) has a class derived from
  * application, this class should have a name ending in "app".  runapp
  * or another base executable (such as created by genstatl) includes code in
@@ -127,7 +127,7 @@ class application : public ATK  {
      * If application::ParseArgs found the \c -ni switch specified on the
      * command line, this does nothing.
      *
-     * There are many possibilities for what initfiles will be loaded.  First
+     * There are many possibilities for what init files will be loaded.  First
      * environ::GetConfiguration("SiteConfigName")
      * will be used to form the names:
      * \c $ANDREWDIR/lib/<em>sitename</em>.atkinit and
@@ -150,7 +150,7 @@ class application : public ATK  {
      */
     virtual boolean Start();
     /**< Perform initial actions of an application, before the main loop.
-     * After the arguments have been parsed and any initfiles read,
+     * After the arguments have been parsed and any init files read,
      * Start() will be called to do any initialization
      * needed before Run() is invoked.
      * The default action is to set default foreground colors, background
@@ -174,7 +174,7 @@ class application : public ATK  {
      */
     virtual boolean Fork();
     /**< Fork if desired.
-     * Unless SetFork(FALSE) has been called (e.g. via the default \c -d
+     * Unless \ref SetFork(\ref FALSE) has been called (e.g. via the default \c -d
      * command-line option) or Fork() has been called once already this
      * function will fork, giving the command prompt back to the user.
      * This is called by the default Run() method.
@@ -186,6 +186,8 @@ class application : public ATK  {
      * unless the PrintVersionNumber preference is set to no.  The version
      * number will also not be printed if SetPrintVersionFlag(FALSE)
      * was called.
+     * \pref{PrintVersionNumber,Boolean,When set to no\, the startup message
+     *       with the application and %ATK version numbers is not printed.}
      */
 
     inline void SetFork(boolean torf) { (this->fork=(torf)); }
@@ -218,43 +220,43 @@ class application : public ATK  {
 
     inline void SetForceLoad(boolean f) { ((this)->forceload=(f)); }
     /**< Set whether or not to load classes referenced by init files.
-     *   By default any classes referenced in initfiles are only loaded
-     *   as needed.  If SetForceLoad}(TRUE) is called on the
+     *   By default any classes referenced in init files are only loaded
+     *   as needed.  If \ref SetForceLoad(\ref TRUE) is called on the
      *   application ReadInitFile() will force all the
      *   referenced classes to be loaded immediately.
      *   \param f TRUE if referenced classes should be loaded; FALSE otherwise.
      */
     inline boolean GetForceLoad() { return ((this)->forceload); }
     /**< Check whether or not to load classes referenced by init files.
-     *   See SetForceLoad for details.
+     *   See SetForceLoad() for details.
      *   \return TRUE if referenced classes should be loaded; FALSE otherwise.
      */
     inline void SetErrorProc(init_fptr p) { ((this)->errorProc=(p)); }
     /**< Set initialization error reporting function.
      *   Sets the function to be executed to report errors encountered while
-     *   ReadInitFile is reading the initfiles.  Use
-     *   SetErrorRock to set the \e rock to be passed in,
+     *   ReadInitFile() is reading the init files.  Use
+     *   SetErrorRock() to set the \e rock to be passed in,
      *   The default routine prints the message to standard error.
      *   \param p The function to call.  May not be NULL.
      */
     inline init_fptr GetErrorProc() { return ((this)->errorProc); }
     /**< Get current initialization error reporting function.
      *   Returns the function which will be used to report errors while
-     *   ReadInitFile is reading the initfiles.
+     *   ReadInitFile is reading the init files.
      *   \return the current error reporting function.
      */
     inline void SetErrorRock(long r) { ((this)->errorRock=(r)); }
     /**< Set the generic parameter to be passed to the error proc.
      *   Set the rock to be passed to the error function when an
      *   error is encountered while ReadInitFile is reading the
-     *   initfiles.
+     *   init files.
      *   \param r The generic parameter, passed in as \e rock.
      */
     inline long GetErrorRock() { return ((this)->errorRock); }
     /**< Get the current generic parameter to be passed to the error proc.
      *   Get the rock to be passed to the error function when an
      *   error is encountered while ReadInitFile is reading the
-     *   initfiles.
+     *   init files.
      *   \return the generic parameter, passed in as \e rock.
      */
     inline void SetMajorVersion(long mv) { ((this)->majorversion=(mv)); }
@@ -326,7 +328,14 @@ class application : public ATK  {
      *   known as the startup application.
      *   It is assumed that the startup application's lifetime is no shorter
      *   than that of any other created application.
-     *   \return the first application structure created. */
+     *   \return the first application structure created.
+     *   \pref{ForeGroundColor,String,The default foreground color for the
+     *         application.}
+     *   \pref{BackGroundColor,String,The default background color for the
+     *         application.}
+     *   \pref{Geometry,String,The default geometry for application\, of
+     *         the form
+     *         [<em>Width</em>x<em>Height</em>][+/-<em>Left</em>/<em>Right</em>+/-<em>Top</em>/<em>Bottom</em>].} */
     virtual const char * const *SessionCheckpoint();
     /**< Provide checkpoint information for session manager.
      *   SessionCheckpoint is called when the window system wants the
@@ -348,12 +357,12 @@ class application : public ATK  {
      */
     static const char *AppGetName();
     /**< Return the startup application's name.
-     *   Basically a shortcut for calling GetName on the startup application.
+     *   Basically a shortcut for calling \ref GetName on the startup application.
      *   \return the program name, or NULL if not set.
      */
     static void AppSetName(const char *s);
     /**< Set the startup application's name.
-     *   Basically a shortcut for calling SetName on the startup application.
+     *   Basically a shortcut for calling \ref SetName on the startup application.
      *   \param s The program name.  The lifetime of s must match the
      *            lifetime of the startup application.
      */
@@ -365,6 +374,13 @@ class application : public ATK  {
      */
 
     application();
+    /**< The default constructor.
+     *   This sets the startup application, if not already set.  It also
+     *   reads the StartIconic preference to set the default for
+     *   iconification.
+     *   \pref{StartIconic,Boolean,If true\, create all windows of this
+     *                             application iconified.  Otherwise
+     *                             (default) create windows normally.} */
     virtual ~application();
 
   private:

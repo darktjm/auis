@@ -423,7 +423,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
     class dired *dired = Dired(self);
     char buf[256];
     const char *res;
-    static struct SearchPattern *pat = NULL;
+    static class search pat;
     long pos;
 
     if (message::AskForString(self, 0,
@@ -433,7 +433,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
         return;
     }
 
-    res = search::CompilePattern(buf, &pat);
+    res = pat.CompilePattern(buf);
     if (res != NULL) {
         message::DisplayString(self, 0, res);
         return;
@@ -444,7 +444,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
     pos = 0;
     while (1) {
         struct stat stbuf;
-        pos = search::MatchPattern(dired, pos, pat);
+        pos = pat.MatchPattern(dired, pos);
         if (pos < 0 || (res = (dired)->Locate( pos)) == NULL)
             break;
         if (stat(GetFullName(self, res), &stbuf) >= 0 &&
@@ -567,7 +567,7 @@ void diredview::SetDataObject(class dataobject   *object)
     (dired)->NotifyObservers( 0);
 }
 
-class view *diredview::Hit(enum view_MouseAction  action, long  x , long  y , long  numberOfClicks)
+class view *diredview::Hit(enum view::MouseAction  action, long  x , long  y , long  numberOfClicks)
 {
     int button;
 
@@ -575,12 +575,12 @@ class view *diredview::Hit(enum view_MouseAction  action, long  x , long  y , lo
         default:
             button = 0;
             break;
-        case view_LeftDown:
-        case view_LeftMovement:
+        case view::LeftDown:
+        case view::LeftMovement:
             button = 1;     /* Left button; select */
             break;
-        case view_RightDown:
-        case view_RightMovement:
+        case view::RightDown:
+        case view::RightMovement:
             button = 2;     /* Right button; deselect */
             break;
     }

@@ -143,7 +143,7 @@ void monthview::ResetMonth(boolean  ForceRedraw)
     }
 }
 
-void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void monthview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     class month *mon;
     static class fontdesc *plainfont = NULL, *boldfont = NULL;
@@ -152,7 +152,7 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
     char MyString[150];
     const char *StrToUse;
 
-    if((type == view_LastPartialRedraw) || (type == view_FullRedraw)) {
+    if((type == view::LastPartialRedraw) || (type == view::FullRedraw)) {
 	mon = (class month *) (this)->GetDataObject();
 	if (this->mymonth != (mon)->GetMonth() || this->myyear !=(mon)->GetYear()) {
 	    (this)->ResetMonth( (this->mymonth != -1));
@@ -164,14 +164,14 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
 	    boldfont = fontdesc::Create("andy", fontdesc_Bold, 12);
 	}
 	startday = -this->skippedatstart;
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	(this)->GetLogicalBounds( &Rect);
 	(this)->SetFont( plainfont); 
 	xcenter = Rect.left + (Rect.width/2);
 	y = Rect.top + (Rect.height/16);
 	(this)->MoveTo( xcenter, y);
 	sprintf(MyString, "%s %d", MonthNames[this->mymonth], this->FullTimes[1].tm_year+1900);
-	(this)->DrawString( MyString, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+	(this)->DrawString( MyString, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
 	(this)->FillTrapezoid( Rect.left+25, Rect.top, 0, Rect.left+5, Rect.top+8, 20, (this)->BlackPattern());
 	(this)->FillTrapezoid( Rect.left+5, Rect.top+8, 20, Rect.left+25, Rect.top+16, 0, (this)->BlackPattern());
 	(this)->FillTrapezoid( Rect.left+Rect.width - 25, Rect.top, 0, Rect.left+Rect.width-25, Rect.top+8, 20, (this)->BlackPattern());
@@ -193,16 +193,16 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
 			(this)->SetFont( boldfont);
 			if (this->EventCt[startday] > 2) {
 			    (this)->FillRectSize( x-8, y-6, 18, 14, (this)->BlackPattern());
-			    (this)->SetTransferMode( graphic_WHITE);
+			    (this)->SetTransferMode( graphic::WHITE);
 			} else if (this->EventCt[startday] > 1) {
 			    (this)->FillRectSize( x-8, y-6, 18, 14, (this)->GrayPattern( 3, 10));
 			}
 		    }
 		}
 		(this)->MoveTo( x, y);
-		(this)->DrawString( StrToUse, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
+		(this)->DrawString( StrToUse, graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBASELINE);
 		if (highlight) {
-		    (this)->SetTransferMode( graphic_COPY);
+		    (this)->SetTransferMode( graphic::COPY);
 		    (this)->SetFont( plainfont);
 		}
 		x += Rect.width/7;
@@ -216,9 +216,9 @@ void monthview::Update()
     struct rectangle Rect;
 
     (this)->GetLogicalBounds( &Rect);
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
     (this)->FillRect( &Rect, (this)->WhitePattern());
-    (this)->FullUpdate( view_FullRedraw, Rect.left, Rect.top, Rect.width, Rect.height);
+    (this)->FullUpdate( view::FullRedraw, Rect.left, Rect.top, Rect.width, Rect.height);
 }
 
 static void ClearAnnouncements(class monthview  *self)
@@ -241,13 +241,13 @@ static void AnnounceEvent(struct eventnode  *en, class monthview  *self)
 }
 
 
-class view *monthview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *monthview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     int row, column, mday, tpos = 0;
     struct rectangle Rect;
     char Msg[250];
 
-    if (action != view_LeftDown && action != view_RightDown) return((class view *) this);
+    if (action != view::LeftDown && action != view::RightDown) return((class view *) this);
     (this)->GetLogicalBounds( &Rect);
     row = (y-Rect.top)/(Rect.height/8);
     column = (x-Rect.left)/(Rect.width/7);
@@ -295,11 +295,11 @@ class view *monthview::Hit(enum view_MouseAction  action, long  x, long  y, long
 }
 
 
-view_DSattributes monthview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dheight)
+view::DSattributes monthview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dheight)
 {
     *dWidth = 168;
     *dheight = 120;
-    return(view_WidthFlexible | view_HeightFlexible);
+    return(view::WidthFlexible | view::HeightFlexible);
 }
 
 static void ChangeMonth(class monthview  *self, int  change)
@@ -334,7 +334,7 @@ void monthview::GrabTextview(boolean  ForceRedraw)
 
 	    (this->tv)->GetLogicalBounds( &Rect);
 	    if (Rect.height > 0 || Rect.width > 0) {
-		(this->tv)->FullUpdate( view_FullRedraw, Rect.left, Rect.top, Rect.width, Rect.height);
+		(this->tv)->FullUpdate( view::FullRedraw, Rect.left, Rect.top, Rect.width, Rect.height);
 	    }
 	}
     }

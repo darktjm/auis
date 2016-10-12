@@ -71,10 +71,10 @@ static boolean DoFunc(class controlV  * self)
     }
     return FALSE;
 }
-class valueview *controlV::DoHit(enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview *controlV::DoHit(enum view::MouseAction  type,long  x,long  y,long  hits )
 {
 
-    if (type == view_RightUp || type == view_LeftUp)
+    if (type == view::RightUp || type == view::LeftUp)
 	DoFunc(this);
     return (this)->buttonV::DoHit(type,x,y,hits );
 }
@@ -125,7 +125,7 @@ void controlV::LookupParameters()
       this->function = "start";
 
     if(bv->mono == -10)
-	bv->mono = ((bv)->DisplayClass() & graphic_Monochrome);
+	bv->mono = ((bv)->DisplayClass() & graphic::Monochrome);
 
     if(!bv->mono){
 

@@ -177,12 +177,12 @@ The following is the modified class declaration for the class
 \programexample{
 class helloworldview [hellov]: view \{ overrides: 
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height); 
 
     \bold{Update(); 
 
-          Hit (enum view_MouseAction action, long x, long y, long 
+          Hit (enum view::MouseAction action, long x, long y, long 
 numberOfClicks) returns struct helloworld *;}  data: 
 
     \bold{long x; 
@@ -213,9 +213,9 @@ Example 1 overrode the class \italic{View}'s \italic{FullUpdate} method.
 
 \indexi{View++\italic{Hit}} 
 
-\indexi{ \italic{view_Hit}} 
+\indexi{ \italic{view::Hit}} 
 
-\indexi{ \italic{view_Update}} The \italic{Update} method provides a way to 
+\indexi{ \italic{view::Update}} The \italic{Update} method provides a way to 
 communicate about partial updates to the screen.  In this example, we will use 
 it to erase the string \italic{hello world} at its old position and draw the 
 string \italic{hello world} at the new location that the user indicates by 
@@ -340,7 +340,7 @@ height)
 
     struct helloworldview *hwv;
 
-    enum view_UpdateType type;
+    enum view::UpdateType type;
 
     long left;
 
@@ -375,7 +375,7 @@ rectangle_Height(&myVisualRect)/2;
 
             helloworldview_DrawString(hwv,"hello world",
 
-	    graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); }   
+	    graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); }   
 
 \}}
 
@@ -405,7 +405,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
     struct helloworldview *hwv;
 
-    enum view_MouseAction action;
+    enum view::MouseAction action;
 
     long x;
 
@@ -415,7 +415,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 \{
 
-    if (action == view_LeftDown)  \{  
+    if (action == view::LeftDown)  \{  
 
         hwv->movingString = TRUE;
 
@@ -423,7 +423,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
     else if (hwv ->HaveDownTransition) \{
 
-	if (action == view_LeftUp)  \{
+	if (action == view::LeftUp)  \{
 
 	    hwv->newX = x;
 
@@ -529,7 +529,7 @@ to \italic{Update}, which will partially redraw,  rather than
 
 
 \paragraph{Control structure for any Hit method} \indexi{ \italic{Hit}} 
-\indexi{View++\italic{Hit}} \indexi{ \italic{view_Hit}}
+\indexi{View++\italic{Hit}} \indexi{ \italic{view::Hit}}
 
 
 In general, any \italic{Hit} method you write should check for the occurrence 
@@ -553,7 +553,7 @@ needs to be redrawn by calling \italic{hwv}'s \italic{WantUpdate}
 
 \indexi{ \italic{WantUpdate}} \indexi{Methods++\italic{WantUpdate}}  
 
-\indexi{ \italic{view_WantUpdate}} 
+\indexi{ \italic{view::WantUpdate}} 
 
 \indexi{View++\italic{WantUpdate}} 
 
@@ -583,7 +583,7 @@ know what pending changes have been queued to be drawn by the next
 
 \indexi{ \italic{Update}} 
 
-\indexi{ \italic{view_Update}}  
+\indexi{ \italic{view::Update}}  
 
 \indexi{Methods++\italic{Update}}
 
@@ -599,13 +599,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT); 
+        helloworldview_SetTransferMode(hwv,graphic::INVERT); 
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y); 
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); 
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); 
 
 
         hwv->x = hwv->newX; 
@@ -616,7 +616,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y); 
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT); 
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT); 
 
    \} \}
 
@@ -625,13 +625,13 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
 In this example, we want to erase the \italic{hello world} string at its 
 current position and redraw it at the new position that we recorded in the 
 \italic{Hit} method.   The statement 
-\italic{helloworldview_SetTransferMode(hwv, graphic_\smaller{INVERT})} 
+\italic{helloworldview_SetTransferMode(hwv, graphic::\smaller{INVERT})} 
 \indexi{Graphic++Transfer mode}
 
 \indexi{ \italic{SetTransferMode}} 
 
 \indexi{Graphic++\italic{SetTransferMode}} 
-\indexi{ \italic{graphic_SetTransferMode}} 
+\indexi{ \italic{graphic::SetTransferMode}} 
 
 sets the graphic transfer mode to \smaller{INVERT}, a mode that causes the 
 window \indexi{Screen inverting}  \indexi{Drawing} manager to draw black 
@@ -719,12 +719,12 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
   data:
@@ -780,7 +780,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     struct helloworldview *hwv;
 
-    enum view_UpdateType type;
+    enum view::UpdateType type;
 
     long left;
 
@@ -810,7 +810,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     helloworldview_DrawString(hwv,"hello world",
 
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -825,13 +825,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT);
+        helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 
         hwv->x = hwv->newX;
@@ -842,7 +842,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
    \}
 
@@ -854,7 +854,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
     struct helloworldview *hwv;
 
-    enum view_MouseAction action;
+    enum view::MouseAction action;
 
     long x;
 
@@ -864,7 +864,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 \{
 
-    if (action == view_LeftDown)  \{  
+    if (action == view::LeftDown)  \{  
 
         hwv->HaveDownTransition = TRUE;
 
@@ -872,7 +872,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
     else if (hwv ->HaveDownTransition) \{
 
-	if (action == view_LeftUp)  \{
+	if (action == view::LeftUp)  \{
 
 	    hwv->newX = x;
 

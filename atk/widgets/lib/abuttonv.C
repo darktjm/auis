@@ -72,7 +72,7 @@ START_ABUTTONV_MOUSE_METHOD(Arm) {
     if((!Armed())!=(!within)) {
 	SetArmed(within);
     }
-    if((action==view_LeftDown || action==view_RightDown) && HasInputFocus) WantInputFocus(this);
+    if((action==view::LeftDown || action==view::RightDown) && HasInputFocus) WantInputFocus(this);
 }
 END_ABUTTONV_MOUSE_METHOD();
 
@@ -145,7 +145,7 @@ static boolean Init() {
     return TRUE;
 }
 
-#define TEXTINMIDDLE (graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM)
+#define TEXTINMIDDLE (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
 #define AButtonv_IndicatorBorderType AShadow_Highlight|AShadow_Default
 #define AButtonv_BorderType AShadow_Highlight|AShadow_Default|AShadow_Plain
 
@@ -288,7 +288,7 @@ START_ABUTTONV_CALLBACK_METHOD(LabelMethod) {
     if(dself->LabelData()) {
 	if(label) {
 	    label->InsertView(this, &linterior);
-	    label->FullUpdate(view_FullRedraw, linterior.left, linterior.top, linterior.width, linterior.top);
+	    label->FullUpdate(view::FullRedraw, linterior.left, linterior.top, linterior.width, linterior.top);
 	}
     } else {
 	ASlot_NAME(labelFG);
@@ -383,7 +383,7 @@ size(this, &sizeact)
     layout.SetMode(AFORMULAACCESS);
     lastfont=NULL;
     swidth=sheight=-1;
-    pass=view_NoSet;
+    pass=view::NoSet;
     size.SetMode(AFORMULAIMMEDIATE);
 }
 
@@ -455,9 +455,9 @@ void AButtonv::DoSelectionHighlight(char *textl, class fontdesc *my_fontdesc, lo
 	    hit->height=r->height;
 	}
 	if(draw) {
-	    SetTransferMode(graphic_INVERT);
+	    SetTransferMode(graphic::INVERT);
 	    FillRectSize(tx, r->top, width, r->height, NULL);
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	}
     }
 }
@@ -474,9 +474,9 @@ void AButtonv::DrawLabelText(class fontdesc  *font, const struct rectangle *inte
 	MoveTo( x - tx/2 + ci.xOriginOffset + 2, y - ty/2 + ci.yOriginOffset +2);
 	DrawText( (char *)text, len, 0);
 	if(HasInputFocus && rsvalid && rsstart==0 && rslen==1) {
-	    SetTransferMode(graphic_INVERT);
+	    SetTransferMode(graphic::INVERT);
 	    FillRectSize(x - tx/2 + ci.xOriginOffset, y - ty/2 + ci.yOriginOffset, tx+4, ty+4, NULL);
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	}
     } else {
 	MoveTo( x, y);
@@ -526,7 +526,7 @@ void AButtonv::LabelDimensions(long &w, long &h, long *below) {
     }
 }
 
-void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
+void AButtonv::FullUpdate(enum view::UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
     CheckIndicator();
     AButton *b=(AButton *)GetDataObject();
     boolean drawing=TRUE;
@@ -543,12 +543,12 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
     if(b->LabelData()) {
 	CheckLabelView();
 	if(label) {
-	    if(type==view_Remove) {
-                label->FullUpdate(view_Remove, 0, 0, 0, 0);
+	    if(type==view::Remove) {
+                label->FullUpdate(view::Remove, 0, 0, 0, 0);
                 label->InsertViewSize(this, 0, 0, 0, 0);
 		return;
 	    }
-	    if(type==view_MoveNoRedraw) {
+	    if(type==view::MoveNoRedraw) {
                 struct rectangle linterior=interior;
                 
                 linterior.left+= (long)((long)b->MarginWidth() * ((double)b->scaleWidth)/uxscale);
@@ -591,7 +591,7 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
 	}
     }
     
-    if(type==view_PartialRedraw || type==view_Remove || type==view_MoveNoRedraw) return;
+    if(type==view::PartialRedraw || type==view::Remove || type==view::MoveNoRedraw) return;
 
     if(border) border->SetHighlighted(HasInputFocus);
 
@@ -611,7 +611,7 @@ void AButtonv::FullUpdate(enum view_UpdateType type, long /* left */, long /* to
 
 void AButtonv::Update() {
     updateRequested=FALSE;
-    // FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+    // FullUpdate(view::FullRedraw, 0, 0, 0, 0);
     lformula.Validate();
     iformula.Validate();
     bformula.Validate();
@@ -632,7 +632,7 @@ void AButtonv::SetDataObject(class dataobject *d) {
     layout.Invalidate();
 }
 
-view_DSattributes AButtonv::DesiredSize(long  width, long  height, enum view_DSpass  p, long  *desired_width, long  *desired_height)
+view::DSattributes AButtonv::DesiredSize(long  width, long  height, enum view::DSpass  p, long  *desired_width, long  *desired_height)
 {
     boolean force=FALSE;
     fontdesc *fd=FindFont();
@@ -655,7 +655,7 @@ view_DSattributes AButtonv::DesiredSize(long  width, long  height, enum view_DSp
     }
     size.Validate();
     size.Desired(desired_width, desired_height);
-    return view_Fixed;
+    return view::Fixed;
 }
 
 
@@ -673,25 +673,25 @@ void AButtonv::GetOrigin(long  width, long height, long *originX, long *originY)
     size.Origin(originX, originY);
 }
 
-boolean AButtonv::RecSearch(struct SearchPattern *pat, boolean ) {
+boolean AButtonv::RecSearch(class search *pat, boolean ) {
     if(label) return label->RecSearch(pat, FALSE);
     AButton *b=(AButton *)GetDataObject();
     if(b==NULL) {
 	rsvalid=FALSE;
 	return FALSE;
     }
-    long start=search::MatchPatternStr((unsigned char *)b->Text(), 0, strlen(b->text), pat);
+    long start=pat->MatchPatternStr((unsigned char *)b->Text(), 0, strlen(b->text));
     if(start>=0) {
 	rsvalid=TRUE;
 	rsstart=start;
-	rslen=search::GetMatchLength();
+	rslen=pat->GetMatchLength();
 	return TRUE;
     }
     rsvalid=FALSE;
     return FALSE;
 }
 
-boolean AButtonv::RecSrchResume(struct SearchPattern *pat) {
+boolean AButtonv::RecSrchResume(class search *pat) {
     if(rsvalid) {
 	if(label) return label->RecSrchResume(pat);
 	AButton *b=(AButton *)GetDataObject();
@@ -704,11 +704,11 @@ boolean AButtonv::RecSrchResume(struct SearchPattern *pat) {
 	long len=strlen(b->text);
 	long start;
 	if(len-rsstart>0) {
-	    start=search::MatchPatternStr((unsigned char *)b->Text(), rsstart, len-rsstart, pat);
+	    start=pat->MatchPatternStr((unsigned char *)b->Text(), rsstart, len-rsstart);
 	    if(start>=0) {
 		rsvalid=TRUE;
 		rsstart=start;
-		rslen=search::GetMatchLength();
+		rslen=pat->GetMatchLength();
 		return TRUE;
 	    }
 	}
@@ -792,7 +792,7 @@ void AButtonv::RecSrchExpose(const struct rectangle &logical, struct rectangle &
 #define FONTTYPE fontdesc_Bold
 #define FONTSIZE 12
 
-void AButtonv::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
+void AButtonv::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight) 
 {
     AButton *dobj = (AButton *)(this->GetDataObject());
     CheckIndicator();

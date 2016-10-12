@@ -23,7 +23,7 @@ helloworldview::helloworldview()
 }
 
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     struct rectangle myVisualRect; 
 
@@ -35,34 +35,34 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
     
     (this)->MoveTo(this->x,this->y);
     (this)->DrawString("hello world",
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 }
 
     
 void helloworldview::Update()
     {
     if (this->newX != this->x ||  this->newY != this->y) {
-        (this)->SetTransferMode(graphic_INVERT);
+        (this)->SetTransferMode(graphic::INVERT);
 
         (this)->MoveTo( this->x , this->y);
-        (this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+        (this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
         this->x = this->newX;
         this->y = this->newY;
 
         (this)->MoveTo( this->x , this->y);
-        (this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+        (this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
    }
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
                     {
-    if (action == view_LeftDown)  {  
+    if (action == view::LeftDown)  {  
         this->HaveDownTransition = TRUE;
     }
     else if (this ->HaveDownTransition) {
-	if (action == view_LeftUp)  {
+	if (action == view::LeftUp)  {
 	    this->newX = x;
 	    this->newY = y;
 	    this->HaveDownTransition = FALSE;

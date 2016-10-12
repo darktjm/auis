@@ -95,11 +95,11 @@ G->WritePixImage((x), (y), (pix), (x1), (y1), width, height); } }
 }
 
 #define DrawHighlightBlackAndWhite(self, G, R) \
-	DrawHighlight((self), (G), (R), graphic_BLACK, graphic_WHITE);
+	DrawHighlight((self), (G), (R), graphic::BLACK, graphic::WHITE);
 #define DrawHighlightWhite(self, G, R) \
-	DrawHighlight((self), (G), (R), graphic_WHITE, graphic_WHITE);
+	DrawHighlight((self), (G), (R), graphic::WHITE, graphic::WHITE);
 #define DrawHighlightBlack(self, G, R) \
-	DrawHighlight((self), (G), (R), graphic_BLACK, graphic_BLACK);
+	DrawHighlight((self), (G), (R), graphic::BLACK, graphic::BLACK);
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *\

@@ -28,14 +28,14 @@ static boolean debug=0;
 
 /* return first pixel value for given cell index */
 
-void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect);
+void spread_PartialUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect);
 void spread_InvertRectangle(class spread  * V, int  left , int  top , int  width , int  height);
 static void SmashSelection (class spread  * V);
 void spread_ClearSelectionBox (class spread  * V );
-static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect);
+static void updateCells(class spread  * V, int  zapped, enum view::UpdateType  how, struct rectangle  *updateClipRect);
 static void updateString (class spread  * V, char  justification, const char  *string, struct rectangle  *cellBounds);
 static void  updateValue (class spread  * V, extended_double  *value, char  format, int  precision, struct rectangle  *cellBounds);
-static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view_UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds);
+static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view::UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds);
 static void updateEdges(class spread  * V, struct rectangle  *updateClipRect);
 static void updateBorder(class spread  * V, struct rectangle  *updateClipRect);
 
@@ -116,7 +116,7 @@ static void FixCursors(class spread  * V)
 
 /* notify children of full update event */
 
-static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+static void NotifyKids(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int r, c, x, y;
@@ -131,7 +131,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 
     V->GetLogicalBounds(&bodyClipRect);
     
-    if(how==view_Remove) {
+    if(how==view::Remove) {
 	for(r0=0;r0<T->NumberOfRows();r0++) {
 	    for(c0=0;c0<T->NumberOfColumns();c0++) {
 		if (!(T)->IsJoinedToAnother( r0, c0)) {
@@ -140,7 +140,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 			child = spread_FindSubview(V, cell);
 			if (child != 0) {
 			    child->InsertViewSize(V, 0,0,0,0);
-			    child->FullUpdate(view_Remove,0,0,0,0);
+			    child->FullUpdate(view::Remove,0,0,0,0);
 			}
 		    }
 
@@ -168,7 +168,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 			for (cc = c + 1, xth = V->colInfo[c].computedWidth - 2 * spread_CELLMARGIN;
 			     (T)->IsJoinedToLeft( r, cc);
 			     NextX(V, cc, xth)) ;
-			if(how!=view_Remove) rectangle_SetRectSize(&cellBounds, x + spread_SPACING + spread_CELLMARGIN, y + spread_SPACING + spread_CELLMARGIN, xth, yth);
+			if(how!=view::Remove) rectangle_SetRectSize(&cellBounds, x + spread_SPACING + spread_CELLMARGIN, y + spread_SPACING + spread_CELLMARGIN, xth, yth);
 			else rectangle_EmptyRect(&cellBounds);
 			(child)->InsertView( V, &cellBounds);
 			rectangle_IntersectRect(&cellClipRect, &cellBounds, &bodyClipRect);
@@ -186,7 +186,7 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 
 /*  redraw when exposed or size changed, etc */
 
-void spread_update_FullUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+void spread_update_FullUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     if (V->grayPix == NULL)
 	InitializeGraphic(V);
@@ -194,21 +194,21 @@ void spread_update_FullUpdate(class spread  * V, enum view_UpdateType  how, stru
     V->lastTime = -1;
     switch(how) {
 
-	case view_MoveNoRedraw:
-	case view_Remove:
+	case view::MoveNoRedraw:
+	case view::Remove:
 	    NotifyKids(V, how, updateClipRect);
 	    FixCursors(V);
 	    break;
 
 	default:
-	    spread_PartialUpdate(V, view_FullRedraw, updateClipRect);
+	    spread_PartialUpdate(V, view::FullRedraw, updateClipRect);
     }
 }
 
 
 /*  redraw when contents changed */
 
-void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+void spread_PartialUpdate(class spread  * V, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int zapped;
@@ -218,7 +218,7 @@ void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct r
     if (V->lastTime < (T)->EverythingTimestamp()) {
 	zapped = 1;
 	V->borderDrawn = 2;
-	(V)->SetTransferMode( graphic_COPY);
+	(V)->SetTransferMode( graphic::COPY);
 	(V)->EraseRect( updateClipRect);
 	V->selectionvisible = FALSE;
         V->lastTime = -1;
@@ -250,7 +250,7 @@ void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct r
 
 void spread_InvertRectangle(class spread  * V, int  left , int  top , int  width , int  height)
 {
-    (V)->SetTransferMode( graphic_INVERT);
+    (V)->SetTransferMode( graphic::INVERT);
     if (width < 0) {
 	left += width;
 	width = -width;
@@ -317,7 +317,7 @@ void spread_ClearSelectionBox (class spread  * V )
     }
 }
 
-static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect)
+static void updateCells(class spread  * V, int  zapped, enum view::UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
     int r, c, x, y;
@@ -364,15 +364,15 @@ static void updateString (class spread  * V, char  justification, const char  *s
 {
     if (justification == '\"') { 		/* right */
 	(V)->MoveTo( rectangle_Left(cellBounds) + rectangle_Width(cellBounds) - 1, rectangle_Top(cellBounds));
-	(V)->DrawString( string, graphic_ATTOP | graphic_ATRIGHT);
+	(V)->DrawString( string, graphic::ATTOP | graphic::ATRIGHT);
     }
     else if (justification == '^') {		/* center */
 	(V)->MoveTo( rectangle_Left(cellBounds) + (rectangle_Width(cellBounds) >> 1), rectangle_Top(cellBounds));
-	(V)->DrawString( string, graphic_ATTOP | graphic_BETWEENLEFTANDRIGHT);
+	(V)->DrawString( string, graphic::ATTOP | graphic::BETWEENLEFTANDRIGHT);
     }
     else {					/* left */
 	(V)->MoveTo( rectangle_Left(cellBounds), rectangle_Top(cellBounds));
-	(V)->DrawString( string, graphic_ATTOP | graphic_ATLEFT);
+	(V)->DrawString( string, graphic::ATTOP | graphic::ATLEFT);
     }
 }
 
@@ -434,7 +434,7 @@ static void updateValue (class spread  * V, extended_double  *value, char  forma
 		if (rightshim > rectangle_Width(cellBounds) - x)
 		    rightshim = rectangle_Width(cellBounds) - x;
 		(V)->MoveTo( rectangle_Left(cellBounds) + rectangle_Width(cellBounds) - 1 - rightshim - x, rectangle_Top(cellBounds));
-		(V)->DrawString( buf, graphic_ATTOP | graphic_ATLEFT);
+		(V)->DrawString( buf, graphic::ATTOP | graphic::ATLEFT);
 		break;
 	    }
 	case HORIZONTALBARFORMAT:
@@ -479,7 +479,7 @@ static void updateValue (class spread  * V, extended_double  *value, char  forma
     }
 }
 
-static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view_UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds)
+static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view::UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds)
 {
     struct rectangle cellClipRect;
     class view *child;
@@ -491,7 +491,7 @@ static void updateCell(class spread  * V, struct cell  * cell, int      zapped, 
     }
     (V)->SetClippingRect( &cellClipRect);
 
-    (V)->SetTransferMode( graphic_COPY);
+    (V)->SetTransferMode( graphic::COPY);
     if (!zapped)
 	(V)->EraseRect( &cellClipRect);
     (V)->SetFont( V->writingFont);
@@ -541,7 +541,7 @@ static void updateEdges(class spread  * V, struct rectangle  *updateClipRect)
     rectangle_SetRectSize(&edgeClipRect, spread_BORDER(V), spread_BORDER(V), (V)->GetLogicalWidth() - spread_BORDER(V), (V)->GetLogicalHeight() - spread_BORDER(V));
     rectangle_IntersectRect(&edgeClipRect, &edgeClipRect, updateClipRect);
     (V)->SetClippingRect( &edgeClipRect);
-    (V)->SetTransferMode( graphic_COPY);
+    (V)->SetTransferMode( graphic::COPY);
 
 /* 
     Because vertical and horizontal lines intersect, we must first erase all
@@ -635,7 +635,7 @@ static void updateBorder(class spread  * V, struct rectangle  *updateClipRect)
 
     if(spread_BORDER(V)<=0) return;
     
-    (V)->SetTransferMode( graphic_COPY);
+    (V)->SetTransferMode( graphic::COPY);
     (V)->EraseRectSize( 0, spread_BORDER(V), spread_BORDER(V), (V)->GetLogicalHeight() - spread_BORDER(V));
     (V)->EraseRectSize( spread_BORDER(V), 0, (V)->GetLogicalWidth() - spread_BORDER(V), spread_BORDER(V));
 
@@ -651,7 +651,7 @@ static void updateBorder(class spread  * V, struct rectangle  *updateClipRect)
 	for (; YinRange(V, T, r, y + spread_SPACING + spread_CELLMARGIN, &borderClipRect); NextY(V, r, y)) {
 	    sprintf (buff, "%d", r + 1);
 	    (V)->MoveTo( spread_BORDER(V) - spread_BORDERMARGIN, y + spread_SPACING + spread_CELLMARGIN);
-	    (V)->DrawString( buff, graphic_ATTOP | graphic_ATRIGHT);
+	    (V)->DrawString( buff, graphic::ATTOP | graphic::ATRIGHT);
 	}
 
 	/* border labels across top */
@@ -664,7 +664,7 @@ static void updateBorder(class spread  * V, struct rectangle  *updateClipRect)
 	for (; XinRange(T, c, x + spread_SPACING + spread_CELLMARGIN, &borderClipRect); NextX(V, c, x)) {
 	    sprintf (buff, "%d", c + 1);
 	    (V)->MoveTo( x +(V->colInfo[c].computedWidth / 2), (spread_BORDER(V) - spread_BORDERMARGIN));
-	    (V)->DrawString( buff, graphic_ATBASELINE | graphic_BETWEENLEFTANDRIGHT);
+	    (V)->DrawString( buff, graphic::ATBASELINE | graphic::BETWEENLEFTANDRIGHT);
 	}
 
     }

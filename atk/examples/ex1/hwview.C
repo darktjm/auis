@@ -11,7 +11,7 @@ ATK_IMPL("hwview.H")
 
 ATKdefineRegistry(helloworldview, view, NULL);
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     int x,y;
     struct rectangle VisualRect;		
@@ -22,6 +22,6 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
 
     (this)->MoveTo(x,y);
     (this)->DrawString("hello world",
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 }

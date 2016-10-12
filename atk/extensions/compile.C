@@ -903,7 +903,7 @@ static class view *PutInAnotherWindow(class view  *view, class buffer  *buffer, 
         (newIM)->SetView( frame);
 
 /* This is here because the frame_Create call can't set the input focus
- * because the frame didn't have a parent when it called view_WantInputFocus.
+ * because the frame didn't have a parent when it called view::WantInputFocus.
  * This is bogus but hard to fix...
  */
         ((frame)->GetView())->WantInputFocus( (frame)->GetView());

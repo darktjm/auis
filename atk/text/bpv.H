@@ -18,11 +18,11 @@ class bpv: public  view {
 
       void SetDataObject(class dataobject *dataobject);
       void ObservedChanged (class observable *changed, long value);
-      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
       void Update();
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
       void PostMenus(class menulist  *ml);
-      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
       void ReceiveInputFocus();
       void LoseInputFocus();
       void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);

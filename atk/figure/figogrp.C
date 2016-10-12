@@ -57,7 +57,7 @@ const char *figogrp::ToolName(class figtoolview  *v, long  rock)
     return "<group>";
 }
 
-enum figobj_Status figogrp::Build(class figview  *v, enum view_MouseAction action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figogrp::Build(class figview  *v, enum view::MouseAction action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     return figobj_Failed;
 }
@@ -83,7 +83,7 @@ void figogrp::Sketch(class figview  *v)
 	h = (-h);
 	y -= h;
     }
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h);
 }
 
@@ -96,7 +96,7 @@ void figogrp::Select(class figview  *v)
     (this)->GetBounds( v); /* make sure handles are up-to-date */
 
     if ((this)->GetHandles() && (this)->GetNumHandles()) {
-	(v)->SetTransferMode( graphic_INVERT);
+	(v)->SetTransferMode( graphic::INVERT);
 
 	for (ix=0; ix<(this)->GetNumHandles(); ix++) {
 	    x = (v)->ToPixX( point_X(&((this)->GetHandles()[ix])));
@@ -177,27 +177,27 @@ static void MoveHandleCon(class figogrp  *self, long  x , long  y , long  ptref)
     }
 }
 
-boolean figogrp::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figogrp::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     if (!handle)
 	return FALSE;
 
     if (!this->doconstraints) {
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		if ((this)->GetReadOnly())
 		    return FALSE;
 		(this)->Sketch( v);
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		(this)->Sketch( v);
 		MoveHandleNocon(this, x, y, ptref);
 		(this)->Sketch( v);
 		break;
-	    case view_LeftUp:
-	    case view_RightUp:
+	    case view::LeftUp:
+	    case view::RightUp:
 		(this)->Sketch( v);
 		MoveHandleNocon(this, x, y, ptref);
 		(this)->RecomputeBounds();
@@ -210,20 +210,20 @@ boolean figogrp::Reshape(enum view_MouseAction  action, class figview  *v, long 
     }
     else {
 	switch (action) {
-	    case view_LeftDown:
-	    case view_RightDown:
+	    case view::LeftDown:
+	    case view::RightDown:
 		if ((this)->GetReadOnly())
 		    return FALSE;
 		(this)->Sketch( v);
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		(this)->Sketch( v);
 		MoveHandleCon(this, x, y, ptref);
 		(this)->Sketch( v);
 		break;
-	    case view_LeftUp:
-	    case view_RightUp:
+	    case view::LeftUp:
+	    case view::RightUp:
 		(this)->Sketch( v);
 		MoveHandleCon(this, x, y, ptref);
 		(this)->Reconfigure();

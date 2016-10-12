@@ -37,7 +37,7 @@ START_VIEW_MOUSE_METHOD(ButtonHitMethod, AOptionMenu, AOptionMenuv) {
         dself->SetSource(txt);
         txt->Destroy(); // the source slot will hang onto the text for us.
     }
-    if(action!=view_LeftDown) return;
+    if(action!=view::LeftDown) return;
     if(b==NULL) b=(AButton *)AWidget::NewWidget("OptionCard");
     if(b==NULL) {
         message::DisplayString(this, 100, "Couldn't create option menu.");
@@ -75,7 +75,7 @@ AOptionCardv::~AOptionCardv() {
 
 START_VIEW_MOUSE_METHOD(CardHitMethod, AButton, AOptionCardv) {
     (void)dself; (void)num_clicks; (void)within; /* unused */
-    if(action==view_LeftUp || action==view_RightUp) GetIM()->VanishWindow();
+    if(action==view::LeftUp || action==view::RightUp) GetIM()->VanishWindow();
     view *v=Label();
     if(v==NULL || !v->IsType(class_textview)) return;
     if(GetIM()==NULL) return;
@@ -98,7 +98,7 @@ START_VIEW_MOUSE_METHOD(CardHitMethod, AButton, AOptionCardv) {
         tv->WantInputFocus(tv);
         im::ForceUpdate();
     }
-    if(mv==NULL || action!=view_LeftUp) return;
+    if(mv==NULL || action!=view::LeftUp) return;
     long line=t->GetLineForPos(lpos);
     AOptionMenu *m=(AOptionMenu *)mv->GetDataObject();
     if(m) m->SetSelected(line);

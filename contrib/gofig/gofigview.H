@@ -29,18 +29,18 @@ class gofigview  : public  view    {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-	void FullUpdate(enum view_UpdateType type, 
+	void FullUpdate(enum view::UpdateType type, 
 		long left, long top, long width, long height);
 	void Update();
-	class view * Hit(enum view_MouseAction action, long x, long y, long n);
-	view_DSattributes DesiredSize(long width, long height, 
-		enum view_DSpass pass, long *desiredWidth, long *desiredHeight);
+	class view * Hit(enum view::MouseAction action, long x, long y, long n);
+	view::DSattributes DesiredSize(long width, long height, 
+		enum view::DSpass pass, long *desiredWidth, long *desiredHeight);
 	void ReceiveInputFocus();
 	void LoseInputFocus();
 	void ObservedChanged(class observable *dobj, long status);
 
 	virtual void DesiredPrintSize(long width, long height, 
-		enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+		enum view::DSpass pass, long *desiredwidth, long *desiredheight);
 	virtual void *GetPSPrintInterface(const char *printtype);
 	virtual void PrintPSRect(FILE *outfile, long logwidth, long logheight, 
 		struct rectangle *visrect);
@@ -57,7 +57,7 @@ public:
 	class keystate *Keystate;
 	class color *boardcolor;
 
-	boolean OnScreen;		/* if not view_Removed */
+	boolean OnScreen;		/* if not view::Removed */
 	boolean embedded;	/* TRUE if no call to GetApplicationLayer */
 	boolean HasInputFocus;	/* T if received input focus */
 

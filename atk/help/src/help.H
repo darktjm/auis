@@ -32,11 +32,11 @@ public:
  
      void PostMenus(class menulist *menuList);
      void PostKeyState(class keystate *keyState);
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void WantUpdate(class view *req);
      void Update();
      void LinkTree(class view *parent);
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
     
  
     

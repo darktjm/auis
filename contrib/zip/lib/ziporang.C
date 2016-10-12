@@ -75,7 +75,7 @@ ziporang::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   fi
   }
 
 long
-ziporang::Build_Object( zip_type_pane	   pane, enum view_MouseAction   action , long   x , long  y , long  clicks, zip_type_point		   X , zip_type_point  Y )
+ziporang::Build_Object( zip_type_pane	   pane, enum view::MouseAction   action , long   x , long  y , long  clicks, zip_type_point		   X , zip_type_point  Y )
           {
   long				  status = zip_ok;
   zip_type_figure		  figure;
@@ -83,7 +83,7 @@ ziporang::Build_Object( zip_type_pane	   pane, enum view_MouseAction   action , 
   IN(ziporang::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
         (this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_roundangle_figure,
 			 CurrentImage, NULL )) == zip_success )
@@ -97,7 +97,7 @@ ziporang::Build_Object( zip_type_pane	   pane, enum view_MouseAction   action , 
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
@@ -112,7 +112,7 @@ ziporang::Build_Object( zip_type_pane	   pane, enum view_MouseAction   action , 
 	  }
 	}
         break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
@@ -172,7 +172,7 @@ long Draw( class ziporang *self, zip_type_figure  figure, zip_type_pane  pane, l
   if ( figure->zip_figure_mode.zip_figure_mode_shaded  ||
        figure->zip_figure_mode.zip_figure_mode_patterned )
     {
-    if ( self->view_object->mouse_action != view_LeftMovement  &&  action == zip_draw )
+    if ( self->view_object->mouse_action != view::LeftMovement  &&  action == zip_draw )
       {
       if ( figure->zip_figure_mode.zip_figure_mode_patterned  &&
 	   (pattern = (self->data_object)->Contextual_Figure_Pattern(  figure )) )
@@ -197,7 +197,7 @@ long Draw( class ziporang *self, zip_type_figure  figure, zip_type_pane  pane, l
       else
       if ( action == zip_clear )
 	{
-	(self->view_object)->FillRRectSize(  left, top, width, height, radius, radius, graphic_WHITE );
+	(self->view_object)->FillRRectSize(  left, top, width, height, radius, radius, graphic::WHITE );
 	}
     }
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )

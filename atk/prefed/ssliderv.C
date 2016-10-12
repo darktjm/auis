@@ -17,7 +17,7 @@ ATKdefineRegistry(ssliderv, scroll, NULL);
 static void getinfo(class ssliderv  *self, struct range  *total , struct range  *seen , struct range  *dot);
 static long whatisat(class ssliderv  *self, long  numerator , long  denominator);
 static void setframe(class ssliderv  *self, long  position , long  numerator , long  denominator);
-static void endzone(class ssliderv  *self, int  end, enum view_MouseAction  action);
+static void endzone(class ssliderv  *self, int  end, enum view::MouseAction  action);
 
 
 ssliderv::ssliderv()
@@ -58,12 +58,12 @@ void ssliderv::SetFrame(long  pos , long  num , long  denom)
 {
 }
 
-static void endzone(class ssliderv  *self, int  end, enum view_MouseAction  action)
+static void endzone(class ssliderv  *self, int  end, enum view::MouseAction  action)
 {
     (self)->Endzone( end, action);
 }
 
-void ssliderv::Endzone(int  end, enum view_MouseAction  action)
+void ssliderv::Endzone(int  end, enum view::MouseAction  action)
 {
 }
     
@@ -74,27 +74,27 @@ const void *ssliderv::GetInterface(const char  *name)
     return &scrollInterface;
 }
 
-void ssliderv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void ssliderv::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     ((class scroll *)this)->desired.location=((class scroll *)this)->ideal_location;
     (this)->scroll::FullUpdate( type, left, top, width, height);
 }
 
 
-view_DSattributes ssliderv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes ssliderv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
    unsigned int loc=(unsigned int)(this)->GetLocation();
    int w=0, h=0;
-   view_DSattributes retval=view_Fixed;
+   view::DSattributes retval=view::Fixed;
    if(loc&(scroll_LEFT|scroll_RIGHT)) {
        w+=(this)->GetWidth()+10;
        h+=128;
-       retval=(view_DSattributes)(((int)retval) || view_HeightFlexible);
+       retval=(view::DSattributes)(((int)retval) || view::HeightFlexible);
    }
    if(loc&(scroll_TOP|scroll_BOTTOM)) {
        h+=(this)->GetWidth()+10;
        w+=128;
-       retval=(view_DSattributes)(((int)retval) || view_WidthFlexible);
+       retval=(view::DSattributes)(((int)retval) || view::WidthFlexible);
    }
   *dWidth=w;
   *dHeight=h;

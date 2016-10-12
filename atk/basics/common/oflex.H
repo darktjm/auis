@@ -18,21 +18,21 @@
  *  guarantee that one element is consecutive in memory to the next,
  *  except under specific conditions:
  *
- *  - After calling Insert(n), n elements at the insert positions are
+ *  - After calling \ref Insert(\e i, \e n), \e n elements at the insert position are
  *    guaranteed to be consecutive.
  *
- *  - After calling GetBuf(i, n, &l), l elements starting at i are
+ *  - After calling \ref GetBuf(\e i, \e n, &\e l), \e l elements starting at \e i are
  *    guaranteed to be consecutive.
  *
  *  These guarantees are invalidated, along with the guarantee that an
  *  address corresponds to a specific element, whenever the buffer
- *  is changed using Insert, Append, Remove, or GetBuf.  Every time
+ *  is changed using \ref Insert, \ref Append, \ref Remove, or \ref GetBuf.  Every time
  *  an element is moved due to such an edit, it is copied to its new
  *  location using the copy constructor, and then the destructor is
  *  called on the old version (This was written before move constructors
- *  of C++11 were available).  Whenever space is allocated using Insert
- *  or Append, the default constructor is called.  Whenever space is
- *  deallocated using Remove, the removed elements' destructors are called.
+ *  of C++11 were available).  Whenever space is allocated using \ref Insert
+ *  or \ref Append, the default constructor is called.  Whenever space is
+ *  deallocated using \ref Remove, the removed elements' destructors are called.
  *  This includes removal of all elements upon array destruction.
  */
 class oflex : public mflex {
@@ -89,14 +89,14 @@ class oflex : public mflex {
 };
 
 
-/** Derive oflex into a class for a specific element data type.
+/** Derive \ref oflex into a class for a specific element data type.
  *  \param name The name of the new array class.
  *  \param type The type for which the class is built.
  *  \param minsize The default minimum size of the array.  If you like
  *                 the 100-byte default on flex, use 100/sizeof(type).
  */
 #define DEFINE_OFLEX_CLASS(name,type,minsize) \
-/** An oflex array for type elements.  Created by DEFINE_OFLEX_CLASS(). */ \
+/** An \ref oflex array for type elements.  Created by DEFINE_OFLEX_CLASS(). */ \
 class name : public oflex { \
   public: \
     inline name(size_t n=minsize) : oflex(sizeof(type), n) { \
@@ -189,7 +189,7 @@ class name : public oflex { \
 	new(dest) type(*(const type *)src); } \
 }
 
-/** Create standard C++ iterators for an oflex-derived array.
+/** Create standard C++ iterators for an \ref oflex-derived array.
  *  \param name The name of the derived class.  The iterator class will
  *              be named <em>name</em>_iter.
  *  \param type The type of the derived class' array element. */
@@ -269,7 +269,7 @@ class Concat(name,_iter) { \
      *   \return TRUE if out-of-bounds of the defined range; FALSE otherwise.  */ \
 }
 
-/** Create standard C++ const iterators for an oflex-derived array.
+/** Create standard C++ const iterators for an \ref oflex-derived array.
  *  \param name The name of the derived class.  The iterator class will
  *              be named <em>name</em>_citer.
  *  \param type The type of the derived class' array element. */

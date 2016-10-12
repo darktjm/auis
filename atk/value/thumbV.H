@@ -19,7 +19,7 @@ public:
    void DrawHighlight();
    void DrawDehighlight();
    void DrawNewValue();
-   class valueview  * DoHit(enum view_MouseAction type, long x,long y,long hits)
+   class valueview  * DoHit(enum view::MouseAction type, long x,long y,long hits)
      ;
    void LookupParameters();
 

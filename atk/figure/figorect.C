@@ -175,7 +175,7 @@ void figorect::Draw(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
 
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     (v)->SetForegroundColor( col, 0, 0, 0); 
@@ -193,7 +193,7 @@ void figorect::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic_LineOnOffDash);
+	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
     }
 
     (v)->DrawRectSize(x, y, w, h); 
@@ -202,7 +202,7 @@ void figorect::Draw(class figview  *v)
 	(v)->SetLineWidth( 1);
 
     if (dash!=figattr_LineSolid)
-	(v)->SetLineDash(NULL, 0, graphic_LineSolid);
+	(v)->SetLineDash(NULL, 0, graphic::LineSolid);
 }
 
 void figorect::Sketch(class figview  *v) 
@@ -227,7 +227,7 @@ void figorect::Sketch(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h); 
 }
 
@@ -272,19 +272,19 @@ enum figobj_HitVal figorect::HitMe(long  x , long  y, long  delta, long  *ptref)
     return res;
 }
 
-enum figobj_Status figorect::Build(class figview  *v, enum view_MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
+enum figobj_Status figorect::Build(class figview  *v, enum view::MouseAction  action, long  x , long  y /* in fig coords */, long  clicks)   
 {
     long px, py;
     int signx, signy;
 
     switch (action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    (this)->PosX() = x;
 	    (this)->PosY() = y;
 	    (this)->RecomputeBounds();
 	    (this)->Sketch( v);
 	    return figobj_NotDone;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    (this)->Sketch( v);
 	    if (this->dummysymmetry) {
 		px = x - (this)->PosX();
@@ -310,7 +310,7 @@ enum figobj_Status figorect::Build(class figview  *v, enum view_MouseAction  act
 	    }
 	    (this)->Sketch( v);
 	    return figobj_NotDone;
-	case view_LeftUp:
+	case view::LeftUp:
 	    (this)->Sketch( v);
 	    if (this->dummysymmetry) {
 		px = x - (this)->PosX();
@@ -404,25 +404,25 @@ static void MoveHandle(class figorect  *self, long  x , long  y , long  ptref)
     }
 }
 
-boolean figorect::Reshape(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
+boolean figorect::Reshape(enum view::MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
     if (!handle)
 	return FALSE;
 
     switch (action) {
-	case view_LeftDown:
-	case view_RightDown:
+	case view::LeftDown:
+	case view::RightDown:
 	    if ((this)->GetReadOnly())
 		return FALSE;
 	    break;
-	case view_LeftMovement:
-	case view_RightMovement:
+	case view::LeftMovement:
+	case view::RightMovement:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->Sketch( v);
 	    break;
-	case view_LeftUp:
-	case view_RightUp:
+	case view::LeftUp:
+	case view::RightUp:
 	    (this)->Sketch( v);
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();

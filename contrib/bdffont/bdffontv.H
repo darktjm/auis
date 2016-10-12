@@ -27,7 +27,7 @@ public:
 	 void PostKeyState(class keystate *k);
 	 void PostMenus(class menulist *m);
 	 void SetDataObject(class dataobject *dataobject);
-	 void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+	 void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
 	 void ObservedChanged(class observable *changed, long value);
 	 void ReceiveInputFocus();
 	 void WantInputFocus(class view *target);

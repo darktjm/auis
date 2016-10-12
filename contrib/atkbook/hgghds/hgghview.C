@@ -36,7 +36,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ATKdefineRegistry(hgghview, lpair, hgghview::InitializeClass);
 static void ChangeButton(class hgghview  *self, long  param);
 static void ToggleProc(class hgghview  *self, long  param);
-static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view_MouseAction  action);
+static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view::MouseAction  action);
 
 
 void hgghview::SetDataObject(class hggh  *h)
@@ -68,10 +68,10 @@ static void ToggleProc(class hgghview  *self, long  param)
     (v2)->WantInputFocus(v2);
 }
 
-static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view_MouseAction  action)
+static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view::MouseAction  action)
 {
     /*class hgghview  *self = (class hgghview *)rock;*/
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	ToggleProc(self, 0);
     }
 }

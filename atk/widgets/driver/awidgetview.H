@@ -39,13 +39,13 @@ public:
 	view *GetApplicationLayer();
 	void LinkTree(view *parent);
 	void InitChildren();
-	void FullUpdate(enum view_UpdateType type, 
+	void FullUpdate(enum view::UpdateType type, 
 		long left, long top, long width, long height);
 	void Update();
 	void SetDataObject(class dataobject *d);
-	view * Hit(enum view_MouseAction action, long x, long y, long n);
-	view_DSattributes DesiredSize(long width, long height, 
-		enum view_DSpass pass, long *desiredWidth, long *desiredHeight) ;
+	view * Hit(enum view::MouseAction action, long x, long y, long n);
+	view::DSattributes DesiredSize(long width, long height, 
+		enum view::DSpass pass, long *desiredWidth, long *desiredHeight) ;
 	void WantUpdate(view *requestor);
 	void ReceiveInputFocus();
         void LoseInputFocus();
@@ -55,8 +55,8 @@ public:
 	void GetOrigin(long width, long height, 
 			long *originX, long *originY);
 
-	boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-	boolean RecSrchResume(struct SearchPattern *pat);
+	boolean RecSearch(class search *pat, boolean toplevel);
+	boolean RecSrchResume(class search *pat);
 	boolean RecSrchReplace(class dataobject *text, long pos, long len);
 	void RecSrchExpose(const struct rectangle &logical, 
 		struct rectangle &hit);

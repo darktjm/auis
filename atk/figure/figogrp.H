@@ -34,8 +34,8 @@ public:
        void Draw(class figview *v); 
        void Sketch(class figview *v);
        void Select(class figview *v); 
-       enum figobj_Status Build( class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ;
-       boolean Reshape(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+       enum figobj_Status Build( class figview *v, enum view::MouseAction action, long x, long y, long clicks)  ;
+       boolean Reshape(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
        void MoveHandle(long x, long y, long ptref);
        enum figobj_HandleType GetHandleType(long num)  ;
        long * GetCanonicalHandles()  ;

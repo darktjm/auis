@@ -65,7 +65,7 @@ static short FreeSlot( class cltextview  * self )
   return j;
 }
 
-void cltextview::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
+void cltextview::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
                                     {
 	int i;
 	for (i = 0; i < this->maxObservers; ++i)
@@ -122,7 +122,7 @@ cltextview::cltextview()
   (this->cursor)->SetStandard(Cursor_LeftPointer);
   THROWONFAILURE( TRUE);
 }
-void cltextview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void cltextview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle rect;
     (this)->textview::FullUpdate( type, left, top, width, height);

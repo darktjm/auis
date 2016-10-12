@@ -70,7 +70,7 @@ static char *TrimWhiteSpace(char  *buf, int  pos)
 }
 
 /* override */
-void hlptextview::GetClickPosition(long  position , long  numberOfClicks, enum view_MouseAction  action, long  startLeft , long  startRight , long  *leftPos , long  *rightPos)
+void hlptextview::GetClickPosition(long  position , long  numberOfClicks, enum view::MouseAction  action, long  startLeft , long  startRight , long  *leftPos , long  *rightPos)
 {
     (this)->textview::GetClickPosition( position, numberOfClicks, action, startLeft, startRight, leftPos, rightPos);
     if ((this)->GetHyperlinkCheck()) {

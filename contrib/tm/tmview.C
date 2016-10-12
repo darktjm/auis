@@ -157,7 +157,7 @@ void tmview::Update()
     (this)->textview::Update();
 }
 
-void tmview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void tmview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     class termulator *tm=(class termulator *)this->dataobject;
 
@@ -224,7 +224,7 @@ tmview::~tmview()
     }
 }	
 
-void tmview::GetClickPosition(long  pos,long  noc,enum view_MouseAction  action,long  startLeft,long  startRight,long  *leftPosP,long  *rightPosP)
+void tmview::GetClickPosition(long  pos,long  noc,enum view::MouseAction  action,long  startLeft,long  startRight,long  *leftPosP,long  *rightPosP)
 {
     if(noc%3!=0){
 	(this)->textview::GetClickPosition(pos,noc,action,startLeft, startRight,leftPosP,rightPosP);

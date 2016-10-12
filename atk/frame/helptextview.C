@@ -21,9 +21,9 @@ static char *helptextview_getstartstring(class helptextview  *self,char  *buf);
 void helptextview::WantInputFocus(class view  *vw)
 {   /* ignore requests for input focus */
 }
-class view *helptextview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helptextview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
-    if (action == view_LeftDown  || action == view_LeftUp) 
+    if (action == view::LeftDown  || action == view::LeftUp) 
 	return (this)->textview::Hit( action, x, y, numberOfClicks);
     return NULL;
 }
@@ -49,13 +49,13 @@ static char *helptextview_getstartstring(class helptextview  *self,char  *buf)
     *bp = '\0';
     return bp;
 }
-void helptextview::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
+void helptextview::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
 {   
     char buf[512], *bp;
     int pos;
     class text *doc = Text(this);
     (this)->textview::GetClickPosition( position,3, action, startLeft, startRight, leftPos, rightPos);
-    if (action != view_LeftDown ) return;
+    if (action != view::LeftDown ) return;
     *buf = '\0';
     message::GetCurrentString(this,buf,512) ;
     if(*buf)message::DeleteCharacters(this, 0, strlen(buf));
@@ -71,7 +71,7 @@ void helptextview::GetClickPosition(long  position, long  numberOfClicks, enum v
     message::InsertCharacters(this, 0, buf, bp - buf);
     message::SetCursorPos(this,bp - buf);
 }
-void helptextview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void helptextview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle tr;
     (this)->textview::FullUpdate( type, left, top, width, height);

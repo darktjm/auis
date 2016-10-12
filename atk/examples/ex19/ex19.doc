@@ -181,7 +181,7 @@ Only one window cursor and one process cursor is allowed per window.
 
 Views that use either of these kinds of cursors should make sure to unset them 
 when their input focus is lost.  Parent views should call 
-\italic{view_RetractViewCursors} on their children before calling their 
+\italic{view::RetractViewCursors} on their children before calling their 
 child's \italic{FullUpdate} routine, but view cursors are automatically 
 retracted (but not destroyed) during a \italic{FullUpdate}. \indexi{Full 
 Update} It is up to the view's FullUpdate method to repost view cursors if 
@@ -198,10 +198,10 @@ Process cursors are set by the interaction manager with a call to
 
 \italic{im_SetProcessCursor}, window cursors are posted by a call to 
 \italic{im_SetWindowCursor}, and view cursors are posted with a call to 
-\italic{view_PostCursor}.  Cursor posts are time dependent, and the last post 
+\italic{view::PostCursor}.  Cursor posts are time dependent, and the last post 
 made will always have precedence over previous posts.  However, reposting an 
 already posted cursor will not affect its precedence. To give a reposted 
-cursor priority over other cursors, you  first call \italic{view_RetractCursor} 
+cursor priority over other cursors, you  first call \italic{view::RetractCursor} 
  to take the cursor out completely, then repost it. 
  \indexi{Cursors++Retracting}
 
@@ -225,11 +225,11 @@ window or process cursor is unset.
 returns a pointer to the newly created instance of the cursor.  You would call 
 this procedure to create the cursor, and use the methods below to set its 
 shape, then use one of \italic{im_SetProcessCursor}, 
-\italic{im_SetWindowCursor}, or \italic{view_PostCursor} to post it. 
+\italic{im_SetWindowCursor}, or \italic{view::PostCursor} to post it. 
 
 \indexi{ \italic{cursor_Create}}  
 
-\indexi{ \italic{im_SetWindowCursor}} \indexi{ \italic{view_PostCursor}}
+\indexi{ \italic{im_SetWindowCursor}} \indexi{ \italic{view::PostCursor}}
 
 
 The following cursors are currently supported under WM and X window managers. 
@@ -313,12 +313,12 @@ overrides:
 
     SetDataObject(struct helloworld *hw);
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -500,9 +500,9 @@ struct helloworldview *hwv;
 
     if(hwv->view!=NULL)\{
 
-	view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	view_Destroy(hwv->view);
+	view::Destroy(hwv->view);
 
     \}
 
@@ -539,7 +539,7 @@ void helloworldview__FullUpdate(hwv,type,left,top,width,height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -601,7 +601,7 @@ long height;
 	hwv->y-hwv->frameY-1,WIDTH+1,HEIGHT+1);
 
 
-    helloworldview_SetTransferMode(hwv,graphic_COPY);
+    helloworldview_SetTransferMode(hwv,graphic::COPY);
 
 
     if(hw->blackOnWhite)\{
@@ -634,13 +634,13 @@ long height;
     rec.height--;
 
 
-    view_InsertView(hwv->applayer,hwv,&rec);
+    view::InsertView(hwv->applayer,hwv,&rec);
 
 }\formatnote{ 
 \bold{      helloworldview_RetractViewCursors(hwv,hwv->applayer);}
 
 
-    view_FullUpdate(hwv->applayer,view_FullRedraw,0,0,WIDTH,HEIGHT);
+    view::FullUpdate(hwv->applayer,view::FullRedraw,0,0,WIDTH,HEIGHT);
 
     hwv->redrawSubView=FALSE;
 
@@ -650,9 +650,9 @@ long height;
 View cursors are posted and retracted (but not destroyed) in an object's Full 
 Update method.  In this example, the only view cursor is the large X or cross 
 cursor in helloworldview which switches to an arrow cursor in textview.  The 
-view_PostCursor method is used to post view cursors.  The method takes a view, 
+view::PostCursor method is used to post view cursors.  The method takes a view, 
 a rectangle in the view, and a cursor pointer.  Correspondingly, the 
-view_RetractViewCursors method takes a view and a view requesting the 
+view::RetractViewCursors method takes a view and a view requesting the 
 retraction; the request is sent to the interaction manager to retract a 
 previously posted cursor. 
 
@@ -693,7 +693,7 @@ struct view *helloworldview__Hit(hwv,action,x,y,numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -712,7 +712,7 @@ long numberOfClicks;
 
 	y>=(hwv->y-hwv->frameY) && y<(hwv->y-hwv->frameY+HEIGHT))
 
-	return view_Hit(hwv->applayer,
+	return view::Hit(hwv->applayer,
 
 			action,
 
@@ -727,13 +727,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -745,7 +745,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -755,7 +755,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -782,11 +782,11 @@ long numberOfClicks;
 
 	    struct cursor *activeCursor;
 
-	    case view_RightDown:
+	    case view::RightDown:
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
-	        if(action==view_RightDown)\{
+	        if(action==view::RightDown)\{
 
                         hwv->hitX=x;
 
@@ -1101,12 +1101,12 @@ overrides:
 
     SetDataObject(struct helloworld *hw);
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long right);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -1286,9 +1286,9 @@ struct helloworldview *hwv;
 
     if(hwv->view!=NULL)\{
 
-	view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	view_Destroy(hwv->view);
+	view::Destroy(hwv->view);
 
     \}
 
@@ -1311,7 +1311,7 @@ struct view *parent;
 
     if(hwv->applayer!=NULL)
 
-	view_LinkTree(hwv->applayer,hwv);
+	view::LinkTree(hwv->applayer,hwv);
 
     super_LinkTree(hwv,parent);
 
@@ -1328,13 +1328,13 @@ struct dataobject *dobj;
 
     if(hwv->view!=NULL)\{
 
-	view_UnlinkTree(hwv->applayer);
+	view::UnlinkTree(hwv->applayer);
 
 	if(hwv->view!=hwv->applayer)
 
-	    view_DeleteApplicationLayer(hwv->view,hwv->applayer);
+	    view::DeleteApplicationLayer(hwv->view,hwv->applayer);
 
-	view_Destroy(hwv->view);
+	view::Destroy(hwv->view);
 
     \}
 
@@ -1344,17 +1344,17 @@ struct dataobject *dobj;
 	hwv->view=(struct view *)class_NewObject(dataobject::ViewName(dobj));
 
 
-	hwv->applayer=view_GetApplicationLayer(hwv->view);
+	hwv->applayer=view::GetApplicationLayer(hwv->view);
 
 	if(hwv->applayer==NULL)
 
 	    hwv->applayer=hwv->view;
 
 
-	view_SetDataObject(hwv->view,dobj);
+	view::SetDataObject(hwv->view,dobj);
 
 
-	view_LinkTree(hwv->applayer,hwv);
+	view::LinkTree(hwv->applayer,hwv);
 
     \}else
 
@@ -1457,7 +1457,7 @@ void helloworldview__FullUpdate(hwv,type,left,top,width,height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -1519,7 +1519,7 @@ long height;
 	hwv->y-hwv->frameY-1,WIDTH+1,HEIGHT+1);
 
 
-    helloworldview_SetTransferMode(hwv,graphic_COPY);
+    helloworldview_SetTransferMode(hwv,graphic::COPY);
 
 
     if(hw->blackOnWhite)\{
@@ -1552,7 +1552,7 @@ long height;
     rec.height--;
 
 
-    view_InsertView(hwv->applayer,hwv,&rec);
+    view::InsertView(hwv->applayer,hwv,&rec);
 
 	
 
@@ -1565,7 +1565,7 @@ long height;
     helloworldview_RetractViewCursors(hwv,hwv->applayer);
 
 
-    view_FullUpdate(hwv->applayer,view_FullRedraw,0,0,WIDTH,HEIGHT);
+    view::FullUpdate(hwv->applayer,view::FullRedraw,0,0,WIDTH,HEIGHT);
 
     hwv->redrawSubView=FALSE;
 
@@ -1581,7 +1581,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if(hwv->x!=hw->x ||
@@ -1669,7 +1669,7 @@ struct helloworldview *hwv;
 
 		hwv->y-hwv->frameY,WIDTH,HEIGHT);
 
-	view_InsertView(hwv->applayer,hwv,&rec);
+	view::InsertView(hwv->applayer,hwv,&rec);
 
 
 	if(hw->blackOnWhite)
@@ -1682,7 +1682,7 @@ struct helloworldview *hwv;
 	helloworldview_RetractViewCursors(hwv,hwv->applayer);
 
 
-	view_FullUpdate(hwv->applayer,view_FullRedraw,0,0,
+	view::FullUpdate(hwv->applayer,view::FullRedraw,0,0,
 
 		WIDTH,HEIGHT);
 
@@ -1690,7 +1690,7 @@ struct helloworldview *hwv;
 
     \}else
 
-	view_Update(hwv->applayer);
+	view::Update(hwv->applayer);
 
 \}
 
@@ -1700,7 +1700,7 @@ struct view *helloworldview__Hit(hwv,action,x,y,numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -1719,7 +1719,7 @@ long numberOfClicks;
 
 	y>=(hwv->y-hwv->frameY) && y<(hwv->y-hwv->frameY+HEIGHT))
 
-	return view_Hit(hwv->applayer,
+	return view::Hit(hwv->applayer,
 
 			action,
 
@@ -1734,13 +1734,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -1752,7 +1752,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -1762,7 +1762,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -1790,11 +1790,11 @@ long numberOfClicks;
 
 		struct cursor *activeCursor;
 
-	    case view_RightDown:
+	    case view::RightDown:
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
-		if(action==view_RightDown)\{
+		if(action==view::RightDown)\{
 
 		    hwv->hitX=x;
 
@@ -2363,12 +2363,12 @@ struct view *v;
 
     else\{
 
-	struct view *al=view_GetApplicationLayer(v);
+	struct view *al=view::GetApplicationLayer(v);
 
 
 	if(al==NULL)\{
 
-	    view_Destroy(v);
+	    view::Destroy(v);
 
 	    return NULL;
 
@@ -2412,9 +2412,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(al2==NULL) \{
 
-	view_DeleteApplicationLayer(v1,al1);
+	view::DeleteApplicationLayer(v1,al1);
 
-    	view_Destroy(v1);
+    	view::Destroy(v1);
 
 	return FALSE;
 
@@ -2425,9 +2425,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(lpAl==NULL) \{
 
-	view_DeleteApplicationLayer(v2,al2);
+	view::DeleteApplicationLayer(v2,al2);
 
-    	view_Destroy(v2);
+    	view::Destroy(v2);
 
 	return FALSE;
 
@@ -2467,16 +2467,16 @@ struct dataobject *dobj1,*dobj2;
     \}
 
 
-    view_SetDataObject(v1,dobj1);
+    view::SetDataObject(v1,dobj1);
 
-    view_SetDataObject(v2,dobj2);
+    view::SetDataObject(v2,dobj2);
 
     frame_SetView(frame,lpAl);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v1,v1);
+    view::WantInputFocus(v1,v1);
 
 
     return TRUE;

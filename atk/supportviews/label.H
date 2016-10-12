@@ -34,13 +34,13 @@ label.H
 
 /* values for various attributes */
 
-#define	label_NOJUST		graphic_NOMOVEMENT
-#define	label_LEFTJUST		graphic_ATLEFT
-#define	label_RIGHTJUST		graphic_ATRIGHT
-#define	label_HCENTERJUST	graphic_BETWEENLEFTANDRIGHT
-#define	label_TOPJUST		graphic_ATTOP
-#define	label_BOTTOMJUST	graphic_ATBOTTOM
-#define	label_VCENTERJUST	graphic_BETWEENTOPANDBOTTOM
+#define	label_NOJUST		graphic::NOMOVEMENT
+#define	label_LEFTJUST		graphic::ATLEFT
+#define	label_RIGHTJUST		graphic::ATRIGHT
+#define	label_HCENTERJUST	graphic::BETWEENLEFTANDRIGHT
+#define	label_TOPJUST		graphic::ATTOP
+#define	label_BOTTOMJUST	graphic::ATBOTTOM
+#define	label_VCENTERJUST	graphic::BETWEENTOPANDBOTTOM
 #define	label_CENTERED		label_HCENTERJUST | label_VCENTERJUST
 
 #define	label_BOXED		0x80

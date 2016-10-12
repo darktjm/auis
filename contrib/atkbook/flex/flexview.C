@@ -118,7 +118,7 @@ flexview::~flexview()
       take care of the subviews */
 }
 
-void flexview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
+void flexview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
     class flexd *flexd = (class flexd *)
       (this)->GetDataObject();
@@ -172,11 +172,11 @@ static void DrawMe(class flexview  *self)
     (self)->MoveTo( (r.left + r.width) / 2,
 			 (r.top + r.height) / 2);
     (self)->DrawString( "<No objects>",
-	graphic_BETWEENLEFTANDRIGHT
-	| graphic_BETWEENTOPANDBASELINE);
+	graphic::BETWEENLEFTANDRIGHT
+	| graphic::BETWEENTOPANDBASELINE);
 }
 
-class view *flexview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  numberOfClicks)
+class view *flexview::Hit(enum view::MouseAction  action,long  x ,long  y ,long  numberOfClicks)
 {
     class view *v;
     class flexd *flexd = (class flexd *)
@@ -232,7 +232,7 @@ void flexview::PostMenus(class menulist  *ml)
     (this)->lpair::PostMenus( myml);
 }
 
-view_DSattributes flexview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view::DSattributes flexview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 { 
     if (this->rightview) {
 	return((this)->lpair::DesiredSize( width, height, pass,
@@ -240,7 +240,7 @@ view_DSattributes flexview::DesiredSize(long  width , long  height, enum view_DS
     }
     *desiredwidth = 200;
     *desiredheight = 100;
-    return(view_WidthFlexible | view_HeightFlexible);
+    return(view::WidthFlexible | view::HeightFlexible);
 }
 
 static boolean CreateViews(class flexview  *self)
@@ -348,7 +348,7 @@ static void DeleteObjects(class flexview  *self)
 	 &result, Choices, NULL) < 0) return;
     if (result != 0 && result != 1) return;
     /* The following two lines will call
-      view_UnlinkTree on self->leftview,
+      view::UnlinkTree on self->leftview,
       so we don't need to do it here */
     (self)->SetNth( 0, NULL);
     (self)->SetNth( 1, NULL);

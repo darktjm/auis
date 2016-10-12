@@ -29,7 +29,7 @@ public:
 	virtual ~diredview();
 
      void SetDataObject(class dataobject *object);
-     class view * Hit(enum view_MouseAction action, long x, long y,
+     class view * Hit(enum view::MouseAction action, long x, long y,
       long numberOfClicks)  ;
      void PostKeyState(class keystate *keystate);
      void PostMenus(class menulist *menus);

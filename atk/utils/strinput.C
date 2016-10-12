@@ -121,7 +121,7 @@ void strinput::SetInput(char  *string)
     (this->textv)->SetDotPosition( (this->textobj)->GetLength());
 }
 
-void strinput::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void strinput::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle child;
 
@@ -130,7 +130,7 @@ void strinput::FullUpdate(enum view_UpdateType  type, long  left , long  top , l
     (this->textv)->FullUpdate( type, 0, 0, child.width, child.height);
 }
 
-class view *strinput::Hit(enum view_MouseAction  action, long  x , long  y , long  clicks)
+class view *strinput::Hit(enum view::MouseAction  action, long  x , long  y , long  clicks)
 {
     return (this->textv)->Hit( action, x, y, clicks);
 }

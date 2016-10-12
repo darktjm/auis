@@ -112,7 +112,7 @@ circlepiview::LinkTree(class view  *parent)
     (this)->view::LinkTree( parent);
 
     if ((this)->GetIM() != NULL) {
-	if ((this)->DisplayClass() & graphic_Color) {
+	if ((this)->DisplayClass() & graphic::Color) {
 	    this->color = 1;
 	} else {
 	    this->color = 0;
@@ -122,13 +122,13 @@ circlepiview::LinkTree(class view  *parent)
 
 
 void
-circlepiview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+circlepiview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Do an update.
 */
 
-  if ((type == view_FullRedraw) || (type == view_LastPartialRedraw)) {
+  if ((type == view::FullRedraw) || (type == view::LastPartialRedraw)) {
     this->need_full_update = TRUE;
     (this)->WantUpdate( this);
   }
@@ -152,7 +152,7 @@ static void step(class circlepiview  *self  , double  x , double  y , double  si
       *inside += (side*side)/(double)(4.0);
       if (self->color) {
 	  (self)->SetFGColor( 0.0, 0.0, 1.0);
-	  (self)->SetTransferMode( graphic_COPY);
+	  (self)->SetTransferMode( graphic::COPY);
 	  tile = NULL;
       } else {
 	  tile = (self)->GrayPattern( 2, 2);
@@ -170,7 +170,7 @@ static void step(class circlepiview  *self  , double  x , double  y , double  si
       *outside += (side*side)/(double)(4.0);
       if (self->color) {
 	  (self)->SetFGColor( 1.0, 0.0, 0.0);
-	  (self)->SetTransferMode( graphic_COPY);
+	  (self)->SetTransferMode( graphic::COPY);
 	  tile = NULL;
       } else {
 	  tile = (self)->GrayPattern( 0, 2);
@@ -209,7 +209,7 @@ circlepiview::Update()
     (this)->EraseVisualRect();
     if (this->color) {
 	(this)->SetFGColor( 0.0, 1.0, 0.0);
-	(this)->SetTransferMode( graphic_COPY);
+	(this)->SetTransferMode( graphic::COPY);
 	tile = NULL;
     } else {
 	tile = (this)->GrayPattern( 1, 2);
@@ -234,14 +234,14 @@ circlepiview::Update()
 
 
 class view *
-circlepiview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+circlepiview::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
 /*
   Handle the button event.  Currently, semantics are:
   left up  --  receive input focus (to post menus)
 */
     switch (action) {
-      case view_LeftUp:
+      case view::LeftUp:
 	(this)->WantInputFocus(this);
 	break;
       default:

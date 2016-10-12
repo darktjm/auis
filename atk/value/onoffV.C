@@ -97,7 +97,7 @@ void onoffV::LookupParameters()
     else
 	fontsize = 10;
     if(bv->mono == -10)
-	bv->mono = ((bv)->DisplayClass() & graphic_Monochrome);
+	bv->mono = ((bv)->DisplayClass() & graphic::Monochrome);
 
     if(!bv->mono){
 	if (parameters[4].found)

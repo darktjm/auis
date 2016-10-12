@@ -10,7 +10,7 @@
 /** \addtogroup libtextobjs
  * @{ */
 struct p_option {
-    struct view_printopt *op;
+    struct view::printopt *op;
     class environment *env, *ansenv;
     boolean changed;
     char *answer; /* points to an allocated string of at least ANSWERLEN+1 chars */
@@ -21,11 +21,11 @@ class printopts  : public  textview {
   public:
     virtual ATKregistryEntry *ATKregistry();
 
-    class view * Hit(enum view_MouseAction action, long x, long y, long n);
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *desiredWidth, long *desiredHeight);
+    class view * Hit(enum view::MouseAction action, long x, long y, long n);
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *desiredWidth, long *desiredHeight);
     void PostKeyState(class keystate *ks);
     void PostMenus(class menulist *ml);
-    struct view_printoptlist *PrintOptions();
+    struct view::printoptlist *PrintOptions();
 
 
     static boolean InitializeClass();

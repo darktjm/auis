@@ -173,7 +173,7 @@ static const char		  ExplodePhrase[]   = "Explode",
 
 
 ATKdefineRegistry(orgv, aptv, orgv::InitializeClass);
-static long Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
+static long Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view::MouseAction    action, long			    x , long			    y , long			    clicks );
 static void Add_Command( class orgv  *self );
 static void Delete_Command( class orgv  *self );
 static void Rename_Command( class orgv  *self );
@@ -189,7 +189,7 @@ static void Alter_Control_Button( class orgv  *self, long  datum, const char  *n
 static void Passivate( class orgv  *self );
 static void Activate( class orgv  *self );
 static void FullUpdate_Tree( class orgv  *self );
-static long Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view_MouseAction   action, long			   x , long			   y , long			   clicks );
+static long Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view::MouseAction   action, long			   x , long			   y , long			   clicks );
 static void Prepare_Description( class orgv  *self, struct tree_node  *node );
 
 
@@ -485,20 +485,20 @@ orgv::SetHitHandler( org_hitfptr handler, class view  *anchor )
 }
 
 void
-orgv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
+orgv::FullUpdate( enum view::UpdateType  type, long  left , long  top , long  width , long  height )
       {
   class orgv *self=this;
   long controls = PaletteExposed * PaletteHeight;
 
   IN(orgv_FullUpdate);
   DEBUGdt(Type,type);
-  if ( ! IgnoreFullUpdate  &&  (type == view_FullRedraw  ||  type == view_LastPartialRedraw) ) {
+  if ( ! IgnoreFullUpdate  &&  (type == view::FullRedraw  ||  type == view::LastPartialRedraw) ) {
     (this)->aptv::FullUpdate(  type, left, top, width, height );
     Left = (this )->BodyLeft( );
     Top = (this )->BodyTop( );
     Width = (this )->BodyWidth( );
     Height = (this )->BodyHeight( );
-    (this)->SetTransferMode(  graphic_COPY );
+    (this)->SetTransferMode(  graphic::COPY );
     if ( FirstTime ) { DEBUG(FirstTime);
       FirstTime = false;
       if ( (Tree )->RootNode( ) ) { DEBUG(RootNode);
@@ -536,14 +536,14 @@ orgv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  wid
 }
 
 class view *
-orgv::Hit( enum view_MouseAction  action, long  x , long  y , long  clicks )
+orgv::Hit( enum view::MouseAction  action, long  x , long  y , long  clicks )
       {
   class orgv *self=this;
   class view *hit = (class view *) this;
 
   IN(orgv_Hit );
   (this)->Announce(  "" );
-  if ( !InputFocus  &&  action == view_LeftDown ) { DEBUG(Grab IF);
+  if ( !InputFocus  &&  action == view::LeftDown ) { DEBUG(Grab IF);
     (this)->WantInputFocus(  this );
   }
   if ( InputFocus ) {
@@ -568,11 +568,11 @@ orgv::Hit( enum view_MouseAction  action, long  x , long  y , long  clicks )
   return(hit);
 }
 
-view_DSattributes
-orgv::DesiredSize( long		      given_width , long		      given_height, enum view_DSpass   pass, long		     *desired_width , long		     *desired_height )
+view::DSattributes
+orgv::DesiredSize( long		      given_width , long		      given_height, enum view::DSpass   pass, long		     *desired_width , long		     *desired_height )
         {
   class orgv *self=this;
-  view_DSattributes result = view_WidthFlexible | view_HeightFlexible;
+  view::DSattributes result = view::WidthFlexible | view::HeightFlexible;
   IN(orgv_DesiredSize);
   if ( TreeView )
     result = (TreeView)->DesiredSize(  given_width, given_height, pass, desired_width, desired_height );
@@ -581,13 +581,13 @@ orgv::DesiredSize( long		      given_width , long		      given_height, enum view
 }
 
 static long
-Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
+Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view::MouseAction    action, long			    x , long			    y , long			    clicks )
             {
   char msg[512];
 
   IN(Control_Button_Hit);
   DEBUGdt(Action,action);
-  if ( type == suite_ItemObject  &&  action == view_LeftUp ) {
+  if ( type == suite_ItemObject  &&  action == view::LeftUp ) {
     switch ( (suite)->ItemAttribute(  item, suite_itemdatum ) ) {
       case  add_code:		Add_Command( self );		break;
       case  delete_code:	Delete_Command( self );		break;
@@ -765,7 +765,7 @@ Node_Border_Command( class orgv  *self )
     (TreeView)->SetTreeAttribute( 
 	treev_NodeBorderStyle( (NodeBorderStyle = style) ) );
   IgnoreLoseInputFocus = IgnoreFullUpdate = false;
-  (self)->FullUpdate(  view_FullRedraw, 0, 0, Width-3, Height-3 );
+  (self)->FullUpdate(  view::FullRedraw, 0, 0, Width-3, Height-3 );
   OUT(Node_Border_Command);
 }
 
@@ -794,7 +794,7 @@ Node_Connector_Command( class orgv  *self )
 	    (NodeConnectorStyle = style) ) );
   }
   IgnoreLoseInputFocus = IgnoreFullUpdate = false;
-  (self)->FullUpdate(  view_FullRedraw, 0, 0, Width-3, Height-3 );
+  (self)->FullUpdate(  view::FullRedraw, 0, 0, Width-3, Height-3 );
   OUT(Node_Connector_Command);
 }
 
@@ -815,7 +815,7 @@ Palette_Command( class orgv  *self )
     (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_palette_hidden) | menu_palette_exposed );
   else
       (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_palette_exposed) | menu_palette_hidden );
-  (self)->FullUpdate(  view_FullRedraw, 0, 0, Width, Height );
+  (self)->FullUpdate(  view::FullRedraw, 0, 0, Width, Height );
   (self)->PostMenus(  Menu );
   OUT(Palette_Command);
 }
@@ -833,8 +833,8 @@ Description_Command( class orgv  *self )
       (PairView)->VSplit(  TreeView, DescriptionViewScroll, 0, 1 );
       (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_description_exposed) | menu_description_hidden );
   }
-  (PairView)->FullUpdate(  view_FullRedraw, 0, 0, Width, Height - (PaletteExposed * PaletteHeight));
-  (self)->SetTransferMode(  graphic_COPY );
+  (PairView)->FullUpdate(  view::FullRedraw, 0, 0, Width, Height - (PaletteExposed * PaletteHeight));
+  (self)->SetTransferMode(  graphic::COPY );
   (self)->PostMenus(  Menu );
   OUT(Description_Command);
 }
@@ -903,19 +903,19 @@ void FullUpdate_Tree( class orgv  *self )
   struct rectangle bounds;
 
   ((PairView)->GetNth(  0 ))->GetLogicalBounds(  &bounds );
-  ((PairView)->GetNth(  0 ))->FullUpdate(  view_FullRedraw, bounds.left, bounds.top, bounds.width, bounds.height );
+  ((PairView)->GetNth(  0 ))->FullUpdate(  view::FullRedraw, bounds.left, bounds.top, bounds.width, bounds.height );
   (self)->Announce(  "" );
   (self)->PostMenus(  Menu );
 }
 
 static long
-Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view_MouseAction   action, long			   x , long			   y , long			   clicks )
+Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view::MouseAction   action, long			   x , long			   y , long			   clicks )
             {
   IN(Tree_Hit);
   DEBUGdt(Type,type);
   DEBUGdt(Action,action);
   if ( type == treev_NodeObject ) { DEBUG(Node ::Hit);
-    if ( action == view_LeftDown  &&  node != PreviousNode ) {
+    if ( action == view::LeftDown  &&  node != PreviousNode ) {
 	PreviousNode = node;
 	(TreeView)->HighlightNode(  node );
 	if ( ! (TreeView)->NodeExploded(  node ) ) {

@@ -23,10 +23,10 @@ public:
       
 	virtual ~monthview();
     
-       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+       void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
        void Update();
-       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-       view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+       class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+       view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
        void LinkTree(class view *parent);
     
       virtual void SetTextview(class textview *tv);

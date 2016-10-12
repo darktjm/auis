@@ -54,17 +54,17 @@
  *  The data stream is represented as a collection of data object definitions
  *  and views that refer to those data objects.  Data objects can be included
  *  in a file using the construct:
- *
- *  <pre><code>
+ *  \pcode
  *     \\begindata{<em>datatype</em>, <em>dataID</em>}
  *         <em>&lt;data object data&gt;</em>
  *     \\enddata{<em>datatyp</em>e, <em>dataID</em>}
- *  </code></pre>
+ *  \endpcode
  *
  *  The \c \\begindata, \c \\enddata pair mark the extent of the data
  *  included in a particular data object.  The \e datatype is the type of
- *  data being stored (e.g. text, raster, etc).  The \e dataID is a
- *  unique ID number that identifies the particular data object.  No two data
+ *  data being stored (e.g. text, raster, etc), as returned by GetTypeName().
+ *  The \e dataID is a unique ID number that identifies the particular data
+ *  object (usually that returned by GetID()).  No two data
  *  objects in the same file/stream will have the same \e dataID;
  *  however, two data objects in different streams may coincidentally have the
  *  same ID number.
@@ -157,9 +157,13 @@ public:
      *   number of (or no) backslashes.  This is so that streams containing
      *   data objects currently unrecognized by the system can skip these
      *   unknown objects, retaining their data for future use.
-     *   Well-formed data streams should be pure ASCII, with short lines
-     *   (76 characters), and with all occurrences of \\, {, and } escaped
-     *   with \\.
+     *   Well-formed data streams should survive mail transport unmodified.
+     *   That is, they should be pure printable ASCII, with short lines
+     *   (76 characters), no trailing spaces on any line, and with all
+     *   occurrences of \\, {, and } escaped with \\.  Hoever, even \ref text,
+     *   the most popular data object, does not fully conform, so this is
+     *   only a good rule of thumb.  The stream can always be encoded using
+     *   quoted-printable or, at worst, base64 if needed for mail transport.
      *
      *   Note that no provision is made to signal failure except via the
      *   error indication on the file pointer.
@@ -187,11 +191,11 @@ public:
 	 *   encoded and written, or application/andrew-inset, in which case
 	 *   the ATK data stream should be encoded and written.  The output
 	 *   from WriteOtherFormat() should start with a newline, followed by:
-	 *   <pre><code>
+	 *   \pcode
 	 *     --<em>boundary</em>
 	 *     Content-type: <em>mime/type</em>
 	 *     Content-Transfer-Encoding: <em>encoding</em>
-	 *   </code></pre>
+	 *   \endpcode
 	 *   The \e encoding is usually one of \c quoted-printable or
 	 *   \c base64.  This header is followed by another newline and the
 	 *   encoded data.
@@ -202,7 +206,8 @@ public:
     /**< Read object in alternate format.
      *   Reads the object in a format other than the ATK stream format used
      *   by Read().  Note that it is impossible to even notify this function
-     *   of the format, so it only supports MIME.
+     *   of the format, so it only supports MIME.  It is basically a hook
+     *   for the old AMS/Messages program.
      *   \param file The input file.  Do not close.
      *   \param fmt The MIME type (e.g. "text/plain")
      *   \param encoding The MIME encoding (e.g. base64 or quoted-printable)
@@ -212,7 +217,8 @@ public:
     /**< Write object in alternate format.
      *   Writes the object in a format other than the ATK stream format used
      *   by Write().  Currently, all implementations of this method simply
-     *   ignore the requested format and only support MIME.
+     *   ignore the requested format and only support MIME.  It is basically
+     *   a hook for the old AMS/Messages program.
      *
      *    Note that no provision is made to signal failure except via the
      *    error indication on the file pointer and the return of 0 indicating
@@ -229,11 +235,13 @@ public:
     /**< See if this object has been modified.
      *   This is meant to be compared to a previous reading.  If they are
      *   equal, then there have been no modifications since the previous
-     *   reading.  Otherwise, there has been a modification.
+     *   reading.  Otherwise, there has been a modification.  The
+     *   \ref buffer object uses this to indicate changed buffers.
      *   \return Current modification sequence counter. */
     virtual void SetModified();
     /**< Claim that this object has been modified.
-     *   Every time the object's stream represenetation changes,
+     *   Every time the object's stream represenetation changes,  The
+     *   \ref buffer object uses this to indicate changed buffers.
      *   this should be called.  It increments a revision counter. */
     virtual void RestoreModified(long oldmodified);
     /**< Revert modification state to previous value.
@@ -259,18 +267,18 @@ public:
      *   integer (the attribute name defines the type).  The supported
      *   attributes are object-dependent:  an object is free to ignore
      *   unused attributes.  The following attributes are "standard" in
-     *   that they are generally set after loading an object, as returned by
-     *   filetype::Lookup():
+     *   that they are generally set by the \ref buffer object when loading a
+     *   data object (as returned by filetype::Lookup()):
+     *   - readonly - An integer which, if non-zero, indicates that the
+     *                object should behave as if read-only.  This is not only
+     *                a reflection of the file's writability, but also
+     *                a flag which may be toggled by the user.
      *   - filename - A string giving the name of the file loaded into the
      *                object.
      *   - extension - If the filename is valid, this string is the set of
      *                 characters after the last dot.
      *   - filesize - An integer giving the size of the file loaded into the
      *                object, if known.
-     *   - readonly - An integer which, if non-zero, indicates that the
-     *                object should behave as if read-only.  This is not only
-     *                a reflection of the file's writability, but also
-     *                a flag which may be toggled by the user.
      *
      *   This function must be overridden to process any attributes,
      *   including the "standard" ones.  The list should be passed down

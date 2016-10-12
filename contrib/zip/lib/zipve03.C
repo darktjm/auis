@@ -56,8 +56,8 @@ END-SPECIFICATION  ************************************************************/
 static int RBDT( class zipedit *self, zip_type_pane pane, long x, long y );
 static int RBDM( class zipedit *self, zip_type_pane pane, long x, long y );
 static int RBUT( class zipedit *self, zip_type_pane pane, long x, long y );
-static int Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks );
-static int Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+static int Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks );
+static int Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks );
 static int Edit_Modification_LBDT( class zipedit *self, zip_type_pane pane, zip_type_pixel	       x, zip_type_pixel y );
 static int Edit_Modification_LBDM( class zipedit *self, zip_type_pane pane, zip_type_pixel x, zip_type_pixel  y );
 static int Edit_Modification_LBUT( class zipedit *self, zip_type_pane pane, zip_type_pixel  x, zip_type_pixel  y );
@@ -83,7 +83,7 @@ static void Set_Constraints( class zipedit	      *self, zip_type_pane	       pan
 
 
 int
-zipedit::Accept_Hit( zip_type_pane	hit_pane, enum view_MouseAction   action , long x , long y , long clicks )
+zipedit::Accept_Hit( zip_type_pane	hit_pane, enum view::MouseAction   action , long x , long y , long clicks )
 {
   class zipedit *self=this;
   int			      status = zip_ok;
@@ -108,9 +108,9 @@ zipedit::Accept_Hit( zip_type_pane	hit_pane, enum view_MouseAction   action , lo
 	  }
         switch ( action )
           {
-          case view_RightDown:     status = RBDT( self, hit_pane, x, y); break;
-          case view_RightMovement: status = RBDM( self, hit_pane, x, y); break;
-          case view_RightUp:       status = RBUT( self, hit_pane, x, y ); break;
+          case view::RightDown:     status = RBDT( self, hit_pane, x, y); break;
+          case view::RightMovement: status = RBDM( self, hit_pane, x, y); break;
+          case view::RightUp:       status = RBUT( self, hit_pane, x, y ); break;
           default:  status = Handle_Edit_Selection( self, hit_pane, action, x, y, clicks );
 	  }
       }
@@ -168,7 +168,7 @@ RBDT( class zipedit *self, zip_type_pane pane, long x, long y )
 
   IN(RBDT);
   if ( self->keyboard_processor )
-    (*self->keyboard_processor)( KeyboardAnchor, pane, 0, view_NoMouseEvent, 0, 0, 0 );
+    (*self->keyboard_processor)( KeyboardAnchor, pane, 0, view::NoMouseEvent, 0, 0, 0 );
   zipedit_Reset_Editing_Selection( self, pane );
   zipedit_Cancel_Enclosure( self, pane );
   if ( ForegroundPinning )
@@ -267,7 +267,7 @@ extern void zipedit_Expose_Selection_Menu( class zipedit        *self );
 
 
 static int
-Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
+Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks )
           {
   long				  status = zip_ok;
   long					  X, Y;
@@ -290,18 +290,18 @@ Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view
 
     Set_Constraints( self, pane, x, y, &X, &Y );
     if ( ( X - LastPointX )  ||  ( Y - LastPointY )  ||
-	 ! (action == view_LeftMovement) )
+	 ! (action == view::LeftMovement) )
       {
       LastPixelX = x;      LastPixelY = y;
       LastPointX = X;      LastPointY = Y;
-      if ( action == view_LeftDown )
+      if ( action == view::LeftDown )
 	{ DEBUG(LeftDown);
 	/* Make Cursor disappear -- this currently crashes PS/2 AIX X Server 9/28/89  */
 	EditingIcon(pane) = pane->zip_pane_cursor_icon;
 	(View)->Set_Pane_Cursor(  pane, '@', CursorFontName );
 	}
       status = (Objects(BuildPending))->Build_Object(  pane, action, x, y, clicks, X, Y );
-      if ( action == view_LeftUp )
+      if ( action == view::LeftUp )
 	{ DEBUG(LeftUp);
 	(View)->Set_Pane_Cursor(  pane, EditingIcon(pane), CursorFontName );
 	if ( CurrentFigure )
@@ -319,20 +319,20 @@ Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view
   }
 
 static int
-Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   int			      status = zip_ok;
 
   IN(Handle_Edit_Selection_Modification);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       status = Edit_Modification_LBDT( self, pane, x, y );
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       status = Edit_Modification_LBUT( self, pane, x, y );
       break;
-    case view_LeftMovement:
+    case view::LeftMovement:
       status = Edit_Modification_LBDM( self, pane, x, y );
       break;
     default:
@@ -658,7 +658,7 @@ void Move_Selection( class zipedit	      *self, zip_type_pane	       pane )
         i++;
      	}
       Enclosure_Bounds( self, pane, &L, &T, &W, &H );
-      (View)->SetTransferMode(  graphic_WHITE );
+      (View)->SetTransferMode(  graphic::WHITE );
       (View)->EraseRectSize(  L-2, T-2, W+4, H+4 );
       EnclosureLeft = L + (EnclosureShadowLastX - EnclosureShadowStartX);
       EnclosureTop  = T + (EnclosureShadowLastY - EnclosureShadowStartY);
@@ -815,7 +815,7 @@ void Show_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane
     {
     Enclosure_Bounds( self, pane, &L, &T, &W, &H );
 /*===*/
-(View)->SetTransferMode(  graphic_INVERT );
+(View)->SetTransferMode(  graphic::INVERT );
 if ( (View )->GetLineWidth( ) != 1 )
   (View)->SetLineWidth(  1 );
 (View)->DrawRectSize( 
@@ -936,7 +936,7 @@ void Show_Enclosure( class zipedit	      *self, zip_type_pane	       pane )
   if ( W > 2  &&  H > 2 )
     {
 /*===*/
-(View)->SetTransferMode(  graphic_INVERT );
+(View)->SetTransferMode(  graphic::INVERT );
 if ( (View )->GetLineWidth( ) != 1 )
   (View)->SetLineWidth(  1 );
 (View)->DrawRectSize(  L, T, W, H );

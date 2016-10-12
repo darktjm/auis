@@ -353,7 +353,7 @@ static void PossibleCompletions(class typescript  *ts, long  key)
     (theText)->NotifyObservers( 0);
 }
 
-static struct SearchPattern *pattern = 0;
+static class search pattern;
 static char lastcmd[MAXPATHLEN];
 static long lastmatch;
 static long beginToken;
@@ -408,17 +408,17 @@ static void CompleteTokenWork(class typescript  *ts, boolean  forward)
     }
 
     if (strlen(cmd) != 0) {
-        if ((patcode = search::CompilePattern(cmd, &pattern))) {
+        if ((patcode = pattern.CompilePattern(cmd))) {
 	    message::DisplayString(ts, 0, patcode);
 	    return;
         }
 	else {
 	    while (TRUE) {
 		if (forward) {
-		    match = search::MatchPattern(ts->cmdText, match+1, pattern);
+		    match = pattern.MatchPattern(ts->cmdText, match+1);
 		}
 		else {
-		    match = search::MatchPatternReverse(ts->cmdText, match-1, pattern);
+		    match = pattern.MatchPatternReverse(ts->cmdText, match-1);
 		}
 		if (match <= 0 || (c = (ts->cmdText)->GetChar( match - 1)) == '\n' || c == '<' || c == '>' || isspace(c)) {
 		    long end;
@@ -532,17 +532,17 @@ static void CompleteCmdWork(class typescript  *ts, boolean  forward)
     }
 
     if (strlen(cmd) != 0) {
-        if ((patcode = search::CompilePattern(cmd, &pattern))) {
+        if ((patcode = pattern.CompilePattern(cmd))) {
 	    message::DisplayString(ts, 0, patcode);
 	    return;
         }
 	else {
 	    while (TRUE) {
 		if (forward) {
-		    match = search::MatchPattern(ts->cmdText, match+1, pattern);
+		    match = pattern.MatchPattern(ts->cmdText, match+1);
 		}
 		else {
-		    match = search::MatchPatternReverse(ts->cmdText, match-1, pattern);
+		    match = pattern.MatchPatternReverse(ts->cmdText, match-1);
 		}
 		if (match <= 0 || (ts->cmdText)->GetChar( match - 1) == '\n') {
 		    break;

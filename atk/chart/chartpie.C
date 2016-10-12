@@ -133,7 +133,7 @@ chartpie::SetDebug( boolean			   state )
   }
 
 class view *
-chartpie::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+chartpie::HitChart( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class chartpie *self=this;
   static long			      prior_x, prior_y, candidate;
@@ -150,9 +150,9 @@ chartpie::HitChart( enum view_MouseAction       action, long			       x , long		
   if ( angle <= 0 )    angle += 360.0; /*===messy===*/
   switch ( action )
     {
-    case  view_LeftDown:
+    case  view::LeftDown:
       (this)->SetFont(  (this)->IconFont() );
-      (this)->SetTransferMode(  graphic_INVERT );
+      (this)->SetTransferMode(  graphic::INVERT );
       for ( candidate = 0; candidate < DrawingCount; candidate++ )
 	{
 	end_angle = start_angle + (3.6 * DrawingItemPercent(candidate));
@@ -167,14 +167,14 @@ chartpie::HitChart( enum view_MouseAction       action, long			       x , long		
 			     prior_y = DrawingItemY(candidate) );
       (this)->DrawString(  "E", 0 );
       break;
-    case  view_LeftMovement:
+    case  view::LeftMovement:
       (this)->MoveTo(  prior_x, prior_y );
       (this)->DrawString(  "E", 0 );
       (this)->MoveTo(  prior_x = DrawingX + (radius * (x_delta / hyp)),
 			     prior_y = DrawingY + (radius * (y_delta / hyp)) );
       (this)->DrawString(  "E", 0 );
       break;
-    case  view_LeftUp:
+    case  view::LeftUp:
       (this)->MoveTo(  prior_x, prior_y );
       (this)->DrawString(  "E", 0 );
       if ( delta )/*===*/
@@ -218,7 +218,7 @@ void Show_Pie_Chart( class chartpie	      *self, long			       medium )
   (self)->SetFont(  font = (self)->BuildFont(  "andysans10", &height ) );
   
   if ( medium == Screen ) {
-      (self)->SetTransferMode(  graphic_BLACK );
+      (self)->SetTransferMode(  graphic::BLACK );
       (self)->DrawOval(  DrawingBounds );
   }
   item = (Data )->ItemAnchor( );
@@ -254,10 +254,10 @@ void Show_Pie_Chart( class chartpie	      *self, long			       medium )
 	{
 	(self)->MoveTo(  DrawingItemLabelX(i), DrawingItemLabelY(i) );
 	(self)->DrawString(  (char *) ((Data)->ItemAttribute(  item, chart_itemname )),
-	    view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM );
+	    graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
 	(self)->MoveTo(  DrawingItemLabelX(i), DrawingItemLabelY(i) + height );
 	(self)->DrawString(  percent_string,
-	    view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM );
+	    graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
 	}
 	else
 	{

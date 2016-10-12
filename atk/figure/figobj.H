@@ -77,12 +77,12 @@ class figobj : public  dataobject  {
       virtual void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
       virtual void Select(class figview *v);
       virtual void SetNumHandles(long num);
-      virtual enum figobj_Status Build(class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ;
+      virtual enum figobj_Status Build(class figview *v, enum view::MouseAction action, long x, long y, long clicks)  ;
       virtual enum figobj_HitVal HitMe(long x, long y, long delta, long *ptref)  ;
       virtual  figobj_HitVal BasicHitMe(long x, long y, long delta, long *ptref)  ;
-      virtual boolean Reshape(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
-      virtual boolean AddParts(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
-      virtual boolean DeleteParts(enum view_MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+      virtual boolean Reshape(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+      virtual boolean AddParts(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
+      virtual boolean DeleteParts(enum view::MouseAction action, class figview *v, long x, long y, boolean handle, long ptref)  ;
       virtual void MoveHandle(long  x, long y, long ptref);
       virtual void Reposition(long xd, long yd);
       virtual void InheritVAttributes(class figattr *attr, unsigned long mask);
@@ -96,8 +96,8 @@ class figobj : public  dataobject  {
       virtual enum figobj_HandleType GetHandleType(long ptref)  ;
       virtual long * GetCanonicalHandles()  ;
       virtual void StabilizeAttachments(boolean keepproport);
-      virtual boolean ORecSearch(struct SearchPattern *pat);
-      virtual boolean ORecSrchResume(struct SearchPattern *pat);
+      virtual boolean ORecSearch(class search *pat);
+      virtual boolean ORecSrchResume(class search *pat);
       virtual boolean ORecSrchReplace(class dataobject *text, long pos, long len);
       virtual void SetName(char *name);
 

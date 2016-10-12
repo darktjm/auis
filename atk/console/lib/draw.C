@@ -102,7 +102,7 @@ int DrawGauge(class consoleClass  *self, int  Op, struct display  *disp)
             DialPosition = 30;
 
 	if (Op == REDRAW) {
-	    (self)->SetTransferMode( graphic_BLACK);
+	    (self)->SetTransferMode( graphic::BLACK);
 	    (self)->DrawArcSize(xo, yo, diam, diam, 290, 140);
 	    (self)->MoveTo( xc, yb);
 	    (self)->DrawLineTo( xc - xoff, yb - yoff);
@@ -110,10 +110,10 @@ int DrawGauge(class consoleClass  *self, int  Op, struct display  *disp)
             (self)->DrawLineTo( xc + xoff, yb - yoff);
         }
         if (Op == NEWVAL) {
-            (self)->SetTransferMode( graphic_WHITE);
+            (self)->SetTransferMode( graphic::WHITE);
             (self)->MoveTo( xc, yb);
             (self)->DrawLineTo( xc + CosineMult[disp->displayparam1] * diam / 2  / 11000, yb - SineMult[disp->displayparam1] * diam / 2 / 11000);
-            (self)->SetTransferMode( graphic_BLACK);
+            (self)->SetTransferMode( graphic::BLACK);
             if (disp->displayparam1 > 90 || disp->displayparam1 < 10) {
                 (self)->MoveTo( xc, yb);
                 (self)->DrawLineTo( xc - xoff, yb - yoff);

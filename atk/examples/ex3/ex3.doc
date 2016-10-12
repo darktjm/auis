@@ -152,12 +152,12 @@ class helloworldview[hellov]: view \{
 
   overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long right);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
   data:
@@ -192,7 +192,7 @@ file, except two new data elements are defined:  \italic{distX} and
 
 \indexi{ \italic{Hit}} 
 
-\indexi{ \italic{view_Hit}}
+\indexi{ \italic{view::Hit}}
 
 
 The \italic{FullUpdate} and\italic{ Update} procedures for this program 
@@ -206,7 +206,7 @@ struct view *helloworldview__Hit(hwv,action,x,y,numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -220,13 +220,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hwv->newX=x-hwv->distX;
 
@@ -234,7 +234,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -244,7 +244,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -263,7 +263,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->distX=x-hwv->x;
 
@@ -271,7 +271,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 
@@ -388,12 +388,12 @@ class helloworldview[hellov]: view \{
 
   overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
   data:
@@ -453,7 +453,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     struct helloworldview *hwv;
 
-    enum view_UpdateType type;
+    enum view::UpdateType type;
 
     long left;
 
@@ -483,7 +483,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
     helloworldview_DrawString(hwv,"hello world",
 
-	graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+	graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -500,13 +500,13 @@ void helloworldview__Update(hwv)
 
     if (hwv->newX != hwv->x ||  hwv->newY != hwv->y) \{
 
-        helloworldview_SetTransferMode(hwv,graphic_INVERT);
+        helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 
         hwv->x = hwv->newX;
@@ -517,7 +517,7 @@ graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
         helloworldview_MoveTo(hwv, hwv->x , hwv->y);
 
         helloworldview_DrawString(hwv, "hello world", 
-graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
     
 
@@ -531,7 +531,7 @@ struct view *helloworldview__Hit(hwv,action,x,y,numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -545,13 +545,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hwv->newX=x-hwv->distX;
 
@@ -559,7 +559,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -569,7 +569,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -588,7 +588,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->distX=x-hwv->x;
 
@@ -596,7 +596,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 

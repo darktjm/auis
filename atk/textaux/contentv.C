@@ -210,10 +210,10 @@ static void contentv_MakeContents(class textview  *self)
     {
     contentv::MakeWindow(Text(self));
 }
-void contentv::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
+void contentv::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
                                     {
 	(this)->textview::GetClickPosition( position, numberOfClicks, action, startLeft, startRight, leftPos, rightPos);
-	if(numberOfClicks == 1 && (action == view_LeftUp || action == view_RightUp))
+	if(numberOfClicks == 1 && (action == view::LeftUp || action == view::RightUp))
 	    locate(this,0);
     }
 static boolean findframe(class frame  *fr,class buffer  *buf)

@@ -1010,11 +1010,11 @@ htmltextview::~htmltextview()
 }
 
 
-view *htmltextview::Hit(enum view_MouseAction action, long x, long y, long numberOfClicks) {
+view *htmltextview::Hit(enum view::MouseAction action, long x, long y, long numberOfClicks) {
     view *vptr;
-    if(action==view_UpMovement || action==view_LeftUp) hitpos= Locate(x,y, &vptr);
+    if(action==view::UpMovement || action==view::LeftUp) hitpos= Locate(x,y, &vptr);
 
-    if (action == view_UpMovement)  {
+    if (action == view::UpMovement)  {
 	htmlenv *rootenv=(htmlenv*)
 	  (((htmltext*)GetDataObject())
 	   ->text::rootEnvironment);

@@ -128,7 +128,7 @@ void DisplayBoxDrawPanHighlight(class rasterview  *self)
 	    rectangle_Left(&DS), rectangle_Top(&DS),
 	    rectangle_Width(&DS), rectangle_Height(&DS)));
 
-    DrawHighlightScreenCoordinates(self, G, DS, graphic_BLACK, graphic_WHITE);
+    DrawHighlightScreenCoordinates(self, G, DS, graphic::BLACK, graphic::WHITE);
 }
 #endif /* 0 */
 
@@ -147,13 +147,13 @@ void rasterview_DisplayBoxWritePixImageFull(class rasterview  *self, class graph
 
     /* Write the entire Display Box back on the screen. */
     InsetRect(&DB, -TWOBORDER, -TWOBORDER);
-    (self)->SetTransferMode( graphic_BLACK);
+    (self)->SetTransferMode( graphic::BLACK);
     (self)->FillRect( &DB, self->BlackPattern);
     InsetRect(&DB, 1, 1);
-    (self)->SetTransferMode( graphic_WHITE);
+    (self)->SetTransferMode( graphic::WHITE);
     (self)->FillRect( &DB, self->WhitePattern);
     InsetRect(&DB, TWOBORDER - 1, TWOBORDER - 1);
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (G)->WritePixImage(
 			   rectangle_Left(&DB) - self->DBXscroll,
 			   rectangle_Top(&DB) - self->DBYscroll,
@@ -181,7 +181,7 @@ void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  
 	    rectangle_Top(&self->DisplayBoxSelection),
 	    rectangle_Width(&self->DisplayBoxSelection),
 	    rectangle_Height(&self->DisplayBoxSelection)));
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (G)->WritePixImage(
 			   rectangle_Left(&DB) - self->DBXscroll,
 			   rectangle_Top(&DB) - self->DBYscroll,
@@ -195,7 +195,7 @@ void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  
     DEBUG(("        DBFrame: (%ld,%ld,%ld,%ld)\n",
 	    rectangle_Left(&DB), rectangle_Top(&DB),
 	    rectangle_Width(&DB), rectangle_Height(&DB)));
-    DrawHighlightScreenCoordinates(self, G, DB, graphic_BLACK, graphic_WHITE);
+    DrawHighlightScreenCoordinates(self, G, DB, graphic::BLACK, graphic::WHITE);
 }
 
 void rasterview_DisplayBoxHide(class rasterview  *self)
@@ -240,7 +240,7 @@ void rasterview_DisplayBoxHide(class rasterview  *self)
 	       rectangle_Left(&R), rectangle_Top(&R),
 	       rectangle_Width(&R), rectangle_Height(&R),
 	      self->Xoff, self->Yoff));
-	(self)->SetTransferMode( graphic_WHITE);
+	(self)->SetTransferMode( graphic::WHITE);
 	(self)->FillRect( &R, self->WhitePattern);
 
 	/* convert the Display Boxes Screen coordinates to pixelimage coordinates. */
@@ -263,7 +263,7 @@ void rasterview_DisplayBoxHide(class rasterview  *self)
 	rectangle_EmptyRect(&self->DisplayBox);
 	rasterview_ReflectChangesInExpansion(self, &SR);
 	self->DisplayBox = DB;
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	DEBUG(("Write Display Box: (%ld,%ld,%ld,%ld)\n",
 	       rectangle_Left(&R),
 	       rectangle_Top(&R),
@@ -311,7 +311,7 @@ void rasterview_DisplayBoxDrawHighlight(class rasterview  *self, class graphic  
 	    rectangle_Left(&DS), rectangle_Top(&DS),
 	    rectangle_Width(&DS), rectangle_Height(&DS)));
 
-    DrawHighlightScreenCoordinates(self, G, DS, graphic_BLACK, graphic_WHITE);
+    DrawHighlightScreenCoordinates(self, G, DS, graphic::BLACK, graphic::WHITE);
 }
 
 void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graphic  *G)
@@ -337,7 +337,7 @@ void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graph
 		rectangle_Top(&self->DisplayBox) - self->DBYscroll);
 
     rectangle_GetRectSize(&DS, &l, &t, &w, &h);
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->FillRectSize( l-2, t-2, w+4, 2, self->GreyPattern);
     (self)->FillRectSize( l-2, t+h, w+4, 2, self->GreyPattern);
     (self)->FillRectSize( l-2, t, 2, h, self->GreyPattern);
@@ -346,7 +346,7 @@ void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graph
     /* In case the above Gray overlapped the Display Box Frame, Redraw the Frame. */
     DS = self->DisplayBox;
     InsetRect(&DS, -BORDER, -BORDER);
-    DrawHighlightScreenCoordinates(self, G, DS, graphic_BLACK, graphic_WHITE);
+    DrawHighlightScreenCoordinates(self, G, DS, graphic::BLACK, graphic::WHITE);
 }
 
 void rasterview_DisplayBoxHideHighlight(class rasterview  *self, class graphic  *G)
@@ -374,15 +374,15 @@ void rasterview_DisplayBoxHideHighlight(class rasterview  *self, class graphic  
     SetTopRect(&DS,
 		rectangle_Top(&DS) - rectangle_Top(&self->DisplayBoxSelection) +
 		rectangle_Top(&self->DisplayBox) - self->DBYscroll);
-    DrawHighlightScreenCoordinates(self, G, DS, graphic_WHITE, -1);
+    DrawHighlightScreenCoordinates(self, G, DS, graphic::WHITE, -1);
 
     /* In case the above Hide overlapped the Display Box Frame, Redraw the Frame. */
     DS = self->DisplayBox;
     InsetRect(&DS, -BORDER, -BORDER);
-    DrawHighlightScreenCoordinates(self, G, DS, graphic_BLACK, graphic_WHITE);
+    DrawHighlightScreenCoordinates(self, G, DS, graphic::BLACK, graphic::WHITE);
 
     /* Write the entire Display Box back on the screen. */
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (G)->WritePixImage(
 			   rectangle_Left(&self->DisplayBox) - self->DBXscroll,
 			   rectangle_Top(&self->DisplayBox) - self->DBYscroll,
@@ -447,7 +447,7 @@ void rasterview_DrawHighlightBehindDisplayBox(class rasterview  *self, class gra
 	    rectangle_GetRectSize(&DS, &l, &t, &w, &h);
 	    l -= self->Xoff;  /* convert to screen coords */
 	    t -= self->Yoff;
-	    (self)->SetTransferMode( graphic_COPY);
+	    (self)->SetTransferMode( graphic::COPY);
 	    (self)->FillRectSize( l-2, t-2, w+4, 2, self->GreyPattern);
 	    (self)->FillRectSize( l-2, t+h, w+4, 2, self->GreyPattern);
 	    (self)->FillRectSize( l-2, t, 2, h, self->GreyPattern);
@@ -765,10 +765,10 @@ void rasterview_DrawHighlightBehindDisplayBox(class rasterview  *self, class gra
 
 	/* draw the path(s) */
 	if (! gray) {
-	    (self)->SetTransferMode( graphic_BLACK);
+	    (self)->SetTransferMode( graphic::BLACK);
 	    (G)->DrawPath( path1, self->DisplayBoxPathLength1);
 	    (G)->DrawPath( path2, self->DisplayBoxPathLength2);
-	    (self)->SetTransferMode( graphic_WHITE);
+	    (self)->SetTransferMode( graphic::WHITE);
 	    (G)->DrawPath( path3, self->DisplayBoxPathLength1);
 	    (G)->DrawPath( path4, self->DisplayBoxPathLength2); }
 	else {
@@ -824,7 +824,7 @@ void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, clas
 	else { y = y2; h = y1 - y2; }
 	if (w==1) w = 2; else h = 2;
 	(self)->FillRectSize( x, y, ++w, ++h, self->WhitePattern);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	if (x <= -Xoff) x = -Xoff;
 	if (y <= -Yoff) y = -Yoff;
 	ClipAndWritePixImage(clipw, cliph,
@@ -841,7 +841,7 @@ void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, clas
 	else { y = y2; h = y1 - y2; }
 	if (w==1) w = 2; else h = 2;
 	(self)->FillRectSize( x, y, ++w, ++h, self->WhitePattern);
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	if (x <= -Xoff) x = -Xoff;
 	if (y <= -Yoff) y = -Yoff;
 	ClipAndWritePixImage(clipw, cliph,
@@ -885,7 +885,7 @@ void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterim
     /* Force bit to be either one or zero. */
     bit = (bit) ? 1 : 0;
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     /* Set the pixel in the full rasterimage so that when contracted, the image will be correct. */
     (fullpix)->SetPixel(

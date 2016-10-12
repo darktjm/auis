@@ -259,7 +259,7 @@ static
 void Set_Crosshairs( class zipview *self, zip_type_pane pane, long x , long y )
 {
   IN(Set_Crosshairs);
-  (self)->SetTransferMode( graphic_INVERT );
+  (self)->SetTransferMode( graphic::INVERT );
   (self)->MoveTo( (self)->Pane_Left( pane ), y );
   if ( (self )->GetLineWidth( ) != 1 )
     (self)->SetLineWidth( 1 );
@@ -278,7 +278,7 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
   class graphic		 *graphic_op;
 
   IN(Blit_Pane);
-  (self)->SetTransferMode(  graphic_COPY );
+  (self)->SetTransferMode(  graphic::COPY );
   rectangle.left =
 	(x_offset > 0) ?
 	   (self)->Pane_Left(  pane ) + BorderThickness
@@ -306,12 +306,12 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
   (self)->BitBlt(  &rectangle, self, &point, NULL );
   if ( pane->zip_pane_state.zip_pane_state_inverted )
     {
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     graphic_op = (self )->BlackPattern( );
     }
     else
     {
-    (self)->SetTransferMode(  graphic_WHITE );
+    (self)->SetTransferMode(  graphic::WHITE );
     graphic_op = (self )->WhitePattern( );
     }
   (self)->FillRectSize(  
@@ -330,7 +330,7 @@ Blit_Pane( class zipview		  *self, zip_type_pane		   pane, int				   x_offset , 
 	   (self)->Pane_Top(  pane ) + BorderThickness,
 	(self)->Pane_Width(  pane ) - 2 * BorderThickness,
 	abs(y_offset), graphic_op );
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::BLACK );
   OUT(Blit_Pane);
   return zip_success;
   }

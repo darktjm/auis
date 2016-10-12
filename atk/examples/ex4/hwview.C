@@ -38,7 +38,7 @@ helloworldview::helloworldview()
     THROWONFAILURE( TRUE);
 }
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height )
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height )
 {
     struct rectangle myVisualRect;
 
@@ -55,23 +55,23 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
 	this->y = this->newY;
     }
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if (this->blackOnWhite)
 	(this)->FillRect( &myVisualRect, (this)->WhitePattern());
     else
 	(this)->FillRect( &myVisualRect, (this)->BlackPattern());
 
-    (this)->SetTransferMode( graphic_INVERT);
+    (this)->SetTransferMode( graphic::INVERT);
 
     (this)->MoveTo( this->x, this->y);
-    (this)->DrawString("hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+    (this)->DrawString("hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 }
 
 
 void helloworldview::Update()
 {    
-    /* TransferMode is graphic_INVERT from the last FullUpdate */
+    /* TransferMode is graphic::INVERT from the last FullUpdate */
 
     if (this->newBlackOnWhite != this->blackOnWhite)  {
 	struct rectangle vr;
@@ -84,34 +84,34 @@ void helloworldview::Update()
     if (this->newX != this->x || this->newY != this->y) {
 	
                 (this)->MoveTo( this->x, this->y);
-	(this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+	(this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
 
 	this->x = this->newX;
 	this->y = this->newY;
 
 	(this)->MoveTo( this->x, this->y);
-	(this)->DrawString( "hello world", graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);
+	(this)->DrawString( "hello world", graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);
     }
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     if(this->HaveDownTransition)
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		this->newX=x-this->distX;
 		this->newY=y-this->distY;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		this->newX=x;
 		this->newY=y;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -121,11 +121,11 @@ class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y,
 
     if(!this->HaveDownTransition)
 	switch(action){
-	    case view_RightDown:
+	    case view::RightDown:
 		this->distX=x-this->x;
 		this->distY=y-this->y;
 		/* fall through */
-	    case view_LeftDown:
+	    case view::LeftDown:
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;

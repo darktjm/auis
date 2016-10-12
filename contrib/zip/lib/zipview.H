@@ -68,7 +68,7 @@ struct zipview_states
 #include "zipstrm.h"
 #include "zippane.h"
 
-typedef long (*zip_panehitproc)(long anchor, zip_type_pane pane, enum view_MouseAction action, long x, long y, long clicks);
+typedef long (*zip_panehitproc)(long anchor, zip_type_pane pane, enum view::MouseAction action, long x, long y, long clicks);
 typedef long (*zip_panedisplayproc)(long anchor, zip_type_pane pane, long action);
 typedef void (*zip_paneexceptproc)(struct zipview *, zip_type_pane pane);
 
@@ -82,11 +82,11 @@ public:
 
 
 
-   view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dheight );
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dheight );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void Update();
    void WantUpdate( class view *requestor );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n);
+   class view * Hit( enum view::MouseAction action, long x, long y, long n);
    void ReceiveInputFocus();
    void LoseInputFocus();
    void SetDataObject( class dataobject *d );
@@ -332,7 +332,7 @@ public:
   zip_type_pane			 pane, current_pane;
   struct rectangle		 block;
   long				 action;
-  enum view_MouseAction		 mouse_action;
+  enum view::MouseAction		 mouse_action;
   long				 mouse_x,
 				 mouse_y,
 				 mouse_clicks;

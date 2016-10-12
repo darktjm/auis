@@ -1989,14 +1989,14 @@ typescript::Update()
 }
 
 class view *
-typescript::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+typescript::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class view *v;
     int i;
     char *p;
 
     v = (this)->textview::Hit( action, x, y, numberOfClicks);
-    if (action == view_LeftFileDrop) {
+    if (action == view::LeftFileDrop) {
 	char **files;
 	class im *im = (this)->GetIM();
 
@@ -2026,7 +2026,7 @@ NullWinSizeProc()
 #endif /* TIOCGWINSZ */
 
 void 
-typescript::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+typescript::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     this->lastPosition = -1;
     (this)->textview::FullUpdate( type, left, top, width, height);
@@ -2071,7 +2071,7 @@ typescript::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  
 }
 
 void 
-typescript::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
+typescript::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
 {
     if(numberOfClicks  %3) {
 	(this)->textview::GetClickPosition( position, numberOfClicks, action, startLeft, startRight, leftPos, rightPos);

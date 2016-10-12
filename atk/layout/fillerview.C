@@ -64,7 +64,7 @@ static void initializeInsets();
 static void InitializeGraphics(class fillerview  *self, struct graphicstuff  *gc);
 static int			/* returns y position of top of button */ TopOfTheMark(class fillerview  *self, struct graphicstuff  *gc, int  i				/* index of this button */);
 static void showhit(class fillerview  *self, struct graphicstuff  *gc);
-static void UpdateScreen(class fillerview  *self, enum view_UpdateType  how		    /* kind of update */, struct rectangle  *updateRect		    /* rectangle affected */);
+static void UpdateScreen(class fillerview  *self, enum view::UpdateType  how		    /* kind of update */, struct rectangle  *updateRect		    /* rectangle affected */);
 
 
 static void
@@ -210,7 +210,7 @@ showhit(class fillerview  *self, struct graphicstuff  *gc)
 
     if (self->hitindex >= 0) {
 	savetransfermode = (self)->GetTransferMode();
-	(self)->SetTransferMode( graphic_INVERT);
+	(self)->SetTransferMode( graphic::INVERT);
 	(self)->DrawRectSize( LEFTMARGIN, TopOfTheMark(self, gc, self->hitindex), gc->linewidth + 3 * LEFTMARGIN, gc->lineheight);
 	(self)->SetTransferMode( savetransfermode);
     }
@@ -219,7 +219,7 @@ showhit(class fillerview  *self, struct graphicstuff  *gc)
 /* process mouse hit */
 
 class view *				/* returns view to get subsequent hits */
-fillerview::Hit(enum view_MouseAction  action		/* button and what it did */, long  x	, long  y				/* coordinates of mouse */, long  numberOfClicks			/* number of clicks at this location */)
+fillerview::Hit(enum view::MouseAction  action		/* button and what it did */, long  x	, long  y				/* coordinates of mouse */, long  numberOfClicks			/* number of clicks at this location */)
 {
     int i;
     struct graphicstuff realgc, *gc = &realgc;
@@ -245,11 +245,11 @@ fillerview::Hit(enum view_MouseAction  action		/* button and what it did */, lon
 	}
     }
 
-    if (this->hitindex >= 0 && (action == view_LeftDown || action == view_LeftMovement || action == view_RightDown || action == view_RightMovement)) {
+    if (this->hitindex >= 0 && (action == view::LeftDown || action == view::LeftMovement || action == view::RightDown || action == view::RightMovement)) {
 	showhit(this, gc);
     }
 
-    else if (this->hitindex >= 0 && (action == view_LeftUp || action == view_RightUp)) {
+    else if (this->hitindex >= 0 && (action == view::LeftUp || action == view::RightUp)) {
 	showhit(this, gc);
 	(this)->SetDataObjectByName( Insets[this->hitindex]);
 	return NULL;
@@ -267,21 +267,21 @@ fillerview::Hit(enum view_MouseAction  action		/* button and what it did */, lon
 /* update all components */
 
 static void
-UpdateScreen(class fillerview  *self, enum view_UpdateType  how		    /* kind of update */, struct rectangle  *updateRect		    /* rectangle affected */)
+UpdateScreen(class fillerview  *self, enum view::UpdateType  how		    /* kind of update */, struct rectangle  *updateRect		    /* rectangle affected */)
 {
     int i;
     struct graphicstuff realgc, *gc = &realgc;
 
     InitializeGraphics(self, gc);
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
     (self)->SetClippingRect( updateRect);
     (self)->EraseRect( updateRect);
     (self)->MoveTo( LEFTMARGIN, TOPMARGIN);
-    (self)->DrawString( "Select an inset", graphic_ATTOP | graphic_ATLEFT);
+    (self)->DrawString( "Select an inset", graphic::ATTOP | graphic::ATLEFT);
     for (i = 0; Insets[i] != NULL; i++) {
 	(self)->MoveTo( LEFTMARGIN * 2, TOPMARGIN * 2 + (i + 1) * gc->lineheight);
-	(self)->DrawString( Insets[i], graphic_ATTOP | graphic_ATLEFT);
+	(self)->DrawString( Insets[i], graphic::ATTOP | graphic::ATLEFT);
     }
     showhit(self, gc);
 }
@@ -289,7 +289,7 @@ UpdateScreen(class fillerview  *self, enum view_UpdateType  how		    /* kind of 
 /* full update when window changes */
 
 void
-fillerview::FullUpdate(enum view_UpdateType  how		    /* kind of update */, long  left , long  top , long  width , long  height		    /* rectangle affected (in some cases; */)
+fillerview::FullUpdate(enum view::UpdateType  how		    /* kind of update */, long  left , long  top , long  width , long  height		    /* rectangle affected (in some cases; */)
 {
     struct rectangle vb;
 
@@ -303,12 +303,12 @@ fillerview::FullUpdate(enum view_UpdateType  how		    /* kind of update */, long
 
     switch(how) {
 
-	case view_MoveNoRedraw:
-	case view_Remove:
+	case view::MoveNoRedraw:
+	case view::Remove:
 	    break;
 
-	case view_PartialRedraw:
-	case view_LastPartialRedraw:
+	case view::PartialRedraw:
+	case view::LastPartialRedraw:
 	    rectangle_SetRectSize(&vb, left, top, width, height);
 	    /* fall through into default case */
 	default:
@@ -331,7 +331,7 @@ fillerview::Update()
 	return;
 
     (this)->GetVisualBounds( &visualRect);
-    UpdateScreen(this, view_FullRedraw, &visualRect);
+    UpdateScreen(this, view::FullRedraw, &visualRect);
 }
 
 /* input focus obtained; highlight something */

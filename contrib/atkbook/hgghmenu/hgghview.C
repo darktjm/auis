@@ -38,7 +38,7 @@ static class menulist *hgghview_menulist = NULL;
 
 ATKdefineRegistry(hgghview, lpair, hgghview::InitializeClass);
 static void ToggleProc(class hgghview  *self, long  param);
-static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view_MouseAction  action);
+static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view::MouseAction  action);
 
 
 boolean hgghview::InitializeClass()
@@ -122,9 +122,9 @@ static void ToggleProc(class hgghview  *self, long  param)
     (v2)->WantInputFocus( v2);
 }
 
-static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view_MouseAction  action)
+static void ToggleLpairViews(class hgghview  *self, void * ignored, class butt  *b, enum view::MouseAction  action)
 {
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	ToggleProc(self, 0);
     }
 }

@@ -11,56 +11,59 @@
 #include <point.h>
 #include <rect.h>
 #include <shadows.h>
-#define graphic_PROGRAMMERVERSION	7
-
-/* It would be nice if there were enums instead of defines, but
-unfortunately, one cannot guarantee that enums can be easily or'd
-(of course I really want sets of enums, but...) */
-
-#define graphic_NOMOVEMENT		    0
-#define graphic_ATLEFT			    1
-#define graphic_ATRIGHT			    2
-#define graphic_BETWEENLEFTANDRIGHT	    4
-#define graphic_ATTOP			  010
-#define graphic_ATBOTTOM		  020
-#define graphic_ATBASELINE		  040
-#define graphic_BETWEENTOPANDBOTTOM	 0100
-#define graphic_BETWEENTOPANDBASELINE	 0200
-
-/* LineDash */
-#define graphic_LineSolid	0
-#define graphic_LineDoubleDash	1
-#define graphic_LineOnOffDash	2
-
-/* LineCap */
-#define graphic_CapNotLast	0
-#define graphic_CapButt		1
-#define graphic_CapRound	2
-#define graphic_CapProjecting	3
-
-/* LineJoin */
-#define graphic_JoinMiter	0
-#define graphic_JoinRound	1
-#define graphic_JoinBevel	2
-
-/* Display Classes */
-#define	graphic_Monochrome	(1<<1)
-#define	graphic_Color		(1<<2)
-#define	graphic_PseudoColor	(1<<3)
-#define	graphic_GrayScale	(1<<4)
-#define	graphic_DirectColor	(1<<5)
-#define	graphic_TrueColor	(1<<6)
-#define	graphic_StaticColor	(1<<7)
-#define	graphic_StaticGray	(1<<8)
-
 #include <observable.H>
 #include <color.H>
 
 class ddimage;
 class graphic : public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+    virtual ATKregistryEntry *ATKregistry();
 
+    static const int PROGRAMMERVERSION = 7;
+
+    /** When a position may be specified relative to boundaries,
+     *  or one ore more of these together to indicate where. */
+    enum position {
+	NOMOVEMENT = 0, /**< Use by itself: position is absolute.  */
+	ATLEFT = 1, /**< Position at left edge */
+	ATRIGHT = 2, /**< Position at right edge */
+	BETWEENLEFTANDRIGHT = 4, /**< Position centered left-to-right */
+	ATTOP = 010, /**< Position at top edge */
+	ATBOTTOM = 020, /**< Position at bottom edge */
+	ATBASELINE = 040, /**< Position at bottom edge, adjusted upwards for text baseline */
+	BETWEENTOPANDBOTTOM = 0100, /**< Position centered between top and bottom */
+	BETWEENTOPANDBASELINE = 0200 /**< Position centered between top and bottom, adjusting downwards for text baseline */
+    };
+
+    enum LineDash {
+	LineSolid,
+	LineDoubleDash,
+	LineOnOffDash
+    };
+
+    enum LineCap {
+	CapNotLast,
+	CapButt,
+	CapRound,
+	CapProjecting
+    };
+
+    enum LineJoin {
+	JoinMiter,
+	JoinRound,
+	JoinBevel
+    };
+
+    enum DisplayClass {
+	Monochrome = (1<<1),
+	Color = (1<<2),
+	PseudoColor = (1<<3),
+	GrayScale = (1<<4),
+	DirectColor = (1<<5),
+	TrueColor = (1<<6),
+	StaticColor = (1<<7),
+	StaticGray = (1<<8)
+    };
 
     virtual void MoveToPt(struct point * Pt);
     virtual void MoveTo(long NewX, long NewY);
@@ -280,9 +283,8 @@ public:
     struct point patternOrigin;
     icolormap colors;
     color *fore, *back;
-};
 
-
+  public:
 /* Transfer function bit encoding. One specifies the transfer function
    by giving a table source and destination bits, encoded in a hex digit.
    The binary interpretation is that 1 is black and 0 white.
@@ -307,27 +309,27 @@ function be two hexadecimal digits -- the one generated as above
 repeated. Thus, the value for AND would be 0x44 and for copying the
 source, 0xcc.
 
-To help construct the desired function, two constants graphic_SOURCE
-and graphic_DEST have been defined that allow a programmer to specify
+To help construct the desired function, two constants graphic::SOURCE
+and graphic::DEST have been defined that allow a programmer to specify
 the desired effects without having to do the bit by bit calculations.
 Instead, one can just perform the logical operations directly on
 the constants. For example, the AND operation can be expressed as
-(graphic_SOURCE & graphic_DEST). Some common combinations are provided
+(graphic::SOURCE & graphic::DEST). Some common combinations are provided
 as well.
 */
 
-/* Predefined constants for use in transfer modes */
-#define graphic_SOURCE	0xCC
-#define graphic_DEST	0xAA
+    /* Predefined constants for use in transfer modes */
+    static const short SOURCE = 0xCC;
+    static const short DEST = 0xAA;
 
-/* Some synonyms for ease of use */
-#define graphic_COPY	graphic_SOURCE
-#define graphic_OR	(graphic_SOURCE | graphic_DEST)
-#define graphic_XOR	(graphic_SOURCE ^ graphic_DEST)
-#define graphic_AND	(graphic_SOURCE & graphic_DEST)
-#define graphic_WHITE	0x00
-#define graphic_BLACK	0xFF
-#define graphic_INVERT	((~graphic_DEST)&0xFF)
+    /* Some synonyms for ease of use */
+    static const short COPY =	SOURCE;
+    static const short OR =	(SOURCE | DEST);
+    static const short XOR =	(SOURCE ^ DEST);
+    static const short AND =	(SOURCE & DEST);
+    static const short WHITE =	0x00;
+    static const short BLACK =	0xFF;
+    static const short INVERT =	((~DEST)&0xFF);
 
 /* Some notes on the structure:
     The attached graphic provides some bits to write on. Nothing is
@@ -374,5 +376,6 @@ controllable way to limit drawing commands. It is in local coordinates,
 but is usually null (no explicit clipping).
 
 */
+};
 /** @} */
 #endif /* _graphic_H_ */

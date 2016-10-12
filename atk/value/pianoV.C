@@ -105,11 +105,11 @@ static void Drawpiano(class pianoV  * self,boolean  full)
     int hy,*ip;
     float wid,place;
     if(full){
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
 
     (self)->EraseRectSize( self->x,self->y,self->width,self->height);
     }
-    (self)->SetTransferMode(  graphic_BLACK );
+    (self)->SetTransferMode(  graphic::BLACK );
     if(full) (self)->DrawRectSize(self->x,self->y,self->width,self->height);
     hy = (self->height + self->y) / 2;
     wid = self->width / 21.0;
@@ -126,14 +126,14 @@ static void Drawpiano(class pianoV  * self,boolean  full)
 	    }
 	    if(self->label[*ip] && (full ||  LabelChanged(self,*ip))){
 		if(!full){
-		    (self)->SetTransferMode(  graphic_COPY );
+		    (self)->SetTransferMode(  graphic::COPY );
 		    (self)->EraseRectSize( (int)(place + 1 - wid - wid),self->y + 1,(int)(wid + wid - 2),(int)(hy - 2));
-		    (self)->SetTransferMode(  graphic_BLACK );
+		    (self)->SetTransferMode(  graphic::BLACK );
 		}
 		(self)->MoveTo((int)(place - wid), self->y + (hy / 2));
 		(self)->SetFont(NoteOn(self,*ip)? self->boldfont : self->normalfont);
 		(self)->DrawText(self->label[*ip], self->lsize[*ip],
-				      graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM );
+				      graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
 	    }
 
 	}
@@ -151,14 +151,14 @@ static void Drawpiano(class pianoV  * self,boolean  full)
 	}
 	if(self->label[*ip]  && (full ||  LabelChanged(self,*ip))){
 	    if(!full){
-		(self)->SetTransferMode(  graphic_COPY );
+		(self)->SetTransferMode(  graphic::COPY );
 		(self)->EraseRectSize( (int)(place - wid + 1),(int)(hy + 1),(int)(wid - 2),(int)hy - 2);
-		(self)->SetTransferMode(  graphic_BLACK );
+		(self)->SetTransferMode(  graphic::BLACK );
 	    }
 	    (self)->MoveTo((int)(place - (wid / 2)), self->y + hy +(hy / 2));
 	    (self)->SetFont(NoteOn(self,*ip)? self->boldfont : self->normalfont);
 	    (self)->DrawText(self->label[*ip], self->lsize[*ip],
-				  graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBOTTOM );
+				  graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM );
 	}
     }
     self->lastval = self->tmpval;
@@ -284,12 +284,12 @@ void pianoV::DrawNewValue( )
 
 #define flipbit(A,B) ((A & B)? (A & ~B) : (A | B))
 
-class valueview * pianoV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
+class valueview * pianoV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
     int tmp,v,m;
     switch(type){
-	case view_LeftDown:
+	case view::LeftDown:
 	    v = (tt)->GetValue();
 	    m = masks[locateHit(this,x,y)];
 	    this->tmpval =  flipbit(v,m);
@@ -298,7 +298,7 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 #endif /* DEBUG */
 	    Drawpiano(this,FALSE);
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    v = (tt)->GetValue();
 	    m = masks[locateHit(this,x,y)];
 	    tmp =  flipbit(v,m);
@@ -307,7 +307,7 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 		Drawpiano(this,FALSE);
 	    }
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	    (tt)->SetValue(this->tmpval);
 	    break;
 	default:

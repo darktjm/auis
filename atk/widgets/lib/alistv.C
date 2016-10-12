@@ -18,10 +18,10 @@ void AListvTextviewStateFormula::Evaluate() {
 }
 
 
-void AListv::SingleMode(view_MouseAction act, long ind) {
+void AListv::SingleMode(view::MouseAction act, long ind) {
     AList *dself=(AList *)GetDataObject();
     switch(act) {
-        case view_LeftDown: {
+        case view::LeftDown: {
             long i, c;
             dself->Toggle(ind);
             c=dself->selectionFormula.Count();
@@ -35,12 +35,12 @@ void AListv::SingleMode(view_MouseAction act, long ind) {
     }
 }
 
-void AListv::BrowseMode(view_MouseAction act, long ind) {
+void AListv::BrowseMode(view::MouseAction act, long ind) {
     AList *dself=(AList *)GetDataObject();
     switch(act) {
-        case view_LeftMovement:
-        case view_LeftDown:
-        case view_LeftUp: {
+        case view::LeftMovement:
+        case view::LeftDown:
+        case view::LeftUp: {
             long i, c;
             dself->Select(ind);
             c=dself->selectionFormula.Count();
@@ -54,10 +54,10 @@ void AListv::BrowseMode(view_MouseAction act, long ind) {
     }
 }
 
-void AListv::MultipleMode(view_MouseAction act, long ind) {
+void AListv::MultipleMode(view::MouseAction act, long ind) {
     AList *dself=(AList *)GetDataObject();
     switch(act) {
-        case view_LeftDown: {
+        case view::LeftDown: {
             dself->Toggle(ind);
             }
             break;
@@ -66,16 +66,16 @@ void AListv::MultipleMode(view_MouseAction act, long ind) {
 }
 
 
-void AListv::ExtendedMode(view_MouseAction act, long ind) {
+void AListv::ExtendedMode(view::MouseAction act, long ind) {
     AList *dself=(AList *)GetDataObject();
     long i,c;
     long min, max;
     const char *mods;
     AListSelectedItem *items;
-    if(firstInd==0 && act!=view_LeftDown) return;
+    if(firstInd==0 && act!=view::LeftDown) return;
     
     switch(act) {
-        case view_LeftDown:
+        case view::LeftDown:
             mods=GetIM()-> WantInformation("hit_modifiers");
             if(mods==NULL || *mods!='s') {
                 firstInd=ind;
@@ -91,9 +91,9 @@ void AListv::ExtendedMode(view_MouseAction act, long ind) {
                 dself->Toggle(ind);
             }
             break;
-        case view_LeftMovement:
-        case view_RightMovement:
-        case view_RightDown:
+        case view::LeftMovement:
+        case view::RightMovement:
+        case view::RightDown:
             min=MIN(ind,firstInd);
             max=MAX(ind,firstInd);
             c=dself->selectionFormula.Count();
@@ -116,12 +116,12 @@ void AListv::ExtendedMode(view_MouseAction act, long ind) {
             break;
         default: ;
     }
-    if(act==view_LeftUp || act==view_RightUp) toggleMode=FALSE;
+    if(act==view::LeftUp || act==view::RightUp) toggleMode=FALSE;
 }
 
 START_VIEW_CALLBACK_METHOD(TextHitMethod,AList,AListv) {
     text *t=(text *)tv->GetDataObject();
-    view_MouseAction act=(view_MouseAction)in[1].Integer();
+    view::MouseAction act=(view::MouseAction)in[1].Integer();
     long pos=in[2].Integer();
     long num_clicks=in[3].Integer();
     long line=t->GetLineForPos(pos);

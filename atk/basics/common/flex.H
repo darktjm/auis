@@ -26,15 +26,15 @@
  *  guarantee that one element is consecutive in memory to the next,
  *  except under specific conditions:
  *
- *  - After calling Insert(n), n elements at the insert positions are
+ *  - After calling \ref Insert(\e i, \e n), \e n elements at the insert position are
  *    guaranteed to be consecutive.
  *
- *  - After calling GetBuf(i, n, &l), l elements starting at i are
+ *  - After calling \ref GetBuf(\e i, \e n, &\e l), \e l elements starting at \e i are
  *    guaranteed to be consecutive.
  *
  *  These guarantees are invalidated, along with the guarantee that an
  *  address corresponds to a specific element, whenever the buffer
- *  is changed using Insert, Append, Remove, or GetBuf.
+ *  is changed using \ref Insert, \ref Append, \ref Remove, or \ref GetBuf.
  *
  *  Elements are raw bytes.  Constructors and destructors are not
  *  called.
@@ -52,14 +52,14 @@
  *  characteristics of this implementation:
  *
  *     - An element's location in memory will not change unless the
- *       array is edited (via Insert or Remove).
+ *       array is edited (via \ref Insert or \ref Remove).
  *
  *     - If you do not edit within a particular region, that region
- *       will remain contiguous (mflex/oflex depend on this in particular).
+ *       will remain contiguous (\ref mflex/\ref oflex depend on this in particular).
  *
  *  Previous versions of this were a flexible array of any type, with the
  *  type defined by the preprocessor when compiling.  This is now split
- *  into flex, mflex, and oflex to handle other cases.
+ *  into \ref flex, \ref mflex, and \ref oflex to handle other cases.
  */
 class flex
 {
@@ -91,7 +91,7 @@ class flex
 	if(deallocate) deallocate(ptr);
     }
     /**< Deallocates len bytes.
-     *   Default is to call deallocate().
+     *   Default is to call \ref deallocate.
      *   \param ptr Memory to free, and variable to set to NULL.
      */
 
@@ -152,8 +152,8 @@ class flex
      *   This does not automatically expand the array if needed.
      *   \param i The element to access.
      *   \return a variable reference to the requested element.  This
-     *           reference is valid until the next Insert, Append, Remove,
-     *           or GetBuf.
+     *           reference is valid until the next \ref Insert, \ref Append,
+     *           \ref Remove, or \ref GetBuf.
      *           On error, a message is displayed to standard error and a
      *           random element may be returned, instead.
      */
@@ -163,8 +163,8 @@ class flex
      *   This does not automatically expand the array if needed.
      *   \param i The element to access.
      *   \return a const reference to the requested element.  This
-     *           reference is valid until the next Insert, Append, Remove
-     *           or GetBuf.
+     *           reference is valid until the next \ref Insert, \ref Append,
+     *           \ref Remove or \ref GetBuf.
      *           On error, a message is displayed to standard error and a
      *           random element may be returned, instead.
      */
@@ -175,14 +175,14 @@ class flex
      *   \param len The number of elements to insert.
      *   \return a pointer to start of the newly added space.  This
      *           pointer is guaranteed to be a contiguous region of
-     *           memory of length len, and is invalidated at the next
-     *           Insert, Append, Remove, or GetBuf.
+     *           \p len elements, and is invalidated at the next
+     *           \ref Insert, \ref Append, \ref Remove, or \ref GetBuf.
      */
     inline char *Append() {return Insert( n, 1 );}
     /**< Create space for a new element at the end of the array.
      *   \return a pointer to the newly added space.   This
-     *           pointer is invalidated at the next Insert, Append,
-     *           Remove, or GetBuf.
+     *           pointer is invalidated at the next \ref Insert, \ref Append,
+     *           \ref Remove, or \ref GetBuf.
      */
 
     size_t Find( const char &o ) const;
@@ -190,7 +190,7 @@ class flex
      *   If the given pointer is a pointer to a valid element of the
      *   array, the index corresponding to this is returned.  Note that
      *   array elements may generally become invalidated after any
-     *   Insert, Append, Remove, or GetBuf operation.
+     *   \ref Insert, \ref Append, \ref Remove, or \ref GetBuf operation.
      *   \param o A pointer to an array element.
      *   \return The index of o in the array, or -1 if not a valid
      *           array element. */
@@ -199,7 +199,7 @@ class flex
      *   If the given pointer is a pointer to a valid element of the
      *   array, the index corresponding to this is returned.  Note that
      *   array elements may generally become invalidated after any
-     *   Insert, Append, Remove, or GetBuf operation.
+     *   \ref Insert, \ref Append, \ref Remove, or \ref GetBuf operation.
      *   \param o A pointer to an array element.
      *   \return The index of o in the array, or -1 if not a valid
      *           array element. */
@@ -224,17 +224,17 @@ class flex
     /**< Obtain pointer to consecutively stored array elements.
      *   This ensures that the requested number of elements are
      *   contiguous in memeory, at least until the next call to
-     *   Insert, Append, Remove, or GetBuf.
+     *   \ref Insert, \ref Append, \ref Remove, or \ref GetBuf.
      *   \param i The first element in the contiguous region.
      *   \param len The number of desired contiguous elements.
      *   \param gotlenp A pointer to a variable which will be filled with
      *                  the actual number of contiguous elements.  This
      *                  will be at least the actual number of array elements
-     *                  at i, up to len.  It may be smaller if i or len
+     *                  at \p i, up to \p len.  It may be smaller if \p i or \p len
      *                  are out of range, and it may be larger if more
      *                  elements are contiguous.
      *   \return a pointer to the first element in the contiguous region.
-     *           This may be NULL if *gotlenp is 0.
+     *           This may be NULL if *\p gotlenp is 0.
      */
 };
 /** @} */

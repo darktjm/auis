@@ -220,13 +220,13 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long
+    FullUpdate(enum view::UpdateType type, long left, long top, long
 
 width, long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)
 
 returns struct view *;
 
@@ -320,7 +320,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -337,13 +337,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -355,7 +355,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -365,7 +365,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -383,7 +383,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->hitX=x;
 
@@ -391,7 +391,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 
@@ -701,12 +701,12 @@ The statement \italic{helloworldview_SetDataObject (hwv, hw)} associates the
 view \italic{hwv} with the dataobject \italic{hw}.  As a side effect, it adds 
 the view \italic{hwv} to the \italic{hw'}s list of observers (see Observable, 
 Vol. 2).  Before drawing a data object in a newly created instance of a 
-\italic{view}, you should call \italic{view_SetDataObject} in order to 
+\italic{view}, you should call \italic{view::SetDataObject} in order to 
 associate the data object with the view and to add the view to the data 
 object's list of observers.  A \italic{view} may have only one data object at 
 a time, but you can reassign a view to another data object.  When defining a 
 sub-class of \italic{view}, you should not need to override \italic{view}'s 
-definition of \italic{view_SetDataObject}. 
+definition of \italic{view::SetDataObject}. 
 
 \begindata{bp,538929224}
 \enddata{bp,538929224}
@@ -952,12 +952,12 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -1107,7 +1107,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -1161,7 +1161,7 @@ long height;
     hwv->blackOnWhite=hw->blackOnWhite;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hw->blackOnWhite)
@@ -1177,14 +1177,14 @@ long height;
 		&myVisualRect, helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv,graphic_INVERT);
+    helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
     helloworldview_MoveTo(hwv, hw->x - hwv->frameX, hw->y - hwv->frameY);
 
     helloworldview_DrawString(hwv,"hello world",
 
-			   graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+			   graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -1199,7 +1199,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     if (hw->blackOnWhite!=hwv->blackOnWhite) \{
@@ -1239,9 +1239,9 @@ hwv->frameY!=hwv->newFrameY) \{
 
 	helloworldview_DrawString(hwv, "hello world",
 
-				  graphic_BETWEENTOPANDBASELINE |
+				  graphic::BETWEENTOPANDBASELINE |
 
-				  graphic_BETWEENLEFTANDRIGHT);
+				  graphic::BETWEENLEFTANDRIGHT);
 
   
 
@@ -1263,9 +1263,9 @@ hwv->frameY!=hwv->newFrameY) \{
 
 	helloworldview_DrawString(hwv, "hello world",
 
-				  graphic_BETWEENTOPANDBASELINE |
+				  graphic::BETWEENTOPANDBASELINE |
 
-				  graphic_BETWEENLEFTANDRIGHT);
+				  graphic::BETWEENLEFTANDRIGHT);
 
     \}
 
@@ -1277,7 +1277,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -1294,13 +1294,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -1312,7 +1312,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -1322,7 +1322,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -1341,7 +1341,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->hitX=x;
 
@@ -1349,7 +1349,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 

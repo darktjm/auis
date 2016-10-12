@@ -39,10 +39,10 @@ popupwin::~popupwin() {
     delete lks;
 }
 
-view *popupwin::Hit(view_MouseAction act, long x, long y, long numclicks) {
+view *popupwin::Hit(view::MouseAction act, long x, long y, long numclicks) {
     view *ret=this;
     if(v) ret=v->Hit(act, x, y, numclicks);
-    if(act==view_LeftUp) Retract();
+    if(act==view::LeftUp) Retract();
     return ret;
 };
 
@@ -61,9 +61,9 @@ void popupwin::SetView(view *vw) {
     v->LinkTree(this);
 }
 
-void popupwin::Post(view *origin, long mousex, long mousey, view_MouseAction act, long viewx, long viewy, long w, long h) {
+void popupwin::Post(view *origin, long mousex, long mousey, view::MouseAction act, long viewx, long viewy, long w, long h) {
     if(w==0 && h==0 && v) {
-	v->DesiredSize(500, 500, view_NoSet, &w, &h);
+	v->DesiredSize(500, 500, view::NoSet, &w, &h);
     }
     GetIM()->ResizeWindow(w,h);
     
@@ -89,7 +89,7 @@ void popupwin::InitChildren()
     else view::InitChildren();
 }
 
-void popupwin::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void popupwin::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle r;
     
@@ -107,7 +107,7 @@ void popupwin::Update()
     view::Update();
 }
 
-view_DSattributes popupwin::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes popupwin::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
     if(v) return (v)->DesiredSize( width, height, pass, dWidth, dHeight);
     else return view::DesiredSize( width, height, pass, dWidth, dHeight);

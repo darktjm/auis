@@ -102,7 +102,7 @@ ForegroundColor: black
 
 #~help
 
-The default foreground color for the application.
+The default background color for the application.
 
 #~endhelp
 

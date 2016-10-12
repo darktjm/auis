@@ -15,7 +15,7 @@ htmlimagev::htmlimagev() {
 htmlimagev::~htmlimagev() {
 }
 
-view *htmlimagev::Hit(enum view_MouseAction action,long xi, long yi, long numberOfClicks) {
+view *htmlimagev::Hit(enum view::MouseAction action,long xi, long yi, long numberOfClicks) {
     x=xi;
     y=yi;
     return imagev::Hit(action, x, y, numberOfClicks);

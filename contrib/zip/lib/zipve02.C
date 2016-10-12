@@ -58,9 +58,9 @@ END-SPECIFICATION  ************************************************************/
 
 
 extern NO_DLL_EXPORT int zipedit_Redisplay_Edit_Pane( class zipedit		  *self, zip_type_pane		   pane );
-extern NO_DLL_EXPORT int zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks );
 static long Change_Shade( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   shade );
-extern NO_DLL_EXPORT int zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction				   action , int				   x , int				   y , int				   clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction				   action , int				   x , int				   y , int				   clicks );
 static int Figure_Palette_LBDT( class zipedit		  *self, zip_type_pane		   icon_pane, int				   x , int				   y , int				   clicks );
 static int Create_Name_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
 static int Create_Font_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
@@ -88,11 +88,11 @@ static int Create_BR_Palette( class zipedit		  *self, zip_type_pane			   contain
 extern NO_DLL_EXPORT void zipedit_Expose_BR_Palette( class zipedit		  *self, zip_type_pane		   pane );
 extern NO_DLL_EXPORT void zipedit_Hide_BR_Palette( class zipedit		  *self, zip_type_pane		   pane );
 static int Create_Palette_Surround( class zipedit  *self, zip_type_pane  pane, zip_type_pane  *palette, const char *name, int x_origin , int   y_origin , int width , int height );
-extern NO_DLL_EXPORT int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action, long  x , long  y , long  clicks );
-extern NO_DLL_EXPORT int zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view::MouseAction  action, long  x , long  y , long  clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks );
 extern NO_DLL_EXPORT int zipedit_Handle_Font_Italic_Selection( class zipedit	      *self, zip_type_pane	       pane, int			       action , long			       x , long			       y , long			       clicks );
-extern NO_DLL_EXPORT int zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
-extern NO_DLL_EXPORT int zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks );
 static void Set_Sample( class zipedit	      *self, zip_type_pane	       pane, boolean		       draw_pane );
 static boolean Change_Figure_Font_And_Mode( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   font , long				   mode );
 
@@ -330,7 +330,7 @@ zipedit_Redisplay_Edit_Pane( class zipedit		  *self, zip_type_pane		   pane )
 extern zip_type_figure zipedit_Next_Selected_Figure( class zipedit *self, zip_type_pane pane, zip_type_figure figure );
 
 int
-zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
+zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction	   action, long				   x , long				   y , long				   clicks )
           {
   long				  status = zip_ok, shade = 0, changed = false;
   zip_type_figure		  figure, display, 
@@ -338,7 +338,7 @@ zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane
   char				 *ptr;
 
   IN(zipedit_Handle_Shade_Palette_Hit);
-  if ( action == view_LeftDown  &&
+  if ( action == view::LeftDown  &&
        (figure = (self->view_object)->Within_Which_Figure(  x, y )) )
     {
     DEBUGst(Figure-name,figure->zip_figure_name);
@@ -408,21 +408,21 @@ long Change_Shade( class zipedit		  *self, zip_type_pane		   pane, zip_type_figu
   }
 
 int
-zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction				   action , int				   x , int				   y , int				   clicks )
+zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view::MouseAction				   action , int				   x , int				   y , int				   clicks )
         {
   int				  status = zip_ok;
 
   IN(zipedit_Handle_Figure_Palette_Hit);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       Figure_Palette_LBDT( self, pane, x, y, clicks );
       break;
-    case view_LeftUp:
-    case view_LeftMovement:
-    case view_RightDown:
-    case view_RightUp:
-    case view_RightMovement:
+    case view::LeftUp:
+    case view::LeftMovement:
+    case view::RightDown:
+    case view::RightUp:
+    case view::RightMovement:
     default: ;
     }
   OUT(zipedit_Handle_Figure_Palette_Hit);
@@ -442,7 +442,7 @@ Figure_Palette_LBDT( class zipedit		  *self, zip_type_pane		   icon_pane, int			
   if ( icon_pane->zip_pane_client_data )
     {
     if ( self->keyboard_processor )
-      (*self->keyboard_processor)( KeyboardAnchor, pane, 0, view_NoMouseEvent, 0, 0, 0 );
+      (*self->keyboard_processor)( KeyboardAnchor, pane, 0, view::NoMouseEvent, 0, 0, 0 );
     zipedit_Cancel_Enclosure( self, pane );
     zipedit_Hide_Selection_Menu( self );
     if ( CurrentFigure ) {
@@ -952,13 +952,13 @@ Create_Palette_Surround( class zipedit		  *self, zip_type_pane		   pane, zip_typ
   }
 
 int
-zipedit_Handle_Font_Family_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipedit_Handle_Font_Family_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   long			      status = zip_success;
   zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Family_Selection);
-  if ( action == view_LeftDown )
+  if ( action == view::LeftDown )
     {
     (self->view_object)->Clear_Pane(  pane );
     figure = (self->data_object)->Figure(  "font_catalog_family" );
@@ -977,18 +977,18 @@ zipedit_Handle_Font_Family_Selection( class zipedit	      *self, zip_type_pane	 
   }
 
 int
-zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   long			      status = zip_success;
   zip_type_figure	      figure;
   char				      msg[257];
 
   IN(zipedit_Handle_Font_Height_Selection);
-  if ( action == view_LeftDown  ||  action == view_RightDown )
+  if ( action == view::LeftDown  ||  action == view::RightDown )
     {
     (self->view_object)->Clear_Pane(  pane );
     figure = (self->data_object)->Figure(  "font_catalog_height" );
-    if ( action == view_LeftDown )
+    if ( action == view::LeftDown )
       {
       if ( FontHeight < 144 )
 	FontHeight += 2;
@@ -998,7 +998,7 @@ zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	 
       (self->data_object)->Set_Figure_Text(  figure, msg);
       }
     else
-    if ( action == view_RightDown )
+    if ( action == view::RightDown )
       {
       if ( FontHeight > 2 )
 	FontHeight -= 2;
@@ -1014,13 +1014,13 @@ zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	 
   }
 
 int
-zipedit_Handle_Font_Italic_Selection( class zipedit *self, zip_type_pane	       pane, enum view_MouseAction action , long x , long y , long clicks )
+zipedit_Handle_Font_Italic_Selection( class zipedit *self, zip_type_pane	       pane, enum view::MouseAction action , long x , long y , long clicks )
 {
   int			      status = zip_success;
   zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Italic_Selection);
-  if ( action == (int)view_LeftDown )
+  if ( action == (int)view::LeftDown )
     {
     (self->view_object)->Clear_Pane(  pane );
     figure = (self->data_object)->Figure(  "font_catalog_italic" );
@@ -1034,13 +1034,13 @@ zipedit_Handle_Font_Italic_Selection( class zipedit *self, zip_type_pane	       
   }
 
 int
-zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   long			      status = zip_success;
   zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Bold_Selection);
-  if ( action == view_LeftDown )
+  if ( action == view::LeftDown )
     {
     (self->view_object)->Clear_Pane(  pane );
     figure = (self->data_object)->Figure(  "font_catalog_bold" );
@@ -1054,18 +1054,18 @@ zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	   
   }
 
 int
-zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   long			      status = zip_ok, reshow = false;
 
   IN(zipedit_Handle_Font_Sample_Selection);
-  if ( action == view_LeftDown )
+  if ( action == view::LeftDown )
     {
     PriorX = x;  PriorY = y;
     Set_Sample( self, pane, false );
     }
   else
-    if ( action == view_LeftMovement )
+    if ( action == view::LeftMovement )
       {
       (self->view_object)->Set_Pane_Cursor(  pane, '@', CursorFontName ); /* Make Cursor disappear */
       if ( x < (PriorX - 5) )
@@ -1115,10 +1115,10 @@ zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	 
 	PriorX = x;  PriorY = y; reshow = true;
 	}
       }
-  if (  action == view_LeftUp  ||
-       ((action == view_LeftMovement)  &&  reshow ) )
-    Set_Sample( self, pane, action == view_LeftUp );
-  if ( action == view_LeftUp )
+  if (  action == view::LeftUp  ||
+       ((action == view::LeftMovement)  &&  reshow ) )
+    Set_Sample( self, pane, action == view::LeftUp );
+  if ( action == view::LeftUp )
     (self->view_object)->Set_Pane_Cursor(  pane, '2', CursorFontName );
   OUT(zipedit_Handle_Font_Sample_Selection);
   return status;

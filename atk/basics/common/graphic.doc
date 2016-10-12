@@ -72,7 +72,7 @@ graphic to do text output--only indirectly. \
 
 
 
-\fixedtext{void \bold{graphic_}BitBltSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}BitBltSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{srcX}, long \paramname{srcY}, long 
 \paramname{dstX}, long \paramname{dstY}, long \paramname{Width}, long 
 \paramname{Height}, struct graphic *\paramname{DstGraphic}, long 
@@ -80,465 +80,465 @@ graphic to do text output--only indirectly. \
 \paramname{clipHeight});} \
 
 
-\fixedtext{void \bold{graphic_}BitBlt }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}BitBlt }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{SrcRect}, struct graphic 
 *\paramname{DestGraphic}, struct point *\paramname{DstOrigin}, struct 
 rectangle *\paramname{ClipRectList});} \
 
 
-\fixedtext{struct graphic *\bold{graphic_}BlackPattern 
+\fixedtext{struct graphic *\bold{graphic::}BlackPattern 
 }\fixedindent{(struct graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}ClearClippingRect }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}ClearClippingRect }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{struct graphic *\bold{graphic_}CreateGraphic }\fixedindent{();} \
+\fixedtext{struct graphic *\bold{graphic::}CreateGraphic }\fixedindent{();} \
 
 
-\fixedtext{void \bold{graphic_}DrawArcSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawArcSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, short \paramname{StartAngle}, 
 short \paramname{OffsetAngle});} \
 
 
-\fixedtext{void \bold{graphic_}DrawArc }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawArc }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{EnclRect}, short 
 \paramname{StartAngle}, short \paramname{OffsetAngle});} \
 
 
-\fixedtext{void \bold{graphic_}DrawLineToPt }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawLineToPt }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{LineEnd});} \
 
 
-\fixedtext{void \bold{graphic_}DrawLineTo }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawLineTo }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{XEnd}, long \paramname{YEnd});} \
 
 
-\fixedtext{void \bold{graphic_}DrawLine }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawLine }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{DeltaX}, long \paramname{DeltaY});} \
 
 
-\fixedtext{void \bold{graphic_}DrawOvalSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawOvalSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}DrawOval }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawOval }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{void \bold{graphic_}DrawPath }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawPath }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{PointArray}, short 
 \paramname{PointCount});} \
 
 
-\fixedtext{void \bold{graphic_}DrawPolygon }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawPolygon }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{PointArray}, short 
 \paramname{PointCount});} \
 
 
-\fixedtext{void \bold{graphic_}DrawRectSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}DrawRect }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawRect }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{void \bold{graphic_}DrawRgn }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawRgn }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct region *\paramname{Rgn});} \
 
 
-\fixedtext{void \bold{graphic_}DrawRRectSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawRRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, long \paramname{cornerWidth}, 
 long \paramname{cornerHeight});} \
 
 
-\fixedtext{void \bold{graphic_}DrawRRect }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawRRect }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{OuterBox}, struct 
 rectangle *\paramname{InnerBox});} \
 
 
-\fixedtext{void \bold{graphic_}DrawString }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawString }\fixedindent{(struct graphic 
 *\paramname{graphic}, char *\paramname{Text}, short \paramname{Operation});} 
 
-\fixedtext{void \bold{graphic_}DrawText }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawText }\fixedindent{(struct graphic 
 *\paramname{graphic}, char *\paramname{Text}, long \paramname{TextLength}, 
 short \paramname{Operation});} \
 
 
-\fixedtext{void \bold{graphic_}DrawTrapezoid }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}DrawTrapezoid }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{topX}, long \paramname{topY}, long 
 \paramname{topWidth}, long \paramname{bottomX}, long \paramname{bottomY}, 
 long \paramname{bottomWidth});} \
 
 
-\fixedtext{void \bold{graphic_}EraseRectSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}EraseRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}EraseRect }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}EraseRect }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{void \bold{graphic_}EraseVisualRect }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}EraseVisualRect }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}FillArcSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillArcSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, short \paramname{StartAngle}, 
 short \paramname{OffsetAngle}, struct graphic *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillArc }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillArc }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{EnclRect}, short 
 \paramname{StartAngle}, short \paramname{OffsetAngle}, struct graphic 
 *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillOvalSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillOvalSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, struct graphic 
 *\paramname{Tile});} \
 
 
 
-\fixedtext{void \bold{graphic_}FillOval }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillOval }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{Rect}, struct graphic 
 *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillPolygon }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillPolygon }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{PointArray}, short 
 \paramname{PointCount}, struct graphic *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillRectSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, struct graphic 
 *\paramname{Tile});} \
 
 
 
-\fixedtext{void \bold{graphic_}FillRect }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillRect }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{Rect}, struct graphic 
 *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillRgn }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillRgn }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct region *\paramname{Rgn}, struct graphic 
 *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillRRectSize }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillRRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, long \paramname{cornerWidth}, 
 long \paramname{cornerHeight}, struct graphic *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillRRect }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillRRect }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct rectangle *\paramname{OuterBox}, struct 
 rectangle *\paramname{InnerBox}, struct graphic *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FillTrapezoid }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FillTrapezoid }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{topX}, long \paramname{topY}, long 
 \paramname{topWidth}, long \paramname{bottomX}, long \paramname{bottomY}, 
 long \paramname{bottomWidth}, struct graphic *\paramname{Tile});} \
 
 
-\fixedtext{void \bold{graphic_}FinalizeObject }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FinalizeObject }\fixedindent{(struct graphic 
 *\paramname{self});} \
 
 
-\fixedtext{void \bold{graphic_}FlushGraphics }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}FlushGraphics }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}GetBackgroundColor }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetBackgroundColor }\fixedindent{(struct 
 graphic *\paramname{graphic}, char **\paramname{colorName}, long 
 *\paramname{red}, long *\paramname{green}, long *\paramname{blue});} \
 
 
-\fixedtext{void \bold{graphic_}GetClippingRect }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetClippingRect }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{void \bold{graphic_}GetCurrentPt }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}GetCurrentPt }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{Pt});} \
 
 
-\fixedtext{void \bold{graphic_}GetDefaultColors }\fixedindent{(char 
+\fixedtext{void \bold{graphic::}GetDefaultColors }\fixedindent{(char 
 **\paramname{foreground}, char **\paramname{background});} \
 
 
-\fixedtext{long \bold{graphic_}GetDevice }\fixedindent{(struct graphic 
+\fixedtext{long \bold{graphic::}GetDevice }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetEnclosedBottom }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetEnclosedBottom }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}GetEnclosedBounds }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetEnclosedBounds }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{\bold{graphic_}GetEnclosedHeight }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetEnclosedHeight }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetEnclosedLeft }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetEnclosedLeft }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetEnclosedRight }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetEnclosedRight }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetEnclosedTop }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetEnclosedTop }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetEnclosedWidth }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetEnclosedWidth }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{struct fontdesc *\bold{graphic_}GetFont }\fixedindent{(struct 
+\fixedtext{struct fontdesc *\bold{graphic::}GetFont }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}GetForegroundColor }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetForegroundColor }\fixedindent{(struct 
 graphic *\paramname{graphic}, char **\paramname{colorName}, long 
 *\paramname{red}, long *\paramname{green}, long *\paramname{blue});} \
 
 
-\fixedtext{long \bold{graphic_}GetHorizontalResolution 
+\fixedtext{long \bold{graphic::}GetHorizontalResolution 
 }\fixedindent{(struct graphic *\paramname{graphic});} \fixedtext{short 
-\bold{graphic_}GetLineWidth }\fixedindent{(struct graphic 
+\bold{graphic::}GetLineWidth }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetLogicalBottom }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetLogicalBottom }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}GetLogicalBounds }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetLogicalBounds }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{\bold{graphic_}GetLogicalHeight }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetLogicalHeight }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetLogicalLeft }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetLogicalLeft }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetLogicalRight }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetLogicalRight }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetLogicalTop }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetLogicalTop }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetLogicalWidth }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetLogicalWidth }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{short \bold{graphic_}GetSpaceShim }\fixedindent{(struct graphic 
+\fixedtext{short \bold{graphic::}GetSpaceShim }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{short \bold{graphic_}GetTransferMode }\fixedindent{(struct 
+\fixedtext{short \bold{graphic::}GetTransferMode }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetVerticalResolution }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetVerticalResolution }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetVisualBottom }\fixedindent{(struct 
+\fixedtext{long \bold{graphic::}GetVisualBottom }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}GetVisualBounds }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}GetVisualBounds }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{\bold{graphic_}GetVisualHeight }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetVisualHeight }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetVisualLeft }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetVisualLeft }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{long \bold{graphic_}GetVisualRight }\fixedindent{(struct graphic 
+\fixedtext{long \bold{graphic::}GetVisualRight }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetVisualTop }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetVisualTop }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{\bold{graphic_}GetVisualWidth }\fixedindent{(struct graphic 
+\fixedtext{\bold{graphic::}GetVisualWidth }\fixedindent{(struct graphic 
 *\paramname{graphic});} \
 
 
-\fixedtext{char *\bold{graphic_}GetWindowManagerType }\fixedindent{(struct 
+\fixedtext{char *\bold{graphic::}GetWindowManagerType }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{struct graphic *\bold{graphic_}GrayPattern }\fixedindent{(struct 
+\fixedtext{struct graphic *\bold{graphic::}GrayPattern }\fixedindent{(struct 
 graphic *\paramname{graphic}, short \paramname{IntensityNum}, 
 \paramname{IntensityDenom});} \
 
 
-\fixedtext{boolean \bold{graphic_}InitializeObject }\fixedindent{(struct 
+\fixedtext{boolean \bold{graphic::}InitializeObject }\fixedindent{(struct 
 graphic *\paramname{self});} \
 
 
-\fixedtext{void \bold{graphic_}InsertGraphicSize }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}InsertGraphicSize }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct graphic *\paramname{EnclosingGraphic}, 
 long \paramname{xOriginInParent}, long \paramname{yOriginInParent}, long 
 \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}InsertGraphic }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}InsertGraphic }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct graphic *\paramname{EnclosingGraphic}, struct 
 rectangle *\paramname{EnclosedRectangle});} \
 
 
-\fixedtext{void \bold{graphic_}MoveLogicalOrigin }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}MoveLogicalOrigin }\fixedindent{(struct 
 graphic *\paramname{graphic}, long \paramname{DeltaX}, long 
 \paramname{DeltaY});} \
 
 
-\fixedtext{void \bold{graphic_}MoveToPt }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}MoveToPt }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{Pt});} \
 
 
-\fixedtext{void \bold{graphic_}MoveTo }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}MoveTo }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{NewX}, long \paramname{NewY});} \
 
 
-\fixedtext{void \bold{graphic_}Move }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}Move }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{DeltaX}, long \paramname{DeltaY});} \
 
 
-\fixedtext{void \bold{graphic_}ReadPixImage }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}ReadPixImage }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{SrcX}, long \paramname{SrcY}, struct 
 pixelimage *\paramname{DestPixels}, long \paramname{DestX}, long 
 \paramname{DestY}, long \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}RestoreGraphicsState }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}RestoreGraphicsState }\fixedindent{(struct 
 graphic *\paramname{graphic});} \
 
 
-\fixedtext{void \bold{graphic_}SetBackgroundColor }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetBackgroundColor }\fixedindent{(struct 
 graphic *\paramname{graphic}, char *\paramname{colorName}, long 
 \paramname{red}, long \paramname{green}, long \paramname{blue});} \
 
 
-\fixedtext{void \bold{graphic_}SetBitAtLoc }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}SetBitAtLoc }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{XPos}, long \paramname{YPos}, boolean 
 \paramname{NewValue});} \
 
 
-\fixedtext{void \bold{graphic_}SetClippingRectSize }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetClippingRectSize }\fixedindent{(struct 
 graphic *\paramname{graphic}, long \paramname{x}, \paramname{y}, 
 \paramname{w}, \paramname{h});} \
 
 
-\fixedtext{void \bold{graphic_}SetClippingRect }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetClippingRect }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct rectangle 
 *\paramname{AdditionalRect});} \
 
 
-\fixedtext{void \bold{graphic_}SetDefaultColors }\fixedindent{(char 
+\fixedtext{void \bold{graphic::}SetDefaultColors }\fixedindent{(char 
 *\paramname{foreground}, char *\paramname{background});} \
 
 
-\fixedtext{void \bold{graphic_}SetFont }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}SetFont }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct fontdesc *\paramname{ChosenFont});} \
 
 
-\fixedtext{void \bold{graphic_}SetForegroundColor }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetForegroundColor }\fixedindent{(struct 
 graphic *\paramname{graphic}, char *\paramname{colorName}, long 
 \paramname{red}, long \paramname{green}, long \paramname{blue});} \
 
 
-\fixedtext{void \bold{graphic_}SetLineWidth }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}SetLineWidth }\fixedindent{(struct graphic 
 *\paramname{graphic}, short \paramname{NewLineWidth});} \
 
 
-\fixedtext{void \bold{graphic_}SetLogicalOriginPt }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetLogicalOriginPt }\fixedindent{(struct 
 graphic *\paramname{graphic}, struct point *\paramname{Pt});} \
 
 
-\fixedtext{void \bold{graphic_}SetLogicalOrigin }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetLogicalOrigin }\fixedindent{(struct 
 graphic *\paramname{graphic}, long \paramname{NewX}, long 
 \paramname{NewY});} \
 
 
-\fixedtext{void \bold{graphic_}SetSpaceShim }\fixedindent{(struct graphic 
+\fixedtext{void \bold{graphic::}SetSpaceShim }\fixedindent{(struct graphic 
 *\paramname{graphic}, short \paramname{Amount});} \
 
 
-\fixedtext{void \bold{graphic_}SetTransferMode }\fixedindent{(struct 
+\fixedtext{void \bold{graphic::}SetTransferMode }\fixedindent{(struct 
 graphic *\paramname{graphic}, short \paramname{NewTransferMode});} \
 
 
-\fixedtext{struct graphic *\bold{graphic_}WhitePattern 
+\fixedtext{struct graphic *\bold{graphic::}WhitePattern 
 }\fixedindent{(struct graphic *\paramname{graphic});} \fixedtext{void 
-\bold{graphic_}WritePixImage }\fixedindent{(struct graphic 
+\bold{graphic::}WritePixImage }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{DestX}, long \paramname{DestY}, 
 struct pixelimage *\paramname{SrcPixels}, long \paramname{SrcX}, long 
 \paramname{SrcY}, long \paramname{width}, long \paramname{height});} \
 
 
-\fixedtext{void \bold{graphic_}SetFGColor( struct graphic 
+\fixedtext{void \bold{graphic::}SetFGColor( struct graphic 
 *\paramname{graphic, }double \paramname{red}, double \paramname{green}, 
 double \paramname{blue} );
 
-void \bold{graphic_}GetFGColor( struct graphic *\paramname{graphic, }double 
+void \bold{graphic::}GetFGColor( struct graphic *\paramname{graphic, }double 
 *\paramname{red}, double *\paramname{green}, double *\paramname{blue} );
 
-void \bold{graphic_}SetBGColor( struct graphic *\paramname{graphic, }double 
+void \bold{graphic::}SetBGColor( struct graphic *\paramname{graphic, }double 
 \paramname{red}, double \paramname{green}, double \paramname{blue} );
 
-void \bold{graphic_}GetBGColor( struct graphic *\paramname{graphic, }double 
+void \bold{graphic::}GetBGColor( struct graphic *\paramname{graphic, }double 
 *\paramname{red}, double *\paramname{green}, double *\paramname{blue} );
 
-void \bold{graphic_}SetLineDash( struct graphic *\paramname{graphic, }char 
+void \bold{graphic::}SetLineDash( struct graphic *\paramname{graphic, }char 
 *\paramname{dashPattern}, int \paramname{dashOffset}, short 
 \paramname{dashType} );
 
-void \bold{graphic_}GetLineDash( struct graphic *\paramname{graphic, }char 
+void \bold{graphic::}GetLineDash( struct graphic *\paramname{graphic, }char 
 **\paramname{dashPattern}, int *\paramname{dashOffset}, short 
 *\paramname{dashType} );
 
-void \bold{graphic_}SetLineCap( struct graphic *\paramname{graphic, }short 
+void \bold{graphic::}SetLineCap( struct graphic *\paramname{graphic, }short 
 \paramname{NewLineCap} );
 
-short \bold{graphic_}GetLineCap( struct graphic *\paramname{graphic });
+short \bold{graphic::}GetLineCap( struct graphic *\paramname{graphic });
 
-void \bold{graphic_}SetLineJoin( struct graphic *\paramname{graphic, }short 
+void \bold{graphic::}SetLineJoin( struct graphic *\paramname{graphic, }short 
 \paramname{NewLineJoin} );
 
-short \bold{graphic_}GetLineJoin( struct graphic *\paramname{graphic }); \
+short \bold{graphic::}GetLineJoin( struct graphic *\paramname{graphic }); \
 
 
-long \bold{graphic_}DisplayClass( struct graphic *\paramname{graphic });
+long \bold{graphic::}DisplayClass( struct graphic *\paramname{graphic });
 
 boolean \bold{graphic}_IsImageInverted( struct graphic *\paramname{graphic 
 });}
@@ -566,7 +566,7 @@ ways.  First,  the \italic{Interaction Manager} explicitly links its
 \italic{graphic} object, a \italic{window,} to a \italic{pixmap} when you 
 set the \italic{Interaction Manager}'s view.   Second, the \italic{pixmap} 
 is linked implicitly and relative to the parent when you insert a graphic 
-object into its parent by calling \italic{graphic_InsertGraphic} before 
+object into its parent by calling \italic{graphic::InsertGraphic} before 
 beginning to draw when setting up view hierarchies. You must use one of 
 these methods to associate a newly created \italic{graphic} object with its 
 pixel map. \
@@ -710,7 +710,7 @@ that will be added to the right of space characters.  It is initialized to
 Transfer mode \formatnote{  --  }The transfer mode determines how bits will 
 be turned on and off on the screen when drawing lines, writing text, 
 transferring blocks of bits or filling figures.  It is initialized to 
-\smaller{graphic_COPY}. \
+\smaller{graphic::COPY}. \
 
 
 
@@ -769,9 +769,9 @@ drawing, however, you must do one of the following: \
 (see \bold{Interaction Manager}), or
 
 
-(b) call \italic{graphic_InsertGraphic}
+(b) call \italic{graphic::InsertGraphic}
 
-\indexi{ \italic{graphic_InsertGraphic}} \
+\indexi{ \italic{graphic::InsertGraphic}} \
 
 
 to insert the object into its parent's graphic (see \bold{View}). \
@@ -817,9 +817,9 @@ n 0
 \subsection{Creating and initializing graphics} \paragraph{Creating an 
 instance of a graphic} \indexi{Graphic++Creating}
 
-\indexi{ \italic{graphic_CreateGraphic}}
+\indexi{ \italic{graphic::CreateGraphic}}
 
-\example{struct graphic *graphic_CreateGraphic() \
+\example{struct graphic *graphic::CreateGraphic() \
 
 
 }
@@ -832,7 +832,7 @@ class \italic{graphic} and initializes it. \
 \paragraph{Inserting a graphic} \indexi{Graphic++Inserting}
 
 
-\example{void graphic_InsertGraphic(EnclosedGraphic, EnclosingGraphic, 
+\example{void graphic::InsertGraphic(EnclosedGraphic, EnclosingGraphic, 
 EnclosedRectangle) \
 
 
@@ -846,7 +846,7 @@ struct rectangle *EnclosedRectangle;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_InsertGraphic} 
+\leftindent{\bold{Method description.  }\italic{graphic::InsertGraphic} 
 inserts the graphic \italic{EnclosedGraphic} into 
 \italic{EnclosingGraphic}. \
 
@@ -866,9 +866,9 @@ into its parent's graphic.  To move a graphic object, you must reinsert it.
 
 \paragraph{Restoring the graphic state} \indexi{Graphic++Restoring state}
 
-\indexi{ \italic{graphic_RestoreGraphicsState}}
+\indexi{ \italic{graphic::RestoreGraphicsState}}
 
-\example{void graphic_RestoreGraphicsState(grphc) \
+\example{void graphic::RestoreGraphicsState(grphc) \
 
 
 struct graphic *grphc;} \
@@ -876,7 +876,7 @@ struct graphic *grphc;} \
 
 
 \leftindent{\bold{Method description. 
-} \italic{graphic_RestoreGraphicsState} sets the global graphic state 
+} \italic{graphic::RestoreGraphicsState} sets the global graphic state 
 variables to the values of  \italic{grphc}'s global state variables.  The 
 state variables include the line width for drawing lines, the font for 
 drawing text, the clipping rectangle, the current point for drawing lines 
@@ -885,7 +885,7 @@ and text, the  space shims, and for drawing. \
 
 
 \bold{Usage.}  Before drawing, you should call 
-\italic{graphic_RestoreGraphicsState} in order to set the global graphic 
+\italic{graphic::RestoreGraphicsState} in order to set the global graphic 
 state variables.  Since other objects will also potentially be setting the 
 global graphic state, you must restore your objects's graphic state any 
 time another object may have had an opportunity to set the global graphic 
@@ -931,9 +931,9 @@ library.  A point can be thought of as an (x,y) coordinate.
 
 \paragraph{Moving the current point to a new point} \indexi{Graphic++Moving}
 
-\indexi{ \italic{graphic_MoveToPt}}
+\indexi{ \italic{graphic::MoveToPt}}
 
-\example{void graphic_MoveToPt(grphc,NewPosition) \
+\example{void graphic::MoveToPt(grphc,NewPosition) \
 
 
 struct graphic *grphc;  \
@@ -943,7 +943,7 @@ struct point *NewPosition;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_MoveToPt}  sets the 
+\leftindent{\bold{Method description.  }\italic{graphic::MoveToPt}  sets the 
 \italic{current point} to the point, \italic{NewPosition}. \
 
 
@@ -958,15 +958,15 @@ struct point *NewPosition;} \
 struct point *pt;  struct graphic *go;   /* a graphic object */
 
 
-go = graphic_New ():  \bold{...}  \description{pt = 
-point_CreatePoint(graphic_GetVisualLeft (go), graphic_GetVisualTop(go);} 
- graphic_MoveToPt (grphc, pt); \
+go = graphic::New ():  \bold{...}  \description{pt = 
+point_CreatePoint(graphic::GetVisualLeft (go), graphic::GetVisualTop(go);} 
+ graphic::MoveToPt (grphc, pt); \
 
 
 }
 
 The call to \italic{point_CreatePoint} assigns \italic{pt} to the graphic 
-object's visual origin.  Then the call to \italic{graphic_MoveToPt} sets 
+object's visual origin.  Then the call to \italic{graphic::MoveToPt} sets 
 the current point to \italic{pt}. \
 
 
@@ -979,9 +979,9 @@ n 0
 \paragraph{Moving the current point to a new (x,y) coordinate} 
 \indexi{Graphic++Moving}
 
-\indexi{ \italic{graphic_MoveTo}}
+\indexi{ \italic{graphic::MoveTo}}
 
-\example{void graphic_MoveTo(grphc, NewX, NewY) \
+\example{void graphic::MoveTo(grphc, NewX, NewY) \
 
 
 struct graphic *grphc;  \
@@ -994,7 +994,7 @@ long NewX;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_MoveTo} moves the 
+\leftindent{\bold{Method description.  }\italic{graphic::MoveTo} moves the 
 \italic{current point} to \italic{(NewX, Newy) }where the 32-bit integer 
 \italic{NewX} is the horizontal coordinate and \italic{NewY} the vertical. \
 
@@ -1004,9 +1004,9 @@ long NewX;} \
 \paragraph{Moving the current point relative to the current point} 
 \indexi{Graphic++Moving}
 
-\indexi{ \italic{graphic_Move}}
+\indexi{ \italic{graphic::Move}}
 
-\example{void graphic_Move(grphc, DeltaX, DeltaY) \
+\example{void graphic::Move(grphc, DeltaX, DeltaY) \
 
 
 struct graphic *grphc;  \
@@ -1016,7 +1016,7 @@ long DeltaX;  long DeltaY;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_Move} moves the 
+\leftindent{\bold{Method description.}   \italic{graphic::Move} moves the 
 \italic{current point} to \italic{(current x + DeltaX, current y + DeltaY)} 
 where the 32-bit integer \italic{DeltaX} is the horizontal distance from 
 the current point to the desired point, \italic{DeltaY} the vertical 
@@ -1031,7 +1031,7 @@ distance. \
 struct graphic *go;   /* a graphic object */
 
 
-go = graphic_New (); \
+go = graphic::New (); \
 
 
 
@@ -1039,15 +1039,15 @@ go = graphic_New (); \
 
 
 
-graphic_MoveTo (grphc, 20,30);  \
+graphic::MoveTo (grphc, 20,30);  \
 
 
-graphic_Move (grphc, 5, 10);} \
+graphic::Move (grphc, 5, 10);} \
 
 
 
-\italic{graphic_MoveTo (grphc, 20, 30)} moves the current point to the 
-logical coordinate (20,30).  Then \italic{graphic_Move (grphc, 5, 10)} 
+\italic{graphic::MoveTo (grphc, 20, 30)} moves the current point to the 
+logical coordinate (20,30).  Then \italic{graphic::Move (grphc, 5, 10)} 
 moves the current point to (20+5, 30+10), that is, (25,40). \
 
 
@@ -1058,9 +1058,9 @@ moves the current point to (20+5, 30+10), that is, (25,40). \
 \paragraph{Getting the current point location} \indexi{Graphic++Getting 
 location}
 
-\indexi{ \italic{graphic_GetCurrent}}
+\indexi{ \italic{graphic::GetCurrent}}
 
-\example{void graphic_GetCurrentPt(grphc, Pt) \
+\example{void graphic::GetCurrentPt(grphc, Pt) \
 
 
 struct graphic *grphc;  \
@@ -1070,7 +1070,7 @@ struct point *Pt;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_GetCurrentPt}  gets 
+\leftindent{\bold{Method description.  }\italic{graphic::GetCurrentPt}  gets 
 the current point location. \
 
 
@@ -1088,7 +1088,7 @@ struct point *pt;  \
 struct graphic *go;   /* a graphic object */
 
 
-go = graphic_New ();  \
+go = graphic::New ();  \
 
 
 
@@ -1096,13 +1096,13 @@ go = graphic_New ();  \
 
 
 
-graphic_MoveToPt (grphc, 20,30);  graphic_GetCurrentPt (grphc, &pt); \
+graphic::MoveToPt (grphc, 20,30);  graphic::GetCurrentPt (grphc, &pt); \
 
 
 }
 
 The call to \italic{point_CreatePoint} assigns \italic{pt} to the graphic 
-object's visual origin.  Then the call to \italic{graphic_MoveToPt} sets 
+object's visual origin.  Then the call to \italic{graphic::MoveToPt} sets 
 the current point to \italic{pt}. \
 
 
@@ -1122,9 +1122,9 @@ transfer mode and line width. \
 
 
 \paragraph{Drawing a line from the current point to another point} 
-\indexi{Graphic++Drawing lines} \indexi{ \italic{graphic_DrawLineToPt}}
+\indexi{Graphic++Drawing lines} \indexi{ \italic{graphic::DrawLineToPt}}
 
-\example{void graphic_DrawLineToPt(grphc,LineEnd) \
+\example{void graphic::DrawLineToPt(grphc,LineEnd) \
 
 
 struct graphic *grphc;  \
@@ -1134,7 +1134,7 @@ struct point *LineEnd;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_DrawLineToPt} draws 
+\leftindent{\bold{Method description.  }\italic{graphic::DrawLineToPt} draws 
 a line from the current point to the point \italic{LineEnd}.   The width of 
 the line is determined by the graphic state \italic{LineWidth}; the default 
 width is one pixel. \
@@ -1149,9 +1149,9 @@ width is one pixel. \
 \paragraph{Drawing a line from the current point to a  (x,y) coordinate} 
 \indexi{Graphic++Drawing lines}
 
-\indexi{ \italic{graphic_DrawLineTo}}
+\indexi{ \italic{graphic::DrawLineTo}}
 
-\example{void graphic_DrawLineTo(grphc, XEnd, YEnd) \
+\example{void graphic::DrawLineTo(grphc, XEnd, YEnd) \
 
 
 struct graphic *grphc;  \
@@ -1164,7 +1164,7 @@ long XEnd;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_DrawLineTo} draws a 
+\leftindent{\bold{Method description.  }\italic{graphic::DrawLineTo} draws a 
 line from the current point to the coordinate (XEnd, YEnd).  The width of 
 the line is determined by the graphic state \italic{LineWidth}; the default 
 width is one pixel. \
@@ -1183,9 +1183,9 @@ to the current point}
 \indexi{Graphic++Drawing lines} \
 
 
-\indexi{ \italic{graphic_DrawLine}}
+\indexi{ \italic{graphic::DrawLine}}
 
-\example{void graphic_DrawLine(grphc, DeltaX, DeltaY) \
+\example{void graphic::DrawLine(grphc, DeltaX, DeltaY) \
 
 
 struct graphic *grphc;  \
@@ -1198,7 +1198,7 @@ long DeltaX;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{ graphic_DrawLine} draws a 
+\leftindent{\bold{Method description.  }\italic{ graphic::DrawLine} draws a 
 line from the current point (CurrentX, CurrentY) to the coordinate 
 (CurrentX+\italic{DeltaX}, CurrentY+\italic{DeltaY}).  The width of the 
 line is determined by the graphic state \italic{LineWidth};  the default 
@@ -1225,10 +1225,10 @@ setting the \italic{Line Width} and for getting its current value. \
 
 
 
-\paragraph{Setting the line width}\italic{\index{graphic_SetLineWidth}}
+\paragraph{Setting the line width}\italic{\index{graphic::SetLineWidth}}
 
 
-\example{void graphic_SetLineWidth(grphc,NewLineWidth) 
+\example{void graphic::SetLineWidth(grphc,NewLineWidth) 
  \indexi{Graphic++Set line width}
 
 struct graphic *grphc;  \
@@ -1238,7 +1238,7 @@ short NewLineWidth;}  \indexi{ }\
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_SetLineWidth} sets 
+\leftindent{\bold{Method description.}   \italic{graphic::SetLineWidth} sets 
 the line width to NewLineWidth.  The unit is pixels and the value can range 
 from 0 pixels to 2\formatnote{@+}[8}-1.  Other values are undefined. \
 
@@ -1246,16 +1246,16 @@ from 0 pixels to 2\formatnote{@+}[8}-1.  Other values are undefined. \
 
 \paragraph{Getting the line width} \indexi{Graphic++Get line width}
 
-\indexi{ \italic{graphic_GetLineWidth}}
+\indexi{ \italic{graphic::GetLineWidth}}
 
-\example{short graphic_GetLineWidth(grphc) \
+\example{short graphic::GetLineWidth(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}  \italic{graphic_GetLineWidth} 
+\leftindent{\bold{Method description.}  \italic{graphic::GetLineWidth} 
 returns the current line width, which can range from 0 to 28-1 pixels.  The 
 default value for the line width is one pixel. \
 
@@ -1272,21 +1272,21 @@ struct graphic *grphc; \
 
 
 
-grphc = graphic_New ();
+grphc = graphic::New ();
 
 
 ... \
 
 
 
-CLineWidth = graphic_GetLineWidth(grphc);
+CLineWidth = graphic::GetLineWidth(grphc);
 
-graphic_SetLineWidth (CLineWidth+CLineWidth); \
+graphic::SetLineWidth (CLineWidth+CLineWidth); \
 
 
 }
-\italic{CLineWidth = graphic_GetLineWidth} stores the current line width in 
-the short variable \italic{CLineWidth}; then \italic{graphic_SetLineWidth 
+\italic{CLineWidth = graphic::GetLineWidth} stores the current line width in 
+the short variable \italic{CLineWidth}; then \italic{graphic::SetLineWidth 
 (CLineWidth+CLineWidth)} doubles the current line width. \
 
 
@@ -1309,7 +1309,7 @@ struct graphic *\paramname{graphic;
 }short \paramname{dashType;
 
 }}
-\indent{\bold{Method description. } \italic{graphic_SetLineDash }sets the 
+\indent{\bold{Method description. } \italic{graphic::SetLineDash }sets the 
 current line dash style for line drawing (under X11). The 
 \italic{dashPattern} argument is an array of characters whose integer 
 values specify the pattern of on-off dashes desired. This array must be 
@@ -1319,12 +1319,12 @@ should actually begin on any single line drawing operation. The
 \italic{dashType} argument can be any of the following symbolics:
 
 
-\typewriter{graphic_LineSolid} -- solid, non-dashed lines.
+\typewriter{graphic::LineSolid} -- solid, non-dashed lines.
 
-\typewriter{graphic_LineDoubleDash} -- even and odd elements of the 
+\typewriter{graphic::LineDoubleDash} -- even and odd elements of the 
 dashPattern are drawn in the foreground and background colors, respectively.
 
-\typewriter{graphic_LineOnOffDash }-- only the even elements of the 
+\typewriter{graphic::LineOnOffDash }-- only the even elements of the 
 dashPattern are drawn.
 
 
@@ -1336,7 +1336,7 @@ type are set.}
 \bold{Getting the line dash}
 
 \bold{
-}\example{void graphic_GetLineDash( graphic, dashPattern,  dashOffset, 
+}\example{void graphic::GetLineDash( graphic, dashPattern,  dashOffset, 
  dashType );
 
 struct graphic *graphic;
@@ -1348,7 +1348,7 @@ int *dashOffset;
 short *dashType;}
 
 
-\indent{\bold{Method description}. \italic{graphic_GetLineDash} returns the 
+\indent{\bold{Method description}. \italic{graphic::GetLineDash} returns the 
 current values of the line dash style attributes of the given graphic via 
 the pointer arguments passed in.}
 
@@ -1363,28 +1363,28 @@ struct graphic *\paramname{graphic;
 }short \paramname{NewLineCap;}}
 
 
-\indent{\bold{Method description}. \italic{graphic_SetLineCap} sets the 
+\indent{\bold{Method description}. \italic{graphic::SetLineCap} sets the 
 line cap style for the given graphic, which defines how the endpoints of a 
 path are drawn (under X11). The \paramname{NewLineCap} argument can be any 
 of the following symbolics:
 
 
-\typewriter{\typewriter{graphic_CapBut}t} -- the line is square at the 
+\typewriter{\typewriter{graphic::CapBut}t} -- the line is square at the 
 endpoint (perpenedicular to the slope of the line) with no projection 
 beyond.
 
-\typewriter{graphic_CapNotLast} -- same as graphic_CapButt, except for a 
+\typewriter{graphic::CapNotLast} -- same as graphic::CapButt, except for a 
 line width of zero, the final endpoint is not drawn.
 
-\typewriter{graphic_CapRound} -- The line has a circular arc with the 
+\typewriter{graphic::CapRound} -- The line has a circular arc with the 
 diameter equal to the line width, centered on the endpoint.
 
-\typewriter{graphic_CapProjecting} -- The line is square at the end, but 
+\typewriter{graphic::CapProjecting} -- The line is square at the end, but 
 the path continues beyond the endpoint for a distance equal to half the 
 line width.
 
 
-The default line cap is \typewriter{graphic_CapButt}. }\
+The default line cap is \typewriter{graphic::CapButt}. }\
 
 
 
@@ -1396,7 +1396,7 @@ The default line cap is \typewriter{graphic_CapButt}. }\
 struct graphic *\paramname{graphic;}}
 
 
-\indent{\bold{Method Description}. \italic{graphic_GetLineCap} returns the 
+\indent{\bold{Method Description}. \italic{graphic::GetLineCap} returns the 
 currently set line cap style.}
 
 
@@ -1410,38 +1410,38 @@ struct graphic *\paramname{graphic;
 }short \paramname{NewLineJoin;}}\paramname{
 
 }
-\indent{\bold{Method description}. \italic{graphic_SetLineJoin} sets the 
+\indent{\bold{Method description}. \italic{graphic::SetLineJoin} sets the 
 line join style for the given graphic, which defines how corners are drawn 
 for wide lines (under X11). The NewLineJoin argument can be any of the 
 following symbolics:
 
 
-\typewriter{graphic_JoinMiter} -- the outer edges of two lines extend to 
+\typewriter{graphic::JoinMiter} -- the outer edges of two lines extend to 
 meet at an angle. If the angle is less than 11 degrees, then a 
-graphic_JoinBevel style join is used instead.
+graphic::JoinBevel style join is used instead.
 
-\typewriter{graphic_JoinRound} -- The corner is a circular arc with the 
+\typewriter{graphic::JoinRound} -- The corner is a circular arc with the 
 diameter equal to the line width, centered on the joinpoint.
 
-\typewriter{graphic_JoinBevel} -- The corner has 
-\typewriter{graphic_CapButt} style endpoints, with the triangular notch 
+\typewriter{graphic::JoinBevel} -- The corner has 
+\typewriter{graphic::CapButt} style endpoints, with the triangular notch 
 filled.
 
 
-The default line join is \typewriter{graphic_JoinMiter}. }\
+The default line join is \typewriter{graphic::JoinMiter}. }\
 
 
 
 \bold{Getting the line join
 
 }
-\example{short \bold{graphic_}GetLineJoin( graphic );
+\example{short \bold{graphic::}GetLineJoin( graphic );
 
 struct graphic *\paramname{graphic; }}\
 
 
 
-\indent{\bold{Method description}: \italic{graphic_GetLineJoin }returns the 
+\indent{\bold{Method description}: \italic{graphic::GetLineJoin }returns the 
 currently set line join style.}
 
  \
@@ -1478,9 +1478,9 @@ a redraw is requested. \
 
 \paragraph{Setting the current font} \indexi{Graphic++Set font}
 
-\indexi{ \italic{graphic_SetFont}}
+\indexi{ \italic{graphic::SetFont}}
 
-\example{void graphic_SetFont(grphc, ChosenFont) \
+\example{void graphic::SetFont(grphc, ChosenFont) \
 
 
 struct graphic *grphc;  \
@@ -1491,14 +1491,14 @@ struct fontdesc *ChosenFont;} \
 
 
 \leftindent{
-\bold{Method description.  }\italic{graphic_SetFont} sets the current font 
+\bold{Method description.  }\italic{graphic::SetFont} sets the current font 
 for the graphic object \italic{grphc} to the font descriptor 
 \italic{ChosenFont.}   The default current font is \italic{AndySans12}
 
 
 \bold{Usage.}  You must call \italic{fontdesc_Create} to get a pointer to a 
 font descriptor (see the chapter, Font Descriptors), then call 
-\italic{graphic_SetFont} to set the graphic object's current font to the 
+\italic{graphic::SetFont} to set the graphic object's current font to the 
 font descriptor. \
 
 
@@ -1511,7 +1511,7 @@ font descriptor. \
 
 
 
-grphc = graphic_New(); \
+grphc = graphic::New(); \
 
 
 
@@ -1519,7 +1519,7 @@ grphc = graphic_New(); \
 
 
 
-graphic_SetFont (grphc, fontdesc_Create ("andysans", fontdesc_PLAIN, 12));} 
+graphic::SetFont (grphc, fontdesc_Create ("andysans", fontdesc_PLAIN, 12));} 
 
 
 sets the graphic object \italic{grphc}'s current font to 
@@ -1532,16 +1532,16 @@ sets the graphic object \italic{grphc}'s current font to
 
 \paragraph{Getting the current font} \indexi{Graphic++Get font}
 
-\indexi{ \italic{graphic_GetFont}}
+\indexi{ \italic{graphic::GetFont}}
 
-\example{struct fontdesc *graphic_GetFont(grphc) \
+\example{struct fontdesc *graphic::GetFont(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetFont} returns 
+\leftindent{\bold{Method description.}   \italic{graphic::GetFont} returns 
 \italic{grphc}'s current font. \
 
 
@@ -1558,9 +1558,9 @@ n 0
 
 \paragraph{Drawing a string} \indexi{Graphic++Draw text string}
 
-\indexi{ \italic{graphic_DrawString}}
+\indexi{ \italic{graphic::DrawString}}
 
-\example{void graphic_DrawString(grphc, String, Operation) \
+\example{void graphic::DrawString(grphc, String, Operation) \
 
 
 struct graphic *grphc;  \
@@ -1576,7 +1576,7 @@ long Operation;} \
 \leftindent{
 \bold{Method description.}  Text is drawn by "spraying" black through a 
 character stencil and combining it with the pixels on the screen using the 
-current transfer function. \italic{graphic_DrawString} draws the string 
+current transfer function. \italic{graphic::DrawString} draws the string 
 \italic{String} in the \italic{grphc}'s current font at \italic{grphc}'s 
 current point \italic{(cx, cy)}.  The relationship between the string and 
 the current position is specified by the parameter \italic{Operation}. 
@@ -1589,19 +1589,19 @@ The horizontal alignment options are: \
 
 
 
-\formatnote{\italic{graphic_\smaller{NOMOVEMENT}}\formatnote{  --  }the 
+\formatnote{\italic{graphic::\smaller{NOMOVEMENT}}\formatnote{  --  }the 
 origin of the string will be at \italic{cx}.
 
 
-\italic{graphic_\smaller{ATRIGHT}}\formatnote{  --  }the rightmost part of 
+\italic{graphic::\smaller{ATRIGHT}}\formatnote{  --  }the rightmost part of 
 the string will be at \italic{cx}.
 
 
-\italic{graphic_\smaller{ATLEFT}}\formatnote{  --  }the leftmost part of 
+\italic{graphic::\smaller{ATLEFT}}\formatnote{  --  }the leftmost part of 
 the string will be at \italic{cx}.
 
 
-\italic{graphic_\smaller{BETWEENLEFTANDRIGHT}}\formatnote{  --  }the center 
+\italic{graphic::\smaller{BETWEENLEFTANDRIGHT}}\formatnote{  --  }the center 
 of the string will be at \italic{cx}.
 
 
@@ -1610,38 +1610,38 @@ of the string will be at \italic{cx}.
 
 
 
-\formatnote{\italic{graphic_\smaller{NOMOVEMENT}}\formatnote{  --  }the 
+\formatnote{\italic{graphic::\smaller{NOMOVEMENT}}\formatnote{  --  }the 
 origin of the string will be at \italic{cy}.
 
 
-\italic{graphic_\smaller{ATTOP}}\formatnote{  --  }the topmost part of the 
+\italic{graphic::\smaller{ATTOP}}\formatnote{  --  }the topmost part of the 
 string will be at \italic{cy}.
 
 
-\italic{graphic_\smaller{ATBOTTOM}}\formatnote{  --  }the bottommost part 
+\italic{graphic::\smaller{ATBOTTOM}}\formatnote{  --  }the bottommost part 
 of the string, including any descenders, will be at \italic{cy}.
 
 
-\italic{graphic_\smaller{ATBASELINE}}\formatnote{  --  }the baseline of the 
+\italic{graphic::\smaller{ATBASELINE}}\formatnote{  --  }the baseline of the 
 string will be at \italic{cy}.
 
 
-\italic{graphic_\smaller{BETWEENTOPANDBASELINE}}\formatnote{  --  }the 
+\italic{graphic::\smaller{BETWEENTOPANDBASELINE}}\formatnote{  --  }the 
 center point of the string will be at \italic{cy}.  The center is 
 calculated from the topmost part of the string to the bottomost part, which 
 will include descenders.
 
 
-\italic{graphic_\smaller{BETWEENTOPANDBOTTOM}}\formatnote{  --  }the center 
+\italic{graphic::\smaller{BETWEENTOPANDBOTTOM}}\formatnote{  --  }the center 
 of the string will be at \italic{cy}.  The center is calculated from the 
 topmost part of the string to the baseline of the string.  No account is 
 taken of descenders. This is likely to look better than 
-\italic{graphic_\smaller{BETWEENTOPANDBASELINE}} in most cases.
+\italic{graphic::\smaller{BETWEENTOPANDBASELINE}} in most cases.
 
 
 
 }Either option (horizontal or vertical alignment) may be omitted. 
- \italic{graphic_\smaller{ATBASELINE}} and \italic{graphic_\smaller{ATLEFT}} 
+ \italic{graphic::\smaller{ATBASELINE}} and \italic{graphic::\smaller{ATLEFT}} 
 will be used as defaults. \
 
 
@@ -1653,9 +1653,9 @@ n 0
 \view{bpv,538035656,9,0,0}
 \paragraph{Drawing text} \indexi{Graphic++Draw text}
 
-\indexi{ \italic{graphic_DrawText}}
+\indexi{ \italic{graphic::DrawText}}
 
-\example{void graphic_DrawText(grphc, Text, TextLength, Operation) struct 
+\example{void graphic::DrawText(grphc, Text, TextLength, Operation) struct 
 graphic *grphc;  \
 
 
@@ -1669,9 +1669,9 @@ long Operation;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_DrawText}  draws 
+\leftindent{\bold{Method description.  }\italic{graphic::DrawText}  draws 
 \italic{TextLength} number of characters from the string \italic{Text}.  In 
-contrast, \italic{graphic_DrawString} draws all the characters in the 
+contrast, \italic{graphic::DrawString} draws all the characters in the 
 string (i.e., it draws until it encounters a \smaller{NULL} character). 
  Except for this difference, the two methods are alike. \
 
@@ -1681,9 +1681,9 @@ string (i.e., it draws until it encounters a \smaller{NULL} character).
 
 \paragraph{Setting a shim value for spaces} \indexi{Graphic++Set space shim}
 
-\indexi{ \italic{graphic_SetSpaceShim}}
+\indexi{ \italic{graphic::SetSpaceShim}}
 
-\example{void graphic_SetSpaceShim(grphc,n) \
+\example{void graphic::SetSpaceShim(grphc,n) \
 
 
 struct graphic *grphc;  \
@@ -1693,7 +1693,7 @@ short n;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_SetSpaceShim} sets 
+\leftindent{\bold{Method description.  }\italic{graphic::SetSpaceShim} sets 
 the amount of space that will be added to the right of space characters 
 (after the character shim) to \italic{n} pixels.  The default value is 0 
 pixels. \
@@ -1709,16 +1709,16 @@ applications like the object \italic{text}. \
 \paragraph{Getting the shim value for spaces} \indexi{Graphic++Get space 
 shim}
 
-\indexi{ \italic{graphic_GetSpaceShim}}
+\indexi{ \italic{graphic::GetSpaceShim}}
 
-\example{short graphic_GetSpaceShim(grphc) \
+\example{short graphic::GetSpaceShim(grphc) \
 
 
 struct graphic *grphc; }\
 
 
 
-\leftindent{\bold{Method description.}  \italic{graphic_GetSpaceShim} gets 
+\leftindent{\bold{Method description.}  \italic{graphic::GetSpaceShim} gets 
 the space shim value. \
 
 
@@ -1731,9 +1731,9 @@ n 0
 \subsection{Drawing regions} \paragraph{Drawing a rectangle} 
 \indexi{Graphic++Draw rectangle}
 
-\indexi{ \italic{graphic_DrawRect}}
+\indexi{ \italic{graphic::DrawRect}}
 
-\example{void graphic_DrawRect(grphc, Rect) \
+\example{void graphic::DrawRect(grphc, Rect) \
 
 
 struct graphic *grphc;  \
@@ -1743,7 +1743,7 @@ struct rectangle *Rect;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_DrawRect} draws a 
+\leftindent{\bold{Method description.  }\italic{graphic::DrawRect} draws a 
 rectangle in \italic{grphc} at the coordinates specified by the rectangle 
 \italic{Rect}. \
 
@@ -1760,9 +1760,9 @@ conform to the X standard.
 
 }\paragraph{Drawing a polygon} \indexi{Graphic++Draw polygon}
 
-\indexi{ \italic{graphic_DrawPolygon}}
+\indexi{ \italic{graphic::DrawPolygon}}
 
-\example{void graphic_DrawPolygon(grphc, PointArray, PointCount) struct 
+\example{void graphic::DrawPolygon(grphc, PointArray, PointCount) struct 
 graphic *grphc;  \
 
 
@@ -1773,7 +1773,7 @@ short PointCount;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_DrawPolygon} 
+\leftindent{\bold{Method description.}   \italic{graphic::DrawPolygon} 
 provides a placeholder for functions drawing sided, enclosed figures that 
 are not rectangles.  It is assumed that the last point is connected to the 
 first point. \
@@ -1783,9 +1783,9 @@ first point. \
 }
 \paragraph{Drawing an oval} \indexi{Graphic++Draw oval}
 
-\indexi{ \italic{graphic_DrawOval}}
+\indexi{ \italic{graphic::DrawOval}}
 
-\example{void graphic_DrawOval(grphc, Rect) \
+\example{void graphic::DrawOval(grphc, Rect) \
 
 
 struct graphic *grphc;  \
@@ -1795,8 +1795,8 @@ struct rectangle *Rect;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_DrawOval} is the 
-same as \italic{graphic_DrawPolygon }except it is used for drawing oval 
+\leftindent{\bold{Method description.}   \italic{graphic::DrawOval} is the 
+same as \italic{graphic::DrawPolygon }except it is used for drawing oval 
 figures.} \
 
 
@@ -1807,9 +1807,9 @@ n 0
 \view{bpv,538045112,11,0,0}
 \paragraph{Drawing arcs} \indexi{Graphic++Draw arc}
 
-\indexi{ \italic{graphic_DrawArc}}
+\indexi{ \italic{graphic::DrawArc}}
 
-\example{void graphic_DrawArc(grphc, EnclRect, StartAngle, OffsetAngle) \
+\example{void graphic::DrawArc(grphc, EnclRect, StartAngle, OffsetAngle) \
 
 
 struct graphic *grphc;  \
@@ -1825,8 +1825,8 @@ short OffsetAngle;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_DrawArc} is the 
-same as \italic{graphic_DrawPolygon }except it is used for drawing arcs. \
+\leftindent{\bold{Method description.}   \italic{graphic::DrawArc} is the 
+same as \italic{graphic::DrawPolygon }except it is used for drawing arcs. \
 
 
 
@@ -1839,9 +1839,9 @@ positive direction. \
 }\paragraph{Drawing a rounded rectangle} \indexi{Graphic++Draw rounded 
 rectangle}
 
-\indexi{ \italic{graphic_DrawRRect}}
+\indexi{ \italic{graphic::DrawRRect}}
 
-\example{void graphic_DrawRRect(grphc,OuterBox, InnerBox) \
+\example{void graphic::DrawRRect(grphc,OuterBox, InnerBox) \
 
 
 struct graphic *grphc;  \
@@ -1854,8 +1854,8 @@ struct rectangle *InnerBox;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_DrawRRect} is the 
-same as \italic{graphic_DrawPolygon }except it is used for drawing a 
+\leftindent{\bold{Method description.}   \italic{graphic::DrawRRect} is the 
+same as \italic{graphic::DrawPolygon }except it is used for drawing a 
 rounded rectangle, that is, a rectangle with rounded corners. \
 
 
@@ -1863,9 +1863,9 @@ rounded rectangle, that is, a rectangle with rounded corners. \
 }
 \paragraph{Drawing a region} \indexi{Graphic++Draw region}
 
-\indexi{ \italic{graphic_DrawRgn}}
+\indexi{ \italic{graphic::DrawRgn}}
 
-\example{void graphic_DrawRgn(grphc,Rgn) \
+\example{void graphic::DrawRgn(grphc,Rgn) \
 
 
 struct graphic *grphc;  \
@@ -1875,8 +1875,8 @@ struct region *Rgn;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_DrawRgn} is the 
-same as \italic{graphic_DrawPolygon }except it is used for drawing regions. 
+\leftindent{\bold{Method description.}   \italic{graphic::DrawRgn} is the 
+same as \italic{graphic::DrawPolygon }except it is used for drawing regions. 
 
 
 }
@@ -1894,9 +1894,9 @@ the Tile argument overrides this approximation tile). \
 
 \paragraph{Filling a rectangle} \indexi{Graphic++Fill rectangle}
 
-\indexi{ \italic{graphic_FillRect}}
+\indexi{ \italic{graphic::FillRect}}
 
-\example{void graphic_FillRect(grphc, Rect, Tile) \
+\example{void graphic::FillRect(grphc, Rect, Tile) \
 
 
 struct graphic *grphc;  \
@@ -1909,7 +1909,7 @@ struct graphic *Tile;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FillRect} fills a 
+\leftindent{\bold{Method description.}   \italic{graphic::FillRect} fills a 
 rectangle in grphc with the specified graphic, \italic{Tile}. \
 
 
@@ -1922,9 +1922,9 @@ rectangle in grphc with the specified graphic, \italic{Tile}. \
 
 \paragraph{Filling a polygon} \indexi{Graphic++Fill polygon}
 
-\indexi{ \italic{graphic_FillPolygon}}
+\indexi{ \italic{graphic::FillPolygon}}
 
-\example{void graphic_FillPolygon(grphc,PointArray, PointCount, Tile) \
+\example{void graphic::FillPolygon(grphc,PointArray, PointCount, Tile) \
 
 
 struct graphic *grphc;  \
@@ -1940,7 +1940,7 @@ struct graphic *Tile;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FillPolygon} is 
+\leftindent{\bold{Method description.}   \italic{graphic::FillPolygon} is 
 used to fill polygon regions. \
 
 
@@ -1948,9 +1948,9 @@ used to fill polygon regions. \
 }
 \paragraph{Filling an oval} \indexi{Graphic++Fill oval}
 
-\indexi{ \italic{graphic_FillOval}}
+\indexi{ \italic{graphic::FillOval}}
 
-\example{void graphic_FillOval(grphc, Rect, Tile) \
+\example{void graphic::FillOval(grphc, Rect, Tile) \
 
 
 struct graphic *grphc;  \
@@ -1963,7 +1963,7 @@ struct graphic *Tile;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FillOval} is used 
+\leftindent{\bold{Method description.}   \italic{graphic::FillOval} is used 
 to fill oval regions.} \
 
 
@@ -1971,9 +1971,9 @@ to fill oval regions.} \
 
 \paragraph{Filling in an arc} \indexi{Graphic++Fill arc}
 
-\indexi{ \italic{graphic_FillArc}}
+\indexi{ \italic{graphic::FillArc}}
 
-\example{void graphic_FillArc(grphc, EnclRect,StartAngle, OffsetAngle,Tile) 
+\example{void graphic::FillArc(grphc, EnclRect,StartAngle, OffsetAngle,Tile) 
 
 struct graphic *grphc;  \
 
@@ -1988,7 +1988,7 @@ struct graphic *Tile;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FillArc} fills arc 
+\leftindent{\bold{Method description.}   \italic{graphic::FillArc} fills arc 
 regions. \
 
 
@@ -2001,9 +2001,9 @@ regions. \
 }\paragraph{Filling rounded rectangles} \indexi{Graphic++Fill rounded 
 rectangle}
 
-\indexi{ \italic{graphic_FillRRect}}
+\indexi{ \italic{graphic::FillRRect}}
 
-\example{void graphic_FillRRect(grphc,OuterBox,InnerBox,Tile) struct 
+\example{void graphic::FillRRect(grphc,OuterBox,InnerBox,Tile) struct 
 graphic *grphc;  \
 
 
@@ -2017,7 +2017,7 @@ struct graphic *Tile;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FillRRect} fills 
+\leftindent{\bold{Method description.}   \italic{graphic::FillRRect} fills 
 rectangles regions created by \italic{DrawRRect}. }\
 
 
@@ -2032,9 +2032,9 @@ n 0
 \paragraph{Doing a block transfer of bits} \indexi{Graphic++Bit block 
 transfer}
 
-\indexi{ \italic{graphic_BitBlt}}
+\indexi{ \italic{graphic::BitBlt}}
 
-\example{void graphic_BitBlt(grphc, SrcRect, DstPixMap, DstOrigin, 
+\example{void graphic::BitBlt(grphc, SrcRect, DstPixMap, DstOrigin, 
 ClipRect) \
 
 
@@ -2054,7 +2054,7 @@ struct rectangle *ClipRect; \
 
 
 }
-\leftindent{\bold{Method description.  }\italic{graphic_BitBlt} performs 
+\leftindent{\bold{Method description.  }\italic{graphic::BitBlt} performs 
 the transfer of bits from a source pixel map to a destination pixel map. 
  The source pixel map is formed from \italic{grphc}'s \italic{SrcRect}. 
  The destination pixel map is specified by \italic{DstPixMap} and the 
@@ -2071,9 +2071,9 @@ clipped.  (Clip Rect not yet implemented.) \
 }
 \paragraph{Setting the location of a bit} \indexi{Graphic++Set bit location}
 
-\indexi{ \italic{graphic_SetBitAtBitLoc}}
+\indexi{ \italic{graphic::SetBitAtBitLoc}}
 
-\example{void graphic_SetBitAtLoc(grphc,XPos,YPos, Value) \
+\example{void graphic::SetBitAtLoc(grphc,XPos,YPos, Value) \
 
 
 struct graphic *grphc;  \
@@ -2089,7 +2089,7 @@ boolean Value;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_SetBitAtLoc }sets 
+\leftindent{\bold{Method description.}   \italic{graphic::SetBitAtLoc }sets 
 the bit at \italic{grphc}'s (\italic{Xpos, Ypos}) coordinate to the value 
 \italic{Value}.  Value should be 1 (black) or 0 (white). \
 
@@ -2105,9 +2105,9 @@ n 0
 
 \paragraph{Getting the logical bounds} \indexi{Graphic++Get logical bounds}
 
-\indexi{ \italic{graphic_GetLogicalBounds}}
+\indexi{ \italic{graphic::GetLogicalBounds}}
 
-\example{void graphic_GetLogicalBounds(grphc,rect) \
+\example{void graphic::GetLogicalBounds(grphc,rect) \
 
 
 struct graphic *grphc;  \
@@ -2117,7 +2117,7 @@ struct rectangle *rect; }\
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_GetLogicalBounds 
+\leftindent{\bold{Method description.  }\italic{graphic::GetLogicalBounds 
 }sets the rectangle \italic{rect}'s left, top, width and height state 
 variables to the values of \italic{grphc}'s logical rectangle. \
 
@@ -2134,11 +2134,11 @@ struct graphic *go; \
 
 
 
-go = graphic_New(); \
+go = graphic::New(); \
 
 
 
-graphic_GetLogicalBounds (go, &rect);} \
+graphic::GetLogicalBounds (go, &rect);} \
 
 
 
@@ -2150,16 +2150,16 @@ sets \italic{rect'}s state variables to \italic{go}'s logical rectangle. \
 
 \paragraph{Getting the logical right} \indexi{Graphic++Get logical right}
 
-\indexi{ \italic{graphic_GetLogicalRight}}
+\indexi{ \italic{graphic::GetLogicalRight}}
 
-\example{long graphic_GetLogicalRight(grphc) \
+\example{long graphic::GetLogicalRight(grphc) \
 
 
 struct graphic *grphc; }\
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetLogicalRight} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetLogicalRight} 
 returns the \italic{x} coordinate for the right side of the 
 \italic{grphc}'s logical rectangle. \
 
@@ -2168,16 +2168,16 @@ returns the \italic{x} coordinate for the right side of the
 }
 \paragraph{Getting the logical bottom} \indexi{Graphic++Get logical bottom}
 
-\indexi{ \italic{graphic_GetLogicalBottom}}
+\indexi{ \italic{graphic::GetLogicalBottom}}
 
-\example{long graphic_GetLogicalBottom(grphc) \
+\example{long graphic::GetLogicalBottom(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetLogicalBottom 
+\leftindent{\bold{Method description.}   \italic{graphic::GetLogicalBottom 
 }returns the \italic{y} coordinate for the bottom side of the 
 \italic{grphc}'s logical rectangle.} \
 
@@ -2190,9 +2190,9 @@ n 0
 \view{bpv,538064456,14,0,0}
 \paragraph{Getting the enclosed bounds} \indexi{Graphic++Get enclosed bounds
 
-}\indexi{ \italic{graphic_GetEnclosedBounds}}
+}\indexi{ \italic{graphic::GetEnclosedBounds}}
 
-\example{void graphic_GetEnclosedBounds(grphc,rect) \
+\example{void graphic::GetEnclosedBounds(grphc,rect) \
 
 
 struct graphic *grphc;  \
@@ -2202,7 +2202,7 @@ struct rectangle *rect;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetEnclosedBounds} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetEnclosedBounds} 
 sets the rectangle \italic{rect}'s left, top, width and height state 
 variables to the values of \italic{grphc}'s enclosed rectangle. \
 
@@ -2211,16 +2211,16 @@ variables to the values of \italic{grphc}'s enclosed rectangle. \
 
 }\paragraph{Getting the enclosed right} \indexi{Graphic++Get enclosed right}
 
-\indexi{ \italic{graphic_GetEnclosedRight}}
+\indexi{ \italic{graphic::GetEnclosedRight}}
 
-\example{long graphic_GetEnclosedRight(grphc) \
+\example{long graphic::GetEnclosedRight(grphc) \
 
 
 struct graphic *grphc; }\
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetEnclosedRight} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetEnclosedRight} 
 returns the \italic{grphc}'s \italic{x} coordinate for the right side of 
 the \italic{grphc}'s enclosed rectangle. \
 
@@ -2230,16 +2230,16 @@ the \italic{grphc}'s enclosed rectangle. \
 
 \paragraph{Getting the enclosed bottom} \indexi{Graphic++Get enclosed bottom
 
-}\indexi{ \italic{graphic_GetEnclosedBottom}}
+}\indexi{ \italic{graphic::GetEnclosedBottom}}
 
-\example{long graphic_GetEnclosedBottom(grphc) \
+\example{long graphic::GetEnclosedBottom(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetEnclosedBottom} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetEnclosedBottom} 
 returns the \italic{grphc}'s \italic{y} coordinate for the right side of 
 the \italic{grphc}'s enclosed rectangle.} \
 
@@ -2248,9 +2248,9 @@ the \italic{grphc}'s enclosed rectangle.} \
 \subsection{The visual rectangle} \paragraph{Getting the visual rectangle 
 bounds} \indexi{Graphic++Get visual bounds}
 
-\indexi{ \italic{graphic_GetVisualBounds}}
+\indexi{ \italic{graphic::GetVisualBounds}}
 
-\example{void graphic_GetVisualBounds(grphc,rect) s
+\example{void graphic::GetVisualBounds(grphc,rect) s
 
 truct graphic *grphc;  \
 
@@ -2259,7 +2259,7 @@ struct rectangle *rect;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetVisualBounds} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetVisualBounds} 
 gets the boundaries of the visual rectangle. \
 
 
@@ -2269,32 +2269,32 @@ gets the boundaries of the visual rectangle. \
 
 \paragraph{Getting the visual right}
 
- \indexi{Graphic++Get visual right}\indexi{ \italic{graphic_GetVisualRight}}
+ \indexi{Graphic++Get visual right}\indexi{ \italic{graphic::GetVisualRight}}
 
-\example{long graphic_GetVisualRight(grphc)
+\example{long graphic::GetVisualRight(grphc)
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetVisualRight} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetVisualRight} 
 gets the right of the visual rectangle.} \
 
 
 
 \paragraph{Getting the visual bottom} \indexi{Graphic++Get visual bottom}
 
-\indexi{ \italic{graphic_GetVisualBottom}}
+\indexi{ \italic{graphic::GetVisualBottom}}
 
 
-\example{long graphic_GetVisualBottom(grphc) \
+\example{long graphic::GetVisualBottom(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetVisualBottom} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetVisualBottom} 
 gets the bottom of the visual rectangle.} \
 
 
@@ -2309,9 +2309,9 @@ n 0
 \subsection{The clipping rectangle} \paragraph{Setting the clipping 
 rectangle} \indexi{Graphic++Set clipping rectangle}
 
-\indexi{ \italic{graphic_SetClippingRect}}
+\indexi{ \italic{graphic::SetClippingRect}}
 
-\example{void graphic_SetClippingRect(grphc, rect) \
+\example{void graphic::SetClippingRect(grphc, rect) \
 
 
 struct graphic *grphc;  \
@@ -2321,7 +2321,7 @@ struct rectangle *rect;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_SetClippingRect} 
+\leftindent{\bold{Method description.}   \italic{graphic::SetClippingRect} 
 sets \italic{grphc}'s clipping rectangle to \italic{rect}.} \
 
 
@@ -2329,16 +2329,16 @@ sets \italic{grphc}'s clipping rectangle to \italic{rect}.} \
 \paragraph{Clearing a clipping rectangle} \indexi{Graphic++Clear clipping 
 rectangle}
 
-\indexi{ \italic{graphic_ClearClippingRect}}
+\indexi{ \italic{graphic::ClearClippingRect}}
 
-\example{void graphic_ClearClippingRect(grphc) \
+\example{void graphic::ClearClippingRect(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_ClearClippingRect} 
+\leftindent{\bold{Method description.}   \italic{graphic::ClearClippingRect} 
 clears \italic{grphc}'s clipping rectangle. \
 
 
@@ -2347,9 +2347,9 @@ clears \italic{grphc}'s clipping rectangle. \
 }\paragraph{Getting the current clipping rectangle} \indexi{Graphic++Get 
 clipping rectangle}
 
-\indexi{ \italic{graphic_GetClippingRect}}
+\indexi{ \italic{graphic::GetClippingRect}}
 
-\example{void graphic_GetClippingRect(grphc,rect) \
+\example{void graphic::GetClippingRect(grphc,rect) \
 
 
 struct graphic *grphc;  \
@@ -2359,7 +2359,7 @@ struct rectangle *rect;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetClippingRect} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetClippingRect} 
 sets \italic{rect} to \italic{grphc}'s clipping rectangle.  If 
 \italic{grphc} has not set a clipping rectangle, \italic{rect} is set to 
 \italic{grphc}'s visual rectangle.} \
@@ -2379,9 +2379,9 @@ n 0
 
 \indexi{Graphic++Drawing}
 
-\indexi{ \italic{graphic_SetTransferMode}}
+\indexi{ \italic{graphic::SetTransferMode}}
 
-\example{void graphic_SetTransferMode(grphc,NewTransferMode) struct graphic 
+\example{void graphic::SetTransferMode(grphc,NewTransferMode) struct graphic 
 *grphc;  \
 
 
@@ -2389,10 +2389,10 @@ short NewTransferMode;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_SetTransferMode} 
+\leftindent{\bold{Method description.  }\italic{graphic::SetTransferMode} 
 sets the transfer mode for drawing.  The default is 
-\italic{graphic_}\smaller{COPY}.  There is rarely any need to use any other 
-transfer mode except \italic{graphic_}\smaller{INVERT} and 
+\italic{graphic::}\smaller{COPY}.  There is rarely any need to use any other 
+transfer mode except \italic{graphic::}\smaller{INVERT} and 
 \italic{graphic}_\smaller{XOR}.  The transfer mode specifies how each 
 source element S and each destination element D should combine to produce 
 the result.  The source and destination each have four elements, so there 
@@ -2406,9 +2406,9 @@ bits: \
 
 
 
-\typewriter{graphic_SOURCE       --  1  --  1  --  0  --  0
+\typewriter{graphic::SOURCE       --  1  --  1  --  0  --  0
 
-graphic_DESTINATION  --  1  --  0  --  1  --  0
+graphic::DESTINATION  --  1  --  0  --  1  --  0
 
 __________________________________________________________
 
@@ -2421,43 +2421,43 @@ and D is 0, when S is 0 and D is 1 and when both S and D are 0.  When a bit
 is 1, it is interpreted as black; when 0, as white.  For example, if you 
 want the result to be 1 (that is black) only when both the source and 
 destination are 1 (black), you would AND together the source and 
-destination (\italic{graphic_}\smaller{SOURCE} & 
-\italic{graphic_}\smaller{\smaller{DEST}}) to form the transfer mode.  If 
+destination (\italic{graphic::}\smaller{SOURCE} & 
+\italic{graphic::}\smaller{\smaller{DEST}}) to form the transfer mode.  If 
 you want the source to be copied directly without regard to the current 
-value of the destination, you would use \italic{graphic_}\smaller{SOURCE} 
+value of the destination, you would use \italic{graphic::}\smaller{SOURCE} 
 alone to form the transfer mode. \
 
 
 
 You can construct the transfer mode by forming boolean combinations from 
-the graphic constants graphic_SOURCE and graphic_DESTINATION directly.  For 
+the graphic constants graphic::SOURCE and graphic::DESTINATION directly.  For 
 convenience, the following common combinations have been defined as well: \
 
 
 
 \description{
-\italic{graphic_}\smaller{COPY}  --  the bit values are from the source
+\italic{graphic::}\smaller{COPY}  --  the bit values are from the source
 
 
-\italic{graphic_}\smaller{OR}  --  the bit values result from 
+\italic{graphic::}\smaller{OR}  --  the bit values result from 
 \smaller{OR}-ing the source and the destination
 
 
-\italic{graphic_}\smaller{XOR}  --  the bit values result from an exclusive 
+\italic{graphic::}\smaller{XOR}  --  the bit values result from an exclusive 
 or of the source and the destination
 
 
-\italic{graphic_}\smaller{AND}  --  the bit values result from an 
+\italic{graphic::}\smaller{AND}  --  the bit values result from an 
 \smaller{AND}-ing the source and destination
 
 
-\italic{graphic_}\smaller{WHITE}  --  the bit values are white (background)
+\italic{graphic::}\smaller{WHITE}  --  the bit values are white (background)
 
 
-\italic{graphic_}\smaller{BLACK}  --  the bit values are black (foreground)
+\italic{graphic::}\smaller{BLACK}  --  the bit values are black (foreground)
 
 
-\italic{graphic_}\smaller{INVERT}  --  the bit values are the opposite of 
+\italic{graphic::}\smaller{INVERT}  --  the bit values are the opposite of 
 the destination (if foreground, background; if background, foreground)
 
 }
@@ -2469,16 +2469,16 @@ n 0
 \view{bpv,538083704,17,0,0}
 \paragraph{Getting the transfer mode} \indexi{Graphic++Get transfer mode}
 
-\indexi{ \italic{graphic_GetTransferMode}}
+\indexi{ \italic{graphic::GetTransferMode}}
 
-\example{short graphic_GetTransferMode(grphc) \
+\example{short graphic::GetTransferMode(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GetTransferMode} 
+\leftindent{\bold{Method description.}   \italic{graphic::GetTransferMode} 
 gets the transfer mode. \
 
 
@@ -2487,16 +2487,16 @@ gets the transfer mode. \
 \subsection{Buffered output} \paragraph{Flushing graphic output} 
  \indexi{Graphic++Flushing}
 
-\indexi{ \italic{graphic_FlushGraphics}}
+\indexi{ \italic{graphic::FlushGraphics}}
 
-\example{void graphic_FlushGraphics(grphc) \
+\example{void graphic::FlushGraphics(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_FlushGraphics} 
+\leftindent{\bold{Method description.}   \italic{graphic::FlushGraphics} 
 ensures that drawing commands are actually done (not buffered). \
 
 
@@ -2505,16 +2505,16 @@ ensures that drawing commands are actually done (not buffered). \
 \subsection{Patterns} \paragraph{Making white patterns} 
 \indexi{Graphic++White patterns}
 
-\indexi{ \italic{graphic_WhitePattern}}
+\indexi{ \italic{graphic::WhitePattern}}
 
-\example{struct graphic *graphic_WhitePattern(grphc) \
+\example{struct graphic *graphic::WhitePattern(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_WhitePattern 
+\leftindent{\bold{Method description.}   \italic{graphic::WhitePattern 
 }returns a graphic that can be used to supply a white pixmap for fill 
 operations. }\
 
@@ -2523,16 +2523,16 @@ operations. }\
 
 \paragraph{Making black patterns} \indexi{Graphic++Black patterns}
 
-\indexi{ \italic{graphic_BlackPattern}}
+\indexi{ \italic{graphic::BlackPattern}}
 
-\example{struct graphic *graphic_BlackPattern(grphc) \
+\example{struct graphic *graphic::BlackPattern(grphc) \
 
 
 struct graphic *grphc;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_BlackPattern} 
+\leftindent{\bold{Method description.}   \italic{graphic::BlackPattern} 
 returns a graphic that can be used to supply a black pixmap for fill 
 operations.
 
@@ -2540,9 +2540,9 @@ operations.
 }
 \paragraph{Making gray patterns} \indexi{Graphic++Gray patterns}
 
-\indexi{ \italic{graphic_GrayPattern}}
+\indexi{ \italic{graphic::GrayPattern}}
 
-\example{struct graphic *graphic_GrayPattern(grphc,IntensityNum, 
+\example{struct graphic *graphic::GrayPattern(grphc,IntensityNum, 
 IntensityDenom) \
 
 
@@ -2553,7 +2553,7 @@ long IntensityNum, IntensityDenom;} \
 
 
 
-\leftindent{\bold{Method description.}   \italic{graphic_GrayPattern} 
+\leftindent{\bold{Method description.}   \italic{graphic::GrayPattern} 
 returns a graphic that can be used to supply a grey pixmap for fill 
 operations.} \
 
@@ -2588,12 +2588,12 @@ effectively bypassing the built-in approximation on monochrome.
 \bold{Determining the display class
 
 }
-\example{long graphic_DisplayClass( graphic );
+\example{long graphic::DisplayClass( graphic );
 
 struct graphic *graphic}
 
 
-\indent{\bold{Method description}. \italic{graphic_DisplayClass} returns a 
+\indent{\bold{Method description}. \italic{graphic::DisplayClass} returns a 
 bit mask long integer that describes the display of the server that the 
 application is using. The return value consists of the appropriate 
 symbolics bitwise-or'ed together. The set of possible values includes 
@@ -2601,36 +2601,36 @@ symbolics for the six display classes defined by X11, plus additional
 symbolics defined by the graphic class:
 
 
-\typewriter{graphic_Monochrome
+\typewriter{graphic::Monochrome
 
-graphic_Color
+graphic::Color
 
-graphic_PseudoColor
+graphic::PseudoColor
 
-graphic_GrayScale
+graphic::GrayScale
 
-graphic_DirectColor
+graphic::DirectColor
 
-graphic_TrueColor
+graphic::TrueColor
 
-graphic_StaticColor
+graphic::StaticColor
 
-graphic_StaticGray}
+graphic::StaticGray}
 
 
-All color displays will have \typewriter{graphic_Color}  or'ed in with the 
+All color displays will have \typewriter{graphic::Color}  or'ed in with the 
 appropriate display class symbolic. StaticGray displays with a colormap of 
-size 2 will have \typewriter{graphic_Monochrome} or'ed in.
+size 2 will have \typewriter{graphic::Monochrome} or'ed in.
 
 
 \bold{Example}
 
 }
-\example{if ( graphic_DisplayClass( graphic ) & graphic_Color )
+\example{if ( graphic::DisplayClass( graphic ) & graphic::Color )
 
     ...color handling code...
 
-else if ( graphic_DisplayClass( graphic ) & graphic_Monochrome )
+else if ( graphic::DisplayClass( graphic ) & graphic::Monochrome )
 
     ... monochrome handling code}
 
@@ -2653,14 +2653,14 @@ long green;
 long blue;}
 
 
-\indent{\bold{Method description}. \italic{graphic_SetForegroundColor} 
+\indent{\bold{Method description}. \italic{graphic::SetForegroundColor} 
 optionally takes a colorName argument or RGB values (expressed as integers 
 between 0 and 65535) to set the foregound color. If the colorName argument 
 is supplied, it is used to look up RGB values and set the foreground color 
 accordingly. If colorName is NULL, the red, green, and blue values are used.
 
 }
-\example{void graphic_SetFGColor(graphic, red,  green, blue );
+\example{void graphic::SetFGColor(graphic, red,  green, blue );
 
 struct graphic *graphic;
 
@@ -2671,7 +2671,7 @@ double green;
 double blue;}
 
 
-\indent{\bold{Method description}.\italic{\italic{ graphic_SetFGColo}r} 
+\indent{\bold{Method description}.\italic{\italic{ graphic::SetFGColo}r} 
 accepts red, green, and blue real number values between 0.0 and 1.0 to 
 specify the foreground color. }\
 
@@ -2695,13 +2695,13 @@ long *green;
 long *blue;
 
 }
-\indent{\bold{Method description}. \italic{graphic_GetForegroundColor} 
+\indent{\bold{Method description}. \italic{graphic::GetForegroundColor} 
 returns the currently set foreground color. If a colorName was originally 
 used to specify the color, both it and the resultant RGB values are 
 returned. Otherwise only the RGB values are returned.}
 
 
-\example{void graphic_GetFGColor(graphic, red,  green, blue );
+\example{void graphic::GetFGColor(graphic, red,  green, blue );
 
 struct graphic *graphic;
 
@@ -2712,7 +2712,7 @@ double *green;
 double *blue;}
 
 
-\indent{\bold{Method description}.\italic{\italic{ graphic_GetFGColo}r} 
+\indent{\bold{Method description}.\italic{\italic{ graphic::GetFGColo}r} 
 returns the red, green, and blue real number values between 0.0 and 1.0 
 that describe the currently set foreground color. \
 
@@ -2736,14 +2736,14 @@ long green;
 long blue;}
 
 
-\indent{\bold{Method description}. \italic{graphic_SetBackgroundColor} 
+\indent{\bold{Method description}. \italic{graphic::SetBackgroundColor} 
 optionally takes a colorName argument or RGB values (expressed as integers 
 between 0 and 65535) to set the backgound color. If the colorName argument 
 is supplied, it is used to look up RGB values and set the background color 
 accordingly. If colorName is NULL, the red, green, and blue values are used.
 
 }
-\example{void graphic_SetFGColor(graphic, red,  green, blue );
+\example{void graphic::SetFGColor(graphic, red,  green, blue );
 
 struct graphic *graphic;
 
@@ -2754,7 +2754,7 @@ double green;
 double blue;}
 
 
-\indent{\bold{Method description}.\italic{\italic{ graphic_SetFGColo}r} 
+\indent{\bold{Method description}.\italic{\italic{ graphic::SetFGColo}r} 
 accepts red, green, and blue real number values between 0.0 and 1.0 to 
 specify the background color. }\
 
@@ -2778,13 +2778,13 @@ long *green;
 long *blue;
 
 }
-\indent{\bold{Method description}. \italic{graphic_GetBackgroundColor} 
+\indent{\bold{Method description}. \italic{graphic::GetBackgroundColor} 
 returns the currently set background color. If a colorName was originally 
 used to specify the color, both it and the resultant RGB values are 
 returned. Otherwise only the RGB values are returned.}
 
 
-\example{void graphic_GetBGColor(graphic, red,  green, blue );
+\example{void graphic::GetBGColor(graphic, red,  green, blue );
 
 struct graphic *graphic;
 
@@ -2795,7 +2795,7 @@ double *green;
 double *blue;}
 
 
-\indent{\bold{Method description}.\italic{\italic{ graphic_GetBGColo}r} 
+\indent{\bold{Method description}.\italic{\italic{ graphic::GetBGColo}r} 
 returns the red, green, and blue real number values between 0.0 and 1.0 
 that describe the currently set background color. \
 
@@ -2809,9 +2809,9 @@ n 0
 \subsection{Redirecting graphic output} \paragraph{Redirecting a graphic} 
 \indexi{Graphic++Redirect}
 
-\indexi{ \italic{graphic_RedirectGraphic}}
+\indexi{ \italic{graphic::RedirectGraphic}}
 
-\example{void graphic_RedirectGraphic(grphc,SecondaryGraphic) struct 
+\example{void graphic::RedirectGraphic(grphc,SecondaryGraphic) struct 
 graphic *grphc;  \
 
 
@@ -2819,7 +2819,7 @@ struct graphic *SecondaryGraphic;} \
 
 
 
-\leftindent{\bold{Method description.  }\italic{graphic_RedirectGraphic} is 
+\leftindent{\bold{Method description.  }\italic{graphic::RedirectGraphic} is 
 a private method intended for future expansion.   The intention is to 
 provide a way to switch between graphics systems on the fly, such as 
 generating PostScript by capturing graphics calls rather than via a print 

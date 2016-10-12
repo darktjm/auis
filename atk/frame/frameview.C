@@ -120,7 +120,7 @@ static int CalculateLineHeight(class frameview  *self)
 }
 
 
-view_DSattributes frameview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes frameview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
     
     *dWidth = width;
@@ -131,7 +131,7 @@ view_DSattributes frameview::DesiredSize(long  width, long  height, enum view_DS
 	if(this->lineHeight==-1) this->lineHeight=CalculateLineHeight(this);
 	*dHeight = this->lineHeight * this->lines;
     }
-    return (view_DSattributes)(view_HeightFlexible | view_WidthFlexible);
+    return (view::DSattributes)(view::HeightFlexible | view::WidthFlexible);
 }
 
 void frameview::Update()

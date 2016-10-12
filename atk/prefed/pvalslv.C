@@ -78,7 +78,7 @@ void pvalslv::SetFrame(long  pos , long  num , long  denom)
 
 }
 
-void pvalslv::Endzone(int  end, enum view_MouseAction  action)
+void pvalslv::Endzone(int  end, enum view::MouseAction  action)
 {
     long diff=0;
     struct prefval_value v;
@@ -86,7 +86,7 @@ void pvalslv::Endzone(int  end, enum view_MouseAction  action)
     
     if(DATA(this)->type!=prefval_Integer || !(DATA(this))->GetValue()) return;
 
-    if(action != view_LeftDown && action != view_RightDown) return;
+    if(action != view::LeftDown && action != view::RightDown) return;
 
     (DATA(this))->InitValue( &v);
     (DATA(this))->CopyValue( &v, (DATA(this))->GetValue());
@@ -94,7 +94,7 @@ void pvalslv::Endzone(int  end, enum view_MouseAction  action)
     if(end== scroll_MOTIFTOPENDZONE) end=scroll_TOPENDZONE;
     else if(end==scroll_MOTIFBOTTOMENDZONE) end=scroll_BOTTOMENDZONE;
     
-    if(action == view_LeftDown) {
+    if(action == view::LeftDown) {
 	if(end==scroll_BOTTOMENDZONE) diff=(DATA(this))->GetRangeHigh()-v.v.ival;
 	else if(end==scroll_TOPENDZONE) diff=(DATA(this))->GetRangeLow()-v.v.ival;
     } else {

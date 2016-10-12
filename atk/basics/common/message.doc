@@ -147,7 +147,7 @@ question operation.  \indexi{Message++Displaying a string}
 The message methods all operate on a \italic{view}.  The class 
 \italic{message} passes message display requests up the view tree from the 
 given view, looking for a handler of type "message" (see the 
-\italic{view_WantHandler} routine in the section, View). Unless otherwise 
+\italic{view::WantHandler} routine in the section, View). Unless otherwise 
 noted, the \italic{view} can be \smaller{NULL}, in which case the 
 \italic{message} will choose a default message handler. The current 
 implementation does this by using the toplevel handler in the last window 

@@ -67,13 +67,13 @@ consoleClass::consoleClass()
     THROWONFAILURE( TRUE);
 }
 
-void consoleClass::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void consoleClass::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     static boolean firstTime = TRUE;
 
     mydbg(("entering: consoleClass__FullUpdate\n"));
     is_visible = TRUE;
-    (this)->SetTransferMode(graphic_BLACK);
+    (this)->SetTransferMode(graphic::BLACK);
     if (firstTime)  {
 	((this)->GetIM())->SetTitle( TitleFromFile (ConFile, TRUE));
 	firstTime = FALSE;
@@ -135,7 +135,7 @@ void consoleClass::PostMenus(class menulist  *menu)
  
  
 
-class view *consoleClass::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *consoleClass::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class view *ret = NULL;
     struct RegionLog   *whichlog;
@@ -154,7 +154,7 @@ class view *consoleClass::Hit(enum view_MouseAction  action, long  x, long  y, l
 	    (this)->WantInputFocus( this);
 	}
 	switch (action) {
-	    case view_LeftDown:
+	    case view::LeftDown:
 		if ((mydisp = FindInstrument(this, x, y)) == NULL) {
 		    return((class view *) this);
 		}
@@ -163,22 +163,22 @@ class view *consoleClass::Hit(enum view_MouseAction  action, long  x, long  y, l
 		    AddToLog(this, mydisp, TRUE, whichlog, FALSE);
 		}
 		break;
-	    case view_LeftUp: 
+	    case view::LeftUp: 
 		break;
-	    case view_RightDown: 
+	    case view::RightDown: 
 		MovingX = CheckMovingX(this, x, y);
 		LastX = x;
 		LastY = y;
 		break;
-	    case view_RightUp:
+	    case view::RightUp:
 		if (MovingX != -1) {
 		    ResizeDisplay(this,x, y, LastX, LastY, MovingX);
 		    MovingX = -1;
 		}
 		SetStandardCursor(this, Cursor_Arrow);
 		break;
-	    case view_LeftMovement:
-	    case view_RightMovement:
+	    case view::LeftMovement:
+	    case view::RightMovement:
 		break;
 	    default: 
 //		ReportInternalError(this, 

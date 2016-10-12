@@ -132,7 +132,7 @@ void dialogv::SetDataObject(class dataobject  *obj)
     (this)->view::SetDataObject( obj);
 }
 
-void dialogv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void dialogv::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     int tpos=0;
     double topcolor[3];
@@ -160,11 +160,11 @@ void dialogv::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     }
     if(!this->didsizeonce) {
 	long dw, dh;
-	(this)->DesiredSize( r.width, r.height, view_NoSet, &dw, &dh);
+	(this)->DesiredSize( r.width, r.height, view::NoSet, &dw, &dh);
     }
 
     switch(type) {
-	case view_Remove:
+	case view::Remove:
 	    (this->text)->FullUpdate( type, 0, 0, 0, 0);
 	    (this->buttons)->FullUpdate( type, 0, 0, 0, 0);
 	    if(this->rider) {
@@ -174,7 +174,7 @@ void dialogv::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
 		(this->sidekick)->FullUpdate( type, 0, 0, 0, 0);
 	    }
 	    break;
-	case view_MoveNoRedraw:
+	case view::MoveNoRedraw:
 	    sbuttonv::DrawBorder(this, int1.left, int1.top, int1.width, int1.height, (d)->GetPrefs(), sbuttonv_BORDEROUT, FALSE, &int1);
 	    if(this->sidekick) sbuttonv::DrawBorder(this, int2.left, int2.top, int2.width, int2.height, (d)->GetPrefs(), sbuttonv_BORDEROUT, FALSE, &int2);
 	    tpos=int1.top;
@@ -191,10 +191,10 @@ void dialogv::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
 		(this->sidekick)->InsertViewSize( this, int2.left, int2.top, int2.width, int2.height);
 	    }
 	    break;
-	case view_PartialRedraw:
+	case view::PartialRedraw:
 	    break;
-	case view_LastPartialRedraw:
-	case view_FullRedraw:
+	case view::LastPartialRedraw:
+	case view::FullRedraw:
 	    sbuttonv::InteriorBGColor(this, (d)->GetPrefs(), FALSE, topcolor);
 	    sbuttonv::DrawBorder(this, int1.left, int1.top, int1.width, int1.height, (d)->GetPrefs(), sbuttonv_BORDEROUT, TRUE,  &int1);
 	    if(this->sidekick) sbuttonv::DrawBorder(this, int2.left, int2.top, int2.width, int2.height, (d)->GetPrefs(), sbuttonv_BORDEROUT, TRUE,  &int2);
@@ -227,7 +227,7 @@ void dialogv::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     
 }
 
-class view *dialogv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *dialogv::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
 
     if(this->rider) {
@@ -251,7 +251,7 @@ class view *dialogv::Hit(enum view_MouseAction  action, long  x, long  y, long  
 
 #define PERCENTAGE(x, p) (((x)*(p))/100)
 
-view_DSattributes dialogv::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes dialogv::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
     long iw, ih;
     long dummy;
@@ -263,24 +263,24 @@ view_DSattributes dialogv::DesiredSize(long  width, long  height, enum view_DSpa
     if(!this->buttons || !this->text || !d) {
 	*dWidth = width;
 	*dHeight = (height > 2048) ? 256 :height;
-	return (view_DSattributes) (view_HeightFlexible | view_WidthFlexible);
+	return (view::DSattributes) (view::HeightFlexible | view::WidthFlexible);
     }
 
     if(width<0 || width>32767) width=((class view *)this)->parent?(((class view *)this)->parent)->GetLogicalWidth(): 500;
     
     
-    (void) (this->buttons)->DesiredSize( 0, 0, view_NoSet, &this->bwidth, &this->bheight);
+    (void) (this->buttons)->DesiredSize( 0, 0, view::NoSet, &this->bwidth, &this->bheight);
 
     
     if(this->rider || this->sidekick) width=PERCENTAGE(width, 90);
     else {
 	long low=this->bwidth, high=PERCENTAGE(width, 90);
 	/* Please, there MUST be a better way! */
-	(void) (this->text)->DesiredSize( high, height-this->bheight, view_WidthSet, &this->twidth, &oldheight);
+	(void) (this->text)->DesiredSize( high, height-this->bheight, view::WidthSet, &this->twidth, &oldheight);
 	sbuttonv::SizeForBorder(this->text, sbuttonv_Enclosing, d->prefs, FALSE, this->twidth, oldheight, &this->twidth, &oldheight);
 	while(low<high-20) {
 	    sbuttonv::SizeForBorder(this->text, sbuttonv_Interior, d->prefs, FALSE, (low+high)/2-2*PADDING, height-this->bheight, &this->twidth, &this->theight);
-	    (void) (this->text)->DesiredSize( this->twidth, this->theight, view_WidthSet, &this->twidth, &this->theight);
+	    (void) (this->text)->DesiredSize( this->twidth, this->theight, view::WidthSet, &this->twidth, &this->theight);
 	    sbuttonv::SizeForBorder(this->text, sbuttonv_Enclosing, d->prefs, FALSE, this->twidth, this->theight, &this->twidth, &this->theight);
 	    if(this->theight>oldheight) low=(low+high)/2+1;
 	    else high=(low+high)/2;
@@ -298,25 +298,25 @@ view_DSattributes dialogv::DesiredSize(long  width, long  height, enum view_DSpa
     }
     
     sbuttonv::SizeForBorder(this->text, sbuttonv_Interior, d->prefs, FALSE, this->twidth, height-this->bheight, &this->twidth, &this->theight);
-    (void) (this->text)->DesiredSize( this->twidth, height-this->bheight, view_WidthSet, &dummy, &this->theight);
+    (void) (this->text)->DesiredSize( this->twidth, height-this->bheight, view::WidthSet, &dummy, &this->theight);
     sbuttonv::SizeForBorder(this->text, sbuttonv_Enclosing, d->prefs, FALSE, this->twidth, this->theight, &dummy, &this->theight);
 
     this->twidth-=2*PADDING;
     
     if(this->rider) {
 	sbuttonv::SizeForBorder(this->rider, sbuttonv_Interior, d->prefs, TRUE,  this->twidth-2*PADDING, height-this->bheight-this->theight, &iw, &ih);
-	(void) (this->rider)->DesiredSize( iw, ih, view_WidthSet, &dummy, &this->rheight);
+	(void) (this->rider)->DesiredSize( iw, ih, view::WidthSet, &dummy, &this->rheight);
 	sbuttonv::SizeForBorder(this->rider, sbuttonv_Enclosing, d->prefs, TRUE, dummy, this->rheight,  &dummy, &this->rheight);
     }
 
     if(this->sidekick) {
 	sbuttonv::SizeForBorder(this->sidekick, sbuttonv_Interior, d->prefs, FALSE, width/2, this->theight + this->bheight + this->rheight, &iw, &ih);
-	(void) (this->sidekick)->DesiredSize( iw, ih, view_WidthSet, &dummy, &this->sheight);
+	(void) (this->sidekick)->DesiredSize( iw, ih, view::WidthSet, &dummy, &this->sheight);
 	sbuttonv::SizeForBorder(this->sidekick, sbuttonv_Enclosing, d->prefs, FALSE, dummy, this->sheight, &dummy, &this->sheight);
 	
     }
     sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, d->prefs, FALSE, width, this->theight + this->bheight +  this->rheight +2*PADDING, dWidth, dHeight);
-    return view_Fixed;
+    return view::Fixed;
 }
 
 void dialogv::InstallRider(class view  *rider)
@@ -325,7 +325,7 @@ void dialogv::InstallRider(class view  *rider)
     this->roffset=PADDING;
     this->rider=rider;
     if(rider) (rider)->LinkTree( this);
-    if(this->client) (void) (this)->DesiredSize( (this->client)->GetLogicalWidth(), (this->client)->GetLogicalHeight(), view_WidthSet, &dumbw, &dumbh);
+    if(this->client) (void) (this)->DesiredSize( (this->client)->GetLogicalWidth(), (this->client)->GetLogicalHeight(), view::WidthSet, &dumbw, &dumbh);
     if(rider) (rider)->WantInputFocus( rider);
 }
 
@@ -334,7 +334,7 @@ void dialogv::InstallSidekick(class view  *sidekick)
     long dumbw, dumbh;
     this->sidekick=sidekick;
     if(sidekick) (sidekick)->LinkTree( this);
-    if(this->client) (void) (this)->DesiredSize( (this->client)->GetLogicalWidth(), (this->client)->GetLogicalHeight(), view_WidthSet, &dumbw, &dumbh);
+    if(this->client) (void) (this)->DesiredSize( (this->client)->GetLogicalWidth(), (this->client)->GetLogicalHeight(), view::WidthSet, &dumbw, &dumbh);
 }
 	
 void dialogv::LinkTree(class view  *parent)
@@ -506,7 +506,7 @@ void dialogv::DeActivateButton(int  ind)
 static void ConfigureFunc(class im  *self, long  rock , long  customrock, class im  *parent, int  *x , int  *y, unsigned int  *w , unsigned int  *h)
 {
     long lw, lh;
-    (void) ((class dialogv *)customrock)->DesiredSize( (parent)->GetLogicalWidth(), (parent)->GetLogicalHeight(), view_NoSet, &lw, &lh);
+    (void) ((class dialogv *)customrock)->DesiredSize( (parent)->GetLogicalWidth(), (parent)->GetLogicalHeight(), view::NoSet, &lw, &lh);
     *w=(unsigned int)lw;
     *h=(unsigned int)lh;
     (self)->NormalConfiguration( rock, customrock, parent, x, y,w, h);

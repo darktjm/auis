@@ -102,23 +102,23 @@ static int AskFor1(class bdffontv  *self, long  *value, const char  *prompt);
 static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, const char  *prompt1 , const char  *prompt2);
 static boolean FindBuffer(class frame  *f,class buffer  *b);
 static class view *FindViewOfBuffer(class buffer  *b);
-static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
-static int bdffontv_SetEncodingCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SetEncodingCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
 static void bdffontv_UpdateFontExtent(class bdffontv  *self, class bdffont  *fontinfo);
-static int bdffontv_SelectCharCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
+static int bdffontv_SelectCharCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn);
 static void CreateIndexString(char  *menustr, int  menuval);
 static void EnsureCharMenu(class bdffontv  *self, long  num);
 static void SetFontCharacteristics(class bdffontv  *self);
@@ -258,7 +258,7 @@ static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
 static void bdffontv_ForwardCmd(class bdffontv  *self, long  procl)
 {
     chlist_itemfptr proc=(chlist_itemfptr)procl;
-    (*proc)((long)self, NULL, view_LeftUp, 1, 0, 0);
+    (*proc)((long)self, NULL, view::LeftUp, 1, 0, 0);
 } /* bdffontv_ForwardCmd */
 
 #define bdffontv_AskAborted	(0)
@@ -378,7 +378,7 @@ static class view *FindViewOfBuffer(class buffer  *b)
   return ((f)->GetView());
 } /* FindViewOfBuffer */
 
-static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     class buffer *buf;
     class view *v;
@@ -402,7 +402,7 @@ static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view_M
     return (0);
 } /* bdffontv_HelpCmd */
 
-static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     message::DisplayString(self,
 			  0,
@@ -413,14 +413,14 @@ static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum 
     return (0);
 } /* bdffontv_FontExtentCmd */
 
-static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     class chlist *chl;
     char msg[128];
     long face, newface;
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	face = (fontinfo)->GetFontFace() + 1;
 	if (message::MultipleChoiceQuestion(self,
@@ -461,14 +461,14 @@ static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum
     return (0);
 } /* bdffontv_SetFontFaceCmd */
 
-static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
     class chlist *chl;
     char msg[128];
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	(fontinfo)->GetResolution( &x, &y);
 	if (AskFor2(self,
@@ -500,14 +500,14 @@ static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, en
     return (0);
 } /* bdffontv_SetResolutionCmd */
 
-static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long pts;
     class chlist *chl;
     char msg[128];
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	pts = (fontinfo)->GetPointSize();
 	if (AskFor1(self, &pts, "New point size") == bdffontv_AskChanged) {
@@ -531,13 +531,13 @@ static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enu
     return (0);
 } /* bdffontv_SetPointSizeCmd */
 
-static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
     char msg[128];
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	(fontinfo)->GetDefaultDelta( &x, &y);
 	if (AskFor2(self,
@@ -563,13 +563,13 @@ static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, 
     return (0);
 } /* bdffontv_SetDefaultDeltaCmd */
 
-static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
     char msg[128];
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	(fontinfo)->GetDefaultOrigin( &x, &y);
 	if (AskFor2(self,
@@ -595,13 +595,13 @@ static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l,
     return (0);
 } /* bdffontv_SetDefaultOriginCmd */
 
-static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long width, height;
     char msg[128];
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	(fontinfo)->GetDefaultExtent( &width, &height);
 	if (AskFor2(self,
@@ -627,13 +627,13 @@ static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l,
     return (0);
 } /* bdffontv_SetDefaultExtentCmd */
 
-static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char localbuffer[512], *bufp, *tail, *oldname;
     class chlist *chl;
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	oldname = (fontinfo)->GetFontName();
 
@@ -683,13 +683,13 @@ static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum
     return (0);
 } /* bdffontv_SetFontNameCmd */
 
-static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char localbuffer[512], *bufp, *tail, *oldfamily;
     class chlist *chl;
     class bdffont *fontinfo;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	oldfamily = (fontinfo)->GetFontFamily();
 
@@ -743,13 +743,13 @@ static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, en
     return (0);
 } /* bdffontv_SetFontFamilyCmd */
 
-static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
     class chlist *chl;
     char msg[128];
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	bdffont_GetDWidth(&self->modinfo, &x, &y);
 	if (AskFor2(self,
 		    &x, &y,
@@ -779,13 +779,13 @@ static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum vi
     return (0);
 } /* bdffontv_SetDeltaCmd */
 
-static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
     class chlist *chl;
     char msg[128];
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	bdffont_GetOrigin(&self->modinfo, &x, &y);
 	if (AskFor2(self,
 		    &x, &y,
@@ -815,13 +815,13 @@ static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum v
     return (0);
 } /* bdffontv_SetOriginCmd */
 
-static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long width, height;
     class chlist *chl;
     char msg[128];
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	bdffont_GetExtent(&self->modinfo, &width, &height);
 	if (AskFor2(self,
 		    &width, &height,
@@ -853,13 +853,13 @@ static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum v
     return (0);
 } /* bdffontv_SetExtentCmd */
 
-static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char msg[128];
     char localbuffer[128], *bufp, *tail;
     class chlist *chl;
 
-    if ((action == view_LeftUp) || (action == view_RightUp)) {
+    if ((action == view::LeftUp) || (action == view::RightUp)) {
 	sprintf(msg,
 		"New name for character (max. length: 14) [%s]: ",
 		bdffont_GetCharName(&self->modinfo));
@@ -918,7 +918,7 @@ static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum vie
     return (0);
 } /* bdffontv_SetNameCmd */
 
-static int bdffontv_SetEncodingCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SetEncodingCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     message::DisplayString(self,
 			  0,
@@ -1248,9 +1248,9 @@ void bdffontv::SelectCharacter(int  index)
     }
 } /* bdffontv__SelectCharacter */
 
-static int bdffontv_SelectCharCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn)
+static int bdffontv_SelectCharCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
-    if ((action != view_LeftUp) && (action != view_RightUp)) {
+    if ((action != view::LeftUp) && (action != view::RightUp)) {
 	return (0);
     }
 
@@ -1455,7 +1455,7 @@ static boolean bdffontv_InitializeViews(class bdffontv  *self)
 			  fieldstyle);
     i = (chl)->GetLength();
     (chl)->AddItemToEnd( bdffontv_HelpLabel,
-			(chlist_itemfptr)bdffontv_HelpLabel, (long)self);
+			(chlist_itemfptr)bdffontv_HelpCmd, (long)self);
     (chl)->AlwaysAddStyle(
 			  i, sizeof(bdffontv_HelpLabel) - 2,
 			  helpstyle);
@@ -1814,11 +1814,11 @@ void bdffontv::PostMenus(class menulist  *menulist)
 } /* bdffontv__PostMenus */
 
 
-void bdffontv::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void bdffontv::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {
     class bdffont *fontinfo;
 
-    if ( ! this->initialized && type != view_MoveNoRedraw && type != view_Remove)
+    if ( ! this->initialized && type != view::MoveNoRedraw && type != view::Remove)
 	bdffontv_InitializeViews(this);
 
     (this)->lpair::FullUpdate( type, left, top, width, height);
@@ -1833,7 +1833,7 @@ void bdffontv::FullUpdate(enum view_UpdateType  type, long  left, long  top, lon
 	im::EnqueueEvent((event_fptr)GetNewFontParameters, (char *)this, 0);
 
     /* EnsureFocus(self); */
-    if (this->chareditV && type != view_MoveNoRedraw && type != view_Remove)
+    if (this->chareditV && type != view::MoveNoRedraw && type != view::Remove)
 	(this->chareditV)->WantInputFocus( this->chareditV);
 
 } /* bdffontv__FullUpdate */

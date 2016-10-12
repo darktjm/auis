@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ATKdefineRegistry(hwview, view, NULL);
 
 
-void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void hwview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
             {
     struct rectangle Rect;
 
@@ -32,6 +32,6 @@ void hwview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
     (this)->MoveTo( Rect.left + Rect.width/2,
 		   Rect.top + Rect.height/2);
     (this)->DrawString( "Hello, world!",
-	graphic_BETWEENTOPANDBASELINE
-	| graphic_BETWEENLEFTANDRIGHT);
+	graphic::BETWEENTOPANDBASELINE
+	| graphic::BETWEENLEFTANDRIGHT);
 }

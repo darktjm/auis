@@ -145,10 +145,10 @@ zip::Write_Figure( struct zip_figure	      *figure )
     {
 	switch ( figure->zip_figure_line_cap )
 	{
-	    case graphic_CapNotLast: c = 'N'; break;
-            case graphic_CapButt: c = 'B'; break;
-            case graphic_CapRound: c = 'R'; break;
-            case graphic_CapProjecting: c = 'P'; break;
+	    case graphic::CapNotLast: c = 'N'; break;
+            case graphic::CapButt: c = 'B'; break;
+            case graphic::CapRound: c = 'R'; break;
+            case graphic::CapProjecting: c = 'P'; break;
 	}
 	fprintf( file, "LC%c\n", c );
     }
@@ -156,9 +156,9 @@ zip::Write_Figure( struct zip_figure	      *figure )
     {
 	switch ( figure->zip_figure_line_join )
 	{
-	    case graphic_JoinMiter: c = 'M'; break;
-            case graphic_JoinRound: c = 'R'; break;
-            case graphic_JoinBevel: c = 'B'; break;
+	    case graphic::JoinMiter: c = 'M'; break;
+            case graphic::JoinRound: c = 'R'; break;
+            case graphic::JoinBevel: c = 'B'; break;
 	}
 	fprintf( file, "LJ%c\n", c );
     }
@@ -166,9 +166,9 @@ zip::Write_Figure( struct zip_figure	      *figure )
     {
 	switch ( figure->zip_figure_line_dash_type )
         {
-	    case graphic_LineSolid: c = 'S'; break;
-	    case graphic_LineDoubleDash: c = 'D'; break;
-	    case graphic_LineOnOffDash: c = 'O'; break;
+	    case graphic::LineSolid: c = 'S'; break;
+	    case graphic::LineDoubleDash: c = 'D'; break;
+	    case graphic::LineOnOffDash: c = 'O'; break;
 	}
 	fprintf( file, "LD%c,%d,", c, figure->zip_figure_line_dash_offset );
 	p = figure->zip_figure_line_dash_pattern;
@@ -335,10 +335,10 @@ Write_Image_Beginning( class zip		      *self, zip_type_image	       image )
     {
 	switch ( image->zip_image_line_cap )
 	{
-	    case graphic_CapNotLast: c = 'N'; break;
-            case graphic_CapButt: c = 'B'; break;
-            case graphic_CapRound: c = 'R'; break;
-            case graphic_CapProjecting: c = 'P'; break;
+	    case graphic::CapNotLast: c = 'N'; break;
+            case graphic::CapButt: c = 'B'; break;
+            case graphic::CapRound: c = 'R'; break;
+            case graphic::CapProjecting: c = 'P'; break;
 	}
 	fprintf( file, "LC%c\n", c );
     }
@@ -346,9 +346,9 @@ Write_Image_Beginning( class zip		      *self, zip_type_image	       image )
     {
 	switch ( image->zip_image_line_join )
 	{
-	    case graphic_JoinMiter: c = 'M'; break;
-            case graphic_JoinRound: c = 'R'; break;
-            case graphic_JoinBevel: c = 'B'; break;
+	    case graphic::JoinMiter: c = 'M'; break;
+            case graphic::JoinRound: c = 'R'; break;
+            case graphic::JoinBevel: c = 'B'; break;
 	}
 	fprintf( file, "LJ%c\n", c );
     }
@@ -356,9 +356,9 @@ Write_Image_Beginning( class zip		      *self, zip_type_image	       image )
     {
 	switch ( image->zip_image_line_dash_type )
         {
-	    case graphic_LineSolid: c = 'S'; break;
-	    case graphic_LineDoubleDash: c = 'D'; break;
-	    case graphic_LineOnOffDash: c = 'O'; break;
+	    case graphic::LineSolid: c = 'S'; break;
+	    case graphic::LineDoubleDash: c = 'D'; break;
+	    case graphic::LineOnOffDash: c = 'O'; break;
 	}
 	fprintf( file, "LD%c,%d,", c, image->zip_image_line_dash_offset );
 	p = image->zip_image_line_dash_pattern;

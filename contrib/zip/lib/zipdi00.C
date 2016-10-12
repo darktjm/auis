@@ -584,7 +584,7 @@ zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 off
 	      image->zip_image_line_dash_offset = offset;
 	      image->zip_image_line_dash_type = type;
 	    }
-	  else image->zip_image_line_dash_type = graphic_LineSolid;
+	  else image->zip_image_line_dash_type = graphic::LineSolid;
 	  SetStreamModified;
       }
       else

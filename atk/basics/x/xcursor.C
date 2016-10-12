@@ -5,13 +5,11 @@
 
 #include <andrewos.h>
 ATK_IMPL("xcursor.H")
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-
-ATK_IMPL("xcursor.H")
 #include <fontdesc.H>
 #include <xfontdesc.H>
 #include <xgraphic.H>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
 #include <cursor.H>
 #include <view.H>
 #include <im.H>

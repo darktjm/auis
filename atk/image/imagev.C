@@ -63,7 +63,7 @@ static class cursor *waitCursor;
 #define IMAGE(self) ((struct image*) (self->scaled ? self->scaled : self->orig))
 
 #define CLEARRECT(self, RectPtr)			\
-    (self)->SetTransferMode( graphic_WHITE);		\
+    (self)->SetTransferMode( graphic::WHITE);		\
     (self)->FillRect( RectPtr, (self)->BlackPattern())
 
 ATKdefineRegistry(imagev, view, imagev::InitializeClass);
@@ -301,10 +301,10 @@ DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *i
 }
 
 void
-imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, long height )
+imagev::FullUpdate( enum view::UpdateType type, long left, long top, long width, long height )
 {
     this->isLinked = TRUE;
-    if(type == view_FullRedraw || type == view_LastPartialRedraw) {
+    if(type == view::FullRedraw || type == view::LastPartialRedraw) {
 	class region *clipRgn = region::CreateEmptyRegion();
 	class region *clipEstablished;
 
@@ -324,7 +324,7 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	if (!haveFocus && click_to_draw) {
 	    /* Do not draw.  Fill with a gray pattern. */
 	    click_skip_update = TRUE;
-	    SetTransferMode(graphic_COPY);
+	    SetTransferMode(graphic::COPY);
 	    FillRect(canvas, GrayPattern(1, 2));
         } else if((IMAGE(this))->Data()) {
             if(canvas==NULL) {
@@ -349,7 +349,7 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	    if(clipEstablished)
 		(rgn1)->IntersectRegion( clipRgn, rgn1);
 	    (this)->SetClippingRegion( rgn1);
-	    (this)->SetTransferMode( graphic_COPY);
+	    (this)->SetTransferMode( graphic::COPY);
 
 	    point_SetX(&Dest, MAX(Pix.left, rectangle_Left(this->canvas)));
 	    point_SetY(&Dest, MAX(Pix.top, rectangle_Top(this->canvas)));
@@ -391,11 +391,11 @@ imagev::FullUpdate( enum view_UpdateType type, long left, long top, long width, 
 	    (this)->ClearClippingRect();
 	delete clipRgn;
     }
-    else if(type == view_MoveNoRedraw) {
+    else if(type == view::MoveNoRedraw) {
 	(this)->RetractCursor( this->cursor);
 	::PostCursor(this, Cursor_Arrow);
     }
-    else if(type == view_Remove) {
+    else if(type == view::Remove) {
 	if(this->canvas) {
 	    free(this->canvas);
 	    this->canvas = NULL;
@@ -417,7 +417,7 @@ static void ConstrainPanning(imagev *iv) {
 }
 
 class view *
-imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfClicks)
+imagev::Hit( enum view::MouseAction  action, long  ix, long  iy, long  numberOfClicks)
 {
     long iw, ih, px, py;
     if(canvas==NULL) return this;
@@ -429,16 +429,16 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
     }
 
     switch(action) {
-	case view_LeftDown:
+	case view::LeftDown:
 	    break;
-	case view_RightDown:
+	case view::RightDown:
 	    ::PostCursor(this, Cursor_CrossHairs);
 	    this->rockx = ix;
 	    this->rocky = iy;
 	    if(this->panStyle == DISCRETE_PAN) {
 		px = ix;
 		py = iy;
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, py);
 		(this)->DrawLineTo( iw-1, py);
 		(this)->MoveTo( px, 0);
@@ -447,14 +447,14 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    this->lastx = ix;
 	    this->lasty = iy;
 	    break;
-	case view_LeftMovement:
+	case view::LeftMovement:
 	    break;
-	case view_RightMovement:
+	case view::RightMovement:
 	    if(this->panStyle == DISCRETE_PAN) {
 		px =  ix;
 		py = iy;
 		if( px != this->lastx || py != this->lasty ) {
-		    (this)->SetTransferMode( graphic_INVERT);
+		    (this)->SetTransferMode( graphic::INVERT);
 		    (this)->MoveTo( 0, this->lasty);
 		    (this)->DrawLineTo( iw-1, this->lasty);
 		    (this)->MoveTo( this->lastx, 0);
@@ -469,9 +469,9 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 
 		break;
 	    }
-	case view_RightUp:
+	case view::RightUp:
 	    if(this->panStyle == DISCRETE_PAN) {
-		(this)->SetTransferMode( graphic_INVERT);
+		(this)->SetTransferMode( graphic::INVERT);
 		(this)->MoveTo( 0, this->lasty);
 		(this)->DrawLineTo( iw-1, this->lasty);
 		(this)->MoveTo( this->lastx, 0);
@@ -485,7 +485,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    this->do_renderupdate = TRUE;
 	    (this)->WantUpdate( this);
 	    break;
-	case view_LeftUp:
+	case view::LeftUp:
 	default:
 	    break;
     }
@@ -524,8 +524,8 @@ imagev::LoseInputFocus( )
     }
 }
 
-view_DSattributes 
-imagev::DesiredSize( long  width , long  height, enum view_DSpass  pass, long  *desiredWidth , long  *desiredHeight )
+view::DSattributes 
+imagev::DesiredSize( long  width , long  height, enum view::DSpass  pass, long  *desiredWidth , long  *desiredHeight )
 {
     class image *image = orig;
     *desiredWidth = (image)->Width() > 0 ?
@@ -538,7 +538,7 @@ imagev::DesiredSize( long  width , long  height, enum view_DSpass  pass, long  *
 	sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, buttonprefs, haveFocus, *desiredWidth, *desiredHeight, desiredWidth, desiredHeight);
 	sbuttonv::SizeForBorder(this, sbuttonv_Enclosing, buttonprefs, !haveFocus, *desiredWidth, *desiredHeight, desiredWidth, desiredHeight);
     }
-    return(view_Fixed);
+    return(view::Fixed);
 }
 
 void
@@ -552,7 +552,7 @@ imagev::PostMenus( class menulist  *menulist )
 	if(strcmp((this->orig)->SaveFormatString(), "jpeg") == 0)
 	    mask |= IMAGEV_JPEGFORMATMENUS;
 	if((this)->DisplayClass() &
-	   (graphic_PseudoColor | graphic_DirectColor | graphic_GrayScale)) {
+	   (graphic::PseudoColor | graphic::DirectColor | graphic::GrayScale)) {
 	    mask |= IMAGEV_CANHAVEPRIVATECMAP;
 	    if(this->havePrivateCmap) {
 		mask |= IMAGEV_HASPRIVATECMAP;
@@ -619,10 +619,10 @@ imagev::Update( )
 	struct rectangle r;
 	(this)->GetVisualBounds( &r);
 	CLEARRECT(this, &r);
-	(this)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);
+	(this)->FullUpdate( view::FullRedraw, r.left, r.top, r.width, r.height);
     }
     else { /* do_renderupdate */
-	(this)->FullUpdate( view_FullRedraw, 0, 0, 0, 0);
+	(this)->FullUpdate( view::FullRedraw, 0, 0, 0, 0);
     }
 }
 
@@ -1082,7 +1082,7 @@ void imagev::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct re
     writePS(this, outfile, &wpts, &hpts, imagev_REGISTERED_POSTSCRIPT);
 }
 
-void imagev::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight)
+void imagev::DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {
     this->view::DesiredPrintSize(width, height, pass, desiredwidth, desiredheight);
 }
@@ -1329,14 +1329,6 @@ imagev::SetDataObject( class dataobject  *dataobj )
     dimage.RemoveObserver(this);
     dimage=IMAGE(this);
     dimage.AddObserver(this);
-}
-
-void
-imagev::UnlinkTree( )
-{
-    if(dimage.IDDImage()) dimage.Release();
-    this->onScreen = this->isLinked = FALSE;
-    (this)->view::UnlinkTree();
 }
 
 void

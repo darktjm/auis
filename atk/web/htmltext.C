@@ -1598,11 +1598,10 @@ rawinset_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 		return RAW_TEXT;
 	} else {
 	    long p=strlen(taginfo->tagid)+2;
-	    struct SearchPattern *pat=NULL;
-	    if(pat==NULL) search::CompilePattern( "<title>.*</title>", &pat);
-	    int result= search::MatchPattern((hidden *)*ptxtobj, p, pat);
+	    class search pat("<title>.*</title>");
+	    int result= pat.MatchPattern((hidden *)*ptxtobj, p);
 	    if(result>=0) {
-		long matchlen= search::GetMatchLength()-7-8;
+		long matchlen= pat.GetMatchLength()-7-8;
 		if(oldtxtobj->title) free(oldtxtobj->title);
 		oldtxtobj->title=(char *)malloc(matchlen+1);
 		((hidden *)*ptxtobj)->CopySubString(result+7, matchlen, oldtxtobj->title, FALSE);
@@ -3875,7 +3874,7 @@ htmltext::GififyInset(long pos, htmlenv *env, const char *giffile) {
 
 	if (errmsg) {
 		// determine size and choose gifify method
-		v->DesiredSize(15*72/2, 10*72, view_NoSet,
+		v->DesiredSize(15*72/2, 10*72, view::NoSet,
 			&width, &height);
 		if (width <= 7.5*72 && height <= 10*72) 
 			errmsg = GififyViaView(v, giffile, width, height);
@@ -3884,7 +3883,7 @@ htmltext::GififyInset(long pos, htmlenv *env, const char *giffile) {
 		// inset refuses to be small enough to print (or View failed)
 		// use scaling and GififyViaPS
 
-		v->DesiredPrintSize(15*72/2, 10*72, view_NoSet,
+		v->DesiredPrintSize(15*72/2, 10*72, view::NoSet,
 			&width, &height);
 		// determine scaling factor
 		scale = 100;				// default scape

@@ -84,7 +84,7 @@ zipotrap::Object_Datastream_Code( )
   }
 
 long
-zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
+zipotrap::Build_Object( zip_type_pane		   pane, enum view::MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
   int				  status = zip_success;
   static zip_type_point			  initial_Y;
@@ -93,7 +93,7 @@ zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
   IN(zipotrap::Build_Object);
   switch ( action )
     {
-    case view_LeftDown:
+    case view::LeftDown:
       if ( (status =
 	(this->data_object)->Create_Figure(  &CurrentFigure, NULL, zip_trapezoid_figure,
 			   CurrentImage, NULL )) == zip_success )
@@ -106,7 +106,7 @@ zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	initial_Y = Y;
 	}
       break;
-    case view_LeftUp:
+    case view::LeftUp:
       if ( ( figure = CurrentFigure ) )
         {
 	if ( figure_x_point == 0  ||  figure_y_point == 0 )
@@ -116,7 +116,7 @@ zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	  }
 	}
       /* Fall-thru */
-    case view_LeftMovement:
+    case view::LeftMovement:
       if ( CurrentFigure )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );

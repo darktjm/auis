@@ -201,12 +201,12 @@ struct view *v;
 
     else\{
 
-	struct view *al=view_GetApplicationLayer(v);
+	struct view *al=view::GetApplicationLayer(v);
 
 
 	if(al==NULL)\{
 
-	    view_Destroy(v);
+	    view::Destroy(v);
 
 	    return NULL;
 
@@ -261,9 +261,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(al2==NULL) \{
 
-	view_DeleteApplicationLayer(v1,al1);
+	view::DeleteApplicationLayer(v1,al1);
 
-    	view_Destroy(v1);
+    	view::Destroy(v1);
 
 	return FALSE;
 
@@ -274,9 +274,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(lpAl==NULL) \{
 
-	view_DeleteApplicationLayer(v2,al2);
+	view::DeleteApplicationLayer(v2,al2);
 
-    	view_Destroy(v2);
+    	view::Destroy(v2);
 
 	return FALSE;
 
@@ -316,16 +316,16 @@ struct dataobject *dobj1,*dobj2;
     \}
 
 
-    view_SetDataObject(v1,dobj1);
+    view::SetDataObject(v1,dobj1);
 
-    view_SetDataObject(v2,dobj2);
+    view::SetDataObject(v2,dobj2);
 
     frame_SetView(frame,lpAl);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v1,v1);
+    view::WantInputFocus(v1,v1);
 
 
     return TRUE;
@@ -634,12 +634,12 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -810,9 +810,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "hello ",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATRIGHT);
+			       graphic::ATRIGHT);
 
     helloworldview_MoveTo(hwv,
 
@@ -822,9 +822,9 @@ struct helloworldview *hwv;
 
     helloworldview_DrawString(hwv, "world",
 
-			       graphic_BETWEENTOPANDBASELINE |
+			       graphic::BETWEENTOPANDBASELINE |
 
-			       graphic_ATLEFT);
+			       graphic::ATLEFT);
 
 \}
 
@@ -833,7 +833,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -887,7 +887,7 @@ long height;
     hwv->blackOnWhite=hw->blackOnWhite;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hw->blackOnWhite)
@@ -903,7 +903,7 @@ long height;
 		&myVisualRect, helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv,graphic_INVERT);
+    helloworldview_SetTransferMode(hwv,graphic::INVERT);
 
 
     drawHW(hwv);
@@ -921,7 +921,7 @@ struct helloworldview *hwv;
     struct helloworld *hw=(struct helloworld *)hwv->header.view.dataobject;
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     if (hw->blackOnWhite!=hwv->blackOnWhite) \{
@@ -979,7 +979,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -996,13 +996,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hw->x+=x-hwv->hitX;
 
@@ -1014,7 +1014,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -1024,7 +1024,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -1043,7 +1043,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->hitX=x;
 
@@ -1051,7 +1051,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 
@@ -1565,12 +1565,12 @@ struct view *v;
 
     else\{
 
-	struct view *al=view_GetApplicationLayer(v);
+	struct view *al=view::GetApplicationLayer(v);
 
 
 	if(al==NULL)\{
 
-	    view_Destroy(v);
+	    view::Destroy(v);
 
 	    return NULL;
 
@@ -1614,9 +1614,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(al2==NULL) \{
 
-	view_DeleteApplicationLayer(v1,al1);
+	view::DeleteApplicationLayer(v1,al1);
 
-    	view_Destroy(v1);
+    	view::Destroy(v1);
 
 	return FALSE;
 
@@ -1627,9 +1627,9 @@ struct dataobject *dobj1,*dobj2;
 
     if(lpAl==NULL) \{
 
-	view_DeleteApplicationLayer(v2,al2);
+	view::DeleteApplicationLayer(v2,al2);
 
-    	view_Destroy(v2);
+    	view::Destroy(v2);
 
 	return FALSE;
 
@@ -1671,16 +1671,16 @@ struct dataobject *dobj1,*dobj2;
 
 	
 
-    view_SetDataObject(v1,dobj1);
+    view::SetDataObject(v1,dobj1);
 
-    view_SetDataObject(v2,dobj2);
+    view::SetDataObject(v2,dobj2);
 
     frame_SetView(frame,lpAl);
 
     im_SetView(im,frame);
 
 
-    view_WantInputFocus(v1,v1);
+    view::WantInputFocus(v1,v1);
 
 
     return TRUE;

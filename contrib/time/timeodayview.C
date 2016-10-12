@@ -134,17 +134,17 @@ Redraw(class timeodayview  *self)
   if (my_FontSummary) (self)->MoveTo( rect.left + rect.width/2, rect.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
 
   if (my_fontdesc) (self)->SetFont( my_fontdesc);
-  (self)->DrawString( tod,  graphic_BETWEENLEFTANDRIGHT | graphic_ATBASELINE);
+  (self)->DrawString( tod,  graphic::BETWEENLEFTANDRIGHT | graphic::ATBASELINE);
 }
 
 
 void
-timeodayview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+timeodayview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
 /*
   Do an update.
 */
-  if ((type == view_FullRedraw) || (type == view_LastPartialRedraw)) {
+  if ((type == view::FullRedraw) || (type == view::LastPartialRedraw)) {
     this->need_full_update = TRUE;
     Redraw(this);
   }
@@ -159,7 +159,7 @@ timeodayview::Update()
 
 
 class view *
-timeodayview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks  )
+timeodayview::Hit(enum view::MouseAction  action, long  x , long  y, long  numclicks  )
 {
 /*
   Handle the button event.  Currently, semantics are:
@@ -186,8 +186,8 @@ timeodayview::Print(FILE  *file, const char  *processor , const char  *finalForm
 }
 
 
-view_DSattributes 
-timeodayview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desired_width, long  *desired_height)
+view::DSattributes 
+timeodayview::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height)
 {
 /* 
   Tell parent that this object  wants to be as big as the box around its
@@ -211,7 +211,7 @@ timeodayview::DesiredSize(long  width, long  height, enum view_DSpass  pass, lon
     *desired_height = my_FontSummary->maxHeight;
   this->last_height = *desired_height;
 
-  return(view_Fixed); /* (BUG) should disable user sizing, but this doesn't */
+  return(view::Fixed); /* (BUG) should disable user sizing, but this doesn't */
 }
 
 

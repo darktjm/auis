@@ -57,8 +57,8 @@ static char *topts[] = {
 
 #endif /* PageOffsetOpt */
 
-static struct view_printopt po_printer, po_psfile, po_tofile, po_landscape, po_scale, po_papersize;
-static struct view_printopt po_enumcontents, po_swapheaders, po_endnotes, po_doindex, po_docontents;
+static struct view::printopt po_printer, po_psfile, po_tofile, po_landscape, po_scale, po_papersize;
+static struct view::printopt po_enumcontents, po_swapheaders, po_endnotes, po_doindex, po_docontents;
 
 ATKdefineRegistry(ezprintapp, application, ezprintapp::InitializeClass);
 

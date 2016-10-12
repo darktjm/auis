@@ -116,7 +116,7 @@ static void lpair_ResetDimensions(class lpair  *self)
 
 
 void 
-bpair::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
+bpair::FullUpdate(enum view::UpdateType   type, long   left , long   top , long   width , long   height)
 			{
 /* ( the following, including derogatory comment, is copied from lpair.c) */
 

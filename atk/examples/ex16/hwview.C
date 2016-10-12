@@ -92,17 +92,17 @@ static void drawHW(class helloworldview  *hwv)
 			   hwv->x-hwv->frameX,hwv->y-hwv->frameY);
     (hwv)->SetFont(italic);
     (hwv)->DrawString( "hello ",
-			       graphic_BETWEENTOPANDBASELINE |
-			       graphic_ATRIGHT);
+			       graphic::BETWEENTOPANDBASELINE |
+			       graphic::ATRIGHT);
     (hwv)->MoveTo(
 			   hwv->x-hwv->frameX,hwv->y-hwv->frameY);
     (hwv)->SetFont(bold);
     (hwv)->DrawString( "world",
-			       graphic_BETWEENTOPANDBASELINE |
-			       graphic_ATLEFT);
+			       graphic::BETWEENTOPANDBASELINE |
+			       graphic::ATLEFT);
 }
 
-void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height )
+void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height )
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
     struct rectangle myVisualRect;
@@ -128,14 +128,14 @@ void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  to
     this->y=hw->y;
     this->blackOnWhite=hw->blackOnWhite;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if (hw->blackOnWhite)
 	(this)->FillRect( &myVisualRect, (this)->WhitePattern());
     else
 	(this)->FillRect( &myVisualRect, (this)->BlackPattern());
 
-    (this)->SetTransferMode(graphic_INVERT);
+    (this)->SetTransferMode(graphic::INVERT);
 
     drawHW(this);
 }
@@ -145,7 +145,7 @@ void helloworldview::Update()
 {    
     class helloworld *hw=(class helloworld *)this->dataobject;
 
-    (this)->SetTransferMode( graphic_INVERT);
+    (this)->SetTransferMode( graphic::INVERT);
 
     if (hw->blackOnWhite!=this->blackOnWhite) {
 	struct rectangle vr;
@@ -173,27 +173,27 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
 
     if(this->HaveDownTransition)
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		hw->x+=x-this->hitX;
 		hw->y+=y-this->hitY;
 		this->hitX=x;
 		this->hitY=y;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		hw->x=x+this->frameX;
 		hw->y=y+this->frameY;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -203,11 +203,11 @@ class view *helloworldview::Hit(enum view_MouseAction  action, long  x, long  y,
 
     if(!this->HaveDownTransition)
 	switch(action){
-	    case view_RightDown:
+	    case view::RightDown:
 		this->hitX=x;
 		this->hitY=y;
 		/* fall through */
-	    case view_LeftDown:
+	    case view::LeftDown:
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;

@@ -204,7 +204,8 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
     struct dynstr pattern, prompt;
     int wasmeta = 0;
     int c, dodokey = 0, oldforwardp;
-    char *compiled, *tmpbuf;
+    char *tmpbuf;
+    class search compiled;
     const char *compileerr;
     struct statestack stack;
 
@@ -365,8 +366,7 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
 
   compilestate:
 
-    compiled = NULL;
-  if ((compileerr = search::CompilePattern(pattern.text,(struct SearchPattern **) &compiled)) == NULL)
+  if ((compileerr = compiled.CompilePattern(pattern.text)) == NULL)
 	goto searchstate;
     statestack_push(&stack, pattern.used, StackTop->wrappedp,
 		    StackTop->failurep, StackTop->position, StackTop->length,
@@ -376,15 +376,15 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
   searchstate:
 
     if (forwardp)
-	foundloc = search::MatchPattern(txt, StackTop->searchfrom, (struct SearchPattern *)compiled);
+	foundloc = compiled.MatchPattern(txt, StackTop->searchfrom);
     else
-	foundloc = search::MatchPatternReverse(txt, StackTop->searchfrom,(struct SearchPattern *) compiled);
+	foundloc = compiled.MatchPatternReverse(txt, StackTop->searchfrom);
     if (foundloc >= 0) {
 	statestack_push(&stack, pattern.used, StackTop->wrappedp,
-			0, foundloc, search::GetMatchLength(),
+			0, foundloc, compiled.GetMatchLength(),
 			StackTop->searchfrom, forwardp);
 	(tv)->SetDotPosition( foundloc);
-	(tv)->SetDotLength( search::GetMatchLength());
+	(tv)->SetDotLength( compiled.GetMatchLength());
 	(tv)->FrameDot( foundloc);
 	goto successstate;
     }
@@ -411,15 +411,15 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
   newsearchstate:
 
     if (forwardp)
-	foundloc = search::MatchPattern(txt, newsearchfrom, (struct SearchPattern *)compiled);
+	foundloc = compiled.MatchPattern(txt, newsearchfrom);
     else
-	foundloc = search::MatchPatternReverse(txt, newsearchfrom,(struct SearchPattern *)compiled);
+	foundloc = compiled.MatchPatternReverse(txt, newsearchfrom);
     if (foundloc >= 0) {
 	statestack_push(&stack, pattern.used, StackTop->wrappedp,
-			0, foundloc, search::GetMatchLength(),
+			0, foundloc, compiled.GetMatchLength(),
 			newsearchfrom, forwardp);
 	(tv)->SetDotPosition( foundloc);
-	(tv)->SetDotLength( search::GetMatchLength());
+	(tv)->SetDotLength( compiled.GetMatchLength());
 	(tv)->FrameDot( foundloc);
 	goto successstate;
     }
@@ -446,15 +446,15 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
   wrapsearchstate:
 
     if (forwardp)
-	foundloc = search::MatchPattern(txt, (long) 0, (struct SearchPattern *)compiled);
+	foundloc = compiled.MatchPattern(txt, (long) 0);
     else
-	foundloc = search::MatchPatternReverse(txt, (txt)->GetLength(),(struct SearchPattern *)compiled);
+	foundloc = compiled.MatchPatternReverse(txt, (txt)->GetLength());
     if (foundloc >= 0) {
 	statestack_push(&stack, pattern.used, 1,
-			0, foundloc, search::GetMatchLength(),
+			0, foundloc, compiled.GetMatchLength(),
 			(long) 0, forwardp);
 	(tv)->SetDotPosition( foundloc);
-	(tv)->SetDotLength( search::GetMatchLength());
+	(tv)->SetDotLength( compiled.GetMatchLength());
 	(tv)->FrameDot( foundloc);
 	goto successstate;
     }
@@ -592,7 +592,7 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
     if (dynstr_empty(&pattern))
 	goto emptypatternstate;
     compiled = NULL;
-    if ((compileerr = search::CompilePattern(pattern.text, (struct SearchPattern **)&compiled)))
+    if ((compileerr = compiled.CompilePattern(pattern.text)))
 	goto partialstate;
     if (StackTop->failurep)
 	goto failurestate;

@@ -128,7 +128,7 @@ static void get_interface(class oscroll  *self, int  type);
 static void getinfo(class oscroll  *self, int  type, struct range  *total , struct range  *seen , struct range  *dot);
 static void set_frame(class oscroll  *self, int  side, int  posn, long  coord);
 static long bar_height(class oscroll  *self, int  side);
-static void endzone(class oscroll  *self, int  side, int  end, enum view_MouseAction  action);
+static void endzone(class oscroll  *self, int  side, int  end, enum view::MouseAction  action);
 static int what_is_at(class oscroll  *self, int  side, int  coord);
 static void rotate(class oscroll  *self, int  side, long  x , long  y , long  *scroll_x , long  *scroll_y);
 static long from_range_to_bar(class oscroll  *self, int  side, struct scrollbar  *bar, long  posn);
@@ -150,15 +150,15 @@ static void normal_draw_whole_bar(class oscroll  *self, int  side);
 static void erase_dot(class oscroll  *self, int  side, long  top , long  bot);
 static void draw_end_line(class oscroll  * self,long  x1,long  y1,long  x2,long  y2 );
 static void move_elevator(class oscroll  *self, int  side);
-static void  normal_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
-static void motif_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
-static void full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
+static void  normal_full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height);
+static void motif_full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height);
+static void full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height);
 static void normal_scroll__Update(class oscroll  *self);
 static void motif_scroll__Update(class oscroll  *self);
 static void RepeatEvent(class oscroll  *self);
 static void RepeatScroll(class oscroll  *self, long  cTime);
-static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
-static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
+static class view *normal_scroll__Hit(class oscroll  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks);
+static class view *motif_scroll__Hit(class oscroll  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks);
 static void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2, boolean  sense			/* "innie" or "outtie" */, class graphic  *fillp		/* center fill pattern, NULL for none */);
 static void motif_DrawBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2		/* enclosing coords */, class graphic  *lt , class graphic  *dk , class graphic  *fillp /* patterns for light, dark and center */, int  depth			/* depth of border */);
 
@@ -509,7 +509,7 @@ static long bar_height(class oscroll  *self, int  side)
     return 0;
 }
 
-static void endzone(class oscroll  *self, int  side, int  end, enum view_MouseAction  action)
+static void endzone(class oscroll  *self, int  side, int  end, enum view::MouseAction  action)
 {
     scroll_endzonefptr real_endzone;
     int type = Type[side];
@@ -788,7 +788,7 @@ static void rectangle(class oscroll  *self, int  x1 , int  y1 , int  x2 , int  y
    struct rectangle rect;
 
     rectangle_SetRectSize(&rect, MIN(x1,x2), MIN(y1,y2), ABS(x1-x2) + 1, ABS(y1-y2) + 1);
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     (self)->FillRect( &rect, tile);
 }
@@ -1057,7 +1057,7 @@ static void draw_elevator(class oscroll  *self, int  side)
         rotate(self, side, x2, y2, &x2, &y2);
 
         rectangle(self, x1, y1, x2, y2, self->elevatorFill);
-        (self)->SetTransferMode( graphic_COPY);
+        (self)->SetTransferMode( graphic::COPY);
 	left = (x1<x2 ? x1 : x2);
 	top =  (y1<y2 ? y1 : y2);
 	width = abs(x1-x2);
@@ -1083,7 +1083,7 @@ static void draw_dot(class oscroll  *self, int  side)
 	rotate(self, side, x1, y1, &x1, &y1);
 	rotate(self, side, x2, y2, &x2, &y2);
 
-	(self)->SetTransferMode( graphic_COPY);
+	(self)->SetTransferMode( graphic::COPY);
 	/* drawing 2 zero-width rects should probably be faster 
 	 than the old code that drew one double width rectangle.
 	 Also, this code avoids known bugs in some X servers */
@@ -1105,7 +1105,7 @@ static void normal_draw_whole_bar(class oscroll  *self, int  side)
     int height = bar_height(self, side);
     long x1, y1, x2, y2;
 
-    (self)->SetTransferMode( graphic_COPY);
+    (self)->SetTransferMode( graphic::COPY);
 
     /* line between bar and child */
     rotate(self, side, REALBARWIDTH(self) - 1, 0, &x1, &y1);
@@ -1218,7 +1218,7 @@ static void move_elevator(class oscroll  *self, int  side)
             rotate(self, side, right, range[i].bot, &lr_x, &lr_y);
             if (range[i].whitep) {
                 rectangle(self, ul_x, ul_y, lr_x, lr_y, self->elevatorFill);
-                (self)->SetTransferMode( graphic_COPY);
+                (self)->SetTransferMode( graphic::COPY);
 		/* One last pixel hack works for vertical scroll bars but I don't know about horizontal -- these calculations confuse me as to how they work horizontally -- maybe the rotations do work correctly, but it seems strange. */
 		/* end of old way that almost works */
 		/* beginning of new way to be tested */
@@ -1285,7 +1285,7 @@ static void move_elevator(class oscroll  *self, int  side)
 	    } /* end of test for any white part to be drawn */
             else {
                 rectangle(self, ul_x, ul_y, lr_x, lr_y, self->barFill);
-                (self)->SetTransferMode( graphic_COPY);
+                (self)->SetTransferMode( graphic::COPY);
                 if (seen_top == range[i].bot) {
 		    draw_end_line(self,ll_x,ll_y,lr_x,lr_y);
 /*                    scroll_MoveTo(self, ll_x, ll_y);
@@ -1310,7 +1310,7 @@ static void move_elevator(class oscroll  *self, int  side)
 
 
 static void 
-normal_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+normal_full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     int i;
     struct rectangle rect, crect, VB;
@@ -1331,8 +1331,8 @@ normal_full_update(class oscroll  *self, enum view_UpdateType  type, long  left 
         (self->child)->FullUpdate( type, crect.left - self->left, crect.top - self->top, crect.width, crect.height);
     }
     /* If visual rectangle is bogus-- leave. */
-    if(type == view_Remove || rectangle_IsEmptyRect(&VB) ) return;
-    if(type != view_MoveNoRedraw) {
+    if(type == view::Remove || rectangle_IsEmptyRect(&VB) ) return;
+    if(type != view::MoveNoRedraw) {
         /* Is it possible that the scrollee has changed his mind about the scrollbar locations now that he has been redrawn? If so, we need to account for his area changing, and recalling his full update. Then what if he changes his mind again? */
         if(self->child) calc_desired(self);
 	if (self->left > 0) {
@@ -1377,14 +1377,14 @@ normal_full_update(class oscroll  *self, enum view_UpdateType  type, long  left 
         else
             (self)->RetractCursor( self->curse[i]);
 
-    if(type != view_MoveNoRedraw){
+    if(type != view::MoveNoRedraw){
 	self->current = self->desired;
 	(self)->FlushGraphics();
     }
 }
 
 
-static void motif_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+static void motif_full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     int i;
     struct rectangle rect, crect, VB;
@@ -1429,10 +1429,10 @@ static void motif_full_update(class oscroll  *self, enum view_UpdateType  type, 
     }
 
     /* If visual rectangle is bogus-- leave. */
-    if(type == view_Remove || rectangle_IsEmptyRect(&VB) )
+    if(type == view::Remove || rectangle_IsEmptyRect(&VB) )
 	return;
 
-    if (type != view_FullRedraw && type != view_LastPartialRedraw)
+    if (type != view::FullRedraw && type != view::LastPartialRedraw)
 	return;
 
     /* First, draw the border and background */
@@ -1529,7 +1529,7 @@ static void motif_full_update(class oscroll  *self, enum view_UpdateType  type, 
 }
 
 
-static void full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+static void full_update(class oscroll  *self, enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     if(!emulation) {
 	/* NORMAL SCROLLBARS */
@@ -1542,10 +1542,10 @@ static void full_update(class oscroll  *self, enum view_UpdateType  type, long  
 
 /* Overrides of the view routines: */
 
-void oscroll::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
+void oscroll::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)
 {
     this->pending_update = 0;
-    if (type == view_FullRedraw || type == view_LastPartialRedraw) {
+    if (type == view::FullRedraw || type == view::LastPartialRedraw) {
 
 	this->cornerFill = (this)->GrayPattern(environ::GetProfileInt("CornerShade",8),16);
 	this->endzoneFill = (this)->GrayPattern(environ::GetProfileInt("EndZoneShade",2),16);
@@ -1583,7 +1583,7 @@ static void normal_scroll__Update(class oscroll  *self)
     /* Is the change so drastic that we need to start from scratch? */
     if (self->current.location != self->desired.location || self->force_full_update) {
 	rectangle(self, l, t, w, h, self->whiteFill);
-        full_update(self, view_FullRedraw, l, t, w, h);
+        full_update(self, view::FullRedraw, l, t, w, h);
     }
     else {
         for (i = 0; i < scroll_SIDES; i++)
@@ -1628,7 +1628,7 @@ static void motif_scroll__Update(class oscroll  *self)
     if (self->current.location != self->desired.location ||
 	self->force_full_update) {
         rectangle(self, l, t, w, h, TD_BACKPAT(self));
-        full_update(self, view_FullRedraw, l, t, w, h);
+        full_update(self, view::FullRedraw, l, t, w, h);
     }
     else {
         for (i = 0; i < scroll_SIDES; i++)
@@ -1678,7 +1678,7 @@ static void RepeatEvent(class oscroll  *self)
     if (current_end_state != 0) {
 	endzone(self, self->side, (current_end_state == INTOPZONE ?
 				   scroll_TOPENDZONE : scroll_BOTTOMENDZONE),
-				   view_LeftDown);
+				   view::LeftDown);
     } else {
 	switch (self->direction) {
 	    case scroll_DOWN:
@@ -1739,14 +1739,14 @@ static void RepeatScroll(class oscroll  *self, long  cTime)
 }
 
 
-static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static class view *normal_scroll__Hit(class oscroll  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     int posn = 0, status,side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
     struct scrollbar *cur = NULL, *des = NULL;
     long logicalTop = 0, logicalHeight = 0, logicalPos = 0;
 
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	if (self->button != NEITHER)
 	    return (class view *)self;            /* We already are dealing with the other button. */
 
@@ -1803,7 +1803,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseActio
 		    self->thumbing = NOPE;
 		self->side = side;
 
-		if (action == view_LeftDown)
+		if (action == view::LeftDown)
 		    self->button = LEFT;
 		else
 		    self->button = RIGHT;
@@ -1819,7 +1819,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseActio
     }
 
     /* Assure that we have the correct button */
-    if (((action == view_LeftMovement || action == view_LeftUp) && ((self->button & LEFT) == 0)) || ((action == view_RightMovement || action == view_RightUp) && ((self->button & RIGHT) == 0)))
+    if (((action == view::LeftMovement || action == view::LeftUp) && ((self->button & LEFT) == 0)) || ((action == view::RightMovement || action == view::RightUp) && ((self->button & RIGHT) == 0)))
 	return (class view *)self;
 
     if (self->side != -1) {
@@ -1838,7 +1838,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseActio
 	coord = logicalPos - logicalTop;
     }
 
-    if (action == view_LeftMovement || action == view_RightMovement) {
+    if (action == view::LeftMovement || action == view::RightMovement) {
 	endzones = (cur->endzones ? self->endzoneLength : 0) + self->endbarSpace;
 
 	switch (self->thumbing) {
@@ -1997,7 +1997,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseActio
     return (class view *)self;
 }
 
-static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static class view *motif_scroll__Hit(class oscroll  *self, enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     int posn = 0, status, side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
@@ -2005,7 +2005,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
     long logicalTop = 0, logicalHeight = 0, logicalPos = 0;
     static int last_hit_side = 0;
 
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	if (self->button != NEITHER)
 	    /* We already are dealing with the other button. */
 	    return (class view *)self;
@@ -2019,7 +2019,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
 					   y - self->top, num_clicks);
 	    return retval;
 	}
-	else if (action == view_RightDown)
+	else if (action == view::RightDown)
 	    return (class view *)self;
 
 	else if (x < self->left && (self->current.location & scroll_LEFT)) {
@@ -2095,7 +2095,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
 
 		self->side = side;
 
-		if (action == view_LeftDown)
+		if (action == view::LeftDown)
 		    self->button = LEFT;
 		else
 		    self->button = RIGHT;
@@ -2116,7 +2116,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
     }
 
     /* Assure that we have the correct button */
-    if (((action == view_LeftMovement || action == view_LeftUp) &&
+    if (((action == view::LeftMovement || action == view::LeftUp) &&
 	  ((self->button & LEFT) == 0)))
 	return (class view *)self;
 
@@ -2137,7 +2137,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
 	coord = logicalPos - logicalTop;
     }
 
-    if (action == view_LeftMovement) {
+    if (action == view::LeftMovement) {
 	endzones = (cur->endzones ? self->endzoneLength : 0);
 
 	switch (self->thumbing) {
@@ -2297,8 +2297,8 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
 	}
     }
 
-    if (self->button == LEFT && (action == view_LeftDown ||
-				  action == view_LeftMovement))
+    if (self->button == LEFT && (action == view::LeftDown ||
+				  action == view::LeftMovement))
 	set_frame(self, self->side, what_is_at(self, self->side,
 					       self->hitcoord), 0);
     else if (self->button == RIGHT)
@@ -2310,7 +2310,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction
     return (class view *)self;
 }
 
-class view *oscroll::Hit(enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+class view *oscroll::Hit(enum view::MouseAction  action, long  x , long  y , long  num_clicks)
 {
     if(!emulation) {
 	/* NORMAL SCROLLBARS */

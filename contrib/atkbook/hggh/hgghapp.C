@@ -29,7 +29,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 ATKdefineRegistry(hgghapp, application, NULL);
-static void ToggleLpairViews(class hgghapp  *self, class lpair  *lp, class butt  *b, enum view_MouseAction  action);
+static void ToggleLpairViews(class hgghapp  *self, class lpair  *lp, class butt  *b, enum view::MouseAction  action);
 
 
 hgghapp::hgghapp()
@@ -75,11 +75,11 @@ boolean hgghapp::Start()
     return(TRUE);
 }
 
-static void ToggleLpairViews(class hgghapp  *self, class lpair  *lp, class butt  *b, enum view_MouseAction  action)
+static void ToggleLpairViews(class hgghapp  *self, class lpair  *lp, class butt  *b, enum view::MouseAction  action)
 {
     class view *v1, *v2;
 
-    if (action == view_LeftDown || action == view_RightDown) {
+    if (action == view::LeftDown || action == view::RightDown) {
 	v1 = (lp)->GetNth( 0);
 	v2 = (lp)->GetNth( 1);
 	(lp)->SetNth( 0, v2);

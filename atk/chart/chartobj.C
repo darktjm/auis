@@ -184,10 +184,10 @@ static boolean chartobj_debug = 0;
 #define  DashedGraphic		(self->dashed_graphic)
 #define  DashedIcon		('5')
 
-#define  RightTop		(view_ATRIGHT | view_ATTOP)
-#define  RightBottom		(view_ATRIGHT | view_ATBOTTOM)
-#define  RightMiddle		(view_ATRIGHT | view_BETWEENTOPANDBOTTOM)
-#define  Balanced	        (view_BETWEENLEFTANDRIGHT | view_BETWEENTOPANDBOTTOM)
+#define  RightTop		(graphic::ATRIGHT | graphic::ATTOP)
+#define  RightBottom		(graphic::ATRIGHT | graphic::ATBOTTOM)
+#define  RightMiddle		(graphic::ATRIGHT | graphic::BETWEENTOPANDBOTTOM)
+#define  Balanced	        (graphic::BETWEENLEFTANDRIGHT | graphic::BETWEENTOPANDBOTTOM)
 
 #define  ScalesSuppressed	(self->suppress_scales)
 #define  LabelsSuppressed	(self->suppress_labels)
@@ -278,7 +278,7 @@ chartobj::ObservedChanged( class observable	      *changed, long			       value 
       break;
     }
   (this )->ClearBody( );
-  (this)->FullUpdate(  view_FullRedraw, Left, Top, Width, Height );
+  (this)->FullUpdate(  view::FullRedraw, Left, Top, Width, Height );
   OUT(chartobj_ObservedChanged);
   }
 
@@ -333,7 +333,7 @@ chartobj::Moniker( )
   }
 
 void 
-chartobj::FullUpdate( enum view_UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
+chartobj::FullUpdate( enum view::UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
         {
   class chartobj *self=this;
   char				  value_string[25];
@@ -342,7 +342,7 @@ chartobj::FullUpdate( enum view_UpdateType	   type, long			   left , long			   t
   IN(chartobj_FullUpdate);
   (this)->aptv::FullUpdate(  type, left, top, width, height );
   if ( ! (this)->BypassUpdate()  &&  Height > 0  &&
-	(type == view_FullRedraw || type == view_LastPartialRedraw) )
+	(type == view::FullRedraw || type == view::LastPartialRedraw) )
     { DEBUG(Not Bypassed);
     ChartLeft = Left;  ChartTop = Top;  ChartWidth = Width;  ChartHeight = Height;
     Generate_Shadows( this );
@@ -481,7 +481,7 @@ chartobj::DrawChart( )
   }
 
 class view *
-chartobj::Hit( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
+chartobj::Hit( enum view::MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class view		     *hit;
 
@@ -493,7 +493,7 @@ chartobj::Hit( enum view_MouseAction       action, long			       x , long			    
   }
 
 class view *
-chartobj::HitChart( enum view_MouseAction     action, long			     x , long			     y , long			     clicks )
+chartobj::HitChart( enum view::MouseAction     action, long			     x , long			     y , long			     clicks )
         {
   class chartobj *self=this;
   static struct chart_item_shadow  *shadow;
@@ -503,16 +503,16 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 
   IN(chartobj_HitChart);
   if ( shadow  ||
-	 (action == view_LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
+	 (action == view::LeftDown  &&  (shadow = (this)->WhichItem(  x, y ))) )
     {
     CURRENTITEM = shadow->item;
     if ( y > Bottom )	y = Bottom;
     if ( y < Top )	y = Top;
     switch ( action )
       {
-      case  view_LeftDown:
+      case  view::LeftDown:
 	(this )->UseInvisibleCursor( );
-        (this)->SetTransferMode(  graphic_INVERT );
+        (this)->SetTransferMode(  graphic::INVERT );
 	initial_y = y;
 	y = ShadowMiddle(shadow);
 	(this)->MoveTo(  Left, prior_y = y );
@@ -521,7 +521,7 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 	value = value_original = (Chart)->ItemAttribute(  shadow->item, chart_itemvalue );
 	DEBUGdt(Initial-value,value);
         break;
-      case  view_LeftMovement:
+      case  view::LeftMovement:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( abs(delta = prior_y - y) > PIXELSPERINTERVAL )
@@ -529,7 +529,7 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 	(this)->MoveTo(  Left, prior_y = y );
 	(this)->DrawLineTo(  Right, y );
         break;
-      case  view_LeftUp:
+      case  view::LeftUp:
 	(this)->MoveTo(  Left, prior_y );
 	(this)->DrawLineTo(  Right, prior_y );
 	if ( abs(delta = initial_y - y) > PIXELSPERINTERVAL )
@@ -720,9 +720,9 @@ void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long w
   short		  x, x_increment, y, excess, fudge, i = 0;
 
   IN(Draw_Horizontal_Labels);
-  (self)->SetTransferMode(  graphic_WHITE );
-  (self)->FillRectSize(  left, top, width, height, graphic_WHITE );
-  (self)->SetTransferMode(  graphic_BLACK );
+  (self)->SetTransferMode(  graphic::WHITE );
+  (self)->FillRectSize(  left, top, width, height, graphic::WHITE );
+  (self)->SetTransferMode(  graphic::BLACK );
   if ( (Chart )->ItemCount( ) )
     {
     x_increment = width / (Chart )->ItemCount( );
@@ -774,22 +774,22 @@ void Draw_Left_Scale( class chartobj	  *self )
 
   IN(Draw_Left_Scale); /*=== NEEDS WORK ===*/
   Prepare_Vertical_Scale( self );
-  (self)->SetTransferMode(  graphic_WHITE );
+  (self)->SetTransferMode(  graphic::WHITE );
   (self)->FillRectSize(  LeftScaleLeft,  LeftScaleTop,
-			       LeftScaleWidth, LeftScaleHeight, graphic_WHITE );
-  (self)->SetTransferMode(  graphic_COPY );
+			       LeftScaleWidth, LeftScaleHeight, graphic::WHITE );
+  (self)->SetTransferMode(  graphic::COPY );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleBarX, LeftScaleBottom );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleTop );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleBottom );
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleBottom );
-  (self)->SetLineDash(  "\001\004", 0, graphic_LineOnOffDash);
+  (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
   (self)->MoveTo(  LeftScaleRight, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleRight+ChartWidth, LeftScaleTop );
   (self)->MoveTo(  LeftScaleRight, LeftScaleBottom );
   (self)->DrawLineTo(  LeftScaleRight+ChartWidth, LeftScaleBottom );
-  (self)->SetLineDash(  NULL, 0, graphic_LineSolid);
+  (self)->SetLineDash(  NULL, 0, graphic::LineSolid);
   if ( (ScaleTick > 0) && (adjust = (value = (Chart)->ItemValueLeast()) % ScaleTick ) )
     value -= ScaleTick + adjust;
   sprintf( value_string, "%ld", value );
@@ -810,10 +810,10 @@ void Draw_Left_Scale( class chartobj	  *self )
       {
       (self)->MoveTo(  LeftScaleBarX, Y );
       (self)->DrawLineTo(  LeftScaleRight, Y );
-      (self)->SetLineDash(  "\001\004", 0, graphic_LineOnOffDash);
+      (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
       (self)->MoveTo(  LeftScaleRight, Y );
       (self)->DrawLineTo(  LeftScaleRight+ChartWidth, Y );
-      (self)->SetLineDash(  NULL, 0, graphic_LineSolid);
+      (self)->SetLineDash(  NULL, 0, graphic::LineSolid);
       (self)->MoveTo(  LeftScaleBarX, Y + half_y_increment );
       (self)->DrawLineTo(  LeftScaleRight - 5, Y + half_y_increment );
       value -= ScaleTick;

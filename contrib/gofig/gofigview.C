@@ -305,7 +305,7 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 	int lthick = self->linethickness;
 	int diam = 2*radius + ((lthick&1) ? 1 : 0);
 	long dpycls = (self)->DisplayClass();
-	boolean colordpy = (dpycls & graphic_Color) != 0;
+	boolean colordpy = (dpycls & graphic::Color) != 0;
 	double fgr, fgg, fgb;
 
 	if (colordpy)
@@ -326,18 +326,18 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 				+ (atrowcol( self, s->row+1, s->col ) ? 1 : 0);
 		/* draw background (yellow, if possible) */
 		if ( ! colordpy) {
-			self->SetTransferMode( graphic_WHITE );
+			self->SetTransferMode( graphic::WHITE );
 			self->FillRectSize( left, top, width, height, NULL );
 		}
 		else  { 
 			self->SetForegroundColor( self->boardcolor );
-			self->SetTransferMode( graphic_COPY );
+			self->SetTransferMode( graphic::COPY );
 			self->FillRectSize( left, top, width, height, NULL );
 			self->SetFGColor( fgr, fgg, fgb );
 		}
 		/* draw vertical */
 		int startend, stopend;
-		self->SetTransferMode( graphic_BLACK );
+		self->SetTransferMode( graphic::BLACK );
 		self->SetLineWidth( lthick );
 		startend = (s->row == 0) ? topend(self) : y-radius ;
 		stopend = (s->row == dobj->height-1) ? bottomend(self) 
@@ -373,26 +373,26 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 	case 'B':
 		if (isselected && self->HasInputFocus) {
 			/* draw circle in white to get white rim */
-			(self)->SetTransferMode( graphic_WHITE );
+			(self)->SetTransferMode( graphic::WHITE );
 			(self)->FillOvalSize( 
 				x - radius - lthick/2, y - radius - lthick/2, 
 				diam, diam, NULL );
 			trad = radius - lthick;
 			tdiam = diam - 2*lthick;
 		}
-		self->SetTransferMode( graphic_BLACK );
+		self->SetTransferMode( graphic::BLACK );
 		(self)->FillOvalSize( x - trad - lthick/2, 
 			y - trad - lthick/2, tdiam, tdiam, NULL );
 		break;
 	case 'W':
 		if ( ! colordpy) {
-			self->SetTransferMode( graphic_WHITE );
+			self->SetTransferMode( graphic::WHITE );
 			(self)->FillOvalSize( x - radius - lthick/2, 
 				y - radius - lthick/2, diam, diam, NULL );
 		}
 		else {
 			self->SetForegroundColor("White", 0xFFFF, 0xFFFF, 0xFFFF);
-			self->SetTransferMode( graphic_COPY );
+			self->SetTransferMode( graphic::COPY );
 			(self)->FillOvalSize( x - radius - lthick/2, 
 				y - radius - lthick/2, diam, diam, NULL );
 			self->SetFGColor( fgr, fgg, fgb );
@@ -410,13 +410,13 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 		
 		if (trad == 0) {}
 		else if ( ! colordpy) {
-			self->SetTransferMode( graphic_WHITE );
+			self->SetTransferMode( graphic::WHITE );
 			(self)->FillOvalSize( x - trad - lthick/2, 
 				y - trad - lthick/2, tdiam, tdiam, NULL );
 		}
 		else  {
 			self->SetForegroundColor( self->boardcolor );
-			self->SetTransferMode( graphic_COPY );
+			self->SetTransferMode( graphic::COPY );
 			(self)->FillOvalSize( x - trad - lthick/2, 
 				y - trad - lthick/2, tdiam, tdiam, NULL );
 			self->SetFGColor( fgr, fgg, fgb );
@@ -429,9 +429,9 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 
 	/* draw annotation in contrasting color */
 	if (s->color != 'B')
-		self->SetTransferMode( graphic_BLACK );
+		self->SetTransferMode( graphic::BLACK );
 	else	/* white on black */
-		self->SetTransferMode( graphic_WHITE );
+		self->SetTransferMode( graphic::WHITE );
 	self->SetLineWidth( 2*lthick );
 	trad = mytrunc( radius * .7 );
 	if (s->note == 0) {}
@@ -445,8 +445,8 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 		self->SetFont( self->notefont );
 		self->MoveTo( x, y );
 		self->DrawString( buf,
-			graphic_BETWEENLEFTANDRIGHT 
-				 |  graphic_BETWEENTOPANDBOTTOM );
+			graphic::BETWEENLEFTANDRIGHT 
+				 |  graphic::BETWEENTOPANDBOTTOM );
 		break;
 	case '%':		/* diagonal cross */
 		delta = mytrunc( trad/1.414 + 0.5 );
@@ -513,7 +513,7 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 	}
 
 	/* draw border in black */
-	self->SetTransferMode( graphic_BLACK );
+	self->SetTransferMode( graphic::BLACK );
 	self->SetLineWidth( lthick );
 	if (isselected && self->HasInputFocus) {
 		/* dotted border for the selected spot */
@@ -524,10 +524,10 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 		dotted[0] = 2*lthick;
 		dotted[1] = 2*lthick;
 		dotted[2] = '\0';
-		self->SetLineDash(dotted, 0, graphic_LineOnOffDash );
+		self->SetLineDash(dotted, 0, graphic::LineOnOffDash );
 		(self)->DrawOvalSize(  x - radius, y - radius,
 				diam-lthick, diam-lthick );
-		self->SetLineDash(dotted, 0, graphic_LineSolid );
+		self->SetLineDash(dotted, 0, graphic::LineSolid );
 	}
 	else if (s->color == 'W') {
 		(self)->DrawOvalSize(  x - radius, y - radius, 
@@ -548,7 +548,7 @@ RedrawView(gofigview  *self) {
 	int left, top, vwidth, vheight;
 	gofig *dobj = (gofig *)self->dataobject;
 	long dpycls = (self)->DisplayClass();
-	boolean colordpy = (dpycls & graphic_Color) != 0;
+	boolean colordpy = (dpycls & graphic::Color) != 0;
 	unsigned edges;
 	dobj->getedges( &edges );
 	double fgr, fgg, fgb;
@@ -564,12 +564,12 @@ RedrawView(gofigview  *self) {
 
 		/* draw background (yellow, if possible) */
 		if ( ! colordpy) {
-			self->SetTransferMode( graphic_WHITE );
+			self->SetTransferMode( graphic::WHITE );
 			self->FillRectSize( left, top, vwidth, vheight, NULL );
 		}
 		else  { 
 			self->SetForegroundColor( self->boardcolor );
-			self->SetTransferMode( graphic_COPY );
+			self->SetTransferMode( graphic::COPY );
 			self->FillRectSize( left, top, vwidth, vheight, NULL );
 			self->SetFGColor( fgr, fgg, fgb );
 		}
@@ -615,7 +615,7 @@ RedrawView(gofigview  *self) {
 		int i, j;
 		int startend, stopend;
 		/* draw verticals */
-		self->SetTransferMode( graphic_BLACK );
+		self->SetTransferMode( graphic::BLACK );
 		self->SetLineWidth( self->linethickness );
 		startend = topend( self );
 		stopend = bottomend( self );
@@ -721,12 +721,12 @@ RedrawView(gofigview  *self) {
 				sprintf( buf, "%d", i);
 				self->MoveTo( leftx, y );
 				self->DrawString( buf,
-					graphic_BETWEENLEFTANDRIGHT 
-					|  graphic_BETWEENTOPANDBOTTOM );
+					graphic::BETWEENLEFTANDRIGHT 
+					|  graphic::BETWEENTOPANDBOTTOM );
 				self->MoveTo( rightx, y );
 				self->DrawString( buf,
-					graphic_BETWEENLEFTANDRIGHT 
-					|  graphic_BETWEENTOPANDBOTTOM );
+					graphic::BETWEENLEFTANDRIGHT 
+					|  graphic::BETWEENTOPANDBOTTOM );
 			}
 
 			/* display indices at top and bottom */
@@ -742,12 +742,12 @@ RedrawView(gofigview  *self) {
 				buf[0] = indexletters[i];
 				self->MoveTo( x, topy );
 				self->DrawString( buf,
-					graphic_BETWEENLEFTANDRIGHT 
-					|  graphic_BETWEENTOPANDBOTTOM );
+					graphic::BETWEENLEFTANDRIGHT 
+					|  graphic::BETWEENTOPANDBOTTOM );
 				self->MoveTo( x, bottomy );
 				self->DrawString( buf,
-					graphic_BETWEENLEFTANDRIGHT 
-					|  graphic_BETWEENTOPANDBOTTOM );
+					graphic::BETWEENLEFTANDRIGHT 
+					|  graphic::BETWEENTOPANDBOTTOM );
 			}
 		}
 
@@ -1072,7 +1072,7 @@ SetPrintSize(gofigview *self, int code) {
 	double newcolwidth;
 
 	long wpts, hpts;
-	self->DesiredPrintSize( pagew, pageh, view_NoSet, &wpts, &hpts );
+	self->DesiredPrintSize( pagew, pageh, view::NoSet, &wpts, &hpts );
 	sprintf( prompt, "With spacing %0.3f, prints %0.1f by %0.1f inches.  %s", 
 			dobj->printcolwidth/1000.0,
 			wpts/72.0, hpts/72.0, 
@@ -1091,7 +1091,7 @@ SetPrintSize(gofigview *self, int code) {
 
 	dobj->printcolwidth = mytrunc( newcolwidth * 1000.0 );
 
-	self->DesiredPrintSize( pagew, pageh, view_NoSet, &wpts, &hpts );
+	self->DesiredPrintSize( pagew, pageh, view::NoSet, &wpts, &hpts );
 	sprintf( prompt, "Now prints %0.1f by %0.1f inches", wpts/72.0, hpts/72.0 );
 	message::DisplayString( NULL, 0, prompt );
 }
@@ -1467,19 +1467,19 @@ gofigview::LoseInputFocus() {
 	case the 'type' is a PartialRedraw;  they specify which part to update.)
 */
 	void 
-gofigview::FullUpdate(enum view_UpdateType   type, 
+gofigview::FullUpdate(enum view::UpdateType   type, 
 		long   left , long   top , long   width , long   height) {
 	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", type, 
 		left, top, width, height));
-	if (type == view_Remove  
+	if (type == view::Remove  
 			||  GetLogicalWidth() == 0 
 			|| GetLogicalHeight() == 0) {
-		/* view_Remove means the view has left the screen.
+		/* view::Remove means the view has left the screen.
 			A zero dimension means the view is not visible */
 		OnScreen = FALSE;
 		return;
 	}
-	if (type != view_FullRedraw && type != view_LastPartialRedraw)
+	if (type != view::FullRedraw && type != view::LastPartialRedraw)
 		return;
 	/* we continue only for a FullRedraw or 
 		the last of a sequence of PartialRedraw requests.  */
@@ -1506,12 +1506,12 @@ gofigview::Update() {
 }
 
 	view *
-gofigview::Hit(enum view_MouseAction   action, 
+gofigview::Hit(enum view::MouseAction   action, 
 			long   x , long   y , long   num_clicks) {
 	gofig *dobj = (gofig *)dataobject;
 	boolean newselection = FALSE;
 	DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (view *)this;
 	if (! OnScreen) return NULL;
 
@@ -1544,8 +1544,8 @@ gofigview::Hit(enum view_MouseAction   action,
 			either button merely selects the down spot */
 		WantInputFocus( this );
 	}
-	else if (action == view_RightDown) { /* selection already moved */}
-	else if (action == view_LeftDown) {
+	else if (action == view::RightDown) { /* selection already moved */}
+	else if (action == view::LeftDown) {
 		/* save conditions at time of mouse down */
 		if (where != NULL) 
 			stonewheredown = *where;
@@ -1621,8 +1621,8 @@ gofigview::Hit(enum view_MouseAction   action,
 	return (view *)this;
 }
 
-	view_DSattributes
-gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass, 
+	view::DSattributes
+gofigview::DesiredSize(long  width, long  height, enum view::DSpass  pass, 
 			long  *desiredWidth, long  *desiredHeight) {
 	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 	gofig *dobj = (gofig *)dataobject;
@@ -1632,13 +1632,13 @@ gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 	double colwidth;
 	int hres = GetHorizontalResolution(), vres = GetVerticalResolution();
 
-	if (pass == view_NoSet) {
+	if (pass == view::NoSet) {
 		colwidth  = dobj->printcolwidth * hres / 72000.0 
 				* SCREENEXPAND;
 	}
-	else if (pass == view_WidthSet) 
+	else if (pass == view::WidthSet) 
 		colwidth = width / (dobj->width + addinx);
-	else /* pass == view_HeightSet */ 
+	else /* pass == view::HeightSet */ 
 		colwidth = WTOHRATIO * height * hres 
 			/ (vres * (dobj->height + addinx));
 
@@ -1647,7 +1647,7 @@ gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 				/ (WTOHRATIO * hres) );
 	DEBUG(("Leave DesiredSize: %ld x %ld\n", 
 			*desiredWidth, *desiredHeight));
-	return view_HeightFlexible | view_WidthFlexible;
+	return view::HeightFlexible | view::WidthFlexible;
 }
 
 /* # # # # # # # # # # # # # # 
@@ -2046,7 +2046,7 @@ GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, int wpts, int hp
 
 
 	void
-gofigview::DesiredPrintSize(long width, long height, enum view_DSpass pass,
+gofigview::DesiredPrintSize(long width, long height, enum view::DSpass pass,
 		long *desiredwidth, long *desiredheight) {
 
 	gofig *dobj = (gofig *)dataobject;
@@ -2058,11 +2058,11 @@ gofigview::DesiredPrintSize(long width, long height, enum view_DSpass pass,
 	/* the dtransform/idtransform hack can EXPAND the pixel size,
 		so we need an additional half pixel per row or column */
 	float indexadd = ((edges&INDICESedge) ? 2.0*INDEXFRAC : 0.0);
-	if (pass == view_NoSet) 
+	if (pass == view::NoSet) 
 		colwidth  = dobj->printcolwidth / 1000.0 + 0.5;
-	else if (pass == view_WidthSet) 
+	else if (pass == view::WidthSet) 
 		colwidth = width / (dobj->width + indexadd) - 0.5;
-	else /* pass == view_HeightSet */ 
+	else /* pass == view::HeightSet */ 
 		colwidth = WTOHRATIO * height / (dobj->height +indexadd) - 0.5;
 
 	wpts = mytrunc( colwidth * (dobj->width + indexadd) );
@@ -2113,7 +2113,7 @@ gofigview::PrintPSDoc(FILE *outfile, long pagew, long pageh) {
 	registerdefs( this );
 	print::PSNewPage(1);
 
-	DesiredPrintSize(pagew, pageh, view_NoSet, &dw, &dh);
+	DesiredPrintSize(pagew, pageh, view::NoSet, &dw, &dh);
 	fprintf(outfile, "%ld %ld translate\n",  (pagew-dw)/2, (pageh-dh)/2);
 
 	GeneratePostScript(outfile, (gofig *)dataobject, "", dw, dh);
@@ -2125,7 +2125,7 @@ gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boo
 
 	/* compute size */
 	long wpts, hpts;
-	DesiredPrintSize(pagew, pageh, view_NoSet, &wpts, &hpts);
+	DesiredPrintSize(pagew, pageh, view::NoSet, &wpts, &hpts);
 
 	/* generate preface and prefix */
 	const char *prefix;

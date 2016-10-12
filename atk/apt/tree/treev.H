@@ -137,7 +137,7 @@ struct  treev_specification
 
 class treev;
 
-typedef class view *(*treev_hitfptr)(class view *anchor, class treev *self, struct tree_node *node, int t, view_MouseAction act, long x, long y, long clicks);
+typedef class view *(*treev_hitfptr)(class view *anchor, class treev *self, struct tree_node *node, int t, view::MouseAction act, long x, long y, long clicks);
 typedef void (*treev_updatefptr)(class treev *self);
 class treev : public  aptv
   {
@@ -147,18 +147,17 @@ public:
 
 
    void SetDataObject( class dataobject *data );
-   view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, long *dWidth, long *dheight )
+   view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dWidth, long *dheight )
 								 ;
-   void FullUpdate( enum view_UpdateType type, long left, long top, long width, long height );
+   void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    void Update();
    void ObservedChanged( class observable *changed, long value );
-   class view * Hit( enum view_MouseAction action, long x, long y, long n)	 ;
+   class view * Hit( enum view::MouseAction action, long x, long y, long n)	 ;
    void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
    class view * GetApplicationLayer()						 ;
    const void * GetInterface( const char *interface_name )				 ;
 
    void LinkTree( class view *parent );
-   void UnlinkTree();
 
 
 

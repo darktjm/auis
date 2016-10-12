@@ -26,10 +26,10 @@ public:
     inline void SetData(class dataobject *d) { (this->t=(class dataobject *)d); }
 
      void LinkTree(class view *parent);
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void Update();
-     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
+     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
      void GetOrigin(long width, long height, long *originX, long *originY);
      void WantInputFocus(class view *requestor);
      void InitChildren();

@@ -9,14 +9,17 @@
  * @{ */
 #include <ATK.H>
 
-/** The atom class exists to provide convenient handles for strings.
- *  If you try to create two atoms having the same name, the atom package
+/** This class exists to provide convenient handles for strings.
+ *  If you try to create two atoms having the same name, the \ref atom package
  *  will simply return the same atom for both calls.  Given this invariant,
- *  that calling atom_Intern with the same string twice will result in the
+ *  that calling Intern() with the same string twice will result in the
  *  same pointer being returned, one can build a very fast string
  *  comparison routine by storing and searching atoms instead of strings.
  *  In fact, just replacing string pointers with the result from Name()
- *  on an atom of the string, like so: s = atom::Intern(s)->Name();
+ *  on an atom of the string, like so:
+ *  \qcode
+ *    s = atom::Intern(s)->Name();
+ *  \endqcode
  *  gives the same benefits.
  *
  * Note that this is only effective if you reference a string many times

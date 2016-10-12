@@ -50,7 +50,7 @@ union actionu {
 	struct action *keys, *keypos;
     } proc;
     struct actionu2 {
-	enum view_MouseAction action;
+	enum view::MouseAction action;
 	long x;
 	long y;
 	long newButtonState;
@@ -88,7 +88,7 @@ struct im_ArgState {
 enum im_keyecho_t {im_KeyEchoOff, im_KeyEchoPending, im_KeyEchoDisplayed};
 
 	typedef void (*im_keyfptr)(class im  *self, long  key);
-	typedef void (*im_mousefptr)(class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
+	typedef void (*im_mousefptr)(class im  *self, enum view::MouseAction  act, long  x, long  y, long  newButtonState);
 	typedef void (*im_menufptr)(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 	typedef void (*im_signalfptr)(int i, char *d);
 	typedef void (*im_filefptr)(FILE *fp, char *d);
@@ -122,10 +122,10 @@ public:
 		      class atomlist * name,
 		      class atomlist * className );		      
      void UnlinkNotification(class view *unlinkedTree);
-     class view * Hit (enum view_MouseAction action, long x, long y, long clicks)  ;
+     class view * Hit (enum view::MouseAction action, long x, long y, long clicks)  ;
      void ObservedChanged(class observable *changed, long value);
-     boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-     boolean RecSrchResume(struct SearchPattern *pat);
+     boolean RecSearch(class search *pat, boolean toplevel);
+     boolean RecSrchResume(class search *pat);
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit); 
   
@@ -139,7 +139,7 @@ public:
     virtual class im * DoKey(long key)  ; /* Simulates typing of key on window. */
     virtual void DoKeySequence(char *keys);  /* simulates typing string */
     virtual class im * HandleMenu(struct proctable_Entry *procTableEntry, ATK  *object, long rock)  ;
-    virtual class im * HandleMouse(enum view_MouseAction action, long x, long y, long newButtonState)  ;
+    virtual class im * HandleMouse(enum view::MouseAction action, long x, long y, long newButtonState)  ;
     virtual void DoMacro();
     virtual void DoMenu(char *itemname);
 
@@ -345,7 +345,7 @@ public:
     enum im_EventType lastEvent;
     long lastX;
     long lastY;
-    enum view_MouseAction lastMouseDown;
+    enum view::MouseAction lastMouseDown;
     long clickCount;
     struct im_ArgState argState;	/* structure for maintaining argument info */
     long lastCommand;

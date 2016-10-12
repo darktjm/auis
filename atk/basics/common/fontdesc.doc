@@ -21,7 +21,7 @@ attr:[FontFace Italic Int Set]}
 
 When the graphic package handles text, it uses a default font, 
 \italic{AndySans12}.  If you wish to use a different font, you must call 
-\italic{graphic_SetFont} and specify the font you want by giving its font 
+\italic{graphic::SetFont} and specify the font you want by giving its font 
 descriptor.  The \italic{fontdesc} package provides methods and class 
 procedures for creating font descriptors that you need to access the Andrew 
 font library. 

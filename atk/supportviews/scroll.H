@@ -68,22 +68,22 @@ class scroll : public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();
   
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void Update();
-     class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void WantUpdate(class view *requestor);
      void LinkTree(class view *parent);
      void UnlinkNotification(class view *unlinkedTree);
-     boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-     boolean RecSrchResume(struct SearchPattern *pat);
+     boolean RecSearch(class search *pat, boolean toplevel);
+     boolean RecSrchResume(class search *pat);
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
      void PrintPSDoc(FILE *outfile, long pagew, long pageh);
      void *GetPSPrintInterface(const char *printtype);
-     void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+     void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
      void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
     void GetPrintOrigin(long w, long h, long *xoff, long *yoff);
-    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long * desired_width, long * desired_height);
+    view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long * desired_width, long * desired_height);
     void GetOrigin(long width, long height, long * originX, long * originY);
 
   
@@ -194,7 +194,7 @@ public:
     struct rectangle botbutton[scroll_SIDES];
     boolean lastbuttonstate;
     long lastwidth, lastheight;
-    enum view_MouseAction lastaction;
+    enum view::MouseAction lastaction;
     double barbackground[3];
     double mattebackground[3];
     int mousestate; /* one of scroll_TOPENDZONE, scroll_BOTTOMENDZONE, scroll_REPEATING, scroll_THUMBING, scroll_MAYBETHUMBING, scroll_NOTHING */

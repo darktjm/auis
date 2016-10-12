@@ -16,7 +16,7 @@ class htmltextview: public textview {
     virtual ATKregistryEntry *ATKregistry();
 
     void SetDataObject(class dataobject *dataObject);
-    class view *Hit(enum view_MouseAction action, long x, long y, long numberOfClicks);
+    class view *Hit(enum view::MouseAction action, long x, long y, long numberOfClicks);
     void PostMenus(class menulist *menulist);
     void PostKeyState(class keystate *keystate);
     virtual boolean ConfirmReadOnly();

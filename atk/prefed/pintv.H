@@ -19,9 +19,9 @@ public:
 	virtual ~pintv();
 
 
-     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
      void SetDataObject(class dataobject *d);
-     class view * Hit(enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
+     class view * Hit(enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void WantInputFocus(class view *requestor);
      void WantUpdate(class view *requestor);
      void ObservedChanged(class observable *changed, long value);

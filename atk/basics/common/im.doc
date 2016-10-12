@@ -194,7 +194,7 @@ unsigned char *\paramname{itemname});}
 basicobject *\paramname{object}, long \paramname{rock});} 
 
 \fixedtext{struct im *\bold{im_}HandleMouse }\fixedindent{(struct im 
-*\paramname{im}, enum view_MouseAction \paramname{action}, long \paramname{x}, 
+*\paramname{im}, enum view::MouseAction \paramname{action}, long \paramname{x}, 
 long \paramname{y}, long \paramname{newButtonState});} 
 
 \fixedtext{void \bold{im_}HandleRedraw }\fixedindent{(struct im 
@@ -682,8 +682,8 @@ interaction manager, im.
 }
 \leftindent{\bold{Class procedure description. } \italic{im_ForceUpdate} 
 forces an update on all the windows and interfaces that have requested they be 
-redrawn via \italic{view_WantUpdate}, by calling the procedure\italic{ 
-view_Update}. 
+redrawn via \italic{view::WantUpdate}, by calling the procedure\italic{ 
+view::Update}. 
 
 
 \bold{Usage.} Normally, the views that have requested updates are not actually 
@@ -1428,7 +1428,7 @@ manager++Getting the last used manager} \indexi{ \italic{im_GetLastUsed}}
 manager (and associated window) can be used for such things as putting up a 
 dialog box in the window from which a particular interaction originated.  Most 
 of the time, a programmer has a view in hand whose interaction manager can be 
-obtained via view_GetIM, but on occasion a timer-based interaction will occur 
+obtained via view::GetIM, but on occasion a timer-based interaction will occur 
 (such as checkpointing all files) resulting in output to be displayed on a 
 "useful" window.  The last-used window is as good an approximation as any to a 
 "useful" window. 

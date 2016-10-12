@@ -55,7 +55,7 @@ should use frame_Create.  If you do use frame_New there are some other
 steps that you need to take in addition to linking the frame to its subview 
 (see frame_SetView) and to its parent interaction manager (see im_SetView). 
 You must post the default handler for this frame (see 
-view_PostDefaultHandler) so that the message package knows what msghandler 
+view::PostDefaultHandler) so that the message package knows what msghandler 
 to use for interacting with the user (default msghandler is "message").  As 
 well, if your application will map multiple windows (interaction managers) 
 and you do not override frame's Quit menu, you may want to specify how 

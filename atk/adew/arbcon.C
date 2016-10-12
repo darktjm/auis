@@ -73,7 +73,7 @@ static void SetNotice(const char  *str);
 static int appendlist(char  **lst,int  cnt,char  *str,int  TEST);
 static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name);
 static long findstring(class text  *txt,const char  *str);
-static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
+static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 static void NewWindow(const char  *filename,int  bflags,boolean  AddArb);
 static void arbcon_Create();
 static void addtypes(class cel  *cl);
@@ -288,7 +288,7 @@ static long findstring(class text  *txt,const char  *str)
     }
     return -1;
 }
-static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
+static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
 {   /* deal with clicks */
     char buf[512];
     int len;
@@ -300,7 +300,7 @@ static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *positi
     }
     *numberOfClicks = 1;
     len = *rightPos - *leftPos;
-    if(*action == view_LeftUp){	
+    if(*action == view::LeftUp){	
 	if(which == 0){
 	    if(len > 0){
 		(self->ArbCelList)->CopySubString(*leftPos, len,buf,FALSE);

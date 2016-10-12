@@ -132,11 +132,11 @@ static void freeQlist (struct action  *Q);
 static void freeQelt(struct action  *Q);
 static void pruneActions(class im  *im);
 static struct action * keyAction(class im  *im, long  k);
-static struct action * mouseAction(class im  *im, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
+static struct action * mouseAction(class im  *im, enum view::MouseAction  act, long  x, long  y, long  newButtonState);
 static struct action * menuAction(class im  *im, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static struct action * macroAction(class im  *im, struct action  *macro, struct action  *nextaction, long  remainingrepetitions);
 static void userKey(class im  *self, long  key);
-static void userMouse(class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
+static void userMouse(class im  *self, enum view::MouseAction  act, long  x, long  y, long  newButtonState);
 static void userMenu(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static struct action *ConsumeMacroEvent(struct action  *a);
 static struct action * GetNextInputEvent();
@@ -470,7 +470,7 @@ keyAction(class im  *im, long  k)
 	allocate an action block for a mouse hit
 */
 static	struct action *
-mouseAction(class im  *im, enum view_MouseAction  act, long  x, long  y, long  newButtonState)
+mouseAction(class im  *im, enum view::MouseAction  act, long  x, long  y, long  newButtonState)
 					{
 	struct action *a = newAction();
 	if (a == NULL) return NULL;
@@ -534,16 +534,16 @@ userKey(class im  *self, long  key)
 }
 
 	static void
-userMouse(class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState)
+userMouse(class im  *self, enum view::MouseAction  act, long  x, long  y, long  newButtonState)
 	{
 	struct action *a;
 	if(self==NULL) return;
 	if (self->LogFile != NULL) switch (act) {
-		case view_RightDown:
-		case view_LeftDown:
+		case view::RightDown:
+		case view::LeftDown:
 			WriteLogXY(self, log_MOUSEDOWN, x, y);    break;
-		case view_RightUp:
-		case view_LeftUp:
+		case view::RightUp:
+		case view::LeftUp:
 			WriteLogXY(self, log_MOUSEUP, x, y);    break;
 		default:
 			break;
@@ -1269,13 +1269,13 @@ im::HandleMenu(struct proctable_Entry  *procTableEntry, ATK   *object, long  roc
   for such things as override windows */
 
 class view *
-im::Hit (enum view_MouseAction  action, long  x , long  y , long  clicks)
+im::Hit (enum view::MouseAction  action, long  x , long  y , long  clicks)
 {
     return (this->topLevel)->Hit( action, x, y, clicks);
 }
 
 class im *
-im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButtonState)
+im::HandleMouse(enum view::MouseAction  action, long  x, long  y, long  newButtonState)
 					{
 	long dest = destroycount;
 
@@ -1288,7 +1288,7 @@ im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButton
 	    (this->keystate)->Reset();
 	}
 
-	if (this->topLevel != NULL && action != view_NoMouseEvent) {
+	if (this->topLevel != NULL && action != view::NoMouseEvent) {
 		if ((this->buttonState == im_AllUp 
 					&& newButtonState != im_AllUp)
 				|| this->mouseFocus == NULL)  {
@@ -1302,8 +1302,8 @@ im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButton
 					&& ((this->lastY + HITPIXELS) >= y));
 			if (closeHit)
 				this->clickCount += 1;
-			else if (action == view_LeftDown 
-						|| action == view_RightDown)  {
+			else if (action == view::LeftDown 
+						|| action == view::RightDown)  {
 				this->lastMouseDown = action;
 				this->clickCount = 1;
 				this->lastX = x;
@@ -1315,7 +1315,7 @@ im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButton
 			this->mouseFocus = (this)->Hit( action, x, y, 
 					this->clickCount);
 
-			if (action == view_UpMovement)
+			if (action == view::UpMovement)
 				this->mouseFocus = NULL;
 			else if (mouseFocus==NULL) {
 			    fprintf(stderr, "WARNING: mouseFocus==NULL.\n");
@@ -1539,7 +1539,7 @@ im::im()
     this->lastEvent = im_NoEvent;
     this->lastX = -1;
     this->lastY = -1;
-    this->lastMouseDown = view_NoMouseEvent;
+    this->lastMouseDown = view::NoMouseEvent;
     this->clickCount = 1;
     this->next = imList;
     imList = this;
@@ -1845,7 +1845,7 @@ void im::SetView(class view  *topLevel)
     this->keystate = this->imKeystate;
     this->lastX = -1;
     this->lastY = -1;
-    this->lastMouseDown = view_NoMouseEvent;
+    this->lastMouseDown = view::NoMouseEvent;
     this->clickCount = 1;
 
     this->topLevel = topLevel;
@@ -3743,7 +3743,7 @@ void im::UnlinkNotification(class view  *unlinkedTree)
         this->buttonState = im_AllUp;
         this->lastX = -1;
         this->lastY = -1;
-        this->lastMouseDown = view_NoMouseEvent;
+        this->lastMouseDown = view::NoMouseEvent;
         this->clickCount = 1;
     }
 
@@ -4219,14 +4219,14 @@ im::MoveWindow( int  x , int  y )
     return(FALSE);
 }
 
-boolean im::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean im::RecSearch(class search *pat, boolean toplevel)
 {
     if (this->topLevel)
 	return this->topLevel->RecSearch(pat, toplevel);
     return FALSE;
 }
 
-boolean im::RecSrchResume(struct SearchPattern *pat)
+boolean im::RecSrchResume(class search *pat)
 {
     if (this->topLevel) return this->topLevel->RecSrchResume(pat);
     return FALSE;

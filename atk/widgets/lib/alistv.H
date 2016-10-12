@@ -32,15 +32,15 @@ class AListvTextAct : public aaction {
 class AListv :public ATextv {
     friend class AListvTextviewStateFormula;
     AListvTextAct hitAct;
-    void TextHit(view_MouseAction act, long pos);
+    void TextHit(view::MouseAction act, long pos);
     AListvTextviewStateFormula listTextviewStateFormula;
     
     long firstInd;
     boolean toggleMode;
-    void SingleMode(view_MouseAction act, long ind);
-    void BrowseMode(view_MouseAction act, long ind);
-    void MultipleMode(view_MouseAction act, long ind);
-    void ExtendedMode(view_MouseAction act, long ind);
+    void SingleMode(view::MouseAction act, long ind);
+    void BrowseMode(view::MouseAction act, long ind);
+    void MultipleMode(view::MouseAction act, long ind);
+    void ExtendedMode(view::MouseAction act, long ind);
   public:
     ATKregistryEntry *ATKregistry();
     AListv();

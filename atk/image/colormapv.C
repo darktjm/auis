@@ -14,8 +14,8 @@ ATK_IMPL("colormapv.H")
 
 ATKdefineRegistry(colormapv, view, colormapv::InitializeClass);
 static long SliderChanged( long rock, long  inten );
-class view * Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-class view * Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
+class view * Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view::UpdateType  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
+class view * Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view::UpdateType  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
 
 
 static suite_Specification cmap_entries[] = {
@@ -135,7 +135,7 @@ SliderChanged( long rock, long  inten )
 }
 
 void
-colormapv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
+colormapv::FullUpdate( enum view::UpdateType  type, long  left , long  top , long  width , long  height )
       {
   struct rectangle r;
   class colormap *cmap = (class colormap*) (this)->GetDataObject();
@@ -193,9 +193,9 @@ colormapv::Update( )
 }
 
 class view *
-Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view::UpdateType  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if(item && action == view_LeftDown) {
+  if(item && action == view::LeftDown) {
       class suite *s = self->controlPanel;
       class color *c;
       unsigned short R, G, B;
@@ -224,9 +224,9 @@ Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *i
 }
 
 class view *
-Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view::UpdateType  type, enum view::MouseAction  action, long  x , long  y , long  clicks )
             {
-  if(item && action == view_LeftDown) {
+  if(item && action == view::LeftDown) {
       message::DisplayString(self, 0, (char *) ((suite)->ItemAttribute( item, suite_itemcaption )) );
   }
   return(NULL);
@@ -239,7 +239,7 @@ colormapv::PostMenus( class menulist  *menulist )
 }
 
 class view *
-colormapv::Hit( enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
+colormapv::Hit( enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
                     {
     return((class view *) (this->top)->Hit( action, x, y, numberOfClicks));
 }

@@ -55,8 +55,8 @@ public:
 	virtual ~bushv();
     static class bushv * Create( char object )  ;
   
-     void FullUpdate( enum view_UpdateType Type, long left, long top, long width, long height )  ;
-     class view * Hit( enum view_MouseAction action, long x, long y, long numberOfClicks )  ;
+     void FullUpdate( enum view::UpdateType Type, long left, long top, long width, long height )  ;
+     class view * Hit( enum view::MouseAction action, long x, long y, long numberOfClicks )  ;
      void PostMenus( class menulist *menulist )  ;
      void PostKeyState( class keystate *kstate )  ;
      void SetDataObject( class dataobject *bush )  ;

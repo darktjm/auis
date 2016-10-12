@@ -238,13 +238,13 @@ AWidgetView::LoseInputFocus() {
 }
 
 	static void
-UpdateBorder(AWidgetView *self, enum view_UpdateType type) {
+UpdateBorder(AWidgetView *self, enum view::UpdateType type) {
 	AWidget *dobj = (class AWidget *)self->GetDataObject();
 	AShadow *border = self->GetBorder();
 	struct rectangle r;
 	self->GetLogicalBounds(&r);
-	if(border && (type==view_FullRedraw 
-	    || type==view_LastPartialRedraw)) {
+	if(border && (type==view::FullRedraw 
+	    || type==view::LastPartialRedraw)) {
 		border->SetHighlighted(self->GetHasInputFocus());
 		border->SetSensitive(dobj->sensitive);
 		ASlot *selected = dobj->Get(slot_selected);
@@ -263,10 +263,10 @@ UpdateBorder(AWidgetView *self, enum view_UpdateType type) {
 /* FullUpdate(self, type, left, top, width, height)
 	Update and redraw part or all of the image.
 	(The last four arguments apply when 'type' is 
-	view_PartialRedraw;  they specify which part to update.)
+	view::PartialRedraw;  they specify which part to update.)
 */
 	void 
-AWidgetView::FullUpdate(enum view_UpdateType   type, 
+AWidgetView::FullUpdate(enum view::UpdateType   type, 
 			long left, long top, long width, long height)  {
 	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", 
 			type, left, top, width, height));
@@ -279,7 +279,7 @@ AWidgetView::FullUpdate(enum view_UpdateType   type,
 	void 
 AWidgetView::Update() {
 	ENTER(AWidgetView_Update);
-	if (border) UpdateBorder(this, view_FullRedraw);
+	if (border) UpdateBorder(this, view::FullRedraw);
 	updateRequested = FALSE;
 	LEAVE(AWidgetView_Update);
 }
@@ -297,11 +297,11 @@ void AWidgetView::SetDataObject(class dataobject *d) {
 }
 
 	class view *
-AWidgetView::Hit(enum view_MouseAction action, 
+AWidgetView::Hit(enum view::MouseAction action, 
 			long x, long y, long num_clicks) {
 	DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 	AWidget *dobj = (class AWidget *)GetDataObject();
-	if (action == view_NoMouseEvent)
+	if (action == view::NoMouseEvent)
 		return (class view *)this;
 
 	if ( ! (boolean)dobj->sensitive) return this;
@@ -312,7 +312,7 @@ AWidgetView::Hit(enum view_MouseAction action,
             long mx=physical_LogicalXToGlobalX(drawable, x);
             long my=physical_LogicalYToGlobalY(drawable, y);
             nf=(mouseFocus)->Hit( action,                          physical_GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical_GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
-            if(action==view_LeftUp || action==view_RightUp || action==view_UpMovement) nf=NULL;
+            if(action==view::LeftUp || action==view::RightUp || action==view::UpMovement) nf=NULL;
         } else {
             // see if hit is within the rectangle
             rectangle r, interior;
@@ -331,67 +331,67 @@ AWidgetView::Hit(enum view_MouseAction action,
 
             // take appropriate action
             switch (action) {
-                case view_LeftDown:
+                case view::LeftDown:
                     if (leftDown) 
                         // lost an up.  invent one
-                        Hit(view_LeftUp, x, y, 1);
+                        Hit(view::LeftUp, x, y, 1);
                     leftDown = TRUE;
                     (dobj->mouseLeftDown)(dobj, avalueflex() | this
                                           | xunits | yunits | (long)within | (long)action 
                                           | num_clicks, destview);
                     break;
-                case view_LeftMovement:
+                case view::LeftMovement:
                     if ( ! leftDown) 
                         // lost a down.  invent one
-                        Hit(view_LeftDown, x, y, 0);
+                        Hit(view::LeftDown, x, y, 0);
                     leftDown = TRUE;
                     (dobj->mouseLeftMove)(dobj, avalueflex() | this
                                           | xunits | yunits | (long)within | (long)action 
                                           | num_clicks, destview);
                     break;
-                case view_LeftUp:
+                case view::LeftUp:
                     if ( ! leftDown) 
                         // lost a down.  invent one
-                        Hit(view_LeftDown, x, y, 0);
+                        Hit(view::LeftDown, x, y, 0);
                     leftDown = FALSE;
                     (dobj->mouseLeftUp)(dobj, avalueflex() | this
                                         | xunits | yunits | (long)within | (long)action 
                                         | num_clicks, destview);
                     break;
-                case view_RightDown:
+                case view::RightDown:
                     if (rightDown) 
                         // lost an up.  invent one
-                        Hit(view_RightUp, x, y, 1);
+                        Hit(view::RightUp, x, y, 1);
                     rightDown = TRUE;
                     (dobj->mouseRightDown)(dobj, avalueflex() | this
                                            | xunits | yunits | (long)within | (long)action 
                                            | num_clicks, destview);
                     break;
-                case view_RightMovement:
+                case view::RightMovement:
                     if ( ! rightDown) 
                         // lost a down.  invent one
-                        Hit(view_RightDown, x, y, 0);
+                        Hit(view::RightDown, x, y, 0);
                     rightDown = TRUE;
                     (dobj->mouseRightMove)(dobj, avalueflex() | this
                                            | xunits | yunits | (long)within | (long)action 
                                            | num_clicks, destview);
                     break;
-                case view_RightUp:
+                case view::RightUp:
                     if ( ! rightDown) 
                         // lost a down.  invent one
-                        Hit(view_RightDown, x, y, 0);
+                        Hit(view::RightDown, x, y, 0);
                     rightDown = FALSE;
                     (dobj->mouseRightUp)(dobj, avalueflex() | this
                                          | xunits | yunits | (long)within | (long)action 
                                          | num_clicks, destview);
                     break;
-                case view_LeftFileDrop:
-                case view_MiddleFileDrop:
-                case view_RightFileDrop:
+                case view::LeftFileDrop:
+                case view::MiddleFileDrop:
+                case view::RightFileDrop:
                     // implement filedrops someday... XXX
                     break;
-		case view_UpMovement: /* tjm - unused */
-		case view_NoMouseEvent: /* tjm - unused */
+		case view::UpMovement: /* tjm - unused */
+		case view::NoMouseEvent: /* tjm - unused */
 		    break;
             }
 
@@ -407,7 +407,7 @@ AWidgetView::Hit(enum view_MouseAction action,
             if(mouseFocus) mouseFocus->RemoveObserver(this);
             mouseFocus=NULL;
             return nf;
-        } else if(nf!=mouseFocus && (action==view_LeftDown || action==view_RightDown || nf==NULL)) {
+        } else if(nf!=mouseFocus && (action==view::LeftDown || action==view::RightDown || nf==NULL)) {
             if(mouseFocus) mouseFocus->RemoveObserver(this);
             if(nf!=this) {
                 if(nf) nf->AddObserver(this);
@@ -418,9 +418,9 @@ AWidgetView::Hit(enum view_MouseAction action,
         return mouseFocus?mouseFocus:this;	// where to send subsequent hits
 }
 
-	view_DSattributes
+	view::DSattributes
 AWidgetView::DesiredSize(long  /* width */, long  /* height */, 
-			enum view_DSpass  /* pass */, 
+			enum view::DSpass  /* pass */, 
 			long  *dWidth, long  *dHeight)  {
 	class AWidget *dobj = (class AWidget *)GetDataObject();
 	aaction *computeViewSize;
@@ -498,7 +498,7 @@ AWidgetView::DesiredSize(long  /* width */, long  /* height */,
 	*dHeight = ToPixY(dobj->desiredHeight);
 	DEBUG(("Leave DesiredSize: %ld x %ld\n", 
 				*dWidth, *dHeight));
-	return view_Fixed;
+	return view::Fixed;
 }
 
 	void 
@@ -511,12 +511,12 @@ AWidgetView::GetOrigin(long /* width */, long height,
 
 
 	boolean
-AWidgetView::RecSearch(struct SearchPattern * , boolean ) {
+AWidgetView::RecSearch(class search * , boolean ) {
 	return FALSE;
 }
 
 	boolean
-AWidgetView::RecSrchResume(struct SearchPattern *) {
+AWidgetView::RecSrchResume(class search *) {
 	return FALSE;
 }
 

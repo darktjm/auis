@@ -82,11 +82,11 @@ void ScrollInterfaceClassic::ScreenDelta(long dx, long dy) {
 }
 
 static const struct scrollfns *fns=NULL;
-static void DoHorizEndZone(class view *vw, int typeEnd, enum view_MouseAction action) {
+static void DoHorizEndZone(class view *vw, int typeEnd, enum view::MouseAction action) {
     if(fns==NULL || fns->SetFrame==NULL || fns->GetInfo==NULL)  return;
     struct range total, seen, beg;
     fns->GetInfo(vw, &total, &seen, &beg);
-    if(action==view_LeftDown || action == view_RightDown) {
+    if(action==view::LeftDown || action == view::RightDown) {
 	if (typeEnd == scroll_TOPENDZONE)
 	    fns->SetFrame(vw, total.beg, 0, vw->GetLogicalWidth());
 	else
@@ -94,11 +94,11 @@ static void DoHorizEndZone(class view *vw, int typeEnd, enum view_MouseAction ac
     }
 }
 
-static void DoVertEndZone(class view *vw, int typeEnd, enum view_MouseAction action) {
+static void DoVertEndZone(class view *vw, int typeEnd, enum view::MouseAction action) {
     if(fns==NULL || fns->SetFrame==NULL || fns->GetInfo==NULL)  return;
     struct range total, seen, beg;
     fns->GetInfo(vw, &total, &seen, &beg);
-    if(action==view_LeftDown || action == view_RightDown) {
+    if(action==view::LeftDown || action == view::RightDown) {
 	if (typeEnd == scroll_TOPENDZONE)
 	    fns->SetFrame(vw, total.beg, 0, vw->GetLogicalHeight());
 	else
@@ -123,19 +123,19 @@ void ScrollInterfaceClassic::Shift(scroll_Direction dir) {
     switch(dir) {
 	case scroll_Up:
 	    ::fns=vert;
-	    if(vzone) vzone(vw, scroll_MOTIFTOPENDZONE, view_RightDown);
+	    if(vzone) vzone(vw, scroll_MOTIFTOPENDZONE, view::RightDown);
 	    break;
 	case scroll_Down:
 	    ::fns=vert;
-	    if(vzone) vzone(vw, scroll_MOTIFBOTTOMENDZONE, view_RightDown);
+	    if(vzone) vzone(vw, scroll_MOTIFBOTTOMENDZONE, view::RightDown);
 	    break;
 	case scroll_Left:
 	    ::fns=horiz;
-	    if(hzone) hzone(vw, scroll_MOTIFTOPENDZONE, view_RightDown);
+	    if(hzone) hzone(vw, scroll_MOTIFTOPENDZONE, view::RightDown);
 	    break;
 	case scroll_Right:
 	    ::fns=horiz;
-	    if(hzone) hzone(vw, scroll_MOTIFBOTTOMENDZONE, view_RightDown);
+	    if(hzone) hzone(vw, scroll_MOTIFBOTTOMENDZONE, view::RightDown);
 	    break;
 	case scroll_None:
 	    break;
@@ -158,19 +158,19 @@ void ScrollInterfaceClassic::Extreme(scroll_Direction dir) {
     switch(dir) {
 	case scroll_Up:
 	    ::fns=vert;
-	    if(vzone) vzone(vw, scroll_TOPENDZONE, view_LeftDown);
+	    if(vzone) vzone(vw, scroll_TOPENDZONE, view::LeftDown);
 	    break;
 	case scroll_Down:
 	    ::fns=vert;
-	    if(vzone) vzone(vw, scroll_BOTTOMENDZONE, view_LeftDown);
+	    if(vzone) vzone(vw, scroll_BOTTOMENDZONE, view::LeftDown);
 	    break;
 	case scroll_Left:
 	    ::fns=horiz;
-	    if(hzone) hzone(vw, scroll_TOPENDZONE, view_LeftDown);
+	    if(hzone) hzone(vw, scroll_TOPENDZONE, view::LeftDown);
 	    break;
 	case scroll_Right:
 	    ::fns=horiz;
-	    if(hzone) hzone(vw, scroll_BOTTOMENDZONE, view_LeftDown);
+	    if(hzone) hzone(vw, scroll_BOTTOMENDZONE, view::LeftDown);
 	    break;
 	case scroll_None:
 	    break;
@@ -216,7 +216,7 @@ ScrollRegionElevator::ScrollRegionElevator()  : ScrollRegion(scroll_Range) {
 ScrollRegionElevator::~ScrollRegionElevator() {
 }
 
-void ScrollRegion::Draw(class scroll &scroll, int stype,  view_UpdateType type, const struct rectangle &damaged) {
+void ScrollRegion::Draw(class scroll &scroll, int stype,  view::UpdateType type, const struct rectangle &damaged) {
     struct sbutton_info b;
     b.prefs=baseprefs;
     b.label="";
@@ -251,7 +251,7 @@ ScrollRegionEndzone::ScrollRegionEndzone()  : ScrollRegion(scroll_Endzone, FALSE
 ScrollRegionEndzone::~ScrollRegionEndzone() {
 }
 
-void ScrollRegionEndzone::Draw(class scroll &scroll, int stype, view_UpdateType type, const struct rectangle &damaged) {
+void ScrollRegionEndzone::Draw(class scroll &scroll, int stype, view::UpdateType type, const struct rectangle &damaged) {
     Update(scroll, stype);
 }
 

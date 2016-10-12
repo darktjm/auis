@@ -268,12 +268,12 @@ For example, the following is the new class declaration for the example class
 \programexample{
 class helloworldview[hellov] : view \{ overrides: 
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height); 
 
     Update(); 
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct helloworldview *; 
 
     ReceiveInputFocus(); 
@@ -654,12 +654,12 @@ class helloworldview[hellov]: view \{
 
 overrides:
 
-    FullUpdate(enum view_UpdateType type, long left, long top, long width, 
+    FullUpdate(enum view::UpdateType type, long left, long top, long width, 
 long height);
 
     Update();
 
-    Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) 
+    Hit (enum view::MouseAction action, long x, long y, long numberOfClicks) 
 returns struct view *;
 
     ReceiveInputFocus();
@@ -757,7 +757,7 @@ void helloworldview__FullUpdate(hwv, type, left, top, width, height)
 
 struct helloworldview *hwv;
 
-enum view_UpdateType type;
+enum view::UpdateType type;
 
 long left;
 
@@ -796,7 +796,7 @@ long height;
     \}
 
 
-    helloworldview_SetTransferMode(hwv, graphic_COPY);
+    helloworldview_SetTransferMode(hwv, graphic::COPY);
 
 
     if (hwv->blackOnWhite)
@@ -810,14 +810,14 @@ helloworldview_WhitePattern(hwv));
 helloworldview_BlackPattern(hwv));
 
 
-    helloworldview_SetTransferMode(hwv, graphic_INVERT);
+    helloworldview_SetTransferMode(hwv, graphic::INVERT);
 
 
     helloworldview_MoveTo(hwv, hwv->x, hwv->y);
 
     helloworldview_DrawString(hwv,"hello world",
 
-			   graphic_BETWEENTOPANDBASELINE | graphic_BETWEENLEFTANDRIGHT);    
+			   graphic::BETWEENTOPANDBASELINE | graphic::BETWEENLEFTANDRIGHT);    
 
 \}
 
@@ -829,7 +829,7 @@ struct helloworldview *hwv;
 
 \{    
 
-     /* TransferMode is graphic_INVERT from the last FullUpdate */
+     /* TransferMode is graphic::INVERT from the last FullUpdate */
 
 
     if (hwv->newBlackOnWhite != hwv->blackOnWhite)  \{
@@ -849,8 +849,8 @@ struct helloworldview *hwv;
 
 	helloworldview_MoveTo(hwv, hwv->x, hwv->y);
 
-	helloworldview_DrawString(hwv, "hello world", graphic_BETWEENTOPANDBASELINE | 
-graphic_BETWEENLEFTANDRIGHT);
+	helloworldview_DrawString(hwv, "hello world", graphic::BETWEENTOPANDBASELINE | 
+graphic::BETWEENLEFTANDRIGHT);
 
 
 	hwv->x = hwv->newX;
@@ -860,8 +860,8 @@ graphic_BETWEENLEFTANDRIGHT);
 
 	helloworldview_MoveTo(hwv, hwv->x, hwv->y);
 
-	helloworldview_DrawString(hwv, "hello world", graphic_BETWEENTOPANDBASELINE | 
-graphic_BETWEENLEFTANDRIGHT);
+	helloworldview_DrawString(hwv, "hello world", graphic::BETWEENTOPANDBASELINE | 
+graphic::BETWEENLEFTANDRIGHT);
 
     \}
 
@@ -873,7 +873,7 @@ struct view *helloworldview__Hit(hwv, action, x, y, numberOfClicks)
 
 struct helloworldview *hwv;
 
-enum view_MouseAction action;
+enum view::MouseAction action;
 
 long x;
 
@@ -887,13 +887,13 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightUp:
+	    case view::RightUp:
 
 		hwv->HaveDownTransition=FALSE;
 
 		/* fall through */
 
-	    case view_RightMovement:
+	    case view::RightMovement:
 
 		hwv->newX=x-hwv->distX;
 
@@ -901,7 +901,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftUp:
+	    case view::LeftUp:
 
 		hwv->HaveDownTransition=FALSE;
 
@@ -911,7 +911,7 @@ long numberOfClicks;
 
 		break;
 
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 
 		/* do nothing */
 
@@ -930,7 +930,7 @@ long numberOfClicks;
 
 	switch(action)\{
 
-	    case view_RightDown:
+	    case view::RightDown:
 
 		hwv->distX=x-hwv->x;
 
@@ -938,7 +938,7 @@ long numberOfClicks;
 
 		/* fall through */
 
-	    case view_LeftDown:
+	    case view::LeftDown:
 
 		hwv->HaveDownTransition=TRUE;
 

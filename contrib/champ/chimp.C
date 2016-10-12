@@ -11,7 +11,7 @@
 
 
 ATKdefineRegistry(chimp, chlist, NULL);
-static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view_MouseAction  action, long  nclicks);
+static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view::MouseAction  action, long  nclicks);
 static void WriteOutEvent(FILE  *fp, struct eventnode  *en);
 
 
@@ -25,9 +25,9 @@ chimp::chimp()
     THROWONFAILURE((TRUE));
 }
 
-static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view_MouseAction  action, long  nclicks)
+static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view::MouseAction  action, long  nclicks)
 {
-    if (action == view_LeftUp || action == view_RightUp) {
+    if (action == view::LeftUp || action == view::RightUp) {
 	(self->en)->SetEvent( en);
     }
 }

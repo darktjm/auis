@@ -63,7 +63,7 @@ class ATextv : public AWidgetView {
     friend class ATextvStateFormula;
     observable *lastobs;
     long swidth, sheight;
-    enum view_DSpass  pass;
+    enum view::DSpass  pass;
     struct rectangle interior;
     AFormulaViewAct lformula;
     AFormulaViewAct bformula;
@@ -102,12 +102,12 @@ class ATextv : public AWidgetView {
     ~ATextv();
     static void Init();
 
-    void FullUpdate(enum view_UpdateType type, 
+    void FullUpdate(enum view::UpdateType type, 
 		    long left, long top, long width, long height);
     void Update();
     void SetDataObject(class dataobject *d);
-    view_DSattributes DesiredSize(long width, long height, 
-				  enum view_DSpass pass, 
+    view::DSattributes DesiredSize(long width, long height, 
+				  enum view::DSpass pass, 
 				  long * desired_width, long * desired_height);
     void ObservedChanged (class observable *changed, 
     long value);
@@ -116,14 +116,14 @@ class ATextv : public AWidgetView {
                    long * originX, long * originY);
     void InitChildren();
     void LinkTree(class view *parent);
-    boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-    boolean RecSrchResume(struct SearchPattern *pat);
+    boolean RecSearch(class search *pat, boolean toplevel);
+    boolean RecSrchResume(class search *pat);
     boolean RecSrchReplace(class dataobject *text, long pos, long len);
     void RecSrchExpose(const struct rectangle &logical, 
 		       struct rectangle &hit);
     void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);     
-    void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+    void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
     void GetPrintOrigin(long w, long h, long *xoff, long *yoff);
     view *GetApplicationLayer();
     void ReceiveInputFocus();

@@ -35,7 +35,7 @@ wbuttonv::Update() {
 }
 
 	void 
-wbuttonv::FullUpdate( enum view_UpdateType  type, 
+wbuttonv::FullUpdate( enum view::UpdateType  type, 
 			long  x, long  y, long  width, long  height )  {
 	if (NEEDSET(this)) doset(this);
 	(this)->buttonV::FullUpdate(  type, x, y, width, height );

@@ -954,7 +954,7 @@ coordinate system.  (When called on the child view.)
 
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -972,27 +972,27 @@ drops, but this support is fairly rudimentary and may be changed.)
 The cases are distinguished by the type parameter as follows:
 
 
-\indent{\constant{view_LeftDown} --  The left mouse button was pressed.
+\indent{\constant{view::LeftDown} --  The left mouse button was pressed.
 
-\constant{view_LeftUp} -- The left mouse button was released.
+\constant{view::LeftUp} -- The left mouse button was released.
 
-\constant{view_LeftMovement} -- The mouse was moved with the left mouse 
+\constant{view::LeftMovement} -- The mouse was moved with the left mouse 
 button pressed.
 
-\constant{view_RightDown} -- The right mouse button was pressed.
+\constant{view::RightDown} -- The right mouse button was pressed.
 
-\constant{view_RightUp} -- The right mouse button was released.
+\constant{view::RightUp} -- The right mouse button was released.
 
-\constant{view_RightMovement} -- The mouse was moved with the right mouse 
+\constant{view::RightMovement} -- The mouse was moved with the right mouse 
 button pressed.
 
-\constant{view_LeftFileDrop} -- A file was dropped with the left mouse 
+\constant{view::LeftFileDrop} -- A file was dropped with the left mouse 
 button.
 
-\constant{view_MiddleFileDrop} -- A file was dropped with the middle mouse 
+\constant{view::MiddleFileDrop} -- A file was dropped with the middle mouse 
 button.
 
-\constant{view_RightFileDrop} -- A file was dropped with the right mouse 
+\constant{view::RightFileDrop} -- A file was dropped with the right mouse 
 button.
 
 }
@@ -1184,26 +1184,26 @@ classes defined by X11, plus additional symbols defined by the graphic
 class:
 
 
-\typewriter{\indent{graphic_Monochrome
+\typewriter{\indent{graphic::Monochrome
 
-graphic_Color
+graphic::Color
 
-graphic_PseudoColor
+graphic::PseudoColor
 
-graphic_GrayScale
+graphic::GrayScale
 
-graphic_DirectColor
+graphic::DirectColor
 
-graphic_TrueColor
+graphic::TrueColor
 
-graphic_StaticColor
+graphic::StaticColor
 
-graphic_StaticGray}}
+graphic::StaticGray}}
 
 
-All color displays will have \typewriter{graphic_Color}  or'ed in with the 
+All color displays will have \typewriter{graphic::Color}  or'ed in with the 
 appropriate display class symbol. StaticGray displays with a colormap of 
-size 2 will have \typewriter{graphic_Monochrome} or'ed in.
+size 2 will have \typewriter{graphic::Monochrome} or'ed in.
 
 
 \type{void} \class{view}::\memberfunction{DrawArc}(\type{struct rectangle 
@@ -1783,8 +1783,8 @@ $endatt
 Draws the characters in the nul-terminated \argument{String} in the current 
 font at the current point.  The spacial relationship between the string 
 drawn and the current position is specified by \argument{Operation}.  If 
-the value of \argument{Operation} is 0, \constant{graphic_ATBASELINE} and 
-\constant{graphic_ATLEFT} will be used as defaults.
+the value of \argument{Operation} is 0, \constant{graphic::ATBASELINE} and 
+\constant{graphic::ATLEFT} will be used as defaults.
 
 
 \memberfunction{DrawText} operates identically to 
@@ -1800,15 +1800,15 @@ options are: \
 
 (X, and Y) denote the current X and Y point set in the view and graphic.
 
-\constant{\constant{graphic_NOMOVEMENT}}  -- the origin of the string will 
+\constant{\constant{graphic::NOMOVEMENT}}  -- the origin of the string will 
 be at X.
 
-\constant{graphic_ATRIGHT}  --  the rightmost part of the string will be at 
+\constant{graphic::ATRIGHT}  --  the rightmost part of the string will be at 
 X.
 
-\constant{graphic_ATLEFT}  --  the leftmost part of the string will be at X.
+\constant{graphic::ATLEFT}  --  the leftmost part of the string will be at X.
 
-\constant{graphic_BETWEENLEFTANDRIGHT}  --  the center of the string will 
+\constant{graphic::BETWEENLEFTANDRIGHT}  --  the center of the string will 
 be at X.
 
 
@@ -1816,23 +1816,23 @@ The vertical alignment options are: \
 
 
 
-\constant{graphic_NOMOVEMENT}  --  the origin of the string will be at Y.
+\constant{graphic::NOMOVEMENT}  --  the origin of the string will be at Y.
 
-\constant{graphic_ATTOP}  --  the topmost part of the string will be at Y.
+\constant{graphic::ATTOP}  --  the topmost part of the string will be at Y.
 
-\constant{graphic_ATBOTTOM}  --  the bottommost part of the string, 
+\constant{graphic::ATBOTTOM}  --  the bottommost part of the string, 
 including any descenders, will be at Y.
 
-\constant{graphic_ATBASELINE}  --  the baseline of the string will be at Y.
+\constant{graphic::ATBASELINE}  --  the baseline of the string will be at Y.
 
-\constant{graphic_BETWEENTOPANDBASELINE}  --  the center point of the 
+\constant{graphic::BETWEENTOPANDBASELINE}  --  the center point of the 
 string will be at Y.  The center is calculated from the topmost part of the 
 string to the bottomost part, which will include descenders.
 
-\constant{graphic_BETWEENTOPANDBOTTOM}  --  the center of the string will 
+\constant{graphic::BETWEENTOPANDBOTTOM}  --  the center of the string will 
 be at Y.  The center is calculated from the topmost part of the string to 
 the baseline of the string.  No account is taken of descenders. This is 
-likely to look better than \constant{graphic_BETWEENTOPANDBASELINE} in most 
+likely to look better than \constant{graphic::BETWEENTOPANDBASELINE} in most 
 cases.
 
 
@@ -2539,21 +2539,21 @@ drawn (under X11). The \paramname{\argument{NewLineCap}} argument can be
 any of the following symbols:
 
 
-\constant{graphic_CapButt} -- The line is square at the endpoint 
+\constant{graphic::CapButt} -- The line is square at the endpoint 
 (perpendicular to the slope of the line) with no projection beyond.
 
-\constant{graphic_CapNotLast} -- Same as graphic_CapButt, except for a line 
+\constant{graphic::CapNotLast} -- Same as graphic::CapButt, except for a line 
 width of zero, the final endpoint is not drawn.
 
-\constant{graphic_CapRound} -- The line has a circular arc with the 
+\constant{graphic::CapRound} -- The line has a circular arc with the 
 diameter equal to the line width, centered on the endpoint.
 
-\constant{graphic_CapProjecting} -- The line is square at the end, but the 
+\constant{graphic::CapProjecting} -- The line is square at the end, but the 
 path continues beyond the endpoint for a distance equal to half the line 
 width.
 
 
-The default line cap is \constant{graphic_CapButt}.
+The default line cap is \constant{graphic::CapButt}.
 
  \
 
@@ -2573,12 +2573,12 @@ drawing operation. The \argument{dashType} argument can be any of the
 following symbols:
 
 
-\constant{graphic_LineSolid} -- Solid, non-dashed lines.
+\constant{graphic::LineSolid} -- Solid, non-dashed lines.
 
-\constant{graphic_LineDoubleDash} -- Even and odd elements of the 
+\constant{graphic::LineDoubleDash} -- Even and odd elements of the 
 dashPattern are drawn in the foreground and background colors, respectively.
 
-\constant{graphic_LineOnOffDash}\typewriter{ }-- Only the even elements of 
+\constant{graphic::LineOnOffDash}\typewriter{ }-- Only the even elements of 
 the \italic{dashPattern} are drawn.
 
 
@@ -2595,18 +2595,18 @@ lines (under X11). The \argument{NewLineJoin} argument can be any of the
 following symbols:
 
 
-\constant{graphic_JoinMiter} -- The outer edges of two lines extend to meet 
+\constant{graphic::JoinMiter} -- The outer edges of two lines extend to meet 
 at an angle. If the angle is less than 11 degrees, then a 
-\constant{graphic_JoinBevel} style join is used instead.
+\constant{graphic::JoinBevel} style join is used instead.
 
-\constant{graphic_JoinRound} -- The corner is a circular arc with the 
+\constant{graphic::JoinRound} -- The corner is a circular arc with the 
 diameter equal to the line width, centered on the joinpoint.
 
-\constant{graphic_JoinBevel} -- The corner has \constant{graphic_CapButt} 
+\constant{graphic::JoinBevel} -- The corner has \constant{graphic::CapButt} 
 style endpoints, with the triangular notch filled.
 
 
-The default line join is \constant{graphic_JoinMiter}.
+The default line join is \constant{graphic::JoinMiter}.
 
  \
 
@@ -2654,31 +2654,31 @@ source element, S, and each destination element, D, should combine to
 produce the result.  The source and destination each have four elements, so 
 there are sixteen possible ways to combine them. You can construct the 
 transfer mode by forming boolean combinations from the graphic constants 
-\constant{graphic_SOURCE} and \constant{graphic_DESTINATION} directly.  For 
+\constant{graphic::SOURCE} and \constant{graphic::DESTINATION} directly.  For 
 convenience, the following common combinations have been defined as well: \
 
 
 
-\constant{graphic_COPY}  --  The bit values are from the source
+\constant{graphic::COPY}  --  The bit values are from the source
 
-\constant{graphic_OR}  -- The bit values result from OR-ing the source and 
+\constant{graphic::OR}  -- The bit values result from OR-ing the source and 
 the destination
 
-\constant{graphic_XOR}  -- The bit values result from an exclusive or of 
+\constant{graphic::XOR}  -- The bit values result from an exclusive or of 
 the source and the destination
 
-\constant{graphic_AND}  -- The bit values result from an AND-ing the source 
+\constant{graphic::AND}  -- The bit values result from an AND-ing the source 
 and destination
 
-\constant{graphic_WHITE}  -- The bit values are the foreground.
+\constant{graphic::WHITE}  -- The bit values are the foreground.
 
-\constant{graphic_BLACK}  -- The bit values are the background.
+\constant{graphic::BLACK}  -- The bit values are the background.
 
-\constant{graphic_INVERT}  -- The bit values are the opposite of the 
+\constant{graphic::INVERT}  -- The bit values are the opposite of the 
 destination (if foreground, background; if background, foreground)
 
 
-The default is \constant{graphic_COPY}. \
+The default is \constant{graphic::COPY}. \
 
 
 
@@ -2721,7 +2721,7 @@ determine the effect of applying the \classobject{pixelimage}.
 \type{
 void} \class{view}::\virtualmemberfunction{FullUpdate}(
 
-	\type{enum view_UpdateType} \argument{type},
+	\type{enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -2769,32 +2769,32 @@ when it has been removed from the screen entirely.  The cases are
 distinguished by the\indent{ }\argument{type} parameter as follows:
 
 
-\indent{\constant{view_FullRedraw} --  The \class{view} should be 
+\indent{\constant{view::FullRedraw} --  The \class{view} should be 
 completely redrawn, any cursors should retracted and then reposted. The 
 parameters \argument{left}, \argument{top}, \argument{width} and 
 \argument{height} are ignored.
 
 
-\constant{view_PartialRedraw}  --  The \class{view} should be redrawn 
+\constant{view::PartialRedraw}  --  The \class{view} should be redrawn 
 within the rectangle specified by the parameters \argument{left}, 
 \argument{top}, \argument{width}, and \argument{height}.   Further partial 
 redraws will follow.  A \italic{\class{view}} receiving this call may defer 
-the update until it receives the \constant{view_LastPartialRedraw}.
+the update until it receives the \constant{view::LastPartialRedraw}.
 
 
-\constant{view_LastPartialRedraw}  --  The \class{view} should be redrawn 
+\constant{view::LastPartialRedraw}  --  The \class{view} should be redrawn 
 within the rectangle specified by the parameters \argument{left}, 
 \argument{top}, \argument{width}, and \argument{height}.  This is the last 
 partial redraw.
 
 
-\constant{view_MoveNoRedraw}  --  The redraw request is occurring because 
+\constant{view::MoveNoRedraw}  --  The redraw request is occurring because 
 the \italic{\class{view}} is being moved.  If the \class{view} has posted 
 cursors they should be rectracted and then reposted.  (So that they will be 
 moved to the new location.)
 
 
-\constant{view_Remove}  --  The redraw request is occurring because the 
+\constant{view::Remove}  --  The redraw request is occurring because the 
 \italic{\bold{view}} is being removed from the screen.   The \class{view} 
 should retract all cursors that it has posted.  (Otherwise they will remain 
 on screen.)}
@@ -2831,7 +2831,7 @@ The simplest implementation of \virtualmemberfunction{Update} is:
 
 \type{void} \class{testview}::\virtualmemberfunction{Update}() \{
 
-	\virtualmemberfunction{FullUpdate}(\constant{view_FullRedraw}, 0, 0, 0, 0);
+	\virtualmemberfunction{FullUpdate}(\constant{view::FullRedraw}, 0, 0, 0, 0);
 
 \}
 
@@ -2886,7 +2886,7 @@ ATKregistryEntry  *}\argument{type});
 *}\argument{requestor});
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -2898,7 +2898,7 @@ view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x},
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{Traverse}(\type{\keyword{enum} 
-view_Traversal} \argument{trav});
+view::Traversal} \argument{trav});
 
 (\virtualmemberfunction{Traverse} is not implemented anywhere yet.)
 
@@ -3232,7 +3232,7 @@ a user's action.  For example, a click in the view should usually trigger a
 
 
 \example{\type{\class{view} *}\class{helloworldview}::Hit 
-(\type{\keyword{enum} view_MouseAction} \argument{action}, 
+(\type{\keyword{enum} view::MouseAction} \argument{action}, 
 \keyword{\type{long}} \argument{x}, \keyword{\type{long}} \argument{y}, 
 \keyword{\type{long}} \argument{numberOfClicks}) \{
 
@@ -3242,9 +3242,9 @@ a user's action.  For example, a click in the view should usually trigger a
 
 		// ...
 
-		case view_LeftDown:
+		case view::LeftDown:
 
-		case view_RightDown:
+		case view::RightDown:
 
 		// ...
 
@@ -3814,7 +3814,7 @@ In the future this document should be extended to cover deriving new
 \type{void} 
 \class{view}::\virtualmemberfunction{DesiredSize}(\keyword{\type{long}} 
 \argument{width}, \keyword{\type{long}} \argument{height}, 
-\type{\keyword{enum} view_DSpass} \argument{pass}, \type{\keyword{long} 
+\type{\keyword{enum} view::DSpass} \argument{pass}, \type{\keyword{long} 
 *}\argument{dWidth}, \type{\keyword{long} *}\globalvariable{dheight});
 
 \type{void} 
@@ -3878,32 +3878,32 @@ and \argument{height} parameters indicate the parent's preference.
  Typically the parent doesn't care and just passes in maximum values.  The 
 \argument{pass} argument indicates which of \argument{width} and 
 \argument{height} are fixed by the parent and which are flexible.  The 
-possible values for pass are \constant{view_NOSET} (meaning both width and 
-height are flexible), \constant{view_WIDTHSET}, \constant{view_HEIGHTSET}. 
+possible values for pass are \constant{view::NOSET} (meaning both width and 
+height are flexible), \constant{view::WIDTHSET}, \constant{view::HEIGHTSET}. 
  The *\argument{desiredWidth} and *\argument{desiredHeight} arguments must 
 be filled in with the child's desired size.  The return value is the 
 bit-wise 'or' of the following values:
 
 \indent{
-\constant{view_FIXED				}The size is fixed, that is, not flexible.
+\constant{view::FIXED				}The size is fixed, that is, not flexible.
 
 
-\constant{view_WIDTHSMALLER		}The width could be made smaller.
+\constant{view::WIDTHSMALLER		}The width could be made smaller.
 
 
-\constant{view_WIDTHLARGER		}The width could be made larger.
+\constant{view::WIDTHLARGER		}The width could be made larger.
 
 
-\constant{view_WIDTHFLEXIBLE}		The width is flexible.
+\constant{view::WIDTHFLEXIBLE}		The width is flexible.
 
 
-\constant{view_HEIGHTSMALLER	}The height could be made smaller.
+\constant{view::HEIGHTSMALLER	}The height could be made smaller.
 
 
-\constant{view_HEIGHTLARGER		}The height could be made larger.
+\constant{view::HEIGHTLARGER		}The height could be made larger.
 
 
-\constant{view_HEIGHTFLEXIBLE	}The height is flexible.
+\constant{view::HEIGHTFLEXIBLE	}The height is flexible.
 
 }
 \virtualmemberfunction{WantNewSize} is called by a child view when it needs 
@@ -3932,7 +3932,7 @@ such as FullUpdates, or WantExposures, or recursive searches.
 
 \type{void} \class{view}::\virtualmemberfunction{FullUpdate}(
 
-	\type{enum view_UpdateType} \argument{type},
+	\type{enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -3952,7 +3952,7 @@ testview:
 
 \example{void testview::FullUpdate(\type{
 
-	enum view_UpdateType} \argument{type},
+	enum view::UpdateType} \argument{type},
 
 	\type{long} \argument{left},
 
@@ -3964,8 +3964,8 @@ testview:
 
 // ...
 
-if(child->GetIM()!=GetIM() && (type==view_FullRedraw || 
-type==view_PartialRedraw || type=view_LastPartialRedraw)) \{
+if(child->GetIM()!=GetIM() && (type==view::FullRedraw || 
+type==view::PartialRedraw || type=view::LastPartialRedraw)) \{
 
 	// Link it into the view tree.  This may also
 
@@ -4002,32 +4002,32 @@ On the basis of the type parameter the remaining responsibilities are:
 // all of the following fragments are typically under a switch(type)
 
 }
-\indent{\constant{view_FullRedraw} --  The FullUpdate method of any visible 
-children should be called with a view_UpdateType of view_FullRedraw or 
-view_LastPartialRedraw.  E.g.:
+\indent{\constant{view::FullRedraw} --  The FullUpdate method of any visible 
+children should be called with a view::UpdateType of view::FullRedraw or 
+view::LastPartialRedraw.  E.g.:
 
 
-\example{case view_FullRedraw:}
+\example{case view::FullRedraw:}
 
-\example{child->FullUpdate(view_FullRedraw, 0, 0, 0, 0);
+\example{child->FullUpdate(view::FullRedraw, 0, 0, 0, 0);
 
 
 // or
 
 
-child->FullUpdate(view_LastPartialRedraw, 0, 0, child->GetVisualWidth(), 
+child->FullUpdate(view::LastPartialRedraw, 0, 0, child->GetVisualWidth(), 
 child->GetVisualHeight());
 
 }
-\constant{view_PartialRedraw}  --  If the given area intersects the area of 
+\constant{view::PartialRedraw}  --  If the given area intersects the area of 
 a child the partial redraw should be passed to the child.  E.g.:
 
 	\
 
 
-\example{case view_PartialRedraw:
+\example{case view::PartialRedraw:
 
-case view_LastPartialRedraw:}
+case view::LastPartialRedraw:}
 
 \example{struct rectangle childvisualbounds;
 
@@ -4058,26 +4058,26 @@ Alternatively the redraw may be postponed until the last partial redraw
 arrives.
 
 
-\constant{view_LastPartialRedraw}  --  If view_PartialRedraws are passed to 
-the child then this should behave just like a view_PartialRedraw. 
+\constant{view::LastPartialRedraw}  --  If view::PartialRedraws are passed to 
+the child then this should behave just like a view::PartialRedraw. 
  Otherwise this should either call FullUpdate on the child with a type of 
-view_FullRedraw.  Alternately it may make one or more FullUpdate calls on 
-the child with types of view_PartialRedraw or view_LastPartialRedraw such 
-that all the areas which have been given view_PartialRedraw or 
-view_LastPartialRedraw calls are covered in the update calls passed to the 
+view::FullRedraw.  Alternately it may make one or more FullUpdate calls on 
+the child with types of view::PartialRedraw or view::LastPartialRedraw such 
+that all the areas which have been given view::PartialRedraw or 
+view::LastPartialRedraw calls are covered in the update calls passed to the 
 child.
 
 
-\constant{view_MoveNoRedraw}  --  This should be passed on to any children. 
+\constant{view::MoveNoRedraw}  --  This should be passed on to any children. 
  The left, top, width, and height may be ignored.
 
 
-\constant{view_Remove}  --  This also should be passed on to any children. 
+\constant{view::Remove}  --  This also should be passed on to any children. 
  The left, top, width, and height may be ignored.}
 
 
 \type{\class{view} *}\class{view}::Hit (\type{\keyword{enum} 
-view_MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
+view::MouseAction} \argument{action}, \keyword{\type{long}} \argument{x}, 
 \keyword{\type{long}} \argument{y}, \keyword{\type{long}} 
 \argument{numberOfClicks});
 
@@ -4158,12 +4158,12 @@ into the view tree.
 
 
 \type{boolean} 
-\class{view}::\virtualmemberfunction{RecSearch}(\type{\keyword{struct} 
-SearchPattern *}\argument{pat}, \type{boolean} \argument{toplevel});
+\class{view}::\virtualmemberfunction{RecSearch}(\type{\keyword{class} 
+search *}\argument{pat}, \type{boolean} \argument{toplevel});
 
 \type{boolean} 
-\class{view}::\virtualmemberfunction{RecSrchResume}(\type{\keyword{struct} 
-SearchPattern *}\argument{pat});
+\class{view}::\virtualmemberfunction{RecSrchResume}(\type{\keyword{class} 
+search *}\argument{pat});
 
 \type{boolean} 
 \class{view}::\virtualmemberfunction{RecSrchReplace}(\type{\class{dataobject\
@@ -4349,7 +4349,7 @@ ar} *}\argument{printtype});
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{DesiredPrintSize}(\keyword{\type{long}} 
 \argument{width}, \keyword{\type{long}} \argument{height}, 
-\type{\keyword{enum} view_DSpass} \argument{pass}, \type{\keyword{long} 
+\type{\keyword{enum} view::DSpass} \argument{pass}, \type{\keyword{long} 
 *}\argument{desiredwidth}, \type{\keyword{long} *}\argument{desiredheight});
 
 \keyword{\type{void}} 
@@ -4358,7 +4358,7 @@ ar} *}\argument{printtype});
 \keyword{\type{long}} \argument{logheight}, \type{\keyword{struct} 
 rectangle *}\argument{visrect});
 
-\type{\keyword{struct} view_printoptlist 
+\type{\keyword{struct} view::printoptlist 
 *}\class{view}::\virtualmemberfunction{PrintOptions}();
 
 \keyword{\type{long}} 
@@ -4367,14 +4367,14 @@ rectangle *}\argument{visrect});
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{SetPrintOption}(\type{\keyword{struct} 
-view_printopt *}\argument{vopt}, \keyword{\type{long}} \argument{value});
+view::printopt *}\argument{vopt}, \keyword{\type{long}} \argument{value});
 
 \keyword{\type{void}} 
 \class{view}::\virtualmemberfunction{Print}(\type{FILE *}\argument{file}, 
 \type{\keyword{char} *}\argument{processor}, \type{\keyword{char} 
 *}\argument{finalFormat}, \type{boolean} \argument{topLevel});
 
-\type{\class{view} *}Hit (\type{\keyword{enum} view_MouseAction} 
+\type{\class{view} *}Hit (\type{\keyword{enum} view::MouseAction} 
 \argument{action}, \keyword{\type{long}} \argument{x}, \keyword{\type{long}} 
 \argument{y}, \keyword{\type{long}} \argument{numberOfClicks});\section{
 
@@ -6873,15 +6873,15 @@ on the text is \constant{TRUE} the datastream will be written as a text
 object, otherwise it will be written as whatever type it actually is.
 
 
-\type{boolean} \class{textview}::RecSearch(\type{\keyword{struct} 
-SearchPattern *}\type{pat}, \type{boolean} \type{toplevel});
+\type{boolean} \class{textview}::RecSearch(\type{\keyword{class} 
+search *}\type{pat}, \type{boolean} \type{toplevel});
 
 Searches for \argument{pat} in the text and any embedded objects.   See 
 \class{view}::\virtualmemberfunction{RecSearch}.
 
 
-\type{boolean} \class{textview}::RecSrchResume(\type{\keyword{struct} 
-SearchPattern *}\type{pat});
+\type{boolean} \class{textview}::RecSrchResume(\type{\keyword{class} 
+search *}\type{pat});
 
 See \class{view}::\virtualmemberfunction{RecSrchResume}.
 

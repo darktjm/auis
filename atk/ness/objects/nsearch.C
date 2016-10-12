@@ -906,7 +906,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 	class style *stylep;
 	struct stylist *stelt;
 	char menuname[100];
-	static struct SearchPattern *regPat;
+	class search regPat;
 
 	if (WhereItWas == NULL)
 		WhereItWas = new nessmark;
@@ -939,7 +939,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cxc = search::CompilePattern(cstring, &regPat);
+		cxc = regPat.CompilePattern(cstring);
 		free(cstring);
 		/* XXX save pat's cstring and compiled pattern
 		test and avoid recompilation (? will this really be faster) */
@@ -955,17 +955,17 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 					argument */
 				envlen = (textp)->GetLength();
 				((class simpletext *)textp)->length = finish;
-				pos = search::MatchPattern(textp, pos, regPat);
+				pos = regPat.MatchPattern(textp, pos);
 				((class simpletext *)textp)->length = envlen;
 			}
 			else  
-				pos = search::MatchPattern(textp, pos, regPat);
+				pos = regPat.MatchPattern(textp, pos);
 				
 			if (pos >= 0) {
 				/* succeed */
 				(subject)->SetPos( pos);
 				(subject)->SetLength(
-					search::GetMatchLength());
+					regPat.GetMatchLength());
 			}
 			else {
 				/* fail */
@@ -985,7 +985,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cxc = search::CompilePattern(cstring, &regPat);
+		cxc = regPat.CompilePattern(cstring);
 		free(cstring);
 		/* XXX save cstring and test to avoid recompilation (? is this really faster) */
 		if (cxc != 0) {
@@ -994,13 +994,13 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 			(subject)->MakeConst("");   /* EmptyText */
 		}
 		else {
-			envpos = search::MatchPatternReverse(textp, finish, regPat);
+			envpos = regPat.MatchPatternReverse(textp, finish);
 				
 			if (envpos >= 0 && (len == 0 || envpos >= pos)) {
 				/* succeed */
 				(subject)->SetPos(envpos);
 				(subject)->SetLength(
-					search::GetMatchLength());
+					regPat.GetMatchLength());
 			}
 			else {
 				/* fail */
@@ -1528,7 +1528,7 @@ for (pos = 0; pos <= (textp)->GetLength(); pos ++) {
 		NSP = popValue(NSP);
 		/* ??? If the pointer is to a cel, and the type is not celview,
 			we use the object in the cel.
-			XXX should use view_CanView(), but it is not fully implemented */
+			XXX should use view::CanView(), but it is not fully implemented */
 		if ((objval)->IsType( celClass) && strcmp(cstring, "celview") != 0)
 			objval = (ATK  *)((class cel *)objval)->GetObject();
 

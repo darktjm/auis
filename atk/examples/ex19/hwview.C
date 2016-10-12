@@ -176,7 +176,7 @@ void helloworldview::ObservedChanged(class observable *obj, long  val)
 #define WIDTH 100
 #define HEIGHT 100
 
-void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height )
+void helloworldview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height )
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
     struct rectangle myVisualRect,rec;
@@ -207,7 +207,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,
     rectangle_SetRectSize(&rec,this->x-this->frameX-1,
 	this->y-this->frameY-1,WIDTH+1,HEIGHT+1);
 
-    (this)->SetTransferMode(graphic_COPY);
+    (this)->SetTransferMode(graphic::COPY);
 
     if(hw->blackOnWhite){
 	(this)->FillRect(&myVisualRect,
@@ -232,7 +232,7 @@ void helloworldview::FullUpdate(enum view_UpdateType  type,long  left,long  top,
      */
     (this)->RetractViewCursors(this->applayer);
 
-    (this->applayer)->FullUpdate(view_FullRedraw,0,0,WIDTH,HEIGHT);
+    (this->applayer)->FullUpdate(view::FullRedraw,0,0,WIDTH,HEIGHT);
     this->redrawSubView=FALSE;
 }
 
@@ -240,7 +240,7 @@ void helloworldview::Update()
 {    
     class helloworld *hw=(class helloworld *)this->dataobject;
 
-    (this)->SetTransferMode( graphic_COPY);
+    (this)->SetTransferMode( graphic::COPY);
 
     if(this->x!=hw->x ||
        this->y!=hw->y ||
@@ -295,7 +295,7 @@ void helloworldview::Update()
 
 	(this)->RetractViewCursors(this->applayer);
 
-	(this->applayer)->FullUpdate(view_FullRedraw,0,0,
+	(this->applayer)->FullUpdate(view::FullRedraw,0,0,
 		WIDTH,HEIGHT);
 	this->redrawSubView=FALSE;
     }else
@@ -303,7 +303,7 @@ void helloworldview::Update()
 }
 
 
-class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,long  numberOfClicks)
+class view *helloworldview::Hit(enum view::MouseAction  action,long  x,long  y,long  numberOfClicks)
 {
     class helloworld *hw=(class helloworld *)this->dataobject;
 
@@ -318,21 +318,21 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 
     if(this->HaveDownTransition){
 	switch(action){
-	    case view_RightUp:
+	    case view::RightUp:
 		this->HaveDownTransition=FALSE;
 		/* fall through */
-	    case view_RightMovement:
+	    case view::RightMovement:
 		hw->x+=x-this->hitX;
 		hw->y+=y-this->hitY;
 		this->hitX=x;
 		this->hitY=y;
 		break;
-	    case view_LeftUp:
+	    case view::LeftUp:
 		this->HaveDownTransition=FALSE;
 		hw->x=x+this->frameX;
 		hw->y=y+this->frameY;
 		break;
-	    case view_LeftMovement:
+	    case view::LeftMovement:
 		/* do nothing */
 		break;
 	    default:
@@ -347,9 +347,9 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
     if(!this->HaveDownTransition)
 	switch(action){
 		class cursor *activeCursor;
-	    case view_RightDown:
-	    case view_LeftDown:
-		if(action==view_RightDown){
+	    case view::RightDown:
+	    case view::LeftDown:
+		if(action==view::RightDown){
 		    this->hitX=x;
 		    this->hitY=y;
 		    activeCursor=this->dragCursor;

@@ -208,7 +208,7 @@ static boolean CheckRightSwitchee(class pagev  *self, boolean  *NeedFullRedraw,s
     return(FALSE);
 }
 
-void pagev::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
+void pagev::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
 {
     struct rectangle Rect;
     boolean NeedFull; /* ignored */
@@ -219,8 +219,8 @@ void pagev::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  
 	(this)->MoveTo( (Rect.left + Rect.width) / 2,
 			    (Rect.top + Rect.height) / 2);
 	(this)->DrawString( "<No objects>",
-	    graphic_BETWEENLEFTANDRIGHT
-	    | graphic_BETWEENTOPANDBASELINE);
+	    graphic::BETWEENLEFTANDRIGHT
+	    | graphic::BETWEENTOPANDBASELINE);
 	return;
     }
     (this->NowPlaying->v)->InsertView( this, &Rect);
@@ -237,7 +237,7 @@ void pagev::Update()
 	struct rectangle Rect;
 	(this)->GetVisualBounds( &Rect);
 	(this)->EraseRect( &Rect);
-	(this)->FullUpdate( view_FullRedraw,
+	(this)->FullUpdate( view::FullRedraw,
 				Rect.left, Rect.top,
 				Rect.width, Rect.height);
 	return;
@@ -245,7 +245,7 @@ void pagev::Update()
     if (this->NowPlaying) (this->NowPlaying->v)->Update();
 }
 
-class view *pagev::Hit(enum view_MouseAction  action, long	 x, long	 y, long	 numberOfClicks)
+class view *pagev::Hit(enum view::MouseAction  action, long	 x, long	 y, long	 numberOfClicks)
 {
     if (!this->NowPlaying) {
 	(this)->WantInputFocus( this);
@@ -476,7 +476,7 @@ static void PasteSwitchee(class pagev  *self)
     (sw)->SetNowPlaying( d);
 }
 
-view_DSattributes pagev::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *dWidth, long  *dHeight)
+view::DSattributes pagev::DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *dWidth, long  *dHeight)
 {
     if(this->NowPlaying && this->NowPlaying->v){
 	return (this->NowPlaying->v)->DesiredSize( width  , height  , pass, dWidth, dHeight);
@@ -496,7 +496,7 @@ void pagev::InitChildren()
     for (sw = page->FirstSwitchee; sw; sw = sw->next) {
 	CheckRightSwitchee(this, &NeedFullRedraw, sw);
 /*	if(self->NowPlaying != safe) 
-	    view_UnlinkTree(self->NowPlaying->v); */
+	    view::UnlinkTree(self->NowPlaying->v); */
     }
     this->NowPlaying = safe;
 }
@@ -522,7 +522,7 @@ void pagev::Print(FILE  *file, const char  *processor, const char  *finalFormat,
 	    if(strcmp(processor,"troff") == 0 && (sw->next != NULL)) 
 		fprintf(file,".bp\n");
 	}
-/*	view_UnlinkTree(self->NowPlaying->v); */
+/*	view::UnlinkTree(self->NowPlaying->v); */
     }
     this->NowPlaying = safe;
 }

@@ -58,7 +58,7 @@ HISTORY
 		 This bug caused treev graphics ops to be done even when the treev was not
 		 in the viewTree; (GW Keim)
   07/25/89	Remove arg from im_ForceUpdate (TCP)
-  07/26/89	Use graphic_COPY instead of graphic_OR for Pale: X oddities (TCP)
+  07/26/89	Use graphic::COPY instead of graphic::OR for Pale: X oddities (TCP)
   08/24/89	Pass object-type arg to Hit-handlers (TCP)
    10/24/89	Changed the Mark_Child_Exposure call in Expose_Node_Children to 
 	              be recursive. (GW Keim)
@@ -296,7 +296,7 @@ struct  node_shadow
 				      exploded	:1;
   };
 
-#define  Balanced		    (view_BETWEENTOPANDBOTTOM | view_BETWEENLEFTANDRIGHT)
+#define  Balanced		    (graphic::BETWEENTOPANDBOTTOM | graphic::BETWEENLEFTANDRIGHT)
 #define  Halo			    true
 #define  NoHalo			    false
 
@@ -819,13 +819,13 @@ void Check_Dimensions( class treev	      *self, tree_type_node      node )
   OUT(Check_Dimensions);
   }
 
-view_DSattributes
+view::DSattributes
 treev::DesiredSize( long			    given_width , long			    given_height,
-		      enum view_DSpass	    pass, long			   *desired_width , long			   *desired_height )
+		      enum view::DSpass	    pass, long			   *desired_width , long			   *desired_height )
 {
     class treev *self=this;
-  view_DSattributes  result = view_WidthFlexible |
-					       view_HeightFlexible;
+  view::DSattributes  result = view::WidthFlexible |
+					       view::HeightFlexible;
 
   IN(treev_DesiredSize);
   if ( ScrolledView )
@@ -845,11 +845,11 @@ treev::DesiredSize( long			    given_width , long			    given_height,
   }
 
 void 
-treev::FullUpdate( enum view_UpdateType    type, long			   left , long			   top , long			   width , long			   height )
+treev::FullUpdate( enum view::UpdateType    type, long			   left , long			   top , long			   width , long			   height )
 {
     class treev *self=this;
   IN(treev_FullUpdate);
-  if ( Tree  &&  (type == view_FullRedraw || type == view_LastPartialRedraw) )
+  if ( Tree  &&  (type == view::FullRedraw || type == view::LastPartialRedraw) )
     {
     if ( ScrollView )
       { DEBUG(Use Scrolled View);
@@ -966,7 +966,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	if ( parent ) {
 	    if(inExplosion) {
 		ShadowExposed(NodeShadow(node)) = true;
-		(this)->FullUpdate(view_FullRedraw,0,0,Width,Height);
+		(this)->FullUpdate(view::FullRedraw,0,0,Width,Height);
 	    }
 	    else {
 		Check_Dimensions( this, node );
@@ -999,7 +999,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 		  Erase_Node_Children(this,NodeShadowNode(parent));
 	  }
 	  if(inExplosion)
-	      (this)->FullUpdate(view_FullRedraw,0,0,Width,Height);
+	      (this)->FullUpdate(view::FullRedraw,0,0,Width,Height);
 	  else {
 	      Redisplay_Node_Children(this,parent ? NodeShadowNode(parent) : NULL);
 	  }
@@ -1025,7 +1025,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	Check_Dimensions( this, node );
 	shadow = NodeShadow(node);
 	Clear_Shadow( this, shadow );
-	(this)->SetTransferMode(  graphic_COPY );
+	(this)->SetTransferMode(  graphic::COPY );
 	Draw_Node_Caption( this, shadow, NoHalo );
 	if ( ShadowHighlighted(shadow) )
 	  Highlight_Node_Shadow( this, shadow );
@@ -1037,7 +1037,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	Check_Dimensions( this, node );
     	shadow = NodeShadow(node);
 	Clear_Shadow( this, shadow );
-	(this)->SetTransferMode(  graphic_COPY );
+	(this)->SetTransferMode(  graphic::COPY );
 	Draw_Node_Title( this, shadow );
 	if ( ShadowHighlighted(shadow) )
 	  Highlight_Node_Shadow( this, shadow );
@@ -1106,7 +1106,7 @@ Which_Node_Hit( class treev	       *self, long		        x , long		        y )
   }
 
 class view *
-treev::Hit( enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
+treev::Hit( enum view::MouseAction    action, long			    x , long			    y , long			    clicks )
 {
     class treev *self=this;
   struct tree_node	  *node = NULL;
@@ -1212,7 +1212,7 @@ void Clear_Shadow( class treev		 *self, struct node_shadow	 *shadow )
   
   IN(Clear_Shadow);
   treev_FlipColors(self);
-  Fill_Area( self, graphic_COPY, NULL, NodeBorderStyle,
+  Fill_Area( self, graphic::COPY, NULL, NodeBorderStyle,
 	    SL+1, ST+1, (SW-1) - offset, (SH-1) - offset );
   treev_RestoreColors(self);
   OUT(Clear_Shadow);
@@ -1316,7 +1316,7 @@ void Normalize_Node_Shadow( class treev	       *self, struct node_shadow  *shado
     switch ( style )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
 	Clear_Shadow( self, shadow );
@@ -1348,10 +1348,10 @@ void Highlight_Node_Shadow( class treev	       *self, struct node_shadow  *shado
     switch ( NodeHighlightStyle )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
-	Fill_Shadow( self, shadow, graphic_COPY, DottedTile );
+	Fill_Shadow( self, shadow, graphic::COPY, DottedTile );
 	Draw_Node_Title( self, shadow );
 	Draw_Node_Caption( self, shadow, Halo );
 	break;
@@ -1379,10 +1379,10 @@ void Footprint_Node_Shadow( class treev		  *self, struct node_shadow	  *shadow )
     switch ( NodeFootprintStyle )
       {
       case  treev_Invert:
-        Fill_Shadow( self, shadow, graphic_INVERT, NULL );
+        Fill_Shadow( self, shadow, graphic::INVERT, NULL );
 	break;
       case  treev_Pale:
-	Fill_Shadow( self, shadow, graphic_COPY, DottedTile );
+	Fill_Shadow( self, shadow, graphic::COPY, DottedTile );
 	Draw_Node_Title( self, shadow );
 	Draw_Node_Caption( self, shadow, Halo );
 	break;
@@ -2525,14 +2525,14 @@ void Draw_Background( class treev	      *self )
     width = Right - left + 1;
     height = Bottom - top + 1;
     if ( BackgroundNonWhite )
-      (self)->SetTransferMode(  graphic_COPY );
+      (self)->SetTransferMode(  graphic::COPY );
     else {
 	treev_FlipColors(self);
     }
     DEBUGdt(l,left);DEBUGdt(t,top);DEBUGdt(w,width);DEBUGdt(h,height);
     (self)->FillRectSize(  left, top, width, height, BackgroundPattern );
     if(!BackgroundNonWhite) treev_RestoreColors(self);
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
     }
   OUT(Draw_Background);
   }
@@ -2545,7 +2545,7 @@ void Fill_Background( class treev	      *self )
     if ( BackgroundNonWhite )
       {
       BackgroundPattern = (self)->GrayPattern(  BackgroundShade, 100 );
-      (self)->SetTransferMode(  graphic_COPY );
+      (self)->SetTransferMode(  graphic::COPY );
       (self)->FillRect(  Bounds, BackgroundPattern );
       }
       else
@@ -2554,7 +2554,7 @@ void Fill_Background( class treev	      *self )
       (self)->FillRect(  Bounds, BackgroundPattern );
       treev_RestoreColors(self);
       }
-    (self)->SetTransferMode(  graphic_COPY );
+    (self)->SetTransferMode(  graphic::COPY );
     }
   }
 
@@ -2923,18 +2923,9 @@ treev::LinkTree(class view  *parent)
 {
     class treev *self=this;
     (this)->aptv::LinkTree(parent);
-    if(ScrollView && parent && (this)->GetIM()) {
-	(ScrollView)->LinkTree(parent);
-	(ScrollView)->SetView(ScrolledView);
-    }
-}
-
-void
-treev::UnlinkTree()
-{
-    class treev *self=this;
-    (this)->aptv::UnlinkTree();
     if(ScrollView) {
-	(ScrollView)->UnlinkTree();
+	(ScrollView)->LinkTree(parent);
+	if(parent && (this)->GetIM())
+	    (ScrollView)->SetView(ScrolledView);
     }
 }

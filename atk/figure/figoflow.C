@@ -148,7 +148,7 @@ void figoflow::Draw(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_COPY);
+    (v)->SetTransferMode( graphic::COPY);
     (v)->SetForegroundColor( "black", 0, 0, 0); 
     (v)->DrawRectSize(x, y, w, h);
     if (w > 16) {
@@ -157,7 +157,7 @@ void figoflow::Draw(class figview  *v)
 	sprintf(buf, "%ld", this->order);
 	v->SetFont( ClassFontDesc);
 	v->MoveTo(x+4, y+4);
-	v->DrawString(buf, graphic_ATLEFT|graphic_ATTOP);
+	v->DrawString(buf, graphic::ATLEFT|graphic::ATTOP);
     }
 }
 
@@ -183,7 +183,7 @@ void figoflow::Sketch(class figview  *v)
 	h = (v)->ToPixH( -(this)->PosH());
     }
 
-    (v)->SetTransferMode( graphic_INVERT);
+    (v)->SetTransferMode( graphic::INVERT);
     (v)->DrawRectSize( x, y, w, h); 
 }
 

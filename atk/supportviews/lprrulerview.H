@@ -57,12 +57,12 @@ class lprrulerview : public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-	 void FullUpdate( enum view_UpdateType type, 
+	 void FullUpdate( enum view::UpdateType type, 
 		long left, long top, long width, long height );
 	 void Update();
-	 class view * Hit( enum view_MouseAction action, long x, long y, long n)
+	 class view * Hit( enum view::MouseAction action, long x, long y, long n)
 			 ;
-	 view_DSattributes DesiredSize( long width, long height, enum view_DSpass pass, 
+	 view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, 
 				long *desiredWidth, long *desiredHeight ) 
 			 ;
 
@@ -93,7 +93,7 @@ public:
 
 
 
-	boolean OnScreen;			/* if not view_Removed */
+	boolean OnScreen;			/* if not view::Removed */
 	boolean rulerchanged, iconschanged, textchanged;	/* indicate redraw requirements */
 	
 	/* Image patterns might differ between instances  on different displays: */

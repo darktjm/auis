@@ -71,10 +71,10 @@ class figview  : public  view {
       virtual ~figview();
 
 
-      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
+      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
       void Update();
-      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *desiredWidth, long *desiredHeight)  ; 
-      class view * Hit(enum view_MouseAction action, long x, long y, long n)	 ;
+      view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *desiredWidth, long *desiredHeight)  ; 
+      class view * Hit(enum view::MouseAction action, long x, long y, long n)	 ;
       void WantUpdate(class view *requestor);
       void ReceiveInputFocus();
       void LoseInputFocus();
@@ -87,14 +87,14 @@ class figview  : public  view {
       void SetDataObject(class dataobject *dobj);
       void LinkTree(class view *parent);
       void ExposeChild(class view *v);
-      boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-      boolean RecSrchResume(struct SearchPattern *pat);
+      boolean RecSearch(class search *pat, boolean toplevel);
+      boolean RecSrchResume(class search *pat);
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logica, struct rectangle &hit);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
       void *GetPSPrintInterface(const char *printtype);
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
-      void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
+      void DesiredPrintSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight);
 
 
       virtual void BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize);
@@ -195,7 +195,7 @@ class figview  : public  view {
       class keystate *BuildKeystate;
       const char *ForegroundColor, *BackgroundColor, *FigBackColor;
 
-      boolean OnScreen;		/* if not view_Removed */
+      boolean OnScreen;		/* if not view::Removed */
       boolean embedded;		/* TRUE if no call to GetApplicationLayer */
       boolean HasInputFocus;	/* T if received input focus */
       boolean InputFocusClick;

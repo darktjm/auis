@@ -31,7 +31,7 @@ enum scroll_Direction {
 
 typedef void (*scroll_getinfofptr)(class view *scrollee, struct range *total, struct range *seen, struct range *dot);
 typedef void (*scroll_setframefptr)(class view *scrollee, long posn, long coord, long height);
-typedef void (*scroll_endzonefptr)(class view *scrollee, int typeEnd, enum view_MouseAction act);
+typedef void (*scroll_endzonefptr)(class view *scrollee, int typeEnd, enum view::MouseAction act);
 typedef long (*scroll_whatfptr)(class view *scrollee, long coord, long height);
 
 struct scrollfns {
@@ -118,7 +118,7 @@ class ScrollRegion {
     virtual void ComputeRect(class scroll &scroll, int stype, const struct rectangle &bar, struct rectangle &area);
 		/* Computes the rectangle within the scroll area where the region should appear.  The rectangle should reflect both the x and y axis locations.  If the scroller supports only x or y it will override the non-applicable data.
 */	
-    virtual void Draw(class scroll &scroll, int stype, view_UpdateType type, const struct rectangle &damaged);
+    virtual void Draw(class scroll &scroll, int stype, view::UpdateType type, const struct rectangle &damaged);
 		/*  Essentially equivalent to FullUpdate for views. stype indicates whether this is the horizontal or vertical version.  (If there aren't serparate horizontal and vertical elevators drawn, same stype should be used all the type either scroll_VERT or scroll_HORIZ. */
 
     virtual void Update(class scroll &scroll, int stype);
@@ -199,7 +199,7 @@ class ScrollRegionEndzone : public ScrollRegion {
   public:
     ScrollRegionEndzone();
     ~ScrollRegionEndzone();
-    void Draw(class scroll &scroll, int stype, view_UpdateType type, const struct rectangle &damaged);
+    void Draw(class scroll &scroll, int stype, view::UpdateType type, const struct rectangle &damaged);
     void Update(class scroll &scroll, int stype);
 };
 /** @} */

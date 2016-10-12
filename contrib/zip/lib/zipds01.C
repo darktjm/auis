@@ -423,20 +423,20 @@ zip::Parse_Figure_Attributes( zip_type_figure	       figure )
 	switch ( c )
         {
 	    case 'W': figure->zip_figure_line_width = Parse_Stream_Integer(); break;
-	    case 'C': if (( c = NextChar()) == 'N' ) cap = graphic_CapNotLast;
-		else if ( c == 'B' ) cap = graphic_CapButt;
-		else if ( c == 'R' ) cap = graphic_CapRound;
-		else if ( c == 'P' ) cap = graphic_CapProjecting;
-		else { cap = graphic_CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
+	    case 'C': if (( c = NextChar()) == 'N' ) cap = graphic::CapNotLast;
+		else if ( c == 'B' ) cap = graphic::CapButt;
+		else if ( c == 'R' ) cap = graphic::CapRound;
+		else if ( c == 'P' ) cap = graphic::CapProjecting;
+		else { cap = graphic::CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
 		(this)->Set_Figure_Line_Cap(  figure, cap ); break;
-	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic_JoinMiter;
-		else if ( c == 'R' ) cap = graphic_JoinRound;
-		else if ( c == 'B' ) cap = graphic_JoinBevel;
-		else { cap = graphic_JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
+	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic::JoinMiter;
+		else if ( c == 'R' ) cap = graphic::JoinRound;
+		else if ( c == 'B' ) cap = graphic::JoinBevel;
+		else { cap = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
 		(this)->Set_Figure_Line_Join(  figure, cap ); break;
-	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic_LineSolid;
-	        else if ( c == 'D' ) cap = graphic_LineDoubleDash;
-		else if ( c == 'O' ) cap = graphic_LineOnOffDash;
+	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic::LineSolid;
+	        else if ( c == 'D' ) cap = graphic::LineDoubleDash;
+		else if ( c == 'O' ) cap = graphic::LineOnOffDash;
 		NextChar(); offset = Parse_Stream_Integer(); NextChar();
 		while( element != 0 )
 		{
@@ -641,20 +641,20 @@ Parse_Image_Attributes( class zip		      *self )
 	switch ( c )
         {
 	    case 'W': Image->zip_image_line_width = Parse_Stream_Integer(); break;
-	    case 'C': if (( c = NextChar()) == 'N' ) cap = graphic_CapNotLast;
-		else if ( c == 'B' ) cap = graphic_CapButt;
-		else if ( c == 'R' ) cap = graphic_CapRound;
-		else if ( c == 'P' ) cap = graphic_CapProjecting;
-		else { cap = graphic_CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
+	    case 'C': if (( c = NextChar()) == 'N' ) cap = graphic::CapNotLast;
+		else if ( c == 'B' ) cap = graphic::CapButt;
+		else if ( c == 'R' ) cap = graphic::CapRound;
+		else if ( c == 'P' ) cap = graphic::CapProjecting;
+		else { cap = graphic::CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
 		(self)->Set_Image_Line_Cap(  Image, cap ); break;
-	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic_JoinMiter;
-		else if ( c == 'R' ) cap = graphic_JoinRound;
-		else if ( c == 'B' ) cap = graphic_JoinBevel;
-		else { cap = graphic_JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
+	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic::JoinMiter;
+		else if ( c == 'R' ) cap = graphic::JoinRound;
+		else if ( c == 'B' ) cap = graphic::JoinBevel;
+		else { cap = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
 		(self)->Set_Image_Line_Join(  Image, cap ); break;
-	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic_LineSolid;
-	        else if ( c == 'D' ) cap = graphic_LineDoubleDash;
-		else if ( c == 'O' ) cap = graphic_LineOnOffDash;
+	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic::LineSolid;
+	        else if ( c == 'D' ) cap = graphic::LineDoubleDash;
+		else if ( c == 'O' ) cap = graphic::LineOnOffDash;
 		NextChar(); offset = Parse_Stream_Integer(); NextChar(); i = 0;
 		while( element != 0 )
 		{
