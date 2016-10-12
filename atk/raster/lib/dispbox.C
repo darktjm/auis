@@ -185,7 +185,7 @@ void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  
     (G)->WritePixImage(
 			   rectangle_Left(&DB) - self->DBXscroll,
 			   rectangle_Top(&DB) - self->DBYscroll,
-			   ((class raster *)self->dataobject)->GetPix(),
+			   ((class raster *)self->GetDataObject())->GetPix(),
 			   rectangle_Left(&self->DisplayBoxSelection),
 			   rectangle_Top(&self->DisplayBoxSelection),
 			   rectangle_Width(&self->DisplayBoxSelection),
@@ -200,7 +200,7 @@ void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  
 
 void rasterview_DisplayBoxHide(class rasterview  *self)
 {
-    class raster *ras = (class raster *)self->dataobject;
+    class raster *ras = (class raster *)self->GetDataObject();
     class graphic *G = (self)->GetDrawable();
     struct rectangle VB;
     long clipw = (self->Expansion)->GetWidth();
@@ -352,7 +352,7 @@ void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graph
 void rasterview_DisplayBoxHideHighlight(class rasterview  *self, class graphic  *G)
 {
     class rasterimage *pix =
-      ((class raster *)self->dataobject)->GetPix();
+      ((class raster *)self->GetDataObject())->GetPix();
     struct rectangle DS, DBS;
 
     if (self->DisplayBoxHidden) return;
@@ -852,7 +852,7 @@ void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, clas
 void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterimage  *pix, long  x , long  y, boolean  bit)
 {
     class rasterimage *fullpix =
-      ((class raster *)self->dataobject)->GetPix();
+      ((class raster *)self->GetDataObject())->GetPix();
 
     /* Image is in Expanded Mode. */
     struct rectangle sub;

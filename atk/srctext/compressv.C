@@ -115,7 +115,7 @@ void compressv::LinkTree(view *parent)
     compress *fn=(compress *)GetDataObject();
     (this)->view::LinkTree(parent);
     while (!ATK::IsTypeByName((parent)->GetTypeName(), "textview"))
-	if ((parent=parent->parent) == NULL) return;
+	if ((parent=parent->GetParent()) == NULL) return;
     this->parenttext= (text *)(parent)->GetDataObject();
     this->parentview= (textview *)parent;
     if (GetDrawable() && GetIM()) { /* make sure the graphic & im exist */

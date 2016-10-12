@@ -211,7 +211,7 @@ setnextcolor(gofigview *self, char color) {
 	static int
 leftend(gofigview *self) {
 	unsigned edges;
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	dobj->getedges( &edges );
 	return self->xoff 
 		- ((edges&LEFTedge) ? self->linethickness/2 : self->radius);
@@ -219,7 +219,7 @@ leftend(gofigview *self) {
 	static int
 rightend(gofigview *self) {
 	unsigned edges;
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	dobj->getedges( &edges );
 	return self->xoff + (dobj->width-1)*self->spotwidth 
 		+ ((edges&RIGHTedge) ? self->linethickness/2: self->radius);
@@ -227,7 +227,7 @@ rightend(gofigview *self) {
 	static int
 topend(gofigview *self) {
 	unsigned edges;
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	dobj->getedges( &edges );
 	return self->yoff 
 		- ((edges&TOPedge) ? self->linethickness/2 : self->radius);
@@ -235,7 +235,7 @@ topend(gofigview *self) {
 	static int
 bottomend(gofigview *self) {
 	unsigned edges;
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	dobj->getedges( &edges );
 	return self->yoff + (dobj->height-1)*self->spotheight 
 		+ ((edges&BOTTOMedge) ? self->linethickness/2 : self->radius);
@@ -271,7 +271,7 @@ computeHoshi(int hoshi[4], boolean leftedge, boolean rightedge, int width) {
 
 	static struct stone *
 atrowcol(gofigview *self, int row, int col) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	int i;
 	for (i = 0; i < dobj->nstones(); i++)
 		if ((*dobj)[i].row == row 
@@ -282,7 +282,7 @@ atrowcol(gofigview *self, int row, int col) {
 
 	static struct stone *
 selectedspot(gofigview *self) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	if (self->curspotrow == -1) return NULL; 
 	struct stone *s = atrowcol(self, self->curspotrow, self->curspotcol);
 	if (s) return s;
@@ -296,7 +296,7 @@ selectedspot(gofigview *self) {
 */
 	static void
 drawspot(gofigview *self, struct stone *s, boolean isclear) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	boolean isselected = (s->row == self->curspotrow
 				&& s->col == self->curspotcol);
 	const int x = self->xoff + s->col * self->spotwidth;
@@ -546,7 +546,7 @@ RedrawView(gofigview  *self) {
 	if ( ! self->OnScreen) return;
 	struct rectangle r;
 	int left, top, vwidth, vheight;
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	long dpycls = (self)->DisplayClass();
 	boolean colordpy = (dpycls & graphic::Color) != 0;
 	unsigned edges;
@@ -884,7 +884,7 @@ SetClickMode(gofigview *self, int code) {
 #if 0
 	/* deselect the current spot: avoid cycling its color */
 	
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	struct stone *s = selectedspot(self);
 	if (s != NULL) {
 		dobj->changed(s);
@@ -921,7 +921,7 @@ DoNothing(gofigview *self, int code) {
 */
 	static void 
 PutStone(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	struct stone *s = selectedspot(self);
 	if (s == NULL) {ClickFirst(); return;}
 	if (s->color == '/') {
@@ -947,7 +947,7 @@ PutStone(gofigview *self, int code) {
 */
 	static void 
 CharNote(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	struct stone *s = selectedspot(self);
 	if (s == NULL) {ClickFirst(); return;}
 
@@ -981,7 +981,7 @@ CharNote(gofigview *self, int code) {
 */
 	static void 
 EnterNote(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	struct stone *s = selectedspot(self);
 
 	/* posting menus should not be necessary, but the 'A' on the menu 
@@ -1013,7 +1013,7 @@ EnterNote(gofigview *self, int code) {
 
 	static void 
 SetLayout(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	int rows, cols;
 	unsigned edges;
 	dobj->getedges( & edges );
@@ -1066,7 +1066,7 @@ SetLayout(gofigview *self, int code) {
 
 	static void 
 SetPrintSize(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	char buffer[20];
 	char prompt[50];
 	double newcolwidth;
@@ -1103,7 +1103,7 @@ SetPrintSize(gofigview *self, int code) {
 */
 	static void 
 MoveSpot(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	struct stone *s = selectedspot(self);
 	int row, col;
 	if (s == NULL) {
@@ -1133,7 +1133,7 @@ MoveSpot(gofigview *self, int code) {
 */
 	static void 
 CopyCommand(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	if (dobj == NULL) return;
 	FILE *copyFile;
 
@@ -1150,7 +1150,7 @@ CopyCommand(gofigview *self, int code) {
 */
 	static void 
 ReplaceCommand(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	if (dobj == NULL) return;
 	FILE *inf;
 	int c;
@@ -1441,7 +1441,7 @@ gofigview::ReceiveInputFocus() {
 	PostKeyState( Keystate );
 	PostMenus( Menus);
 
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 	struct stone *sel = selectedspot( this );
 	if (sel) dobj->changed(sel);
 
@@ -1456,7 +1456,7 @@ gofigview::ReceiveInputFocus() {
 gofigview::LoseInputFocus() {
 	ENTER(gofigview_LoseInputFocus);
 	HasInputFocus = FALSE;
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 	struct stone *sel = selectedspot( this );
 	if (OnScreen && sel) dobj->changed(sel);
 	LEAVE(gofigview_LoseInputFocus);
@@ -1508,7 +1508,7 @@ gofigview::Update() {
 	view *
 gofigview::Hit(enum view::MouseAction   action, 
 			long   x , long   y , long   num_clicks) {
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 	boolean newselection = FALSE;
 	DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 	if (action == view::NoMouseEvent)
@@ -1625,7 +1625,7 @@ gofigview::Hit(enum view::MouseAction   action,
 gofigview::DesiredSize(long  width, long  height, enum view::DSpass  pass, 
 			long  *desiredWidth, long  *desiredHeight) {
 	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 	unsigned edges;
 	dobj->getedges( & edges );
 	double addinx = (edges&INDICESedge) ? 2.0*INDEXFRAC : 0.0;
@@ -2049,7 +2049,7 @@ GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, int wpts, int hp
 gofigview::DesiredPrintSize(long width, long height, enum view::DSpass pass,
 		long *desiredwidth, long *desiredheight) {
 
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 	unsigned edges;
 	dobj->getedges( & edges );
 	int wpts, hpts;
@@ -2088,7 +2088,7 @@ gofigview::GetPSPrintInterface(const char *printtype) {
 
 	static void
 registerdefs(gofigview *self) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	unsigned edges;
 	dobj->getedges( & edges );
 	print::PSRegisterDef("godict", "60 dict");
@@ -2104,7 +2104,7 @@ gofigview::PrintPSRect(FILE *outfile, long logwidth, long logheight,
 		struct rectangle *visrect) {
 	registerdefs( this );
 
-	GeneratePostScript(outfile, (gofig *)dataobject, "", logwidth, logheight );
+	GeneratePostScript(outfile, (gofig *)GetDataObject(), "", logwidth, logheight );
 }
 
 	void
@@ -2116,12 +2116,12 @@ gofigview::PrintPSDoc(FILE *outfile, long pagew, long pageh) {
 	DesiredPrintSize(pagew, pageh, view::NoSet, &dw, &dh);
 	fprintf(outfile, "%ld %ld translate\n",  (pagew-dw)/2, (pageh-dh)/2);
 
-	GeneratePostScript(outfile, (gofig *)dataobject, "", dw, dh);
+	GeneratePostScript(outfile, (gofig *)GetDataObject(), "", dw, dh);
 }
 
 	void
 gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel) {
-	gofig *dobj = (gofig *)dataobject;
+	gofig *dobj = (gofig *)GetDataObject();
 
 	/* compute size */
 	long wpts, hpts;
@@ -2164,7 +2164,7 @@ gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boo
 
 	static void 
 printdata(gofigview *self, int code) {
-	gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->GetDataObject();
 	printf("visacc:  %d  currow,col:  %d %d  sel: 0x%p\n",
 		 self->visibleaccnum,	self->curspotrow, self->curspotcol,
 		selectedspot( self ));

@@ -35,7 +35,7 @@ void hrv::LinkTree(class view *parent)
 {
     this->view::LinkTree(parent);
     while (parent && !ATK::IsTypeByName(parent->GetTypeName(), "textview"))
-	parent= parent->parent;
+	parent= parent->GetParent();
     this->parentview= (textview *)parent;
 }
 

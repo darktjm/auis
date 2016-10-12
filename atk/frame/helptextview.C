@@ -3,7 +3,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-#define Text(self) ((class text *) ((self)->dataobject))
+#define Text(self) ((class text *) ((self)->GetDataObject()))
 
 #include <andrewos.h>
 ATK_IMPL("helptextview.H")

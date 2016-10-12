@@ -275,7 +275,7 @@ static char *CheckDir(const char *path, const char *dir, const char *filenm) {
 static int FetchFrom(AVarSet *self, const char *path, const char *dir, const char *filenm) {
     int errors = 0;
     char *pathname=CheckDir(path, dir, filenm);
-    FILE *fp = fopen((char *)pathname, "r");
+    FILE *fp = pathname ? fopen((char *)pathname, "r") : NULL;
     if (fp) {
 	errors += self->FetchResources(fp);
 	fclose(fp);

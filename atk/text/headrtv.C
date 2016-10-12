@@ -493,7 +493,7 @@ static class textview *GetTextView(class view  *self)
 {
     while(self) {
 	if(ATK::IsTypeByName((self)->GetTypeName(),"textview")) return (class textview *)self;
-	self=self->parent;
+	self=self->GetParent();
     }
     return (class textview *)self;
 }

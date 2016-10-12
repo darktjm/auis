@@ -23,7 +23,7 @@ ATK_IMPL("ezdiff.H")
 #include <cursor.H>
 #include <ezdiff.H>
 
-#define ObjectOf(V) (((class view *)(V))->dataobject)
+#define ObjectOf(V) (((class view *)(V))->GetDataObject())
 #define USECURRENTMARK -32000l
 static class ezdiff *firstlink , *lastlink;
 static char buffername[1024];

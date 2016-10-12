@@ -70,7 +70,7 @@ public:
   inline long Yval() { return (this->y); }
   inline long Width() { return (this->width); }
   inline long Height() { return (this->height); }
-  inline class value * Value() { return ((class value *) this->dataobject); }
+  inline class value * Value() { return ((class value *) this->GetDataObject()); }
 
   valueview();
 	

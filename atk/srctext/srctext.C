@@ -1017,7 +1017,7 @@ void srctext::SetWriteCallbacks(srctext_writefptr pre, srctext_writefptr post)
 long srctext::GetModified()
 {
     long pos=0, len=GetLength();
-    long mod, maxmod=this->GetModified();
+    long mod, maxmod=text::GetModified();
     while ((pos=nextInset(this, pos,len-pos)) >= 0 && pos<len) {
 	environment *env=(environment *)(this->text::rootEnvironment)->GetInnerMost(pos);
 	if (env->type == environment_View) {

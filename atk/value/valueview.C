@@ -406,7 +406,7 @@ void valueview::Changed(long status)
 
 void valueview::Destroyed()
      {
-  this->dataobject = NULL;
+  SetThisDataObject(NULL); /* tjm - hard to say if this is safe; depends on what was destoryed */
   (this)->Deactivate();
 }
 

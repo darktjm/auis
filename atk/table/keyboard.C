@@ -135,7 +135,7 @@ void AddRows(class spread  * V, int  after , int  count)
 	(MyTable(V))->InsertData ( Q, &remnant);
 	(Q)->Destroy();
     }
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 /* add columns to table */
@@ -159,7 +159,7 @@ void AddCols(class spread  * V, int  after , int  count)
 	(MyTable(V))->InsertData ( Q, &remnant);
 	(Q)->Destroy();
     }
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 /* verify there is a selection to enter data into */

@@ -21,14 +21,14 @@
 
 #define xim_PRORGAMMERVERSION 1
 
-#define xim2valid(AnXIMPtr) (((class xgraphic *) ((AnXIMPtr)->drawable))->valid)
-#define xim2window(AnXIMPtr) (((class xgraphic *) ((AnXIMPtr)->drawable))->localWindow)
-#define xim2display(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->drawable))->XDisplay())
-#define xim2fd(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->drawable))->xfd)
-#define xim2gc(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->drawable))->XGC())
-#define xim2screen(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->drawable))->XScreen())
-#define xim2fillgc(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->drawable))->XFillGC())
-#define xim2graphic(AnXIMPtr) ((class xgraphic *) ((AnXIMPtr)->drawable))
+#define xim2valid(AnXIMPtr) (((class xgraphic *) ((AnXIMPtr)->GetDrawable()))->valid)
+#define xim2window(AnXIMPtr) (((class xgraphic *) ((AnXIMPtr)->GetDrawable()))->localWindow)
+#define xim2display(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->GetDrawable()))->XDisplay())
+#define xim2fd(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->GetDrawable()))->xfd)
+#define xim2gc(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->GetDrawable()))->XGC())
+#define xim2screen(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->GetDrawable()))->XScreen())
+#define xim2fillgc(AnXIMPtr) (((class xgraphic *)((AnXIMPtr)->GetDrawable()))->XFillGC())
+#define xim2graphic(AnXIMPtr) ((class xgraphic *) ((AnXIMPtr)->GetDrawable()))
 
 #define xim2programname(AnXIMPtr) ((AnXIMPtr)->programname?(AnXIMPtr)->programname:"No program name set!")
 

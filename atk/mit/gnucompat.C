@@ -121,7 +121,7 @@ static int back_to_start (class text  *txt, int  pos)
 
 static void gcparafill (class textview  *self, long  key)
 {
-    class text *txt = (class text *)self->dataobject;
+    class text *txt = (class text *)self->GetDataObject();
     int pos, len, cur, npos, count, nextc, end;
     int one_only = 0, modified = 0, found_table;
 
@@ -286,7 +286,7 @@ static int is_itemp (class text  *txt, int  start , int  end)
 
 static void insertBullets (class textview  *self, long  key)
 {
-    class text *txt = (class text *)self->dataobject;
+    class text *txt = (class text *)self->GetDataObject();
     class style *stylep;
     
     int dot, pos, len, end;
@@ -365,7 +365,7 @@ static void insertBullets (class textview  *self, long  key)
 
 static void removeBullets (class textview  *self, long  key)
 {
-    class text *txt = (class text *)self->dataobject;
+    class text *txt = (class text *)self->GetDataObject();
     struct text_statevector sv;
     int pos, count, len, end;
     long cur, indent, left;
@@ -465,7 +465,7 @@ static int parse_num (class text  *txt, int  start , int  end , int  *numret)
 
 static void enumerate (class textview  *self, long  key)
 {
-    class text *txt = (class text *)self->dataobject;
+    class text *txt = (class text *)self->GetDataObject();
     struct text_statevector sv;
     int dot, pos, npos, count, tlen, len, end;
     long cur, indent, left;
@@ -586,7 +586,7 @@ static void enumerate (class textview  *self, long  key)
 
 static void denumerate (class textview  *self, long  key)
 {
-    class text *txt = (class text *)self->dataobject;
+    class text *txt = (class text *)self->GetDataObject();
     struct text_statevector sv;
     int pos, count, len, end;
     long cur, indent, left;

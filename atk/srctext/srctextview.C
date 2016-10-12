@@ -963,7 +963,7 @@ void srctextview::PutFileIntoNewWindow(char *bufname, char *proc, char *filename
 	}
     }
     if (bf) {
-	if (viewp->dataobject!=(bf)->GetData()) /*not viewing Int/Mod already*/
+	if (viewp->GetDataObject()!=(bf)->GetData()) /*not viewing Int/Mod already*/
 	    newView=PutInAnotherWindow(this,bf,TRUE);
 	if (proc && strlen(proc)>0) {
 	    if (!TofC)

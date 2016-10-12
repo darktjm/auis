@@ -2783,9 +2783,9 @@ Get the size of the window. Note: this size should be good since HandleRedraw is
     if (width > 0 && height > 0)  {
 		/* It is actually on the screen, so display the top level view  */
 
-	this->drawable->visualBounds 
-	  = this->drawable->localBounds;
-	point_SetPt(&this->drawable->enclosedOrigin, 0, 0);
+	this->GetDrawable()->visualBounds 
+	  = this->GetDrawable()->localBounds;
+	point_SetPt(&this->GetDrawable()->enclosedOrigin, 0, 0);
 		/* Clear out the view specific cursors */
 		/* if (im->header.im.cursorlist) xim_ClearCursorList(im); */
 
@@ -2811,9 +2811,9 @@ Get the size of the window. Note: this size should be good since HandleRedraw is
 
 	if (this->topLevel != NULL)  {
 	    if (this->bbarv)
-		this->bbarv->InsertView(this, &this->drawable->localBounds);
+		this->bbarv->InsertView(this, &this->GetDrawable()->localBounds);
 	    else
-		this->topLevel->InsertView( this, &this->drawable->localBounds);
+		this->topLevel->InsertView( this, &this->GetDrawable()->localBounds);
 
 	    /* See if we have only a little bit to do, and if so, only update that part */
 	    if (curUpdateRgn) {
@@ -3036,7 +3036,7 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 	rwidth=width;rheight=height;
 	width-=point_X(&(im)->GetDrawable()->physicalOrigin);
 	height-=point_Y(&(im)->GetDrawable()->physicalOrigin);
-	if(width!=(im)->GetLogicalWidth() || height!=(im)->GetLogicalHeight()) {	rectangle_SetRectSize( &im->drawable->localBounds, 0, 0, width,  height);
+	if(width!=(im)->GetLogicalWidth() || height!=(im)->GetLogicalHeight()) {	rectangle_SetRectSize( &im->GetDrawable()->localBounds, 0, 0, width,  height);
 	    sizechanged=TRUE;
 	    if(im->menubaron && im->menu) mb_RefitMenubar(im->menu);
 	}
@@ -4083,7 +4083,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 
     /* Resize the input only window as appropriate */
     if (rec) {
-	rectangle_IntersectRect(&vrec, rec, &(plainCur->view->drawable->visualBounds));
+	rectangle_IntersectRect(&vrec, rec, &(plainCur->view->GetDrawable()->visualBounds));
 	physical_LogicalToGlobalRect((plainCur->view)->GetDrawable(), &vrec);
 	/* This is a hack because of no 0-sized windows -- something better should be done */
 	if (vrec.height>0 && vrec.width>0) {
@@ -5557,7 +5557,7 @@ struct rectangle *xim::GetLoc(class view  *view, struct rectangle  *rect)
     if(this->IsOffscreenWindow) return NULL;
     rect->width = (view)->GetEnclosedWidth();
     rect->height = (view)->GetEnclosedHeight();
-    for(x = y = 0; view != (class view *)this; view = view->parent){
+    for(x = y = 0; view != (class view *)this; view = view->GetParent()){
 	x += (view)->GetEnclosedLeft();
 	y += (view)->GetEnclosedTop();
     }
@@ -5597,12 +5597,12 @@ boolean xim::ResizeWindow(int  width , int  height)
 	newMap = XCreatePixmap(xim2display(this), RootWindow(xim2display(this), DefaultScreen(xim2display(this))), preferedWidth, preferedHeight, DefaultDepth(xim2display(this), DefaultScreen(xim2display(this))));
 	/* clear new pixmap */
 	XFillRectangle(xim2display(this), newMap, DefaultGC(xim2display(this),DefaultScreen(xim2display(this))), 0, 0, (unsigned int)width, (unsigned int)height);
-	rectangle_SetRectSize( &this->drawable->localBounds, 0, 0, width,  height);
+	rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width,  height);
 	XCopyArea(xim2display(this), xim2window(this), newMap, DefaultGC(xim2display(this), DefaultScreen(xim2display(this))), 0, 0, width, height, 0, 0);
 	XFreePixmap(xim2display(this), xim2window(this));
 	xim2window(this) = newMap;
-	rectangle_SetRectSize( &this->drawable->localBounds, 0, 0, width, height);
-	this->drawable->visualBounds = this->drawable->localBounds;
+	rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width, height);
+	this->GetDrawable()->visualBounds = this->GetDrawable()->localBounds;
     }
     else {
 /* is this necessary? */
@@ -5679,14 +5679,15 @@ boolean xim::CreateOffscreenWindow(class im  *o, int  width , int  height)
     point_SetPt(&(this)->GetDrawable()->physicalOrigin, 0, 0);
     (xim2graphic(this))->InsertGraphicSize( xim2graphic(other), 0, 0, width, height);
     point_SetPt(&(this)->GetDrawable()->physicalOrigin, 0, 0);
-    ((class view *)this)->parent = NULL;
+    if(GetParent())
+	LinkTree(NULL);
     xim2graphic(this)->localWindow = newPixmap;
     xim2window(this)= newPixmap;
-    rectangle_SetRectSize( &this->drawable->localBounds, 0, 0, width,	 height);
-    this->drawable->visualBounds = this->drawable->localBounds;
-    point_SetPt(&this->drawable->enclosedOrigin, 0, 0);
+    rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width,	 height);
+    this->GetDrawable()->visualBounds = this->GetDrawable()->localBounds;
+    point_SetPt(&this->GetDrawable()->enclosedOrigin, 0, 0);
     ((class xgraphic *)xim2graphic(this))->SetTransferMode( graphic::COPY);
-    ((xgraphic *)drawable)->DisplayClassVal=o->DisplayClass();
+    ((xgraphic *)GetDrawable())->DisplayClassVal=o->DisplayClass();
     cmap = (class colormap **) ColormapForDisplay(xDisplay);
     (this)->SetInheritedColormap( cmap);
     SetForegroundBackground(this, &foregroundColor, &backgroundColor, &foreground, &background);

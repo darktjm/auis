@@ -173,7 +173,7 @@ static void
 htmlview_SetTitle(class htmlview * self, long  key)
 {
     char reply[80];
-    class html* h = (class html*) self->view::dataobject;
+    class html* h = (class html*) self->view::GetDataObject();
     if (message::AskForString(self, 0, "New title: ", (h)->GetTitle(), reply, sizeof(reply)) < 0) {
 	message::DisplayString(self, 0, "Cancelled");
 	return;
@@ -186,7 +186,7 @@ static void
 htmlview_SetIndex(class htmlview * self, long  key)
 {
     char reply[80];
-    class html* h = (class html*) self->view::dataobject;
+    class html* h = (class html*) self->view::GetDataObject();
 
     if (message::AskForString(self, 0, "Is the document searchable? [yes/no] ", (h)->GetIsIndex() ? "yes" : "no", reply, sizeof(reply)) < 0) {
 	message::DisplayString(self, 0, "Cancelled");
@@ -200,7 +200,7 @@ static void
 htmlview_SetLink(class htmlview * self, long  key)
 {
     long pos, len;
-    class html* html = (class html*) self->view::dataobject;
+    class html* html = (class html*) self->view::GetDataObject();
     char uri[MAXPATHLEN];
 
     pos = (self)->GetDotPosition();
@@ -221,7 +221,7 @@ htmlview_SetLink(class htmlview * self, long  key)
 class view*
 htmlview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
-    class html* html = (class html*) this->view::dataobject;
+    class html* html = (class html*) this->view::GetDataObject();
     long pos;
     char* s;
     class view* retv = (this)->textview::Hit( action, x, y, numberOfClicks);
@@ -252,7 +252,7 @@ static void
 htmlview_EditAttributes(class htmlview * self, long  key)
 {
     long pos, len;
-    class html* html = (class html*) self->view::dataobject;
+    class html* html = (class html*) self->view::GetDataObject();
     class environment* startEnv;
     char* choices[16]; /* 3 internal, that leaves user with max of 13 */
     char answer[MAXPATHLEN];
@@ -346,7 +346,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 static void
 htmlview_AddRandom(class htmlview * self, long  key)
 {
-    class html* html = (class html *)self->view::dataobject;
+    class html* html = (class html *)self->view::GetDataObject();
     char ename[MAXPATHLEN];
     long pos, len;
 
@@ -368,7 +368,7 @@ htmlview_AddRandom(class htmlview * self, long  key)
 static void
 htmlview_AddImage(class htmlview * self, long  key)
 {
-    class html* html = (class html *)self->view::dataobject;
+    class html* html = (class html *)self->view::GetDataObject();
     char ename[MAXPATHLEN];
     static char vars[256];
     long pos;
@@ -408,7 +408,7 @@ htmlview_SetImage(class htmlview * self, long  key)
 static void
 htmlview_AddHrule(class htmlview * self, long  key)
 {
-    class html* html = (class html*) self->view::dataobject;
+    class html* html = (class html*) self->view::GetDataObject();
     long pos = (self)->GetDotPosition();
     (html)->AddEntity( pos, 0, "hr", 0);
 }
@@ -565,7 +565,7 @@ const struct listCompileTable {
 static void 
 htmlview_makeList (class htmlview  *self, char * listStyleName)
 {
-    class html* html = (class html *)self->view::dataobject;
+    class html* html = (class html *)self->view::GetDataObject();
     struct text_statevector sv;
     long dot, pos, npos, len, end, origLen;
     long startPos, itemPos;
@@ -708,7 +708,7 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
 
 static void htmlview_unlistify (class htmlview  *self, long  key)
 {
-    class html *html = (class html *)self->view::dataobject;
+    class html *html = (class html *)self->view::GetDataObject();
     struct text_statevector sv;
     int pos, count, len, end;
     long cur, indent, left;
@@ -771,7 +771,7 @@ static void htmlview_unlistify (class htmlview  *self, long  key)
 static void
 htmlview_modifyList(class htmlview * self, long  key)
 {
-    class html *html = (class html *)self->view::dataobject;
+    class html *html = (class html *)self->view::GetDataObject();
     char* ptr;
     if (!self->styleInQuestion) {
 	message::DisplayString(self, 0, "Need to use Edit Attributes to call this");

@@ -89,7 +89,7 @@ void asmtextview::SetDataObject(class dataobject *dataobj)
 /* only check if c-comments are on */
 void asmtextview::StartComment(char key /* must be char for "&" to work. */)
 {
-    asmtext *ct=(asmtext *)this->view::dataobject;
+    asmtext *ct=(asmtext *)this->view::GetDataObject();
     if ((ct)->UseCComments())
 	(this)->srctextview::StartComment(key);
     else
@@ -100,7 +100,7 @@ void asmtextview::StartComment(char key /* must be char for "&" to work. */)
 /* only check if c-comments are on */
 void asmtextview::EndComment(char key /* must be char for "&" to work. */)
 {
-    asmtext *ct=(asmtext *)this->view::dataobject;
+    asmtext *ct=(asmtext *)this->view::GetDataObject();
     if ((ct)->UseCComments())
 	(this)->srctextview::EndComment(key);
     else
@@ -110,7 +110,7 @@ void asmtextview::EndComment(char key /* must be char for "&" to work. */)
 /* override */
 void asmtextview::StartLineComment(char key /* must be char for "&" to work. */)
 {
-    asmtext *ct=(asmtext *)this->view::dataobject;
+    asmtext *ct=(asmtext *)this->view::GetDataObject();
     /* hold it! make sure THIS asmtext object is the one that mapped this key to be a bang-comment! */
     if (strchr(ct->bangComments,key))
 	(this)->srctextview::StartLineComment(key);
@@ -121,7 +121,7 @@ void asmtextview::StartLineComment(char key /* must be char for "&" to work. */)
 /* override */
 void asmtextview::Reindent()
 {
-    asmtext *ct= (asmtext *)this->view::dataobject;
+    asmtext *ct= (asmtext *)this->view::GetDataObject();
     long pos= GetDotPosition(), len= GetDotLength();
 
     if (len>0 && (ct)->IndentingEnabled()) {

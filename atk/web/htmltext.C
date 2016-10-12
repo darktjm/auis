@@ -1598,7 +1598,8 @@ rawinset_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 		return RAW_TEXT;
 	} else {
 	    long p=strlen(taginfo->tagid)+2;
-	    class search pat("<title>.*</title>");
+	    class search pat;
+	    pat.CompilePattern("<title>.*</title>");
 	    int result= pat.MatchPattern((hidden *)*ptxtobj, p);
 	    if(result>=0) {
 		long matchlen= pat.GetMatchLength()-7-8;
@@ -3813,7 +3814,6 @@ GififyViaView(view *v, const char *filename, long width, long height) {
 	if ( ! realim || ! realim->SupportsOffscreen()) 
 		return "*** Cannot gifify without X windows";
 	(v)->InsertView((view *)realim, &playpen);
-	v->imPtr = realim;
 	Ximg = im::CreateOffscreen(realim, width, height);
 	if (Ximg == NULL) {
 		retval = "*** Could not create offscreen view area";
@@ -3827,7 +3827,7 @@ GififyViaView(view *v, const char *filename, long width, long height) {
 	v->WantColormap(v, &privateCmap);
 	Ximg->SetView(v);
 	im::ForceUpdate();
-	drawbl = v->drawable;
+	drawbl = v->GetDrawable();
 	drawngif = new imageio;
 	if (drawngif == NULL) {
 		retval = "*** Could not create new gif";

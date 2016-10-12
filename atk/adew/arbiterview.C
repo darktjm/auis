@@ -43,7 +43,7 @@ static class cursor *WaitCursor;
 static const class atom *a_vp;
 static class arbiterview *firstlink , *lastlink;
 #define NameSet(V) (((class view *)V)->name_explicitly_set)
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Cel(A) ((class cel *) DataObject(A))
 #define Parent(V) (((class view *)V)->parent)
 #define Arbiter(A) ((class arbiter *) DataObject(A))
@@ -445,7 +445,7 @@ printf("Found via arbiter %s = %s (%s)- Returning %d\n",(cl)->GetRefName(),Objec
 	{ /* support the new child finding stuff in arbiter */
 	    class cel *cel;
 	    class arbiter *fcel;
-	    if((fcel = (class arbiter *)  self->dataobject) != NULL){
+	    if((fcel = (class arbiter *)  self->GetDataObject()) != NULL){
 
 		for(cel = (fcel)->GetFirst(); cel != (class cel *)fcel; cel = (cel)->GetNextChain()){
 		    if(at == (cel)->GetRefAtom()){
@@ -556,7 +556,7 @@ long arbiterview::GetArbName(char  *buf,long  buflen)
     class buffer *b;
     const char *myname;
     class celview *cv = (class celview *) this;
-    class view *parent = this->parent;
+    class view *parent = this->GetParent();
     if(Cel(this) == NULL) return buflen;
     myname = (Cel(this))->GetRefName();
     if(parent != NULL && cv->TopLevel == FALSE &&  cv->arb != NULL) {
@@ -616,13 +616,13 @@ boolean arbiterview::InTree()
  if(arbiterview_GetTrueChild(self)->parent) printf("cpp = %d\n",arbiterview_GetTrueChild(self)->parent->parent);
 	    fflush(stdout);
 */
-    if(((class view *)this)->parent == NULL){
+    if(((class view *)this)->GetParent() == NULL){
 	if(((this)->GetTrueChild() != NULL) &&
 	   ATK::IsTypeByName(((this)->GetTrueChild())->GetTypeName(),"frame") &&
 /*	   (strcmp(class_GetTypeName(arbiterview_GetTrueChild(self)),"frame") == 0) && */
-	   (this)->GetTrueChild()->parent != NULL && 
+	   (this)->GetTrueChild()->GetParent() != NULL && 
 	   ((this)->GetApplication() != NULL) &&
-	   (((this)->GetApplication())->parent != NULL)){
+	   (((this)->GetApplication())->GetParent() != NULL)){
 	    fflush(stdout);
 	    return TRUE;
 	}

@@ -1343,7 +1343,7 @@ void figview::FullUpdate(enum view::UpdateType  type, long  left , long  top , l
 	this->OnScreen = FALSE;
 	long ix;
 	for (ix=0; ix<this->objs_size; ix++) {
-	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->parent==this) {
+	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->GetParent()==this) {
 		objs[ix].insetv->FullUpdate(view::Remove, 0, 0, 0, 0);
 	    }
 	}
@@ -1353,7 +1353,7 @@ void figview::FullUpdate(enum view::UpdateType  type, long  left , long  top , l
     if(type == view::MoveNoRedraw) {
 	long ix;
 	for (ix=0; ix<this->objs_size; ix++) {
-	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->parent==this) {
+	    if (objs[ix].o && objs[ix].insetv && objs[ix].insetv->GetParent()==this) {
 		(objs[ix].insetv)->InsertView(this, &(objs[ix].insetb));
 		objs[ix].insetv->FullUpdate(view::MoveNoRedraw, 0, 0, 0, 0);
 	    }
@@ -2621,7 +2621,7 @@ static boolean PrintSplot(class figobj  *o, long  ref, class figure  *fig, struc
 
 void figview::Print(FILE  *file, const char  *processor, const char  *format, boolean  toplevel)
 {
-    class figure *fig = (class figure *)this->dataobject;
+    class figure *fig = (class figure *)this->GetDataObject();
     long wpts, hpts;  /* image dimensions in points */
     long tmpval;
     const char *prefix;
@@ -2754,7 +2754,7 @@ void figview::Print(FILE  *file, const char  *processor, const char  *format, bo
 
 void figview::PrintPSRect(FILE *file, long logwidth, long logheight, struct rectangle *visrect)
 {
-    class figure *fig = (class figure *)this->dataobject;
+    class figure *fig = (class figure *)this->GetDataObject();
     struct printlump lump;
     boolean landscape;
 

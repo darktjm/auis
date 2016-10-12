@@ -29,7 +29,7 @@ ATK_IMPL("frameview.H")
 static class keymap *frameviewKeymap;
 static class menulist *frameviewMenulist;
 
-#define Text(self) ((class text *) self->dataobject)
+#define Text(self) ((class text *) self->GetDataObject())
 
 
 ATKdefineRegistry(frameview, textview, frameview::InitializeClass);

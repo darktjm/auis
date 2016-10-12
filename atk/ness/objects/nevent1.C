@@ -72,7 +72,7 @@ ProperPtr(ATK   *ptr, const struct ATKregistryEntry   *type) {
 	}
 	/* it is a view.  If data object is wanted, check this one's */
 	if ((type)->IsType( dataobjectClass)) {
-		dobj = ((class view *)ptr)->dataobject;
+		dobj = ((class view *)ptr)->GetDataObject();
 		if ((dobj)->IsType( type))
 			return (ATK  *)dobj;
 	}
@@ -136,9 +136,9 @@ ProperPtr(ATK   *ptr, const struct ATKregistryEntry   *type) {
 #undef NCLASSES
 
 	/* as a last resort try the ancestors of the view we were passed. */
-	view = ((class view *)ptr)->parent;
+	view = ((class view *)ptr)->GetParent();
 
-	while(view && !(view)->IsType( type)) view=view->parent;
+	while(view && !(view)->IsType( type)) view=view->GetParent();
 	
 	return (ATK  *)view;
 }

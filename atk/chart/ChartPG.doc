@@ -540,8 +540,6 @@ chart_EKG
 
 chart_Dot
 
-chart_Cartesian
-
 chart_Polar
 
 chart_xxx}}}
@@ -2026,18 +2024,6 @@ Displays data collection as a Histrogram.  \
 
 
 Displays data collection as Dot-chart.  Dots may be connected.
-
-
-\bold{\sans{chartstk}}
-
-
-Displays data collection as Stacked-Histogram-chart.
-
-
-\bold{\sans{chartcsn}}
-
-
-Displays data collection as Cartesian-chart.
 
 
 \section{5.2	Extending the Chart Classes}

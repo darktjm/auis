@@ -845,7 +845,7 @@ static void eqview_Paste(class eqview  *self)
     struct formula *f;
 
     i = 0;
-    ct = (self->imPtr)->Argument();
+    ct = (self->GetIM())->Argument();
 
     pos = (self)->GetDotPosition();
     len = (self)->GetDotLength();

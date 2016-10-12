@@ -34,8 +34,8 @@ ATK_IMPL("contentv.H")
 #include "contentv.H"
 static class menulist *contentvMenus;
 static int ScrollTop = FALSE;
-#define Data(self) ((class content *)(((class view *) self)->dataobject))
-#define Text(v)	(class text *) ((v)->dataobject)
+#define Data(self) ((class content *)(((class view *) self)->GetDataObject()))
+#define Text(v)	(class text *) ((v)->GetDataObject())
 #define Srctext(self) (Data(self)->srctext)
 
 ATKdefineRegistry(contentv, textview, contentv::InitializeClass);
@@ -172,8 +172,8 @@ static int check(class frame  *fr, struct contentv_cntr  *rock)
 }
 static class frame *getframe(class view  *vw)
 {
-    while (vw->parent != NULL){
-	vw = vw->parent;
+    while (vw->GetParent() != NULL){
+	vw = vw->GetParent();
 	if(ATK::IsTypeByName((vw)->GetTypeName(),"frame")){
 	    return (class frame *) vw;
 	}

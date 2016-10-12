@@ -42,7 +42,7 @@ static long tokenSearchCmd;
 
 static proctable_fptr typescript_GrabLastCmd;
 
-#define Text(self) ((class text *) ((self)->dataobject))
+#define Text(self) ((class text *) ((self)->GetDataObject()))
 #define MyEnvinfo(text,pos) (text->rootEnvironment)->GetInnerMost( pos)
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 

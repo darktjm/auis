@@ -591,7 +591,6 @@ static void dosearch(class textview  *tv, volatile int  forwardp)
     forwardp = StackTop->forwardp;
     if (dynstr_empty(&pattern))
 	goto emptypatternstate;
-    compiled = NULL;
     if ((compileerr = compiled.CompilePattern(pattern.text)))
 	goto partialstate;
     if (StackTop->failurep)

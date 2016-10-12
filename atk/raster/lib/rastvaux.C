@@ -566,7 +566,7 @@ void rasterview::FullUpdate(enum view::UpdateType   type, long   left , long   t
 	class rasterimage *pix = (ras)->GetPix();
 	class view *v;
 	this->CheckedParent = TRUE;
-	for (v = (class view *)this; v != NULL; v = v->parent) {
+	for (v = (class view *)this; v != NULL; v = v->GetParent()) {
 	    const char *nm = (v)->GetTypeName();
 	    DEBUG(("parent: %s\n", nm));
 	    if (strcmp(nm, "messages") == 0) {

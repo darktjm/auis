@@ -69,7 +69,7 @@ struct aniinfo {
 };
 
 #define fdraw(A) if (ISICONORLABEL(A->x2)) idraw(self,A); else ldraw(self,A)
-#define ObjectOf(ll) ll->dataobject
+#define ObjectOf(ll) ll->GetDataObject()
 #define findpic(ll) ((class fad *)ObjectOf(ll))
 #define TellUser(self, s) message::DisplayString(self,0,s)
 #define BOXTEST(A) IsMode(A,BOXMODE)
@@ -1362,8 +1362,8 @@ void fadview::ObservedChanged(class observable  *changed, long  value)
     else {
 	if(value == fad_NEWFAD){
 	    (this)->showfad(1,cpic);
-	    if(this->parent)
-		(this->parent)->WantNewSize(this); /* Yes, it really has to be called this way */
+	    if(this->GetParent())
+		(this->GetParent())->WantNewSize(this); /* Yes, it really has to be called this way */
 	}
 	else if(this->f == cpic->deleated || value == CurrentFrame(this))
 	    (this)->showfad(value,cpic);

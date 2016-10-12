@@ -6,18 +6,18 @@
 LOCALINCLUDES	=	-I${BASEDIR}/include/zip
 
 OBJS = chart.o chartv.o chartp.o chartobj.o chartdot.o \
-	chartpie.o chartx1app.o charthst.o chartstk.o chartcsn.o chartlin.o
+	chartpie.o chartx1app.o charthst.o chartlin.o
 
 
 HFILES = chart.H chartv.H chartobj.H chartdot.H  \
-	chartpie.H chartx1app.H charthst.H chartstk.H chartcsn.H chartlin.H
+	chartpie.H chartx1app.H charthst.H chartlin.H
 
 LIBS = 
 
 NormalObjectRule()
 NormalATKRule()
 EXTRACLASSES=chartv chartobj chartdot  \
-	chartpie chartx1app charthst chartstk chartcsn chartlin
+	chartpie chartx1app charthst chartlin
 DynamicMultiObject(chart,$(EXTRACLASSES),$(OBJS), $(LIBS),$(DYNMATHLIB),)
 InstallDynamicObject(chart,$(EXTRACLASSES),$(FULLATKDLIBDIR))
 

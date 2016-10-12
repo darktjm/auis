@@ -70,7 +70,7 @@ static struct view::printoptlist textview_printopts = {
     NULL /* this will be adjusted to be a pointer to the parent list */
 };
 
-#define Text(self) ((class text *) ((self)->dataobject))
+#define Text(self) ((class text *) ((self)->GetDataObject()))
 
 ATKdefineRegistry(textview, view, textview::InitializeClass);
 static void getinfo(class textview  *self, struct range  *total , struct range  *seen , struct range  *dot);
@@ -678,21 +678,20 @@ static void HandleSelection(class textview *self, long len, boolean setlen)
 
 void textview::ObservedChanged(class observable  *changed, long  value)
             {
-    class view *vself = (class view *) this;
-    if (changed == (class observable *) vself->dataobject)  {
+    if (changed == (class observable *) this->GetDataObject())  {
 	if (value == observable::OBJECTDESTROYED) {
 	    if (this->displayEnvironment != NULL) {
 		(this)->ReleaseStyleInformation( this->displayEnvironment);
 		this->displayEnvironment = NULL;
 	    }
-	    vself->dataobject = NULL;
+	    SetThisDataObject(NULL); /* tjm - will probably end up NULL anyway */
 	}
 	else {
 	    if(this->dot && this->dot->GetModified()) {
 		this->dot->SetModified(FALSE);
 		if(this->dot->GetLength()==0 && this->GetIM()) this->GetIM()->GiveUpSelectionOwnership(this);
 	    }
-	    (vself)->WantUpdate( vself);
+	    (this)->WantUpdate( this);
 	}
     }
     else if (value == observable::OBJECTDESTROYED &&
@@ -3879,7 +3878,7 @@ static void CreateMatte(class textview  *self, class viewref  *vr)
     }
 
     if (v != NULL) {
-        if (v->parent != (class view *) self)
+        if (v->GetParent() != (class view *) self)
             (v)->LinkTree( (class view *) self);
         (v)->InitChildren();
     }

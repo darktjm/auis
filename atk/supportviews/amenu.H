@@ -337,23 +337,11 @@ class AmenuEntrylist;
 class AmenuCard : public dataobject {
   public:
     virtual ATKregistryEntry *ATKregistry();
-    inline AmenuCard() {AmenuCard(TRUE);}
+    inline AmenuCard();
     /**< Default constructor.
-     *   This reads the preferences and creates the demo menu described
-     *   above.  Use the other constructor to avoid creating the demo
-     *   menu.  It is also possible to clear out the entries array:
-     *   \qcode
-     *    AmenuCard menu();
-     *    while(menu->GetN() > 0)
-     *      menu->RemoveEntry(menu[0]);
-     *   \endqcode
+     *   This reads the preferences and prepares for menu construction.
      *   \sbuttonpref{AmenuCard,menu card,card,menu item}
      */
-    AmenuCard(boolean do_demo);
-    /**< Create a menu card without the demo menu.
-     *   This reads the preferences and creates the demo menu described
-     *   above if desired.
-     *   \param do_demo TRUE to create the demo menu. */
     ~AmenuCard();
     virtual AmenuEntry &AddEntry(AmenuEntry *e, int priority=10);
     /**< Adds an entry line to a menu card.

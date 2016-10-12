@@ -253,7 +253,7 @@ int dataobject::ListCurrentViews(class view  **array,int  size)
     count = 0; 
     for (i = 0, observers = GetObservers(&nObservers); i < nObservers ; i++, observers++)
 	if(ATK::IsTypeByName((*observers)->GetTypeName(),"view") &&
-	   ((class view *)(*observers))->dataobject == this){
+	   ((class view *)(*observers))->GetDataObject() == this){
 	    if(count < size) *array++ = (class view *)*observers;
 	    count++;
 	}

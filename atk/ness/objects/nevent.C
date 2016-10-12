@@ -366,17 +366,17 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 
 	case 'n':		/* value_getvalue(obj) => long */
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		v = (vobj)->GetValue();
 		goto stackLong;
 	case 'o':		/* value_getarraysize(obj) => long  */
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		v = (vobj)->GetArraySize();
 		goto stackLong;
 	case 'p':		/* value_getstring(obj) => string */
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		s = (char *)(vobj)->GetString();
 		goto stackString;
 	case 'q':	{	/* value_getarrayelt(obj, index) => string */
@@ -384,7 +384,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		char **sar;
 		NSP = unstackLong(NSP, iar, &index);
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		if (index <0  ||  index > (vobj)->GetArraySize())
 			RunError(":index out of bounds", iar);
 		sar = (char **)(vobj)->GetStringArray();
@@ -393,13 +393,13 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 	case 'r':		/* value_setvalue(obj, long) */
 		NSP = unstackLong(NSP, iar, &v);
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		(vobj)->SetValue( v);
 		break;
 	case 's':		/* value_setarraysize(obj, long)  */
 		NSP = unstackLong(NSP, iar, &v);
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		if (v != (vobj)->GetArraySize()) {
 			/* create new array of the given size
 				containng NULL ptrs
@@ -413,7 +413,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		s = (FETCHMARK(NSP))->ToC();
 		NSP = popValue(NSP);
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		/* store a pointer to the malloced string returned by ToC
 			XXX never freed */
 		(vobj)->SetString( s);
@@ -425,7 +425,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		NSP = popValue(NSP);	/* discard the marker now */
 		NSP = unstackLong(NSP, iar, &index);
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		if (index <0  ||  index >= (vobj)->GetArraySize())
 			RunError(":index out of bounds", iar);
 		/* store the pointer to the malloced string into the malloced array
@@ -441,7 +441,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		v = NSP->b.v;
 		NSPopSpace(boolstkelt); 
 		NSP = unstackObject(NSP, iar, &vvwobj, valueviewClass);
-		vobj = (class value *)vvwobj->dataobject;
+		vobj = (class value *)vvwobj->GetDataObject();
 		(vobj)->SetNotify( v);
 		break;
 
@@ -1042,7 +1042,7 @@ HandleNamedCel(class celview  *cv, long int ness) {
 	struct objnode *onode;
 	class nesssym *xattr;
 
-	c = (class cel *)cv->dataobject;
+	c = (class cel *)cv->GetDataObject();
 	if (c == NULL  ||  (c)->GetRefName() == NULL) return;
 	tname = CelSymName((char *)(c)->GetRefName());
 	for (n = ness::GetList();  n != NULL;  n = n->next) {

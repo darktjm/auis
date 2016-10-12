@@ -266,7 +266,7 @@ view::DSattributes dialogv::DesiredSize(long  width, long  height, enum view::DS
 	return (view::DSattributes) (view::HeightFlexible | view::WidthFlexible);
     }
 
-    if(width<0 || width>32767) width=((class view *)this)->parent?(((class view *)this)->parent)->GetLogicalWidth(): 500;
+    if(width<0 || width>32767) width=((class view *)this)->GetParent()?(((class view *)this)->GetParent())->GetLogicalWidth(): 500;
     
     
     (void) (this->buttons)->DesiredSize( 0, 0, view::NoSet, &this->bwidth, &this->bheight);

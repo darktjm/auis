@@ -318,7 +318,7 @@ void textview::PrepareInsertion(boolean  insertingNewLine)
 	return;
     }
 
-    if ((lastCmd = (this->imPtr)->GetLastCmd()) == lcInsertEnvironment && this->insertEnvironment != NULL && ! (this->insertEnvMark)->GetModified()) {
+    if ((lastCmd = (this->GetIM())->GetLastCmd()) == lcInsertEnvironment && this->insertEnvironment != NULL && ! (this->insertEnvMark)->GetModified()) {
 	if (this->insertStack != NULL) {
 	    insertMark = (d)->CreateMark( pos, 0);
 	    (insertMark)->SetStyle( FALSE, TRUE);
@@ -393,7 +393,7 @@ class environment *textview::GetEnclosingEnvironment(long  pos)
 {
     class environment *te;
 #ifdef IGNORE_STYLEFLAGS_AT_STARTOFPARAGRAPH
-    long lastCmd = (this->imPtr)->GetLastCmd();
+    long lastCmd = (this->GetIM())->GetLastCmd();
     class text *d = Text(this);
 
     if (lastCmd != lcNewLine
@@ -418,7 +418,7 @@ class environment *textview::GetEnclosingEnvironment(long  pos)
 class environment *textview::GetInsertEnvironment(long  pos)
 {
     class environment *te;
-    long lastCmd = (this->imPtr)->GetLastCmd();
+    long lastCmd = (this->GetIM())->GetLastCmd();
     
     if (lastCmd != lcInsertEnvironment || (this->insertEnvMark)->GetModified()) {
 	te = (this)->GetEnclosingEnvironment( pos);

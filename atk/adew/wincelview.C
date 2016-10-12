@@ -13,7 +13,7 @@ ATK_IMPL("wincelview.H")
 #include <rect.h>
 #include <wincelview.H>
 
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Cel(A) ((class cel *) DataObject(A))
 
 

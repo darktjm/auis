@@ -71,7 +71,7 @@ void rawtextview::ReceiveInputFocus()
 /*RSK92overstrike*/
 static void toggleOverstrike(rawtextview  *self,long  key)
 {
-    rawtext *d = (rawtext *)self->view::dataobject;
+    rawtext *d = (rawtext *)self->view::GetDataObject();
     if ((d)->IsInOverstrikeMode()) {
 	(d)->ChangeOverstrikeMode(FALSE);
 	message::DisplayString(self,0,"Normal (insert) mode.");

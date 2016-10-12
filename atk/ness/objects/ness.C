@@ -748,7 +748,7 @@ ness::EstablishViews(class view  *child) {
 				textchild = textsecond, textsecond = NULL) {
 		class view *v;
 		/* XXX BOGOSITY ALERT:  scan up tree for parent textview */
-		for (v = textchild; v != NULL; v = v->parent)  {
+		for (v = textchild; v != NULL; v = v->GetParent())  {
 			DEBUG(("parent is a %s\n",(v)->GetTypeName()));
 			if ((v)->IsType( textviewClass)) {
 				deftext = (class textview *)v;

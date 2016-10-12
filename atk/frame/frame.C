@@ -680,9 +680,9 @@ ATK  *frame::WantHandler(const char  *handlerName)
 {
     if (strcmp(handlerName, "message") == 0)
 	return (ATK  *) this->messageLine;
-    else if (this->parent == NULL) return NULL;
+    else if (this->GetParent() == NULL) return NULL;
     else
-	return (this->parent)->WantHandler( handlerName);
+	return (this->GetParent())->WantHandler( handlerName);
 }
 
 const char *frame::WantInformation(const char  *key)
@@ -704,13 +704,13 @@ void frame::PostKeyState(class keystate  *keystate)
 	    (this->mykeystate)->AddAfter( keystate);
 	}
 	if (keystate == NULL) {
-	    (this->parent)->PostKeyState( this->mykeystate);
+	    (this->GetParent())->PostKeyState( this->mykeystate);
 	}
 	else{
 	    if (keystate == this->mykeystate->next) {
 		this->mykeystate->next = NULL;
 	    }
-	    (this->parent)->PostKeyState( keystate);
+	    (this->GetParent())->PostKeyState( keystate);
 	}
     }
     else if (keystate == NULL || keystate->object != (ATK  *) this->messageView) {
@@ -718,11 +718,11 @@ void frame::PostKeyState(class keystate  *keystate)
 	    /* (this->keystate)->Reset(); */
 	    (this->keystate)->AddAfter( keystate);
 	    if (keystate == NULL) {
-		(this->parent)->PostKeyState( this->keystate);
+		(this->GetParent())->PostKeyState( this->keystate);
 	    } else {
-		(this->parent)->PostKeyState( keystate);
+		(this->GetParent())->PostKeyState( keystate);
 	    }
-    } else (this->parent)->PostKeyState( keystate);
+    } else (this->GetParent())->PostKeyState( keystate);
 }
 
 
@@ -733,10 +733,10 @@ void frame::PostMenus(class menulist  *menulist)
 	if((menulist != NULL) && this->hasDialogMessage && menulist->object == (ATK  *) this->dialogView){
 	    (this->mymenus)->ClearChain();
 	    (this->mymenus)->ChainBeforeML( menulist, (long) menulist);
-	    (this->parent)->PostMenus(this->mymenus);
+	    (this->GetParent())->PostMenus(this->mymenus);
 	}
 	else {
-	    (this->parent)->PostMenus( this->mymenus);
+	    (this->GetParent())->PostMenus( this->mymenus);
 	}
     }
     else if ((menulist == NULL) || (menulist->object != (ATK  *) this->messageView)) {
@@ -744,10 +744,10 @@ void frame::PostMenus(class menulist  *menulist)
 	(this->menulist)->ClearChain();
 	(this->defaultmenulist)->ChainBeforeML( menulist, (long) menulist);
 	if(this->commandEnable) (this->defaultmenulist)->ChainBeforeML( this->menulist, (long)this->menulist);
-	(this->parent)->PostMenus( this->defaultmenulist);
+	(this->GetParent())->PostMenus( this->defaultmenulist);
     }
     else
-	(this->parent)->PostMenus( menulist);
+	(this->GetParent())->PostMenus( menulist);
 }
 
 void frame::SetCommandEnable(boolean  enable)
@@ -1562,8 +1562,8 @@ TidyUp(class frame  *self)
 }
 static int isDialogChild(class frame  *self, class view  *v)
 {
-    while(v->parent != NULL && v->parent != (class view *) self) 
-	v = v->parent;
+    while(v->GetParent() != NULL && v->GetParent() != (class view *) self) 
+	v = v->GetParent();
     return(v == self->DialogBufferView || v == (class view *)self->dialogView);
 }
 void frame::WantUpdate(class view  *v)

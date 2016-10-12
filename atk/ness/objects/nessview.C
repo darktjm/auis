@@ -161,7 +161,7 @@ static	void Invert(class nessview  *self);
 
 	static void 
 PostMenus(class nessview  *self) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	long menumask;
 	DEBUG(("Enter PostMenus(%d)\n", self->HasIF));
 	if (dobj->hasWarningText) menumask = MenuOrigin;
@@ -203,7 +203,7 @@ setExecFunc(class nessview  *self, char  *funcname) {
 
 	static void
 nessview_NextError(class nessview  *self, long  rock) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	class im *im = (self)->GetIM();
 
 	if  (im && (im)->ArgProvided()) 
@@ -233,7 +233,7 @@ nessview_NextError(class nessview  *self, long  rock) {
 */
 	void
 nessview::FirstError() {
-	if (((class ness *)this->dataobject)->GetErrors() == NULL)
+	if (((class ness *)this->GetDataObject())->GetErrors() == NULL)
 		return;
 
 	if((this)->GetDataObject()) ((class ness *)(this)->GetDataObject())->errorpending=FALSE;
@@ -252,7 +252,7 @@ nessview::FirstError() {
 
 	static void
 nessview_Compile(class nessview  *self, ness_access  accesslevel) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	struct errornode *errs;
 
 	(dobj)->SetAccessLevel( accesslevel);
@@ -292,7 +292,7 @@ nessview_Compile(class nessview  *self, ness_access  accesslevel) {
 
 	static void
 nessview_Execute(class nessview  *self, long  rock) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	char buffer[1000];
 	struct errornode *errs = NULL;
 
@@ -357,7 +357,7 @@ nessview_Execute(class nessview  *self, long  rock) {
 
 	static void
 ShowOrigin(class nessview  *self) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	char buf[500];
 	char *date, *author;
 
@@ -392,7 +392,7 @@ DeauthButton(class nessview  *self) {
 */
 	static void
 AuthorButton(class nessview  *self, long  option) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 
 	(self)->WantInputFocus( self);
 	if (dobj->hasWarningText  && 
@@ -464,7 +464,7 @@ CompileButton(class nessview  *self) {
 */
 	static void
 CompileMenu(class nessview  *self) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	dobj->PromptBeforeCompile = FALSE;
 	nessview_Compile(self, ness_codeGreen);
 }
@@ -1057,7 +1057,7 @@ Trust Script Author - Compile/Execute
  */
 	static void 
 DisplayDialogBox(class nessview  *self, long  time  /* ignored */) {
-	class ness *dobj = (class ness *)self->dataobject;
+	class ness *dobj = (class ness *)self->GetDataObject();
 	long choice;
 
 	static const char * const choices[] = {
@@ -1323,7 +1323,7 @@ Invert(class nessview  *self) {
 	void
 nessview::FullUpdate(enum view::UpdateType   type, long   left , 
 		long   top , long   width , long   height) {
-	class ness *dobj = (class ness *)this->dataobject;
+	class ness *dobj = (class ness *)this->GetDataObject();
 	
 	DEBUG(("FullUpdate(%d)\n", type));
 
@@ -1351,7 +1351,7 @@ nessview::FullUpdate(enum view::UpdateType   type, long   left ,
 
 	void
 nessview::Update() {
-	class ness *dobj = (class ness *)this->dataobject;
+	class ness *dobj = (class ness *)this->GetDataObject();
 	struct errornode *errs = NULL;
 
 	ENTER(nessview_Update);
@@ -1385,7 +1385,7 @@ nessview::Update() {
 */
 	class view *
 nessview::Hit(enum view::MouseAction  action, long  x , long  y, long  numberOfClicks) {
-	class ness *dobj = (class ness *)this->dataobject;
+	class ness *dobj = (class ness *)this->GetDataObject();
 	static long initialx, initialy;
 
 	if ( ! dobj->hasWarningText || 
@@ -1520,8 +1520,8 @@ void
 				only for the _first_ change.  */
 			::PostMenus(this);
 		/* tell our parent data object that it has changed  XXX UGH */
-		if (this->parent != NULL  &&
-				this->parent->dataobject != NULL)
-			(this->parent->dataobject)->SetModified();
+		if (this->GetParent() != NULL  &&
+				this->GetParent()->GetDataObject() != NULL)
+			(this->GetParent()->GetDataObject())->SetModified();
 	LEAVE(nessview_ObservedChanged);
 }

@@ -69,6 +69,11 @@ class ScrollInterface;
  *  numbers in the table, the table and the graph can each adjust accordingly.
  *  Likewise, a text editor may display the same document in more than one
  *  window, with changes reflected appropriately in each.
+ *
+ * FIXME: all coordinate parameters must document their coordinate system.
+ *
+ * FIXME: ExposeChild() and WantExposure() should be somehow related, but
+ *        aren't.  Why?
  */
 class view : public  observable {
   public:
@@ -84,8 +89,24 @@ class view : public  observable {
 
     // view methods.  Override-able, but not usually overridden.
     virtual void SetName( atomlist *name );
+    /**< Set the object name used by the resource manager.
+     *   The default is to use the registered name for the class,
+     *   as parsed by atomlist::StringToAtomlist().
+     *   The old resource manager is deprecated.
+     *   \param name The new name, split into an atom list. */
     virtual atomlist *GetName();
+    /**< Get the object name used by the resource manager.
+     *   Returns the name of this object, as set by SetName().
+     *   The old resource manager is deprecated.
+     *   \return The name of this object. */
     virtual atomlist *GetClass();
+    /**< Get the class name used by the resource manager.
+     *   This is the registered name for the class, as parsed by
+     *   atomlist::StringToAtomlist().  Since there are no dots
+     *   in any class name, this is just a single-element list with
+     *   the class name as the first element.
+     *   The old resource manager is deprecated.
+     *   \return The name of this class. */
 
     virtual void InsertViewRegion(view *parent, region *region);
     /**< Display this view in a rectangle.
@@ -220,17 +241,74 @@ class view : public  observable {
 // view methods that can be overridden
 // input focus 
     virtual void ReceiveInputFocus();
+    /**< Perform actions when receiving input focus.
+     *   This method must be overridden to perform actions on receiving
+     *   input focus.  At the minimum, key and menu bindings should be
+     *   enabled by this method, using PostKeyState() and PostMenulist().
+     *   Appearance may also be changed, although rendering such changes
+     *   must be deferred using WantUpdate().
+     *   [FIXME: this conflicts with AndrewProgramming.ez: it says that
+     *   key/menu updates are done by overriding PostKeyState() and
+     *   PostMenulist(), rather than this function, but most code in the
+     *   wild seems to do it as described here]
+     */
     virtual void LoseInputFocus();
-    virtual boolean AcceptingFocus();
+    /**< Perform actions when losing input focus.
+     *   This method must be overridden to perform actions on losing
+     *   input focus.  Key and menu bindings will be automatically be
+     *   removed, so this only needs to update appearance, if desired.
+     *   Again, this must be deferred using WantUpdate(). */
     virtual void ChildLosingInputFocus();
+    /**< Perform actions when a LinkTree() descendent loses focus.
+     *   This method must be overridden to perform actions when child
+     *   views lose input focus.  For example, the appearance of the
+     *   container may change based on this fact.  These notifications
+     *   are issued before the view actually losing focus gets its
+     *   LoseInputFocus() notification. */
     virtual void ChildReceivingInputFocus();
+    /**< Perform actions when a LinkTree() descendent loses focus.
+     *   This method must be overridden to perform actions when child
+     *   views gain input focus.  For example, the appearance of the
+     *   container may change based on this fact.  These notifications
+     *   are issued before the view actually gaining focus gets its
+     *   ReceiveInputFocus() notification. */
 
 // application layer (what to do if alone in a window)
     virtual view *GetApplicationLayer();
     virtual void DeleteApplicationLayer(view *applicationLayer);
 
     virtual void GetOrigin(long w, long h, long *originX, long *originY);
+    /**< Determine view offset from insertion point when used as inset.
+     *   While the insertion point is defined entirely by the parent,
+     *   it is generally the same as a character inserted at that position.
+     *   That is, its X coordinate is that of the left edge, and the Y
+     *   coordinate is that of the text baseline.  A view containing text
+     *   will generally want its baseline to be aligned with the baseline
+     *   of surrounding text.  The returned origin is relative to the
+     *   view's upper-left corner.
+     *   \param w The width of the rectangle into which the view will be rendered.
+     *   \param h The hight of the rectangle into which the view will be rendered.
+     *   \param originX Return of a horizontal offset from the insertion
+     *                  point when rendered at the given dimensions.  Positive
+     *                  values move the view left.
+     *   \param originY Return of a vertical offset from the insertion
+     *                  point when rendered at the given dimensions.
+     *                  Positive values move the view up.
+     */
     virtual void GetPrintOrigin(long w, long h, long *originX, long *originY);
+    /**< Determine view offset from insertion point when used as inset.
+     *   Most views look different when being printed.  This method is
+     *   called in place of GetOrigin() while printing, to allow for such
+     *   differences.
+     *   \param w The width of the rectangle into which the view will be rendered.
+     *   \param h The hight of the rectangle into which the view will be rendered.
+     *   \param originX Return of a horizontal offset from the insertion
+     *                  point when rendered at the given dimensions.  Positive
+     *                  values move the view left.
+     *   \param originY Return of a vertical offset from the insertion
+     *                  point when rendered at the given dimensions.
+     *                  Positive values move the view up.
+     */
 
 // color
     virtual void ReceiveColormap(colormap *cmap);
@@ -243,7 +321,9 @@ class view : public  observable {
      *   it wants its Update() routine called at the earliest opportunity.
      *   This object is free to ignore or repsect the request.  If it chooses
      *   to respect the request, Update() will eventually be called on the
-     *   child view.
+     *   child view.  Note that the default action is to pass it up the
+     *   LinkTree() hierarchy anyway, so it is safe to call this on
+     *   oneself.
      *   \param requestor The child view making the request.
      */
     virtual void WantInputFocus(view *requestor);
@@ -264,7 +344,9 @@ class view : public  observable {
      *   at the earliest opportunity.  This object is free to ignore or
      *   respect the request.  If it chooses to respect the request,
      *   DesiredSize() will eventually be caled on the child view, usually
-     *   followed by FullUpdate() after resizing.
+     *   followed by FullUpdate() after resizing.  The default implementation
+     *   passes the request to the parent if it is called on itself, so it
+     *   is generally safe to call it on oneself.
      *   \param requestor The child view making the request.
      */
     virtual void PostKeyState(class keystate *keystate);
@@ -302,9 +384,12 @@ class view : public  observable {
      *   \param parent The parent view; usually the caller.  If NULL,
      *                 only unlink from the current parent.
      */
+    view *GetParent() { return parent; }
+    /**< Find the parent of this view in the LinkTree() hierarchy.
+     *   \return the parent. */
     inline void UnlinkTree() { LinkTree(NULL); }
     /**< Unlink this view from its view tree.
-     *   This is equivalent to calling LinkTree(NULL)
+     *   This is equivalent to calling LinkTree(NULL).  Do not override.
      */
     virtual boolean IsAncestor(view *possibleAncestor);
     /**< Determine if this view is another view's descendent.
@@ -380,50 +465,55 @@ class view : public  observable {
 // support for recursive search
     virtual boolean RecSearch(class search *pat, boolean toplevel);
     /**< Recursively search a view hierarchy.
-     *   The search begins at this node, and proceeds, depth first, to
+     *   The search begins at this view, and proceeds, depth first, to
      *   any children.  If this view does not support searching,
      *   this method does nothing.  This method is itself responsible for
      *   identififying children and passing the search on to them in the
-     *   correct order.  In addition, this method must 
+     *   correct order.  In addition, on successful match, the location
+     *   and extent must be saved internally to allow other recursive
+     *   search methods to function.  A common implementation is to
+     *   simply set the search resume location and make RecSrchResume()
+     *   do all the work.
      *   \param pat The search pattern.
      *   \param toplevel TRUE if this is the top of the hierarchy.  This
      *   means to start at an implementation-defined location rather than
      *   the start of the object's text.
-     *   \return TRUE if search succeeded.  If so, the search position and
-     *   extent must be cached internally so that RecSrchResume() and
-     *   RecSrchReplace() work.
+     *   \return TRUE if search succeeded.
      */
     virtual boolean RecSrchResume(class search *pat);
     /**< Continue a search begun by RecSearch().
      *   This is used to find the next occurrence of the search pattern.
      *   \param pat The search pattern.
-     *   \return TRUE if search succeeded.  If so, the search position and
-     *   extent must be cached internally so that RecSrchResume() and
-     *   RecSrchReplace() work.  This should return FALSE if the previous
-     *   RecSearch() or RecSrchResume() failed, or no such previous call
-     *   was made with this pattern.
+     *   \return TRUE if search succeeded.  This should return FALSE if
+     *   the previous RecSearch() or RecSrchResume() failed, or no such
+     *   previous call was made with this pattern.
      */
     virtual boolean RecSrchReplace(class dataobject *text, long pos, long len);
     /**< Continue a search begun by RecSearch().
      *   This is used to replace the found occurrence of the search pattern.
      *   Generally the class of \p text is the same, or an ancestor of the
-     *   class on which the search took place.
-     *   \param text A text object this class understands.
-     *   \param pos The position in the text object's text of the replacement text.
-     *   \param len The length of the replacement text.
-     *   \return TRUE if replacement succeeded.  This should return FALSE
+     *   class on which the search took place.  It is the responsibility
+     *   of implementors of this method to ensure that the type of \p text
+     *   is understood.
+     *   \param text A replacement object this class understands.
+     *   \param pos The position in the replacement object's contents of the replacement text.
+     *   \param len The extent of the replacement text.
+     *   \return TRUE if the replacement succeeded.  This should return FALSE
      *   and do nothing else if the previous RecSearch() or RecSrchResume()
-     *   failed, or no such previous call was made, or if text is an object
-     *   which is not recognized.
+     *   failed, or no such previous call was made, or if \p text is an object
+     *   which is not supported.
      */
     virtual void RecSrchExpose(const struct rectangle &logical, 
 			struct rectangle &hit);
     /**< Highlight search result.
      *   This is used to display and highlight the last search result.
+     *   The actual exposure may be done mostly with WantExposure()
+     *   and/or WantUpdate().
      *   \param logical The logical bounds within which the highlighted
      *                  results should appear.
      *   \param hit Filled in with the logical bounds into which the
-     *          highlighted results were rendered on successful completion.
+     *          highlighted results would be rendered at the next update
+     *          on successful completion.
      */
     
 // Postscript printing
@@ -466,6 +556,16 @@ class view : public  observable {
 
     //    virtual void Traverse(enum Traversal trav);
     virtual void WantExposure(view *requestor, struct rectangle *childrect);
+    /**< Make part of a child of this view visible.
+     *   This is a request to make part of a view, which is a LinkTree()
+     *   child of this view, visible.  This is normally done by
+     *   panning or scrolling until the child is visible.  This should
+     *   be passed up the LinkTree() hierarchy with \p childrect converted
+     *   to this view's coordinate system when complete.
+     *   \param requestor A child of this view in the LinkTree() hierarchy.
+     *   \param childrect The location within the child to make visible,
+     *                    in the child's coordinate system.
+     */
 
     // GetScrollInterface will create an appropriate object of
     // a class derived from ScrollInterface.  The caller is responsible
@@ -748,14 +848,29 @@ class view : public  observable {
 
     //virtual enum DescriberErrs Describe(char*format,FILE*file,long rock);
 
-
+  private:
+    /* following are managed by SetName/GetName */
     atomlist *name;
     atomlist *className;
     short  name_explicitly_set;
+    void EnsureName();
+    /* follwing is managed by InsertView/LinkTree */
     im *imPtr;
-    view *parent;
-    class dataobject *dataobject;
+    friend class im; /* so it can set imPtr to itself */
     graphic *drawable;
+    view *parent;
+    /* following is managed by view::SetDataObject() and GetDataObject() */
+    class dataobject *dataobject;
+  protected:
+    /* This should not be used by anyone.  It's used twice to set it to NULL
+     * when the data object declares itself destroyed, but that shouldn't
+     * happen unless it was destroyed by the view.  I'll leave it here for
+     * now, though.  - tjm */
+    /** Set the data object associated with this view directly.
+     *  You should call view::SetDataObject instead.
+     *  \param obj The new value for dataobject.
+     */
+    inline void SetThisDataObject(class dataobject *obj) { dataobject = obj; }
 };
 
  /** @} */

@@ -141,9 +141,9 @@ void AWgtFigView::FullUpdate(enum view::UpdateType   type,
 
 	if ( ! currfig) {
 		hadcurrfig = FALSE;
-		if (parent->IsType(class_AWgtFigView) && ! currfig) {
+		if (GetParent()->IsType(class_AWgtFigView) && ! currfig) {
 			// use parents figure
-			currfig = ((AWgtFigView *)parent)->currfig;
+			currfig = ((AWgtFigView *)GetParent())->currfig;
 			currfig->Reference();
 			currfigshared = TRUE;
 		}

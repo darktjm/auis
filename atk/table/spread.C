@@ -404,7 +404,7 @@ void spread_ScrollLogically(class spread *V, long tr, long lc, long br, long rc,
 }
 
 void spread::WantExposure(class view *requestor, struct rectangle *childrect) {
-    if(parent) {
+    if(GetParent()) {
 	struct rectangle vb, cl;
 	if(requestor!=this) {
 	    int r,c;
@@ -429,7 +429,7 @@ void spread::WantExposure(class view *requestor, struct rectangle *childrect) {
 	if(rectangle_IsEqualRect(&cl, childrect)) {
 	    return;
 	}
-	parent->WantExposure(this,childrect);
+	GetParent()->WantExposure(this,childrect);
     }
 }
 /* filter update requests */
@@ -440,8 +440,8 @@ void spread::WantUpdate(class view  *requestor)
     if (debug)
 	printf("spread__WantUpdate(%p,%p) requests = %d\n", this, requestor, updateRequests);
 
-    if ((this != requestor || !(updateRequests++)) && parent != NULL)
-	(parent)->WantUpdate( requestor);
+    if ((this != requestor || !(updateRequests++)) && GetParent() != NULL)
+	(GetParent())->WantUpdate( requestor);
 
     if (debug)
 	printf("spread__WantUpdate exited\n");

@@ -1603,7 +1603,7 @@ static void OutputLabel(FILE  *f, const char  *l)
 void sbuttonv::Print(FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
 	int count;
-	class sbutton *dobj = (class sbutton *)this->dataobject;
+	class sbutton *dobj = (class sbutton *)this->GetDataObject();
 
 	if (strcmp(processor, "troff") == 0) {
 		/* output to troff */

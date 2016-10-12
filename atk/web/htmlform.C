@@ -170,7 +170,7 @@ static void CBSubmissionFunc (AWidget *self,
         view *vself=(view *)in[0].ATKObject();
         while(vself) {
             if(vself->IsType(class_webview)) break;
-            vself=vself->parent;
+            vself=vself->GetParent();
         }
         webview *wv=(webview *)vself;
         if(wv==NULL || form==NULL) {
@@ -271,7 +271,7 @@ static void CBMapClickFunc (AWidget *self,
         view *vself=(view *)in[0].ATKObject();
         while(vself) {
             if(vself->IsType(class_webview)) break;
-            vself=vself->parent;
+            vself=vself->GetParent();
         }
         webview *wv=(webview *)vself;
         if(wv==NULL || form==NULL) {

@@ -102,7 +102,7 @@ static boolean PrintSplot(class figobj *o, long  ref, class figure *fig, struct 
 
 long textflowview::BuildPlan(struct textps_layout_plan **planptr, long pagewidth, long pageheight)
 {
-    class textflow *fig = (class textflow *)this->dataobject;
+    class textflow *fig = (class textflow *)this->GetDataObject();
     class figobj *foc;
     struct printlump lump;
     int startcol;

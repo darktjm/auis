@@ -321,8 +321,8 @@ void textview_JoinCmd(class textview  *self)
 
     if (ConfirmReadOnly(self))
         return;
-    ct = (self->imPtr)->Argument();
-    (self->imPtr)->ClearArg();
+    ct = (self->GetIM())->Argument();
+    (self->GetIM())->ClearArg();
     text = Text(self);
     for (i = 0; i < ct; i++)
     {
@@ -355,7 +355,7 @@ static void yankKillLine (class textview  *self, int		 action)
     d = Text(self);
     if ( (d)->GetChar(pos) == '\012')
 	return;
-    count = (self->imPtr)->Argument();
+    count = (self->GetIM())->Argument();
     lastpos = (d)->GetLength();
 
     /* find end of line range to be deleted/yanked */
@@ -381,7 +381,7 @@ static void yankKillLine (class textview  *self, int		 action)
     else
 	(self)->DeleteCharacters( pos, applen);
 	
-    (self->imPtr)->SetLastCmd( lcKill);	/* mark us as a text killing command */
+    (self->GetIM())->SetLastCmd( lcKill);	/* mark us as a text killing command */
     (d)->NotifyObservers( observable::OBJECTCHANGED);
 }
 
@@ -927,7 +927,7 @@ void textview_ViDeleteCmd (class textview  *self)
 	return;
 	
     dsize = (d)->GetLength();
-    len = (self->imPtr)->Argument();
+    len = (self->GetIM())->Argument();
 
     if (ConfirmViewDeletion(self, pos, len)) {
 	for (j = 0; j < len; j++)
@@ -1343,7 +1343,7 @@ static void viYankDeleteLine(class textview  *self, int		 action)
 	if (pos == (d)->GetLength() && pos > 0 )
 	{
 	    (self)->SetDotPosition( pos - 1);
-	    (self->imPtr)->ClearArg();
+	    (self->GetIM())->ClearArg();
 	    textview_BeginningOfFirstWordCmd(self);
 	    pos = (self)->GetDotPosition();
 	}
@@ -1355,7 +1355,7 @@ static void viYankDeleteLine(class textview  *self, int		 action)
     else
 	(self)->DeleteCharacters( pos, applen);
 	
-    (self->imPtr)->SetLastCmd( lcKill);	/* mark us as a text killing command */
+    (self->GetIM())->SetLastCmd( lcKill);	/* mark us as a text killing command */
 }
 
 void textview_ViDeleteLineCmd(class textview  *self)
@@ -1393,7 +1393,7 @@ void textview_OpenLineBeforeCmd(class textview  *self)
 
 void textview_OpenLineAfterCmd(class textview  *self)
     {
-    (self->imPtr)->ClearArg(); 
+    (self->GetIM())->ClearArg(); 
     textview_EndOfLineCmd(self);
     textview_OpenLineCmd(self);
     (self)->ToggleVIMode();
@@ -1413,7 +1413,7 @@ void textview_InsertAtEndCmd(class textview  *self)
 
 void textview_ChangeRestOfLineCmd(class textview  *self)
     {
-    (self->imPtr)->ClearArg(); 
+    (self->GetIM())->ClearArg(); 
     textview_KillLineCmd(self);
     (self)->ToggleVIMode();
 }
@@ -1451,7 +1451,7 @@ void textview_ReplaceCharCmd(class textview  *self)
     long	pos;
     
 
-    (self->imPtr)->ClearArg(); 
+    (self->GetIM())->ClearArg(); 
     pos	= (self)->GetDotPosition();
     tc = ((self)->GetIM())->GetCharacter();
     (Text(self))->ReplaceCharacters( pos, 1, &tc, 1);

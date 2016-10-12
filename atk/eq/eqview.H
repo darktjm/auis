@@ -81,6 +81,6 @@ class eqview : public  view {
     char *filename;		/* name of file read in */
 };
 
-#define Eq(self) ((class eq *) ((self)->dataobject))
+#define Eq(self) ((class eq *) ((self)->GetDataObject()))
 /** @} */
 #endif /* _eqview_H_ */

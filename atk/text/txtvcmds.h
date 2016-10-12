@@ -20,7 +20,7 @@ extern long lcNewLine;
 
 #define NEW(type) (type *) malloc(sizeof(type))
 
-#define Text(v)	(struct text *) ((v)->dataobject)
+#define Text(v)	(struct text *) ((v)->GetDataObject())
 
 #define TEXT_VIEWREFCHAR '\377'
 

@@ -157,7 +157,7 @@ static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos,
 static long incsearchf(ATK *tva, long  key)
 {
     class textview  *tv=(class textview *)tva;
-    class text *txt = (class text *)(tv->dataobject);
+    class text *txt = (class text *)(tv->GetDataObject());
     long pos = (tv)->GetDotPosition();
     unsigned long len = (tv)->GetDotLength();
     class mark *mark = (txt)->CreateMark( pos, len);

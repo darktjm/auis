@@ -1228,7 +1228,7 @@ LBL (const char  *labelp, class view  *view)
 					hcache+5, FALSE));
 }
 
-#define Text(v)	(class text *) ((v)->dataobject)
+#define Text(v)	(class text *) ((v)->GetDataObject())
 
 	static void
 EditStylesInWindow(class view  *textv)
@@ -1553,7 +1553,7 @@ ChopTree(class lpair  *branch, struct ATKregistryEntry   *lpairInfo)
 	else {
 		class view *v = (class view *)branch;
 		/* destroy a childview and its data object */
-		class dataobject *dobj = ((class view *)branch)->dataobject;
+		class dataobject *dobj = ((class view *)branch)->GetDataObject();
 		(v)->UnlinkTree();
 		(v)->Destroy();
 		(dobj)->Destroy();
@@ -1569,7 +1569,7 @@ ENTER(lookzview::~lookzview);
 		(this->curss)->RemoveObserver( this);
 
 	(this)->SetVisibility( TRUE);
-	(this)->LinkTree( this->parent);
+	(this)->LinkTree( this->GetParent());
 
 	ChopTree(this->image, (this->image)->ATKregistry());
 
@@ -1654,7 +1654,7 @@ lookzview::FullUpdate(enum view::UpdateType   type, long  left , long  top , lon
 
 	this->OnScreen = (type != view::Remove);
 	if (! this->Linked)
-		(this)->LinkTree( this->parent);
+		(this)->LinkTree( this->GetParent());
 	if (type == view::FullRedraw)
 		(this)->GetLogicalBounds( &r);
 	else 
@@ -1670,7 +1670,7 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 		/* BOGOSITY ALERT:  we grub around in the parent to
 		  find its stylesheet */
 		class view *v;
-		for (v = (class view *)this; v != NULL; v = v->parent) 
+		for (v = (class view *)this; v != NULL; v = v->GetParent()) 
 			if ((v)->IsType("textview")) {
 				class text *t = (class text *)v->GetDataObject();
 				if (t && t->styleSheet) 
@@ -1871,7 +1871,7 @@ UpdateDocument(class lookzview  *self)
 	if (self->embedded) {
 		/* BOGOSITY ALERT:  we call Full_Update of parent */
 		class view *v;
-		for (v = (class view *)self; v != NULL; v = v->parent) 
+		for (v = (class view *)self; v != NULL; v = v->GetParent()) 
 			if (strcmp("textview", (v)->GetTypeName()) == 0) {
 				/* this is exceedingly dangerous XXX XXX
 					 We call a FullUpdate 

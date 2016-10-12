@@ -14,7 +14,7 @@ ATK_IMPL("metextview.H")
 #include <message.H>
 #include <menulist.H>
 #include <metextview.H>
-#define Text(A) ((class mentertext *)(A->dataobject))
+#define Text(A) ((class mentertext *)(A->GetDataObject()))
 
 ATKdefineRegistry(metextview, textview, metextview::InitializeClass);
 static void metextview_CancelCommand(class metextview  *self );

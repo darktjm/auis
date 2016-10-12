@@ -32,7 +32,6 @@ static struct view::printoptlist view_printopts = {
 
 ATKdefineRegistry(view, observable, view::InitializeClass);
 static void view_SetDefaultColors(class view  *self , class view  *parent);
-static void EnsureName(class view  * self);
 
 
 boolean view::InitializeClass()
@@ -111,10 +110,6 @@ view::~view()
 	(this->drawable)->Destroy();
 	this->drawable=NULL;
     }
-}
-
-boolean view::AcceptingFocus() {
-    return TRUE;
 }
 
 void view::ChildLosingInputFocus() {
@@ -516,12 +511,12 @@ long view::GetDevice()
     return 0;
 }
 
-static void EnsureName(class view  * self)
+void view::EnsureName()
      {
-  if (self->name == NULL)
-    self->name = atomlist::StringToAtomlist((self)->GetTypeName());
-  if (self->className == NULL)
-    self->className = atomlist::StringToAtomlist((self)->GetTypeName());
+  if (this->name == NULL)
+    this->name = atomlist::StringToAtomlist((this)->GetTypeName());
+  if (this->className == NULL)
+    this->className = atomlist::StringToAtomlist((this)->GetTypeName());
 }
 
 void view::SetName( class atomlist  * name )
@@ -532,13 +527,13 @@ void view::SetName( class atomlist  * name )
 
 class atomlist * view::GetName( )
      {
-  EnsureName(this);
+  EnsureName();
   return this->name;
 }
 
 class atomlist * view::GetClass( )
      {
-  EnsureName(this);
+  EnsureName();
   return this->className;
 }
 
@@ -561,7 +556,7 @@ short view::GetResource( class atomlist  * name, class atomlist  * class_c, cons
   struct atoms * classMark = (class_c )->Mark( );
   short gotit = FALSE;
 
-  EnsureName(this);
+  EnsureName();
 
   if (this->parent != NULL)
     {
@@ -580,7 +575,7 @@ void view::GetManyParameters( struct resourceList  * resources, class atomlist  
   struct atoms * classMark = NULL;
   class atomlist * passname;
   class atomlist * passclass;
-  EnsureName(this);
+  EnsureName();
   if (this->parent != NULL)
     {
       if (name == NULL)
@@ -610,7 +605,7 @@ void view::GetManyParameters( struct resourceList  * resources, class atomlist  
 void view::PostResource( class atomlist  * path, const class atom  * type, long  data )
                     {
   struct atoms * pathMark = (path )->Mark( );
-  EnsureName(this);
+  EnsureName();
   if (this->parent != NULL)
     {
       (path)->JoinToBeginning(  this->name );

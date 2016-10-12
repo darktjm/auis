@@ -45,7 +45,7 @@ static void dynsearch_SearchForward(class textview  *view)
     class text *text;
 
     lastDirection = FORWARD;
-    text = (class text *) view->dataobject;
+    text = (class text *) view->GetDataObject();
     argument = ((view)->GetIM())->Argument();
     if (GetPattern(view, text, FORWARD) < 0)
 	return;
@@ -77,7 +77,7 @@ static void dynsearch_SearchReverse(class textview  *view)
     class text *text;
 
     lastDirection = REVERSE;
-    text = (class text *) view->dataobject;
+    text = (class text *) view->GetDataObject();
     originalPos = (view)->GetDotPosition();
     argument = ((view)->GetIM())->Argument();
     if (GetPattern(view, text, REVERSE) < 0)

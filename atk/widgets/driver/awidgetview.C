@@ -252,8 +252,8 @@ UpdateBorder(AWidgetView *self, enum view::UpdateType type) {
 			border->SetSelected((boolean)*selected);
 		border->DrawBorder(self, &r);
 	}
-	if (self->parent->IsType(class_matte)) {
-		matte *ma = (class matte *)self->parent;
+	if (self->GetParent()->IsType(class_matte)) {
+		matte *ma = (class matte *)self->GetParent();
 		if (((boolean)ma->resizing==0)  
 					!=  ((boolean)dobj->resizable==0))
 			ma->SetResizing(0);  // arg is ignored

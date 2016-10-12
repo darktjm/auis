@@ -47,10 +47,10 @@ void enterstrV::ObservedChanged(class observable  *changed,long  value)
 	}
     }
     else if(this->etext){
-	if(val != (class value *)this->dataobject){
+	if(val != (class value *)this->GetDataObject()){
 	    /* ERROR */
 	    fflush(stdout);
-	    val = (class value *)this->dataobject;
+	    val = (class value *)this->GetDataObject();
 	}
 	str = (val)->GetString();
 	os = (this->etext)->GetString();

@@ -79,7 +79,7 @@ void modtextview::Paren(char key /* must be char for "&" to work. */)
     if (key=='}')
 	SelfInsertReindent(key);
     else if (key==')') {
-	modtext *ct=(modtext *)this->view::dataobject;
+	modtext *ct=(modtext *)this->view::GetDataObject();
 	long openparen,oldpos=GetDotPosition();
 	SelfInsert(key);
 	openparen= (ct)->ReverseBalance(GetDotPosition());
@@ -95,7 +95,7 @@ void modtextview::Paren(char key /* must be char for "&" to work. */)
 /* HandleEndOfLineStyle will terminate both linecomment AND preprocessor styles when a newline is added (if not \quoted) */
 void modtextview::HandleEndOfLineStyle(long pos)
 {
-    modtext *ct=(modtext *)this->view::dataobject;
+    modtext *ct=(modtext *)this->view::GetDataObject();
     if (ct->preprocessor) {
 	if ((ct)->GetStyle(pos)==ct->srctext::linecomment_style || ((ct)->GetStyle(pos)==ct->srctext::kindStyle[PREPRC] && !(ct)->Quoted(pos))) {
 	    long start=pos;
@@ -108,7 +108,7 @@ void modtextview::HandleEndOfLineStyle(long pos)
 
 static void startPreproc(modtextview *self, char key)
 {
-    modtext *ct=(modtext *)self->view::dataobject;
+    modtext *ct=(modtext *)self->view::GetDataObject();
     long pos, oldpos;
     if ((self)->ConfirmReadOnly())
 	return;

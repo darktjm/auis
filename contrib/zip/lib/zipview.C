@@ -266,7 +266,6 @@ zipview::zipview( )
   MyMouseAction = view::NoMouseEvent;
   this->objects = NULL;
   BlockTop = BlockLeft = BlockHeight = BlockWidth = 0;
-  this->imPtr = NULL;/*=== WHY DONE ? ===*/
   Menu = (class_menulist)->DuplicateML(  this );
   (Menu)->SetView(  this );
   Keystate = keystate::Create( this, class_keymap );
@@ -1628,7 +1627,7 @@ zipview::Announce( const char			       *message )
   long			      status = zip_ok;
 
   IN(zipview_Announce);
-  if ( this->imPtr )
+  if ( this->GetIM() )
     {
     if ( message::DisplayString( this, 0, message ) == -1 )
       status = zip_failure;

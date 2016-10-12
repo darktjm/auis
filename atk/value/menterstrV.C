@@ -49,10 +49,10 @@ void menterstrV::ObservedChanged(class observable  *changed,long  value)
 	}
     }
     else {
-	if(val != (class value *)this->dataobject){
+	if(val != (class value *)this->GetDataObject()){
 	    /* ERROR */
 	    fflush(stdout);
-	    val = (class value *)this->dataobject;
+	    val = (class value *)this->GetDataObject();
 	}
 	str = (val)->GetString();
 	os = (this->etext)->GetString();
@@ -75,7 +75,7 @@ class view *menterstrV::GetApplicationLayer()
     (this->etext)->AddObserver(this);
     this->etextview = ev;
     h = 40;
-    if(((class view *)this)->parent != NULL){
+    if(((class view *)this)->GetParent() != NULL){
 	/* can't call desired size on unlinked text */
 	(ev)->LinkTree(this);
 	(ev)->DesiredSize(500,500,view::NoSet,&w,&h);
