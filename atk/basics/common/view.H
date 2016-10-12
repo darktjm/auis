@@ -41,6 +41,12 @@ class ScrollInterface;
  *  programmer to execute drawing operations using its associated graphic
  *  object.
  *
+ *  To manage display update requests and respond to input events, the
+ *  \ref view also contains a pointer to an instance of the class \ref im.
+ *  It is expected that descendents of the \ref view class add procedures
+ *  related to the view on class inititialization, and set up menus and
+ *  key bindings when the view is in focus.
+ *
  *  It is never proper to create an instance of a \ref view.  You should
  *  only create subclasses of \ref view.
  *
@@ -62,7 +68,7 @@ class ScrollInterface;
  *  view of the same underlying numerical data.  When the user changes the
  *  numbers in the table, the table and the graph can each adjust accordingly.
  *  Likewise, a text editor may display the same document in more than one
- *  window, with changes reflected appropriately in each. 
+ *  window, with changes reflected appropriately in each.
  */
 class view : public  observable {
   public:
@@ -82,11 +88,52 @@ class view : public  observable {
     virtual atomlist *GetClass();
 
     virtual void InsertViewRegion(view *parent, region *region);
+    /**< Display this view in a rectangle.
+     *   This sets up the logical bounds and clipping to the given region.
+     *   The parameters are the same as for graphic::InsertGraphicRegion.
+     *   [FIXME: this is poorly documented]
+     *   \param parent The parent class; this is generally the one who
+     *                 calls this method.
+     *   \param region Where to place this view. */
     virtual void InsertView(view *parent, struct rectangle *enclosingRect);
+    /**< Display this view in a rectangle.
+     *   This sets up the logical bounds and clipping to the given rectangle.
+     *   The parameters are the same as for graphic::InsertGraphic.
+     *   [FIXME: this is poorly documented]
+     *   \param parent The parent class; this is generally the one who
+     *                 calls this method.
+     *   \param enclosingRect Where to place this view. */
     virtual void InsertViewSize(view *EnclosingView, 
 		long xOriginInParent, long yOriginInParent, long w, long h);
+    /**< Display this view in a rectangle.
+     *   This sets up the logical bounds and clipping to the given rectangle.
+     *   The parameters are the same as for graphic::InsertGraphicSize.
+     *   [FIXME: this is poorly documented]
+     *   \param EnclosingView The view relative to which this will be placed.
+     *   \param xOriginInParent The X coordiante relateve to \p EnclosingView.
+     *   \param yOriginInParent The Y coordiante relateve to \p EnclosingView.
+     *   \param width The width of the rectangle.
+     *   \param height The height of the rectangle.
+     */
     virtual void SetDataObject(class dataobject *dobj);
+    /**< Attach this view to a data object.
+     *   This sets the source of data for this view.  It may be overridden
+     *   to initialize parameters immediately from the view and to ensure
+     *   that the data object is a class this view can handle.  However,
+     *   there is no way short of killing the program to signal failure.
+     *
+     *   If overridden, the parent's implementation should be called as
+     *   well.  The default implementation detaches the existing data
+     *   object, adds a reference to the new one, and adds itself as an
+     *   observer to the new one.  It also adjusts the data object and
+     *   view names as needed.
+     *   \param dobj The data object.  Do not set this to NULL, as some
+     *   views will crash.  The only safe way to remove the data object
+     *   is to create a new view instance, and destroy the old.
+     */
     inline class dataobject *GetDataObject() { return ((this)->dataobject); }
+    /**< Get the object attached to this view.
+     *   \return The object, or NULL if no object is attached. */
 
     // view methods that should be overridden
 
@@ -121,28 +168,54 @@ class view : public  observable {
     virtual view *Hit (enum MouseAction action, long x, long y, 
 			long numberOfClicks);
 
+    /** Input to DesiredSize() indicating flexibilty of input values. */
     enum DSpass {
-	NoSet,
-	WidthSet,
-	HeightSet
+	NoSet, /**< Both dimensions are flexible. */
+	WidthSet, /**< The width cannot be changed. */
+	HeightSet /**< The height cannot be changed. */
     };
 
     typedef int DSattributes;
 
+    /** Return value from DesiredSize() indicating flexibilty of return values. */
     enum DSattribute {
-	Fixed = 0,
+	Fixed = 0, /**< Any otherwise unspecified direction is inflexible.  */
 
-	WidthLarger = 1,
-	WidthSmaller = 2,
-	WidthFlexible = 3,
+	WidthLarger = 1, /**< The reported width can grow. */
+	WidthSmaller = 2, /**< The reported width can shrink. */
+	WidthFlexible = 3, /**< The reported width can grow or shrink. */
 
-	HeightLarger = 4,
-	HeightSmaller = 8,
-	HeightFlexible = 12
+	HeightLarger = 4, /**< The reported height can grow. */
+	HeightSmaller = 8, /**< The reported height can shrink.  */
+	HeightFlexible = 12 /**< The reported height can grow or shink. */
     };
 
     virtual DSattributes DesiredSize(long w, long h, 
 			enum DSpass pass, long *dWidth, long *dheight);
+    /**< Report requested size of this view.
+     *   This method is used to conduct size negotiation between the
+     *   parent and this view.  The parent passes in \p h and \p w, which
+     *   are the current space allocated for the view, and receives the
+     *   child's desired values in \p dWidth and \p dheight.  The permitted
+     *   modifications to \p w and \p h are given in \p pass.  In addition
+     *   to giving the desired size, a set of flags indicating possible
+     *   modifications to this size is returned as well.
+     *
+     *   This is generally called by the parent during a FullUpdate() call.
+     *   It is called as many times as needed to fit the children within
+     *   their given space.  Once complete, the child's FullUpdate() is called.
+     *   It is also generally called in response to a child calling
+     *   WantNewSize().
+     *   \param w The parent's desired width.
+     *   \param h The parent's desired height.
+     *   \param pass The flexibility of \p w and \p h.
+     *   \param dWidth The returned child's desired width.
+     *   \param dheight The returned child's desired height.
+     *   \return a combination of \ref DSattribute flags indicating how
+     *           flexible \p dWidth and \p dheight are.  Note that some of the
+     *           flags are combinations of others; to check, and them
+     *           and compare them with the flag being checked.
+     */
 
 // view methods that can be overridden
 // input focus 
@@ -165,8 +238,35 @@ class view : public  observable {
     virtual void WantColormap(view *requestor, colormap **cmap);
 
     virtual void WantUpdate(view *requestor);
+    /**< An appeal from a child to update itself.
+     *   A child calls this on its parent with itself as the parameter when
+     *   it wants its Update() routine called at the earliest opportunity.
+     *   This object is free to ignore or repsect the request.  If it chooses
+     *   to respect the request, Update() will eventually be called on the
+     *   child view.
+     *   \param requestor The child view making the request.
+     */
     virtual void WantInputFocus(view *requestor);
+    /**< An appeal from a child to receive input focus.
+     *   A child calls this on its parent with itself as the parameter when
+     *   it wants input focus at the earliest opportunity.  This object is
+     *   free to ignore or repsect the request.  If it chooses to respect
+     *   the request, RecieveInputFocus() will eventually be called on the
+     *   child view.  Note that the default action is to pass it up the
+     *   LinkTree() hierarchy anyway, so it is safe to call this on
+     *   oneself.
+     *   \param requestor The child view making the request.
+     */
     virtual void WantNewSize(view *requestor);
+    /**< An appeal from a child to resize it.
+     *   A child calls this on its parent with itself as the parameter when
+     *   its contents change, requiring a renegotiation of its living space
+     *   at the earliest opportunity.  This object is free to ignore or
+     *   respect the request.  If it chooses to respect the request,
+     *   DesiredSize() will eventually be caled on the child view, usually
+     *   followed by FullUpdate() after resizing.
+     *   \param requestor The child view making the request.
+     */
     virtual void PostKeyState(class keystate *keystate);
     virtual void PostMenus(class menulist *menulist);
 
@@ -182,27 +282,149 @@ class view : public  observable {
 
 // View linking/unlinking functions
     virtual void LinkTree(view *parent);
-    virtual void UnlinkTree();
+    /**< Link this view into the view tree.
+     *   There is a view tree assocaited with each top-level window.  At
+     *   the root of this tree is the interaction manager (\ref im) for this
+     *   window.  In order to receive events of any kind, a view must be
+     *   linked into that tree.  The view will also inherit its graphic
+     *   context from its new parent; a view must be linked to perform
+     *   any drawing.  When creating a new vew to display, call the new
+     *   view's LinkTree() method with the view into which it
+     *   will display as the \p parent parameter.  When finished using a
+     *   view, it may be unlinked by calling the new view's LinkTree() method
+     *   with a NULL parameter.
+     *
+     *   This method must be overridden by any view which displays other
+     *   views as children of itself.  The override must call this method
+     *   on all of its children to update linkage when its linkage changes.
+     *   Of course the parent's implementation should always be called first
+     *   to ensure that its own linkage is correct.
+     *   \param parent The parent view; usually the caller.  If NULL,
+     *                 only unlink from the current parent.
+     */
+    inline void UnlinkTree() { LinkTree(NULL); }
+    /**< Unlink this view from its view tree.
+     *   This is equivalent to calling LinkTree(NULL)
+     */
     virtual boolean IsAncestor(view *possibleAncestor);
+    /**< Determine if this view is another view's descendent.
+     *   This checks the link ancestry defined by LinkTree().
+     *   \param possibleAncestor The view to check.
+     *   \return TRUE if the \p possibleAncestor is this view or an actual
+     *   ancestor of this view.
+     */
     virtual void UnlinkNotification(view *unlinkedTree);
+    /**< Callback when links are removed.
+     *   If any view below this in the LinkTree() hierarchy is unlinked,
+     *   this method is called first in its parent and all ancestors.
+     *   The notification is passed on by the method itself; if you override
+     *   this method, either call the parent class' version or pass the
+     *   notification up to your own parent yourself.  This method is not
+     *   meant to be called directly except by overriders of this method.
+     *
+     *   Remember that not only the given view, but also all of its
+     *   descendents are unlinked.  If some of these descendents
+     *   may interest you, use IsAncestor() to determine if they are
+     *   being unlinked as well.
+     *   \param unlinkedTree The view actually being unlinked.
+     */
     virtual void ExposeSelf(boolean recurse);
+    /**< Make this view visible within its parent.
+     *   This method calls the ExposeChild() method in this view's parent
+     *   in the LinkTree() heirarchy to request that it be made visible.
+     *   This method is not meant to be overridden.
+     *   \param recurse If TRUE, call ExposeSelf(TRUE) in the parent as well.
+     */
     virtual void ExposeChild(view *v);
+    /**< Make a child of this view visible.
+     *   This is a request to make a view \p v, which is a child of this
+     *   view, visible.  This is normally done by panning or scrolling
+     *   until the child is visible.  It is not necessary that this view
+     *   itself be visible, just that the child be visible within its
+     *   bounds.
+     *   \param v A child of this view in the LinkTree() hierarchy.
+     */
 
     virtual const char *GetWindowManagerType();
     virtual long GetDevice();
     virtual void InitChildren();
     virtual boolean CanView(const char *TypeName);
+    /**< Determine if this view can handle data objects of a given %ATK
+     *   class name.
+     *   This must be overridden by descendents of view which do not
+     *   support the same list of data objects as their parents.  In
+     *   particular, view itself supports none.  It is checked before
+     *   creating a view on a data object.
+     *
+     *   This method is a good idea that was never implemented properly.
+     *   The default returns TRUE, even though it should return FALSE.
+     *   It doesn't even check if the parameter is a dataobject.
+     *   Only 3 classes override this (of 140 in AMS-less %ATK).
+     *   Only 1 class actually looks at this (\ref celview), even though
+     *   it should be verified at the least by anything that inserts
+     *   "insets" (e.g. \ref textview, \ref spread) or creates views
+     *   from names (e.g. \b runapp).  Even though these all use the
+     *   dataobject::ViewName() method by default, they also allow
+     *   view overrides which are never verified.  Instead, views just
+     *   assume they are given data objects of the correct type, and
+     *   silently cast their data objects to that type.
+     *
+     *   \param TypeName The %ATK registry name for the data object.
+     *   \return TRUE if the view can display objects of this type.
+     */
 
 // Support for selections ala X 
     virtual void LoseSelectionOwnership();
     virtual long WriteSelection(FILE *out);
 
 // support for recursive search
-    virtual boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-    virtual boolean RecSrchResume(struct SearchPattern *pat);
+    virtual boolean RecSearch(class search *pat, boolean toplevel);
+    /**< Recursively search a view hierarchy.
+     *   The search begins at this node, and proceeds, depth first, to
+     *   any children.  If this view does not support searching,
+     *   this method does nothing.  This method is itself responsible for
+     *   identififying children and passing the search on to them in the
+     *   correct order.  In addition, this method must 
+     *   \param pat The search pattern.
+     *   \param toplevel TRUE if this is the top of the hierarchy.  This
+     *   means to start at an implementation-defined location rather than
+     *   the start of the object's text.
+     *   \return TRUE if search succeeded.  If so, the search position and
+     *   extent must be cached internally so that RecSrchResume() and
+     *   RecSrchReplace() work.
+     */
+    virtual boolean RecSrchResume(class search *pat);
+    /**< Continue a search begun by RecSearch().
+     *   This is used to find the next occurrence of the search pattern.
+     *   \param pat The search pattern.
+     *   \return TRUE if search succeeded.  If so, the search position and
+     *   extent must be cached internally so that RecSrchResume() and
+     *   RecSrchReplace() work.  This should return FALSE if the previous
+     *   RecSearch() or RecSrchResume() failed, or no such previous call
+     *   was made with this pattern.
+     */
     virtual boolean RecSrchReplace(class dataobject *text, long pos, long len);
+    /**< Continue a search begun by RecSearch().
+     *   This is used to replace the found occurrence of the search pattern.
+     *   Generally the class of \p text is the same, or an ancestor of the
+     *   class on which the search took place.
+     *   \param text A text object this class understands.
+     *   \param pos The position in the text object's text of the replacement text.
+     *   \param len The length of the replacement text.
+     *   \return TRUE if replacement succeeded.  This should return FALSE
+     *   and do nothing else if the previous RecSearch() or RecSrchResume()
+     *   failed, or no such previous call was made, or if text is an object
+     *   which is not recognized.
+     */
     virtual void RecSrchExpose(const struct rectangle &logical, 
 			struct rectangle &hit);
+    /**< Highlight search result.
+     *   This is used to display and highlight the last search result.
+     *   \param logical The logical bounds within which the highlighted
+     *                  results should appear.
+     *   \param hit Filled in with the logical bounds into which the
+     *          highlighted results were rendered on successful completion.
+     */
     
 // Postscript printing
     virtual void *GetPSPrintInterface(const char *printtype);

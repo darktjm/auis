@@ -109,8 +109,8 @@ class AButtonv : public AWidgetView {
     void GetOrigin(long width, long height, 
 		   long * originX, long * originY);
     void LinkTree(class view *parent);
-    boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-    boolean RecSrchResume(struct SearchPattern *pat);
+    boolean RecSearch(class search *pat, boolean toplevel);
+    boolean RecSrchResume(class search *pat);
     boolean RecSrchReplace(class dataobject *text, long pos, long len);
     void RecSrchExpose(const struct rectangle &logical, 
 		       struct rectangle &hit);

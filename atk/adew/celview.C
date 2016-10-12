@@ -1563,7 +1563,7 @@ void celview::GetOrigin(long  width, long  height, long  *originX, long  *origin
     else (this)->view::GetOrigin( width, height, originX, originY);
 }
 
-boolean celview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean celview::RecSearch(class search *pat, boolean toplevel)
 {
     boolean res;
 
@@ -1576,7 +1576,7 @@ boolean celview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean celview::RecSrchResume(struct SearchPattern *pat)
+boolean celview::RecSrchResume(class search *pat)
 {
     boolean res;
 

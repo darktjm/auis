@@ -3157,7 +3157,7 @@ void figview::LinkTree( class view  *parent )
     }
 }
 
-static boolean figview_RecSearchLoop(class figview *self, long pos, struct SearchPattern *pat)
+static boolean figview_RecSearchLoop(class figview *self, long pos, class search *pat)
 {
     long ix;
     class figobj *o;
@@ -3189,14 +3189,14 @@ static boolean figview_RecSearchLoop(class figview *self, long pos, struct Searc
     return FALSE;
 }
 
-boolean figview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean figview::RecSearch(class search *pat, boolean toplevel)
 {
     this->FlushDataChanges();
 
     return figview_RecSearchLoop(this, 0, pat);
 }
 
-boolean figview::RecSrchResume(struct SearchPattern *pat)
+boolean figview::RecSrchResume(class search *pat)
 {
     long pos;
 

@@ -353,22 +353,22 @@ int tindex::IndexTerm(class text  *d,const char  *term,const char  **error)
 {
 	ATKinit;
 
-    char *lastPattern = NULL;
+    class search lastPattern;
     const char  *tp;
     int pos = 0, len,dlen,c;
     int j;
     class style *Style = NULL;
     class environment *te;
- 
-    tp =search::CompilePattern(term,(struct SearchPattern **)&lastPattern);
+
+    tp =lastPattern.CompilePattern(term);
     if(tp != NULL){
 	if(error) *error = tp;
 	return -1;
     }
     j = 0;len = 0;
     dlen = (d)->GetLength();
-    for(pos = 0;(pos = search::MatchPattern(d,pos,(struct SearchPattern *)lastPattern)) >= 0;pos += len){
-	len =  search::GetMatchLength();
+    for(pos = 0;(pos = lastPattern.MatchPattern(d,pos)) >= 0;pos += len){
+	len =  lastPattern.GetMatchLength();
 	if(len == 0) {
 	    return 0;
 	}

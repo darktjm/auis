@@ -24,8 +24,8 @@ class fnotev: public  view {
     void GetOrigin(long width, long height, long *originX, long *originY);
     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
     void ReceiveInputFocus();
-    boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-    boolean RecSrchResume(struct SearchPattern *pat);
+    boolean RecSearch(class search *pat, boolean toplevel);
+    boolean RecSrchResume(class search *pat);
     void *GetPSPrintInterface(const char *printtype);
 
     virtual void pushchild();

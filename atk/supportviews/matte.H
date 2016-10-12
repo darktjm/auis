@@ -30,8 +30,8 @@ public:
      void ObservedChanged (class observable *changed, long value);
      void LinkTree(class view *parent);
      void InitChildren();
-     boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-     boolean RecSrchResume(struct SearchPattern *pat);
+     boolean RecSearch(class search *pat, boolean toplevel);
+     boolean RecSrchResume(class search *pat);
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void PrintPSDoc(FILE *outfile, long pagew, long pageh);
      void *GetPSPrintInterface(const char *printtype);

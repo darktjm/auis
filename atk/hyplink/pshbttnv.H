@@ -43,8 +43,8 @@ class pushbuttonview: public  view {
       void PostMenus(class menulist *ml);
       void WantUpdate(class view *requestor);
       void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
-      boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-      boolean RecSrchResume(struct SearchPattern *pat);
+      boolean RecSearch(class search *pat, boolean toplevel);
+      boolean RecSrchResume(class search *pat);
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
       void *GetPSPrintInterface(const char *printtype);

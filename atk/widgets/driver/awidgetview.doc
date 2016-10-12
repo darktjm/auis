@@ -221,9 +221,9 @@ General view methods
 Recursive search methods
 
 
-	boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
+	boolean RecSearch(class search *pat, boolean toplevel);
 
-	boolean RecSrchResume(struct SearchPattern *pat);
+	boolean RecSrchResume(class search *pat);
 
 	boolean RecSrchReplace(class dataobject *text, long pos, long len);
 

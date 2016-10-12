@@ -580,7 +580,7 @@ iconview::SetTitleFont(const char  * titlefont,int  titlestyle,int  titlepts)
     this->titlefont = fontdesc::Create(titlefont, titlestyle, titlepts);
 }
 
-boolean iconview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean iconview::RecSearch(class search *pat, boolean toplevel)
 {
     boolean res;
 
@@ -594,7 +594,7 @@ boolean iconview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean iconview::RecSrchResume(struct SearchPattern *pat)
+boolean iconview::RecSrchResume(class search *pat)
 {
     boolean res;
 

@@ -8,6 +8,8 @@
 !  bitstream-bitstream vera sans mono/bitstream vera sans/bitstream vera serif
 !  monotype-noto mono/noto sans/noto serif
 !  misc-liberation mono/liberation sans/liberation serif
+!  monotype-courier new/arial/times new roman (MS core fonts)
+!  b&h-luxi mono/sans/serif
 -andy-andy-medium-r-normal--0-0-0-0-p-0-iso8859-1 "-urw-nimbus roman no9 l-medium-r-normal--0-0-0-0-p-0-iso8859-1"
 -andy-andy-medium-i-normal--0-0-0-0-p-0-iso8859-1 "-urw-nimbus roman no9 l-medium-i-normal--0-0-0-0-p-0-iso8859-1"
 -andy-andy-bold-r-normal--0-0-0-0-p-0-iso8859-1 "-urw-nimbus roman no9 l-bold-r-normal--0-0-0-0-p-0-iso8859-1"

@@ -52,7 +52,7 @@ static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos,
     const char *newerr;
     static char prompt[MAXSTRING+256];
     long loc;
-    struct SearchPattern *pattern;
+    class search pattern;
     boolean newContForward = contForward;
     boolean newContBackward = contBackward;
 
@@ -109,8 +109,7 @@ static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos,
 	if (newstring[0] != '\0') {
 	    loc = -1;
             newpos = NULL;
-            pattern = NULL;
-            newerr = search::CompilePattern(newstring, &pattern);
+            newerr = pattern.CompilePattern(newstring);
             if (newerr == NULL) {
                 if (strcmp(string, newstring) == 0)
                     fudge = 1;
@@ -119,17 +118,17 @@ static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos,
 
 		if (forwardp) {
 		    if (contForward) {
-			loc = search::MatchPattern(txt, (tv)->GetDotPosition() + fudge, pattern);
+			loc = pattern.MatchPattern(txt, (tv)->GetDotPosition() + fudge);
 		    }
 		}
 		else {
 		    if (contBackward) {
-			loc = search::MatchPatternReverse(txt, (tv)->GetDotPosition() - fudge, pattern);
+			loc = pattern.MatchPatternReverse(txt, (tv)->GetDotPosition() - fudge);
 		    }
 		}
 
                 if (loc >= 0) {
-		    newpos = (txt)->CreateMark( loc, search::GetMatchLength());
+		    newpos = (txt)->CreateMark( loc, pattern.GetMatchLength());
 		    newContForward = TRUE;
 		    newContBackward = TRUE;
 		}

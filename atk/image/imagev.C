@@ -1332,14 +1332,6 @@ imagev::SetDataObject( class dataobject  *dataobj )
 }
 
 void
-imagev::UnlinkTree( )
-{
-    if(dimage.IDDImage()) dimage.Release();
-    this->onScreen = this->isLinked = FALSE;
-    (this)->view::UnlinkTree();
-}
-
-void
 imagev::UnlinkNotification( class view  *unlinkedTree )
 {
     this->onScreen = this->isLinked = FALSE;

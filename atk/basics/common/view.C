@@ -460,23 +460,16 @@ void view::LinkTree(class view  *parent)
 	}
     }
     else {
+	if (this->parent != NULL)
+	    this->parent->UnlinkNotification( this);
+
         this->imPtr = NULL;
 	if(this->drawable) {
 	    rectangle_SetRectSize(&this->drawable->localBounds, 0, 0, 0, 0);
 	    (this)->ClearInheritedColormap();
 	}
+	this->parent = NULL;
     }
-}
-
-void view::UnlinkTree()
-    {
-    class view *parent = this->parent;
-
-    if (parent != NULL)
-	(parent)->UnlinkNotification( this);
-    
-    (this)->LinkTree( NULL);
-    this->parent = NULL;
 }
 
 void view::UnlinkNotification(class view  *unlinkedTree)
@@ -663,12 +656,12 @@ long view::WriteSelection(FILE  *out)
     return -1;
 }
 
-boolean view::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean view::RecSearch(class search *pat, boolean toplevel)
 {
     return FALSE;
 }
 
-boolean view::RecSrchResume(struct SearchPattern *pat)
+boolean view::RecSrchResume(class search *pat)
 {
     return FALSE;
 }

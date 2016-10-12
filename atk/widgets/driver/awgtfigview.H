@@ -35,9 +35,9 @@ class AWgtFigView : public AWidgetView {
 	view::DSattributes DesiredSize(long width, long height, 
 			enum view::DSpass pass, 
 			long *desiredWidth, long *desiredHeight);
-	virtual boolean RecSearch(struct SearchPattern *pat, 
+	virtual boolean RecSearch(class search *pat, 
 			boolean toplevel);
-	virtual boolean RecSrchResume(struct SearchPattern *pat);
+	virtual boolean RecSrchResume(class search *pat);
 	virtual boolean RecSrchReplace(class dataobject *text, 
 			long pos, long len);
 	virtual void RecSrchExpose(const struct rectangle &logical, 

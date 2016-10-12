@@ -1479,9 +1479,9 @@ virtual void InitChildren();
 
 virtual boolean CanView(char *TypeName);
 
-virtual boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
+virtual boolean RecSearch(class search *pat, boolean toplevel);
 
-virtual boolean RecSrchResume(struct SearchPattern *pat);
+virtual boolean RecSrchResume(class search *pat);
 
 	assumption:  awidgetview knows about all embedded views
 

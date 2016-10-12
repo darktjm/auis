@@ -76,7 +76,11 @@ The following known dependencies currently exist:
     preference.  See below for replacing this with gv.
   - GNU make, or at least a make capable of dealing with GNU-style
     `$(shell ..)` and `ifeq` .. `endif`, such as makepp.
-  - URW Nimbus fonts, installed in your X font path.
+  - URW Nimbus fonts, installed in your X font path.  This can be
+    overridden by either editing xmkfontd/non-auis.alias before
+    installation or $ANDREWDIR/X11fonts/fonts.alias after installation,
+    or inserting your own set of font aliases in the font path before
+    andrew's.
 
 I recommend the following preference settings in ~/.preferences:
 

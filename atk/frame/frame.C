@@ -1938,14 +1938,14 @@ class frame *frame::GetFrameInWindowForBuffer(class buffer  *b)
     return f;
 }
 
-boolean frame::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean frame::RecSearch(class search *pat, boolean toplevel)
 {
     if (this->childView)
 	return this->childView->RecSearch(pat, toplevel);
     return FALSE;
 }
 
-boolean frame::RecSrchResume(struct SearchPattern *pat)
+boolean frame::RecSrchResume(class search *pat)
 {
     if (this->childView)
 	return this->childView->RecSrchResume(pat);

@@ -631,7 +631,7 @@ void lpair::InitChildren()
 }
 
 
-boolean lpair::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean lpair::RecSearch(class search *pat, boolean toplevel)
 {
     class view *v;
     int ai;
@@ -652,7 +652,7 @@ boolean lpair::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean lpair::RecSrchResume(struct SearchPattern *pat)
+boolean lpair::RecSrchResume(class search *pat)
 {
     class view *v;
     int ai;

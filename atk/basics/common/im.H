@@ -124,8 +124,8 @@ public:
      void UnlinkNotification(class view *unlinkedTree);
      class view * Hit (enum view::MouseAction action, long x, long y, long clicks)  ;
      void ObservedChanged(class observable *changed, long value);
-     boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-     boolean RecSrchResume(struct SearchPattern *pat);
+     boolean RecSearch(class search *pat, boolean toplevel);
+     boolean RecSrchResume(class search *pat);
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit); 
   

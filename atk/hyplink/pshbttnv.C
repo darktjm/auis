@@ -1415,7 +1415,7 @@ void pushbuttonview::PrintPSRect(FILE *outfile, long logwidth, long logheight, s
 
 }
 
-boolean pushbuttonview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean pushbuttonview::RecSearch(class search *pat, boolean toplevel)
 {
     const char *ts;
     int substart;
@@ -1427,11 +1427,11 @@ boolean pushbuttonview::RecSearch(struct SearchPattern *pat, boolean toplevel)
 	return FALSE;
     }
 
-    substart = search::MatchPatternStr((unsigned char *)ts, 0, strlen(ts), pat);
+    substart = pat->MatchPatternStr((unsigned char *)ts, 0, strlen(ts));
     if (substart>=0) {
 	this->recsearchvalid = TRUE;
 	this->recsearchsubstart = substart;
-	this->recsearchsublen = search::GetMatchLength();
+	this->recsearchsublen = pat->GetMatchLength();
 	return TRUE;
     }
 
@@ -1439,7 +1439,7 @@ boolean pushbuttonview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean pushbuttonview::RecSrchResume(struct SearchPattern *pat)
+boolean pushbuttonview::RecSrchResume(class search *pat)
 {
     if(this->recsearchvalid) {
 	const char *ts;
@@ -1454,11 +1454,11 @@ boolean pushbuttonview::RecSrchResume(struct SearchPattern *pat)
 	this->recsearchsubstart++;
 	this->recsearchsublen=0;
 	len=strlen(ts);
-	if(len-this->recsearchsubstart>0) substart = search::MatchPatternStr((unsigned char *)ts, this->recsearchsubstart, len-this->recsearchsubstart, pat);
+	if(len-this->recsearchsubstart>0) substart = pat->MatchPatternStr((unsigned char *)ts, this->recsearchsubstart, len-this->recsearchsubstart);
 	if (substart>=0) {
 	    this->recsearchvalid = TRUE;
 	    this->recsearchsubstart = substart;
-	    this->recsearchsublen = search::GetMatchLength();
+	    this->recsearchsublen = pat->GetMatchLength();
 	    return TRUE;
 	}
 	this->recsearchvalid = FALSE;

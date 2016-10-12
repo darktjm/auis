@@ -20,7 +20,8 @@ ATK_IMPL("dynsearch.H")
 #define REVERSE		2
 
 static char lastString[MAXSTRING] = "";
-static char *lastPattern;
+static class search lastPattern;
+static int lastPatternValid = 0;
 static int lcSearch = 0;
 static int failures = 0;
 static int lastDirection = FORWARD;
@@ -50,7 +51,7 @@ static void dynsearch_SearchForward(class textview  *view)
 	return;
     (view)->SetDotPosition( (view)->GetDotPosition() + (view)->GetDotLength());
     for (count = 0; count < argument; count++) {
-	pos = search::MatchPattern (text, (view)->GetDotPosition(), (struct SearchPattern *)lastPattern);
+	pos = lastPattern.MatchPattern (text, (view)->GetDotPosition());
 	if (pos < 0) {
 	    (view)->SetDotLength(0);
 	    message::DisplayString(view, 0, "Search failed.");
@@ -60,7 +61,7 @@ static void dynsearch_SearchForward(class textview  *view)
 	}
 	failures = 0;
 	(view)->SetDotPosition( pos);
-	(view)->SetDotLength( search::GetMatchLength());
+	(view)->SetDotLength( lastPattern.GetMatchLength());
     }
     (view)->FrameDot( pos);
     (view)->WantUpdate( view);
@@ -85,7 +86,7 @@ static void dynsearch_SearchReverse(class textview  *view)
     if (originalPos > 0)
         (view)->SetDotPosition( originalPos - 1);
     for (count = 0; count < argument; count++) {
-	pos = search::MatchPatternReverse(text, (view)->GetDotPosition(), (struct SearchPattern *)lastPattern);
+	pos = lastPattern.MatchPatternReverse(text, (view)->GetDotPosition());
 	if (pos < 0) {
 	    (view)->SetDotPosition( originalPos);
             message::DisplayString(view, 0, "Reverse search failed.");
@@ -95,7 +96,7 @@ static void dynsearch_SearchReverse(class textview  *view)
 	}
 	failures = 0;
 	(view)->SetDotPosition( pos);
-	(view)->SetDotLength( search::GetMatchLength());
+	(view)->SetDotLength( lastPattern.GetMatchLength());
     }
     (view)->FrameDot( pos);
     (view)->WantUpdate( view);
@@ -157,11 +158,12 @@ static int GetPattern(class textview  *view		/* textview we're using */, class t
         const char *errorMessage;
 
 	failures = 0;
-	errorMessage = search::CompilePattern(string, (struct SearchPattern **)&lastPattern);
+	errorMessage = lastPattern.CompilePattern(string);
 	if (errorMessage != NULL) {
 	    message::DisplayString(view, 0, errorMessage);
 	    return -1;
 	}
+	lastPatternValid = 1;
 	strcpy(lastString, string);
     }
     ((view)->GetIM())->SetLastCmd( lcSearch);
@@ -173,18 +175,18 @@ static void dynsearch_SearchAgain(class textview  *self)
     class text *d = (class text *)(self)->GetDataObject();
     long	savePos, pos;
 
-    if (lastPattern != NULL) {
+    if (lastPatternValid) {
         savePos = pos = (self)->GetDotPosition();
 
 	if (lastDirection == FORWARD) {
             pos = (self)->CollapseDot();
-            pos = search::MatchPattern(d, pos, (struct SearchPattern *)lastPattern);
+            pos = lastPattern.MatchPattern(d, pos);
         }
         else {
             (self)->SetDotLength( 0);
             if (pos > 0)
 		(self)->SetDotPosition( --pos);
-            pos = search::MatchPatternReverse(d, pos, (struct SearchPattern *)lastPattern);
+            pos = lastPattern.MatchPatternReverse(d, pos);
         }
         if (pos < 0)
 	{
@@ -194,7 +196,7 @@ static void dynsearch_SearchAgain(class textview  *self)
 	}
         else {
             (self)->SetDotPosition(pos);
-            (self)->SetDotLength( search::GetMatchLength());
+            (self)->SetDotLength( lastPattern.GetMatchLength());
             (self)->FrameDot(pos);
             (self)->WantUpdate( self);
         }
@@ -219,8 +221,6 @@ boolean dynsearch::InitializeClass()
     struct ATKregistryEntry  *textviewClassinfo;
 
     lcSearch = im::AllocLastCmd();
-    lastPattern = NULL;
-    lastString[0] = 0;
 
     textviewClassinfo = ATK::LoadClass("textview");
     proctable::DefineProc("dynsearch-search-forward", (proctable_fptr) dynsearch_SearchForward, textviewClassinfo, NULL,

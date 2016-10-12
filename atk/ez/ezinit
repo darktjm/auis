@@ -6,6 +6,7 @@ addfiletype .c ctext
 addfiletype .h ctext
 addfiletype .C cpptext
 addfiletype .H cpptext
+addfiletype .org org
 addfiletype .eq eq
 addfiletype .fad fad
 addfiletype .raster raster
@@ -18,6 +19,7 @@ addfiletype .overview text "template=help"
 addfiletype .help text "template=help"
 addfiletype * text "template=default"
 # from samples
+addfiletype .png imageio
 addfiletype .gif imageio
 addfiletype .jpg imageio
 addfiletype .pbm imageio

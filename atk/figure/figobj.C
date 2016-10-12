@@ -625,12 +625,12 @@ void figobj::PrintObject(class figview  *v, FILE  *file, const char  *prefix, bo
 {
 }
 
-boolean figobj::ORecSearch(struct SearchPattern *pat)
+boolean figobj::ORecSearch(class search *pat)
 {
     return FALSE;
 }
 
-boolean figobj::ORecSrchResume(struct SearchPattern *pat)
+boolean figobj::ORecSrchResume(class search *pat)
 {
     return FALSE;
 }

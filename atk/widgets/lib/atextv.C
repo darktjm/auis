@@ -476,12 +476,12 @@ void ATextv::GetOrigin(long  width, long height, long *originX, long *originY) {
     size.Origin(originX, originY);
 }
 
-boolean ATextv::RecSearch(struct SearchPattern *pat, boolean ) {
+boolean ATextv::RecSearch(class search *pat, boolean ) {
     if(child) return child->RecSearch(pat, FALSE);
     return FALSE;
 }
 
-boolean ATextv::RecSrchResume(struct SearchPattern *pat) {
+boolean ATextv::RecSrchResume(class search *pat) {
     if(child) return child->RecSrchResume(pat);
     return FALSE;
 }

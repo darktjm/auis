@@ -32,12 +32,6 @@ ATK_IMPL("tags.H")
 #include <sys/param.h>
 #include <tags.H>
 
-struct SearchPattern {
-    short size, used;
-    unsigned char *body;
-};
-
-
 #define TBUFNAM "Tags-Buffer"
 static const char *TagsFile = NULL;
 
@@ -271,7 +265,7 @@ static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
     boolean foundTag=FALSE;
     int same;
 
-    static struct SearchPattern *result = NULL;
+    static class search result;
     class frame *ourFrame;
     class view *ourView;
     class buffer *filebuffer, *curbuf, *TagsBuffer;
@@ -287,10 +281,10 @@ static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
     }
     doc = (class text *) (TagsBuffer)->GetData();
 
-    search::CompilePattern(tag, &result);
+    result.CompilePattern(tag);
     while (!foundTag) {
 	/* keep looking for the EXACT tag name, and only use a fuzzy match IF no exact one was found  -RSK*/
-	position = search::MatchPattern(doc, position+1, result);
+	position = result.MatchPattern(doc, position+1);
 	if (position<0) {
 	    /* we're all done looking, no exact match, so use fuzzy one */
 	    foundTag= TRUE;
@@ -305,7 +299,7 @@ static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
 	} else if (firstField(doc,position)) {
 	    /* the string we found IS a tag, remember this position for posterity */
 	    if ((position==0 || (doc)->GetChar(position-1)=='\n') &&
-		((c=(doc)->GetChar(position+search::GetMatchLength()))==' ' || c=='\t')) {
+		((c=(doc)->GetChar(position+result.GetMatchLength()))==' ' || c=='\t')) {
 		/* we found that EXACT tag */
 		foundTag= TRUE;
 	    } else if (fuzzypos<0) {
@@ -386,13 +380,13 @@ static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
 	}
     } else {
 	/* search for tag in source file */
-	search::CompilePattern(searchstring, &result);
-	position = search::MatchPattern(doc,0,result);
+	result.CompilePattern(searchstring);
+	position = result.MatchPattern(doc,0);
 	if (position<0) {
 	    message::DisplayString(view,0,"Tag not found in source file -- rebuild tag file!");
 	    return;
 	}
-	length = search::GetMatchLength();
+	length = result.GetMatchLength();
 	if (match_bol) {
 	    position++;
 	    length--;

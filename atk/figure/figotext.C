@@ -977,7 +977,7 @@ void figotext::PrintObject(class figview  *v, FILE  *file, const char  *prefix, 
     fprintf(file, "%s  grestore\n", prefix);
 }
 
-boolean figotext::ORecSearch(struct SearchPattern *pat)
+boolean figotext::ORecSearch(class search *pat)
 {
     char *ts;
     int substart, pos;
@@ -988,11 +988,11 @@ boolean figotext::ORecSearch(struct SearchPattern *pat)
     }
 
     pos = 0;
-    substart = search::MatchPatternStr((unsigned char *)ts, pos, strlen(ts), pat);
+    substart = pat->MatchPatternStr((unsigned char *)ts, pos, strlen(ts));
     if (substart>=0) {
 	this->recsearchvalid = TRUE;
 	this->recsearchsubstart = substart;
-	this->recsearchsublen = search::GetMatchLength();
+	this->recsearchsublen = pat->GetMatchLength();
 	return TRUE;
     }
 
@@ -1000,7 +1000,7 @@ boolean figotext::ORecSearch(struct SearchPattern *pat)
     return FALSE;
 }
 
-boolean figotext::ORecSrchResume(struct SearchPattern *pat)
+boolean figotext::ORecSrchResume(class search *pat)
 {
     char *ts;
     int substart, pos;
@@ -1012,11 +1012,11 @@ boolean figotext::ORecSrchResume(struct SearchPattern *pat)
 
     pos = this->recsearchsubstart+this->recsearchsublen;
 
-    substart = search::MatchPatternStr((unsigned char *)ts, pos, strlen(ts), pat);
+    substart = pat->MatchPatternStr((unsigned char *)ts, pos, strlen(ts));
     if (substart>=0) {
 	this->recsearchvalid = TRUE;
 	this->recsearchsubstart = substart;
-	this->recsearchsublen = search::GetMatchLength();
+	this->recsearchsublen = pat->GetMatchLength();
 	return TRUE;
     }
 

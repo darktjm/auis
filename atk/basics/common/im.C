@@ -4219,14 +4219,14 @@ im::MoveWindow( int  x , int  y )
     return(FALSE);
 }
 
-boolean im::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean im::RecSearch(class search *pat, boolean toplevel)
 {
     if (this->topLevel)
 	return this->topLevel->RecSearch(pat, toplevel);
     return FALSE;
 }
 
-boolean im::RecSrchResume(struct SearchPattern *pat)
+boolean im::RecSrchResume(class search *pat)
 {
     if (this->topLevel) return this->topLevel->RecSrchResume(pat);
     return FALSE;

@@ -30,7 +30,6 @@ class figtoolview  : public  lpair {
     void ObservedChanged(class observable *observed, long status);
     void PostMenus(class menulist *ml);
     void PostKeyState(class keystate *ks);
-    void UnlinkTree();
 
     virtual boolean SetPrimaryView(class figview *v)  ;
     virtual void SetExpertMode(boolean val);

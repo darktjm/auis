@@ -986,17 +986,6 @@ void figtoolview::ObservedChanged(class observable  *observed, long  status)
     }
 }
 
-void figtoolview::UnlinkTree()
-{
-    (this)->lpair::UnlinkTree();
-
-  /* This is inappropriate, being unlinked doesn't necessarily imply the view should be destroyed.
-   if (!self->moribund) {
-	Command_Quit(self, 0);
-   }
- */
-}
-
 static void SetToolProc(class stringtbl  *st, class figtoolview  *self, short  accnum)
 {
     int toolnum, objnum;

@@ -487,11 +487,6 @@ void rastoolview::ObservedChanged(class observable  *observed, long  status)
     }
 }
 
-void rastoolview::UnlinkTree()
-{
-    (this)->lpair::UnlinkTree();
-}
-
 static void Command_Refresh(class rastoolview  *self, char  *rock)
 {
     class rasterview *rself = self->primaryview;

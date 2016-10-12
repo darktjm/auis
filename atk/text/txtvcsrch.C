@@ -24,7 +24,8 @@
 /* Search command statics. */
 
 #define SRCHSTRLEN 100
-static struct SearchPattern *lastPattern = NULL;
+static class search lastPattern;
+static boolean lastPatternValid = FALSE;
 static char searchString[SRCHSTRLEN] = "";
 static boolean forwardSearch = TRUE; /* TRUE if last search was forward. */
 
@@ -73,26 +74,27 @@ int textview_SearchCmd(class textview  *self, char *arg)
     }
     pos= self->CollapseDot();
     if (!defaultExists || *searchString != '\0') {
-	tp = search::CompilePattern(searchString, &lastPattern);
+	tp = lastPattern.CompilePattern(searchString);
 	if (tp) {
 	    message::DisplayString(self, 0, tp);
 	    return(-2);
 	}
+	lastPatternValid = TRUE;
     }
     j = 0;
     while (j<ct) {
-        pos = search::MatchPattern(d, pos, lastPattern);
+        pos = lastPattern.MatchPattern(d, pos);
 	if (pos < 0) {
             (self)->SetDotLength(0);
             message::DisplayString(self, 0, "Search failed");
             return(-3);
         }
         (self)->SetDotPosition(pos);
-        (self)->SetDotLength( search::GetMatchLength());
-	pos+= search::GetMatchLength();
+        (self)->SetDotLength( lastPattern.GetMatchLength());
+	pos+= lastPattern.GetMatchLength();
         j++;
     }
-    (self)->FrameDot(pos - search::GetMatchLength());
+    (self)->FrameDot(pos - lastPattern.GetMatchLength());
     (self)->WantUpdate( self);
     forwardSearch = TRUE;
     return(0);
@@ -136,15 +138,16 @@ int textview_RSearchCmd(class textview  *self, char *arg)
     (self)->SetDotLength(0);
     if (orgpos > 0) (self)->SetDotPosition(--pos);
     if (!defaultExists || *searchString != '\0') {
-	tp = search::CompilePattern(searchString, &lastPattern);
+	tp = lastPattern.CompilePattern(searchString);
 	if (tp != 0) {
 	    message::DisplayString(self, 0, tp);
 	    return -2;
 	}
+	lastPatternValid = TRUE;
     }
     j=0;
     while (j<ct) {
-        pos = search::MatchPatternReverse(d, pos, lastPattern);
+        pos = lastPattern.MatchPatternReverse(d, pos);
 	if (pos < 0) {
             (self)->SetDotPosition(orgpos);
 	    self->SetDotLength(0);
@@ -152,7 +155,7 @@ int textview_RSearchCmd(class textview  *self, char *arg)
             return -3;
         }
         (self)->SetDotPosition(pos);
-        (self)->SetDotLength( search::GetMatchLength());
+        (self)->SetDotLength( lastPattern.GetMatchLength());
 	--pos;
         j++;
     }
@@ -167,20 +170,20 @@ void textview_SearchAgain(class textview  *self)
     class text *d = Text(self);
     long	savePos, pos;
 
-    if (lastPattern != NULL) {
+    if (lastPatternValid) {
         savePos = pos = (self)->GetDotPosition();
 
 	if (forwardSearch) {
 	    pos = (self)->GetDotPosition() + (self)->GetDotLength();
             (self)->SetDotPosition( pos);
             (self)->SetDotLength( 0);
-            pos = search::MatchPattern(d, pos, lastPattern);
+            pos = lastPattern.MatchPattern(d, pos);
         }
         else {
             (self)->SetDotLength( 0);
             if (pos > 0)
 		(self)->SetDotPosition( --pos);
-            pos = search::MatchPatternReverse(d, pos, lastPattern);
+            pos = lastPattern.MatchPatternReverse(d, pos);
         }
         if (pos < 0)
 	{
@@ -190,7 +193,7 @@ void textview_SearchAgain(class textview  *self)
 	}
         else {
             (self)->SetDotPosition(pos);
-            (self)->SetDotLength( search::GetMatchLength());
+            (self)->SetDotLength( lastPattern.GetMatchLength());
             (self)->FrameDot(pos);
             (self)->WantUpdate( self);
 	    message::DisplayString(self, 0, "");	/* Clear any leftover message */
@@ -212,7 +215,7 @@ void textview_QueryReplaceCmd(class textview  *self)
     boolean keepAsking = TRUE;
     boolean keepRunning = TRUE;
     boolean returnPosition = TRUE;
-    struct SearchPattern *lastPattern = NULL;
+    class search lastPattern;
     const char *prompt = NULL;
     const char *searchError = NULL;
     char casedString[SRCHSTRLEN];
@@ -265,7 +268,7 @@ void textview_QueryReplaceCmd(class textview  *self)
     replacementLen = strlen(replacement);
 
     if (!defaultExists || *searchString != '\0')
-	if ((searchError = search::CompilePattern(searchString, &lastPattern)) != NULL) {
+	if ((searchError = lastPattern.CompilePattern(searchString)) != NULL) {
 	    message::DisplayString(self, 0, searchError);
 	    return;
 	}
@@ -277,11 +280,11 @@ void textview_QueryReplaceCmd(class textview  *self)
 
     if (searchPos < (fencePos = (d)->GetFence())) searchPos = fencePos;
 
-    while ((pos = search::MatchPattern(d, searchPos, lastPattern)) >= 0
+    while ((pos = lastPattern.MatchPattern(d, searchPos)) >= 0
 	    && keepRunning
 	    && (area == NULL || pos < (area)->GetPos() + (area)->GetLength()))  {
 
-	long matchLen = search::GetMatchLength();
+	long matchLen = lastPattern.GetMatchLength();
 	/* length can change between matches on RE searches */
 
 	if (pos != lastpos) ++numFound;
@@ -541,7 +544,7 @@ static boolean FindNextViewSplot(long rock, class text *self, long pos, class en
 }
 
 /* finds the first match, in the text or any child, starting at pos. */
-static boolean textview_RecSearchLoop(class textview *self, long pos, struct SearchPattern *pat)
+static boolean textview_RecSearchLoop(class textview *self, long pos, class search *pat)
 {
     class text *d;
     long len, newpos, newlen;
@@ -556,8 +559,8 @@ static boolean textview_RecSearchLoop(class textview *self, long pos, struct Sea
     rfound.v = NULL;
     nextenv = d->EnumerateEnvironments(pos, textlen-pos, (text_eefptr)FindNextViewSplot, 0);
 
-    newpos = search::MatchPattern(d, pos, pat);
-    newlen = search::GetMatchLength();
+    newpos = pat->MatchPattern(d, pos);
+    newlen = pat->GetMatchLength();
 
     /* now loop until BOTH found positions are negative (not found) */
     while (rfound.pos >= 0 || newpos >= 0) {
@@ -602,7 +605,7 @@ static boolean textview_RecSearchLoop(class textview *self, long pos, struct Sea
     return FALSE;
 }
 
-boolean textview::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean textview::RecSearch(class search *pat, boolean toplevel)
 {
     long pos;
     class text *d;
@@ -621,7 +624,7 @@ boolean textview::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return textview_RecSearchLoop(this, pos, pat);
 }
 
-boolean textview::RecSrchResume(struct SearchPattern *pat)
+boolean textview::RecSrchResume(class search *pat)
 {
     long pos, len;
 

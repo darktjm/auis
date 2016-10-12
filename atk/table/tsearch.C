@@ -20,7 +20,7 @@
 /* support for nifty recursive search */
 
 /* finds the first match, in a label or any child view, starting at pos. */
-static boolean spread_RecSearchLoop(class spread *self, short posx, short posy, struct SearchPattern *pat)
+static boolean spread_RecSearchLoop(class spread *self, short posx, short posy, class search *pat)
 {
     class table *d;
     short width, height;
@@ -76,7 +76,7 @@ static boolean spread_RecSearchLoop(class spread *self, short posx, short posy, 
 }
 
 
-boolean spread::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean spread::RecSearch(class search *pat, boolean toplevel)
 {
     short posx, posy;
 
@@ -94,7 +94,7 @@ boolean spread::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return spread_RecSearchLoop(this, posx, posy, pat);
 }
 
-boolean spread::RecSrchResume(struct SearchPattern *pat)
+boolean spread::RecSrchResume(class search *pat)
 {
     short posx, posy;
 

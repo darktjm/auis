@@ -526,14 +526,14 @@ matte::~matte()
     delete this->menus;
 }
 
-boolean matte::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean matte::RecSearch(class search *pat, boolean toplevel)
 {
     if (this->child)
 	return this->child->RecSearch(pat, toplevel);
     return FALSE;
 }
 
-boolean matte::RecSrchResume(struct SearchPattern *pat)
+boolean matte::RecSrchResume(class search *pat)
 {
     if (this->child)
 	return this->child->RecSrchResume(pat);

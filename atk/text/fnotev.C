@@ -452,7 +452,7 @@ void fnotev::ReceiveInputFocus()
 }
 
 /* we handle recursive-search the dumb way -- open the footnote and let the parent text take care of it */
-boolean fnotev::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean fnotev::RecSearch(class search *pat, boolean toplevel)
 {
     class fnote *d = (class fnote *)this->GetDataObject();
     if (!d->IsOpen())
@@ -461,7 +461,7 @@ boolean fnotev::RecSearch(struct SearchPattern *pat, boolean toplevel)
     return FALSE;
 }
 
-boolean fnotev::RecSrchResume(struct SearchPattern *pat)
+boolean fnotev::RecSrchResume(class search *pat)
 {
     class fnote *d = (class fnote *)this->GetDataObject();
     if (!d->IsOpen())

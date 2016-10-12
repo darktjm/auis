@@ -1455,7 +1455,7 @@ static boolean bdffontv_InitializeViews(class bdffontv  *self)
 			  fieldstyle);
     i = (chl)->GetLength();
     (chl)->AddItemToEnd( bdffontv_HelpLabel,
-			(chlist_itemfptr)bdffontv_HelpLabel, (long)self);
+			(chlist_itemfptr)bdffontv_HelpCmd, (long)self);
     (chl)->AlwaysAddStyle(
 			  i, sizeof(bdffontv_HelpLabel) - 2,
 			  helpstyle);

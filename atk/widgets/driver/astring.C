@@ -192,7 +192,7 @@ AString::RegSearch(const char *pat, int pos, int *len) const {
 	if (pos >= (int)used) return -1;
 	if ( ! pat || ! *pat) return -9;
 
-	static struct SearchPattern *regPat;
+	static class search regPat;
 	static const char *msg;
 	static AString oldpat = AString();
 
@@ -200,16 +200,16 @@ AString::RegSearch(const char *pat, int pos, int *len) const {
 
 	if (oldpat != pat) {
 		oldpat = pat;
-		msg = search::CompilePattern((char *)pat, &regPat);
+		msg = regPat.CompilePattern((char *)pat);
 		if (msg)  // xxx bogus message destination
 			fprintf(stderr, "AString::RegSearch -- %s\n", msg);
 	}
 	if (msg) return -9;		// not a valid pattern 
 
-	int v = search::MatchPatternStr((unsigned char *)body+pos, 
-			0, used-pos, regPat);
+	int v = regPat.MatchPatternStr((unsigned char *)body+pos, 
+			0, used-pos);
 	if (v < 0) return -1;		// not found
-	if (len) *len = search::GetMatchLength();
+	if (len) *len = regPat.GetMatchLength();
 	return v;
 }
 // copies len chars starting at pos TO s

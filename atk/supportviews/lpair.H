@@ -39,8 +39,8 @@ class lpair: public view {
        void LinkTree(class view *parent);
        view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
        void InitChildren();
-       boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-       boolean RecSrchResume(struct SearchPattern *pat);
+       boolean RecSearch(class search *pat, boolean toplevel);
+       boolean RecSrchResume(class search *pat);
        boolean RecSrchReplace(class dataobject *text, long pos, long len);
        void RecSrchExpose(const struct rectangle &logical,struct rectangle &hit);
 

@@ -69,8 +69,8 @@ class spread: public  view {
       void ObservedChanged(class observable *changed, long status);
       void UnlinkNotification(class view *unlinkedTree);
       void ExposeChild(class view *v);
-      boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-      boolean RecSrchResume(struct SearchPattern *pat);
+      boolean RecSearch(class search *pat, boolean toplevel);
+      boolean RecSrchResume(class search *pat);
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void ChildLosingInputFocus();
       void ChildReceivingInputFocus();

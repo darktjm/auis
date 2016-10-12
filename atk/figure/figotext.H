@@ -43,8 +43,8 @@ class figotext : public  figobj {
       long ReadBody(FILE *file, boolean recompute)  ;
       enum figobj_HandleType GetHandleType(long num)  ;
       long * GetCanonicalHandles()  ;
-      boolean ORecSearch(struct SearchPattern *pat);
-      boolean ORecSrchResume(struct SearchPattern *pat);
+      boolean ORecSearch(class search *pat);
+      boolean ORecSrchResume(class search *pat);
       boolean ORecSrchReplace(class dataobject *text, long pos, long len);
 
 

@@ -166,7 +166,7 @@ static void autobounds(class psview  *self, long  rock)
     class ps *psobj = (class ps *)(self)->GetDataObject();
     class text *tobj = (class text *)(psobj)->GetChild();
     const char pattern[] = "\n%%BoundingBox:";
-    char *pat = NULL;		/* compiled search pattern */
+    class search pat;		/* compiled search pattern */
     long pos, i, c;
     char bbox_buf[200];
     long llx, lly, urx, ury;
@@ -175,12 +175,12 @@ static void autobounds(class psview  *self, long  rock)
     const char pattern2[] = "translate % inserted by ps inset at the request of user to make image visible\n";
 
     /* look for "\n%%BoundingBox: llx lly urx ury\n" information */
-    if (search::CompilePattern(pattern, (struct SearchPattern **)&pat) != NULL) {
+    if (pat.CompilePattern(pattern) != NULL) {
 	message::DisplayString(self, 50, "should not happen:  psview could not compile search pattern.\n");
 	return;
     }
 
-    if ((pos = search::MatchPattern(tobj, 0L, (struct SearchPattern *)pat)) < 0) {
+    if ((pos = pat.MatchPattern(tobj, 0L)) < 0) {
 	/* bbox not found, exit */
 	message::DisplayString(self, 50, "Could not find %%BoundingBox information.");
 	return;
@@ -209,12 +209,12 @@ static void autobounds(class psview  *self, long  rock)
 
     /* did an old translate command exist?  kill it */
     pat = NULL;			/* bug:  should we do this? */
-    if (search::CompilePattern(pattern2, (struct SearchPattern **)&pat) != NULL) {
+    if (pat.CompilePattern(pattern2) != NULL) {
 	message::DisplayString(self, 50, "should not happen:  psview could not compile second search pattern.\n");
 	return;
     }
 
-    if ((pos = search::MatchPattern(tobj, strlen(tr_buf), (struct SearchPattern *)pat)) < 0) {
+    if ((pos = pat.MatchPattern(tobj, strlen(tr_buf))) < 0) {
 	/* old not found, okay */
 	message::DisplayString(self, 50, "BBox information set.");
 	return;

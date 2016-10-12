@@ -271,12 +271,12 @@ AWgtFigView::DesiredSize(long  width, long  height,
  *  # # # # # # # # # # # # # # # #  */
 
 boolean
-AWgtFigView::RecSearch(struct SearchPattern *pat, boolean toplevel) {
+AWgtFigView::RecSearch(class search *pat, boolean toplevel) {
 	return viewer->RecSearch(pat, toplevel);
 }
 
 boolean
-AWgtFigView::RecSrchResume(struct SearchPattern *pat) {
+AWgtFigView::RecSrchResume(class search *pat) {
 	return viewer->RecSrchResume(pat);
 }
 

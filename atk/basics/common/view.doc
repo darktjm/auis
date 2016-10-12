@@ -911,7 +911,7 @@ supports both insets and any kind of scrolling.
 
 struct view *v;
 
-struct SearchPattern *pat;
+class search *pat;
 
 boolean toplevel;
 
@@ -919,7 +919,7 @@ boolean toplevel;
 \leftindent{\bold{Method description.}   \italic{view::RecSearch} causes 
 \italic{v} to begin searching itself and all of its child views for the 
 pattern \italic{pat}. (The \italic{search} class contains the methods which 
-use struct SearchPattern *; see that class for details.) The method returns 
+use class search *; see that class for details.) The method returns 
 TRUE if the search is successful (for \italic{v} or any child), FALSE 
 otherwise.
 
@@ -948,7 +948,7 @@ be handled properly.
 
 struct view *v;
 
-struct SearchPattern *pat;
+class search *pat;
 
 }
 \leftindent{\bold{Method description.}   \italic{view::RecSrchResume} causes 

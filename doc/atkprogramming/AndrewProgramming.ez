@@ -4158,12 +4158,12 @@ into the view tree.
 
 
 \type{boolean} 
-\class{view}::\virtualmemberfunction{RecSearch}(\type{\keyword{struct} 
-SearchPattern *}\argument{pat}, \type{boolean} \argument{toplevel});
+\class{view}::\virtualmemberfunction{RecSearch}(\type{\keyword{class} 
+search *}\argument{pat}, \type{boolean} \argument{toplevel});
 
 \type{boolean} 
-\class{view}::\virtualmemberfunction{RecSrchResume}(\type{\keyword{struct} 
-SearchPattern *}\argument{pat});
+\class{view}::\virtualmemberfunction{RecSrchResume}(\type{\keyword{class} 
+search *}\argument{pat});
 
 \type{boolean} 
 \class{view}::\virtualmemberfunction{RecSrchReplace}(\type{\class{dataobject\
@@ -6873,15 +6873,15 @@ on the text is \constant{TRUE} the datastream will be written as a text
 object, otherwise it will be written as whatever type it actually is.
 
 
-\type{boolean} \class{textview}::RecSearch(\type{\keyword{struct} 
-SearchPattern *}\type{pat}, \type{boolean} \type{toplevel});
+\type{boolean} \class{textview}::RecSearch(\type{\keyword{class} 
+search *}\type{pat}, \type{boolean} \type{toplevel});
 
 Searches for \argument{pat} in the text and any embedded objects.   See 
 \class{view}::\virtualmemberfunction{RecSearch}.
 
 
-\type{boolean} \class{textview}::RecSrchResume(\type{\keyword{struct} 
-SearchPattern *}\type{pat});
+\type{boolean} \class{textview}::RecSrchResume(\type{\keyword{class} 
+search *}\type{pat});
 
 See \class{view}::\virtualmemberfunction{RecSrchResume}.
 

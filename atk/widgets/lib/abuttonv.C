@@ -673,25 +673,25 @@ void AButtonv::GetOrigin(long  width, long height, long *originX, long *originY)
     size.Origin(originX, originY);
 }
 
-boolean AButtonv::RecSearch(struct SearchPattern *pat, boolean ) {
+boolean AButtonv::RecSearch(class search *pat, boolean ) {
     if(label) return label->RecSearch(pat, FALSE);
     AButton *b=(AButton *)GetDataObject();
     if(b==NULL) {
 	rsvalid=FALSE;
 	return FALSE;
     }
-    long start=search::MatchPatternStr((unsigned char *)b->Text(), 0, strlen(b->text), pat);
+    long start=pat->MatchPatternStr((unsigned char *)b->Text(), 0, strlen(b->text));
     if(start>=0) {
 	rsvalid=TRUE;
 	rsstart=start;
-	rslen=search::GetMatchLength();
+	rslen=pat->GetMatchLength();
 	return TRUE;
     }
     rsvalid=FALSE;
     return FALSE;
 }
 
-boolean AButtonv::RecSrchResume(struct SearchPattern *pat) {
+boolean AButtonv::RecSrchResume(class search *pat) {
     if(rsvalid) {
 	if(label) return label->RecSrchResume(pat);
 	AButton *b=(AButton *)GetDataObject();
@@ -704,11 +704,11 @@ boolean AButtonv::RecSrchResume(struct SearchPattern *pat) {
 	long len=strlen(b->text);
 	long start;
 	if(len-rsstart>0) {
-	    start=search::MatchPatternStr((unsigned char *)b->Text(), rsstart, len-rsstart, pat);
+	    start=pat->MatchPatternStr((unsigned char *)b->Text(), rsstart, len-rsstart);
 	    if(start>=0) {
 		rsvalid=TRUE;
 		rsstart=start;
-		rslen=search::GetMatchLength();
+		rslen=pat->GetMatchLength();
 		return TRUE;
 	    }
 	}

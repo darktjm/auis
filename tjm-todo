@@ -51,7 +51,8 @@
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
 - need play module to either work or ignore (atk/music was dropped in 8.0)
-- many 3d link buttons have text overlapping bottom edge
+- many 3d link buttons in ATK tour have text overlapping bottom edge
+  probably some screwy interaction between table and button
 - pagedown eventually stops working (e.g. 2rtf)
 - questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
@@ -81,6 +82,9 @@
 - fix lack of updates when resizing windows
 - fix contrib/tm to use termios, etc.
 - org doesn't mark entire doc as modified when doc inset is modified
+- view fixes:
+  - Implement CanView() everywhere, and use it where needed.
+  - Ensure SetDataObject() works with NULL data object
 - test all apps, all insets, all docs, etc.
   - squash any crashes
   - run valgrind on as much as possible
@@ -196,13 +200,14 @@
     would be more worthwhile.
 - search for tjm comments and see if there are any TODOs there
 Long-term:
-  - view/adjust styling boundaries (aka view source)?
   - add code snippet inset for literate programming
   - make LaTeX a possible output format (and the default)
   - unicode support
   - internationalization support (probably just GNU gettext)
     currently menus can be replaced, but messages & the like cannot
-  - truetype font support
+  - truetype font support using freetype
+    not sure if that's a good idea; in my experience, antialiasing makes
+    things uglier.  I can already use truetype fonts now directly from X.
   - unicode-bidir support
   - make index entries insets
   - undo

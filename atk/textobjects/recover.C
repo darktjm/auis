@@ -35,9 +35,9 @@ int main (int argc, char *argv[])
 	exit(-2);
     }
 
-    struct SearchPattern *pat=NULL, *pat2;
-    const char *err1= search::CompilePattern("\\\\begindata{unknown,[0-9]*}\n", &pat);
-    const char *err2= search::CompilePattern("\\\\enddata{unknown,[0-9]*}\n", &pat2);
+    class search pat, pat2;
+    const char *err1= pat.CompilePattern("\\\\begindata{unknown,[0-9]*}\n");
+    const char *err2= pat2.CompilePattern("\\\\enddata{unknown,[0-9]*}\n");
     if(err1) {
 	fprintf(stderr, "Internal error in pattern match for unknown begindata.\nError was:%s",err1);
 	exit(-4);
@@ -49,10 +49,10 @@ int main (int argc, char *argv[])
 
     long pos=0;
     while(pos<t->GetLength()) {
-	pos=search::MatchPattern(t, pos, pat);
+	pos=pat.MatchPattern(t, pos);
 	if(pos<0) break;
 
-	long len=search::GetMatchLength();
+	long len=pat.GetMatchLength();
 	if(t->Strncmp(pos, umatch, sizeof(umatch)-1)!=0 || 
 t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	    pos+=len;
@@ -99,8 +99,8 @@ t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	if(pstr==NULL) {
 	    FatalInternal(-13);
 	}
-	struct SearchPattern *pat3;
-	const char *err3=search::CompilePattern(pstr, &pat3);
+	class search pat3;
+	const char *err3=pat3.CompilePattern(pstr);
 	if(err3) {
 	    fprintf(stderr, "Fatal internal errror.\nError was:%s\n", err3);
 	    exit(-14);
@@ -109,7 +109,7 @@ t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	boolean foundend=FALSE;
 	long pos3=pos2;
 	while(pos3<t->GetLength()) {
-	    pos3=search::MatchPattern(t, pos3, pat3);
+	    pos3=pat3.MatchPattern(t, pos3);
 	    if(pos3<0) {
 		FatalInternal(-15);
 	    }
@@ -140,7 +140,6 @@ t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	    t->AlwaysReplaceCharacters(pos3+1, pos4-pos3-1, buf, strlen(buf));
 	} else FatalInternal(-18);
 
-	free(pat3);
 	free(ebuf);
 	free(pstr);
 	
@@ -150,9 +149,9 @@ t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	pos=pos2;
 	foundend=FALSE;
 	while(pos2<t->GetLength()) {
-	    pos2=search::MatchPattern(t, pos2, pat2);
+	    pos2=pat2.MatchPattern(t, pos2);
 	    if(pos2<0) break;
-	    len=search::GetMatchLength();
+	    len=pat2.GetMatchLength();
 	    if(t->Strncmp(pos2, uematch, sizeof(uematch)-1)!=0) {
 		pos2+=len;
 		continue;

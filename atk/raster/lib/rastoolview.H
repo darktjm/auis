@@ -46,7 +46,6 @@ public:
 	virtual ~rastoolview();
     
        void ObservedChanged(class observable *observed, long status);
-       void UnlinkTree();
        void PostMenus(class menulist *ml);
        void PostKeyState(class keystate *ks);
     

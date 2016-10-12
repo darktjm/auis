@@ -207,8 +207,8 @@ class textview : public  view {
       long WriteSelection(FILE *out)  ;
       void LoseSelectionOwnership();
       void ExposeChild(class view *v);
-      boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
-      boolean RecSrchResume(struct SearchPattern *pat);
+      boolean RecSearch(class search *pat, boolean toplevel);
+      boolean RecSrchResume(class search *pat);
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);

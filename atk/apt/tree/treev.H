@@ -158,7 +158,6 @@ public:
    const void * GetInterface( const char *interface_name )				 ;
 
    void LinkTree( class view *parent );
-   void UnlinkTree();
 
 
 

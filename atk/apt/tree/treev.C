@@ -2923,18 +2923,9 @@ treev::LinkTree(class view  *parent)
 {
     class treev *self=this;
     (this)->aptv::LinkTree(parent);
-    if(ScrollView && parent && (this)->GetIM()) {
-	(ScrollView)->LinkTree(parent);
-	(ScrollView)->SetView(ScrolledView);
-    }
-}
-
-void
-treev::UnlinkTree()
-{
-    class treev *self=this;
-    (this)->aptv::UnlinkTree();
     if(ScrollView) {
-	(ScrollView)->UnlinkTree();
+	(ScrollView)->LinkTree(parent);
+	if(parent && (this)->GetIM())
+	    (ScrollView)->SetView(ScrolledView);
     }
 }

@@ -1877,14 +1877,14 @@ void scroll::UnlinkNotification(class view  *unlinkedTree)
     (this->updatelistp)->DeleteTree( unlinkedTree);
 }
 
-boolean scroll::RecSearch(struct SearchPattern *pat, boolean toplevel)
+boolean scroll::RecSearch(class search *pat, boolean toplevel)
 {
     if (this->scrollee)
 	return this->scrollee->RecSearch(pat, toplevel);
     return FALSE;
 }
 
-boolean scroll::RecSrchResume(struct SearchPattern *pat)
+boolean scroll::RecSrchResume(class search *pat)
 {
     if (this->scrollee)
 	return this->scrollee->RecSrchResume(pat);

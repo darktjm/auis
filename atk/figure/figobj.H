@@ -96,8 +96,8 @@ class figobj : public  dataobject  {
       virtual enum figobj_HandleType GetHandleType(long ptref)  ;
       virtual long * GetCanonicalHandles()  ;
       virtual void StabilizeAttachments(boolean keepproport);
-      virtual boolean ORecSearch(struct SearchPattern *pat);
-      virtual boolean ORecSrchResume(struct SearchPattern *pat);
+      virtual boolean ORecSearch(class search *pat);
+      virtual boolean ORecSrchResume(class search *pat);
       virtual boolean ORecSrchReplace(class dataobject *text, long pos, long len);
       virtual void SetName(char *name);
 

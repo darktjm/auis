@@ -511,12 +511,12 @@ AWidgetView::GetOrigin(long /* width */, long height,
 
 
 	boolean
-AWidgetView::RecSearch(struct SearchPattern * , boolean ) {
+AWidgetView::RecSearch(class search * , boolean ) {
 	return FALSE;
 }
 
 	boolean
-AWidgetView::RecSrchResume(struct SearchPattern *) {
+AWidgetView::RecSrchResume(class search *) {
 	return FALSE;
 }
 

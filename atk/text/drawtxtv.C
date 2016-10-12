@@ -837,6 +837,12 @@ static void GenerateLineItems(class textview  *self, class text  *text, class ma
 		    localRubber++;
 		    lastWidth=localWidth;
 		    localWidth += info->clp->vi_width;
+		    // tjm - FIXME: Nasty hack - If this view is the only
+		    // item on the line, force it to be displayed.  Otherwise,
+		    // there's an infinite loop when style tags are on and
+		    // view is too wide to fit with its tags (e.g. bpv)
+		    if(pos == initPos + envLength && localWidth > info->xDim)
+			localWidth = info->xDim;
 		    lastBP = tp;
 		    lastPos = pos - envLength;
 		    lastIP = info->lineIP-1;

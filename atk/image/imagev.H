@@ -62,7 +62,6 @@ class imagev : public  view {
     void LoseColormap(class colormap *cmap);
     void UnlinkNotification(class view *unlinkedTree);
     void LinkTree(class view *parent);
-    void UnlinkTree();
     class view * GetApplicationLayer()  ;
     void DeleteApplicationLayer(class view *scrollbar);
     void SetDataObject( class dataobject *image);

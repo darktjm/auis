@@ -423,7 +423,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
     class dired *dired = Dired(self);
     char buf[256];
     const char *res;
-    static struct SearchPattern *pat = NULL;
+    static class search pat;
     long pos;
 
     if (message::AskForString(self, 0,
@@ -433,7 +433,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
         return;
     }
 
-    res = search::CompilePattern(buf, &pat);
+    res = pat.CompilePattern(buf);
     if (res != NULL) {
         message::DisplayString(self, 0, res);
         return;
@@ -444,7 +444,7 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
     pos = 0;
     while (1) {
         struct stat stbuf;
-        pos = search::MatchPattern(dired, pos, pat);
+        pos = pat.MatchPattern(dired, pos);
         if (pos < 0 || (res = (dired)->Locate( pos)) == NULL)
             break;
         if (stat(GetFullName(self, res), &stbuf) >= 0 &&

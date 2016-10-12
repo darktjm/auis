@@ -40,12 +40,6 @@ static const unsigned char searchFoldTRT[256] = {
 208,209,210,211,212,213,214,247,216,217,218,219,220,221,222,255
 };
 
-struct SearchPattern {
-    short size, used;
-    unsigned char *body;
-};
-static int MatchLength;
-
 /* Special operators in the search pattern. */
 #define STAR 0200	/* what follows may be repeated zero or more times */
 #define BPAR 0201	/* begin parenthesized expression */
@@ -61,11 +55,6 @@ static unsigned char * SkipOp (unsigned char *s );
 static long TryMatch (class simpletext  *d, long  pos, unsigned char **s , int loop);
 static long TryMatchStr (unsigned char *str, long  pos, long length, unsigned char **s , int loop);
 
-
-int search::GetMatchLength ()
-{
-    return MatchLength;
-}
 
 static unsigned char *
 SkipOp (unsigned char *s )
@@ -87,7 +76,7 @@ SkipOp (unsigned char *s )
     }
 }
 
-char *search::GetQuotedSearchString(char  *string, char  *resString, long  resStrLen)
+char *search::GetQuotedSearchString(const char  *string, char  *resString, long  resStrLen)
 {
     long resultMaxLen;
     long resultLen = 0;
@@ -134,50 +123,52 @@ char *search::GetQuotedSearchString(char  *string, char  *resString, long  resSt
     return result;
 }
 
+search::~search()
+{
+    if(body)
+	free(body);
+}
+
 const char *
-search::CompilePattern (const char *s, struct SearchPattern   **result )
+search::CompilePattern (const char *s)
 {
     const unsigned char *string=(const unsigned char *)s;
-    struct SearchPattern  *p;
-    long    used = 0;
     int     LastStart = -1;
     int     ParenStack[20];
     int     ParenDepth = 0;
-    if ((p = *result) == 0) {
-	p = (struct SearchPattern  *) malloc (sizeof (struct SearchPattern));
-	p -> body = (unsigned char *) malloc (p -> size = 100);
-	*result = p;
-    }
-    p -> used = 0;
+    if (!body)
+	body = (unsigned char *) malloc (size = 100);
+    used = 0;
+    MatchLength = -1;
     while (*string) {
 	int     ThisStart = used;
-	if (used + 20 >= p -> size)
-	    p -> body = (unsigned char *) realloc (p -> body, p -> size += 50);
+	if (used + 20 >= size)
+	    body = (unsigned char *) realloc (body, size += 50);
 	switch (*string) {
 	    case '.': 
-		p -> body[used++] = ANY1;
+		body[used++] = ANY1;
 		break;
 	    case '\\': 
 		switch (*++string) {
 		    case '(': 
 			if (ParenDepth>19)
 			    return "Too many \\('s in regular expression";
-			p -> body[used++] = BPAR;
+			body[used++] = BPAR;
 			ParenStack[ParenDepth++] = ThisStart;
 			break;
 		    case ')': 
-			p -> body[used++] = EPAR;
+			body[used++] = EPAR;
 			if (ParenDepth <= 0)
 			    return "Unmatched \\) in regular expression";
 			ThisStart = ParenStack[--ParenDepth];
 			break;
 		    default: 
-			p -> body[used++] = *string;
+			body[used++] = *string;
 			break;
 		}
 		break;
 	    case '[': {
-		    unsigned char *set = p -> body + used;
+		    unsigned char *set = body + used;
 		    long    inverted = 0;
 		    *set++ = SET;
 		    if (*++string == '^')
@@ -187,7 +178,7 @@ search::CompilePattern (const char *s, struct SearchPattern   **result )
 			for (n = 16; --n >= 0;)
 			    *set++ = inverted;
 		    }
-		    set = p -> body + used + 1;
+		    set = body + used + 1;
 		    used += 17;
 		    while (*string) {
 			long min = *string;
@@ -219,7 +210,7 @@ search::CompilePattern (const char *s, struct SearchPattern   **result )
 		}
 	    case '*': 
 		if (LastStart >= 0) {
-		    unsigned char *d = p -> body + used;
+		    unsigned char *d = body + used;
 		    long n = used - LastStart;
 		    while (--n >= 0)
 			d[0] = d[-1], d--;
@@ -230,7 +221,7 @@ search::CompilePattern (const char *s, struct SearchPattern   **result )
 		}
 		else return "'*' not after pattern in regular expression";
 	    default: 
-		p -> body[used++] = searchFoldTRT[*string];
+		body[used++] = searchFoldTRT[*string];
 		break;
 	}
 	string++;
@@ -238,8 +229,7 @@ search::CompilePattern (const char *s, struct SearchPattern   **result )
     }  /* end of while loop */
     if (ParenDepth != 0)
 	return "Unmatched \\( in regular expression";
-    p -> body[used] = 0;
-    p -> used = used;
+    body[used] = 0;
     return 0;
 }
 
@@ -265,7 +255,7 @@ static void RetractWaitCursor()
     im::SetProcessCursor(NULL);
 }
 
-int search::MatchPattern (class simpletext  *d, long  pos, struct SearchPattern  *p )
+int search::MatchPattern (class simpletext  *d, long  pos)
 {
     unsigned char *s;
     int canopt;
@@ -276,8 +266,8 @@ int search::MatchPattern (class simpletext  *d, long  pos, struct SearchPattern 
     boolean wait_cursor;
 
     MatchLength = 0;
-    if (p == 0 || p -> used <= 0) return -1;
-    optchar = p->body[0];
+    if (used <= 0) return -1;
+    optchar = body[0];
     canopt = !isop(optchar);
     dl = (d)->GetLength();
     wait_cursor = (dl - pos > LONG_SEARCH_LENGTH);
@@ -297,7 +287,7 @@ int search::MatchPattern (class simpletext  *d, long  pos, struct SearchPattern 
 	if (canopt)
             if (optchar != searchFoldTRT[bufLen--, *buf++])
                 continue;
-	s = p -> body;
+	s = body;
 	n = TryMatch (d, pos, &s, 1);
 	if (n>=0) {
 	    MatchLength = n - pos;
@@ -311,7 +301,7 @@ int search::MatchPattern (class simpletext  *d, long  pos, struct SearchPattern 
     return -1;
 }
 
-int search::MatchPatternStr (unsigned char *str, long  pos, long length, struct SearchPattern  *p )
+int search::MatchPatternStr (unsigned char *str, long  pos, long length)
 {
     unsigned char *s;
     int canopt;
@@ -321,8 +311,8 @@ int search::MatchPatternStr (unsigned char *str, long  pos, long length, struct 
     boolean wait_cursor;
 
     MatchLength = 0;
-    if (p == 0 || p -> used <= 0) return -1;
-    optchar = p->body[0];
+    if (used <= 0) return -1;
+    optchar = body[0];
     canopt = !isop(optchar);
     wait_cursor = (length > LONG_SEARCH_LENGTH);
     if (wait_cursor)
@@ -342,7 +332,7 @@ int search::MatchPatternStr (unsigned char *str, long  pos, long length, struct 
 	if (canopt)
             if (optchar != searchFoldTRT[bufLen--, *buf++])
                 continue;
-	s = p -> body;
+	s = body;
 	n = TryMatchStr (str, pos, length, &s, 1);
 	if (n>=0) {
 	    MatchLength = n - pos;
@@ -356,7 +346,7 @@ int search::MatchPatternStr (unsigned char *str, long  pos, long length, struct 
     return -1;
 }
 
-int search::MatchPatternReverse (class simpletext  *d, long  pos, struct SearchPattern  *p )
+int search::MatchPatternReverse (class simpletext  *d, long  pos )
 {
     unsigned char *s;
     int canopt;
@@ -366,8 +356,8 @@ int search::MatchPatternReverse (class simpletext  *d, long  pos, struct SearchP
     boolean wait_cursor;
 
     MatchLength = 0;
-    if (p == 0 || p -> used <= 0) return -1;
-    optchar = p->body[0];
+    if (used <= 0) return -1;
+    optchar = body[0];
     canopt = !isop(optchar);
     wait_cursor = (pos > LONG_SEARCH_LENGTH);
     if (wait_cursor)
@@ -386,7 +376,7 @@ int search::MatchPatternReverse (class simpletext  *d, long  pos, struct SearchP
 	if (canopt)
             if (optchar != searchFoldTRT[bufLen--, *--buf])
                 continue;
-	s = p -> body;
+	s = body;
 	n = TryMatch (d, pos, &s, 1);
 	if (n>=0) {
 	    MatchLength = n - pos;
@@ -400,7 +390,7 @@ int search::MatchPatternReverse (class simpletext  *d, long  pos, struct SearchP
     return -1;
 }
 
-int search::MatchPatternStrReverse (unsigned char *str, long  pos, long length, struct SearchPattern  *p )
+int search::MatchPatternStrReverse (unsigned char *str, long  pos, long length )
 {
     unsigned char *s;
     int canopt;
@@ -410,8 +400,8 @@ int search::MatchPatternStrReverse (unsigned char *str, long  pos, long length, 
     boolean wait_cursor;
 
     MatchLength = 0;
-    if (p == 0 || p -> used <= 0) return -1;
-    optchar = p->body[0];
+    if (used <= 0) return -1;
+    optchar = body[0];
     canopt = !isop(optchar);
     wait_cursor = (pos > LONG_SEARCH_LENGTH);
     if (wait_cursor)
@@ -431,7 +421,7 @@ int search::MatchPatternStrReverse (unsigned char *str, long  pos, long length, 
 	if (canopt)
             if (optchar != searchFoldTRT[bufLen--, *--buf])
                 continue;
-	s = p -> body;
+	s = body;
 	n = TryMatchStr (str, pos, length, &s, 1);
 	if (n>=0) {
 	    MatchLength = n - pos;
