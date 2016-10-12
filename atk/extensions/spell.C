@@ -24,7 +24,7 @@ ATK_IMPL("spell.H")
 
 #include <spell.H>
 
-#define Text(self) ((class text *) self->dataobject)
+#define Text(self) ((class text *) self->GetDataObject())
 
 static FILE *inFile, *outFile;
 static char *wordArray[10];

@@ -69,14 +69,14 @@ void rawKey(class tmview  *self,long  key)
 {
     char buf=key;
 
-    ((class termulator *)self->dataobject)->ProcessInput(
+    ((class termulator *)self->GetDataObject())->ProcessInput(
 			      &buf,1);
 }
 
 void tmview::SetDataObject(class dataobject  *t)
 {
     class termulator *tm=(class termulator *)t;
-    class termulator *oldtm=(class termulator *)this->dataobject;
+    class termulator *oldtm=(class termulator *)this->GetDataObject();
 
     (this)->textview::SetDataObject(tm);
 
@@ -106,7 +106,7 @@ static enum keymap_Types rawKeyLookup(class tmview  *self,long  key,struct proct
 
 static void trackTermulator(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos=tm->cursor;
 
     tm->CheckChild();
@@ -159,7 +159,7 @@ void tmview::Update()
 
 void tmview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  width,long  height)
 {
-    class termulator *tm=(class termulator *)this->dataobject;
+    class termulator *tm=(class termulator *)this->GetDataObject();
 
     if(tm->inpView==this && (width!=this->width || height!=this->height)){
 	struct text_statevector sv;
@@ -216,7 +216,7 @@ tmview::~tmview()
 {
 	ATKinit;
 
-    class termulator *tm=(class termulator *)this->dataobject;
+    class termulator *tm=(class termulator *)this->GetDataObject();
 
     if(this->curpos!=NULL && tm!=NULL){
 	(tm)->RemoveMark(this->curpos);
@@ -230,7 +230,7 @@ void tmview::GetClickPosition(long  pos,long  noc,enum view::MouseAction  action
 	(this)->textview::GetClickPosition(pos,noc,action,startLeft, startRight,leftPosP,rightPosP);
     }else{
 	class termulator *tm=
-	  (class termulator *)this->dataobject;
+	  (class termulator *)this->GetDataObject();
 	class environment *rootEnv=tm->rootEnvironment,*env;
 
 	(tm)->Untermulate();
@@ -247,7 +247,7 @@ void tmview::GetClickPosition(long  pos,long  noc,enum view::MouseAction  action
 
 void tmview::PostKeyState(class keystate  *ks)
 {
-    class termulator *tm=(class termulator *)this->dataobject;
+    class termulator *tm=(class termulator *)this->GetDataObject();
 
     tm->CheckChild();
     if(tm->pid && !(tm->mode.c_lflag&(ICANON))) /* what rawness matters? */
@@ -270,7 +270,7 @@ void tmview::PostMenus(class menulist  *ml)
 
 static void submit(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos;
 
     tm->inpView=self;
@@ -290,7 +290,7 @@ static void submit(class tmview  *self)
 
 static void submitStay(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos=(tm)->GetLength();
 
     tm->inpView=self;
@@ -310,7 +310,7 @@ static void submitStay(class tmview  *self)
 static void selfInsert(class tmview  *self,long  key)
 {
     char c=key;
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos;
 
     tm->inpView=self;
@@ -342,7 +342,7 @@ static void sendSignal(class tmview  *self,long  key)
 {
     char c=key;
     class termulator *tm=
-      (class termulator *)self->dataobject;
+      (class termulator *)self->GetDataObject();
 
     tm->inpView=self;
 
@@ -353,7 +353,7 @@ static void sendSignal(class tmview  *self,long  key)
 static void eraseLine(class tmview  *self)
 {
     class termulator *tm=
-      (class termulator *)self->dataobject;
+      (class termulator *)self->GetDataObject();
     int fence;
 
     tm->inpView=self;
@@ -379,7 +379,7 @@ static void eraseLine(class tmview  *self)
 static void replaceCmd(class tmview  *self,long  how)
 {
     class termulator *tm=
-      (class termulator *)self->dataobject;
+      (class termulator *)self->GetDataObject();
     int pos,len,fence,c;
     const char *cmd;
     char buf[200],*p=buf;
@@ -431,7 +431,7 @@ static void replaceCmd(class tmview  *self,long  how)
 static void getLine(class tmview  *self,int  pos,int  *beginP,int  *endP)
 {
     class termulator *tm=
-      (class termulator *)self->dataobject;
+      (class termulator *)self->GetDataObject();
     class environment *env=tm->rootEnvironment;
     int c,nc;
     int end=pos;
@@ -455,7 +455,7 @@ static void move(class tmview  *self)
 {
     int pos,len,begin,end;
     class termulator *tm=
-      (class termulator *)self->dataobject;
+      (class termulator *)self->GetDataObject();
 
     tm->inpView=self;
 
@@ -494,7 +494,7 @@ static void exec(class tmview  *self)
 
 static void deleteOrEOT(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos;
     int c;
 
@@ -516,7 +516,7 @@ static void deleteOrEOT(class tmview  *self)
 
 static void startProc(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     char buf[5000],*com;
     const char *shell=environ::Get("SHELL");
     const char *argbuf[500],**argv;
@@ -571,7 +571,7 @@ static void startProc(class tmview  *self)
 
 static void bol(class tmview  *self)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     int pos,fence;
 
     tm->inpView=self;
@@ -589,12 +589,12 @@ static void bol(class tmview  *self)
 
 static void clear(class tmview  *self)
 {
-    ((class termulator *)self->dataobject)->Clear();
+    ((class termulator *)self->GetDataObject())->Clear();
 }
 
 static void execStr(class tmview  *self,char  *str)
 {
-    class termulator *tm=(class termulator *)self->dataobject;
+    class termulator *tm=(class termulator *)self->GetDataObject();
     eraseLine(self);
     (tm)->InsertCharacters((tm)->GetLength(),str,strlen(str));
     submit(self);

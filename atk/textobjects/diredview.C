@@ -29,7 +29,7 @@ ATK_IMPL("diredview.H")
 #include <diredview.H>
 
 #define Dired(self) \
-    ((class dired *) (self)->dataobject)
+    ((class dired *) (self)->GetDataObject())
 
 #define WAITON()    im::SetProcessCursor(waitCursor)
 #define WAITOFF()   im::SetProcessCursor(NULL)
@@ -393,11 +393,11 @@ static void ptproc_UpLine(class diredview  *self, long  rock)
 static void ptproc_ToggleSelect(class diredview  *self, long  rock)
 {
     class dired *dired = Dired(self);
-    long count = (self->imPtr)->Argument();
+    long count = (self->GetIM())->Argument();
     struct proctable_Entry *NextPE =
       proctable::Lookup("textview-next-line");
 
-    (self->imPtr)->ClearArg();
+    (self->GetIM())->ClearArg();
 
     if (count > 10000)
         count = 10000;

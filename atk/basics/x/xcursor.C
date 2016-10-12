@@ -117,7 +117,7 @@ void xcursor::Make(class xim  *im)
     if (tmp==None && this->fillChar) {
 
 	info = (XFontStruct *)(xfillFont)->GetRealFontDesc(
-							im->drawable);
+							im->GetDrawable());
 
 	/* This is the code for constructing an andrew semantics cursor from the single character
 	    The basic idea is:

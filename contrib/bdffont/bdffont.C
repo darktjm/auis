@@ -1046,10 +1046,12 @@ long bdffont::Write(FILE  *file, long  id, int  level)
     fprintf(file, "FONTBOUNDINGBOX %ld %ld %ld %ld\n",
 	     this->bbw, this->bbh, this->bbx, this->bby);
 
-    fprintf(file, "STARTPROPERTIES %ld\n", FilterPropertiesOut(this, &props));
-    fprintf(file, "%s", props);
-    free(props);
-    fprintf(file, "ENDPROPERTIES\n");
+    if(this->properties) {
+	fprintf(file, "STARTPROPERTIES %ld\n", FilterPropertiesOut(this, &props));
+	fprintf(file, "%s", props);
+	free(props);
+	fprintf(file, "ENDPROPERTIES\n");
+    }
 
     if (this->activedefns > 0) {
 	fprintf(file, "CHARS %ld\n", this->activedefns);

@@ -22,11 +22,11 @@ view *htmlimagev::Hit(enum view::MouseAction action,long xi, long yi, long numbe
 }
 
 htmltextview *htmlimagev::HTMLTextView() {
-    view *p=parent;
+    view *p=GetParent();
     ATK_CLASS(htmltextview);
     while(p) {
 	if(p->IsType(class_htmltextview)) return (htmltextview *)p;
-	p=p->parent;
+	p=p->GetParent();
     }
     return NULL;
 }

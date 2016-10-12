@@ -208,7 +208,6 @@ static void autobounds(class psview  *self, long  rock)
     (tvobj)->WantUpdate( tvobj);
 
     /* did an old translate command exist?  kill it */
-    pat = NULL;			/* bug:  should we do this? */
     if (pat.CompilePattern(pattern2) != NULL) {
 	message::DisplayString(self, 50, "should not happen:  psview could not compile second search pattern.\n");
 	return;

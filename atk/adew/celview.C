@@ -43,7 +43,7 @@ ATK_IMPL("celview.H")
 #include <arbiter.H>
 /* #define DEBUG */
 
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Parent(A) (A->parent)
 #define Data(A) ((class cel *)DataObject(A) )
 #define VALUE 10
@@ -51,7 +51,6 @@ static const class atom *UNSETFLAG;
 #define RESIZING FALSE
 #define DRAWING FALSE
 static class menulist *celviewMenus;
-#define DataObject(A) (A->dataobject)
 #define Cel(A) ((class cel *) DataObject(A))
 #define NameSet(V) (((class view *)V)->name_explicitly_set)
 struct overlay  {
@@ -573,7 +572,7 @@ void celview::FullUpdate(enum view::UpdateType  type,long  left,long  top,long  
 	(Cel(this))->InitDefault();
     }
     if(this->arb == NULL && !this->TopLevel &&
-	(this->arb = arbiterview::FindArb(this->parent)) != NULL){
+	(this->arb = arbiterview::FindArb(this->GetParent())) != NULL){
 	(this->arb)->InitCell(this);
     }
     if(type == view::FullRedraw && Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh)){
@@ -834,9 +833,9 @@ static char * atomlisttostring(class atomlist  *al)
     cp = buf;
     for(at = (al)->TraversalStart(); at != NULL; at = (al)->TraversalNext(at)){
 #ifdef DEBUG
-printf("--> %s\n",at->atom->Name());
+printf("--> %s\n",al->TraversalAtom(at)->Name());
 #endif /* DEBUG */
-	for(alcp = at->atom->Name(); *alcp; alcp++)
+	for(alcp = al->TraversalAtom(at)->Name(); *alcp; alcp++)
 	    *cp++ = *alcp;
 	*cp++ = '.';
     }
@@ -1375,7 +1374,7 @@ void celview::WantUpdate(class view  *requestor)
 	return;
     }
     /* don't process updates for children that don't belong to the current overlay */
-    for(view = requestor; (view != (class view *) this) && view != NULL; view = view->parent)
+    for(view = requestor; (view != (class view *) this) && view != NULL; view = view->GetParent())
 	if(view == this->child)
 	    (this)->view::WantUpdate(requestor);
 
@@ -1388,7 +1387,7 @@ void celview::PostCursor(struct rectangle  *rec,class cursor  *c)
 	return;
     }
     /* don't process posts for children that don't belong to the current overlay */
-    for(; (view != (class view *) this) && view != NULL; view = view->parent)
+    for(; (view != (class view *) this) && view != NULL; view = view->GetParent())
 	if(view == this->child)
 	    (this)->view::PostCursor(rec,c);
 
@@ -1398,7 +1397,7 @@ void celview::ObservedChanged(class observable  *changed, long  value)
     if(changed == (class observable *)Cel(this)) 
     {
 	class cel *c = Cel(this);
-	class view *parent = ((class view *) this)->parent;
+	class view *parent = ((class view *) this)->GetParent();
 	if (value == observable::OBJECTDESTROYED){
 /* NO LONGER assumes the parent is also observing the cel and will destroy the celview */
 	    if(parent == NULL) this->truechild = NULL;
@@ -1550,7 +1549,7 @@ class celview *celview::GetCelviewFromView(class view  *v)
 	ATKinit;
 
     if(v == NULL) return NULL;
-    for( v = v->parent;v != NULL; v = v->parent){
+    for( v = v->GetParent();v != NULL; v = v->GetParent()){
 	if(ATK::IsTypeByName((v)->GetTypeName(),"celview"))
 	    return((class celview *) v);
     }

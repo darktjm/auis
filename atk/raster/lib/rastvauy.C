@@ -485,7 +485,7 @@ void rasterview_ImprintInsetProc(class rasterview  *self, long  rock)
 
     rectangle_SetRectSize(&R, 0, 0, self->InsetBox.width, self->InsetBox.height);
 
-    if ((((class view *)offim)->drawable)->IsImageInverted())
+    if ((((class view *)offim)->GetDrawable())->IsImageInverted())
 	(pix2)->InvertSubraster( &R);
 
     (pix)->BlitSubraster( self->InsetBox.left, self->InsetBox.top, pix2, &R, rock);

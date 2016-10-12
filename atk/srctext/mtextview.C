@@ -77,7 +77,7 @@ class keystate *mtextview::PrependKeyState()
 /* FindDefinitionOrImplementation() isolates the identifier pointed to by the caret and tries to find its corresponding definition module (if implementation is FALSE) or implementation module (if implementation is TRUE) */
 static void FindDefinitionOrImplementation(mtextview *self, boolean implementation)
 {
-    mtext *ct = (mtext *)self->view::dataobject;
+    mtext *ct = (mtext *)self->view::GetDataObject();
     long pos,oldpos;
     char name[256],proc[256],msg[300];
     char filename[256],bufname[256],searchpath[1024];
@@ -146,7 +146,7 @@ static void implementation(mtextview *self, long key)
 /* any modifications to asterisk should be duplicated in m3textv.c */
 static void asterisk(mtextview *self, char key /* must be char for "&" to work. */)
 {
-    mtext *ct=(mtext *)self->view::dataobject;
+    mtext *ct=(mtext *)self->view::GetDataObject();
     int count=((self)->GetIM())->Argument();
     long pos,oldpos;
 

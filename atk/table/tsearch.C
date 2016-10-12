@@ -40,14 +40,14 @@ static boolean spread_RecSearchLoop(class spread *self, short posx, short posy, 
 		switch (curc->celltype) {
 		    case table_TextCell:
 			ts = curc->interior.TextCell.textstring;
-			substart = search::MatchPatternStr((unsigned char *)ts, 0, strlen(ts), pat);
+			substart = pat->MatchPatternStr((unsigned char *)ts, 0, strlen(ts));
 			if (substart>=0) {
 			    self->recsearchchild = NULL;
 			    self->recsearchposh = posx;
 			    self->recsearchposv = posy;
 			    self->recsearchvalid = TRUE;
 			    self->recsearchsubstart = substart;
-			    self->recsearchsublen = search::GetMatchLength();
+			    self->recsearchsublen = pat->GetMatchLength();
 			    return TRUE;
 			}
 			break;

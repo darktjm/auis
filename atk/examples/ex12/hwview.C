@@ -84,7 +84,7 @@ void helloworldview::DeleteApplicationLayer(class view *v)
 
 void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height )
 {
-    class helloworld *hw=(class helloworld *)this->dataobject;
+    class helloworld *hw=(class helloworld *)this->GetDataObject();
     struct rectangle myVisualRect;
 
     (this)->GetVisualBounds(&myVisualRect);
@@ -125,7 +125,7 @@ void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  t
 
 void helloworldview::Update()
 {    
-    class helloworld *hw=(class helloworld *)this->dataobject;
+    class helloworld *hw=(class helloworld *)this->GetDataObject();
 
     (this)->SetTransferMode( graphic::INVERT);
 
@@ -165,7 +165,7 @@ void helloworldview::Update()
 
 class view *helloworldview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
-    class helloworld *hw=(class helloworld *)this->dataobject;
+    class helloworld *hw=(class helloworld *)this->GetDataObject();
 
     if(this->HaveDownTransition)
 	switch(action){
@@ -227,7 +227,7 @@ void helloworldview::LoseInputFocus()
 
 static void Center(class helloworldview  *hwv, long  rock)
 {
-    class helloworld *hw=(class helloworld *)hwv->dataobject;
+    class helloworld *hw=(class helloworld *)hwv->GetDataObject();
 
     hw->x = hwv->newFrameX + hwv->vrWidth / 2;
     hw->y = hwv->newFrameY + hwv->vrHeight / 2;
@@ -238,7 +238,7 @@ static void Center(class helloworldview  *hwv, long  rock)
 
 static void Invert(class helloworldview  *hwv, long  rock)
 {
-    class helloworld *hw=(class helloworld *)hwv->dataobject;
+    class helloworld *hw=(class helloworld *)hwv->GetDataObject();
 
     hw->blackOnWhite = !hw->blackOnWhite;
     (hw)->NotifyObservers(0);
@@ -247,7 +247,7 @@ static void Invert(class helloworldview  *hwv, long  rock)
 
 static void relocate(class helloworldview  *hwv,long  rock)
 {
-    class helloworld *hw=(class helloworld *)hwv->dataobject;
+    class helloworld *hw=(class helloworld *)hwv->GetDataObject();
     char buf[100];
     int x, y;
 
@@ -291,7 +291,7 @@ static void readHW(class helloworldview  *hwv,long  rock)
 		message::DisplayString(hwv,1,msgBuf);
 	    }else{
 		class helloworld *hw=
-		  (class helloworld *)hwv->dataobject;
+		  (class helloworld *)hwv->GetDataObject();
 
 		if(strcmp(name,(hw)->GetTypeName())!=0){
 		    sprintf(msgBuf,
@@ -322,7 +322,7 @@ static void writeHW(class helloworldview  *hwv,long  rock)
 	message::DisplayString(hwv,1,msgBuf);
     }else{
 	class helloworld *hw=
-	  (class helloworld *)hwv->dataobject;
+	  (class helloworld *)hwv->GetDataObject();
 	
 	(hw)->Write(fp,im::GetWriteID(),0);
 	fclose(fp);
@@ -332,7 +332,7 @@ static void writeHW(class helloworldview  *hwv,long  rock)
 
 static void xgetinfo(class helloworldview  *hwv, struct range  *total , struct range  *seen , struct range  *dot)
 {
-    class helloworld *hw=(class helloworld *)hwv->dataobject;
+    class helloworld *hw=(class helloworld *)hwv->GetDataObject();
 
     total->beg = 0;
     total->end = TOTALSIZE;
@@ -343,7 +343,7 @@ static void xgetinfo(class helloworldview  *hwv, struct range  *total , struct r
 
 static void ygetinfo(class helloworldview  *hwv, struct range  *total , struct range  *seen , struct range  *dot)
 {
-    class helloworld *hw=(class helloworld *)hwv->dataobject;
+    class helloworld *hw=(class helloworld *)hwv->GetDataObject();
 
     total->beg = 0;
     total->end = TOTALSIZE;

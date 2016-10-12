@@ -12,7 +12,7 @@ ATK_IMPL("etextview.H")
 #include <entertext.H>
 #include <valueview.H>
 #include <etextview.H>
-#define Text(A) ((class entertext *)(A->dataobject))
+#define Text(A) ((class entertext *)(A->GetDataObject()))
 
 ATKdefineRegistry(etextview, textview, etextview::InitializeClass);
 static void etextview_CancelCommand(class etextview  *self );

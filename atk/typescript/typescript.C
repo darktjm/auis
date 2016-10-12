@@ -103,8 +103,8 @@ static char io_buffer[4096];
 
 /* #define DONTCUTSTYLES */
 #define MyEnvinfo(text,pos) ((class environment *)(text->rootEnvironment)->GetInnerMost(pos))
-#define TEXT(A) ((class text*)(A->dataobject))
-#define TEXTOBJ(A) A->dataobject
+#define TEXT(A) ((class text*)(A->GetDataObject()))
+#define TEXTOBJ(A) A->GetDataObject()
 #define ISPIPESCRIPT(self) (self->pipescript)
 
 static const char *DefaultArgList[] = { 0, 0 };

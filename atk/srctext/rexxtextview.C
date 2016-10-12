@@ -95,7 +95,7 @@ static long matchingdelim(rexxtext *ct, long pos)
 /* rexxtextview_EndComment handles NESTED slash-star comments */
 void rexxtextview::EndComment(char key /* must be char for "&" to work. */)
 {
-    rexxtext *ct=(rexxtext *)this->view::dataobject;
+    rexxtext *ct=(rexxtext *)this->view::GetDataObject();
     int count=(GetIM())->Argument();
     long pos,oldpos;
     if (ConfirmReadOnly())

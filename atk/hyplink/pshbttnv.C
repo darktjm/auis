@@ -351,7 +351,7 @@ static void LocateHit(class pushbuttonview *pv, const struct rectangle &logical,
     const char *textl;
     int style;
     class fontdesc *my_fontdesc;
-    b=(class pushbutton *)pv->dataobject;
+    b=(class pushbutton *)pv->GetDataObject();
     if (b) {
 	style = (b)->GetStyle();
 	if (!(my_fontdesc = (b)->GetButtonFont())) {
@@ -1304,7 +1304,7 @@ static void OutputLabel(FILE  *f, const char  *l)
 
 void pushbuttonview::Print(FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
-    class pushbutton *dobj = (class pushbutton *)this->dataobject;
+    class pushbutton *dobj = (class pushbutton *)this->GetDataObject();
     if (strcmp(processor, "troff") == 0) {
 	/* output to troff */
 	if (topLevel)

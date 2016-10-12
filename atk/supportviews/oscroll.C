@@ -1658,7 +1658,7 @@ void oscroll::WantUpdate(class view  *requestor)
 
     if (!this->pending_update) {
         this->pending_update = 1;
-        if(((class view *)this)->parent) (((class view *)this)->parent)->WantUpdate( this);
+        if(((class view *)this)->GetParent()) (((class view *)this)->GetParent())->WantUpdate( this);
     }
 }
 /*
@@ -1857,7 +1857,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view::MouseActi
 		    self->scrollEvent = NULL;
 		}
 		(self->curse[self->side])->SetStandard( ThumbIcon);
-		(self->imPtr)->SetWindowCursor( self->curse[self->side]);
+		(self->GetIM())->SetWindowCursor( self->curse[self->side]);
 		
 		/* Fall through into the yes clause */
 
@@ -1957,7 +1957,7 @@ static class view *normal_scroll__Hit(class oscroll  *self, enum view::MouseActi
 
     if (self->thumbing != NOPE) {
 	(self->curse[self->side])->SetStandard( CursorIcon[Type[self->side]]);
-	(self->imPtr)->SetWindowCursor( NULL);
+	(self->GetIM())->SetWindowCursor( NULL);
 
 	if (ABS(coord - self->hitcoord) > SMALLDIST || (self->thumbing == YES && (self->button == RIGHT || ! thumbScroll))) {
 	    long newPos = from_range_to_bar(self, self->side, cur, cur->seen.beg) + coord - self->hitcoord;
@@ -2259,7 +2259,7 @@ static class view *motif_scroll__Hit(class oscroll  *self, enum view::MouseActio
 
     if (self->thumbing != NOPE) {
 	(self->curse[0])->SetStandard( NormalIcon);
-	(self->imPtr)->SetWindowCursor( NULL);
+	(self->GetIM())->SetWindowCursor( NULL);
 
 	if (ABS(coord - self->hitcoord) > SMALLDIST) {
 	    long newPos = from_range_to_bar(self, self->side, cur,

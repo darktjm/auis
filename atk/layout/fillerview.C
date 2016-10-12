@@ -8,7 +8,7 @@
 #define getView(V) (*(V))
 #define getIM(V) (&getView(V))->GetIM()
 #define getDrawable(V) (&getView(V))->GetDrawable()
-#define MyFiller(V) ((class filler *)(getView(V).dataobject))
+#define MyFiller(V) ((class filler *)(getView(V).GetDataObject()))
 
 #define fillerview_MINIMUMSIZE 100
 #define LEFTMARGIN 5

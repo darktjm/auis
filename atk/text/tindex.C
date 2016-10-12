@@ -28,8 +28,8 @@ ATK_IMPL("tindex.H")
 #define tindex_HIDDEN -16
 #define tindex_VISIBLE -17
 
-#define Data(self) ((class content *)(((class view *) self)->dataobject))
-#define Text(self) ((class text *) ((self)->dataobject))
+#define Data(self) ((class content *)(((class view *) self)->GetDataObject()))
+#define Text(self) ((class text *) ((self)->GetDataObject()))
 
 static const char * const indexnames[] = {
     "index",

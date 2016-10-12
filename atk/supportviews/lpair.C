@@ -286,12 +286,12 @@ void lpair::WantUpdate(class view  *requestor)
 	/* If we are about to FullUpdate the view requesting an update, throw away the
  * request. This prevents views from getting updates before FullUpdates.
  */
-	if (this->parent != NULL &&
+	if (this->GetParent() != NULL &&
 	    !(((this->needsfull & 1) && this->obj[0] != NULL &&
 	       (requestor)->IsAncestor( this->obj[0])) ||
 	      ((this->needsfull & 2) && this->obj[1] != NULL &&
 		  (requestor)->IsAncestor( this->obj[1]))))
-		(this->parent)->WantUpdate( requestor);
+		(this->GetParent())->WantUpdate( requestor);
 }
 
 

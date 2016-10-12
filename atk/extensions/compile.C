@@ -38,7 +38,7 @@ ATK_IMPL("compile.H")
 
 static class style *boldStyle = NULL;
 
-#define Text(thisView) ((class text *) thisView->dataobject)
+#define Text(thisView) ((class text *) thisView->GetDataObject())
 
 struct lengthPair {
     long first, second;
@@ -422,7 +422,7 @@ static void compile_Build(class view  *view, long  key)
             return;
     }
     commandBuffer = MakeCommandBuffer(compileCommand, "Error-Log", (im_filefptr) compile_BuildHandler);
-    if (view->dataobject != (commandBuffer)->GetData()) /* If not already looking at the error log. */
+    if (view->GetDataObject() != (commandBuffer)->GetData()) /* If not already looking at the error log. */
         PutInAnotherWindow(view, commandBuffer, FALSE);
     InsertMessage(commandBuffer, 0, compileCommand, strlen(compileCommand));
     message::DisplayString(view, 0, "Started compile, output is in buffer \"Error-Log\".");

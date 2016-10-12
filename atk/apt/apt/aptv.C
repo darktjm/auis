@@ -266,7 +266,6 @@ class aptv *self=this;
 
   IN(aptv_InitializeObject);
   DEBUGst(RCSID,rcsidaptv);
-  this->imPtr = NULL;
   Data = NULL;
   PrintStream = (struct aptv_print_stream *)
 		calloc( 1, sizeof(struct aptv_print_stream) );
@@ -439,7 +438,7 @@ static class aptv *
 Parent_AptView( class aptv	       *self )
     {
   class aptv	      *parent = NULL;
-  class view *candidate=self->parent;
+  class view *candidate=self->GetParent();
   IN(Parent_AptView);
   while ( candidate  &&  parent == NULL )
     {
@@ -447,7 +446,7 @@ Parent_AptView( class aptv	       *self )
     if ( ATK::IsTypeByName( (candidate )->GetTypeName( ), "aptv" ) )
       parent = (class aptv *)candidate;
       else
-      candidate = candidate->parent;
+      candidate = candidate->GetParent();
     }
   OUT(Parent_AptView);
   return  parent;

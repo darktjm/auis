@@ -34,9 +34,6 @@ class search : public ATK  {
 
     /** Default constructor.  Use CompilePattern() to initialize. */
     search() : size(0), used(0), body(NULL), MatchLength(-1) {} ;
-    search(const char *string) { search(); CompilePattern(string); }
-    /**< Non-error-checking constructor to create with a compiled pattern.
-     *   \param string The pattern. */
     ~search();
     const char * CompilePattern(const char *string)  ;
     /**< Compile the pattern for use with the matching functions.

@@ -514,6 +514,15 @@ void AmenuEntry::Dispatch() {
 
 ATKdefineRegistryNoInit(AmenuCard, dataobject);
 
+AmenuCard::AmenuCard()
+{
+    entries = new AmenuEntrylist;
+    prefs=sbutton::GetNewPrefs("AmenuCard");
+    if(prefs==NULL) return;
+    sbutton::InitPrefs(prefs, "AmenuCard");
+}
+
+#if 0
 class NO_DLL_EXPORT democlass;
 DEFINE_AACTION_FUNC_CLASS(democlass,AmenuCard);
 static void demofunc(AmenuCard *obj, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
@@ -524,18 +533,13 @@ static void demofunc(AmenuCard *obj, const avalueflex &aux, const avalueflex &in
 
 static democlass demo(demofunc,9L);
 
-AmenuCard::AmenuCard(boolean do_demo)
+void AmenuCard::Demo()
 {
-    entries = new AmenuEntrylist;
-    prefs=sbutton::GetNewPrefs("AmenuCard");
-    if(prefs==NULL) return;
-    sbutton::InitPrefs(prefs, "AmenuCard");
-    if(do_demo) {
-	AddEntry(10). SetAction(this,&demo,42L). AddLeftIcon("\100"). SetLabel("Foo", NULL, "pink");
-	AddEntry(5).  SetAction(this,&demo,88L). AddRightString(NULL,"andy22i").AddLeftIcon("\047"). SetLabel("foo", NULL, "pink");
-	AddSeparator(7);
-    }
+    AddEntry(10). SetAction(this,&demo,42L). AddLeftIcon("\100"). SetLabel("Foo", NULL, "pink");
+    AddEntry(5).  SetAction(this,&demo,88L). AddRightString(NULL,"andy22i").AddLeftIcon("\047"). SetLabel("foo", NULL, "pink");
+    AddSeparator(7);
 }
+#endif
 
 AmenuCard::~AmenuCard() {
     if(prefs) sbutton::FreePrefs(prefs);

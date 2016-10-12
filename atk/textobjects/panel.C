@@ -403,7 +403,7 @@ void panel::PostKeyState(class keystate  *ks)
     /* Post our own keystate, discarding keystate from child */
 
     this->keystate->next = NULL;
-    (this->parent)->PostKeyState( this->keystate);
+    (this->GetParent())->PostKeyState( this->keystate);
 }
 
 class view *panel::Hit(enum view::MouseAction  action, long  x , long  y , long  numberOfClicks)

@@ -81,7 +81,7 @@ keystate *ctextview::PrependKeyState()
 /* Paren is overridden so that an end-brace will reindent the line */
 void ctextview::Paren(char key /* must be char for "&" to work. */)
 {
-    ctext *ct = (ctext *)this->view::dataobject;
+    ctext *ct = (ctext *)this->view::GetDataObject();
     long pos=GetDotPosition();
     if (key=='}')
 	SelfInsertReindent(key);
@@ -95,7 +95,7 @@ void ctextview::Paren(char key /* must be char for "&" to work. */)
 /* HandleEndOfLineStyle will terminate both linecomment AND preprocessor styles when a newline is added (if not \quoted) */
 void ctextview::HandleEndOfLineStyle(long pos)
 {
-    ctext *ct=(ctext *)this->view::dataobject;
+    ctext *ct=(ctext *)this->view::GetDataObject();
 
     if ((ct)->GetStyle(pos)==ct->srctext::linecomment_style || ((ct)->GetStyle(pos)==ct->srctext::kindStyle[PREPRC] && !(ct)->Quoted(pos))) {
 	long start=pos;
@@ -106,7 +106,7 @@ void ctextview::HandleEndOfLineStyle(long pos)
 
 static void startPreproc(ctextview *self, char key)
 {
-    ctext *ct=(ctext *)self->view::dataobject;
+    ctext *ct=(ctext *)self->view::GetDataObject();
     long pos, oldpos;
     if ((self)->ConfirmReadOnly())
 	return;

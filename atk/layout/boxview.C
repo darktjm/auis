@@ -302,8 +302,8 @@ boxview::WantNewSize(class view	 *requestor		/* view requesting a new size */)
     if (boxview_debug)
 	printf("boxview_WantNewSize(%s)\n", viewname(requestor));
 
-    if (this->child == requestor && getView(this).parent != NULL) {
-	(getView(this).parent)->WantNewSize( this);
+    if (this->child == requestor && getView(this).GetParent() != NULL) {
+	(getView(this).GetParent())->WantNewSize( this);
     }
 }
 

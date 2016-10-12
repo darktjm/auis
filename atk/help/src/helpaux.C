@@ -850,8 +850,8 @@ void help::GetHelpOnTerminal(const char  *akey		/* topic string */,int  list		/*
 static class frame *
 getframe(class view  *vw)
 {
-    while(vw->parent) {
-	vw = vw->parent;
+    while(vw->GetParent()) {
+	vw = vw->GetParent();
 	if(ATK::IsTypeByName((vw)->GetTypeName(),"frame"))
 	    return((class frame*) vw);
     }

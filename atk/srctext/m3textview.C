@@ -80,7 +80,7 @@ class keystate *m3textview::PrependKeyState()
 /* FindInterfaceOrModule() isolates the identifier pointed to by the caret and tries to find its corresponding interface (if module is FALSE) or module (if module is TRUE) */
 static void FindInterfaceOrModule(m3textview *self, boolean module)
 {
-    m3text *ct = (m3text *)self->view::dataobject;
+    m3text *ct = (m3text *)self->view::GetDataObject();
     long pos,oldpos;
     char name[256],proc[256],msg[300];
     char filename[256],bufname[256],searchpath[1024];
@@ -147,7 +147,7 @@ static void module(m3textview *self, long key)
 /* identical to mtext's asterisk() with the exception of pragma-checking */
 static void asterisk(m3textview *self, char key /* must be char for "&" to work. */)
 {
-    m3text *ct=(m3text *)self->view::dataobject;
+    m3text *ct=(m3text *)self->view::GetDataObject();
     int count=((self)->GetIM())->Argument();
     long pos,oldpos;
 
@@ -170,7 +170,7 @@ static void asterisk(m3textview *self, char key /* must be char for "&" to work.
 /* m3pragma should be functionally equivalent to paren function in modtextv.c */
 static void m3pragma(m3textview *self, char key /* must be char for "&" to work. */)
 {
-    m3text *ct=(m3text *)self->view::dataobject;
+    m3text *ct=(m3text *)self->view::GetDataObject();
     long oldpos=(self)->GetDotPosition();
     if ((self)->ConfirmReadOnly())
 	return;

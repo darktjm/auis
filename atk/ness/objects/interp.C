@@ -1582,14 +1582,14 @@ brancher: {
 		else if (op == 's') {
 			/* currentselection(textview) */
 			(NSP->s.v)->Set( 
-				(class simpletext *)v->dataobject,
+				(class simpletext *)v->GetDataObject(),
 				(v)->GetDotPosition(),
 				(v)->GetDotLength());
 		}
 		else {
 			/* op == 'm' :  currentmark(textview) */ 
 			(NSP->s.v)->Set( 
-				(class simpletext *)v->dataobject,
+				(class simpletext *)v->GetDataObject(),
 				(v->atMarker)->GetPos(),
 				(v->atMarker)->GetLength());
 		}
@@ -1810,7 +1810,7 @@ brancher: {
 				(t=(class textview *)ProperPtr((ATK  *)p->v,
 					textviewClass)) == NULL)
 			 RunError(":first argument was not a textview", iar-1);
-		if ((class simpletext *)t->dataobject
+		if ((class simpletext *)t->GetDataObject()
 					== (n)->GetText())  {
 			(t)->SetDotPosition( (n)->GetPos());
 			(t)->SetDotLength( (n)->GetLength());

@@ -35,7 +35,7 @@ public:
   virtual void SetPrompt(char *string);
   virtual boolean HaveYouGotTheFocus()  ;
 
-  inline boolean IsLinked() { return ((this)->parent && (this)->imPtr); }
+  inline boolean IsLinked() { return ((this)->GetParent() && (this)->GetIM()); }
 
   class text *textobj;
   class textview *textv;

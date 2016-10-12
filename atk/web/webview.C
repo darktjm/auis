@@ -851,7 +851,7 @@ class view *webview::Hit(enum view::MouseAction  action, long  x,  long  y,  lon
     ATK_CLASS(htmltext);
     ATK_CLASS(htmltextview);
     ATK_CLASS(htmlimagev);
-    class web *web = (class web *) this->view::dataobject;
+    class web *web = (class web *) this->view::GetDataObject();
     long pos;
     const char *s=NULL;
     view *hit=NULL;

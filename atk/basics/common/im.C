@@ -1259,7 +1259,7 @@ im::HandleMenu(struct proctable_Entry  *procTableEntry, ATK   *object, long  roc
 
     if((object)->IsType( viewinfo) && procTableEntry->type) {
 	class view *v=(class view *)object;
-	while(v && !(v)->IsType( procTableEntry->type)) v=v->parent;
+	while(v && !(v)->IsType( procTableEntry->type)) v=v->GetParent();
 	if(v) object=(ATK  *)v;
     }
     return HandleProc(this, procTableEntry, object, rock, NULL);
@@ -1567,17 +1567,17 @@ im::im()
     this->LogFile = NULL;
 #if 0
     /* really the im name should be unique, but this
-     way is a core leak... */
+     way is a core leak...
+     tjm - no leak here, but I won't change the code since it works as is. */
     const class atom * atom;
 
     atom = atom::InternRock((long) this);
-    this->name = new atomlist; /* can't use setname here because of a class `feature' */    
-    (this->name)->Prepend(atom);
+    class atomlist al = new atomlist;
+    al->Prepend(atom);
+    this->SetName(&al);
 #else
-    this->name = atomlist::StringToAtomlist("im");
+    this->SetName(atomlist::StringToAtomlist("im"));
 #endif    
-    this->className = atomlist::StringToAtomlist("im");
-
     this->keyEchoState=im_KeyEchoOff;
 
     this->moreRecentlyUsed = this->lessRecentlyUsed = (class im *) 0;
@@ -1708,20 +1708,20 @@ void im::WantInputFocus(class view  *requestor)
     class colormap **current = NULL, **new_c = NULL;
     class view *ancestor;
     if (this->inputFocus != NULL) {
-	ancestor=this->inputFocus->parent;
+	ancestor=this->inputFocus->GetParent();
 	while(ancestor) {
 	    ancestor->ChildLosingInputFocus();
-	    ancestor=ancestor->parent;
+	    ancestor=ancestor->GetParent();
 	}
 	(this->inputFocus)->LoseInputFocus();
 	if(requestor)
 	    current = (this->inputFocus)->CurrentColormap();
     }
     if(requestor) {
-	ancestor=requestor->parent;
+	ancestor=requestor->GetParent();
 	while(ancestor) {
 	    ancestor->ChildReceivingInputFocus();
-	    ancestor=ancestor->parent;
+	    ancestor=ancestor->GetParent();
 	}
     }
     this->inputFocus = requestor;
@@ -1881,12 +1881,12 @@ void im::SetView(class view  *topLevel)
 	    // and give the toplevel view to the bbar.
 	    ((viewholderv *)this->bbarv)->setChild(topLevel);
 	    this->bbarv->LinkTree(this); /* Sets up parent and imPtr fields. */
-	    this->bbarv->InsertView(this, &this->drawable->localBounds);
+	    this->bbarv->InsertView(this, &this->GetDrawable()->localBounds);
 	} else {
 	    // No buttonbar.  Be lightweight.  Insert the toplevel directly.
 	    // Alternatively, we could implement a dummy viewholderv.
 	    topLevel->LinkTree(this); /* Sets up parent and imPtr fields. */
-	    topLevel->InsertView(this, &this->drawable->localBounds);
+	    topLevel->InsertView(this, &this->GetDrawable()->localBounds);
 	}
     }
     globalDoRedraw = TRUE;
@@ -3664,8 +3664,8 @@ short im::GetResource( class atomlist  * name, class atomlist  * class_c, const 
   struct atoms * classMark = (name)->Mark();
   short found;
 
-  (name)->JoinToBeginning(  this->name );
-  (class_c)->JoinToBeginning(  this->className );
+  (name)->JoinToBeginning(  this->GetName() );
+  (class_c)->JoinToBeginning(  this->GetClass() );
   (name)->Prepend(  ProgramNameAtom );
   (class_c)->Prepend(  A_application );
   found = rm::GetResource( name, class_c, type, data );
@@ -3679,7 +3679,7 @@ void im::PostResource( class atomlist  * path, const class atom  * type, long  d
                     {
   struct atoms * pathMark = (path)->Mark();
 
-  (path)->JoinToBeginning(  this->name );
+  (path)->JoinToBeginning(  this->GetName() );
   (path)->Prepend(  ProgramNameAtom );
   rm::PostResource( path, data, type );
   (path)->Cut(  pathMark );
@@ -3694,20 +3694,20 @@ void im::GetManyParameters(struct resourceList  * resources, class atomlist  * n
   class atomlist * passclass;
 
   if (name == NULL)
-    passname = this->name;
+    passname = this->GetName();
   else
     {
       nameMark = (name)->Mark();
-      (name)->JoinToBeginning(this->name);
+      (name)->JoinToBeginning(this->GetName());
       passname = name;
     }
 
   if (class_c == NULL)
-    passclass = this->className;
+    passclass = this->GetClass();
   else
     {
       classMark = (class_c)->Mark();
-      (class_c)->JoinToBeginning(this->className);
+      (class_c)->JoinToBeginning(this->GetClass());
       passclass = class_c;
     }
 
@@ -3732,7 +3732,7 @@ void im::UnlinkNotification(class view  *unlinkedTree)
     if (this->inputFocus != NULL && (this->inputFocus)->IsAncestor( unlinkedTree)) {
         (this->inputFocus)->LoseInputFocus();
 	this->inputFocus = NULL;
-	if(unlinkedTree->parent && unlinkedTree->parent!=(class view *)this) (unlinkedTree->parent)->WantInputFocus( unlinkedTree->parent);
+	if(unlinkedTree->GetParent() && unlinkedTree->GetParent()!=(class view *)this) (unlinkedTree->GetParent())->WantInputFocus( unlinkedTree->GetParent());
        /* im_PostKeyState(self, NULL);
         im_PostMenus(self, NULL); */
     }

@@ -24,10 +24,10 @@ ATK_IMPL("fnotev.H")
 #define OFNAME "andy"
 #define OFSIZE 12
 #define SHIM 3
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Text(A) ((class text *) DataObject(A))
 #define Fnote(A) ((class fnote *) DataObject(A))
-#define Graphic(A) (((class view *)(A))->drawable)
+#define Graphic(A) (((class view *)(A))->GetDrawable())
 #define CANTSWITCHTEXTVIEW 1 /* textview currently doesn't allow itself to switch to a new text */
 struct impair {
     class im *host,*fn;
@@ -343,7 +343,7 @@ void fnotev::LinkTree(class view  *parent)
 {
     (this)->view::LinkTree(parent);
     while(!ATK::IsTypeByName((parent)->GetTypeName(),"textview")){
-	if((parent = parent->parent) == NULL ) return;
+	if((parent = parent->GetParent()) == NULL ) return;
     }
     this->parenttext = (class text *) (parent)->GetDataObject();
     this->parentview = (class textview *) parent;

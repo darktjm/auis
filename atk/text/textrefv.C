@@ -14,7 +14,7 @@ ATK_IMPL("textrefv.H")
 #include <environment.H>
 #include <texttag.H>
 #include <fontdesc.H>
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Data(A) ((class textref *)(DataObject(A)))
 
 /*

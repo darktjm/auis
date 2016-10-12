@@ -146,9 +146,9 @@ void printopts::PostKeyState(class keystate  *ks)
 {
     class keystate *newch;
 
-    if (this->parent != NULL) {
+    if (this->GetParent() != NULL) {
 	newch = (this->keys)->AddBefore(ks);
-	(this->parent)->PostKeyState(newch);
+	(this->GetParent())->PostKeyState(newch);
     }
 }
 

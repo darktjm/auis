@@ -46,10 +46,10 @@ ATK_IMPL("arbcon.H")
 static class arbcon *Gself;
 static class arbiterview *OwnArb;
 #define INITIALSIZE 512
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Cel(A) ((class cel *) DataObject(A))
 #define Arbiter(A) ((class arbiter *) DataObject(A))
-#define Parent(V) (((class view *)V)->parent)
+#define Parent(V) (((class view *)V)->GetParent())
 #define NamedView 0
 #define EXISTINGOBJECT 1
 #define DEFAULTVIEW 1

@@ -1218,7 +1218,6 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 			(v)->SetDataObject( d);
 			(v)->InsertView( (class view *)iptr,
 					 &playpen);
-			v->imPtr=iptr;
 			createdview = TRUE;
 		    }
 		    else (v)->Destroy();

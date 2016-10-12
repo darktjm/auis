@@ -459,7 +459,7 @@ static void tags_FindTagCmd(class view  *view,long  key)
 {
     char *name;
     int RecursiveEdit= !((view)->GetIM())->ArgProvided() && environ::GetProfileSwitch("TagRecursiveEdit", TRUE);
-    class text *doc=(class text *)view->dataobject;
+    class text *doc=(class text *)view->GetDataObject();
 
     name = getFunction(doc,((class textview *)view)->GetDotPosition());
     tags_FindTag(view,name,RecursiveEdit);

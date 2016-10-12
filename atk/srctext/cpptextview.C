@@ -73,7 +73,7 @@ keystate *cpptextview::PrependKeyState()
 /* slash will END an existing comment style if preceded by an asterisk, or start a line comment style if preceded by another slash */
 static void slash(cpptextview *self, char key)
 {
-    cpptext *ct=(cpptext *)self->view::dataobject;
+    cpptext *ct=(cpptext *)self->view::GetDataObject();
     int count=((self)->GetIM())->Argument();
     long pos,oldpos;
     if ((self)->ConfirmReadOnly())

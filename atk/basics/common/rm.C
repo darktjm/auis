@@ -29,7 +29,7 @@ static class Namespace * converters;
 ATKdefineRegistry(rm, ATK, rm::InitializeClass);
 #if DEBUG_RM
 void Patom( const class atom  * atom );
-void Plist( class atomlist  * list );
+void Plist( const class atomlist  * list );
 #endif
 int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
 int FindManyResources( struct resourceList  * resources, class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
@@ -44,9 +44,9 @@ void Patom( const class atom  * atom )
   printf("%s",(atom)->Name());
 }
 
-void Plist( class atomlist  * list )
+void Plist( const class atomlist  * list )
      {
-  struct atoms * current = (list)->TraversalStart();
+	 const struct atoms * current = (list)->TraversalStart();
   if (current != NULL)
     {
       Patom((list)->TraversalAtom(current));

@@ -28,9 +28,9 @@ static class keymap *newKeymap;
 static class menulist *newMenus;
 static class lsetview *DeleteMode = NULL;
 
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Data(A) ((class lset *)DataObject(A) )
-#define Islinked(self) (((struct view *)self)->parent != NULL && self->GetIM())
+#define Islinked(self) (((struct view *)self)->GetParent() != NULL && self->GetIM())
 #define lsetview_NeedLink 10
 #define VALUE 10
 #define CEL 5
@@ -276,7 +276,7 @@ static int lsetview_PlaceView(class lsetview  *self)
     long pf; 
     class lset *ls = Data(self);
     boolean promptforname = self->GetIM()->ArgProvided();
-    (self->imPtr)->ClearArg();    
+    (self->GetIM())->ClearArg();    
     if(self->child || self->mode == lsetview_IsSplit) return -1;
    viewname[0] = '\0';
 #ifdef DEBUG
@@ -328,8 +328,8 @@ static void lsetview_DeleteMode(class lsetview  *self)
 static void lsetview_UnsplitParent(class lsetview  *self)
 {
     if(self->child || self->mode == lsetview_IsSplit) return;
-    if(self->parent && (self)->IsType(self->parent)){
-	class lsetview *parent = (class lsetview *) self->parent;
+    if(self->GetParent() && (self)->IsType(self->GetParent())){
+	class lsetview *parent = (class lsetview *) self->GetParent();
 	(parent)->Unsplit(self);
     }
 }
@@ -342,7 +342,7 @@ static int lsetview_ReadView(class lsetview  *self)
     long pf;
     char realName[1024];
     FILE *thisFile;
-    (self->imPtr)->ClearArg();    
+    (self->GetIM())->ClearArg();    
     pf = message::AskForString(self, 0, "File to insert here: ", 0, iname, sizeof(iname));
     if (pf < 0) return -1;
     if(strlen(iname)==0){

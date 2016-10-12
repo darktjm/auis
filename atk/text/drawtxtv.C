@@ -25,7 +25,7 @@
 static class graphic *pat;
 #define FGC 1
 #define Text(self) \
-    ((class text *) ((self)->dataobject))
+    ((class text *) ((self)->GetDataObject()))
 
 #define FastJustify(INFO) \
     ((INFO->endOfPara && INFO->just == \

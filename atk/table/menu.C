@@ -216,7 +216,7 @@ static void m_cut(class spread  * V, char  ch)
 	    SetCurrentCell (V, &remnant);
 	}
     }
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 static void m_copy(class spread  * V, char  ch)
@@ -276,7 +276,7 @@ static void m_paste(class spread  * V, char  ch)
 	(MyTable(V))->InsertData ( S, &(V->selection));
 	(S)->Destroy(); 
     }
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 static void m_combine(class spread  * V, char  ch)

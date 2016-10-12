@@ -325,7 +325,7 @@ static void ChangeMonth(class monthview  *self, int  change)
 void monthview::GrabTextview(boolean  ForceRedraw)
 {
     if (this->tv && this->t){
-	if ((class dataobject *) this->t != ((class view *) this->tv)->dataobject) {
+	if ((class dataobject *) this->t != ((class view *) this->tv)->GetDataObject()) {
 	    (this->tv)->SetDataObject( this->t);
 	    ForceRedraw = TRUE;
 	}

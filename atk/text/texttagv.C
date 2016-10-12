@@ -9,7 +9,7 @@ ATK_IMPL("texttagv.H")
 #include <texttagv.H>
 #include <environ.H>
 #include <fontdesc.H>
-#define DataObject(A) (A->dataobject)
+#define DataObject(A) (A->GetDataObject())
 #define Data(A) ((class texttag *)(DataObject(A)))
 
 

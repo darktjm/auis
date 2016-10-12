@@ -378,7 +378,7 @@ static void movecolup (class spread  * V, int      x  , int      y)
     movecolcancel (V);
     (MyTable(V))->ChangeThickness ( COLS, V->currentslice,
 	(V->colInfo[V->currentslice].computedWidth - V->currentoffset + x));
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 static void movecolcancel (class spread  * V)
@@ -430,7 +430,7 @@ static void moverowup (class spread  * V, int      x  , int      y)
 	printf("moverowup\n");
     moverowcancel (V);
     (MyTable(V))->ChangeThickness( ROWS, V->currentslice, (MyTable(V))->RowHeight( V->currentslice) - V->currentoffset + y);
-    (V->parent)->WantNewSize( V);
+    (V->GetParent())->WantNewSize( V);
 }
 
 static void moverowcancel (class spread  * V)

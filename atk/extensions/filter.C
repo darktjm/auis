@@ -101,7 +101,7 @@ static void filterf(class textview  *tv,char  *command,short  method)
     }
 
     fd->v=tv;
-    fd->t=(class text *)tv->dataobject;
+    fd->t=(class text *)tv->GetDataObject();
     fd->pos=(tv)->GetDotPosition();
     fd->len=(tv)->GetDotLength();
     fd->method=method;

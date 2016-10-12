@@ -266,7 +266,6 @@ nessrunapp::Run() {
 	if(iptr==NULL) iptr=new im;
 	(textviewp)->InsertView( iptr,
 			 &playpen);
-	textviewp->imPtr=iptr;
 	(this->theNess)->SetName( (char *)this->inputfile);
 	(this->theNess)->SetAccessLevel( ness_codeUV);
 

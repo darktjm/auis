@@ -15,6 +15,11 @@ ATK_IMPL("atomlist.H")
 
 ATKdefineRegistry(atomlist, ATK, NULL);
 
+struct atoms {
+    const class atom *atom;
+    struct atoms *next;
+};
+
 atomlist::atomlist()
 {
   this->atoms = NULL;
@@ -133,9 +138,9 @@ void atomlist::Append(const class atom  *atom)
 }
 
 
-void atomlist::JoinToEnd(class atomlist  *otherlist)
+void atomlist::JoinToEnd(const class atomlist  *otherlist)
 {
-    struct atoms *otherAtoms;
+    const struct atoms *otherAtoms;
     struct atoms **last;
 
     for (last = &(this->atoms); *last != NULL; last = &((*last)->next))
@@ -149,9 +154,9 @@ void atomlist::JoinToEnd(class atomlist  *otherlist)
     }
 }
 
-void atomlist::JoinToBeginning(class atomlist  *otherlist)
+void atomlist::JoinToBeginning(const class atomlist  *otherlist)
 {
-    struct atoms *otherAtoms;
+    const struct atoms *otherAtoms;
     struct atoms **last;
     struct atoms *temp;
 

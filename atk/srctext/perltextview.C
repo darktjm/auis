@@ -129,7 +129,7 @@ static long copyString(perltext *self, long pos, char buff[])
 
 void perltextview::HandleEndOfLineStyle(long pos)
 {
-    perltext *ct = (perltext *)this->view::dataobject;
+    perltext *ct = (perltext *)this->view::GetDataObject();
     char buff[256];
 
     /* terminate any bang-comments that might be there */
@@ -161,7 +161,7 @@ static long backwardSkipWhitespace(perltext *ct, long pos)
 /* begins or ends a string that is delimited by a '"', '\'', or '`' provided the string starts with one of those delimiters. */
 static void styleString(perltextview *self, char key, long pos)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
 
     if ((ct)->Quoted(pos))
 	return;
@@ -186,7 +186,7 @@ static void styleString(perltextview *self, char key, long pos)
 
 static void reindentLine(perltextview *self, char key)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
     long pos;
     pos= (self)->GetDotPosition();
     if ((ct)->IndentingEnabled() && !(ct)->InCommentStart(pos)) 
@@ -196,7 +196,7 @@ static void reindentLine(perltextview *self, char key)
 
 static void reindent(perltextview *self, char key /* must be char for "&" to work. */) 
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
 
     if (key == '}')
 	reindentLine(self,key);
@@ -207,7 +207,7 @@ static void reindent(perltextview *self, char key /* must be char for "&" to wor
 /* puts the style on a label. */
 static void styleLabel(perltextview *self, char key, long pos)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
     if (pos && !(ct)->InCommentStart(pos) && !(ct)->InString(pos)) {
 	mark *colonpos=(ct)->CreateMark(pos,0);
 	reindentLine(self,key); /* do this first, so the inserted char won't be part of the label style */
@@ -220,7 +220,7 @@ static void styleLabel(perltextview *self, char key, long pos)
 
 static void check_sub(perltextview *self, long pos)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
     char buff[256], c;
     long start, end;
     Dict *word;
@@ -240,7 +240,7 @@ static void check_sub(perltextview *self, long pos)
 
 static void styleStringDelim(perltextview *self, char key)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
     long pos, newpos, startpos, stringpos=0, beforeInsert, afterInsert, len; 
     char buff[256], c=0;
     int delim_count = 1;
@@ -371,7 +371,7 @@ class keystate *perltextview::PrependKeyState()
 
 static void startLineComment(perltextview *self, char key, long before, long after)
 {
-    perltext *ct=(perltext *)self->view::dataobject;
+    perltext *ct=(perltext *)self->view::GetDataObject();
     if (!(ct)->GetStyle(before)) {
 	if ('$'!= (ct)->GetChar(before-1))
 	    (ct)->WrapStyleNow(before,after-before, ct->srctext::linecomment_style, FALSE,TRUE);
@@ -386,7 +386,7 @@ static void startLineComment(perltextview *self, char key, long before, long aft
 
 void perltextview::Paren(char key)
 {
-    perltext *ct = (perltext *)this->view::dataobject;
+    perltext *ct = (perltext *)this->view::GetDataObject();
     long pos=GetDotPosition();
     if (key=='}')
 	SelfInsertReindent(key);

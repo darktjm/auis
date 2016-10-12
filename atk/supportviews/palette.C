@@ -423,12 +423,12 @@ void palette::SetLocation(enum palette_location  loc)
 void palette::SetChild(class view  *child)
 {
     if (this->child != NULL)
-        this->child->parent = NULL;
+        this->child->LinkTree(NULL);
 
     this->child = child;
 
     if (child != NULL)
-        child->parent = (class view *)this;
+	this->child->LinkTree(this);
 }
 
 static struct palette_item *palette_AddItem(class palette  *self, union palette_iteminfo  info, int  pos, palette_hitfptr fn, long  rock, enum palette_autoselect  autoselect)

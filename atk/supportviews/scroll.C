@@ -1731,7 +1731,7 @@ static void HandleThumbing(class scroll  *self, enum view::MouseAction  action, 
 	    } else *cur = *des;
 	}
     } else { /* this is an up transition */
-	(self->imPtr)->SetWindowCursor( NULL);
+	(self->GetIM())->SetWindowCursor( NULL);
 
 	dbeg=coord/* -self->seenLength/2 */;
 	

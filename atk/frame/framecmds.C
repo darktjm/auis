@@ -748,7 +748,7 @@ static void frame_NewWindow(class frame  *self)
     char host[100];
 
     strcpy(host, "");
-    count = (self->imPtr)->Argument();
+    count = (self->GetIM())->Argument();
     if (count > 1) {
 	if (message::AskForString(self, 10, "Host: ", "", host, 100) < 0)
 	    return;

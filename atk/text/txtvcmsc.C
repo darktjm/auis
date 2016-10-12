@@ -30,7 +30,7 @@ void textview_ViCommandCmd(class textview	 *self, long		 key)
 {
     char tc;
 
-    tc = (self->imPtr)->GetCharacter();
+    tc = (self->GetIM())->GetCharacter();
     switch (tc )
     {
 	case 'r':

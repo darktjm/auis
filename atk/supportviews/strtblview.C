@@ -59,7 +59,7 @@ static void
 ComputeItemSize(class strtblview  *self)
 	{
 	class stringtbl *st 
-			= (class stringtbl *)self->dataobject;
+			= (class stringtbl *)self->GetDataObject();
 	short n = (st)->NStrings();
 	short maxwidth = 0;
 	short i;
@@ -93,7 +93,7 @@ ComputeOrganization (class strtblview  *self, short  width , short  height)
 			about half the entries.  */
 	short r, c;
 	class stringtbl *st 
-			= (class stringtbl *)self->dataobject;
+			= (class stringtbl *)self->GetDataObject();
 	short n = (st)->NStrings();
 	if ( ! self->sizeknown) 
 		ComputeItemSize(self);
@@ -159,7 +159,7 @@ void
 strtblview::Clear()
 	{
 	class stringtbl *st 
-			= (class stringtbl *)this->dataobject;
+			= (class stringtbl *)this->GetDataObject();
 	this->sizeknown = FALSE;
 	this->GaveSize = FALSE;
 	this->tablechanged = TRUE;
@@ -203,7 +203,7 @@ static void
 AdjustHighlight(class strtblview  *self)
 	{
 	class stringtbl *st 
-			= (class stringtbl *)self->dataobject;
+			= (class stringtbl *)self->GetDataObject();
 	unsigned long which = self->BlackOnes ^ st->highlight;
 		/* WARNING: direct use of st->highlight could be a problem if the
 		data object has changed asynchronously with the view */
@@ -227,7 +227,7 @@ static void
 RedrawTable(class strtblview  *self)
 	{
 	class stringtbl *st 
-			= (class stringtbl *)self->dataobject;
+			= (class stringtbl *)self->GetDataObject();
 	struct rectangle rectangle, r;
 	short i, n;
 	
@@ -297,7 +297,7 @@ strtblview::Hit(enum view::MouseAction   action, long   x , long   y , long   nu
 	if (! this->OnScreen || ! CheckWindow(this, "Hit")) return NULL;
 	if ( action == view::LeftDown || action == view::RightDown ) {
 		class stringtbl *st 
-				= (class stringtbl *)this->dataobject;
+				= (class stringtbl *)this->GetDataObject();
 		short i, n = (st)->NStrings();
 		struct rectangle r;
 		(this)->GetLogicalBounds( &r);
@@ -331,7 +331,7 @@ strtblview::DesiredSize( long  width, long  height, enum view::DSpass  pass,
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
 	class stringtbl *st 
-			= (class stringtbl *)this->dataobject;
+			= (class stringtbl *)this->GetDataObject();
 	short n = (st)->NStrings();
 	if (n > this->maxused)  this->maxused = n;
 	if ( ! CheckWindow(this, "DSize")) {

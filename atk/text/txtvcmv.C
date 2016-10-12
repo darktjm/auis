@@ -307,7 +307,7 @@ void textview_ViGlitchUpCmd(class textview  *self)
     long 	dotPos;
     long 	dist, lines;
 
-    n = (self->imPtr)->Argument();
+    n = (self->GetIM())->Argument();
     pos = (self)->GetTopPosition();
     pos = (self)->MoveBack( pos, 0, textview_MoveByLines, 0, 0);
     pos = (self)->MoveForward( pos, n, textview_MoveByLines, 0, 0);
@@ -329,7 +329,7 @@ void textview_ViGlitchDownCmd(class textview  *self)
     long	dotPos;
     long 	dist, lines;
 
-    n = (self->imPtr)->Argument();
+    n = (self->GetIM())->Argument();
     pos = (self)->GetTopPosition();
     pos = (self)->MoveBack( pos, n, textview_MoveByLines, &dist, &lines);
     if (self->scroll == textview_ScrollForward)
@@ -359,22 +359,22 @@ void textview_ViGlitchDownCmd(class textview  *self)
 
 void textview_DownCmd(class textview  *self)
     {
-    if ( (self->imPtr)->Argument() == 1 )
+    if ( (self->GetIM())->Argument() == 1 )
     {
 	/* default is half the screen */
-	(self->imPtr)->argState.argProvided = TRUE;
-	(self->imPtr)->argState.argument  = textview_GetLines(self)/2;
+	(self->GetIM())->argState.argProvided = TRUE;
+	(self->GetIM())->argState.argument  = textview_GetLines(self)/2;
     }
     textview_ViGlitchUpCmd(self);
 }
 
 void textview_UpCmd(class textview  *self)
     {
-    if ( (self->imPtr)->Argument() == 1 )
+    if ( (self->GetIM())->Argument() == 1 )
     {
 	/* default is half the screen */
-	(self->imPtr)->argState.argProvided = TRUE;
-	(self->imPtr)->argState.argument  = textview_GetLines(self)/2;
+	(self->GetIM())->argState.argProvided = TRUE;
+	(self->GetIM())->argState.argument  = textview_GetLines(self)/2;
     }
     textview_ViGlitchDownCmd(self);
 }
@@ -646,7 +646,7 @@ void textview_PreviousLineCmd (class textview  *self  /**/)
 	/* ignore wrap-around lines */
 	cumLines	=	lines	= 0;
 	npos	= startPos;
-	for (j = (self->imPtr)->Argument(); j > 0; j--)
+	for (j = (self->GetIM())->Argument(); j > 0; j--)
 	{
 	    nlPos = (text)->GetBeginningOfLine( (text)->GetBeginningOfLine( npos) - 1);
 	    do
@@ -689,8 +689,8 @@ void textview_PreviousLineCmd (class textview  *self  /**/)
 		{
 		    if ( self->editor == VI )
 		    {
-			(self->imPtr)->argState.argProvided = TRUE;
-			(self->imPtr)->argState.argument  = cumLines;
+			(self->GetIM())->argState.argProvided = TRUE;
+			(self->GetIM())->argState.argument  = cumLines;
 			textview_ViGlitchDownCmd(self);
 		    }
 		    else
@@ -716,7 +716,7 @@ void textview_PreviousLineCmd (class textview  *self  /**/)
 	    (self)->GetLogicalHeight() - 2 * self->by, xpos - self->para_width - self->hz_offset, (int *) 0, NULL, &info);
     }
     (self)->SetDotPosition( npos);
-    (self->imPtr)->SetLastCmd( lcMove);
+    (self->GetIM())->SetLastCmd( lcMove);
     (self)->WantUpdate( self);
 }
 
@@ -733,7 +733,7 @@ static void textview_VINextLineCmd (class textview  *self /**/)
     pos = (self)->CollapseDot();
     dsize	= (Text(self))->GetLength();
 
-    if ((self->imPtr)->GetLastCmd() == lcMove)
+    if ((self->GetIM())->GetLastCmd() == lcMove)
 	xpos = self->movePosition;
     else
 	self->movePosition = xpos = self->cexPos;
@@ -776,8 +776,8 @@ static void textview_VINextLineCmd (class textview  *self /**/)
 	    else
 		if ( self->editor == VI )
 		{
-		    (self->imPtr)->argState.argProvided = TRUE;
-		    (self->imPtr)->argState.argument  = nlines;
+		    (self->GetIM())->argState.argProvided = TRUE;
+		    (self->GetIM())->argState.argument  = nlines;
 		    textview_ViGlitchUpCmd(self);
 		}
 		else
@@ -834,7 +834,7 @@ void textview_NextLineCmd (class textview  *self /**/)
 
     pos = (self)->CollapseDot();
 
-    if ((self->imPtr)->GetLastCmd() == lcMove)
+    if ((self->GetIM())->GetLastCmd() == lcMove)
 	xpos = self->movePosition;
     else
 	self->movePosition = xpos = self->cexPos;
@@ -1073,8 +1073,8 @@ void textview_BeginningOfNextLineCmd(class textview  *self)
     int	ct;
     int    j;
 
-    ct = (self->imPtr)->Argument();
-    (self->imPtr)->ClearArg(); 
+    ct = (self->GetIM())->Argument();
+    (self->GetIM())->ClearArg(); 
 
     for (j = 0; j < ct; j++)
     {
@@ -1120,7 +1120,7 @@ void textview_GoToLineCmd(class textview  *self)
 	textview_EndOfTextCmd(self);
     else
     {
-	text = (class text *) self->dataobject;
+	text = (class text *) self->GetDataObject();
 	(self)->SetDotLength( 0);
 	pos = (text)->GetPosForLine( argument);
 	(self)->SetDotPosition( pos);

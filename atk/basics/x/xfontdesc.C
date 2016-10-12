@@ -637,7 +637,7 @@ GetAnyOldGraphic()
 	}
 #endif /* DEVELOPER_ENV */
 	im = im::GetLastUsed();
-	return  ((im == NULL) ? NULL : (class xgraphic *)im->drawable);
+	return  ((im == NULL) ? NULL : (class xgraphic *)im->GetDrawable());
 }
 
 static class xgraphic *

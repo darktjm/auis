@@ -93,7 +93,7 @@ labelview::GetApplicationLayer()
 RedrawTable(class labelview  *self)
 	{
 	class label *st 
-			= (class label *)self->dataobject;
+			= (class label *)self->GetDataObject();
 	struct rectangle r;
 	int x, y;
 	
@@ -201,7 +201,7 @@ labelview::DesiredSize( long  width, long  height, enum view::DSpass  pass,
 		long w, h;
 		char *tail;
 		class label *st 
-			= (class label *)this->dataobject;
+			= (class label *)this->GetDataObject();
 		class graphic *g;
 		struct FontSummary *FS;
 		if ( ! CheckWindow(this, "DSize")) {
@@ -214,7 +214,7 @@ labelview::DesiredSize( long  width, long  height, enum view::DSpass  pass,
 		this->minwidth = this->minheight = 0;
 		g = (this)->GetDrawable();
 		FS = (st->font)->FontSummary( g);
-		tail = (char *)((class label *)this->dataobject)->GetText();
+		tail = (char *)((class label *)this->GetDataObject())->GetText();
 		while (tail) {
 			char *tend = strchr(tail, '\n');
 			if (tend) {

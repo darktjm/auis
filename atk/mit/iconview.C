@@ -88,11 +88,11 @@ DrawOpen(class iconview  * self, enum view::UpdateType  type, long  ax, long  ay
 
     if (self->titlefont == (class fontdesc *)0)
 	self->titlefont = fontdesc::Create(TITLEFONT, TITLESTYLE, TITLEPTS);
-    titlesummary = (self->titlefont)->FontSummary( self->drawable);
+    titlesummary = (self->titlefont)->FontSummary( self->GetDrawable());
 
     /* get the title and calculate its width */
-    title = ((class icon *) self->dataobject)->GetTitle();
-    tw = MIN((string_width(title, self->titlefont, self->drawable) + (*title ? titlesummary->maxSpacing : 0)), w - 2); /* add one-character-width padding if title is non-null */
+    title = ((class icon *) self->GetDataObject())->GetTitle();
+    tw = MIN((string_width(title, self->titlefont, self->GetDrawable()) + (*title ? titlesummary->maxSpacing : 0)), w - 2); /* add one-character-width padding if title is non-null */
 
     handle_height = MIN(titlesummary->newlineHeight + 2, h);
 
@@ -161,7 +161,7 @@ DrawClosed(class iconview  * self, enum view::UpdateType  type, long  ax, long  
     /* Get my icon font. Is this sure not to return NULL? */
     if (self->iconfont == (class fontdesc *)0)
 	self->iconfont = fontdesc::Create(ICONFONT, ICONSTYLE, ICONPTS);
-    (self->iconfont)->CharSummary( self->drawable,
+    (self->iconfont)->CharSummary( self->GetDrawable(),
 			  self->iconchar, &iconinfo);
     iconx = iconinfo.xOriginOffset;
     icony = iconinfo.yOriginOffset;
@@ -397,7 +397,7 @@ iconview::DesiredSize(long  w , long  h, enum view::DSpass  pass, long  *dw , lo
                 {  
 	struct fontdesc_charInfo iconinfo;
 	if (!this->isopen) {
-	    (this->iconfont)->CharSummary( this->drawable,
+	    (this->iconfont)->CharSummary( this->GetDrawable(),
 				 this->iconchar, &iconinfo);
 	    *dw = iconinfo.width;
 	    *dh = iconinfo.height;
@@ -431,9 +431,9 @@ iconview::Hit(enum view::MouseAction  action, long  x, long  y, long  clicks)
 		class view *v;
 		(this)->Close();
 		v = (class view *) this;
-		v = v->parent;
+		v = v->GetParent();
 		if(v != NULL && strcmp((v)->GetTypeName(),"matte") == 0)
-		    v = v->parent;
+		    v = v->GetParent();
 		if(v)
 		    (v)->WantInputFocus(v);
 	    }
@@ -462,9 +462,9 @@ iconview::ReceiveInputFocus()
 	(this->bottomview)->WantInputFocus(
 			    this->bottomview);
     } else {
-	class view *parent = ((class view *)this)->parent;
+	class view *parent = ((class view *)this)->GetParent();
 	while (parent && !ATK::IsTypeByName ((parent)->GetTypeName(), "textview"))
-	    parent = parent->parent;
+	    parent = parent->GetParent();
 	if (parent) (parent)->WantInputFocus( parent);
     }
 }
@@ -507,7 +507,7 @@ iconview::RecommendSize(long  w, long  h)
 void
 iconview::DecidedSize(long  w, long  h)
             {  
-    ((class icon *)this->dataobject)->SetSize(w,h);
+    ((class icon *)this->GetDataObject())->SetSize(w,h);
 }
 
 
@@ -638,7 +638,7 @@ void iconview::RecSrchExpose(const struct rectangle &logical, struct rectangle &
 	  
 	  if (this->titlefont == (class fontdesc *)0)
 	      this->titlefont = fontdesc::Create(TITLEFONT, TITLESTYLE, TITLEPTS);
-	  titlesummary = (this->titlefont)->FontSummary( this->drawable);
+	  titlesummary = (this->titlefont)->FontSummary( this->GetDrawable());
 
 	  handle_height = MIN(titlesummary->newlineHeight + 2, h);
 
