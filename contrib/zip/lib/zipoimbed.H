@@ -24,7 +24,7 @@ zipoimbed.H
 class zipoimbed : public  ziporect
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipoimbed);
 
 
 

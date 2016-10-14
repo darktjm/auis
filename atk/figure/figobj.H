@@ -53,11 +53,10 @@ struct figobj_Attachment {
 
 class figobj : public  dataobject  {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(figobj);
       static boolean InitializeClass();
 
       figobj();
-      virtual ~figobj();
 
 
       long Write(FILE *fp, long id, int level)  ;

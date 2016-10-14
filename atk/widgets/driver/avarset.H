@@ -95,9 +95,8 @@ class AVarSet : public  dataobject
 	// its type will be unchanged and may differ from `ent'.
 
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AVarSet);
     AVarSet();
-    virtual ~AVarSet();
 
     long Read(FILE *file, long id);
     long Write(FILE *file, long id, int level);

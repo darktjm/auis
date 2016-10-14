@@ -87,7 +87,7 @@ public:
 	long printcolwidth;
 	gflex *stones;
 
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(gofig);
 	static boolean InitializeClass();
 
         long Read(FILE *file, long id);
@@ -96,7 +96,6 @@ public:
 
 	gofig();
 	gofig(int w, int h);
-	virtual ~gofig();
 
 	void setdimensions(int w, int h);
 		/* changes width and height.  

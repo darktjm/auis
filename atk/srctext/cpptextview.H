@@ -10,14 +10,13 @@
 #include "ctextview.H"
 class cpptextview: public ctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(cpptextview);
 
     void PostMenus(class menulist *menulist);
     class keystate* PrependKeyState();
 
     static boolean InitializeClass();
     cpptextview();
-    virtual ~cpptextview();
 
     class keystate *cpp_state;
     class menulist *cpp_menus;

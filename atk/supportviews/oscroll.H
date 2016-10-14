@@ -22,7 +22,7 @@ struct arrow {
 
 class oscroll : public  scroll {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(oscroll);
 
   
      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
@@ -71,7 +71,6 @@ public:
     
 	oscroll();
     
-	virtual ~oscroll();
 
   
     class view *child;

@@ -29,7 +29,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 static const char InsertionText[] = "\n\n\n\nHello, world!\n\nYou are viewing a demonstration of how the Andrew Toolkit can be used to produce interesting and complex multi-font formatted text.\n\nThis should prove useful in understanding how to make fancy text.\n(At least, that's the intent.)\n";
 
 
-ATKdefineRegistry(fontanim, text, NULL);
+ATKdefineRegistryNoInit(fontanim, text);
 void ToggleStyle(class fontanim  *self, long time);
 
 

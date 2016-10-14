@@ -13,7 +13,7 @@ ATK_IMPL("updateq.H")
 
 /**************** class procedures ****************/
 
-ATKdefineRegistry(updateq, dataobject, NULL);
+ATKdefineRegistryNoInit(updateq, dataobject);
 
 updateq::updateq()
      {

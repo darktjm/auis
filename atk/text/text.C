@@ -71,7 +71,7 @@ static long HighBitStart = -1;
 static int DataStreamVersion = 0;
 
 
-ATKdefineRegistry(text, simpletext, NULL);
+ATKdefineRegistryNoInit(text, simpletext);
 static void AddObj(class text  *self, class dataobject  *obj);
 static void DelObj(class text  *self, class dataobject  *obj);
 #if 0

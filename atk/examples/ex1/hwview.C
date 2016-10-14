@@ -9,7 +9,7 @@ ATK_IMPL("hwview.H")
 #include "hwview.H"
 
 
-ATKdefineRegistry(helloworldview, view, NULL);
+ATKdefineRegistryNoInit(helloworldview, view);
 
 void helloworldview::FullUpdate(enum view::UpdateType  type, long  left, long  top, long  width, long  height)
                         {

@@ -15,7 +15,7 @@ ATK_IMPL("figoins.H")
 #include <message.H>
 #include <im.H>
 
-ATKdefineRegistry(figoins, figorect, NULL);
+ATKdefineRegistryNoInit(figoins, figorect);
 
 
 figoins::figoins()

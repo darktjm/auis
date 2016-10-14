@@ -11,7 +11,7 @@ ATK_IMPL("cltextview.H")
 #define INITIALNUMOBSERVERS 4
 
 
-ATKdefineRegistry(cltextview, textview, NULL);
+ATKdefineRegistryNoInit(cltextview, textview);
 static short FindObserverCallBack(class cltextview  * self, ATK   *observer, cltextview_hitfptr  callBack);
 static short FindObserver( class cltextview  * self, ATK   *observer );
 static short FreeSlot( class cltextview  * self );

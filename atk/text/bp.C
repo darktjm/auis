@@ -7,7 +7,7 @@
 ATK_IMPL("bp.H")
 #include <bp.H>
 
-ATKdefineRegistry(bp, dataobject, NULL);
+ATKdefineRegistryNoInit(bp, dataobject);
 #ifndef lint
 #endif /* lint */
 

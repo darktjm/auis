@@ -13,7 +13,7 @@
 #include <view.H>
 class helloworldview: public  view {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS(helloworldview);
 
 
   void SetDataObject(class dataobject *d);
@@ -28,7 +28,6 @@ public:
   void LinkTree(class view *parent);
   void ObservedChanged(class observable *obj, long val);
 
-  ~helloworldview();
   helloworldview();
 
   static boolean InitializeClass();

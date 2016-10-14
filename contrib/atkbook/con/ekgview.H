@@ -24,13 +24,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conview.H>
 class ekgview: public conview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(ekgview);
 
     
       
 	ekgview();
       
-	virtual ~ekgview();
     
        void DrawMyself(struct rectangle *r, boolean IsFullUpdate);
     

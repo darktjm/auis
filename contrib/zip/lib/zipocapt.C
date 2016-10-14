@@ -38,7 +38,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipocapt.H"
 
-ATKdefineRegistry(zipocapt, zipobject, NULL);
+ATKdefineRegistryNoInit(zipocapt, zipobject);
 
 static enum view::MouseAction Accept_Caption_Character( class zipocapt *self, zip_type_pane pane, char c, enum view::MouseAction action, long x, long y, long clicks );
 static long Draw( class zipocapt *self, zip_type_figure figure, zip_type_pane pane );

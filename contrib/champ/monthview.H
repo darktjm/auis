@@ -11,7 +11,7 @@
 #include <view.H>
 class monthview: public view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(monthview);
 
     
       
@@ -21,7 +21,6 @@ public:
       
 	monthview();
       
-	virtual ~monthview();
     
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
        void Update();

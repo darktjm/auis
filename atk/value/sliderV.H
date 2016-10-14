@@ -14,7 +14,7 @@
 class sliderV : public  valueview
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(sliderV);
 
  
    void DrawFromScratch(long x,long y,long width,long height);
@@ -36,7 +36,6 @@ public:
   
 	sliderV();
   
-	virtual ~sliderV(); 
 
   char * label;
   const char * fontname;

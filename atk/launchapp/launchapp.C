@@ -53,7 +53,7 @@ enum lpair_type {
 
    
  
-ATKdefineRegistry(launchapp, application, NULL);
+ATKdefineRegistryNoInit(launchapp, application);
 static class lpair *lpair_AddSplit(class lpair  *lp, class view  *v, enum lpair_side  side, enum lpair_dir  splitdir, enum lpair_type  splittype, 				    long  splitval, boolean  movable);
 static void ZombieHandler(int  pid, long  rock, int  *status);
 static void Do(const char  *name, class frame  *frame, long  index, const char  **args);

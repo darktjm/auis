@@ -23,7 +23,7 @@
 #include <textview.H>
 class typescript : public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(typescript);
 
 
      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
@@ -50,7 +50,6 @@ public:
 
     void CheckChild(void);
 
-	virtual ~typescript();
 
     class frame *frame;	/* First frame on the window (for setting the title) */
     class mark *cmdStart;	/* last place a new command was started */

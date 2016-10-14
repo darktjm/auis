@@ -11,7 +11,7 @@ ATK_IMPL("unknown.H")
 static char keywordbuf[32];
 
 
-ATKdefineRegistry(unknown, text, NULL);
+ATKdefineRegistryNoInit(unknown, text);
 
 const char *unknown::GetRealClass()
 {

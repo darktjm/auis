@@ -10,7 +10,7 @@
 #include "chimp.H"
 
 
-ATKdefineRegistry(chimp, chlist, NULL);
+ATKdefineRegistryNoInit(chimp, chlist);
 static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view::MouseAction  action, long  nclicks);
 static void WriteOutEvent(FILE  *fp, struct eventnode  *en);
 

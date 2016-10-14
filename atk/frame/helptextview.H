@@ -11,7 +11,7 @@
 
 class helptextview : public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(helptextview);
 
     
        void WantInputFocus( class view *requestor);
@@ -20,7 +20,6 @@ public:
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     
       
-	virtual ~helptextview();
       
 	helptextview();    
     

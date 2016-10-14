@@ -41,7 +41,7 @@ typedef boolean (*figure_eofptr)(class figobj *o, long ref, class figure *self, 
 
 class figure : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(figure);
 
 
     
@@ -51,7 +51,6 @@ public:
       
 	figure();
       
-	virtual ~figure();
     
        void SetAttributes(struct attributes *attributes);
        long Write(FILE *fp, long writeid, int level)  ;

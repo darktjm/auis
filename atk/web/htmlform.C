@@ -183,7 +183,7 @@ static void CBSubmissionFunc (AWidget *self,
             fprintf(stderr, "web: form submission failed with error: %s\n", err);
         }
 }
-static formCB CBSubmission(&CBSubmissionFunc, 0L);
+static traced_ptr<formCB> CBSubmission(new formCB(&CBSubmissionFunc, 0L));
 
 //CBReset
 static void CBResetFunc (AWidget *self, 
@@ -255,7 +255,7 @@ static void CBResetFunc (AWidget *self,
 	}
 
 }
-static formCB CBReset(&CBResetFunc, 0L);
+static traced_ptr<formCB> CBReset(new formCB(&CBResetFunc, 0L));
 
 //CBMapClick
 static void CBMapClickFunc (AWidget *self, 
@@ -289,7 +289,7 @@ static void CBMapClickFunc (AWidget *self,
         }
         
 }
-static formCB CBMapClick(&CBMapClickFunc, 0L);
+static traced_ptr<formCB> CBMapClick(new formCB(&CBMapClickFunc, 0L));
 
 
 //====================================
@@ -375,7 +375,7 @@ htmlform::AddInputNode(attlist *atts) {
 		attx = atts->GetAttribute("align");
 		if (attx) 
 			w->Set(slot_align, strdup(attx->value));
-		w->Set(slot_labelActivateCallback, &CBMapClick);
+		w->Set(slot_labelActivateCallback, CBMapClick);
 
 		// get URL - initiate fetch
 		attx = atts->GetAttribute("src");
@@ -426,7 +426,7 @@ htmlform::AddInputNode(attlist *atts) {
 		attx = atts->GetAttribute("value");
 		cval = (attx) ? attx->value : "Submit";
 		w->Set(slot_text, cval);
-		w->Set(slot_activateCallback, &CBSubmission);
+		w->Set(slot_activateCallback, CBSubmission);
 		break;
 
 	case htmlform_InReset:
@@ -434,7 +434,7 @@ htmlform::AddInputNode(attlist *atts) {
 		attx = atts->GetAttribute("value");
 		cval = (attx) ? attx->value : "Reset";
 		w->Set(slot_text, cval);
-		w->Set(slot_activateCallback, &CBReset);
+		w->Set(slot_activateCallback, CBReset);
 		break;
 
 	case htmlform_Select: // tjm - what to do?

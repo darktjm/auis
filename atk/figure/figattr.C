@@ -28,7 +28,7 @@ static char attribute_names[figattr_NumAttributes][20] = {
 
 
 
-ATKdefineRegistry(figattr, dataobject, NULL);
+ATKdefineRegistryNoInit(figattr, dataobject);
 
 static char *CopyString(const char  *str);
 

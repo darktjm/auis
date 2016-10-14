@@ -19,4 +19,4 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <andrewos.h>
 #include <dood.H>
 
-ATKdefineRegistry(dood, dataobject, NULL);
+ATKdefineRegistryNoInit(dood, dataobject);

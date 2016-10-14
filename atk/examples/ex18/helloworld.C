@@ -17,7 +17,7 @@ ATK_IMPL("helloworld.H")
 #include "style.H"
 
 
-ATKdefineRegistry(helloworld, dataobject, NULL);
+ATKdefineRegistryNoInit(helloworld, dataobject);
 
 
 static class dataobject *createInitialDobj()

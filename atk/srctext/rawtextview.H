@@ -10,13 +10,12 @@
 #include <textview.H>
 class rawtextview: public textview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(rawtextview);
 
     void ReceiveInputFocus();
 
     static boolean InitializeClass();
     rawtextview();
-    virtual ~rawtextview();
 
     class keystate *raw_state;
     class menulist *raw_menus;    

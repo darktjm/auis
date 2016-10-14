@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <clockob.H>
 class clocksec: public clockob {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clocksec);
 
     
       
 	clocksec();
       
-	virtual ~clocksec();
 };
 
 #endif /* _clocksec_H_ */

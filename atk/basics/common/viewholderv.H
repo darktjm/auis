@@ -23,8 +23,7 @@ class viewholderv: public view {
     /****************************************************************************/
     /*                         Constructors/Destructors                         */
     /****************************************************************************/
-    virtual ATKregistryEntry *ATKregistry();
-    virtual ~viewholderv();
+    TRACED_CLASS(viewholderv);
 
 
     /****************************************************************************/

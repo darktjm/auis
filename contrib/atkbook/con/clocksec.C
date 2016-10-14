@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <clocksec.H>
 
 
-ATKdefineRegistry(clocksec, clockob, NULL);
+ATKdefineRegistryNoInit(clocksec, clockob);
 
 
 clocksec::clocksec()

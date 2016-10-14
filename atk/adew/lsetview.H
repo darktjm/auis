@@ -21,7 +21,7 @@
 #include <lpair.H>
 class lsetview: public lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(lsetview);
 
 
      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
@@ -47,7 +47,6 @@ public:
     
 	lsetview();    
     
-	virtual ~lsetview();
 
 	int HasFocus;
 	class keystate *keystatep;

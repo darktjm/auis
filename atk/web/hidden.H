@@ -12,7 +12,7 @@ enum visibility { hidden_HIDDEN, hidden_EXPOSED, hidden_FULLSCREEN };
 #include <htmltext.H>
 class hidden : public htmltext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(hidden);
 
     const char *ViewName();
     inline boolean IsVisible() { return ((this)->Visibility != hidden_HIDDEN); }
@@ -20,7 +20,6 @@ class hidden : public htmltext {
     inline void SetVisibility(enum visibility v) { ((this)->Visibility = ((this)->Visibility == hidden_FULLSCREEN)?hidden_FULLSCREEN:v); }
 
     hidden();
-    virtual ~hidden();
     static boolean InitializeClass();
 
     enum visibility Visibility;

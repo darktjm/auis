@@ -17,7 +17,7 @@ struct content_chapentry {
 
 class content : public  text {
   public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(content);
 
 
       void ObservedChanged (class observable *changed, long value);
@@ -35,7 +35,6 @@ class content : public  text {
       static int StyleNameContentLevel(const char *stylename);
 
       content();
-      virtual ~content();
 
       struct content_chapentry *entry,*indexentry;
       class text *srctext;

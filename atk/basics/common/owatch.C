@@ -15,7 +15,7 @@ static class owatch *owo=NULL;
 #define owatch_WATCHESPERBLOCK (owatch_BLOCKSIZE/sizeof(struct owatch_data))
 
 
-ATKdefineRegistry(owatch, observable, NULL);
+ATKdefineRegistryNoInit(owatch, observable);
 
 void owatch::ObservedChanged(class observable  *changed, long  value  )
 {

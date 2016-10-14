@@ -54,16 +54,15 @@ class AText : public AWidget {
     ASlotString textViewClass;
 
     ATextStateFormula stateFormula;
-    ATextSlotAct sourceAct;
-    ATextSlotAct valueAct;
-    ATextSlotAct valueAssignAct;
+    traced_ptr<ATextSlotAct> sourceAct;
+    traced_ptr<ATextSlotAct> valueAct;
+    traced_ptr<ATextSlotAct> valueAssignAct;
     boolean observeTextChanges;
     boolean doingTextValue;
   public:    
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AText);
     AText();
     AText(const char *t);
-    virtual ~AText();
     void ObservedChanged(observable *changed, long change);
     inline void SetTextViewClass(const char *c) {
         textViewClass=c;

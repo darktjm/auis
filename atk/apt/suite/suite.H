@@ -357,7 +357,7 @@ struct suite_item {
 
 class suite : public  aptv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(suite);
 
 
     
@@ -368,7 +368,6 @@ public:
 	
 	suite();
 	
-	virtual ~suite();
 	static class suite * Create( const suite_Specification *suite_Spec,long anchor)  ;
 
     

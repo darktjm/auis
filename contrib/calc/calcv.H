@@ -87,7 +87,7 @@ struct calcv_area
 class calcv : public  aptv
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(calcv);
 
 
 
@@ -111,7 +111,6 @@ public:
   
 	calcv();
   
-	virtual ~calcv();
 
 
 

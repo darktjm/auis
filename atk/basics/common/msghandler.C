@@ -11,7 +11,7 @@ ATK_IMPL("msghandler.H")
 #include <msghandler.H>
 
 
-ATKdefineRegistry(msghandler, ATK, NULL);
+ATKdefineRegistryNoInit(msghandler, ATK);
 
 int msghandler::DisplayString(int  priority, const char  *string)
             {

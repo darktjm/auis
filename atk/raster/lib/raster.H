@@ -33,7 +33,7 @@
 #include <dataobject.H>
 class raster : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(raster);
 
 
 
@@ -73,7 +73,6 @@ public:
 	
 	raster();
 	
-	virtual ~raster();
 	static class raster * Create(/* struct classhdr *ClassID, */ long width, long height)
 			 ;
 		/* creates a raster object with a rasterimage having

@@ -64,7 +64,7 @@ struct chart_item_shadow
 class chartobj : public  aptv
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chartobj);
 
 
 
@@ -123,7 +123,6 @@ public:
   
 	chartobj();
   
-	virtual ~chartobj();
 
 
 

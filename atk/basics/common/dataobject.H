@@ -86,9 +86,8 @@
 
 class dataobject: public  observable {
 public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(dataobject);
     dataobject(); /**< Default constructor.  Do not create dataobject objects. */
-    virtual ~dataobject();
 
     /** Return codes from Read() */
     enum read_return {

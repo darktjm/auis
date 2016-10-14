@@ -19,7 +19,7 @@ ATK_IMPL("style.H")
 /* Convert any unit to unit style_RawDots */
 
 
-ATKdefineRegistry(style, ATK, NULL);
+ATKdefineRegistryNoInit(style, ATK);
 static long CVDots(long  amt, enum style_Unit  unit);
 static int style_freeattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
 static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );

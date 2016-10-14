@@ -24,7 +24,7 @@ zipotrap.H
 class zipotrap : public  zipobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipotrap);
 
    char Object_Icon();
    char Object_Icon_Cursor();

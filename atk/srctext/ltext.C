@@ -25,7 +25,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rig
 #define LOW(ch) (isupper(ch)?tolower(ch):(ch))
 #define new_c(type) (type *)malloc(sizeof(type))
 
-ATKdefineRegistry(ltext, srctext, NULL);
+ATKdefineRegistryNoInit(ltext, srctext);
 
 static void addindent(ltext *self, const char *name, int args)
 {

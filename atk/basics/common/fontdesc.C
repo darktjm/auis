@@ -13,7 +13,7 @@ ATK_IMPL("fontdesc.H")
 
 
 
-ATKdefineRegistry(fontdesc, ATK, NULL);
+ATKdefineRegistryNoInit(fontdesc, ATK);
 static class fontdesc *fontdesc_CreateUsingDescriptor(struct fontnamedesc  *FontName, long  FontStyle, long  FontSize);
 
 

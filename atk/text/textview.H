@@ -179,9 +179,8 @@ class aaction;
 
 class textview : public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(textview);
       textview();
-      virtual ~textview();
       static boolean InitializeClass();
 
       static long GetUniquePlanId();  /* supplies IDs for PS printing layouts. */  

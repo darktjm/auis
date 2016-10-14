@@ -93,14 +93,13 @@ enum sbutton_sizepolicy {
 
 class sbutton: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(sbutton);
 	
 	static boolean InitializeClass();
 
     
 	sbutton();
     
-	virtual ~sbutton();
     static class sbutton * CreateSButton(struct sbutton_prefs *prefs)  ;
     static class sbutton * CreateFilledSButton(struct sbutton_prefs *prefs, const struct sbutton_list *blist)  ;
     static struct sbutton_prefs * GetNewPrefs(const char *name)  ;

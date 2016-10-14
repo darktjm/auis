@@ -27,7 +27,7 @@ rasterview.H
 #include <view.H>
 class rasterview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(rasterview);
 
 
 
@@ -105,7 +105,6 @@ public:
 	
 	rasterview();
 	
-	virtual ~rasterview();
 
 
 

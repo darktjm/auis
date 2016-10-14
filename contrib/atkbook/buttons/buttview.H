@@ -24,7 +24,7 @@ typedef int (*buttview_hit_fptr)(void * rock1, void * rock2, class butt * self, 
 
 class buttview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(buttview);
 
     
        void FullUpdate(enum view::UpdateType type, long left, long top,
@@ -36,7 +36,6 @@ public:
       
 	buttview();
       
-	virtual ~buttview();
     
       virtual void SetHitFunction(buttview_hit_fptr HitFunction);
       virtual void SetRocks(void *r1, void *r2);

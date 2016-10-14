@@ -13,11 +13,10 @@
 
 class iddimage : public observable {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(iddimage);
 
     iddimage();
     iddimage(image *src, colormap **map=NULL);
-    virtual ~iddimage();
    
     virtual void ObservedChanged(observable *changed, long change);
     // When the source image changes outdated will be set to TRUE.

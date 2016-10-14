@@ -84,10 +84,9 @@ struct figattr_arrowhead {
 
 class figattr : public  dataobject  {
   public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(figattr);
 
       figattr();
-      virtual ~figattr();
 
       long Write(FILE *fp, long writeid, int level)  ;
       long Read(FILE *file, long id)  ;

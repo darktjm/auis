@@ -6,7 +6,7 @@
 #include <text.H>
 class gtext : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(gtext);
 
     
       
@@ -16,7 +16,6 @@ public:
       
 	gtext();
       
-	virtual ~gtext();
     
        const char * ViewName()  ;
 };

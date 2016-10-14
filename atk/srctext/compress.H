@@ -10,11 +10,10 @@
 #include <text.H>
 class compress: public text {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(compress);
     static boolean InitializeClass();
 
     compress();
-    virtual ~compress();
 
     static void Compress(text *txt,long pos,long len);
     static void DecompressAll(text *txt);

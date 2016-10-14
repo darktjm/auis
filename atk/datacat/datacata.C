@@ -32,7 +32,7 @@ static const char *progname;
 #define MAXIMUM_DEPTH (20)
 
 
-ATKdefineRegistry(datacata, application, NULL);
+ATKdefineRegistryNoInit(datacata, application);
 static void clean_insert(class datacata  *self, FILE  *fp);
 static void doinsert(class datacata  *self, long  size , long  endskip, long  depth);
 static void usage();

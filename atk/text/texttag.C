@@ -7,7 +7,7 @@
 ATK_IMPL("texttag.H")
 #include <texttag.H>
 
-ATKdefineRegistry(texttag, fnote, NULL);
+ATKdefineRegistryNoInit(texttag, fnote);
 
 const char * texttag::ViewName()
 {

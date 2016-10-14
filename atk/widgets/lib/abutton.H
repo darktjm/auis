@@ -36,10 +36,9 @@ class AButton : public AWidget {
     ASlotInt borderType;
   public:
     
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AButton);
     AButton();
     AButton(const char *t);
-    virtual ~AButton();
     inline void SetLabelData(dataobject *dobj) {
 	labelData=dobj;
     }

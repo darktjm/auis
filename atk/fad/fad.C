@@ -20,7 +20,7 @@ struct fad *fad__NewData()
 	}
 ***************** */
 
-ATKdefineRegistry(fad, dataobject, NULL);
+ATKdefineRegistryNoInit(fad, dataobject);
 static class fontdesc *my_DefineFont(const char  *fname);
 static struct fadvector *newvector(struct fadpoint  *p1,struct fadpoint  *p2);
 static boolean pointmatch(class fad  *self,struct fadpoint  *pt,long  x,long  y);

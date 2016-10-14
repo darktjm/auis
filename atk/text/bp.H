@@ -13,7 +13,7 @@
 
 class bp : public  dataobject  {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS_NODEST(bp);
       bp();
 
       const char * ViewName()  ;

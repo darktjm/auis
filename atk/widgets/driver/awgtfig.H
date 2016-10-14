@@ -6,10 +6,9 @@
 
 class AWgtFig : public AWidget {
   public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(AWgtFig);
 
 	AWgtFig();
-	virtual ~AWgtFig();
 
 	ASlotFigure initialImage;  // a figure to start from
 

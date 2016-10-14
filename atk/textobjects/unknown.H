@@ -6,7 +6,7 @@
 #include <text.H>
 class unknown : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(unknown);
 
     
       virtual const char * GetRealClass()  ;
@@ -19,7 +19,6 @@ public:
       
 	unknown();
     
-	virtual ~unknown();
     
       char *realclass;
     class text *odata;

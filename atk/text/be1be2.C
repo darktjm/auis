@@ -84,7 +84,7 @@ ATK_IMPL("be1be2.H")
  */
 
 
-ATKdefineRegistry(be1be2, ATK, NULL);
+ATKdefineRegistryNoInit(be1be2, ATK);
 static long CVDots(long  amt, enum style_Unit  unit);
 static boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
 

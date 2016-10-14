@@ -9,7 +9,7 @@
 
 
 
-ATKdefineRegistry(champ, ATK, NULL);
+ATKdefineRegistryNoInit(champ, ATK);
 
 int champ::ReadDatesFromChampPath(const char  *path)
 {

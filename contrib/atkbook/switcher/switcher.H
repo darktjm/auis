@@ -29,13 +29,12 @@ struct switchee {
 #include <dataobject.H>
 class switcher : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(switcher);
 
     
       
 	switcher();
       
-	virtual ~switcher();
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;

@@ -64,7 +64,7 @@ static boolean debug=TRUE;
 #define	 UserWidth		Printing->zip_printing_user_width
 #define	 UserHeight		Printing->zip_printing_user_height
 
-ATKdefineRegistry(zipprint, ATK, NULL);
+ATKdefineRegistryNoInit(zipprint, ATK);
 
 static long Print_Figure( class zipprint	        *self, zip_type_figure		 figure, zip_type_pane		 pane );
 static long Print_Image( class zipprint *self, zip_type_image image, zip_type_pane pane );

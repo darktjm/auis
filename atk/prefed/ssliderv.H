@@ -7,13 +7,12 @@
 #include <scroll.H>
 class ssliderv : public  scroll {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(ssliderv);
 
 
     
 	ssliderv();
     
-	virtual ~ssliderv();
 
     virtual long WhatIsAt(long num, long denom)  ;
     virtual void Endzone(int end, enum view::MouseAction act);

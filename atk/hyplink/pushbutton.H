@@ -56,7 +56,7 @@
 #include <dataobject.H>
 class pushbutton: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pushbutton);
 
   
     
@@ -65,7 +65,6 @@ public:
     
 	pushbutton();
     
-	virtual ~pushbutton();
   
      long Read (FILE *fp, long id)  ;
      long Write (FILE *fp, long id, int level)  ;

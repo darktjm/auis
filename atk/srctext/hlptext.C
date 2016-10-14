@@ -10,7 +10,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rig
 #include "dogtags.h"
 #include "hlptext.H"
 
-ATKdefineRegistry(hlptext, text, NULL);
+ATKdefineRegistryNoInit(hlptext, text);
 
 hlptext::hlptext()
 {

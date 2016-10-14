@@ -12,9 +12,8 @@
 class psview : public  iconview
 {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(psview);
     psview();
-    virtual ~psview();
     static boolean InitializeClass();
     static boolean atk_inited;
 

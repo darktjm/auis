@@ -65,7 +65,7 @@ static char tree_debug = 0;
 #define  TraversalOrder		(self->traversal_order)
 
 
-ATKdefineRegistry(tree, apt, NULL);
+ATKdefineRegistryNoInit(tree, apt);
 static tree_type_node Build_Node( class tree	      *self, const char	    	      *name, long		       datum );
 static char * Ancestry( class tree	      *self, tree_type_node      node, const char		      *separator , char		      *string );
 

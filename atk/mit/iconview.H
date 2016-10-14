@@ -11,7 +11,7 @@
 class iconview : public  view
 {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(iconview);
 
   
     void GetOrigin(long width, long height, long *originX, long *originY);
@@ -48,7 +48,6 @@ class iconview : public  view
     static boolean atk_inited;
 
 
-    virtual ~iconview();
     static void CloseRelated(class view *v);
     static void OpenRelated(class view *v);
 

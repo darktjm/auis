@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <graphic.H>
 
 
-ATKdefineRegistry(hwview, view, NULL);
+ATKdefineRegistryNoInit(hwview, view);
 
 
 void hwview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)

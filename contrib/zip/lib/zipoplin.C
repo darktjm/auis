@@ -33,7 +33,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipoplin.H"
 
-ATKdefineRegistry(zipoplin, zipopath, NULL);
+ATKdefineRegistryNoInit(zipoplin, zipopath);
 
 zipoplin::zipoplin( )
       {

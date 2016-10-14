@@ -15,7 +15,7 @@ class value;
 class text;
 class arbiterview: public  celview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(arbiterview);
 
 
      void ObservedChanged (class observable *changed, long value);
@@ -46,7 +46,6 @@ public:
 	static boolean InitializeClass();
 
     
-	virtual ~arbiterview();
     
 	arbiterview();
     static class dataobject * GetNamedObject(class view *vw,const char *ObjectName)  ;

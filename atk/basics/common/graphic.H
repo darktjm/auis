@@ -17,7 +17,7 @@
 class ddimage;
 class graphic : public  observable {
 public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(graphic);
 
     static const int PROGRAMMERVERSION = 7;
 
@@ -252,7 +252,6 @@ public:
     static void GetDefaultColors(const char **foreground, const char **background);
     static class graphic * CreateGraphic(class view *v)  ;
     
-	virtual ~graphic();
     
 	graphic();
     static void ComputeShadow(long  br , long  bg , long  bb, long  *rr , long  *rg , long  *rb, int  shadow);

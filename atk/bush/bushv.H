@@ -43,7 +43,7 @@ END-SPECIFICATION  ************************************************************/
 #include <tree.H>
 class bushv : public  aptv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bushv);
 
   
     
@@ -52,7 +52,6 @@ public:
     
 	bushv();
     
-	virtual ~bushv();
     static class bushv * Create( char object )  ;
   
      void FullUpdate( enum view::UpdateType Type, long left, long top, long width, long height )  ;

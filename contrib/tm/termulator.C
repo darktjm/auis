@@ -37,7 +37,7 @@ static const char spaces[]="                                                    
 #define SPACES ((int)sizeof(spaces)-1)
 
 
-ATKdefineRegistry(termulator, text, NULL);
+ATKdefineRegistryNoInit(termulator, text);
 static int fillChars(class termulator  *self,long  pos,long  num);
 static long fillLines(class termulator  *self,long  pos,int  width,int  height);
 static long stripEnds(class termulator  *self,long  num);

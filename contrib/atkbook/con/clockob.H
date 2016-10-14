@@ -33,7 +33,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conob.H>
 class clockob: public conob {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clockob);
 
     
       
@@ -42,7 +42,6 @@ public:
       
 	clockob();
       
-	virtual ~clockob();
     
       virtual void SetClockPart(int cp);
     

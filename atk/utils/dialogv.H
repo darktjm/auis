@@ -13,7 +13,7 @@
 
 class dialogv : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(dialogv);
 
 
     
@@ -22,7 +22,6 @@ public:
     
 	dialogv();
     
-	virtual ~dialogv();
 	struct HitRock {
 	    dialogv_choicefptr func;
 	    long rock;

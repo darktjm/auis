@@ -11,7 +11,7 @@
 
 class figoflow : public  figorect {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(figoflow);
     static boolean InitializeClass();
 
     figoflow();

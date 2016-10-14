@@ -24,7 +24,7 @@
 #include <dataobject.H>
 class cel: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(cel);
 
 
      void ObservedChanged (class observable *changed, long value);
@@ -41,7 +41,6 @@ public:
     
 	cel();
     
-	virtual ~cel();
 
     virtual boolean SetChildObject(class dataobject *newobject,const char *viewName)  ;
     virtual boolean SetObjectByName(const char *dataname)  ;

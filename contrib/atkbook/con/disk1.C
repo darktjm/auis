@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <getstats.h>
 
 
-ATKdefineRegistry(disk1, statsob, NULL);
+ATKdefineRegistryNoInit(disk1, statsob);
 
 
 disk1::disk1()

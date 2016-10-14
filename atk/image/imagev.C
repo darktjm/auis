@@ -652,7 +652,7 @@ image_Import( const char  *filename, enum image_fileType  type )
     objName = imageTypeName(type);
     if((image = (class image *) ATK::NewObject(objName))) {
 	if((image)->Load(filename, NULL) < 0) {
-	    delete image;
+	    image->Destroy();
 	    return NULL;
 	}
     }
@@ -1093,12 +1093,12 @@ imagev::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 			struct rectangle *visrect) {
 		// (is supposed to pay attention to input values of pmax*)
 	image *src = (image *)GetDataObject();	// get the image object
-	imageio out;
-	src->Duplicate(&out);			// Duplicate into a gif object
-	out.SetSaveFormatString("gif"); // <sigh> it *is* Gifify, after all
-	if (pmaxw) *pmaxw = out.Width();	// report size
-	if (pmaxh) *pmaxh = out.Height();
-	return (out.WriteNative(NULL, filename) == 0);	// success if 0
+	traced_ptr<imageio> out;
+	src->Duplicate(out);			// Duplicate into a gif object
+	out->SetSaveFormatString("gif"); // <sigh> it *is* Gifify, after all
+	if (pmaxw) *pmaxw = out->Width();	// report size
+	if (pmaxh) *pmaxh = out->Height();
+	return (out->WriteNative(NULL, filename) == 0);	// success if 0
 }
 
 

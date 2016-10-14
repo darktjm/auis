@@ -18,7 +18,7 @@ static long lastPos;
 static long ncrlength;
 
 
-ATKdefineRegistry(nestedmark, ATK, NULL);
+ATKdefineRegistryNoInit(nestedmark, ATK);
 static void DoFreeTree(class nestedmark  *self);
 static void FilterProc(class nestedmark  *self, struct filterstruct  *data, class tree23int  *t, class tree23int  *which  );
 static class nestedmark *splitOffRight(class nestedmark  *self,int  rpos);

@@ -13,7 +13,7 @@
 #include <thumbV.H>
 class thumbstrV : public  thumbV {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(thumbstrV);
 
  
    const char * GetValueString()  ;

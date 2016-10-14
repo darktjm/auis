@@ -47,7 +47,7 @@ struct colInformation {
 #include <view.H>
 class spread: public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(spread);
 
 
       void WantInputFocus(class view *requestor);
@@ -88,7 +88,6 @@ class spread: public  view {
 
       spread();	/* initialize instance */
 
-      virtual ~spread();	/* clean up instance */
       static boolean WantLimitedHighlighting()  ;
 
       virtual void ComputeSizes();

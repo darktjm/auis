@@ -16,7 +16,7 @@ struct indenter {
 #include "srctext.H"
 class ltext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(ltext);
 
     void SetAttributes(struct attributes *atts);
     int Indentation(long pos);

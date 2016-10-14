@@ -41,7 +41,7 @@ END-SPECIFICATION  ************************************************************/
 class chartpie : public  chartobj
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chartpie);
 
 
 
@@ -57,7 +57,6 @@ public:
   
 	chartpie();
   
-	virtual ~chartpie();
 
 
 

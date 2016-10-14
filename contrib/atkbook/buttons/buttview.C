@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(buttview, view, NULL);
+ATKdefineRegistryNoInit(buttview, view);
 
 
 buttview::buttview()

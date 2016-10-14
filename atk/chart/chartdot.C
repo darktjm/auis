@@ -83,7 +83,7 @@ static class fontdesc		*dot_font;
 #define  DotFont		(dot_font)
 
 
-ATKdefineRegistry(chartdot, chartobj, NULL);
+ATKdefineRegistryNoInit(chartdot, chartobj);
 
 chartdot::chartdot( )
       {

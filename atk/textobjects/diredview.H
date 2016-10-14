@@ -17,7 +17,7 @@
 #include <textview.H>
 class diredview: public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(diredview);
 
 
     
@@ -26,7 +26,6 @@ public:
     
 	diredview();
     
-	virtual ~diredview();
 
      void SetDataObject(class dataobject *object);
      class view * Hit(enum view::MouseAction action, long x, long y,

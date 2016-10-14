@@ -21,7 +21,7 @@ typedef boolean (*text_eefptr)(long rock, class text *self, long pos, class envi
 #include <simpletext.H>
 class text: public  simpletext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(text);
     
     void SetReadOnly(boolean ro);
     void SetAttributes(struct attributes *attributes);
@@ -80,7 +80,6 @@ class text: public  simpletext {
     inline void SetWriteStyle(enum textwritestyle style) { ((this)->writeStyle = style); }
     inline char  * GetBaseTemplateName() { return ((this)->templateName); }
     
-    virtual ~text();
     text();
 
     static void ApplyEnvironment(struct text_statevector *sv,

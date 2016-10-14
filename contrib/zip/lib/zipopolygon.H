@@ -23,7 +23,7 @@ zipopolygon.H
 class zipopolygon : public  zipocirc
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipopolygon);
 
 
 

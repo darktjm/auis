@@ -19,13 +19,12 @@ enum palette_itemtype {palette_ICON = 0, palette_VIEW = 1, palette_STRING = 2};
 
 class palette: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(palette);
     
     static class palette * Create(class view *child, enum palette_location loc)  ;
     
 	palette();
     
-	virtual ~palette();
 
     static void DestroyItem(struct palette_item *item);
     static void SelectItem(struct palette_item *item);

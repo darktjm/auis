@@ -42,7 +42,7 @@ ATK_IMPL("toksym.H")
 
 
 	
-ATKdefineRegistry(toksym, sym, NULL);
+ATKdefineRegistryNoInit(toksym, sym);
 #if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
 #endif
 

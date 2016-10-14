@@ -14,7 +14,7 @@
 #include <environ.H>
 
 
-ATKdefineRegistry(tmapp, application, NULL);
+ATKdefineRegistryNoInit(tmapp, application);
 
 tmapp::tmapp()
 {

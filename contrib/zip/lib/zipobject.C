@@ -39,7 +39,7 @@ END-SPECIFICATION  ************************************************************/
 
 static boolean debug=TRUE;
 
-ATKdefineRegistry(zipobject, view, NULL);
+ATKdefineRegistryNoInit(zipobject, view);
 
 zipobject::zipobject( )
       {

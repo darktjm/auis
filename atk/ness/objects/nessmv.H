@@ -11,7 +11,7 @@
 #include <nessview.H>
 class nessmv : public  nessview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(nessmv);
 
 	void PostMenus (class menulist *menulist);
 
@@ -19,7 +19,6 @@ public:
 	static boolean atk_inited;
 
 	nessmv();
-	virtual ~nessmv();
 
 	class menulist *ml;
 };

@@ -8,7 +8,7 @@ ATK_IMPL("chlist.H")
 #include <chlist.H>
 
 
-ATKdefineRegistry(chlist, text, NULL);
+ATKdefineRegistryNoInit(chlist, text);
 static void Clear(class chlist  *self);
 
 

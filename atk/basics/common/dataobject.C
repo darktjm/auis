@@ -13,7 +13,7 @@ ATK_IMPL("dataobject.H")
 /* some code assumes this is larger than your average number */
 static long unique = 1234;
 
-ATKdefineRegistry(dataobject, observable, NULL);
+ATKdefineRegistryNoInit(dataobject, observable);
 
 dataobject::dataobject()
         {

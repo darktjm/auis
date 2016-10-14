@@ -14,7 +14,7 @@
 #include <dataobject.H>
 class lset : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(lset);
 
 
      long Read (FILE *file, long id)  ;

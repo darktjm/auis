@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(butt, dataobject, NULL);
+ATKdefineRegistryNoInit(butt, dataobject);
 
 
 butt::butt()

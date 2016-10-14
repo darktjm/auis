@@ -16,7 +16,7 @@
 #include <view.H>
 class boxview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(boxview);
 
 
 
@@ -43,7 +43,6 @@ public:
   
 	boxview();
   
-	virtual ~boxview();
 
 
 	boolean	updateNeeded;		    /* the box itself needs to be updated */

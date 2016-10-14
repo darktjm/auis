@@ -21,7 +21,7 @@ ATK_IMPL("stringtbl.H")
 
 
 	
-ATKdefineRegistry(stringtbl, dataobject, NULL);
+ATKdefineRegistryNoInit(stringtbl, dataobject);
 static short FindString(class stringtbl  *self, const char  *s, int startIndex);
 static void SetIthBit(class stringtbl  *self, short  i, boolean  val);
 static short  FindEntry(class stringtbl  *self, short  accnum);

@@ -7,13 +7,12 @@
 #include <textview.H>
 class titextv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(titextv);
 
 
     
 	titextv();
     
-	virtual ~titextv();
 
      void Update();
 

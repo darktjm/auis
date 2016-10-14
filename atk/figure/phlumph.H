@@ -15,10 +15,9 @@
 
 class phlumph : public dataobject {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(phlumph);
 
     phlumph();
-    virtual ~phlumph();
 
     const char *ViewName();
     long Write(FILE *fp, long writeid, int level);

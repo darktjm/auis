@@ -81,7 +81,7 @@ ATK_IMPL("apts.H")
 \******************************************************************************/
 
 
-ATKdefineRegistry(apts, ATK, NULL);
+ATKdefineRegistryNoInit(apts, ATK);
 
 
 long

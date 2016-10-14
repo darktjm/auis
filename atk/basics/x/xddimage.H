@@ -22,11 +22,10 @@ class WorkProc;
 DEFINE_MFLEX_CLASS(xcolors,xcolor *, 10);
 class xddimage : public iddimage {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(xddimage);
 
     xddimage();
     xddimage(image *src, colormap **map=NULL);
-    virtual ~xddimage();
    
     virtual void ObservedChanged(observable *changed, long change);
     // When the source image changes outdated will be set to TRUE.

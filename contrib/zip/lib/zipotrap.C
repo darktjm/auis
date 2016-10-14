@@ -51,7 +51,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipotrap.H"
 
 
-ATKdefineRegistry(zipotrap, zipobject, NULL);
+ATKdefineRegistryNoInit(zipotrap, zipobject);
 
 static long Draw( class zipotrap *self, zip_type_figure figure, zip_type_pane pane );
 static void Compute_Handle_Positions( class zipotrap		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *X4 , zip_type_pixel		  *X5 , zip_type_pixel		  *X6 , zip_type_pixel		  *X7 , zip_type_pixel		  *X8 , zip_type_pixel		  *X9, zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3 );

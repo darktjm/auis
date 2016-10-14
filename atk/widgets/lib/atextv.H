@@ -97,9 +97,8 @@ class ATextv : public AWidgetView {
     DECLARE_AACTION_METHOD(KeyStateMethod);
     DECLARE_AACTION_METHOD(WantKeyStateMethod);
     
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(ATextv);
     ATextv();
-    ~ATextv();
     static void Init();
 
     void FullUpdate(enum view::UpdateType type, 

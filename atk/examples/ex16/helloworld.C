@@ -12,7 +12,7 @@ ATK_IMPL("helloworld.H")
 #include "helloworld.H"
 
 
-ATKdefineRegistry(helloworld, dataobject, NULL);
+ATKdefineRegistryNoInit(helloworld, dataobject);
 
 helloworld::helloworld()
 {

@@ -9,7 +9,7 @@ ATK_IMPL("prefsbv.H")
 #include <view.H>
 
 
-ATKdefineRegistry(prefsbv, sbuttonv, NULL);
+ATKdefineRegistryNoInit(prefsbv, sbuttonv);
 
 prefsbv::prefsbv()
 {

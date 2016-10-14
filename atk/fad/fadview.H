@@ -11,7 +11,7 @@
 #include <view.H>
 class fadview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fadview);
 
 
 	 view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
@@ -35,7 +35,6 @@ public:
 
 	fadview();
 
-	virtual ~fadview();
 
 	static boolean InitializeClass();
 

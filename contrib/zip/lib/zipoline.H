@@ -25,7 +25,7 @@ zipoline.ch
 class zipoline : public  zipobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipoline);
 
 
 

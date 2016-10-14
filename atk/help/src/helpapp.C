@@ -98,7 +98,7 @@ NO_DLL_EXPORT class help *helpobj;		/* global help object for ncproc use */
  * usage statement
  */
 
-ATKdefineRegistry(helpapp, application, NULL);
+ATKdefineRegistryNoInit(helpapp, application);
 
 static void  show_usage(class helpapp  *self);
 static void AddPath(const char  *astr);

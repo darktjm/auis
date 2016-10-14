@@ -358,7 +358,7 @@ static long treev_fgr, treev_fgg, treev_fgb;
 static long treev_bgr, treev_bgg, treev_bgb;
 
 
-ATKdefineRegistry(treev, aptv, NULL);
+ATKdefineRegistryNoInit(treev, aptv);
 static void treev_FlipColors(class treev  *self);
 static void treev_RestoreColors(class treev  *self);
 static void SetTreeAttribute( class treev	      *self, long		       attribute , long		       value );

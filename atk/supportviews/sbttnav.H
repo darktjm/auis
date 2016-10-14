@@ -18,7 +18,7 @@ struct groups {
 
 class sbttnav : public  sbuttonv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(sbttnav);
 
 
      boolean Touch(int ind, enum view::MouseAction action)  ;
@@ -30,7 +30,6 @@ public:
     
 	sbttnav();
     
-	virtual ~sbttnav();
 
     class menulist *ml;
     struct groups *groups;

@@ -15,7 +15,7 @@ ATK_IMPL("environment.H")
 #define NUMPERBLOCK DESIREDBLOCKSIZE / sizeof(class environment)
 #define BLOCKSIZE NUMPERBLOCK * sizeof(class environment)
 
-ATKdefineRegistry(environment, nestedmark, NULL);
+ATKdefineRegistryNoInit(environment, nestedmark);
 static long AlterEnvironmentSize(class environment  *self, struct removestruct  *data);
 /* static void environment__Dump(class environment  *self, int  level); */
 

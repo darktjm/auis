@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <dataobject.H>
 class conob: public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(conob);
 
     
       
 	conob();
       
-	virtual ~conob();
     
        long Read(FILE *fp, long id)  ;
        long Write(FILE *fp, long writeID, int level)  ;

@@ -35,7 +35,7 @@ ATK_IMPL("bpair.H")
 	code for movable borders, and the calls on DesiredSize   */
 
 
-ATKdefineRegistry(bpair, lpair, NULL);
+ATKdefineRegistryNoInit(bpair, lpair);
 static void lpair_ComputeSizes (class lpair  *l);
 static void lpair_ResetDimensions(class lpair  *self);
 

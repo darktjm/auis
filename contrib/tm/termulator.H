@@ -39,7 +39,7 @@ typedef char *(*termulator_escfptr)(class termulator *self, char *buf, long len)
 typedef char *(*termulator_statefptr)(class termulator *self, char *buf, long len);
 class termulator: public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(termulator);
 
     
          void Clear();
@@ -82,7 +82,6 @@ public:
 	
 	termulator();
         
-	virtual ~termulator();
     
 	inline int   GetX() { return (this->x); }
 	inline int   GetY() { return (this->y); }

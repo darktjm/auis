@@ -11,10 +11,9 @@
 
 class bpv: public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(bpv);
       static boolean InitializeClass();
       bpv();
-      virtual ~bpv();
 
       void SetDataObject(class dataobject *dataobject);
       void ObservedChanged (class observable *changed, long value);

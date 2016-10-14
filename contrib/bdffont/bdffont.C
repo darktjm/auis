@@ -23,7 +23,7 @@ NO_DLL_EXPORT struct bdffont_fontchar bdffont_ReadCharDefn;
 #define bdfprop_INT_LEN (10)
 /* include parser tables and actions */
 
-ATKdefineRegistry(bdffont, dataobject, NULL);
+ATKdefineRegistryNoInit(bdffont, dataobject);
 static unsigned char  bdflex_ComposeByte(char  c1 , char  c2);
 static void bdffont_EnsureDefns(class bdffont  *self, long  num);
 static void WriteCharacter(FILE  *file, struct bdffont_fontchar  *defn);

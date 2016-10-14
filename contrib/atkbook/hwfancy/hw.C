@@ -20,5 +20,5 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <hw.H>
 
 
-ATKdefineRegistry(hw, dataobject, NULL);
+ATKdefineRegistryNoInit(hw, dataobject);
 

@@ -10,7 +10,7 @@
 #include <textview.H>
 class logview : public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(logview);
 
 
      void LoseInputFocus();
@@ -21,7 +21,6 @@ public:
 	
 	static boolean InitializeClass();
 	
-	virtual ~logview();
 
     class menulist *menu;
 };

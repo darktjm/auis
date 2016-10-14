@@ -18,7 +18,7 @@ ATK_IMPL("message.H")
 
 
 
-ATKdefineRegistry(message, ATK, NULL);
+ATKdefineRegistryNoInit(message, ATK);
 
 int message::DisplayString(class view  *view, int  priority, const char  *string)
                 {

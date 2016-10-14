@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conob.H>
 class trouble: public conob {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(trouble);
 
     
       
@@ -30,7 +30,6 @@ public:
       
 	trouble();
       
-	virtual ~trouble();
     
        void ObservedChanged(class contimer *ct, long code);
        void GetStringToDisplay(char *Buf, int len, boolean IsClick);

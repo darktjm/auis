@@ -11,7 +11,7 @@
 #include <dataobject.H>
 class enode: public dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(enode);
 	enode();
 
     

@@ -45,7 +45,7 @@ struct triggerclass {
 static struct triggerclass *Triggers = NULL;	/* the list of defined triggers */
 
 
-ATKdefineRegistry(observable, traced, NULL);
+ATKdefineRegistryNoInit(observable, traced);
 
 
 observable::observable()

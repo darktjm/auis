@@ -18,7 +18,7 @@
 
 class panner : public  scroll {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(panner);
 
 
     
@@ -29,7 +29,6 @@ public:
       
 	panner();
       
-	virtual ~panner();
 
     
        void SetLocation(int location);

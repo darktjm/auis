@@ -128,7 +128,7 @@ struct cell {
 #include <dataobject.H>
 class table: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(table);
 
 
   void SetAttributes(struct attributes *attributes);
@@ -190,7 +190,6 @@ public:
   
 	table();	/* initialize contents */
   
-	virtual ~table();	/* clean up contents */
 
 
     char *tablename;			/* tag for write routine */

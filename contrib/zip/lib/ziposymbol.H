@@ -48,13 +48,12 @@ struct symbol_set
 class ziposymbol : public  ziporect
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(ziposymbol);
 
 
   
 	ziposymbol();
   
-	virtual ~ziposymbol();
 
 
    char Object_Icon();

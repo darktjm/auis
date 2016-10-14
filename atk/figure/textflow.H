@@ -10,10 +10,9 @@
 
 class textflow : public figure {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(textflow);
 
       textflow();
-      virtual ~textflow();
 
       virtual const char *ViewName();
 };

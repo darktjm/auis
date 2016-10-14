@@ -29,7 +29,7 @@
 
 class lpair: public view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(lpair);
 
 
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
@@ -68,7 +68,6 @@ class lpair: public view {
 
        lpair();
 
-       virtual ~lpair();
 
 
        class cursor *cursor; /* The "correct" cursor for this lpair. */

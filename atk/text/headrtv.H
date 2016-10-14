@@ -10,7 +10,7 @@
 #include <view.H>
 class headrtv: public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS_NODEST(headrtv);
       headrtv();
       static boolean InitializeClass();
       static boolean atk_inited;

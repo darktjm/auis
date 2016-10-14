@@ -24,7 +24,7 @@ ATK_IMPL("chartx1app.H")
 #define  Im		    (self->imp)
 
 
-ATKdefineRegistry(chartx1app, application, NULL);
+ATKdefineRegistryNoInit(chartx1app, application);
 static int Query( const char			      *topic );
 
 

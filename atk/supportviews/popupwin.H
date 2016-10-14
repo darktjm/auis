@@ -8,9 +8,8 @@
 
 class popupwin : public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(popupwin);
     popupwin();
-    ~popupwin();
     view *Hit(view::MouseAction act, long x, long y, long numclicks);
     
     static popupwin *Create(im *original, view *popup);

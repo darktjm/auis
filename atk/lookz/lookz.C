@@ -17,7 +17,7 @@ ATK_IMPL("lookz.H")
 #define MAXFILELINE 255
 
 	
-ATKdefineRegistry(lookz, dataobject, NULL);
+ATKdefineRegistryNoInit(lookz, dataobject);
 
 lookz::lookz()
 		{

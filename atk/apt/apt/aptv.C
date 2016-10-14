@@ -247,7 +247,7 @@ struct  aptv_print_stream
 
 
 
-ATKdefineRegistry(aptv, view, NULL);
+ATKdefineRegistryNoInit(aptv, view);
 static class aptv * Parent_AptView( class aptv	       *self );
 static void Print_Area( class aptv	      *self, long		       enclosure , long		       area );
 static void Size_Enclosures( class aptv	      *self );

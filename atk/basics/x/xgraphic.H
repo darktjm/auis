@@ -36,7 +36,7 @@ class ddimage;
 
 class xgraphic : public  graphic {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(xgraphic);
 
 
     virtual void DrawLineTo(long XEnd, long YEnd);
@@ -133,7 +133,6 @@ public:
     static void SetUpdateRegion(Region Rgn,Display* whichDisplay, Drawable whichWindow);
     static void FinalizeWindow(Display *whichDisplay, Drawable whichWindow);
     
-	virtual ~xgraphic();
     
 	xgraphic();
     

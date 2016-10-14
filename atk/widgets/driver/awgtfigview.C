@@ -201,9 +201,10 @@ void AWgtFigView::FullUpdate(enum view::UpdateType   type,
 				viewer->ToFigX(rectangle_Left(&inner)),
 				viewer->ToFigY(rectangle_Top(&inner)),
 				viewer->ToFigW(rectangle_Width(&inner)),
-				viewer->ToFigH(rectangle_Height(&inner)));			figattr fatr;
-			fatr.SetColor("#b200c6");
-			fobj->UpdateVAttributes(&fatr, 
+				viewer->ToFigH(rectangle_Height(&inner)));
+			traced_ptr<figattr> fatr;
+			fatr->SetColor("#b200c6");
+			fobj->UpdateVAttributes(fatr, 
 					(long) (1<<figattr_Color) );
 			currfig->AlwaysInsertObject(fobj, 
 					currfig->RootObjRef(), // put in outer group

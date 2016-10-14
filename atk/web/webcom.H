@@ -55,11 +55,10 @@ typedef void  (*webcom_cbptr)(void *, webcom *, int);
 #include <observable.H>
 class webcom: public observable{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(webcom);
 
 	static boolean InitializeClass();
 	webcom();
-	virtual ~webcom();
 
 	static class webcom *CreateFromStream(FILE *f) ;
 	static class webcom *Create(const char *url, class webcom *parent, 

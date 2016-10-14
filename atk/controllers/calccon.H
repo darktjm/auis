@@ -13,14 +13,13 @@
 #include <observable.H>
 class calccon : public  observable  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(calccon);
  
 
         
 	static boolean InitializeClass();
 
 	
-	virtual ~calccon();
 	
 	calccon();
 /* user code begins here for classprocedures */

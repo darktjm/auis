@@ -25,7 +25,7 @@ zipofcapt.H
 class zipofcapt : public  zipocapt
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipofcapt);
 
 
 

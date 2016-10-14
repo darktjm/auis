@@ -11,9 +11,8 @@
 
 class fnotev: public  view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(fnotev);
     fnotev();
-    virtual ~fnotev();
 
     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
     void Update();

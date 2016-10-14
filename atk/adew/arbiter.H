@@ -13,7 +13,7 @@
 #include <cel.H>
 class arbiter : public  cel {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(arbiter);
 
 
 	inline class cel * GetFirst() { return ((this)->first); }

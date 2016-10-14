@@ -7,13 +7,12 @@
 #include <wrapv.H>
 class textintv : public  wrapv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(textintv);
 
 
     
 	textintv();
     
-	virtual ~textintv();
 
     inline class textview *GetTextView() { return ((class textview *)((class wrapv *)this)->tv); }
     inline class text *GetText() { return ((class text *)((class wrapv *)this)->t); }

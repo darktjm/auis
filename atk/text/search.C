@@ -50,7 +50,7 @@ static const unsigned char searchFoldTRT[256] = {
 
 
 
-ATKdefineRegistry(search, ATK, NULL);
+ATKdefineRegistryNoInit(search, ATK);
 static unsigned char * SkipOp (unsigned char *s );
 static long TryMatch (class simpletext  *d, long  pos, unsigned char **s , int loop);
 static long TryMatchStr (unsigned char *str, long  pos, long length, unsigned char **s , int loop);

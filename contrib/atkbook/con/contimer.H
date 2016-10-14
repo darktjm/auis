@@ -25,13 +25,12 @@ typedef void (*collection_fptr)(class contimer *);
 
 class contimer: public  observable  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(contimer);
 
     
       
 	contimer();
       
-	virtual ~contimer();
     
       virtual void SetInterval(int ms);
       virtual void SetDataCollectionProc(collection_fptr proc);

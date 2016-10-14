@@ -56,7 +56,7 @@ static unsigned char unhex[8][17] = {
 	and a newline at the end of the bytes for the row.
 */
 	
-ATKdefineRegistry(heximage, ATK, NULL);
+ATKdefineRegistryNoInit(heximage, ATK);
 
 
 void

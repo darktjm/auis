@@ -24,13 +24,12 @@ directory, and re-read it only if necessary.
 
 class path : public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(path);
 
   
     
 	path();
     
-	virtual ~path();
     static class path * Create(char *filepath)  ;
     static char * TruncatePath(char *filepath, char *resultPath, long limit, boolean tryHome)  ;
     static void FreeTruncatedPaths();

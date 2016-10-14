@@ -31,7 +31,7 @@ ATK_IMPL("xwdio.H")
 /* tiny turds in your white zones. */
 
 
-ATKdefineRegistry(xwdio, ATK, NULL);
+ATKdefineRegistryNoInit(xwdio, ATK);
 static void reverse_video(unsigned char *location , unsigned char *output, long  nbytes);
 static void _swapshort (char  *bp, unsigned  n);
 static void _swaplong (char  *bp, unsigned  n);

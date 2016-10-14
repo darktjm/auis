@@ -31,7 +31,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipopath.H"
 
-ATKdefineRegistry(zipopath, zipobject, NULL);
+ATKdefineRegistryNoInit(zipopath, zipobject);
 
 static long Draw( class zipopath		  *self, zip_type_figure		   figure, zip_type_pane		   pane, short			   action );
 static long signum(long  a);

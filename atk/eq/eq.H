@@ -36,7 +36,7 @@ typedef void (*eq_enumfptr)(const char *alias, const char *orig, void *rock);
 #include <dataobject.H>
 class eq : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(eq);
 
 
      long Read(FILE *file, long id)  ;
@@ -74,7 +74,6 @@ public:
 
     eq();
 
-    virtual ~eq();
     static const struct symbol * Lookup(const char *name)  ;
     static void EnumerateSymbols(eq_enumfptr proc, void *rock);
     static boolean InitializeClass();

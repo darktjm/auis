@@ -10,7 +10,7 @@
 #include "cpptext.H"
 class idltext: public cpptext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(idltext);
 
     static boolean InitializeClass();
     idltext();

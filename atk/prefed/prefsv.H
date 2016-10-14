@@ -7,7 +7,7 @@
 #include <textview.H>
 class prefsv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(prefsv);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	prefsv();
     
-	virtual ~prefsv();
 
 
      void PostMenus(class menulist *ml);

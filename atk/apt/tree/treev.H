@@ -142,7 +142,7 @@ typedef void (*treev_updatefptr)(class treev *self);
 class treev : public  aptv
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(treev);
 
 
 
@@ -195,7 +195,6 @@ public:
   
 	treev();
   
-	virtual ~treev();
 
 
 

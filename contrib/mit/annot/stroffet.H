@@ -10,7 +10,7 @@
 #include <icon.H>
 class stroffet : public  icon {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(stroffet);
 
  
     void SetChild(class dataobject * child);

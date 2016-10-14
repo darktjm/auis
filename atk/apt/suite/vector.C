@@ -54,7 +54,7 @@ ATK_IMPL("vector.H")
 #define DataSpaceAvailable	(DataSize > DataUsed)
 
 
-ATKdefineRegistry(vector, ATK, NULL);
+ATKdefineRegistryNoInit(vector, ATK);
 static void ReallocData( class vector    *self );
 
 

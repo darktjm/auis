@@ -14,7 +14,7 @@ struct comment {
 #include <chlist.H>
 class chimp: public  chlist {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(chimp);
 	chimp();
 
     

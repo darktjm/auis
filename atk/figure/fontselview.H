@@ -11,7 +11,7 @@
 
 class fontselview  : public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fontselview);
 
 
     
@@ -21,7 +21,6 @@ public:
       
 	fontselview();
       
-	virtual ~fontselview();
 
     
        void ObservedChanged(class observable *fontsel, long status);

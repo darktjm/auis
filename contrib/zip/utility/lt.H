@@ -29,7 +29,7 @@ END-SPECIFICATION  ************************************************************/
 #include <dataobject.H>
 class lt : public  dataobject  {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS_NODEST(lt);
   virtual void Set_Debug( boolean debug );
   virtual long Read_Visuals( char *foreground, char *background );
  

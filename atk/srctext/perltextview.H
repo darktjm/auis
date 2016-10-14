@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class perltextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(perltextview);
 
     void HandleEndOfLineStyle(long pos);
     void Paren(char key);
@@ -19,7 +19,6 @@ class perltextview: public srctextview {
 
     static boolean InitializeClass();
     perltextview();
-    virtual ~perltextview();
 
     class keystate *perl_state;
     class menulist *perl_menus;

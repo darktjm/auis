@@ -18,7 +18,7 @@ ATK_IMPL("enterstrV.H")
 
 
 
-ATKdefineRegistry(enterstrV, buttonV, NULL);
+ATKdefineRegistryNoInit(enterstrV, buttonV);
 
 class valueview *enterstrV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
                {

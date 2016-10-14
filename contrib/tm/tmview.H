@@ -10,7 +10,7 @@
 #include <textview.H>
 class tmview: public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(tmview);
 
     
 	 void SetDataObject(class dataobject *d);
@@ -34,7 +34,6 @@ public:
         
 	tmview();
 	
-	virtual ~tmview();
     
         int screen;
         class keystate *keystate;

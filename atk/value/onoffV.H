@@ -14,7 +14,7 @@
 class onoffV : public  buttonV
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(onoffV);
 
  
    void LookupParameters();

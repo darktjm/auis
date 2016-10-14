@@ -9,13 +9,12 @@
 #include <textview.H>
 class chlistview: public textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chlistview);
 
     
       
 	chlistview();
       
-	virtual ~chlistview();
     
        class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
        class environment * GetStyleInformation(struct text_statevector *sv, long pos, long *length)  ;

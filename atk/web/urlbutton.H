@@ -14,9 +14,8 @@
 
 class urlbutton : public sbutton {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(urlbutton);
     urlbutton();
-    virtual ~urlbutton();
     static boolean InitializeClass();
 
     // overrides

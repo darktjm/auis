@@ -19,7 +19,7 @@ struct p_option {
 #include <textview.H>
 class printopts  : public  textview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(printopts);
 
     class view * Hit(enum view::MouseAction action, long x, long y, long n);
     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *desiredWidth, long *desiredHeight);
@@ -34,7 +34,6 @@ class printopts  : public  textview {
 
     printopts();
 
-    virtual ~printopts();
 
 
     class menulist *menus;

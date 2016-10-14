@@ -29,7 +29,7 @@ ATK_IMPL("plusspace.H")
 static FILE *f;	/* to avoid passing 'file' to all PutXxxx functions */
 
 	
-ATKdefineRegistry(plusspace, ATK, NULL);
+ATKdefineRegistryNoInit(plusspace, ATK);
 static void PutNibblePair(unsigned char byte);
 static void PutSame(unsigned char byte, long  count);
 static void PutDiffer(unsigned char *start, long  length);

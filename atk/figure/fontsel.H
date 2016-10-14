@@ -21,7 +21,7 @@
 
 class fontsel : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fontsel);
 
 
     
@@ -31,7 +31,6 @@ public:
       
 	fontsel();
       
-	virtual ~fontsel();
 
     
       virtual void SetStyle(long mask);

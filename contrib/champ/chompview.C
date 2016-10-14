@@ -16,7 +16,7 @@
 
 
 
-ATKdefineRegistry(chompview, view, NULL);
+ATKdefineRegistryNoInit(chompview, view);
 
 
 chompview::chompview()

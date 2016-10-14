@@ -136,9 +136,8 @@ DEFINE_MFLEX_CLASS(ddcolors,ddcolor *, 10);
 // called first.
 class colormap : public observable {
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(colormap);
     colormap();
-    virtual ~colormap();
     void Flush();
     virtual ddcolor *Allocate(const color *c); 
     virtual ddcolor *Allocate(const char *name, unsigned short r, unsigned short g, unsigned short b);

@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <textview.H>
 
 
-ATKdefineRegistry(hwapp, application, NULL);
+ATKdefineRegistryNoInit(hwapp, application);
 
 
 hwapp::hwapp()

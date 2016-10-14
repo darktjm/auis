@@ -19,7 +19,7 @@ ATK_IMPL("typetext.H")
 #include <stylesheet.H>
 
 
-ATKdefineRegistry(typetext, text, NULL);
+ATKdefineRegistryNoInit(typetext, text);
 
 long typetext::HandleKeyWord(long  pos, char  *keyword, FILE  *file  )
 {

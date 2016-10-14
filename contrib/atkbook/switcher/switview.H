@@ -27,7 +27,7 @@ struct switcheroo {
 #include <view.H>
 class switview: public view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(switview);
 
     
       
@@ -36,7 +36,6 @@ public:
       
 	switview();
       
-	virtual ~switview();
     
        void FullUpdate(enum view::UpdateType type, long left,
 		  long top, long width, long height);

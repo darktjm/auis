@@ -78,7 +78,7 @@ ATK_IMPL("chart.H")
 static boolean chart_debug = 0;
 
 
-ATKdefineRegistry(chart, apt, NULL);
+ATKdefineRegistryNoInit(chart, apt);
 static long SetChartAttribute( class chart		    *self, long			     attribute , long			     value );
 static long SetItemAttribute( class chart       *self, struct chart_item  *item, long		       attribute , long		       value );
 static char * Extract_Field_Value( class chart		      *self, const char			     **fields, const char			      *name );

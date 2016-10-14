@@ -984,7 +984,7 @@ DummyFunction(ATK *, const avalueflex &,
 	out.add("ASlot::DummyFunction called.");
 }
 
-static ASlotFunctionAct dummy(DummyFunction, 0L);
+static traced_ptr<ASlotFunctionAct> dummy(new ASlotFunctionAct(DummyFunction, 0L));
 
 // Dispatch is used as the aaction for 
 //	old proctable values that are not aactions
@@ -1000,22 +1000,22 @@ Dispatch(ATK *obj, const avalueflex &a,
 }
 
 ASlotFunction::ASlotFunction()  { 
-	val.obj = (void *) &dummy;
+	val.obj = (void *) dummy;
 	pe = NULL; 
 }
 ASlotFunction::ASlotFunction(const atom *n)  { 
 	SetName(n);  
-	val.obj = (void *) &dummy;
+	val.obj = (void *) dummy;
 	pe = NULL; 
 }
 ASlotFunction::ASlotFunction(aaction *s) { 
-	val.obj = (void *) &dummy;
+	val.obj = (void *) dummy;
 	pe = NULL; 
 	*this=s; 
 }
 ASlotFunction::ASlotFunction(const atom *n, aaction *s) { 
 	SetName(n);  
-	val.obj = (void *) &dummy;
+	val.obj = (void *) dummy;
 	pe = NULL; 
 	*this=s; 
 }
@@ -1029,7 +1029,7 @@ ASlotFunction::Default() {
 	}
 	pe = NULL;
 	avalue_u v;
-	v.obj = (void *) &dummy;
+	v.obj = (void *) dummy;
 	Assign(&v);
 	EnableFlags(isdefault);
 	return *this;

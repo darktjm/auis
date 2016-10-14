@@ -13,7 +13,7 @@
 
 class scrollandpanner  : public  scroll {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(scrollandpanner);
 
 
     
@@ -21,7 +21,6 @@ public:
       
 	scrollandpanner();
       
-	virtual ~scrollandpanner();
 
 
     

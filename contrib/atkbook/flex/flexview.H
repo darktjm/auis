@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <lpair.H>
 class flexview: public lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(flexview);
 
     
       
@@ -30,7 +30,6 @@ public:
       
 	flexview();
       
-	virtual ~flexview();
     
        void FullUpdate(enum view::UpdateType type, long left, long top,
 		  long width, long right);

@@ -19,7 +19,7 @@
 
 static boolean debug=FALSE;
 
-ATKdefineRegistry(schedapp, application, NULL);
+ATKdefineRegistryNoInit(schedapp, application);
 
 schedapp::schedapp( )
 {

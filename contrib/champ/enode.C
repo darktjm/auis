@@ -7,7 +7,7 @@
 #include "enode.H"
 
 
-ATKdefineRegistry(enode, dataobject, NULL);
+ATKdefineRegistryNoInit(enode, dataobject);
 
 
 enode::enode()

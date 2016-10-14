@@ -355,22 +355,22 @@ START_ABUTTONV_CALLBACK_METHOD(ScaleMethod) {
                          uyscale / ((double)dself->scaleHeight));
 }
 END_ABUTTONV_CALLBACK_METHOD();
-                                             
-static AButtonvMethodAct lact(&AButtonv::LabelMethod,0L);
-static AButtonvMethodAct bact(&AButtonv::BorderMethod,0L);
-static AButtonvMethodAct iact(&AButtonv::IndicatorMethod,0L);
-static AButtonvMethodAct layoutact(&AButtonv::LayoutMethod,0L);
-static AButtonvMethodAct sizeact(&AButtonv::SizeMethod,0L);
-static AButtonvMethodAct updateact(&AButtonv::WantUpdateMethod, 0L);
-static AButtonvMethodAct scaleact(&AButtonv::ScaleMethod, 0L);
+
+static traced_ptr<AButtonvMethodAct> lact(new AButtonvMethodAct(&AButtonv::LabelMethod,0L));
+static traced_ptr<AButtonvMethodAct> bact(new AButtonvMethodAct(&AButtonv::BorderMethod,0L));
+static traced_ptr<AButtonvMethodAct> iact(new AButtonvMethodAct(&AButtonv::IndicatorMethod,0L));
+static traced_ptr<AButtonvMethodAct> layoutact(new AButtonvMethodAct(&AButtonv::LayoutMethod,0L));
+static traced_ptr<AButtonvMethodAct> sizeact(new AButtonvMethodAct(&AButtonv::SizeMethod,0L));
+static traced_ptr<AButtonvMethodAct> updateact(new AButtonvMethodAct(&AButtonv::WantUpdateMethod, 0L));
+static traced_ptr<AButtonvMethodAct> scaleact(new AButtonvMethodAct(&AButtonv::ScaleMethod, 0L));
 
 AButtonv::AButtonv() :
-lformula(this, &lact, &updateact),
-bformula(this, &bact, &updateact),
-iformula(this, &iact, &updateact),
-layout(this, &layoutact, &updateact),
-scaleFormula(this, &scaleact),
-size(this, &sizeact)
+lformula(this, lact, updateact),
+bformula(this, bact, updateact),
+iformula(this, iact, updateact),
+layout(this, layoutact, updateact),
+scaleFormula(this, scaleact),
+size(this, sizeact)
 {
     ATKinit;
     highlighted=FALSE;

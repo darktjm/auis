@@ -24,7 +24,7 @@
 #include "srctext.H"
 class rexxtext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(rexxtext);
 
     void BackwardCheckWord(long from, long to);
     long CheckComment(long start);

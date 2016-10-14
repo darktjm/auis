@@ -18,7 +18,7 @@
 #include <cel.H>
 class filler: public  cel {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(filler);
 
 
 

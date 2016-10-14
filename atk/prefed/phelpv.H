@@ -7,7 +7,7 @@
 #include <textview.H>
 class phelpv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(phelpv);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	phelpv();
     
-	virtual ~phelpv();
 
      void SetDotPosition(long pos);
      class view * Hit(enum view::MouseAction action, long x, long y, long clicks)  ;

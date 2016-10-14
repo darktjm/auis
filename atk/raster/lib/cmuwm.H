@@ -10,7 +10,7 @@
 #include <image.H>
 class cmuwm : public  image {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(cmuwm);
 
   
      long Read( FILE *file, long id )  ;

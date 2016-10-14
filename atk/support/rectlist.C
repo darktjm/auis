@@ -28,7 +28,7 @@ static int EndNew = 0;
 
 
 
-ATKdefineRegistry(rectlist, ATK, NULL);
+ATKdefineRegistryNoInit(rectlist, ATK);
 static void Intersect(int  oldnum , int  newnum  )
 {
     int ob, ot, ol, Or, nb, nt, nl, nr, ib, it;

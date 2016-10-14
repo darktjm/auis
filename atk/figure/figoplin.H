@@ -13,13 +13,12 @@
 
 class figoplin : public  figobj {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(figoplin);
 
       static class figoplin * Create(struct point *pointlist, long numpoints, boolean closed)  ;
 
       figoplin();
 
-      virtual ~figoplin();
 
       static boolean InitializeClass();
 

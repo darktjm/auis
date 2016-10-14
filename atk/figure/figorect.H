@@ -10,7 +10,7 @@
 
 class figorect : public  figobj {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(figorect);
 
 
     

@@ -23,13 +23,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conview.H>
 class clogview: public conview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clogview);
 
     
       
 	clogview();
       
-	virtual ~clogview();
     
        void FullUpdate(enum view::UpdateType type, long left,
 		  long top, long width, long right);

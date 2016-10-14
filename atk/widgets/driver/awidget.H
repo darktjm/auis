@@ -87,7 +87,7 @@ class AWidget : public  AVarSet {
 		// The image will be scaled so it fits into whatever space 
 		// has actually been allocated on the page
 	
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(AWidget);
 	AWidget();
 
 	// destructors for embedded slots will destruct their contents
@@ -109,6 +109,8 @@ DEFINE_AACTION_CLASS(Concat(DataClass,MethodAct),DataClass)
 #define WIDGET_VIEW_METHOD_CLASS(DataClass,ViewClass) \
 DEFINE_AACTION_CLASS(Concat(ViewClass,MethodActBase), ViewClass); \
 class Concat(ViewClass,MethodAct) : public Concat(ViewClass,MethodActBase) { \
+  protected: \
+	virtual ~Concat(ViewClass,MethodAct)() {} \
   public: \
 	inline Concat(ViewClass,MethodAct)(void (ViewClass::*p)(const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : Concat(ViewClass,MethodActBase)(p, a) { \
     	} \

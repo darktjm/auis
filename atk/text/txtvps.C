@@ -3678,15 +3678,15 @@ static void PrintPSText(class textview *self, FILE *outfile, long width, long he
 	class textview *contentstextv = new textview;
 	contentstextv->SetDataObject(contentstext);
 	PrintPSText(contentstextv, outfile, width, height, 1, FALSE);
-	delete contentstextv;
-	delete contentstext;
+	contentstextv->Destroy();
+	contentstext->Destroy();
     }
     if (indextext) {
 	class textview *indextextv = new textview;
 	indextextv->SetDataObject(indextext);
 	PrintPSText(indextextv, outfile, width, height, 1, FALSE);
-	delete indextextv;
-	delete indextext;
+	indextextv->Destroy();
+	indextext->Destroy();
     }
 }
 

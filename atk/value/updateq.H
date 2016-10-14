@@ -17,9 +17,8 @@ struct fp_queue {
 
 class updateq : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(updateq);
 	updateq();
-	~updateq();
 
 
  virtual void SetView( class view * view );

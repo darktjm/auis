@@ -16,7 +16,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rig
 #include "srctext.H"
 #include "modtext.H"
 
-ATKdefineRegistry(modtext, srctext, NULL);
+ATKdefineRegistryNoInit(modtext, srctext);
 
 boolean modtext::IsTokenChar(char ch)    
 {

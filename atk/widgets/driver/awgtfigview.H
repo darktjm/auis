@@ -14,10 +14,9 @@ class AWgtFigView : public AWidgetView {
 	boolean needToPrepImage;  // TRUE which FullUpdate 
 			//	or Update needs to call prepImage
    public:
-	ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(AWgtFigView);
 
 	AWgtFigView();
-	virtual ~AWgtFigView();
 
 
 	inline long ToFigX(long val) 

@@ -30,7 +30,7 @@ static boolean debug=FALSE;
 #define  BackgroundHeight	    (self->background_height)
 
 
-ATKdefineRegistry(lt, dataobject, NULL);
+ATKdefineRegistryNoInit(lt, dataobject);
 
 
 

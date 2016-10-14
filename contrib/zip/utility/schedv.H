@@ -30,7 +30,7 @@ END-SPECIFICATION  ************************************************************/
 #include <view.H>
 class schedv : public  view {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS(schedv);
    void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
    class view *Hit( enum view::MouseAction action, long x, long y, long n );
    void SetDataObject( class dataobject *data );
@@ -40,7 +40,6 @@ public:
    static boolean InitializeClass();
    static boolean atk_inited;
    schedv();
-   virtual ~schedv();
 private:
    class sched			    *data;
    class zipview		    *zipviewp;

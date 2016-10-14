@@ -14,7 +14,7 @@ typedef boolean (*bufferlist_sfptr)(class buffer *a, class buffer *b);
 
 class bufferlist : public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bufferlist);
 	 void ObservedChanged (class observable *changed, long value);
     
         virtual void AddBuffer(class buffer *buffer);
@@ -37,7 +37,6 @@ public:
 	virtual void Sort(bufferlist_sfptr compareRoutine);
     
         
-	virtual ~bufferlist();
         
 	bufferlist();
     

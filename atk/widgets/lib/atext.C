@@ -24,9 +24,9 @@ void ATextStateFormula::Evaluate() {
 ATKdefineRegistry(AText,AWidget,Init);
 
 void AText::CommonInit() {
-    value.SetFormula(&valueAct);
-    value.SetAssign(&valueAssignAct);
-    source.SetAssign(&sourceAct);
+    value.SetFormula(valueAct);
+    value.SetAssign(valueAssignAct);
+    source.SetAssign(sourceAct);
     SLOT(font);
     SLOTINIT(cursorPosition,0);
     SLOTINIT(marginHeight,480);
@@ -103,12 +103,12 @@ static void ATextValueAssign(ASlot *slot, const avalueflex &aux, const avaluefle
     at->SetObserveTextChanges(TRUE);
 }
 
-AText::AText() : stateFormula(this), sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this) {
+AText::AText() : stateFormula(this), sourceAct(new ATextSlotAct(ATextSourceAssign, this)), valueAct(new ATextSlotAct(ATextValue, this)), valueAssignAct(new ATextSlotAct(ATextValueAssign, this)) {
     ATKinit;
     CommonInit();
 }
 
-AText::AText(const char *txt) : stateFormula(this), sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this)  {
+AText::AText(const char *txt) : stateFormula(this), sourceAct(new ATextSlotAct(ATextSourceAssign, this)), valueAct(new ATextSlotAct(ATextValue, this)), valueAssignAct(new ATextSlotAct(ATextValueAssign, this))  {
     ATKinit;
     value=(char *)txt;
     CommonInit();

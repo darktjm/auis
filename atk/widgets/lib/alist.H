@@ -72,19 +72,18 @@ class AList :public AText {
     ASlotInt visibleItemCount;
     ASlotInt itemCount;
 
-    AListSlotAct rowsAct;
-    AListSlotAct selCountAct;
-    AListSlotAct itemsAct;
-    AListSlotAct countAct;
+    traced_ptr<AListSlotAct> rowsAct;
+    traced_ptr<AListSlotAct> selCountAct;
+    traced_ptr<AListSlotAct> itemsAct;
+    traced_ptr<AListSlotAct> countAct;
     AListSelectionFormula selectionFormula;
     AListStateFormula stateFormula;
     
     style *selected;
     style *notselected;
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AList);
     AList();
-    virtual ~AList();
     void Insert(long ind, const char *str);
     void Remove(long ind);
     void Select(long ind);

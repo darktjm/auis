@@ -76,7 +76,7 @@ typedef int (*chart_sortfptr) (struct chart_item  **a, struct chart_item  **b);
 class chart : public  apt
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chart);
 
 
 
@@ -129,7 +129,6 @@ public:
   
 	chart();
   
-	virtual ~chart();
   static class chart * Create( chart_Specification *chart_Spec, char *anchor )		 ;
 
 

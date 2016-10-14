@@ -35,7 +35,7 @@ struct observer
 
 class value : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(value);
  /* really it would be nice if these two were in the opposite relationship */
  
    void NotifyObservers( long rock );
@@ -70,7 +70,6 @@ public:
   
 	value();
   
-	virtual ~value();
 
   short maxObservers;			/* number of entries in observers table */
   struct observer *observers;	/* table of observers */

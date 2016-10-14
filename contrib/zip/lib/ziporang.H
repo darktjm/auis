@@ -23,7 +23,7 @@ ziporang.H
 class ziporang : public  ziporect
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(ziporang);
 
 
 

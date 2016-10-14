@@ -96,7 +96,7 @@ typedef void (*tree_hitfptr) (char *anchor, class tree *self, tree_type_node nod
 class tree : public  apt
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(tree);
 
 
 
@@ -181,7 +181,6 @@ public:
   
 	tree();
   
-	virtual ~tree();
 
 
 

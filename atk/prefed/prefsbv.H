@@ -7,13 +7,12 @@
 #include <sbuttonv.H>
 class prefsbv: public  sbuttonv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(prefsbv);
 
   
     
 	prefsbv();
     
-	virtual ~prefsbv();
   
      boolean Touch(int ind, enum view::MouseAction act)  ;
  };

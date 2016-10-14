@@ -68,7 +68,7 @@ END-SPECIFICATION  ************************************************************/
 class calc : public  apt
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(calc);
 
 
 
@@ -90,7 +90,6 @@ public:
   
 	calc();
   
-	virtual ~calc();
 
 
 

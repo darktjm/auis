@@ -13,7 +13,7 @@
 #include <view.H>
 class helloworldview: public  view {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS(helloworldview);
 
   void SetDataObject(class dataobject *d);
   void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
@@ -26,7 +26,6 @@ public:
   void DeleteApplicationLayer(class view *v);
   void LinkTree(class view *parent);
 
-  ~helloworldview();
   helloworldview();
 
   static boolean InitializeClass();

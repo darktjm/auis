@@ -38,7 +38,7 @@ static unsigned char masks[] = {0xFF, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE};
 static FILE *outf;	/* to avoid passing 'file' to two PutXxxx functions */
 
 	
-ATKdefineRegistry(paint, ATK, NULL);
+ATKdefineRegistryNoInit(paint, ATK);
 static void PutSame(unsigned char byte, long  count);
 static void PutDiffer(unsigned char *start, long  length);
 

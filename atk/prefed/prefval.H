@@ -42,13 +42,12 @@ struct prefval_value {
 #include <dataobject.H>
 class prefval : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(prefval);
 
 
     
 	prefval();
     
-	virtual ~prefval();
     static enum prefval_Type StringToType(const char *str)  ;
 
 

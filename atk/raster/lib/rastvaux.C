@@ -1175,8 +1175,8 @@ void *rasterview::GetPSPrintInterface(const char *printtype)
 	boolean 
 rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
-	cmuwm in;	// temp image of type ATK raster
-	imageio out;		// temp image of type any
+	traced_ptr<cmuwm> in;	// temp image of type ATK raster
+	traced_ptr<imageio> out;	// temp image of type any
 	FILE *rastemp = tmpfile();	// temp file for raster stream
 	raster *dobj = (raster *)GetDataObject();
 
@@ -1184,13 +1184,13 @@ rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 
 	dobj->WriteSubRaster(rastemp, 1, visrect);    // write view's data
 	rewind(rastemp);
-	in.Load(NULL, rastemp);		// read data into ATK-raster image
+	in->Load(NULL, rastemp);		// read data into ATK-raster image
 	fclose(rastemp);
-	in.Duplicate(&out);			// copy to image
-	out.SetSaveFormatString("gif");  // <sigh> it *is* Gifify, after all
-	long ret = out.WriteNative(NULL, filename);	// write image
-	*pmaxw = out.Width();
-	*pmaxh = out.Height();
+	in->Duplicate(out);			// copy to image
+	out->SetSaveFormatString("gif");  // <sigh> it *is* Gifify, after all
+	long ret = out->WriteNative(NULL, filename);	// write image
+	*pmaxw = out->Width();
+	*pmaxh = out->Height();
 	return (ret == 0);	// success if 0
 }
 

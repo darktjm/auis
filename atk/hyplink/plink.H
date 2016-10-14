@@ -11,13 +11,12 @@
 
 class plink : public link {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(plink);
 
 
 
       plink();
 
-      virtual ~plink();
 
       long Read(FILE *file, long id)  ;
       long Write(FILE *file, long writeid, int level)  ;

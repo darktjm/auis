@@ -10,7 +10,7 @@
 #include "cursor.H"
 
 
-ATKdefineRegistry(butter, dataobject, NULL);
+ATKdefineRegistryNoInit(butter, dataobject);
 
 butter::butter()
 {

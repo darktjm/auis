@@ -7,7 +7,7 @@
 #include <lpair.H>
 class pintv : public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pintv);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	pintv();
     
-	virtual ~pintv();
 
 
      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);

@@ -12,18 +12,15 @@ ATK_IMPL("textflowview.H")
 #include <textflow.H>
 #include <figtoolview.H>
 
-ATKdefineRegistry(textflowview, figview, NULL);
+ATKdefineRegistryNoInit(textflowview, figview);
 
 textflowview::textflowview()
 {
-    ATKinit;
-
     THROWONFAILURE( TRUE);
 }
 
 textflowview::~textflowview()
 {
-    ATKinit;
 }
 
 void textflowview::BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize)

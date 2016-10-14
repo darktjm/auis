@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conob.H>
 class statsob: public conob {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(statsob);
 
     
       
@@ -30,7 +30,6 @@ public:
       
 	statsob();
       
-	virtual ~statsob();
     
       virtual void SetStatPart(int which);
     

@@ -7,13 +7,12 @@
 #include <wrapv.H>
 class pvalsbv : public  wrapv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvalsbv);
 
 
     
 	pvalsbv();
     
-	virtual ~pvalsbv();
 
      void ObservedChanged(class observable *changed, long val);
      void SetDataObject(class dataobject *prefval);

@@ -13,7 +13,7 @@ ATK_IMPL("tree23int.H")
 #define NUMPERBLOCK DESIREDBLOCKSIZE / sizeof(class tree23int)
 #define BLOCKSIZE NUMPERBLOCK * sizeof(class tree23int)
 
-ATKdefineRegistry(tree23int, ATK, NULL);
+ATKdefineRegistryNoInit(tree23int, ATK);
 
 #if 0
 static class tree23int *freeList = NULL;

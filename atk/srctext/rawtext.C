@@ -13,7 +13,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1992-1995.  All rig
 #include "rawtext.H"
 
 
-ATKdefineRegistry(rawtext, text, NULL);
+ATKdefineRegistryNoInit(rawtext, text);
 static boolean MakeSureNotOverstrikingView(class rawtext  *d, long  pos , long  len);
 
 

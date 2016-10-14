@@ -29,7 +29,7 @@ lprruler.H
 
 class lprruler : public  dataobject{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(lprruler);
 
 
 
@@ -47,7 +47,6 @@ public:
 	
 	lprruler();
 	
-	virtual ~lprruler();
 
 
 

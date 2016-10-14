@@ -19,7 +19,7 @@
 #include <dataobject.H>
 class box: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(box);
 
 
 
@@ -41,7 +41,6 @@ public:
   
 	box();
   
-	virtual ~box();
 
 
   int inGetModified;			    /* recursion protection switch */

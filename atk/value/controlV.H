@@ -10,7 +10,7 @@
 #include <buttonV.H>
 class controlV : public  buttonV{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(controlV);
 
     
        class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;

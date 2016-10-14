@@ -86,12 +86,11 @@ struct Dir_ {
 #include <attribs.h>
 class bush : public  apt {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bush);
 
     
 
   bush();
-  virtual ~bush();
 	static class bush * Create(const char *init_dir)  ;
 
 

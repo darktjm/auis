@@ -13,7 +13,7 @@
 #include <view.H>
 class timeodayview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(timeodayview);
 
  
   
@@ -23,7 +23,6 @@ public:
   
 	timeodayview();
   
-	virtual ~timeodayview();
  	
    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
    void Update();

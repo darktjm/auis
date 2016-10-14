@@ -24,7 +24,7 @@ static char *fileList[1000];
 static int fileCount;
 
 
-ATKdefineRegistry(be1be2app, application, NULL);
+ATKdefineRegistryNoInit(be1be2app, application);
 static char *OutputName(char  *inputName);
 static void Convert(char  *fileName);
 

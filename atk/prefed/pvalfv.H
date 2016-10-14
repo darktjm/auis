@@ -7,13 +7,12 @@
 #include <pvalsbv.H>
 class pvalfv : public  pvalsbv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvalfv);
 
 
     
 	pvalfv();
     
-	virtual ~pvalfv();
 
      void UpdateSButton();
 };

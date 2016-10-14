@@ -13,7 +13,7 @@
 class htmltextview: public textview {
     long hitpos;
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(htmltextview);
 
     void SetDataObject(class dataobject *dataObject);
     class view *Hit(enum view::MouseAction action, long x, long y, long numberOfClicks);
@@ -22,7 +22,6 @@ class htmltextview: public textview {
     virtual boolean ConfirmReadOnly();
 
     htmltextview();
-    virtual ~htmltextview();
     static boolean InitializeClass();
 
     inline long HitPos() {

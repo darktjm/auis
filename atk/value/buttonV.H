@@ -18,7 +18,7 @@
 class buttonV : public  valueview
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(buttonV);
 
  
  class view * Hit(enum view::MouseAction type, long x, long y, long numberOfClicks)
@@ -41,7 +41,6 @@ public:
   
 	buttonV();
   
-	virtual ~buttonV(); 
 
   inline void SetButtonType(short TYPE) { (this->buttontype = TYPE); }
   inline short GetButtonType() { return (this->buttontype); }

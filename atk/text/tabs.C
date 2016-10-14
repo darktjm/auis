@@ -15,7 +15,7 @@ ATK_IMPL("tabs.H")
 static class tabs *DefaultTabs = NULL;
 
 
-ATKdefineRegistry(tabs, ATK, NULL);
+ATKdefineRegistryNoInit(tabs, ATK);
 
 
 static int

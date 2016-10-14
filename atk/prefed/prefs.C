@@ -20,7 +20,7 @@ ATK_IMPL("prefs.H")
 #include <environment.H>
 
 
-ATKdefineRegistry(prefs, text, NULL);
+ATKdefineRegistryNoInit(prefs, text);
 static int FindCat(struct prefgroup  *a, char  *b);
 static void FreeHelpStyles(class prefs  *self);
 static class environment *AddStyle(class text  *self, long  pos , long  len, class style  *style);

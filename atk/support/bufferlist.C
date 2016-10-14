@@ -34,7 +34,7 @@ struct listentry {
 static char defaultobjectname[64] = DEFAULTOBJECT;
 
 
-ATKdefineRegistry(bufferlist, observable, NULL);
+ATKdefineRegistryNoInit(bufferlist, observable);
 
 bufferlist::bufferlist()
         {

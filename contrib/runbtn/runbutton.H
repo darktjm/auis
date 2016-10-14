@@ -16,8 +16,7 @@ class runbuttonview;
 class runbutton : public  sbutton {
   public:
     runbutton();
-    virtual ~runbutton();
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(runbutton);
     static boolean InitializeClass();
 
     // overrides

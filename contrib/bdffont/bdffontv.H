@@ -12,7 +12,7 @@
 #include <lpair.H>
 class bdffontv : public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bdffontv);
 
     
 	
@@ -22,7 +22,6 @@ public:
 	
 	bdffontv();
 	
-	virtual ~bdffontv();
     
 	 void PostKeyState(class keystate *k);
 	 void PostMenus(class menulist *m);

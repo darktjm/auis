@@ -11,7 +11,7 @@
 #include <text.H>
 class mentertext : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(mentertext);
 
 
      boolean InsertCharacters(long pos, const char *str, long len)  ;
@@ -32,7 +32,6 @@ public:
     
 	mentertext();
     
-	virtual ~mentertext();
 
     char *buf;
     const char *src;

@@ -9,7 +9,7 @@
 #include <view.H>
 class wincelview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(wincelview);
 	wincelview();
 
 

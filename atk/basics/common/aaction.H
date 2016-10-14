@@ -18,9 +18,7 @@ static atom_def aaction_error("error");
  *  implement anything.  */
 class aaction : public traced {
   public:
-    virtual ATKregistryEntry *ATKregistry();
-    aaction() {}
-    virtual ~aaction() {}
+    TRACED_CLASS_NODEST(aaction);
     virtual void operator()(ATK *obj, const avalueflex &in, avalueflex &out);
     /**< Invoke the action on the given object.
      *   This must be overridden by descendents in order for the action
@@ -82,7 +80,7 @@ DEFINE_MFLEX_CLASS(multiact_list,aaction *,1);
 class multiact : public aaction {
     multiact_list list;
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(multiact);
 
     multiact &Prepend(aaction *act);
     /**< Prepend an action to the list
@@ -136,16 +134,17 @@ class name : public aaction { \
     /**< The function to execute.  */ \
     avalueflex auxargs; /**< The user data (aux arguments) */ \
     avalueflex intypes /** The input parameter types */, outtypes /** The return value types */; \
+    ~name() {} \
   public: \
     inline name(void (*p)(type *o, const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : func(p), auxargs(a) { \
     } /**< Create action to call given fuction.
        *   The input and output parameter type arrays are initially empty (anything).
        *   \param p The function.
-       *   \param aux User data (additional parameters to pass to the function). */ \
+       *   \param a User data (additional parameters to pass to the function). */ \
     inline name(void (*p)(type *o, const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a, const avalueflex &t, const avalueflex &r) : func(p), auxargs(a), intypes(t), outtypes(r) { \
     }  /**< Create action to call given fuction.
        *   \param p The function.
-       *   \param aux User data (additional parameters to pass to the function).
+       *   \param a User data (additional parameters to pass to the function).
        *   \param t The array describing the expected input parameter types.
        *   \param r The array describing the return types. */ \
     inline virtual void operator()(ATK *obj, const avalueflex &in, avalueflex &out) { \
@@ -171,16 +170,17 @@ class name : public aaction { \
     /**< The method to execute.  */ \
     avalueflex auxargs; /**< The user data (aux arguments) */ \
     avalueflex intypes /** The input parameter types */, outtypes /** The return value types */; \
+    ~name() {} \
   public: \
     inline name(void (type::*p)(const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : pmf(p), auxargs(a) { \
     } /**< Create action to call given method.
        *   The input and output parameter type arrays are initially empty (anything).
        *   \param p The method.
-       *   \param aux User data (additional parameters to pass to the method). */ \
+       *   \param a User data (additional parameters to pass to the method). */ \
     inline name(void (type::*p)(const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a, const avalueflex &t,  const avalueflex &r) : pmf(p), auxargs(a), intypes(t), outtypes(r) { \
     }  /**< Create action to call given method.
        *   \param p The method.
-       *   \param aux User data (additional parameters to pass to the method).
+       *   \param a User data (additional parameters to pass to the method).
        *   \param t The array describing the expected input parameter types.
        *   \param r The array describing the return types. */ \
     inline virtual void operator()(ATK *obj, const avalueflex &in, avalueflex &out) { \
@@ -323,8 +323,8 @@ funclinkage void methodprefix name(objarg \
  *  \param auxvalues The user data for the function, as an avalueflex array.
  *  \param doc The documentation string for this procedure. */
 #define ENTER_AACTION_FUNC(name,procname,auxvalues,doc)  { \
-	static Concat(name,TargetAct) act(&name,auxvalues); \
-	proctable::DefineAction(procname,&act,  \
+	static traced_ptr<Concat(name,TargetAct)> act(new Concat(name,TargetAct)(&name,auxvalues)); \
+	proctable::DefineAction(procname,act,  \
 		Concat(name,TargetClass),NULL,doc); \
 }
 
@@ -338,8 +338,8 @@ funclinkage void methodprefix name(objarg \
  *  \param auxvalues The user data for the function, as an avalueflex array.
  *  \param doc The documentation string for this procedure. */
 #define ENTER_AACTION_METHOD(name,target,procname,auxvalues,doc)  { \
-static Concat(name,TargetAct) act(&target::name,auxvalues); \
-	proctable::DefineAction(procname,&act,  \
+static traced_ptr<Concat(name,TargetAct)> act(new Concat(name,TargetAct)(&target::name,auxvalues)); \
+	proctable::DefineAction(procname,act,  \
 		Concat(name,TargetClass),NULL,doc); \
 }
 /** @} */

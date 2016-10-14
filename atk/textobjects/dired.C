@@ -34,7 +34,7 @@ ATK_IMPL("dired.H")
  */
 
 
-ATKdefineRegistry(dired, text, NULL);
+ATKdefineRegistryNoInit(dired, text);
 static int CompareFilenameProc(struct fileinfo  *f1 , struct fileinfo  *f2);
 static void LongModeLine(char  *dname , char  *fname , char  *buf);
 static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFiles);

@@ -24,7 +24,7 @@ zipoplin.H
 class zipoplin : public  zipopath
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipoplin);
 
 
 

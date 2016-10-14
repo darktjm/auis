@@ -19,7 +19,7 @@ lookzview.H
 #include <view.H>
 class lookzview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(lookzview);
 
 
 
@@ -61,7 +61,6 @@ public:
 	
 	lookzview();
 	
-	virtual ~lookzview();
 
 
 

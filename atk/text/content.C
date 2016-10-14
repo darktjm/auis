@@ -36,7 +36,7 @@ static const char * const indexnames[] = {
 #define indexnamecount 2
 
 
-ATKdefineRegistry(content, text, NULL);
+ATKdefineRegistryNoInit(content, text);
 
 static int findinlist(char  **lst ,int  cnt,char  *str);
 static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST);

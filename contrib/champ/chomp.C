@@ -6,5 +6,5 @@
 #include <andrewos.h>
 #include "chomp.H"
 
-ATKdefineRegistry(chomp, dataobject, NULL);
+ATKdefineRegistryNoInit(chomp, dataobject);
 

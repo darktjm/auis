@@ -10,7 +10,7 @@ ATK_IMPL("scpanner.H")
 #include <panner.H>
 
 
-ATKdefineRegistry(scrollandpanner, scroll, NULL);
+ATKdefineRegistryNoInit(scrollandpanner, scroll);
 
 scrollandpanner::scrollandpanner()
 {

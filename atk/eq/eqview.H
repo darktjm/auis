@@ -23,7 +23,7 @@ enum changed {
 struct formula;
 class eqview : public  view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(eqview);
 
 
     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *widthp, long *heightp)  ;
@@ -53,7 +53,6 @@ class eqview : public  view {
 
     eqview();
 
-    virtual ~eqview();
 
     static boolean InitializeClass();
 

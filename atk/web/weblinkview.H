@@ -5,7 +5,7 @@
 #include <linkview.H>
 class weblinkview: public  linkview{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(weblinkview);
 
  
   
@@ -14,7 +14,6 @@ public:
   
 	weblinkview();
   
-	virtual ~weblinkview();
  	
    void PostMenus(class menulist *ml);
  

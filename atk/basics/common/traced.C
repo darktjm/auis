@@ -5,7 +5,7 @@ ATK_IMPL("traced.H")
 #include "traced.H"
 
 
-ATKdefineRegistry(traced, ATK, NULL);
+ATKdefineRegistryNoInit(traced, ATK);
 
 
 traced::traced()
@@ -23,8 +23,7 @@ void traced::Destroy()
 
 traced::~traced()
 {
-    /* allow refcount == 1 in case of static allocation */
-    if(this->refcount > 1)
+    if(this->refcount > 0)
 	/* somebody called delete instead of Destroy() */
 	kill(getpid(), 11);
     return;

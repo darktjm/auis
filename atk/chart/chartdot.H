@@ -44,7 +44,7 @@ END-SPECIFICATION  ************************************************************/
 class chartdot : public  chartobj
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chartdot);
 
 
 
@@ -60,7 +60,6 @@ public:
   
 	chartdot();
   
-	virtual ~chartdot();
 
 
 

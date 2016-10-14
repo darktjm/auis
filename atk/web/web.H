@@ -11,10 +11,9 @@
 class web: public htmltext {
 	boolean imbedded;
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(web);
 
 	web();
-	~web();
 	static boolean InitializeClass();
 
 	virtual void SetWebcom(class webcom *c);

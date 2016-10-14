@@ -11,7 +11,7 @@
 #include <text.H>
 class entertext : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(entertext);
 
 
      boolean InsertCharacters(long pos, const char *str, long len)  ;
@@ -28,7 +28,6 @@ public:
     
 	entertext();
     
-	virtual ~entertext();
 
     char *buf;
     long buflenval,mod,realbuflen;

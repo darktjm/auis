@@ -87,7 +87,7 @@ unsigned long doValToMemLSB(unsigned long   val, unsigned char *p, unsigned int 
 
 class image : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(image);
 
 
 
@@ -104,7 +104,6 @@ public:
   
 	image();
   
-	virtual ~image();
   static int depthToColors( int n )  ;
   static int colorsToDepth( int n )  ;
 

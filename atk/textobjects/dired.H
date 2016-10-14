@@ -30,14 +30,13 @@ struct fileinfo {
 #include <text.H>
 class dired: public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(dired);
 
 
 
     
 	dired();
     
-	virtual ~dired();
 
 
      long GetModified()  ;

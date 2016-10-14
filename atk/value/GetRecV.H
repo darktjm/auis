@@ -16,7 +16,7 @@ struct GetRecV_recpair {
 class GetRecV : public  valueview
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(GetRecV);
 
  
    void DrawFromScratch(long x,long y,long width,long height);

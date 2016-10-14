@@ -75,10 +75,9 @@ typedef void (*zip_paneexceptproc)(struct zipview *, zip_type_pane pane);
 class zipview : public  view
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(zipview);
 	static boolean InitializeClass();
 	zipview();
-	~zipview();
 
 
 

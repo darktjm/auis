@@ -287,24 +287,24 @@ START_ATEXTV_CALLBACK_METHOD(WantKeyStateMethod) {
 }
 END_ATEXTV_CALLBACK_METHOD();
 
-static ATextvMethodAct lact(&ATextv::TextMethod,0L);
-static ATextvMethodAct bact(&ATextv::BorderMethod,0L);
-static ATextvMethodAct sizeact(&ATextv::SizeMethod,0L);
-static ATextvMethodAct updateact(&ATextv::WantUpdateMethod, 0L);
-static ATextvMethodAct newsizeact(&ATextv::WantNewSizeMethod, 0L);
-static ATextvMethodAct scaleact(&ATextv::ScaleMethod, 0L);
-static ATextvMethodAct viewdataact(&ATextv::DataViewMethod, 0L);
-static ATextvMethodAct keystateact(&ATextv::KeyStateMethod, 0L);
-static ATextvMethodAct wantkeystateact(&ATextv::WantKeyStateMethod, 0L);
+static traced_ptr<ATextvMethodAct> lact(new ATextvMethodAct(&ATextv::TextMethod,0L));
+static traced_ptr<ATextvMethodAct> bact(new ATextvMethodAct(&ATextv::BorderMethod,0L));
+static traced_ptr<ATextvMethodAct> sizeact(new ATextvMethodAct(&ATextv::SizeMethod,0L));
+static traced_ptr<ATextvMethodAct> updateact(new ATextvMethodAct(&ATextv::WantUpdateMethod, 0L));
+static traced_ptr<ATextvMethodAct> newsizeact(new ATextvMethodAct(&ATextv::WantNewSizeMethod, 0L));
+static traced_ptr<ATextvMethodAct> scaleact(new ATextvMethodAct(&ATextv::ScaleMethod, 0L));
+static traced_ptr<ATextvMethodAct> viewdataact(new ATextvMethodAct(&ATextv::DataViewMethod, 0L));
+static traced_ptr<ATextvMethodAct> keystateact(new ATextvMethodAct(&ATextv::KeyStateMethod, 0L));
+static traced_ptr<ATextvMethodAct> wantkeystateact(new ATextvMethodAct(&ATextv::WantKeyStateMethod, 0L));
 
 ATextv::ATextv() :
-lformula(this, &lact, &updateact),
-bformula(this, &bact, &updateact),
-scaleFormula(this, &scaleact),
-keyStateFormula(this, &keystateact, &wantkeystateact),
-dataViewFormula(this, &viewdataact, &updateact),
+lformula(this, lact, updateact),
+bformula(this, bact, updateact),
+scaleFormula(this, scaleact),
+keyStateFormula(this, keystateact, wantkeystateact),
+dataViewFormula(this, viewdataact, updateact),
 stateFormula(this),
-size(this, &sizeact, &newsizeact)
+size(this, sizeact, newsizeact)
 {
     ATKinit;
     tv=NULL;

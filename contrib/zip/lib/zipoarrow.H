@@ -23,7 +23,7 @@ zipoarrow.H
 class zipoarrow : public  zipobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipoarrow);
 
 
 

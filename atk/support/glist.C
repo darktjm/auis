@@ -14,7 +14,7 @@ ATK_IMPL("glist.H")
 #define newelt() (struct glistelt *) malloc(sizeof(struct glistelt))
 
 
-ATKdefineRegistry(glist, ATK, NULL);
+ATKdefineRegistryNoInit(glist, ATK);
 static int copyElement(char  *value,class glist  *dest);
 static int MoveNew(void  *listelt, struct glist_SortStruct  *ss);
 

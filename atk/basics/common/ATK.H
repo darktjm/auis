@@ -102,6 +102,8 @@ static UNUSED ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
  * The current dynamic object linker requires that you define each
  * class using either ATKdefineRegistry() or ATKdefineRegistryNoInit()
  * or a raw definition.  No additional macros will be expanded.
+ * \param me The class being registered
+ * \param sup The superclass (immediate parent) of the class being registered
  */
 #define ATKdefineRegistryNoInit(me, sup) \
   static ATK *me ## _new_() { return new me; };\

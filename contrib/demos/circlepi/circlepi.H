@@ -10,7 +10,7 @@
 #include <dataobject.H>
 class circlepi: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(circlepi);
 
   
     
@@ -20,7 +20,6 @@ public:
     
 	circlepi();
     
-	virtual ~circlepi();
   
     virtual void SetDepth(int limit);
   

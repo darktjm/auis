@@ -11,10 +11,9 @@
 
 class textflowview : public figview {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(textflowview);
 
       textflowview();
-      virtual ~textflowview();
 
       void BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);

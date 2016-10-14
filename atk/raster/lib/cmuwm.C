@@ -14,7 +14,7 @@ ATK_IMPL("cmuwm.H")
 #include <cmuwm.H>
 
 
-ATKdefineRegistry(cmuwm, image, NULL);
+ATKdefineRegistryNoInit(cmuwm, image);
 
 	int 
 cmuwm::Ident( const char  *fullname ) {

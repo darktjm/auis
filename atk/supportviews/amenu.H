@@ -336,13 +336,12 @@ class AmenuEntrylist;
  */
 class AmenuCard : public dataobject {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AmenuCard);
     inline AmenuCard();
     /**< Default constructor.
      *   This reads the preferences and prepares for menu construction.
      *   \sbuttonpref{AmenuCard,menu card,card,menu item}
      */
-    ~AmenuCard();
     virtual AmenuEntry &AddEntry(AmenuEntry *e, int priority=10);
     /**< Adds an entry line to a menu card.
      *   \param e The entry.
@@ -395,10 +394,9 @@ class AmenuEntries;
 /** A view to display AmenuCard menu cards */
 class AmenuCardv : public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AmenuCardv);
 
     AmenuCardv();
-    ~AmenuCardv();
     view::DSattributes DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height);
     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();
@@ -415,22 +413,20 @@ class AmenuOption : public AmenuCard {
     void EnsurePrefs();
     friend class AmenuOptionv;
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AmenuOption);
     AmenuEntry *selected;
     struct sbutton_prefs *prefs;
     AmenuOption();
     /**< Default constructor.
      *   \sbuttonpref{AmenuOption,option,option selector,option selector}
      */
-    ~AmenuOption();
 };
 
 class AmenuOptionCardv;
 class AmenuOptionv : public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AmenuOptionv);
     AmenuOptionv();
-    ~AmenuOptionv();
     view::DSattributes DesiredSize(long  width, long  height, enum view::DSpass  pass, long  *desired_width, long  *desired_height);
     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();

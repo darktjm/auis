@@ -79,7 +79,7 @@ AList::~AList() {
     delete notselected;
 }
 
-AList::AList() : rowsAct(Rows, this), selCountAct(SelCount, this), itemsAct(Items, this), countAct(Count, this), selectionFormula(this), stateFormula(this) {
+AList::AList() : rowsAct(new AListSlotAct(Rows, this)), selCountAct(new AListSlotAct(SelCount, this)), itemsAct(new AListSlotAct(Items, this)), countAct(new AListSlotAct(Count, this)), selectionFormula(this), stateFormula(this) {
     ATKinit;
 
     SLOT(itemCount);
@@ -93,9 +93,9 @@ AList::AList() : rowsAct(Rows, this), selCountAct(SelCount, this), itemsAct(Item
     TSLOTINIT(selectedItemCount,0L);
     TSLOTINIT(selectedItems,(void *)NULL);
     
-    selectedItemCount.SetFormula(&selCountAct);
-    selectedItems.SetFormula(&itemsAct);
-    itemCount.SetFormula(&countAct);
+    selectedItemCount.SetFormula(selCountAct);
+    selectedItems.SetFormula(itemsAct);
+    itemCount.SetFormula(countAct);
     
     selectionFormula.SetMode(AFORMULAACCESS);
     
@@ -107,7 +107,7 @@ AList::AList() : rowsAct(Rows, this), selCountAct(SelCount, this), itemsAct(Item
     
     stateFormula.Validate();
 
-    rows.SetFormula(&rowsAct);
+    rows.SetFormula(rowsAct);
 
     itemCount=0;
 }

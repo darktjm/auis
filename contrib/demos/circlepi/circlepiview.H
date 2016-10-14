@@ -9,7 +9,7 @@
 #include <view.H>
 class circlepiview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(circlepiview);
 
   
     
@@ -19,7 +19,6 @@ public:
     
 	circlepiview();
     
-	virtual ~circlepiview();
   	
      void ObservedChanged (class observable *changed, long value);
      void LinkTree(class view *parent);

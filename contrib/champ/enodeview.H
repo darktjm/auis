@@ -21,7 +21,7 @@
 #include <lpair.H>
 class enodeview: public lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(enodeview);
 
     
       

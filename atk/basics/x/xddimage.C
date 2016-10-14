@@ -16,7 +16,7 @@ ATK_IMPL("xddimage.H")
 
 class xddimage_draw : public WorkProc {
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(xddimage_draw);
     WorkProc_Status Process();
     long left, top, width, height;
     long destLeft, destTop;
@@ -26,7 +26,6 @@ class xddimage_draw : public WorkProc {
     GC gc;
     Display *dpy;
     xddimage_draw(xddimage *src=NULL, long left=0, long top=0, long width=0, long height=0, long destLeft=0, long destTop=0);
-    virtual ~xddimage_draw();
     void ObservedChanged(observable *changed, long change);
 };
 

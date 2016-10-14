@@ -10,7 +10,7 @@
 #include <buttonV.H>
 class menterstrV : public  buttonV {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(menterstrV);
 
 
     class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;
@@ -21,7 +21,6 @@ public:
    
 	menterstrV();
    
-	virtual ~menterstrV();
 
     class mentertext *etext;
     class metextview *etextview;

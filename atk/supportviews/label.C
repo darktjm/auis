@@ -21,7 +21,7 @@ ATK_IMPL("label.H")
 
 /**/
 
-ATKdefineRegistry(label, dataobject, NULL);
+ATKdefineRegistryNoInit(label, dataobject);
 
 label::label()
 		{

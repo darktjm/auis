@@ -40,7 +40,7 @@
 #include "srctext.H"
 class modtext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(modtext);
 
     void BackwardCheckWord(long pos, long first);
     long CheckComment(long start);

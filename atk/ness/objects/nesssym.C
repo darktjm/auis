@@ -101,7 +101,7 @@
 #include <ness.H>
 #include <aaction.H>
 	
-ATKdefineRegistry(nesssym, toksym, NULL);
+ATKdefineRegistryNoInit(nesssym, toksym);
 
 
 nesssym::nesssym()  {

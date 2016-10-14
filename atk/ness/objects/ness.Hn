@@ -660,7 +660,7 @@ nodeclass eventnode {
 class ness : public  text
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(ness);
 
 /* overrides */
 	long Read(FILE *file, long id);
@@ -756,7 +756,6 @@ public:
 	static boolean atk_inited;
 
 	ness();
-	virtual ~ness();
 
 	static void SetDebug(boolean d);
 	static class ness * GetList()  ;

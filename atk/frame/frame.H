@@ -29,7 +29,7 @@
 
 class frame: public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(frame);
         virtual void SetView(class view *view);
         virtual void SetBuffer(class buffer *buffer, boolean setInputFocus);
         virtual void SetCommandEnable(boolean enable);
@@ -60,7 +60,6 @@ public:
         
 	frame();
         
-	virtual ~frame();
 	static class frame * Enumerate(frame_effptr function, long functionData)  ;
 	static class frame * FindFrameForBuffer(class buffer *b)  ;
 	static class frame * GetFrameInWindowForBuffer(class buffer *b)  ;

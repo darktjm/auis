@@ -9,7 +9,7 @@
 #include <view.H>
 class butterview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(butterview);
 
     
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);

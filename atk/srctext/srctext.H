@@ -39,7 +39,7 @@ typedef void (*srctext_writefptr)(class srctext *self, FILE *file, long writeID,
 #include <text.H>
 class srctext: public text {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(srctext);
 
     long AlwaysInsertFile(FILE * file,char *filename,long position);
     void Clear();
@@ -103,7 +103,6 @@ class srctext: public text {
     virtual void WrapStyleNow(long pos,long len,style *style,boolean begflag,boolean endflag);
 
     srctext();
-    virtual ~srctext();
 
     static void BuildTable(const char *classname, Dict *hashTable[], const Dict wordlist[]);
     static void HashInsert(Dict *hashTable[], const Dict *word);

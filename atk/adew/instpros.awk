@@ -202,7 +202,7 @@ printf "{\n"
 printf "/* user code begins here for ReadObjects */\n"
 printf "/* user code ends here for ReadObjects */\n"
 printf "}\n"
-printf "ATKdefineRegistry(%s,arbiter,NULL)\n", dclass
+printf "ATKdefineRegistryNoInit(%s,arbiter)\n", dclass
 printf "%s::%s()\n",dclass, dclass
 printf "{\n"
 printf "this->SetDefaultStream(defaultstr);\n"

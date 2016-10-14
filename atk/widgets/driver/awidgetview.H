@@ -31,10 +31,9 @@ protected:
 	fontdesc *defaultfont;		// font of last resort
         view *mouseFocus;
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(AWidgetView);
 	static boolean InitializeClass();
 	AWidgetView();
-	virtual ~AWidgetView();
 
 	view *GetApplicationLayer();
 	void LinkTree(view *parent);

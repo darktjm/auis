@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <fancy.H>
 class fancier: public  fancy {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fancier);
 
     
       
 	fancier();
       
-	virtual ~fancier();
 };
 
 #endif /* _fancier_H_ */

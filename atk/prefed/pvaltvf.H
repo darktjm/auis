@@ -7,7 +7,7 @@
 #include <pvaltvl.H>
 class pvaltvf : public  pvaltvl {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvaltvf);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	pvaltvf();
     
-	virtual ~pvaltvf();
 
 
      class keystate * Keys()  ;

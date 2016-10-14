@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  
 
 
-ATKdefineRegistry(conview, view, NULL);
+ATKdefineRegistryNoInit(conview, view);
 
 
 conview::conview()

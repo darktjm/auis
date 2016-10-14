@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class ctextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(ctextview);
 
     void HandleEndOfLineStyle(long pos);
     void Paren(char key);
@@ -19,7 +19,6 @@ class ctextview: public srctextview {
 
     static boolean InitializeClass();
     ctextview();
-    virtual ~ctextview();
 
     class keystate *c_state;
     class menulist *c_menus;

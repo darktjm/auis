@@ -40,12 +40,11 @@ class imagevInterface : public ScrollInterface {
 #include <view.H>
 class imagev : public  view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(imagev);
     static boolean InitializeClass();
 
 
     imagev();
-    virtual ~imagev();
 
 
     class view * Hit( enum view::MouseAction action, long x, long y, long numberOfClicks )  ;
