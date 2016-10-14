@@ -15,7 +15,7 @@ static boolean chlistview_Debug = FALSE;
 
 
 
-ATKdefineRegistry(chlistview, textview, NULL);
+ATKdefineRegistryNoInit(chlistview, textview);
 
 void chlistview::SetUpdateRegion(long  pos, long  len)
 {

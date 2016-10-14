@@ -45,7 +45,7 @@ static struct attributes hardWiredAttributes[4];
 #define READONLYINDEX 3 /* Where to put the readonly flag. */
 
 
-ATKdefineRegistry(filetype, ATK, NULL);
+ATKdefineRegistryNoInit(filetype, ATK);
 
 
 void filetype::FreeAttributes(struct attributes *attributes)

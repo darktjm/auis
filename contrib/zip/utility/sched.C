@@ -25,7 +25,7 @@ END-SPECIFICATION  ************************************************************/
 #include <errno.h>
 static boolean debug=FALSE;
 
-ATKdefineRegistry(sched, dataobject, NULL);
+ATKdefineRegistryNoInit(sched, dataobject);
 
 void
 sched::Set_Debug( boolean mode )

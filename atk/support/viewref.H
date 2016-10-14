@@ -13,13 +13,12 @@
 class environment;
 class viewref: public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(viewref);
 
 
     
 	viewref();
     
-	virtual ~viewref();
     static class viewref * Create(const char *viewtype, class dataobject *dataobject)  ;
 
     char *viewType;

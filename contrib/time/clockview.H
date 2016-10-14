@@ -15,7 +15,7 @@
 #include <view.H>
 class clockview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clockview);
 
  
   
@@ -25,7 +25,6 @@ public:
   
 	clockview();
   
-	virtual ~clockview();
  	
    void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
    void Update();

@@ -26,7 +26,7 @@
 #include <view.H>
 class help : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(help);
 
     
  
@@ -49,7 +49,6 @@ public:
 	static boolean InitializeClass();
 
     
-	virtual ~help();
     static void SetIndex(const char *indexName);
     static void SetAliasesFile(const char *aliasName);
     static void AddSearchDir(const char *dirName);

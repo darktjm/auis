@@ -13,7 +13,7 @@
 #include <valueview.H>
 class stringV : public  valueview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(stringV);
 
  
    void DrawFromScratch(long x,long y,long width,long height);

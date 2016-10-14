@@ -10,7 +10,7 @@
 #include <view.H>
 class hrv: public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(hrv);
 
     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
     view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight);

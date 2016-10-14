@@ -17,7 +17,7 @@ ATK_IMPL("figorect.H")
 #include <rect.h>
 
 
-ATKdefineRegistry(figorect, figobj, NULL);
+ATKdefineRegistryNoInit(figorect, figobj);
 
 static void MoveHandle(class figorect  *self, long  x , long  y , long  ptref);
 

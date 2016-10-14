@@ -9,7 +9,7 @@ ATK_IMPL("thumbstrV.H")
 #include <thumbstrV.H>
 
 
-ATKdefineRegistry(thumbstrV, thumbV, NULL);
+ATKdefineRegistryNoInit(thumbstrV, thumbV);
 
 const char *thumbstrV::GetValueString()
 {

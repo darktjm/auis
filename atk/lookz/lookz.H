@@ -33,7 +33,7 @@ lookz.H
 #include <dataobject.H>
 class lookz : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(lookz);
 
 
 
@@ -59,7 +59,6 @@ public:
 	
 	lookz();
 	
-	virtual ~lookz();
 
 
 

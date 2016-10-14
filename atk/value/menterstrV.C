@@ -17,7 +17,7 @@ ATK_IMPL("menterstrV.H")
 
 
 
-ATKdefineRegistry(menterstrV, buttonV, NULL);
+ATKdefineRegistryNoInit(menterstrV, buttonV);
 
 class valueview *menterstrV::DoHit( enum view::MouseAction  type,long  x,long  y,long  hits )
                {

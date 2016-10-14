@@ -41,7 +41,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipoarrow.H"
 
 
-ATKdefineRegistry(zipoarrow, zipobject, NULL);
+ATKdefineRegistryNoInit(zipoarrow, zipobject);
 static int Draw( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
 static void Draw_Basic_Style( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane, char				   fill );
 static void Draw_Basic_Body( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *current_x , zip_type_pixel		  *current_y , zip_type_pixel		  *prior_x , zip_type_pixel		  *prior_y );

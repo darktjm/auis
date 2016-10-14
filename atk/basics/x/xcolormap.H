@@ -84,9 +84,8 @@ struct xcolormap_cube {
 
 class xcolormap  : public  colormap  {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(xcolormap);
     xcolormap(Display *dpy=NULL, Colormap def=None);
-    virtual ~xcolormap();
     virtual ddcolor *Alloc(const atom *name);
     virtual ddcolor *Alloc(unsigned short r, unsigned short g, unsigned short b);
     virtual ddcolor *AllocExact(unsigned short r, unsigned short g, unsigned short b, boolean exact);

@@ -29,7 +29,7 @@ END-SPECIFICATION  ************************************************************/
 #include <dataobject.H>
 class sched : public  dataobject {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS_NODEST(sched);
   virtual void Set_Debug( boolean debug );
   static class sched *Create( char *stream_name );
   sched();

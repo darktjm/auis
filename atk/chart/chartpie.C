@@ -99,7 +99,7 @@ struct chartpie_drawing
 
 
 
-ATKdefineRegistry(chartpie, chartobj, NULL);
+ATKdefineRegistryNoInit(chartpie, chartobj);
 static void Show_Pie_Chart( class chartpie	      *self, long			       medium );
 static void Compute_Pie_Points( class chartpie	      *self );
 

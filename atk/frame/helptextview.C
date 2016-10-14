@@ -14,7 +14,7 @@ ATK_IMPL("helptextview.H")
 #include <helptextview.H>
 
 
-ATKdefineRegistry(helptextview, textview, NULL);
+ATKdefineRegistryNoInit(helptextview, textview);
 static char *helptextview_getstartstring(class helptextview  *self,char  *buf);
 
 

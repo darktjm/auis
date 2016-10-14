@@ -70,9 +70,8 @@ typedef boolean (*htmlefptr)(htmltext *self, long pos, htmlenv *env, dataobject 
 #include <text.H>
 class htmltext: public text {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(htmltext);
     htmltext();
-    virtual ~htmltext();
     static boolean InitializeClass();
 
     long ReadSubString(long pos, FILE *file, 

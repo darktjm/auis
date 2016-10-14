@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <graphic.H>
 
 
-ATKdefineRegistry(doodview, view, NULL);
+ATKdefineRegistryNoInit(doodview, view);
 static void DrawMyRect(class doodview  *self, short  transfermode, boolean  FillTheRectangle);
 
 

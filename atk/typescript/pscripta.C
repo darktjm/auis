@@ -16,7 +16,7 @@ ATK_IMPL("pscripta.H")
 static FILE *outfile = NULL;
 
 
-ATKdefineRegistry(pipescriptapp, application, NULL);
+ATKdefineRegistryNoInit(pipescriptapp, application);
 
 boolean pipescriptapp::ParseArgs(int  argc,const char  **argv)
 {

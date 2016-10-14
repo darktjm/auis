@@ -12,7 +12,7 @@
 #include <dataobject.H>
 class helloworld: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(helloworld);
 
 
      long Read(FILE *file,long id)  ;
@@ -21,7 +21,6 @@ public:
     
 	helloworld();
     
-	virtual ~helloworld();
 
     long x,y;
     boolean blackOnWhite;

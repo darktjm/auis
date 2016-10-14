@@ -23,7 +23,7 @@
 #include <textview.H>
 class gtextv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(gtextv);
 
 
  
@@ -38,7 +38,6 @@ public:
   
 	gtextv();
   
-	virtual ~gtextv();
 
  
   int *xp, *yp;          /* Mouse Buffering Arrays */

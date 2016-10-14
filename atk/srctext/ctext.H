@@ -14,7 +14,7 @@
 #include "srctext.H"
 class ctext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(ctext);
 
     int Indentation(long pos);
     boolean IsTokenChar(char ch);

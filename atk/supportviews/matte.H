@@ -11,7 +11,7 @@
 
 class matte : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(matte);
 
 
      void WantNewSize(class view *requestor);
@@ -58,7 +58,6 @@ public:
     
 	matte();
     
-	virtual ~matte();
 
     int desw,desh;
     class view *child;

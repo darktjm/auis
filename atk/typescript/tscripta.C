@@ -16,7 +16,7 @@ ATK_IMPL("tscripta.H")
 #include <fontdesc.H>
 #include <framemessage.H>
 
-ATKdefineRegistry(typescriptapp, application, NULL);
+ATKdefineRegistryNoInit(typescriptapp, application);
 
 boolean typescriptapp::ParseArgs(int argc, const char **argv)
 {

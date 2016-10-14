@@ -6,18 +6,15 @@
 ATK_IMPL("textflow.H")
 #include <textflow.H>
 
-ATKdefineRegistry(textflow, figure, NULL);
+ATKdefineRegistryNoInit(textflow, figure);
 
 textflow::textflow()
 {
-    ATKinit;
-
     THROWONFAILURE( TRUE);
 }
 
 textflow::~textflow()
 {
-    ATKinit;
 }
 
 const char *textflow::ViewName()

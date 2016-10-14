@@ -42,7 +42,7 @@ END-SPECIFICATION  ************************************************************/
 static long				  sides;
 
 
-ATKdefineRegistry(zipopolygon, zipocirc, NULL);
+ATKdefineRegistryNoInit(zipopolygon, zipocirc);
 
 #if (defined(MACH) && defined(i386))
 int calltosavecompile (zip_type_pane  pane, zip_type_figure  figure, class zipopolygon  *self);

@@ -9,7 +9,7 @@
 #include <month.H>
 
 
-ATKdefineRegistry(month, dataobject, NULL);
+ATKdefineRegistryNoInit(month, dataobject);
 
 
 month::month()

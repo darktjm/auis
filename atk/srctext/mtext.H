@@ -10,7 +10,7 @@
 #include "modtext.H"
 class mtext: public modtext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(mtext);
 
     void SetupStyles();
 

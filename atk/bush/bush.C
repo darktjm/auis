@@ -102,7 +102,7 @@ ATK_IMPL("bush.H")
 
 static const tree_Specification DirTree[] = {tree_Order(tree_PreOrder), 0};
 
-ATKdefineRegistry(bush, apt, NULL);
+ATKdefineRegistryNoInit(bush, apt);
 static int ExtractNodePath( class bush     *self, const char		   *source , char		   **path );
 static int ExtractNodeName( char		 *source, char	        **name );
 static const char * getname( class bush   *self, int   	  uid);

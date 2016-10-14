@@ -19,7 +19,7 @@ enum valueview_MouseStates
 #include <view.H>
 class valueview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(valueview);
 
 
    void FullUpdate( enum view::UpdateType type, long x, long y, long width, long height );

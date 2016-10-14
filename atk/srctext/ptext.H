@@ -17,7 +17,7 @@
 #include "srctext.H"
 class ptext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(ptext);
 
     void SetAttributes(struct attributes *atts);
     void SetupStyles();

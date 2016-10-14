@@ -23,13 +23,12 @@ struct listitem {
 
 class chlist: public text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chlist);
 
     
       
 	chlist();
       
-	virtual ~chlist();
     
        void Clear();
     

@@ -20,7 +20,7 @@
 #include <pushbutton.H>
 class pushbuttonview: public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(pushbuttonview);
 
 
 
@@ -29,7 +29,6 @@ class pushbuttonview: public  view {
 
       pushbuttonview();
 
-      virtual ~pushbuttonview();
 
       void ReceiveInputFocus();
       void LoseInputFocus();

@@ -18,7 +18,7 @@ ATK_IMPL("stylesheet.H")
 
 
 
-ATKdefineRegistry(stylesheet, observable, NULL);
+ATKdefineRegistryNoInit(stylesheet, observable);
 ATKdefineRegistryNoInit(stylesheetInternal, traced);
 static long FindStyle(class stylesheetInternal  *self, class style  *styleptr);
 

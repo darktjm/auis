@@ -9,14 +9,12 @@
 #include <view.H>
 class chompview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chompview);
 
     
       
 	chompview();
       
-	virtual ~chompview();
-    
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
        view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
        void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);

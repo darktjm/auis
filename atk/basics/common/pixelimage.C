@@ -34,7 +34,7 @@ static int bitmask[8] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
 */
 
 
-ATKdefineRegistry(pixelimage, observable, NULL);
+ATKdefineRegistryNoInit(pixelimage, observable);
 static boolean ClipChange(class pixelimage  *self, struct rectangle  *sub);
 static long GetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *dest);
 static long SetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *src);

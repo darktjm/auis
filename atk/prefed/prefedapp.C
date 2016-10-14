@@ -18,7 +18,7 @@ static const char *fakeargv[]=
 };
 
 
-ATKdefineRegistry(prefedapp, ezapp, NULL);
+ATKdefineRegistryNoInit(prefedapp, ezapp);
 
 
 prefedapp::prefedapp()

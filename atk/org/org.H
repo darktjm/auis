@@ -46,7 +46,7 @@ END-SPECIFICATION  ************************************************************/
 class org : public  apt
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(org);
 
 
 
@@ -64,7 +64,6 @@ public:
   
 	org();
   
-	virtual ~org();
 
 
 

@@ -115,11 +115,10 @@
 class gentext : public  ness {
 	text *retval;	// value returned by Instantiate 
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(gentext);
 	static boolean InitializeClass();
 	
 	gentext();
-	virtual ~gentext();
 
 	virtual void SetVar(const char *var, const char *value);
 		/* sets the named global variable to the C string */

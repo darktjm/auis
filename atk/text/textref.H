@@ -10,7 +10,7 @@
 
 class textref : public fnote {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(textref);
 
 
 	 const char * ViewName()  ;

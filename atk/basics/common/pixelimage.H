@@ -42,7 +42,7 @@
 
 class pixelimage : public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pixelimage);
 
 
 
@@ -138,7 +138,6 @@ public:
 	pixelimage();
 		/* initializes to having 'bits' == NULL */
 	/* struct classhdr *ClassID, */
-	virtual ~pixelimage();
 		/* discards the 'bits' value if non-NULL */
 	static class pixelimage * Create(long width, long height)  ;
 		/* creates a pixelimage object with 'bits' for a raster

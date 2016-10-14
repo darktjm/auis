@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(hggh, dataobject, NULL);
+ATKdefineRegistryNoInit(hggh, dataobject);
 
 
 hggh::hggh()

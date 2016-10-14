@@ -44,7 +44,7 @@ enum sbuttonv_conv {
 
 class sbuttonv: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(sbuttonv);
 
   
     
@@ -53,7 +53,6 @@ public:
     
 	sbuttonv();
     
-	virtual ~sbuttonv();
     static void SaveViewState(class view *self, struct sbuttonv_view_info *vi);
     static void RestoreViewState(class view *self, struct sbuttonv_view_info *vi);
 

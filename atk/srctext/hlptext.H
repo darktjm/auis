@@ -10,7 +10,7 @@
 #include <text.H>
 class hlptext: public text {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(hlptext);
 
     long Read(FILE *file, long id);
 

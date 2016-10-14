@@ -50,7 +50,7 @@ label.H
 
 class label : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(label);
 
 
 
@@ -81,7 +81,6 @@ public:
 	
 	label();
 	
-	virtual ~label();
 
 
 

@@ -14,7 +14,7 @@ ATK_IMPL("hwapp.H")
 #include "hwview.H"
 
 
-ATKdefineRegistry(helloworldapp, application, NULL);
+ATKdefineRegistryNoInit(helloworldapp, application);
 
 boolean helloworldapp::Start()
 {

@@ -39,7 +39,7 @@ ATK_IMPL("lpair.H")
 
 /* Basically, the only reason this routine exists is because the FullUpdate signature does not use rectangles. This routine expects its redrawRectangle argument to be valid know matter what the type argument is. The type arg is just passed through to the children that need to be redrawn. All in all, this, Update, and FullUpdate can probably be simplified. -Z- */
 
-ATKdefineRegistry(lpair, view, NULL);
+ATKdefineRegistryNoInit(lpair, view);
 static void DoFullUpdate(class lpair  *self, enum view::UpdateType  type, struct rectangle  *redrawRectangle);
 static void lpair_ComputeSizesFromTotal (class lpair  *l, int	 totalsize);
 static void lpair_ComputeSizes (class lpair  *l);

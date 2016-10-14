@@ -86,13 +86,12 @@ enum prefs_SortType {
 #include <text.H>
 class prefs : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(prefs);
 
 
     
 	prefs();
     
-	virtual ~prefs();
     static const char * TranslateViewName(const char *name)  ;
 
     virtual long ReadDataPart()  ;

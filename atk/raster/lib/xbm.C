@@ -59,7 +59,7 @@ static boolean initialized = FALSE;	/* easier to fill in at run time */
   
 /* from X11R5 XRdBitF.c */
 
-ATKdefineRegistry(xbm, ATK, NULL);
+ATKdefineRegistryNoInit(xbm, ATK);
 static int NextInt (FILE  *fstream);
 static void initHexTable();
 

@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <conob.H>
 
 
-ATKdefineRegistry(ekgview, conview, NULL);
+ATKdefineRegistryNoInit(ekgview, conview);
 
 
 ekgview::ekgview()

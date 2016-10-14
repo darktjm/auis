@@ -18,7 +18,7 @@ ATK_IMPL("mantext.H")
 #define INCREMENT 1000
 
 
-ATKdefineRegistry(mantext, rofftext, NULL);
+ATKdefineRegistryNoInit(mantext, rofftext);
 
 
 mantext::mantext()

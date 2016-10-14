@@ -7,7 +7,7 @@
 #include <pvaltv.H>
 class pvaltvl : public  pvaltv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvaltvl);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	pvaltvl();
     
-	virtual ~pvaltvl();
 
 
      void ObservedChanged(class observable *changed, long value);

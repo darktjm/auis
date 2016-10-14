@@ -26,7 +26,7 @@ ATK_IMPL("mmtext.H")
 #define INCREMENT 1000
 
 
-ATKdefineRegistry(mmtext, rofftext, NULL);
+ATKdefineRegistryNoInit(mmtext, rofftext);
 
 mmtext::mmtext()
 {

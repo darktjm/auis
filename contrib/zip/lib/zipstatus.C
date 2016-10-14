@@ -308,7 +308,7 @@ static const char		 * const zip_pane_facility_names[] =
 				};
 
 
-ATKdefineRegistry(zipstatus, zipview, NULL);
+ATKdefineRegistryNoInit(zipstatus, zipview);
 static char * Format_Message( class zipstatus	      *self, int			       facility, int			       status );
 static char * Format_Figure_Status_Message ( class zipstatus		  *self, zip_type_figure		   figure );
 static char * Format_Image_Status_Message ( class zipstatus		  *self, zip_type_image		   image );

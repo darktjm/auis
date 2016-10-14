@@ -25,7 +25,7 @@ ATK_IMPL("namespace.H")
 /****************************************************************/
 
 
-ATKdefineRegistry(Namespace, ATK, NULL);
+ATKdefineRegistryNoInit(Namespace, ATK);
 static int Index(class Namespace  * self,const class atom  * key);
 static int Create( class Namespace  * self, const class atom  * key );
 

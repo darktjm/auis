@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class ptextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(ptextview);
 
     class keystate *PrependKeyState();
     void PostMenus(class menulist *menulist);
@@ -20,7 +20,6 @@ class ptextview: public srctextview {
 
     static boolean InitializeClass();
     ptextview();
-    virtual ~ptextview();
 
     class keystate *c_state;
     class menulist *c_menus;    

@@ -9,7 +9,7 @@
 #include <dataobject.H>
 class chomp: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(chomp);
 
 };
 /** @} */

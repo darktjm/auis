@@ -34,7 +34,7 @@ ATK_IMPL("labelview.H")
 
 
 	
-ATKdefineRegistry(labelview, view, NULL);
+ATKdefineRegistryNoInit(labelview, view);
 static boolean BogusCallFromParent(class labelview  *self, const char  *where , const char  *msg);
 static boolean CheckWindow(class labelview  *self, const char  *where);
 static void RedrawTable(class labelview  *self);

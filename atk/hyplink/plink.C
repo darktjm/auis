@@ -15,7 +15,7 @@ ATK_IMPL("plink.H")
 #define MAX_LINE_LENGTH 70
 
 
-ATKdefineRegistry(plink, link, NULL);
+ATKdefineRegistryNoInit(plink, link);
 static void WriteLine(FILE  *f, const char  *l);
 static char *GlomStrings(char  *s , char  *t);
 static char *ReadLine(FILE  *f);

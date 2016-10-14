@@ -11,7 +11,7 @@ ATK_IMPL("textintv.H")
 #include "titextv.H"
 
 
-ATKdefineRegistry(textintv, wrapv, NULL);
+ATKdefineRegistryNoInit(textintv, wrapv);
 
 textintv::textintv()
 {

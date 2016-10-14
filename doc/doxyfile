@@ -83,7 +83,8 @@ EXPAND_AS_DEFINED      = BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS \
 			 DECLARE_GLIST_CLASS GLIST_CLASS \
 			 DEFINE_AMHASH_CLASS DEFINE_AOHASH_CLASS DEFINE_AHASH_CLASS_ITER \
 			 ATK_CLASS ASEQ ASEQC ASTYPE AVSSET \
-			 Concat Concat3 Stringize
+			 Concat Concat3 Stringize \
+			 TRACED_CLASS TRACED_CLASS_NODEST
 # supposedly this is only needed for including files not processed, but
 # this is necessary to get the EXPAND_AS_DEFINED option to work
 INCLUDE_PATH           = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk

@@ -24,7 +24,7 @@ typedef int (*butt_hit_fptr)(void * rock1, void * rock2, class butt * self, enum
 
 class butt: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(butt);
 
     
        void FullUpdate(enum view::UpdateType type, long left, long top,
@@ -36,7 +36,6 @@ public:
       
 	butt();
       
-	virtual ~butt();
     
       virtual void SetText(const char *txt);
       virtual void SetButtonFont(class fontdesc *f);

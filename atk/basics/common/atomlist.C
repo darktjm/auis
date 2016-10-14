@@ -13,7 +13,7 @@ ATK_IMPL("atomlist.H")
  */
 
 
-ATKdefineRegistry(atomlist, ATK, NULL);
+ATKdefineRegistryNoInit(atomlist, ATK);
 
 struct atoms {
     const class atom *atom;

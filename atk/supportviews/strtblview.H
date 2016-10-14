@@ -35,7 +35,7 @@ strtblview.H
 
 class strtblview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(strtblview);
 
 	 void FullUpdate( enum view::UpdateType type, 
 		long left, long top, long width, long height );
@@ -66,7 +66,6 @@ public:
 	
 	strtblview();
 	
-	virtual ~strtblview();
 
 	/* the following are options for SetItemHitProc.  
 		The rock passed to the stv parameter is ignored */

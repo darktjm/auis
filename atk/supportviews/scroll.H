@@ -66,7 +66,7 @@ enum scroll_Regions {
 
 class scroll : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(scroll);
   
      void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);
      void Update();
@@ -136,7 +136,6 @@ public:
     
 	scroll();
     
-	virtual ~scroll();
 
 	inline void SetInterface(class ScrollInterface *s) {
 	    if(!customsi) delete si;

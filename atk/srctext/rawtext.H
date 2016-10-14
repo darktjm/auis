@@ -10,7 +10,7 @@
 #include <text.H>
 class rawtext: public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(rawtext);
 
 
   
@@ -26,7 +26,6 @@ public:
     
 	rawtext();
     
-	virtual ~rawtext();
 
   
     inline boolean   PutNewlineAtEOF() { return ((this)->NewlineEOF); }

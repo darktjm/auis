@@ -13,7 +13,7 @@ ATK_IMPL("palette.H")
 static struct palette_item *FreeList;
 
 
-ATKdefineRegistry(palette, view, NULL);
+ATKdefineRegistryNoInit(palette, view);
 static struct palette_item *palette_AddItem(class palette  *self, union palette_iteminfo  info, int  pos, palette_hitfptr fn, long  rock, enum palette_autoselect  autoselect);
 
 

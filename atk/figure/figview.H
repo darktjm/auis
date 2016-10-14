@@ -62,13 +62,12 @@ typedef void (*figview_esfptr)(class figobj *this_c, long ix, class figview *sel
 
 class figview  : public  view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(figview);
 
       static boolean InitializeClass();
 
       figview();
 
-      virtual ~figview();
 
 
       void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);

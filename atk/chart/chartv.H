@@ -123,7 +123,7 @@ struct  chartv_specification
 class chartv : public  aptv
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chartv);
 
 
    void LinkTree(class view *parent);
@@ -159,7 +159,6 @@ public:
   
 	chartv();
   
-	virtual ~chartv();
 
 
 

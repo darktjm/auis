@@ -13,7 +13,7 @@
 #include "srctext.H"
 class asmtext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(asmtext);
 
     long Indent(mark *range);
     char * Keywordify(char *buff, boolean checkforceupper);

@@ -38,7 +38,7 @@ END-SPECIFICATION  ************************************************************/
 #include <textview.H>
 class suitecv: public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(suitecv);
 
     
 	
@@ -47,7 +47,6 @@ public:
 	
 	suitecv();
 	
-	virtual ~suitecv();
 
 	 void FullUpdate( enum view::UpdateType type, long left, long top, long width, long height );
 	 void PostKeyState(class keystate *kstate);

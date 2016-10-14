@@ -13,7 +13,7 @@
 
 class figotext : public  figobj {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(figotext);
 
     
       static class figotext * Create(char *chars, long x, long y)  ;
@@ -23,7 +23,6 @@ class figotext : public  figobj {
 
       figotext();
 
-      virtual ~figotext();
 
 
       void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);

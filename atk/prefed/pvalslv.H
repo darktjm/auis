@@ -7,13 +7,12 @@
 #include <ssliderv.H>
 class pvalslv : public  ssliderv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvalslv);
 
 
     
 	pvalslv();
     
-	virtual ~pvalslv();
 
      long WhatIsAt(long num, long denom)  ;
      void Endzone(int end, enum view::MouseAction act);

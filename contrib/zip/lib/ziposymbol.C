@@ -86,7 +86,7 @@ static long				  symbol_sets_count;
 #define  OutstandingHeight		 (self->outstanding_height)
 
 
-ATKdefineRegistry(ziposymbol, ziporect, NULL);
+ATKdefineRegistryNoInit(ziposymbol, ziporect);
 
 static long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane pane );
 static long Draw_Symbol( class ziposymbol *self, zip_type_figure figure, zip_type_pane pane, char *algorithm, zip_type_pixel left , zip_type_pixel top , zip_type_pixel width , zip_type_pixel height,  long x_factor , long y_factor, boolean print );

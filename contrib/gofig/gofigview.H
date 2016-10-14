@@ -27,7 +27,7 @@ enum noteopts {Number,Letter,None};
 #include <view.H>
 class gofigview  : public  view    {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(gofigview);
 
 	void FullUpdate(enum view::UpdateType type, 
 		long left, long top, long width, long height);
@@ -51,7 +51,6 @@ public:
 	static boolean InitializeClass();
 
 	gofigview();
-	virtual ~gofigview();
 
 	class menulist  *Menus;
 	class keystate *Keystate;

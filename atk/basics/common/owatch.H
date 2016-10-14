@@ -17,7 +17,7 @@ struct owatch_data {
 
 class owatch : public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(owatch);
 
 
       

@@ -32,7 +32,7 @@ rasterimage.H
 #include <pixelimage.H>
 class rasterimage : public  pixelimage {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(rasterimage);
 
 
 
@@ -65,7 +65,6 @@ public:
 	
 	rasterimage();
 	
-	virtual ~rasterimage();
 	static class rasterimage * Create(long width, long height)  ;
 		/* creates a rasterimage object with 'bits' for a raster
 			of the given width and height */

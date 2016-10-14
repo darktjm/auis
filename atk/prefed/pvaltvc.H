@@ -7,7 +7,7 @@
 #include <pvaltv.H>
 class pvaltvc : public  pvaltv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvaltvc);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	pvaltvc();
     
-	virtual ~pvaltvc();
 
     virtual void Select(int ind);
 

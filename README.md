@@ -146,13 +146,24 @@ So far, the following incompatibilities have been introduced:
    I have also removed metamail, since there are better ways to get it
    (other than the AMS hacks, but since I'm chucking AMS anyway...)
 
- - No AFS support.  Mostly a hack, anyway. The only useful things I
-   can think of are directory permission and file flush semantics,
-   neither of which is that important with any of the supplied
-   apps.  Actually, I guess the console app does AFS status monitoring
-   as well, but I'm not going to set up a dummy AFS cell just to test
-   it.  Like AMS above, I actually removed the code, so that I don't
-   have to deal with it when doing mass updates.
+ - I have removed AFS support.  It was mostly a hack, anyway. The
+   only useful things I can think of are directory permission and
+   file flush semantics, neither of which is that important with
+   any of the supplied apps.  Actually, I guess the console app
+   does AFS status monitoring as well, but I'm not going to set up
+   a dummy AFS cell just to test it.  Like AMS above, I actually
+   removed the code, so that I don't have to deal with it when
+   doing mass updates.
+
+ - I have made the destructor for every class derived from traced
+   protected, and added a dummy protected destructor to those classes
+   which had none.  I did this using a macro, which will generate hate
+   from anti-macro C++ers, but it saves typing, ensures consistency of
+   implementation, and provides a hint to users of the class as to why
+   they are not allowed to destroy the object directly.  As a side
+   effect, I turned illegal object declarations into a sort of
+   auto-freeing pointer using a template class (in violation of the
+   anti-template coding guideline).
 
  - I have removed the ch files and tools required to convert out-of-tree
    pre-C++ code to C++.  Since I am unaware of any such code, this does
@@ -245,7 +256,7 @@ So far, the following incompatibilities have been introduced:
       fine.   The main thing to research is that they are compatible
       with dynamic loading, and how to portably instantiate templates
       at particular locations.  In particular, nested types are
-      completely safe.
+      completely safe (and I am using them to clean up name spaces).
    
     - Leaving the burden of space ownership to the callee is safe, but
       inefficient.  Instead, document space ownership.  For example,

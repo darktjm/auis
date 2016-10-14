@@ -20,14 +20,13 @@
 #include <dataobject.H>
 class header: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(header);
 
 
         static class header *Create(int  type, char *left, char *center, char *right)  ;
     
 	header();
     
-	virtual ~header();
     
 	static boolean InitializeClass();
 	static boolean atk_inited;

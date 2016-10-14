@@ -7,13 +7,12 @@
 #include <pvalsbv.H>
 class pvalbv : public  pvalsbv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvalbv);
 
 
     
 	pvalbv();
     
-	virtual ~pvalbv();
 
      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;
      void UpdateSButton();

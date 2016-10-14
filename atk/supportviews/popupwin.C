@@ -18,11 +18,11 @@ static void RetractProc(popupwin *p,  const avalueflex &aux, const avalueflex &i
     p->Retract();
 }
 
-static popupwinfunc func(RetractProc,1L);
+static traced_ptr<popupwinfunc> func(new popupwinfunc(RetractProc,1L));
 static keymap *km=NULL;
 
 static boolean InitializeClass() {
-    proctable_Entry *proc=proctable::DefineAction("popupwin-cancel", &func, &popupwin_ATKregistry_, NULL, "Cancels a popup.");
+    proctable_Entry *proc=proctable::DefineAction("popupwin-cancel", func, &popupwin_ATKregistry_, NULL, "Cancels a popup.");
     km=new keymap;
     km->BindToKey("\007", proc, 0);
     return TRUE;

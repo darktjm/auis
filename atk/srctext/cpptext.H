@@ -21,7 +21,7 @@
 #include "ctext.H"
 class cpptext: public ctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(cpptext);
 
     void BackwardCheckLabel(long pos);
     void BreakLine(class mark *endofline);

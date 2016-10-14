@@ -10,7 +10,7 @@
 #include <stringV.H>
 class clicklistV : public  stringV {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clicklistV);
 
 
     void ObservedChanged( class observable * observed, long status );
@@ -20,7 +20,6 @@ public:
    
 	clicklistV();
    
-	virtual ~clicklistV();
 
     class text *textp;
     class cltextview *cltextviewp;

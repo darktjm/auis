@@ -24,7 +24,7 @@ extern char ProgramName[];	/* blechhh */
 static const char *nullstring="";
 
 
-ATKdefineRegistry(environ, ATK, NULL);
+ATKdefineRegistryNoInit(environ, ATK);
 static boolean varcmp(const char  *variable, const char  *envEntry);
 static char * strncpyMovePointer(char *dest, const char *src, const int numchars);
 

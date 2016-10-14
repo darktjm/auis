@@ -42,7 +42,7 @@ static struct keystate  *class_keystate;
 
 /* compute the parameters which say how big the largest item is */
 
-ATKdefineRegistry(strtblview, view, NULL);
+ATKdefineRegistryNoInit(strtblview, view);
 static void ComputeItemSize(class strtblview  *self);
 static void ComputeOrganization (class strtblview  *self, short  width , short  height);
 static void iRect(class strtblview    *self, short  i, struct rectangle  *r);

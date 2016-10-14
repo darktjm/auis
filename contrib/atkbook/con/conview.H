@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <view.H>
 class conview: public view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(conview);
 
     
       
 	conview();
       
-	virtual ~conview();
     
        view::DSattributes DesiredSize(long width, long height,
 	enum view::DSpass pass, long *dWidth,

@@ -15,7 +15,7 @@ ATK_IMPL("hwapp.H")
 #include "view.H"
 
 
-ATKdefineRegistry(helloworldapp, application, NULL);
+ATKdefineRegistryNoInit(helloworldapp, application);
 static boolean makeWindow(class dataobject  *dobj);
 
 

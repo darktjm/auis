@@ -8,9 +8,8 @@ class htmltextview;
 class htmlimagev : public imagev {
     long x, y;
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(htmlimagev);
     htmlimagev();
-    virtual ~htmlimagev();
     
     view *Hit(enum view::MouseAction action,long x, long y, long numberOfClicks);
     inline void GetHitPos(long *xp, long *yp) {

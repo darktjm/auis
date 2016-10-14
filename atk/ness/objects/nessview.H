@@ -12,7 +12,7 @@
 
 class nessview  : public  scroll {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(nessview);
 
 
 
@@ -42,7 +42,6 @@ public:
 			/* Create default Keymap & Menus */
 	
 	nessview();
-	virtual ~nessview();
 
 
 	class textview *SourceText;	/* display the ness script */

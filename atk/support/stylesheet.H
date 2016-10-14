@@ -22,7 +22,7 @@
 
 class stylesheetInternal : public  traced {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(stylesheetInternal);
     virtual void FreeStyles();			/* clear out all styles in the stylesheet */
     virtual void Add(class style *styleptr);	/* add a style to the stylesheet */
     virtual void Delete(class style *styleptr);	/* delete a style from the stylesheet */
@@ -46,7 +46,6 @@ public:
  the stylesheetInternal object pointed to by dest. */
     virtual void Copy(stylesheetInternal *dest);
 
-    virtual ~stylesheetInternal();
 
     stylesheetInternal();
 
@@ -62,7 +61,7 @@ struct stylesheet_maplist;
 class stylesheet : public  observable {
   public:
     stylesheetInternal *si;
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(stylesheet);
     inline void PrepareForChangesIfNeeded() {
 	if(si->ReferenceCount()>1) {
 	    PrepareForChanges();
@@ -155,8 +154,6 @@ class stylesheet : public  observable {
 
     void PrepareForChanges();
     boolean FindReplacement(style *oldstyle, style **newstyle);
-    
-    virtual ~stylesheet();
     
     stylesheet();
     stylesheet(const stylesheet *s);

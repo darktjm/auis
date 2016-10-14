@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <lpair.H>
 class hgghview: public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(hgghview);
 
     
       
@@ -30,7 +30,6 @@ public:
       
 	hgghview();
       
-	virtual ~hgghview();
     
        void PostKeyState(class keystate *keystate);
        void PostMenus(class menulist *ml);

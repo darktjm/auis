@@ -9,7 +9,7 @@ ATK_IMPL("sliderstrV.H")
 #include <sliderstrV.H>
 
 
-ATKdefineRegistry(sliderstrV, sliderV, NULL);
+ATKdefineRegistryNoInit(sliderstrV, sliderV);
 
 const char *sliderstrV::GetValueString()
 {

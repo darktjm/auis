@@ -39,7 +39,7 @@ END-SPECIFICATION
 #include <view.H>
 class suiteev : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(suiteev);
 
 
     
@@ -49,7 +49,6 @@ public:
 	
 	suiteev();
 	
-	virtual ~suiteev();
 
     
 	 void FullUpdate(enum view::UpdateType type,long left,long top,long width,long height);

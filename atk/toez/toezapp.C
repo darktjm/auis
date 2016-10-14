@@ -36,7 +36,7 @@ ATK_IMPL("toezapp.H")
 #include <rofftext.H>
 
 	
-ATKdefineRegistry(toezapp, application, NULL);
+ATKdefineRegistryNoInit(toezapp, application);
 static void show_usage(class toezapp  *self);
 static void InsistOn(const char  *arg , const char  *assumed);
 static void AnalyzeInput(class toezapp  *self);

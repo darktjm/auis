@@ -85,6 +85,7 @@
 - view fixes:
   - Implement CanView() everywhere, and use it where needed.
   - Ensure SetDataObject() works with NULL data object
+- Get rid of ATKinit.  Use static variables with constructors instead.
 - test all apps, all insets, all docs, etc.
   - squash any crashes
   - run valgrind on as much as possible
@@ -172,6 +173,7 @@
     It's possible to do "make Makefiles; make All", but some places depend
       on libs/headers from previous dirs to be installed
   - make it possible to use -k and -j (-k mostly works now)
+  - make top-level Makefile not disappear w/ "make Makefiles"
   - fix corruption of flags (empty flags become -- eventually)
   - distclean target that removes .depends and Makefile
   - maybe just switch to cmake

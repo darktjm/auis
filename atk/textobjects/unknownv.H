@@ -6,7 +6,7 @@
 #include <textview.H>
 class unknownv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(unknownv);
 
     
        void PostMenus(class menulist *menus);
@@ -17,7 +17,6 @@ public:
     
 	unknownv();
     
-	virtual ~unknownv();
     
       class menulist *menus;
  };

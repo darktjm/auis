@@ -19,7 +19,7 @@ ATK_IMPL("bargraphV.H")
 #define MIN(A,B) ((A > B)? B:A)
 #endif
 
-ATKdefineRegistry(bargraphV, sliderV, NULL);
+ATKdefineRegistryNoInit(bargraphV, sliderV);
 static void DrawKnurl(class bargraphV  * self,boolean  fullupdate,struct rectangle  *rr);
 
 

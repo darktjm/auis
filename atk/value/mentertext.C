@@ -18,7 +18,7 @@ ATK_IMPL("mentertext.H")
 #define Enclosed(text,pos) Root(this) != MyEnvinfo(text,pos)
 
 
-ATKdefineRegistry(mentertext, text, NULL);
+ATKdefineRegistryNoInit(mentertext, text);
 static void checkstyles(class mentertext  *self);
 static int mentertext_GetBufP(class mentertext  *self,char  *buf);
 

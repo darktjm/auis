@@ -17,7 +17,7 @@ static long MSEC10 = event_MSECtoTU(10);
 static class event *freeList;
 
 
-ATKdefineRegistry(event, ATK, NULL);
+ATKdefineRegistryNoInit(event, ATK);
 
 event::event()
 {

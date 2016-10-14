@@ -77,9 +77,8 @@ class ScrollInterface;
  */
 class view : public  observable {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(view);
     static boolean InitializeClass();
-    virtual ~view();
     view();
 
     static const int VERSION = 1;

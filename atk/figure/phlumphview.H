@@ -11,11 +11,10 @@
 
 class phlumphview : public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(phlumphview);
 
     static boolean InitializeClass();
     phlumphview(boolean iconmode = TRUE);
-    virtual ~phlumphview();
 
     void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
     void Update();

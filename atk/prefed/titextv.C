@@ -11,7 +11,7 @@ ATK_IMPL("titextv.H")
 #include "textintv.H"
 
 
-ATKdefineRegistry(titextv, textview, NULL);
+ATKdefineRegistryNoInit(titextv, textview);
 
 titextv::titextv()
 {

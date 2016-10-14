@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <sys/file.h> /* for access() call */
 #include <errno.h>
 
-ATKdefineRegistry(conapp, application, NULL);
+ATKdefineRegistryNoInit(conapp, application);
 
 conapp::conapp()
 {

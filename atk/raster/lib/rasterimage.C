@@ -88,7 +88,7 @@ ATK_IMPL("rasterimage.H")
 	XXX we need a home for this function 
 */
 	
-ATKdefineRegistry(rasterimage, pixelimage, NULL);
+ATKdefineRegistryNoInit(rasterimage, pixelimage);
 static char * Stabilize(char  *s);
 
 

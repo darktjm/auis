@@ -10,7 +10,7 @@
 #include <sliderV.H>
 class bargraphV : public  sliderV {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(bargraphV);
 
 
    void Drawslider(boolean fullupdate,struct rectangle *rr);

@@ -10,7 +10,7 @@
 #include "modtext.H"
 class m3text: public modtext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(m3text);
 
     boolean Quoted(long pos);
     void RedoStyles();

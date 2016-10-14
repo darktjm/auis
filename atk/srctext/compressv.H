@@ -10,11 +10,10 @@
 #include <view.H>
 class compressv: public view {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(compressv);
     static boolean InitializeClass();
 
     compressv();
-    virtual ~compressv();
 
     view::DSattributes DesiredSize(long width,long height,enum view::DSpass pass,long *dWidth,long *dheight);
     void FullUpdate(enum view::UpdateType type,long left,long top,long width,long right);

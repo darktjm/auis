@@ -8,12 +8,10 @@ ATK_IMPL("phlumph.H")
 
 #include <textflow.H>
 
-ATKdefineRegistry(phlumph, dataobject, NULL);
+ATKdefineRegistryNoInit(phlumph, dataobject);
 
 phlumph::phlumph()
 {
-    ATKinit;
-
     this->numpages = 0;
     this->listsize = 0;
     this->pagelist = NULL;
@@ -24,8 +22,6 @@ phlumph::phlumph()
 
 phlumph::~phlumph()
 {
-    ATKinit;
-
     if (this->pagelist)
 	free(this->pagelist);
 

@@ -15,12 +15,11 @@
 #include <dataobject.H>
 class icon : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(icon);
 
 
   
 	icon();
-	virtual ~icon();
   
 	static boolean InitializeClass();
 	static boolean atk_inited;

@@ -25,7 +25,7 @@ class celview;
 typedef class view *(*celview_hitfptr)(class celview *self, enum view::MouseAction, long x, long y, long clicks, long rock);
 class celview: public view {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(celview);
 
 
       void WantNewSize(class view *requestor);
@@ -77,7 +77,6 @@ class celview: public view {
       static boolean InitializeClass();
 
 
-      virtual ~celview();
       // needed during deletion of arbiterview <sigh>
       virtual void DeleteCell(class celview *cv) { }
 

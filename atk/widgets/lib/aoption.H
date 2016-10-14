@@ -18,9 +18,9 @@ class AOptionMenu : public  AButton {
     AListSelectedItem item;
 #endif
     ASlotInt selected;
-    AOptionSlotAct buttonTextAct;
+    traced_ptr<AOptionSlotAct> buttonTextAct;
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(AOptionMenu);
 
     void NotifyObservers(long change);
     

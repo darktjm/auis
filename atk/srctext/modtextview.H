@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class modtextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(modtextview);
 
     void HandleEndOfLineStyle(long pos);
     void Paren(char key);
@@ -19,7 +19,6 @@ class modtextview: public srctextview {
 
     static boolean InitializeClass();
     modtextview();
-    virtual ~modtextview();
 
     class keystate *mod_state;
     class menulist *mod_menus;    

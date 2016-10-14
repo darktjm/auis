@@ -10,7 +10,7 @@
 #include <dataobject.H>
 class hr : public dataobject {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(hr);
 
     const char *ViewName();
 };

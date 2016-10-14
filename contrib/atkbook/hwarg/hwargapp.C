@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <text.H>
 
 
-ATKdefineRegistry(hwargapp, hwapp, NULL);
+ATKdefineRegistryNoInit(hwargapp, hwapp);
 
 
 hwargapp::hwargapp()

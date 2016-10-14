@@ -19,8 +19,7 @@ class urlbutton;
 class urlbuttonview : public sbuttonv {
   public:
     urlbuttonview();
-    virtual ~urlbuttonview();
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(urlbuttonview);
     static boolean InitializeClass();
 
     // overrides

@@ -10,7 +10,7 @@
 class stroffetview : public  iconview
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(stroffetview);
 
  
      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);

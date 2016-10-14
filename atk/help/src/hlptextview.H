@@ -9,7 +9,7 @@
 #include <textview.H>
 class hlptextview: public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(hlptextview);
 
  
   
@@ -24,7 +24,6 @@ public:
     
 	hlptextview();
     
-	virtual ~hlptextview();
  
   
     inline void SetHyperlinkCheck(boolean newValue) { ((this)->checkForHyperlinks = (newValue)); }

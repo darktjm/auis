@@ -12,14 +12,13 @@
 #include <observable.H>
 class arbcon : public  observable  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(arbcon);
  
 
         
 	static boolean InitializeClass();
 
 	
-	virtual ~arbcon();
 	
 	arbcon();    
 /* user code begins here for classprocedures */

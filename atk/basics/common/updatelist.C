@@ -11,7 +11,7 @@ ATK_IMPL("updatelist.H")
 static struct updateitem *freeList = NULL;
 
 
-ATKdefineRegistry(updatelist, ATK, NULL);
+ATKdefineRegistryNoInit(updatelist, ATK);
 
 updatelist::updatelist()
         {

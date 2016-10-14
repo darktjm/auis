@@ -14,7 +14,7 @@
 #include <rofftext.H>
 class mmtext: public  rofftext {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(mmtext);
 
 
     

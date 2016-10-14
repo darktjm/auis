@@ -22,7 +22,7 @@
 static boolean debug=FALSE;
 
 
-ATKdefineRegistry(ltapp, application, NULL);
+ATKdefineRegistryNoInit(ltapp, application);
 
 ltapp::ltapp( )
 {

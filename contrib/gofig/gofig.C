@@ -636,7 +636,7 @@ converttext(textview *txtv, long c) {
 		}
 	}  /* while TRUE */
 	if (row == 0) {
-		delete newfig;
+		newfig->Destroy();
 		return 0;
 	}
 

@@ -83,7 +83,7 @@ static boolean chartlin_debug = 0;
 #define  PixelsPerInterval	((self )->PixelsPerInterval( ))
 
 
-ATKdefineRegistry(chartlin, chartobj, NULL);
+ATKdefineRegistryNoInit(chartlin, chartobj);
 
 chartlin::chartlin( )
       {

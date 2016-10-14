@@ -16,7 +16,7 @@ struct pagev_switcheroo {
 #include <view.H>
 class pagev: public view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pagev);
 
     
       
@@ -25,7 +25,6 @@ public:
       
 	pagev();
       
-	virtual ~pagev();
     
        void FullUpdate(enum view::UpdateType type, long left,
 		  long top, long width, long height);

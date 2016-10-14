@@ -22,7 +22,7 @@ static char CursorTable[] = {  'a',
 
 
 
-ATKdefineRegistry(cursor, ATK, NULL);
+ATKdefineRegistryNoInit(cursor, ATK);
 
 void cursor::ChangeShape()
 {

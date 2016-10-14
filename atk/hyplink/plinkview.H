@@ -11,7 +11,7 @@
 
 class plinkview  : public  linkview  {
     public:
-      virtual ATKregistryEntry *ATKregistry();
+      TRACED_CLASS(plinkview);
 
 
 
@@ -20,7 +20,6 @@ class plinkview  : public  linkview  {
 
       plinkview();
 
-      virtual ~plinkview();
 
       void PostMenus(class menulist *ml);
 

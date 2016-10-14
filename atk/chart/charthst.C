@@ -83,7 +83,7 @@ static boolean charthst_debug = 0;
 #define  abs(x)			(((x) < 0) ? -(x): (x))
 
 
-ATKdefineRegistry(charthst, chartobj, NULL);
+ATKdefineRegistryNoInit(charthst, chartobj);
 
 charthst::charthst( )
       {

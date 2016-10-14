@@ -35,7 +35,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipprint.H"
 #include "zipoarc.H"
 
-ATKdefineRegistry(zipoarc, zipobject, NULL);
+ATKdefineRegistryNoInit(zipoarc, zipobject);
 static long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
 static void Set_Points( zip_type_figure		   figure, float			   x_center , float			   y_center , float			   x_radius , float			   y_radius, 		float			   xs_delta , float			   ys_delta , float			   xe_delta , float			   ye_delta );
 static void Compute_Handle_Positions( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3, zip_type_pixel		  *XS , zip_type_pixel		  *YS , zip_type_pixel		  *XE , zip_type_pixel		  *YE );

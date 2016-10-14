@@ -20,7 +20,7 @@ ATK_IMPL("prefval.H")
  
 
 
-ATKdefineRegistry(prefval, dataobject, NULL);
+ATKdefineRegistryNoInit(prefval, dataobject);
 static boolean EnsureListSize(class prefval  *self, int  n);
 static boolean EnsureChoiceListSize(class prefval  *self, int  n);
 static boolean appproc(class prefval  *self, FILE  *fp, char  *buf);

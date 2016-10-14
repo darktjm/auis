@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  
 
 
-ATKdefineRegistry(conob, dataobject, NULL);
+ATKdefineRegistryNoInit(conob, dataobject);
 
 
 conob::conob()

@@ -7,7 +7,7 @@
 #include "attlist.H"
 #include "htmlenv.H"
 
-ATKdefineRegistry(htmlenv, environment, NULL);
+ATKdefineRegistryNoInit(htmlenv, environment);
 
 htmlenv::htmlenv()
 {

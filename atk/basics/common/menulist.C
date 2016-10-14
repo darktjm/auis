@@ -39,7 +39,7 @@ struct mpitem {
 };
 
 
-ATKdefineRegistry(menulist, ATK, NULL);
+ATKdefineRegistryNoInit(menulist, ATK);
 
 
 static void 

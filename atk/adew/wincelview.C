@@ -17,7 +17,7 @@ ATK_IMPL("wincelview.H")
 #define Cel(A) ((class cel *) DataObject(A))
 
 
-ATKdefineRegistry(wincelview, view, NULL);
+ATKdefineRegistryNoInit(wincelview, view);
 static void DoUpdate(class wincelview  *self);
 
 

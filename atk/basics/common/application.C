@@ -29,7 +29,7 @@ ATK_IMPL("application.H")
 static application *startup_app = NULL;
 
 
-ATKdefineRegistry(application, ATK, NULL);
+ATKdefineRegistryNoInit(application, ATK);
 
 
 static void errorProc(long rock, char  *str)

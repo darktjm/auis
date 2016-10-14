@@ -19,4 +19,4 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <andrewos.h>
 #include <hggh.H>
 
-ATKdefineRegistry(hggh, dataobject, NULL);
+ATKdefineRegistryNoInit(hggh, dataobject);

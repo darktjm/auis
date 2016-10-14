@@ -54,7 +54,7 @@ static tree_Specification specification[] = {
 static boolean Org_Debug = 0;
 #define debug Org_Debug
 
-ATKdefineRegistry(org, apt, NULL);
+ATKdefineRegistryNoInit(org, apt);
 static long Read_Body( class org		      *self, FILE			      *file );
 static long Write_Body( class org  *self, FILE  *file, long writeID );
 static void Strip( char  *string );
@@ -71,7 +71,7 @@ void FreeDatum( tree_type_node node, void *user)
 {
   class org *self = (class org *)user;
   if ( Tree->NodeDatum(  node ) )
-    delete (class text *)(Tree)->NodeDatum(  node );
+    ((class text *)(Tree)->NodeDatum(  node ))->Destroy();
 }
 
 org::org( )

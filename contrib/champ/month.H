@@ -9,7 +9,7 @@
 #include <dataobject.H>
 class month: public dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(month);
 	month();
 
     

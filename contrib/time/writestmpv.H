@@ -12,7 +12,7 @@
 #include <timeodayview.H>
 class writestampview: public  timeodayview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(writestampview);
 
  
   
@@ -22,7 +22,6 @@ public:
   
 	writestampview();
   
-	virtual ~writestampview();
 };
 
 /** @} */

@@ -10,7 +10,7 @@
 class checkv : public  valueview
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(checkv);
 
  
    void DrawFromScratch(long x,long y,long width,long height);

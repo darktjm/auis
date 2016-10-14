@@ -84,7 +84,7 @@ static init_fptr currentErrorProc = NULL;
 static long currentErrorRock;
 
 
-ATKdefineRegistry(init, ATK, NULL);
+ATKdefineRegistryNoInit(init, ATK);
 
 static class keymap *GetKeymap(class init  *init, const char  *className, boolean  inheritFlag);
 static class menulist *GetMenulist(class init  *init, const char  *className, boolean  inheritFlag);

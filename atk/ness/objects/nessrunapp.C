@@ -123,7 +123,7 @@ ATK_IMPL("nessrunapp.H")
 #include <nessrunapp.H>
 #include <im.H>
 
-ATKdefineRegistry(nessrunapp, application, NULL);
+ATKdefineRegistryNoInit(nessrunapp, application);
 
 static void show_usage(class nessrunapp  *self);
 void dumpall();

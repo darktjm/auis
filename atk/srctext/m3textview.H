@@ -10,14 +10,13 @@
 #include "modtextview.H"
 class m3textview: public modtextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(m3textview);
 
     void PostMenus(class menulist *menulist);
     class keystate *PrependKeyState();
 
     static boolean InitializeClass();
     m3textview();
-    virtual ~m3textview();
 
     class keystate *m3_state;
     class menulist *m3_menus;    

@@ -29,7 +29,7 @@
 #include <textview.H>
 class htmlview : public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(htmlview);
 
   
      void PostKeyState(class keystate* ks);
@@ -43,7 +43,6 @@ public:
     
 	htmlview();
     
-	virtual ~htmlview();
 
   
     class keystate* kstate;

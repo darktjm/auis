@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class asmtextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(asmtextview);
 
     void EndComment(char key);
     void PostMenus(class menulist *menulist);
@@ -22,7 +22,6 @@ class asmtextview: public srctextview {
 
     static boolean InitializeClass();
     asmtextview();
-    virtual ~asmtextview();
 
     class keystate *asm_state;
     class menulist *asm_menus;    

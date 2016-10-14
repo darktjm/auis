@@ -69,7 +69,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-ATKdefineRegistry(calc, apt, NULL);
+ATKdefineRegistryNoInit(calc, apt);
 static void Reader( class calc	    	      *self );
 static void Writer( class calc		      *self );
 

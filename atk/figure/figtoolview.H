@@ -21,11 +21,10 @@ typedef void (*figtoolview_comm_f)(class figtoolview  *self, const char  *rock);
 
 class figtoolview  : public  lpair {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(figtoolview);
 
     static boolean InitializeClass();
     figtoolview();
-    virtual ~figtoolview();
 
     void ObservedChanged(class observable *observed, long status);
     void PostMenus(class menulist *ml);

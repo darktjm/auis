@@ -42,7 +42,7 @@ class AListv :public ATextv {
     void MultipleMode(view::MouseAction act, long ind);
     void ExtendedMode(view::MouseAction act, long ind);
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(AListv);
     AListv();
     static boolean Init();
     DECLARE_AACTION_METHOD(TextHitMethod);

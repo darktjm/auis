@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <text.H>
 class fontanim : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fontanim);
 
     
       
 	fontanim();
       
-	virtual ~fontanim();
     
        const char * ViewName()  ;
     

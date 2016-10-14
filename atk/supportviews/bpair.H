@@ -26,7 +26,7 @@ bpair.H
 class bpair: public  lpair
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bpair);
 
 
 
@@ -38,7 +38,6 @@ public:
 	
 	bpair();
 	
-	virtual ~bpair();
 
 };
 /** @} */

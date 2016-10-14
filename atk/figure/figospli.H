@@ -16,7 +16,7 @@ struct figospli_cubit {
 
 class figospli : public  figoplin {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(figospli);
 
 
     
@@ -25,7 +25,6 @@ static class figospli * Create(struct point *pointlist, long numpoints, boolean 
       
 	figospli();
       
-	virtual ~figospli();
 
     
        void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);

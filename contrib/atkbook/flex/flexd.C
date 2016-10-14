@@ -25,7 +25,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(flexd, dataobject, NULL);
+ATKdefineRegistryNoInit(flexd, dataobject);
 static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft);
 static void ResetToInitialState(class flexd *self);
 

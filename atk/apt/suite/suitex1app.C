@@ -11,7 +11,7 @@ ATK_IMPL("suitex1app.H")
 
 
 
-ATKdefineRegistry(suitex1app, application, NULL);
+ATKdefineRegistryNoInit(suitex1app, application);
 
 static class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view::MouseAction action, long x, long y, long clicks );
 

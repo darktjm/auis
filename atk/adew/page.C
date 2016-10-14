@@ -16,7 +16,7 @@ ATK_IMPL("page.H")
 #define page_BYDATAOBJECT -10
 
 
-ATKdefineRegistry(page, dataobject, NULL);
+ATKdefineRegistryNoInit(page, dataobject);
 static struct page_switchee *FindSwitchee(class page  *self, class dataobject  *d,long  which);
 static boolean SetSwitchee(class page  *self,struct page_switchee  *sw);
 

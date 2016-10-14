@@ -8,7 +8,7 @@ class text;
 #include <link.H>
 class weblink: public link{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(weblink);
 	static boolean InitializeClass();
 
 	const char * GetResolvedLink()  ;

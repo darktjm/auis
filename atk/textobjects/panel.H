@@ -46,7 +46,7 @@ struct key_Entry {
 #include <textview.H>
 class panel: public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(panel);
 
 
 
@@ -56,7 +56,6 @@ public:
     
 	panel();
     
-	virtual ~panel();
 
 
     virtual struct panel_Entry * Add(const char *item, char *tag, int showNow)  ;

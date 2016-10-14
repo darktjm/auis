@@ -11,7 +11,7 @@
 
 class contentv : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(contentv);
 
 
       void PostMenus(class menulist *menulist);
@@ -19,7 +19,6 @@ public:
       void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
 
     contentv();
-    ~contentv();
 	static boolean InitializeClass();
 
     static void MakeWindow(class text *self);

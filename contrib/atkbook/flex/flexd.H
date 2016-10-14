@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <dataobject.H>
 class flexd : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(flexd);
 
     
       
 	flexd();
       
-	virtual ~flexd();
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;

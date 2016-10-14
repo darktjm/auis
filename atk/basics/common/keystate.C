@@ -14,7 +14,7 @@ ATK_IMPL("keystate.H")
 #include <keystate.H>
 #include <aaction.H>
 
-ATKdefineRegistry(keystate, ATK, NULL);
+ATKdefineRegistryNoInit(keystate, ATK);
 void InitState(class keystate  *self);
 
 

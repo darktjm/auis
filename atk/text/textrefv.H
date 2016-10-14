@@ -10,7 +10,7 @@
 
 class textrefv: public  fnotev {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(textrefv);
 
 
      class view * Hit (enum view::MouseAction action, long x, long y, long numberOfClicks)  ;

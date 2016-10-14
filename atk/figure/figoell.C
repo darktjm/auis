@@ -13,7 +13,7 @@ ATK_IMPL("figoell.H")
 #include <print.H>
 
 
-ATKdefineRegistry(figoell, figorect, NULL);
+ATKdefineRegistryNoInit(figoell, figorect);
 
 figoell::figoell()
 {

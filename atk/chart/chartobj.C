@@ -196,7 +196,7 @@ static boolean chartobj_debug = 0;
 #define  abs(x)			(((x)<0) ? -(x) : (x))
 
 
-ATKdefineRegistry(chartobj, aptv, NULL);
+ATKdefineRegistryNoInit(chartobj, aptv);
 static void Generate_Shadows( class chartobj	    *self );
 static void Set_Shadows( class chartobj	      *self );
 static void Free_Shadows( class chartobj	      *self );

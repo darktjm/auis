@@ -12,7 +12,7 @@ ATK_IMPL("wrapv.H")
 #include <keystate.H>
 
 
-ATKdefineRegistry(wrapv, view, NULL);
+ATKdefineRegistryNoInit(wrapv, view);
 
 wrapv::wrapv()
 {

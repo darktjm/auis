@@ -47,11 +47,10 @@ typedef long (*zip_streamexceptfptr) (class zip *zip, zip_type_stream stream);
 #include <dataobject.H>
 class zip : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(zip);
 	static boolean InitializeClass();
 
 	zip();
-	virtual ~zip();
 
    long Read( FILE *file, long id );
    long Write( FILE *file, long id, int level );

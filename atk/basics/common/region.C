@@ -19,7 +19,7 @@ ATK_IMPL("region.H")
 
 
 
-ATKdefineRegistry(region, ATK, NULL);
+ATKdefineRegistryNoInit(region, ATK);
 
 void region::XorRegion(class region  * RHS, class region  * Result)
 {

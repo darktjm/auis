@@ -45,7 +45,7 @@ static const char		  * const rect_attributes[] =
 					NULL
 					};
 
-ATKdefineRegistry(ziporect, zipobject, NULL);
+ATKdefineRegistryNoInit(ziporect, zipobject);
 
 static long Draw( class ziporect *self, zip_type_figure  figure, zip_type_pane   pane, short  action );
 static void Compute_Handle_Positions( class ziporect  *self, zip_type_figure  figure, zip_type_pane  pane, zip_type_pixel  *X1 , zip_type_pixel *X2 , zip_type_pixel *X3, zip_type_pixel *Y1 , zip_type_pixel *Y2 , zip_type_pixel *Y3 );

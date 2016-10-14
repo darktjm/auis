@@ -10,7 +10,7 @@
 #include <textview.H>
 class srctextview: public textview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(srctextview);
 
     void PrepareInsertion(boolean insertingNewLine);
     void PostMenus(class menulist *menulist);
@@ -53,7 +53,6 @@ class srctextview: public textview {
 
     static boolean InitializeClass();
     srctextview();
-    virtual ~srctextview();
 
     class keystate *src_state;
     class menulist *src_menus;    

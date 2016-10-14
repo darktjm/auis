@@ -16,7 +16,7 @@
 #include <dataobject.H>
 class timeoday: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(timeoday);
 
     
       
@@ -26,7 +26,6 @@ public:
       
 	timeoday();
       
-	virtual ~timeoday();
     
        long Read (FILE *fp, long id)  ;
        long Write (FILE *fp, long id, int level)  ;

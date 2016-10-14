@@ -14,7 +14,7 @@ static boolean Init() {
 
 ATKdefineRegistry(AOptionMenu,AButton,Init);
 
-AOptionMenu::AOptionMenu() : buttonTextAct(&ButtonText, this) {
+AOptionMenu::AOptionMenu() : buttonTextAct(new AOptionSlotAct(&ButtonText, this)) {
     ATKinit;
 #ifdef AOPTION_GIVES_ALIST_INTERFACE
     TSLOTINIT(selectedItemCount,1L);
@@ -23,7 +23,7 @@ AOptionMenu::AOptionMenu() : buttonTextAct(&ButtonText, this) {
     item.pos=0;
     item.len=0;
 #endif
-    text.SetFormula(&buttonTextAct);
+    text.SetFormula(buttonTextAct);
     SLOTINIT(source, NULLATK);
     SLOTINIT(selected,0);
 }

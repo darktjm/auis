@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <view.H>
 class doodview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(doodview);
 
     
       
 	doodview();
       
-	virtual ~doodview();
     
        class view * Hit(enum view::MouseAction action, long x, long y,
 	   long numberOfClicks)  ;

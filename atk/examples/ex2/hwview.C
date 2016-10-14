@@ -12,7 +12,7 @@ ATK_IMPL("hwview.H")
 #define POSUNDEF -1
 
 
-ATKdefineRegistry(helloworldview, view, NULL);
+ATKdefineRegistryNoInit(helloworldview, view);
 
 helloworldview::helloworldview()
         {

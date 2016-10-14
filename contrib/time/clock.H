@@ -34,7 +34,7 @@ struct clock_options {
 #include <dataobject.H>
 class clock: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(clock);
 
     
       
@@ -44,7 +44,6 @@ public:
       
 	clock();
       
-	virtual ~clock();
     
        long Read (FILE *fp, long id)  ;
        long Write (FILE *fp, long id, int level)  ;

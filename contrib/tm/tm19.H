@@ -14,7 +14,7 @@
 #include <termulator.H>
 class tm19: public  termulator {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(tm19);
 
     
         

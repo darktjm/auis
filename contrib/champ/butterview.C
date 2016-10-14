@@ -14,7 +14,7 @@
 
 
 
-ATKdefineRegistry(butterview, view, NULL);
+ATKdefineRegistryNoInit(butterview, view);
 
 void
 butterview::FullUpdate(enum view::UpdateType  type, long  left , long  top , long  width , long  height)

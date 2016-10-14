@@ -25,7 +25,7 @@ static struct messitemi *currentmess=NULL;
 static struct messitemi *firstmess=NULL; 
 
 
-ATKdefineRegistry(messitem, ATK, NULL);
+ATKdefineRegistryNoInit(messitem, ATK);
 static struct messitemi *messitem_Create( char  *s1 , char  *s2, char  wh );
 static char *MapMessFile(const char  *filename, long  *fileLength /* OUT */);
 static int ReadMessFile(const char  *filename, boolean  executeImmediately);

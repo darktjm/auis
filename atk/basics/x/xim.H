@@ -63,7 +63,7 @@ struct menuviews {
 
 class xim : public  im  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(xim);
 
 
     
@@ -129,7 +129,6 @@ public:
 	
 	xim();
 	
-	virtual ~xim();
 
 	class im *HandleMouse(enum view::MouseAction  action, long  x, long  y, long  newButtonState);
 	

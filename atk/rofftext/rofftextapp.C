@@ -20,7 +20,7 @@ ATK_IMPL("rofftextapp.H")
 #include <rofftext.H>
 
 
-ATKdefineRegistry(rofftextapp, application, NULL);
+ATKdefineRegistryNoInit(rofftextapp, application);
 static void show_usage(class rofftextapp  *self);
 
 

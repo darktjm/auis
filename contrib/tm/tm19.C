@@ -17,7 +17,7 @@
  * escape sequence in one pass, but faster...
  */
 
-ATKdefineRegistry(tm19, termulator, NULL);
+ATKdefineRegistryNoInit(tm19, termulator);
 static char *escapeChar(class tm19  *self,char  *buf,int  len);
 
 

@@ -15,7 +15,7 @@ ATK_IMPL("lprruler.H")
 #include <lprruler.H>
 
 	
-ATKdefineRegistry(lprruler, dataobject, NULL);
+ATKdefineRegistryNoInit(lprruler, dataobject);
 
 long
 lprruler::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/ )

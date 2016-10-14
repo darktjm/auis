@@ -32,7 +32,7 @@
 #include <text.H>
 class html : public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(html);
 
   
      void Clear();
@@ -68,7 +68,6 @@ public:
     
 	html();
     
-	virtual ~html();
 
   
     inline const char *  GetTitle() { return ((this)->title); }

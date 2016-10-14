@@ -17,7 +17,7 @@
 
 class cltextview : public  textview  {
 public:
-	virtual ATKregistryEntry *ATKregistry(); 
+	TRACED_CLASS(cltextview);
        void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
 
@@ -29,7 +29,6 @@ public:
 			       cltextview_hitfptr callBack );
     
       
-	virtual ~cltextview();
       
 	cltextview();
     

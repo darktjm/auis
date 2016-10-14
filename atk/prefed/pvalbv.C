@@ -16,7 +16,7 @@ ATK_IMPL("pvalbv.H")
 #define OFF 0
 
 
-ATKdefineRegistry(pvalbv, pvalsbv, NULL);
+ATKdefineRegistryNoInit(pvalbv, pvalsbv);
 
 pvalbv::pvalbv()
 {

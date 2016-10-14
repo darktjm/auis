@@ -12,7 +12,7 @@ class butter;
 typedef void (*butter_hitfptr)(char *rockptr, long rocklong, class butter *self, enum view::MouseAction act);
 class butter: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(butter);
 
     
       

@@ -15,7 +15,7 @@
 #include <celview.H>
 class fillerview: public  celview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fillerview);
 
 
 
@@ -35,7 +35,6 @@ public:
   
 	fillerview();	/* initialize instance */
   
-	virtual ~fillerview();	/* clean up instance */
 
 
 	boolean hasInputFocus;

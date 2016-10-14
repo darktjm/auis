@@ -11,7 +11,7 @@
 
 class fontsample  : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fontsample);
 
 
     
@@ -21,7 +21,6 @@ public:
       
 	fontsample();
       
-	virtual ~fontsample();
 
     
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);

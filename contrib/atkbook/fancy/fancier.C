@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <fontdesc.H>
 
 
-ATKdefineRegistry(fancier, fancy, NULL);
+ATKdefineRegistryNoInit(fancier, fancy);
 
 
 fancier::fancier()

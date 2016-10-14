@@ -13,7 +13,7 @@
 
 class frameview : public  textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(frameview);
 
     
          void Update();
@@ -35,7 +35,6 @@ public:
 	
     
         
-	virtual ~frameview();
         static class frameview * Create(class framemessage *messageLine)  ;
         
 	static boolean InitializeClass();

@@ -55,7 +55,7 @@ struct lprrulerview_icondata {
 
 class lprrulerview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(lprrulerview);
 
 	 void FullUpdate( enum view::UpdateType type, 
 		long left, long top, long width, long height );
@@ -89,7 +89,6 @@ public:
 	
 	lprrulerview();
 	
-	virtual ~lprrulerview();
 
 
 

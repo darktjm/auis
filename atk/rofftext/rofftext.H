@@ -165,7 +165,7 @@ struct tempelt {
 #include <text.H>
 class rofftext: public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(rofftext);
 
 
     
@@ -174,7 +174,6 @@ public:
 	static boolean InitializeClass();
 
     
-	virtual ~rofftext();
     static long ReadRoffIntoText(class text *t, FILE *fp, long pos, const char * const *resources)  ;
 
     virtual void SetText(class text *t); /* must be used before any styles started */

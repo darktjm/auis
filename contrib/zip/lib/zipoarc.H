@@ -23,7 +23,7 @@ zipoarc.H
 class zipoarc : public  zipobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipoarc);
 
 
 

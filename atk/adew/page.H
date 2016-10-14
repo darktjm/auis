@@ -25,13 +25,12 @@ struct page_switchee {
 #include <dataobject.H>
 class page : public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(page);
 
     
       
 	page();
       
-	virtual ~page();
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;

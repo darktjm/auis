@@ -28,7 +28,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(hgghapp, application, NULL);
+ATKdefineRegistryNoInit(hgghapp, application);
 static void ToggleLpairViews(class hgghapp  *self, class lpair  *lp, class butt  *b, enum view::MouseAction  action);
 
 

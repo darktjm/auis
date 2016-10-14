@@ -13,7 +13,7 @@ ATK_IMPL("ssliderv.H")
 #define DATA(self) ((class prefval *)(self)->GetDataObject())
 
 
-ATKdefineRegistry(ssliderv, scroll, NULL);
+ATKdefineRegistryNoInit(ssliderv, scroll);
 static void getinfo(class ssliderv  *self, struct range  *total , struct range  *seen , struct range  *dot);
 static long whatisat(class ssliderv  *self, long  numerator , long  denominator);
 static void setframe(class ssliderv  *self, long  position , long  numerator , long  denominator);

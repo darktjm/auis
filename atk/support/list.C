@@ -23,7 +23,7 @@ ATK_IMPL("list.H")
  */
 
 
-ATKdefineRegistry(list, ATK, NULL);
+ATKdefineRegistryNoInit(list, ATK);
 static int CopyEntry(char  *value, class list  *dst);
 static boolean MoveNew(char  *data, struct arg  *ap);
 static int rcompare(char  **d1, char  **d2);

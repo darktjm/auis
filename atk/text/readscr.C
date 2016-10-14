@@ -56,7 +56,7 @@ static struct StackItem {
 
 
 
-ATKdefineRegistry(readscr, ATK, NULL);
+ATKdefineRegistryNoInit(readscr, ATK);
 static void goshdarn(const char  *errmsg);
 static int textfix(class text  *d, int  len);
 static void linefix(class text  *d);

@@ -53,7 +53,7 @@ The data is encoded with 4 columns to a line and lines usually have about fiftee
 */
 
 
-ATKdefineRegistry(rastio, ATK, NULL);
+ATKdefineRegistryNoInit(rastio, ATK);
 void
 rastio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 				{

@@ -15,14 +15,13 @@
 
 class figogrp : public  figobj {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(figogrp);
 
 
     
       
 	figogrp();
       
-	virtual ~figogrp();
       
 	static boolean InitializeClass();
 

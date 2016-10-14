@@ -33,7 +33,7 @@ ATK_IMPL("suitetapp.H")
             
 	     
   
-ATKdefineRegistry(suitetapp, application, NULL);
+ATKdefineRegistryNoInit(suitetapp, application);
 static class view * Change_Test( class suitetapp  *self );
 static class view * First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );
 static class view * Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view::MouseAction  action, long  x , long  y , long  clicks );

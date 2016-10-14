@@ -15,7 +15,7 @@ static int DebugFlag = 0;
 #define ERRORTOK 1
 #define NOTOK -1
 
-ATKdefineRegistry(parser, ATK, NULL);
+ATKdefineRegistryNoInit(parser, ATK);
 
 /* 		if not ATK
 extern "C" { 

@@ -11,7 +11,7 @@
 
 class fnote: public  text {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(fnote);
 
 
 	static void CloseAll(class text *text);

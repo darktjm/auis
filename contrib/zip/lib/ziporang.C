@@ -38,7 +38,7 @@ END-SPECIFICATION  ************************************************************/
 #include "ziporang.H"
 
 
-ATKdefineRegistry(ziporang, ziporect, NULL);
+ATKdefineRegistryNoInit(ziporang, ziporect);
 
 static long Draw( class ziporang  *self, zip_type_figure  figure, zip_type_pane   pane, long   action );
 

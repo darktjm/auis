@@ -34,7 +34,7 @@ struct zipstatus_states
 class zipstatus : public  zipview
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(zipstatus);
 
 
 
@@ -60,7 +60,6 @@ public:
   
 	zipstatus();
   
-	virtual ~zipstatus();
 
 
 

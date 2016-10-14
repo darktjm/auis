@@ -9,7 +9,7 @@
 
 #include "viewholderv.H"
 
-ATKdefineRegistry(viewholderv, view, NULL);
+ATKdefineRegistryNoInit(viewholderv, view);
 
 /*Public Methods*/
 viewholderv::~viewholderv() {

@@ -10,7 +10,7 @@ ATK_IMPL("filler.H")
 /* return corresponding view name */
 
 
-ATKdefineRegistry(filler, cel, NULL);
+ATKdefineRegistryNoInit(filler, cel);
 
 
 const char *				    /* returns "fillerview" */

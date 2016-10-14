@@ -10,7 +10,7 @@
 #include "srctextview.H"
 class rexxtextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(rexxtextview);
 
     void EndComment(char key);
     void PostMenus(class menulist *menulist);
@@ -18,7 +18,6 @@ class rexxtextview: public srctextview {
 
     static boolean InitializeClass();
     rexxtextview();
-    virtual ~rexxtextview();
 
     class keystate *rexx_state;
     class menulist *rexx_menus;

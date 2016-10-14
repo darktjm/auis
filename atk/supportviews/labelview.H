@@ -29,7 +29,7 @@ labelview.H
 
 class labelview : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(labelview);
 
 
 	 void FullUpdate(/* struct labelview *self, */ enum view::UpdateType type, 
@@ -64,7 +64,6 @@ public:
 	
 	labelview();
 	
-	virtual ~labelview();
 
 
 

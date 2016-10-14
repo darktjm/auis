@@ -14,7 +14,7 @@ ATK_IMPL("pvalfv.H")
 #define DATA(self) ((class prefval *)(self)->GetDataObject())
 
 
-ATKdefineRegistry(pvalfv, pvalsbv, NULL);
+ATKdefineRegistryNoInit(pvalfv, pvalsbv);
 
 pvalfv::pvalfv()
 {

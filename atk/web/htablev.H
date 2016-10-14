@@ -5,7 +5,7 @@
  * @{ */
 class htablev : public spread {
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(htablev);
     htablev();
 };
 /** @} */

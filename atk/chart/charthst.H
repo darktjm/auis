@@ -41,7 +41,7 @@ END-SPECIFICATION  ************************************************************/
 class charthst : public  chartobj
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(charthst);
 
 
 
@@ -58,7 +58,6 @@ public:
   
 	charthst();
   
-	virtual ~charthst();
 
 
 

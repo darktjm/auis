@@ -20,7 +20,7 @@ ATK_IMPL("hwapp.H")
 #include "helloworld.H"
 
 
-ATKdefineRegistry(helloworldapp, application, NULL);
+ATKdefineRegistryNoInit(helloworldapp, application);
 static class view *appLayerOrDestroy(class view  *v);
 static boolean makeSplitWindow(class dataobject  *dobj1,class dataobject  *dobj2);
 

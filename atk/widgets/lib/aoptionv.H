@@ -52,11 +52,10 @@ class AOptionMenuv : public AButtonv {
     virtual void LabelDimensions(long &w, long &h, long *b=NULL);
   public:
     static boolean Init();
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AOptionMenuv);
     DECLARE_AACTION_METHOD(ButtonHitMethod);
     
     AOptionMenuv();
-    virtual ~AOptionMenuv();
     void ObservedChanged(observable *changed, long change);
     void SetDataObject(class dataobject *dobj);
 };

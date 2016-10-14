@@ -16,7 +16,7 @@ ATK_IMPL("clicklistV.H")
 #include <clicklistV.H>
 
 
-ATKdefineRegistry(clicklistV, stringV, NULL);
+ATKdefineRegistryNoInit(clicklistV, stringV);
 static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size);

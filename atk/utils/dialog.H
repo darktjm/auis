@@ -15,7 +15,7 @@
 
 class dialog : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(dialog);
 
 
     
@@ -24,7 +24,6 @@ public:
     
 	dialog();
     
-	virtual ~dialog();
     
      const char * ViewName()  ;
      long Read (FILE *fp, long id)  ;

@@ -38,7 +38,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rig
 static boolean PrettyPrint=FALSE, PPMANGLING=FALSE, BLANKCOL1=FALSE, DOBARS=FALSE; /*RSKprettyprint*/
 static char PrettyOptions[10]; /*RSKprettyprint*/
 
-ATKdefineRegistry(srctext, text, NULL);
+ATKdefineRegistryNoInit(srctext, text);
 
 /* GetEnvironment returns the environment enclosing pos, or the root environment if no style is there */
 environment *srctext::GetEnvironment(long pos)

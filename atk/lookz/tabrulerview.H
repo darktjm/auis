@@ -17,7 +17,7 @@ typedef void (*tabrulerview_valuefptr)(class tabrulerview *self, long rock, enum
 
 class tabrulerview : public  view {
 public:
-virtual ATKregistryEntry *ATKregistry();
+TRACED_CLASS(tabrulerview);
 
 
      void FullUpdate( enum view::UpdateType type, 
@@ -43,7 +43,6 @@ virtual ATKregistryEntry *ATKregistry();
     
 	tabrulerview();
     
-	virtual ~tabrulerview();
 
     boolean OnScreen;			/* if not view::Removed */
     boolean tabrulerchanged;

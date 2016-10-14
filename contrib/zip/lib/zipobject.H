@@ -32,7 +32,7 @@ zipobject.ch
 #include <zippane.h>
 class zipobject : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(zipobject);
 
 
 

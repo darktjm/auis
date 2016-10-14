@@ -49,7 +49,7 @@ typedef class view * (*org_hitfptr)( long anchor, class orgv *orgv, struct tree_
 class orgv : public  aptv
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(orgv);
 
 
 
@@ -75,7 +75,6 @@ public:
   
 	orgv();
   
-	virtual ~orgv();
 
 
 

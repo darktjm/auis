@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <hgghview.H>
 
 
-ATKdefineRegistry(hgghapp, application, NULL);
+ATKdefineRegistryNoInit(hgghapp, application);
 
 
 hgghapp::hgghapp()

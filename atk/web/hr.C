@@ -6,7 +6,7 @@
 #include <andrewos.h>
 #include "hr.H"
 
-ATKdefineRegistry(hr, dataobject, NULL);
+ATKdefineRegistryNoInit(hr, dataobject);
 
 const char *hr::ViewName()
 {

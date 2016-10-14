@@ -29,7 +29,7 @@ END-SPECIFICATION  ************************************************************/
 #include <view.H>
 class ltv : public  view {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS(ltv);
 
    view::DSattributes DesiredSize( long width, long height, enum view::DSpass pass, long *dwidth, long *dheight )
 	 ;
@@ -48,7 +48,6 @@ public:
    static boolean atk_inited;
 
    ltv();
-   virtual ~ltv();
 
 private:
    friend class ltv_private; /* ick */

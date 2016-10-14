@@ -43,7 +43,7 @@ static unsigned char masks[] = {0xFF, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE};
 		beginning at byte with address 'row'.
 */
 	
-ATKdefineRegistry(oldRF, ATK, NULL);
+ATKdefineRegistryNoInit(oldRF, ATK);
 
 
 void

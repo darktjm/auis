@@ -10,14 +10,13 @@
 #include "cpptextview.H"
 class idltextview: public cpptextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(idltextview);
 
     void PostMenus(menulist *menulist);
     class keystate *PrependKeyState();
 
     static boolean InitializeClass();
     idltextview();
-    virtual ~idltextview();
 
     class keystate *idl_state;
     class menulist *idl_menus;

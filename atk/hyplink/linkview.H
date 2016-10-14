@@ -10,10 +10,9 @@
 #include <pshbttnv.H>
 class linkview: public  pushbuttonview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(linkview);
 	static boolean InitializeClass();
 	linkview();
-	virtual ~linkview();
  	
 	void PostMenus(class menulist *ml);
 	class view *Hit (enum view::MouseAction action, 

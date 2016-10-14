@@ -14,7 +14,7 @@
 class sliderstrV : public  sliderV 
 {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(sliderstrV);
 
  
    const char * GetValueString()  ;

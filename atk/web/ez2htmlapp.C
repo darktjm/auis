@@ -60,7 +60,7 @@ struct envlist {
 };
 static struct envlist *doomedenvs;
 
-ATKdefineRegistry(ez2htmlapp, application, NULL);
+ATKdefineRegistryNoInit(ez2htmlapp, application);
 static void cleanup(htmltext *txt);
 static style *findOrCreateStyle(text *txt, const char *stylename);
 
@@ -716,10 +716,10 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 	realim->VanishWindow();
 
 	// use a `content' object to find titles and sections (if possible)
-	content c;
-	c.SetSourceText(htxt);
+	traced_ptr<content> c;
+	c->SetSourceText(htxt);
 
-	if ( ! c.entry) {
+	if ( ! c->entry) {
 		// no title, no sections.  Write one file
 		boolean opened;
 
@@ -743,7 +743,7 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 		else fflush(outfile);
 		return 0;	// succeed
 	}
-	if ( ! self->Split || ! c.entry->next) {
+	if ( ! self->Split || ! c->entry->next) {
 		// there is a title and 
 		//	no Split required or only one section:
 		//	write to only one file
@@ -762,7 +762,7 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 
 		// use the first title we find.
 		// xxx probably bogus.  check proximity to file start
-		mark *m = c.entry->rem;
+		mark *m = c->entry->rem;
 		self->wrapper->SetVarFromText("title", htxt, 
 			m->GetPos(), m->GetLength());
 		self->wrapper->SetVar("body", (char *)s);
@@ -780,10 +780,10 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 	enum {First, Middle, Last} which = First;
 	char nmbuf[3][300];
 	char *prevnm = nmbuf[0], *currnm = nmbuf[1], *nextnm = nmbuf[2], *oldprevnm;
-	htmltext thtxt;
+	traced_ptr<htmltext> thtxt;
 	AString s;
 	int estartloc = 0, elen;		// portion of htxt defined by e
-	for (e = c.entry; e; e = e->next) {
+	for (e = c->entry; e; e = e->next) {
 		if ( ! e->next) which = Last;
 		switch(which) {
 		case First:
@@ -840,17 +840,17 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 		}
 
 		// copy section `e' to thtxt
-		thtxt.ClearCompletely();
-		thtxt.AlwaysCopyTextExactly(0, htxt, estartloc, elen);
+		thtxt->ClearCompletely();
+		thtxt->AlwaysCopyTextExactly(0, htxt, estartloc, elen);
 		estartloc += elen;
 
 		arbval rock;
 		rock.obj = (pointer)self;
-		thtxt.EnumerateInsets((htmlefptr)ConvertInsets, rock);
+		thtxt->EnumerateInsets((htmlefptr)ConvertInsets, rock);
 
 		// convert thtxt, writing to `s'
 		FILE *temp = s.VfileOpen("w");
-		thtxt.Write(temp, 1, 0);
+		thtxt->Write(temp, 1, 0);
 		s.VfileClose(temp);
 
 		// set vars for wrapper and Instantiate

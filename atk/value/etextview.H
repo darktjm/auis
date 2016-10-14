@@ -10,7 +10,7 @@
 #include <textview.H>
 class etextview: public textview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(etextview);
 
 
      void ReceiveInputFocus();

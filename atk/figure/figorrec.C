@@ -13,7 +13,7 @@ ATK_IMPL("figorrec.H")
 #include <print.H>
 
 
-ATKdefineRegistry(figorrec, figorect, NULL);
+ATKdefineRegistryNoInit(figorrec, figorect);
 
 
 figorrec::figorrec()

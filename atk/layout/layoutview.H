@@ -59,7 +59,7 @@ enum createmode_enum {
 #include <view.H>
 class layoutview: public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(layoutview);
 
 
 
@@ -110,7 +110,6 @@ public:
   
 	layoutview();
   
-	virtual ~layoutview();
 
 
 	boolean	hasInputFocus;		    /* layout has the input focus */

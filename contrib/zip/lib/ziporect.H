@@ -24,7 +24,7 @@ ziporect.H
 class ziporect : public  zipobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(ziporect);
 
 
 

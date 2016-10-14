@@ -45,11 +45,9 @@ typedef void (*observable_fptr)(ATK *rcvr, observable *self, long rock);
  */
 class observable : public  traced {
   public:
-    virtual ATKregistryEntry *ATKregistry();
-
+    TRACED_CLASS(observable);
     virtual void Destroy();
     observable();
-    virtual ~observable();
 
     virtual void AddObserver (class observable *observer);
     /**< Add an observer of this object.

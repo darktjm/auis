@@ -12,7 +12,7 @@
 #include <textview.H>
 class hiddenview : public textview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(hiddenview);
 
     void LoseInputFocus();
     void ReceiveInputFocus();
@@ -25,7 +25,6 @@ class hiddenview : public textview {
 
     static boolean InitializeClass();
     hiddenview();
-    virtual ~hiddenview();
 
     class keystate *hid_state;
     class menulist *hid_menus;    

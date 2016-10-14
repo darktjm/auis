@@ -24,7 +24,7 @@ static const char * const SysChoices[] = {"Gregorian", "Hebrew", "Ecclesiastical
 static const char * const BooleanChoices[] = {"Yes", "No", NULL};
 
 
-ATKdefineRegistry(enodeview, lpair, NULL);
+ATKdefineRegistryNoInit(enodeview, lpair);
 
 static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view::MouseAction  action);
 static void ResetButterTexts(class enodeview  *self);

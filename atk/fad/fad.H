@@ -53,7 +53,7 @@ struct fad_frame {
 #include <dataobject.H>
 class fad : public dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(fad);
 
 
      long Read(FILE *f, long id)  ;
@@ -75,7 +75,6 @@ public:
     
 	fad();
     
-	virtual ~fad();
 
     short ox,oy,w,h,pltnum,desw,desh;
     struct fad_frame *f,*bf,*deleated;

@@ -13,13 +13,12 @@
 
 class strinput : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(strinput);
 
 
   
 	strinput();
   
-	virtual ~strinput();
   
 	static boolean InitializeClass();
 

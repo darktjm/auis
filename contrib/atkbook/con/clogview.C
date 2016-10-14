@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(clogview, conview, NULL);
+ATKdefineRegistryNoInit(clogview, conview);
 
 
 clogview::clogview()

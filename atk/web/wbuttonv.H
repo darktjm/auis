@@ -7,7 +7,7 @@
 #include <buttonV.H>
 class wbuttonv: public buttonV{
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(wbuttonv);
 	wbuttonv();
 	static boolean InitializeClass();
 

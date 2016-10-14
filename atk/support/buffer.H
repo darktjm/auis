@@ -37,7 +37,7 @@ struct bufferContents { /* May not have to be in this file. */
 
 class buffer: public  observable {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(buffer);
 
          void ObservedChanged(class observable *object, long value);
     
@@ -101,7 +101,6 @@ public:
         static void GuessBufferName( const char *filename, char *bufferName, int nameSize);
         static void GetUniqueBufferName(const char *proposedBufferName, char *bufferName, int nameSize);
         
-	virtual ~buffer();
         
 	buffer();
         static void SetDefaultObject(const char *objectname);

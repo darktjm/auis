@@ -42,7 +42,7 @@ String table data object
 
 class stringtbl : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(stringtbl);
 
 
 
@@ -106,7 +106,6 @@ public:
 	
 	stringtbl();
 	
-	virtual ~stringtbl();
 
 
 

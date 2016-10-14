@@ -48,7 +48,7 @@ struct component {
 #include <dataobject.H>
 class layout: public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(layout);
 
 
 
@@ -78,7 +78,6 @@ public:
   
 	layout();
   
-	virtual ~layout();
 
 
   struct component *firstcomponent;	    /* first in component list */

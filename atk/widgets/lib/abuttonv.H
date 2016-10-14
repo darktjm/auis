@@ -84,9 +84,8 @@ class AButtonv : public AWidgetView {
     DECLARE_AACTION_METHOD(WantUpdateMethod);
     DECLARE_AACTION_METHOD(ScaleMethod);
     
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(AButtonv);
     AButtonv();
-    ~AButtonv();
     static void Init();
 
     inline void SetArmed(boolean a) {armed=a;}

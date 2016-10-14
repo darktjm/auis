@@ -7,13 +7,12 @@
 #include <view.H>
 class wrapv : public  view {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(wrapv);
 
 
     
 	wrapv();
     
-	virtual ~wrapv();
 
     virtual class keystate * Keys()  ;
     virtual class menulist * Menus()  ;

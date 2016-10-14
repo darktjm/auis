@@ -15,7 +15,7 @@ ATK_IMPL("keymap.H")
 #define KEYMASK	(keymap_MAXKEYS-1)
 
 
-ATKdefineRegistry(keymap, ATK, NULL);
+ATKdefineRegistryNoInit(keymap, ATK);
 struct keymap_fulltable *NewFullTable();
 static void DoInitialize(class keymap  *self, boolean  sparsep);
 static boolean bindKey(class keymap  *self,const unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type);

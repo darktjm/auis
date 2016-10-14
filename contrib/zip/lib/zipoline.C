@@ -33,7 +33,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipoline.H"
 
-ATKdefineRegistry(zipoline, zipobject, NULL);
+ATKdefineRegistryNoInit(zipoline, zipobject);
 
 static long Draw( class zipoline		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
 static void Compute_Handle_Positions( class zipoline		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3 );

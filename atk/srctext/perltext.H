@@ -24,7 +24,7 @@
 #include "srctext.H"
 class perltext: public srctext {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS_NODEST(perltext);
 
     void BackwardCheckWord(long from, long to);
     long BackwardSkipString(long pos, char ch);

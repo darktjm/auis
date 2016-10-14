@@ -12,13 +12,12 @@
 
 class ezdiff : public observable {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(ezdiff);
 
     void ObservedChanged (class observable *changed, long value);
 
     static boolean InitializeClass();
     ezdiff();    
-    virtual ~ezdiff();
 
     static class ezdiff *Create(class buffer *buf1, class buffer *buf2, char *args);
 

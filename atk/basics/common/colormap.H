@@ -9,12 +9,11 @@
 
 class colormap  : public  dataobject  {
 public:
-  virtual ATKregistryEntry *ATKregistry();
+  TRACED_CLASS(colormap);
 
   static boolean InitializeClass();
 
   colormap();
-  virtual ~colormap();
 
   const char * ViewName();
 

@@ -60,7 +60,7 @@ static unsigned char hex[16] = {
 		if long runs of similar bytes are encountered.
 */
 	
-ATKdefineRegistry(rasterio, ATK, NULL);
+ATKdefineRegistryNoInit(rasterio, ATK);
 
 void
 rasterio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)

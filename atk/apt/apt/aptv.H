@@ -108,7 +108,7 @@ struct aptv_states
 class aptv : public  view
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(aptv);
 
 
 
@@ -197,7 +197,6 @@ public:
   
 	aptv();
   
-	virtual ~aptv();
 
 
 

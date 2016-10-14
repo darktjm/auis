@@ -23,9 +23,8 @@ class WorkProc : public observable {
     void Schedule();
     static void DoWork(void *pd, long time);
   public:
-    ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(WorkProc);
     WorkProc(long workinterval=0);
-    virtual ~WorkProc();
     virtual void Start();
     virtual WorkProc_Status Stop();
     virtual void Suspend();

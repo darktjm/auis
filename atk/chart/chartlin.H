@@ -44,7 +44,7 @@ END-SPECIFICATION  ************************************************************/
 class chartlin : public  chartobj
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(chartlin);
 
 
 
@@ -60,7 +60,6 @@ public:
   
 	chartlin();
   
-	virtual ~chartlin();
 
 
 

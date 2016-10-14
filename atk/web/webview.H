@@ -6,10 +6,9 @@
 #include <htmltextview.H>
 class webview: public htmltextview {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(webview);
 	static boolean InitializeClass();
 	webview();
-	virtual ~webview();
 
     static int VisitWeb(class view *self,const char *url, int flags=0, const char *postdata=NULL) ;
     static void movehist(class view *self,int res,class view *v);

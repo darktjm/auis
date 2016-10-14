@@ -37,7 +37,7 @@ ATK_IMPL("raster.H")
 
 
 
-ATKdefineRegistry(raster, dataobject, NULL);
+ATKdefineRegistryNoInit(raster, dataobject);
 #ifdef NOTUSED
 static void WriteV1Stream(class raster  *ras, FILE  *file, long  id);
 #endif /* NOTUSED */

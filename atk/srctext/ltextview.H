@@ -10,14 +10,13 @@
 #include "srctextview.H"
 class ltextview: public srctextview {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(ltextview);
 
     class keystate *PrependKeyState();
     void PostMenus(class menulist *menulist);
 
     static boolean InitializeClass();
     ltextview();
-    virtual ~ltextview();
 
     class keystate *l_state;
     class menulist *l_menus;    

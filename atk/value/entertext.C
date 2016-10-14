@@ -12,7 +12,7 @@ ATK_IMPL("entertext.H")
 #include <fontdesc.H>
 #define INITIALSIZE 64
 
-ATKdefineRegistry(entertext, text, NULL);
+ATKdefineRegistryNoInit(entertext, text);
 static void checkstyles(class entertext  *self);
 
 

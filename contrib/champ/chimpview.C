@@ -12,7 +12,7 @@
 #include "chimpview.H"
 
 
-ATKdefineRegistry(chimpview, lpair, NULL);
+ATKdefineRegistryNoInit(chimpview, lpair);
 
 chimpview::chimpview()
 {

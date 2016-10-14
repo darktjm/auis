@@ -24,11 +24,10 @@ enum link_type {
 #include <pushbutton.H>
 class link: public  pushbutton {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(link);
 	static boolean InitializeClass();
 
 	link();
-	virtual ~link();
     
 	long Read (FILE *file, long id)  ;
 	long Write (FILE *file, long writeid, int level)  ;

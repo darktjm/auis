@@ -10,7 +10,7 @@
 
 class texttag : public fnote {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(texttag);
 
 
 	 const char * ViewName()  ;

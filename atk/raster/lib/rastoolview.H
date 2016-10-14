@@ -34,7 +34,7 @@ typedef void (*rastoolview_procfptr)(class rastoolview *self, char *rock);
 
 class rastoolview  : public  lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(rastoolview);
 
     
       
@@ -43,7 +43,6 @@ public:
       
 	rastoolview();
       
-	virtual ~rastoolview();
     
        void ObservedChanged(class observable *observed, long status);
        void PostMenus(class menulist *ml);

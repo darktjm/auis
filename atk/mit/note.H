@@ -12,7 +12,7 @@
 #include <icon.H>
 class note : public  icon {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(note);
 
  
     void SetChild(class dataobject * child);

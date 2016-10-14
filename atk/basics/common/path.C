@@ -37,7 +37,7 @@ static struct homestruct *homes = NULL;
 #define INITIALCHUNK 30 /* ::::files */
 
 	
-ATKdefineRegistry(path, observable, NULL);
+ATKdefineRegistryNoInit(path, observable);
 static char * strappend(char  *dest , char  *src);
 static void FreeList(char  **list);
 static void FreeFilesAndDirs(class path  *self);

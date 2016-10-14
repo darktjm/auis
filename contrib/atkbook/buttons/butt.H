@@ -21,13 +21,12 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <dataobject.H>
 class butt: public  dataobject  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(butt);
 
     
       
 	butt();
       
-	virtual ~butt();
     
       virtual void SetText(const char *txt);
     

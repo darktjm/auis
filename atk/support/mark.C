@@ -17,7 +17,7 @@ static class mark *freeMarks = NULL;
 static class mark *lastBlock = NULL;
 
 
-ATKdefineRegistry(mark, ATK, NULL);
+ATKdefineRegistryNoInit(mark, ATK);
 
 class mark *mark::Allocate()
 {

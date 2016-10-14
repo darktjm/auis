@@ -12,7 +12,7 @@
 #include <timeoday.H>
 class writestamp: public  timeoday {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(writestamp);
 
     
       
@@ -22,7 +22,6 @@ public:
       
 	writestamp();
       
-	virtual ~writestamp();
     
        void WriteDataPart(FILE *fp);
        long ReadDataPart(FILE *fp)  ;

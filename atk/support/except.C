@@ -8,7 +8,7 @@ static char *except_ExceptionValue = NULL;
 static except_UncaughtExceptionHandler except_UncaughtHandler = NULL;
 
 
-ATKdefineRegistry(except, ATK, NULL);
+ATKdefineRegistryNoInit(except, ATK);
 static void except_DefaultHandler();
 
 

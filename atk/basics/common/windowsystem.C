@@ -13,7 +13,7 @@ ATK_IMPL("windowsystem.H")
 #include <windowsystem.H>
 
 
-ATKdefineRegistry(windowsystem, ATK, NULL);
+ATKdefineRegistryNoInit(windowsystem, ATK);
 
 class cursor *windowsystem::CreateCursor()
     {

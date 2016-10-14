@@ -21,11 +21,10 @@
 
 class simpletext: public dataobject {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+    TRACED_CLASS(simpletext);
 
     static boolean InitializeClass();
     simpletext();
-    virtual ~simpletext();
 
     void SetAttributes(struct attributes *attributes);
 

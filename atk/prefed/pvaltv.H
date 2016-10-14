@@ -7,7 +7,7 @@
 #include <textintv.H>
 class pvaltv : public  textintv {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(pvaltv);
 
 
     
@@ -16,7 +16,6 @@ public:
     
 	pvaltv();
     
-	virtual ~pvaltv();
 
     virtual void UpdateText(long val);
     virtual void UpdateValue();

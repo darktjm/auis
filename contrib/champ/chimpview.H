@@ -9,7 +9,7 @@
 #include <lpair.H>
 class chimpview: public lpair {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS_NODEST(chimpview);
 
     
       

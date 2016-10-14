@@ -7,7 +7,7 @@
 #include <textview.H>
 #include "hrv.H"
 
-ATKdefineRegistry(hrv, view, NULL);
+ATKdefineRegistryNoInit(hrv, view);
 
 view::DSattributes hrv::DesiredSize(long width, long height, enum view::DSpass pass, long *desiredwidth, long *desiredheight)
 {

@@ -100,7 +100,7 @@ enum im_keyecho_t {im_KeyEchoOff, im_KeyEchoPending, im_KeyEchoDisplayed};
 
 class im : public  view  {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(im);
      void WantUpdate(class view *requestor);
      void WantInputFocus(class view *requestor);
      void WantColormap(class view *requestor, class colormap **cmap);
@@ -258,7 +258,6 @@ public:
     
 	im();
     
-	virtual ~im();
     static class im * Create(char *host)  ;
     static class im * CreateTransient(class im *other, int flasgs=im_TRANSIENTMENUS, im_configurefptr cfp=NULL, long crock=0)  ;
     static class im * CreateOverride(class im *other, im_configurefptr cfp=NULL, long crock=0)  ;

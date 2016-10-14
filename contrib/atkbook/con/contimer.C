@@ -25,7 +25,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 
-ATKdefineRegistry(contimer, observable, NULL);
+ATKdefineRegistryNoInit(contimer, observable);
 void HandleTimer(class contimer  *self);
 
 

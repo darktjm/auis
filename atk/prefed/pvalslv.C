@@ -14,7 +14,7 @@ ATK_IMPL("pvalslv.H")
 #define VALUE(self) ((DATA(self))->GetValue()?(DATA(self))->GetValue()->v.ival:0)
 
 
-ATKdefineRegistry(pvalslv, ssliderv, NULL);
+ATKdefineRegistryNoInit(pvalslv, ssliderv);
 
 pvalslv::pvalslv()
 {

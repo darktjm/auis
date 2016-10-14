@@ -47,7 +47,7 @@ struct imbed
 
   };
 
-ATKdefineRegistry(zipoimbed, ziporect, NULL);
+ATKdefineRegistryNoInit(zipoimbed, ziporect);
 
 static long Load_Object( class zipoimbed *self, zip_type_figure  figure, const char *name, boolean announce );
 static long Draw( class zipoimbed *self, zip_type_figure figure, zip_type_pane pane, long  action );

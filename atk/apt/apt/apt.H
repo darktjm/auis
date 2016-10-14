@@ -91,7 +91,7 @@ struct apt_field_contents
 class apt : public  dataobject
   {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(apt);
 
 
 
@@ -131,7 +131,6 @@ public:
   
 	apt();
   
-	virtual ~apt();
   
 	static boolean InitializeClass();
 

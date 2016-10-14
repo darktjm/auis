@@ -56,13 +56,12 @@ struct bdffont_fontchar
 #include <dataobject.H>
 class bdffont : public  dataobject {
 public:
-	virtual ATKregistryEntry *ATKregistry();
+	TRACED_CLASS(bdffont);
 
     
 	
 	bdffont();
 	
-	virtual ~bdffont();
 	static class bdffont * CreateNewFont(long pts, long resx, long resy)  ;
     
 	 long Read(FILE *file, long id)  ;

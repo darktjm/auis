@@ -7,7 +7,7 @@
 ATK_IMPL("textref.H")
 #include <textref.H>
 
-ATKdefineRegistry(textref, fnote, NULL);
+ATKdefineRegistryNoInit(textref, fnote);
 
 const char * textref::ViewName()
 {

@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #define ANIMATIONDELAY event_MSECtoTU(100)
 
 
-ATKdefineRegistry(hanimapp, hwargapp, NULL);
+ATKdefineRegistryNoInit(hanimapp, hwargapp);
 void AnimateText(class hanimapp  *self, long time);
 
 
