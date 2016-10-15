@@ -2085,8 +2085,8 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 //		ScanForProcs, (long)libnode);
 }
 
-NO_DLL_EXPORT 	ness_ProcHookType 
-ness_ProcHook(ness_ProcHookFunc, 0L, avalue::cstring, 
-	avalue::voidatom);
+NO_DLL_EXPORT 	traced_ptr<ness_ProcHookType>
+ness_ProcHook(new ness_ProcHookType(ness_ProcHookFunc, 0L, avalue::cstring, 
+	avalue::voidatom));
 
 

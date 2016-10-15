@@ -61,9 +61,9 @@ END-SPECIFICATION  ************************************************************/
 #define  histogram_code		   10 /*=== Must be dynamic===*/
 #define  dot_code		   11
 #define  pie_code		   12
-/*#define  map_code		   13*/
+/*#define  map_code		   13
 #define  stack_code		   14
-#define  cartesian_code		   15
+#define  cartesian_code		   15*/
 #define  line_code		   16
 #define  print_code		   20
 #define  save_code		   21
@@ -124,6 +124,7 @@ static suite_Specification		pie_button[] =
   0
   };
 
+#if 0
 static suite_Specification		stack_button[] =
   {
   suite_ItemCaption("Stack"),
@@ -137,6 +138,7 @@ static suite_Specification		cartesian_button[] =
   suite_ItemDatum(cartesian_code),
   0
   };
+#endif
 
 static suite_Specification		sort_ascend_label_button[] =
   {
@@ -289,9 +291,9 @@ static suite_Specification		type_buttons[] =
   suite_Item( dot_button ),
   suite_Item( line_button ),
   suite_Item( pie_button ),
-/*  suite_Item( map_button ),*/
+/*  suite_Item( map_button ),
   suite_Item( stack_button ),
-  suite_Item( cartesian_button ),
+  suite_Item( cartesian_button ), */
   0
   };
 
@@ -529,9 +531,11 @@ Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	  
       case  dot_code:
       case  line_code:
       case  pie_code:
+#if 0
 /*      case  map_code:*/
       case  stack_code:
       case  cartesian_code:		DEBUG(Types);
+#endif
 	(self)->ReChartCmd( (char *) (suite)->ItemAttribute(  item, suite_itemcaption ) );
 	break;
       case  print_code:			DEBUG(Print);

@@ -853,7 +853,7 @@ class view : public  observable {
     atomlist *className;
     short  name_explicitly_set;
     void EnsureName();
-    /* follwing is managed by InsertView/LinkTree */
+    /* following are managed by InsertView/LinkTree */
     im *imPtr;
     friend class im; /* so it can set imPtr to itself */
     graphic *drawable;

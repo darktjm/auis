@@ -27,27 +27,6 @@
   fills in the values manually
 - for some reason, doing a full clean deletes Imakefile from examples
   ex2, ex5, ex8, ex19.
-- lots of valgrind access hits with letter.tpl
-  - parser::ParseNumber (317)
-    There is no end sentinel on GetBuf() returns, so to fix, either:
-    - all uses of GetBuf() must be checked to ensure they respect the length
-      - for this case, parser::ParseNumber() needs to take a len parm
-    - 1 extra byte needs to be allocated for simpletext strings to store a 0
-    Note also that GetBuf() cuts off at the gap (and, in general, gap can't
-    be handled w/o extra coding), so neither "fix" above is that great.
-  - InterpretEvent (661)
-  - InterpretEvent (662)
-  - InterpretEvent (664)
-    - all due to ness being deleted while being executed (or is it
-      "while being referenced by an nevent node"? ).
-  - celview::Hit (1510)
-    - due to celview being deleted while its Hit() being executed.
-      Need to defer deletes somehow to prevent this.  Perhaps have
-      anything that calls ness or may be referred to by callers of ness
-      check if currently executing ness; if so, defer deletion until
-      ness finishes.  That's a lot of work for little benefit.  Another
-      option would be to just crash more obviously when an in-progress
-      script deletes itself or the item it's executing for.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
 - need play module to either work or ignore (atk/music was dropped in 8.0)
@@ -60,6 +39,7 @@
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
 - org/bush/treev: kb navigation of nodes, printing (outline?)
+- suite text input widgets are not editable
 - sometimes, bush's ^X^C action is to quit without confirmation
   (maybe has to do with bush not setting change flag correctly as well)
 - hyperlink: don't update label if label isn't default (or at least

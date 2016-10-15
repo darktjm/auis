@@ -233,6 +233,13 @@ So far, the following incompatibilities have been introduced:
     can probably get a font server to give you the appropriate
     fonts.
 
+  - I changed parser::ParseNumber and cparser_ParseNumber without
+    changing their documentation or prototypes:  beware!  If you pass
+    in a length pointer, it must be initialized to the length of the
+    text you want to parse.  This is to fix a bug where all current
+    usages are in text buffers without termination, even though the
+    routines assumed zero termination.
+
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:
     

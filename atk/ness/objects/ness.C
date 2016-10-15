@@ -347,7 +347,7 @@ ness::InitializeClass() {
 
 	// Define the hook for proctable to trigger auto-loading of ness functions, or just access to
 	// functions defined in previously compiled ness scripts.
-	pe = proctable::DefineAction("ness-proctable-hook", &ness_ProcHook, NULL, "ness", "Attempts to locate the named function and place it in the proctable.");
+	pe = proctable::DefineAction("ness-proctable-hook", ness_ProcHook, NULL, "ness", "Attempts to locate the named function and place it in the proctable.");
 
 	return (pe != NULL);
 	}

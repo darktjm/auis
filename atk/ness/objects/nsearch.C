@@ -1250,6 +1250,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		pos = (subject)->GetPos();
 
 		cstring = (textp)->GetBuf( pos, 200, &envlen);
+		len = envlen;
 		success = parser::ParseNumber(cstring, &len, &intval, &realval);
 		if (success == 0 || len > envlen)
 			intval = (1<<31);
@@ -1270,6 +1271,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 			save matched portion in WhereItWas */
 
 		cstring = (textp)->GetBuf( pos, 200, &envlen);
+		len = envlen;
 		success = parser::ParseNumber(cstring, &len, &intval, &realval);
 		if (success == 0 || len > envlen)
 			realval = -999.0;

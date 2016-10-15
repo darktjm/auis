@@ -455,7 +455,8 @@ void view::LinkTree(class view  *parent)
 	}
     }
     else {
-	if (this->parent != NULL)
+	// hack: don't notify if parent is in destructor
+	if (this->parent != NULL && this->parent->ReferenceCount() > 0)
 	    this->parent->UnlinkNotification( this);
 
         this->imPtr = NULL;

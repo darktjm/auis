@@ -1268,8 +1268,6 @@ void celview::Copy ()
 
 celview::~celview()
 {
-	ATKinit;
-
     if(this->olist){
 	struct overlay *ov; 
 	class view *vw[128];
@@ -1468,6 +1466,7 @@ class view *celview::Hit(enum view::MouseAction  action,long  mousex ,long  mous
     }
     if((this->child && !this->resizing) )	{
 	vw = NULL;
+	this->Reference(); // in case one of these deletes me
 	if(this->hitfunc){
 	    vw = (*(this->hitfunc))
 	      (this,action,
@@ -1489,6 +1488,7 @@ class view *celview::Hit(enum view::MouseAction  action,long  mousex ,long  mous
 	    else if ((this->arb)->GetCelMode())
 		arbcon::SetCurrentCelview(this);
 	}
+	this->Destroy(); // in case somebody above deleted me
 	return vw;
     }
     if(this->child == NULL) {
