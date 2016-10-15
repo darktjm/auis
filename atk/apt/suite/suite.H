@@ -642,15 +642,16 @@ END-SPECIFICATION  ************************************************************/
 #define	BreakCount(item)			    ((item->breaks)->Count())
 #define	BreakPos(item,i)			    (item->breaks->Item(i))
 
-#define	item_ActiveForegroundColor ( (item) ? &item->color.fg : &item->suite->activeItemColor.fg )
-#define	item_ActiveBackgroundColor ( (item) ? &item->color.bg : &item->suite->activeItemColor.bg )
-#define	item_ActiveForegroundColorName ( (item) ? (char *)item->color.fg.Name() : (char *)item->suite->activeItemColor.fg.Name() )
-#define	item_ActiveBackgroundColorName ( (item) ? (char *)item->color.bg.Name() : (char *)item->suite->activeItemColor.bg.Name() )
+// tjm - I'm assuming that colors are created from strings, not rgb, so Name() is a valid test.
+#define	item_ActiveForegroundColor ( (item->color.fg.Name()) ? &item->color.fg : item->suite->activeItemColor.fg.Name() ? &item->suite->activeItemColor.fg : &item->suite->suiteColor.fg )
+#define	item_ActiveBackgroundColor ( (item->color.bg.Name()) ? &item->color.bg : item->suite->activeItemColor.bg.Name() ? &item->suite->activeItemColor.bg : &item->suite->suiteColor.bg )
+#define	item_ActiveForegroundColorName ( (item->color.fg.Name()) ? (char *)item->color.fg.Name() : (char *)item->suite->activeItemColor.fg.Name() )
+#define	item_ActiveBackgroundColorName ( (item->color.bg.Name()) ? (char *)item->color.bg.Name() : (char *)item->suite->activeItemColor.bg.Name() )
 
-#define	item_PassiveForegroundColor ( (item) ? &item->color.fg : &item->suite->passiveItemColor.fg )
-#define	item_PassiveBackgroundColor ( (item) ? &item->color.bg : &item->suite->passiveItemColor.bg )
-#define	item_PassiveForegroundColorName ( (item) ? (char *)item->color.fg.Name() : (char *)item->suite->passiveItemColor.fg.Name() )
-#define	item_PassiveBackgroundColorName ( (item) ? (char *)item->color.bg.Name() : (char *)item->suite->passiveItemColor.bg.Name() )
+#define	item_PassiveForegroundColor ( (item->color.fg.Name()) ? &item->color.fg : item->suite->passiveItemColor.fg.Name() ? &item->suite->passiveItemColor.fg : &item->suite->suiteColor.fg )
+#define	item_PassiveBackgroundColor ( (item->color.bg.Name()) ? &item->color.bg : item->suite->passiveItemColor.bg.Name() ? &item->suite->passiveItemColor.bg : &item->suite->suiteColor.bg )
+#define	item_PassiveForegroundColorName ( (item->color.fg.Name()) ? (char *)item->color.fg.Name() : (char *)item->suite->passiveItemColor.fg.Name() )
+#define	item_PassiveBackgroundColorName ( (item->color.bg.Name()) ? (char *)item->color.bg.Name() : (char *)item->suite->passiveItemColor.bg.Name() )
 
 #define	item_ForegroundColor ( (item->mode & item_Active) ? item_ActiveForegroundColor : item_PassiveForegroundColor )
 #define	item_BackgroundColor ( (item->mode & item_Active) ? item_ActiveBackgroundColor : item_PassiveBackgroundColor )

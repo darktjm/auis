@@ -369,6 +369,7 @@ suite::suite( )
   (this)->SetOptions(aptv_SuppressControl | 
 		    aptv_SuppressBorder | 
 		    aptv_SuppressEnclosures);
+  AllocateColors(this);
   WrapStyle = suite_LeftIndent;
   MaxItemPosGiven = 0;
   this->buttonprefs = sbutton::GetNewPrefs(suitebutton);
@@ -1033,16 +1034,15 @@ ParseFontFullName( class suite  *self, char  *fullname , char  *familyName, long
 static void
 ChangeItemCaption( class suite  *self, struct suite_item  *item, char  *caption )
       { class text *txt = NULL;
-  class suitecv *CV = NULL, *t;
+  class suitecv *CV = NULL;
 
     ValidateItem(self,item);
     AllocNameSpace(&item->caption, caption);
     if(item_AccessType & suite_ReadWrite) {
 	(txt = (class text*) item->dataobject)->Clear();
 	(txt)->InsertCharacters( 0, item->caption, strlen(item->caption));
-	t = (class suitecv *)item->viewobject;
-	t->WantUpdate( CV);
-	CV = t; /* tjm - FIXME: verify this is what was intended */
+	CV = (class suitecv *)item->viewobject;
+	CV->WantUpdate( CV);
     }
     (SetView)->ItemUpdate(item);
 }
@@ -2467,7 +2467,8 @@ AllocColorFromPref( class suite  *self, class color  *color, const char  *prefNa
 
     if((prefVal = environ::GetProfile(prefName)) == NULL)
 	prefVal = defaultColorName;
-    *color = prefVal;
+    if(prefVal)
+        *color = prefVal;
 }
 
 #define DEFAULT_FOREGROUND "black"
@@ -2486,11 +2487,12 @@ AllocateColors( class suite  *self )
     AllocColorFromPref(self, &TitleForeground, "suitetitleforeground", SuiteForegroundName /*defaultFG*/);
     AllocColorFromPref(self, &TitleBackground, "suitetitlebackground", SuiteBackgroundName /*defaultBG*/);
 
-    AllocColorFromPref(self, &ActiveItemForeground, "suitebuttonactiveforeground", SuiteForegroundName /*defaultFG*/);
-    AllocColorFromPref(self, &ActiveItemBackground, "suitebuttonactivebackground", SuiteBackgroundName /*defaultBG*/);
+    // leaving this NULL will use the sbutton default colors
+    AllocColorFromPref(self, &ActiveItemForeground, "suitebuttonactiveforeground", NULL /*SuiteForegroundName*/ /*defaultFG*/);
+    AllocColorFromPref(self, &ActiveItemBackground, "suitebuttonactivebackground", NULL /*SuiteBackgroundName*/ /*defaultBG*/);
 
-    AllocColorFromPref(self, &PassiveItemForeground, "suitebuttonpassiveforeground", SuiteForegroundName /*defaultFG*/);
-    AllocColorFromPref(self, &PassiveItemBackground, "suitebuttonpassivebackground", SuiteBackgroundName /*defaultBG*/);
+    AllocColorFromPref(self, &PassiveItemForeground, "suitebuttonpassiveforeground", NULL /*SuiteForegroundName*/ /*defaultFG*/);
+    AllocColorFromPref(self, &PassiveItemBackground, "suitebuttonpassivebackground", NULL /*SuiteBackgroundName*/ /*defaultBG*/);
 }
 
 void
@@ -2499,7 +2501,6 @@ suite::LinkTree(class view  *parent)
     class suite *self=this;
     (this)->aptv::LinkTree( parent);
     if((this)->GetIM()) {
-	AllocateColors(this);
 	SetViewColors((class view *) this, &SuiteForeground, &SuiteBackground);
 	if(Scroll)
 	    (Scroll)->LinkTree( this);

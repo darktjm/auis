@@ -15,21 +15,19 @@
     even though it may be gone.  Thus, crash.
 - adew: often clears regions and never redisplays contents (maybe due
   to my "fix" for lack of resize updates)
-- adew: samples for mbuttonv or clicklistV in vallist document anymore
+- adew: no samples for mbuttonv or clicklistV in vallist document anymore
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
   - pcontrol dies on init if not PC-RT
+- need play module to either work or ignore (atk/music was dropped in 8.0)
 - use qsort to sort in deskey instead of external sort command
 - adjusting controls doesn't always set modified flag for a document
 - sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
-- for some reason, doing a full clean deletes Imakefile from examples
-  ex2, ex5, ex8, ex19.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
-- need play module to either work or ignore (atk/music was dropped in 8.0)
 - many 3d link buttons in ATK tour have text overlapping bottom edge
   probably some screwy interaction between table and button
 - pagedown eventually stops working (e.g. 2rtf)
@@ -39,7 +37,6 @@
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
 - org/bush/treev: kb navigation of nodes, printing (outline?)
-- suite text input widgets are not editable
 - sometimes, bush's ^X^C action is to quit without confirmation
   (maybe has to do with bush not setting change flag correctly as well)
 - hyperlink: don't update label if label isn't default (or at least
