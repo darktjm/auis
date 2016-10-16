@@ -26,6 +26,21 @@
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
+- ending search should re-evaluate character in keymap, or something
+  should be done to prevent e.g. cursor keys from inserting the 2nd char
+  of their escape sequence equivalent into the doc if pressed.
+- apparently can't load & execute ness files w/ event handlers from
+  within ez.   Calling ness-load in the ness-stmt command-line discards
+  the script when the command-line completes.
+- there's no "evalbuffer" equivalent for ness, unless loaded as ness.
+  Actually, I could probably transfer the key bindings to use them in
+  textview as well, but it's still missing evaluation of current
+  selection, and ness-stmt is somewhat screwy as well (deletes most
+  side effects on completion)
+- compiling library ness should add all potential entry points to the
+  proctable list printed by desckey.  Also, there should be a way to
+  add a line of docs for exported functions similar to the proctable
+  help string.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
 - many 3d link buttons in ATK tour have text overlapping bottom edge

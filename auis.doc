@@ -14046,14 +14046,32 @@ $ANDREWDIR/lib/ness
 V
 \begindata{link,14391936}
 Datastream version: 2
-ness
+$ANDREWDIR/lib/ness
 2
 
 black
 white
 \enddata{link,14391936}
 \enddata{link,14391936}
-\view{linkview,14391936,26380,0,0}
+\view{linkview,14391936,26380,0,0} is the only element in the default 
+Ness library path.  Ness scripts in the Ness library path are automatically 
+loaded for procedure calls with their base name as a prefix (e.g. 
+\typewriter{date_slashed} will load \typewriter{date.n}).  They may also 
+be manually loaded using the procedure \bold{ness-load} (which, unlike other 
+procedures, does not take a view as its first parameter; only the script 
+name needs to be supplied:  \typewriter{ness-load} 
+\typewriter{\italic{script}.n}).  If the script name does not have a 
+leading slash after variable and home directory expansion, it is loaded 
+from the library path.  If the script name has spaces, enclose it in 
+quotes.
+
+This directory also contains some configuration files used by Ness, as 
+well as the demo scripts.
+
+Note that \view{linkview,10692880,25568,0,0} contains documentation 
+for some of the library files, but not all, and the documentation is 
+incomplete even for the files that are documented.  I may transfer the 
+documentation here into that file some time, though.
 
 
 
@@ -14074,7 +14092,21 @@ black
 white
 \enddata{link,14392944}
 \enddata{link,14392944}
-\view{linkview,14392944,26381,0,0}
+\view{linkview,14392944,26381,0,0} is a Ness ASCII case translation 
+library.  The following functions are exported:
+
+
+void function \bold{ctype_tolower}(marker \italic{m})
+
+\indent{Modifies the text referenced by marker \italic{m}, replacing 
+all upper-case ASCII letters with the corresponding lower-case letters.}
+
+
+void function \bold{ctype_toupper}(marker \italic{m})
+
+\indent{Modifies the text referenced by marker \italic{m}, replacing 
+all lower-case ASCII letters with the corresponding upper-case letters.}
+
 
 
 \section{date.n}
@@ -14094,7 +14126,169 @@ black
 white
 \enddata{link,14402512}
 \enddata{link,14402512}
-\view{linkview,14402512,26382,0,0}
+\view{linkview,14402512,26382,0,0} is a Ness library of date 
+manipulation utilities.  Month and day names are in English.  Running 
+this script standalone (using \bold{nessrun}) will run some self-tests.
+
+
+\subsection{Canonical date representation}
+
+
+The canonical date representation is an integer giving the number of 
+days from the beginning of a putative year zero.  
+The counting uses only the Gregorian calendar scheme of leap years, 
+so it assigns incorrect numbers to dates prior to the transition.  
+Jan 1 of the putative year zero is day 1.  Year 0 is taken as a leap year.  
+(Since counting really began with year one, there will be no date 
+to which the integers 1...366 are assigned.)
+
+For dates since the transition to the Gregorian calendar, the canonical 
+date integer is suitable for doing arithmetic to compute the number of 
+days between two dates.
+
+
+\subsection{Restrictions}
+
+
+One and two digit year values are taken to be within 50 years of the 
+current year, so years prior to 100 AD are not parsed properly.
+
+Tthis module is not limited as to date.  
+when an assumption is necessary, it assumes the date is 
+from 1/1/1970 - 12/31/2069, inclusive.
+
+
+\subsection{Date styles accepted}
+
+
+separator styles:
+
+\indent{slashes:	7/17/1989
+
+dashes:	7-17-1989
+
+periods:	1989.198}
+
+month styles:
+
+\indent{digits:	7
+
+abbr:	Jul	(must have legal first 3 letters)
+
+full:	July}
+
+year styles:
+
+\indent{digits:	89
+
+abbr:	'89	(a number with an apostrophe in front)
+
+full:	1989	(a number between 1970 and 2069)}
+
+value styles:
+
+\indent{3 values:	7/17/1989	(month, day, year)
+
+2 values:	1989.198	(year, number days from 1/1)
+
+1 value:	726666	(number of days after 12/31/1BC)}
+
+position styles:
+
+\indent{month day year:	July 17, 1989
+
+day month year:	17-July-1989	(month must be abbr or full)
+
+year day:		1989.198		(year must be abbr or full)}
+
+extraneous text:
+
+\indent{ignores extraneous text before and after date
+
+takes leftmost combination of characters to form date
+
+text between the parts of the date can not contain numbers except a time
+
+times must have parts separated by colons (no spaces in time allowed)}
+
+
+\subsection{Exported Functions}
+
+
+integer function \bold{date_today}()
+
+\indent{Returns the canonical integer representation for the current date.}
+
+
+integer function \bold{date_canonical}(marker \italic{m})
+
+\indent{Returns the canonical integer representation for the date in 
+the marker \italic{m}.  This canonical integer is the number of days 
+from 1/1/1970.  The canonical integer for 1/1/1970 is 1.}
+
+
+marker function \bold{date_text}(int \italic{n})
+
+\indent{Returns a text representation (eg:  July 17, 1989) for the canonical
+date given in the integer parameter \italic{n}.}
+
+
+marker function \bold{date_slashed}(int \italic{n})
+
+\indent{Returns a slashed representation (eg:  7/17/1989) for the canonical 
+date given in the integer parameter \italic{n}.}
+
+
+marker function \bold{date_dashed}(int \italic{n})
+
+\indent{Returns a dashed representation (eg:  7-17-1989) for the canonical 
+date given in the integer parameter \italic{n}.}
+
+
+marker function \bold{date_text}(int \italic{n})
+
+\indent{Returns a plain textual representation (\italic{Month} 
+\italic{dd}, \italic{yyyy}) for the canonical date given in the 
+integer parameter \italic{n}.}
+
+
+marker function \bold{date_julian}(int \italic{n})
+
+\indent{Returns a two-value representation (eg:  1989.198) for the 
+canonical date given in the integer parameter \italic{n} (note:  format is 
+\italic{year}.\italic{day}).}
+
+
+marker function \bold{date_DayOfWeek}(integer \italic{n})
+
+\indent{Returns the English name for the day of week for the 
+canonical date given in the integer parameter \italic{n}.}
+
+
+\section{doubleword.n}
+
+\begindata{link,14402513}
+4
+$ANDREWDIR/lib/ness/doubleword.n
+0
+0
+V
+\begindata{link,14402513}
+Datastream version: 2
+doubleword.n
+2
+
+black
+white
+\enddata{link,14402513}
+\enddata{link,14402513}
+\view{linkview,14402513,126383,0,0} provides a command to locate double 
+ASCII words in immediate succession (generally considered bad 
+gramatical form).  To use, add \typewriter{call ness-load 
+doubleword.n} to your initialization file.  This will bind the 
+doubleword functionality to \typewriter{Esc-x2}.  Alternatively, this 
+script can be copied into an embedded Ness inset in a document and 
+invoked with DoMain from the Ness menu.
 
 
 \section{enum.n}
@@ -14114,7 +14308,37 @@ black
 white
 \enddata{link,14403648}
 \enddata{link,14403648}
-\view{linkview,14403648,26383,0,0}
+\view{linkview,14403648,26383,0,0} updates enumerations in current 
+selection or an entire file.
+
+An enumeration is at the beginning of a line and consists of 
+one or more enumeration units, each of which is 
+a dash followed by a period or a digit string followed by a period.  
+The last enumeration unit must be followed by space, tab, or newline.
+
+The numbers will be updated by a simple scheme:
+
+\indent{\symbola{7}	If the enumeration has the same number of 
+enumeration units as the previous one, the last unit is incremented.}
+
+\indent{\symbola{7}	If the enumeration has fewer units than the 
+previous one, the last unit is incremented from its prior value.}
+
+\indent{\symbola{7}	All enumeration units beyond the length of the 
+previous enumeration are set to one.}
+
+When run with \bold{nessrun}, it takes a file name as an argument, 
+and runs the procedure on the entire file.  The original file is then 
+moved to the same name, with a \typewriter{.BAK} extension, and the 
+results are written back using the original file name.  The following 
+function is exported:
+
+
+void function \bold{enum_Digits}()
+
+\indent{Update enumerations in the current selection.}
+
+
 
 
 \section{fileconvert.n}
@@ -14134,7 +14358,21 @@ black
 white
 \enddata{link,14404592}
 \enddata{link,14404592}
-\view{linkview,14404592,26384,0,0}
+\view{linkview,14404592,26384,0,0} is a sample prototypical file 
+conversion program.  Copy it and change it to do anything useful with 
+it; the default converter is a straight copy.  When loaded using 
+\bold{ness-load}, it adds a menu entry "Convert" for converting the 
+current selection.  When run using \bold{nessrun}, it converts the 
+entire file given as a parameter, writing its results to the same 
+base name, with a \typewriter{.d} extension, and possibly moving any 
+existing output file to a backup with an additional \typewriter{.old} 
+extension.  The following function is exported: 
+
+
+void function \bold{fileconvert_convert}()
+
+\indent{Convert the current selection.}
+
 
 
 \section{format.n}
@@ -14154,7 +14392,21 @@ black
 white
 \enddata{link,14405616}
 \enddata{link,14405616}
-\view{linkview,14405616,26385,0,0}
+\view{linkview,14405616,26385,0,0} converts manual paragraphing to 
+automatic paragraphs.  For example, when importing plain text, this 
+wraps consecutive lines of text into a single paragraph, splitting at 
+blank lines.  When loaded using \bold{ness-load}, it adds a menu entry 
+"Search/Spell,Wrap lines" to perform this conversion on the current 
+selection.  When run using \bold{nessrun}, it converts the entire 
+file given as a parameter, possibly converting to ATK format at the 
+same time.  The output is written to a file of the same name, after 
+renaming the input file with a \typewriter{.BAK} extension.  The 
+following function is exported:
+
+
+void function \bold{format_wrap}()
+
+\indent{Wrap paragraphs in the current selection.}
 
 
 \section{fromrtf.n}
@@ -14174,27 +14426,39 @@ black
 white
 \enddata{link,14406560}
 \enddata{link,14406560}
-\view{linkview,14406560,26386,0,0}
+\view{linkview,14406560,26386,0,0} converts a file or selected region 
+from RTF to ATK.
+
+When loaded using \bold{ness-load}, it adds a menu entry "RTF to ATK" 
+to convert the current selection.  When run using \bold{nessrun}, it 
+converts the entire file given as a parameter, writing its results to 
+the same name, with a \typewriter{.d} extension, and possibly moving 
+any existing output file to a backup with an additional 
+\typewriter{.BAK} extension.  The following functions are exported:
 
 
-\section{funchdr.n}
+marker function \bold{fromrtf_to_atk}(marker \italic{t})
 
-\begindata{link,14407904}
-4
-$ANDREWDIR/lib/ness/funchdr.n
-0
-0
-V
-\begindata{link,14407904}
-Datastream version: 2
-funchdr.n
-2
+\indent{Retruns the result of converting the text \italic{t}.}
 
-black
-white
-\enddata{link,14407904}
-\enddata{link,14407904}
-\view{linkview,14407904,26387,0,0}
+
+void function \bold{fromrtf_convert}()
+
+\indent{Convert the current selection.}
+
+
+\subsection{Known Problems}
+
+
+Styles are fragmented:  a long indented section will have separate 
+pieces at each place where the style of an internal piece changes.  
+
+Table of contents entries in ATK are generated based on styles.  These 
+styles are not currently generated by this program; instead the 
+individual components of the styles are generated.
+
+Hidden text in ATK cannot be viewed readily.  Users can get around 
+this by using lookz to give some other attributes to the style "Hidden".
 
 
 \section{gnutranspose.n}
@@ -14214,7 +14478,9 @@ black
 white
 \enddata{link,14379856}
 \enddata{link,14379856}
-\view{linkview,14379856,26388,0,0}
+\view{linkview,14379856,26388,0,0} rebinds \typewriter{^T} to 
+transpose the way GNU Emacs does.  To use, add \typewriter{call 
+ness-load gnutranspose.n} to your initialization file.
 
 
 \section{italicize.n}
@@ -14234,7 +14500,16 @@ black
 white
 \enddata{link,14380880}
 \enddata{link,14380880}
-\view{linkview,14380880,26389,0,0}
+\view{linkview,14380880,26389,0,0} italicizes reserved words in Ness
+programs.  Note that reserved words in strings and comments will be 
+converted as well.  When run using \bold{nessrun}, the file named in 
+its argument is coverted, and written out with the extension 
+\typewriter{.i}.  The following function is exported:
+
+
+void function \bold{italicize_selection}()
+
+\indent{Italicize Ness reserved words within the current selection.}
 
 
 \section{mtmpl.n}
@@ -14254,7 +14529,8 @@ black
 white
 \enddata{link,14381824}
 \enddata{link,14381824}
-\view{linkview,14381824,26390,0,0}
+\view{linkview,14381824,26390,0,0} is the boilerplate which wraps Ness 
+code generated from keyboard macros.
 
 
 \section{nesswarn.d}
@@ -14274,7 +14550,9 @@ black
 white
 \enddata{link,14382928}
 \enddata{link,14382928}
-\view{linkview,14382928,26391,0,0}
+\view{linkview,14382928,26391,0,0} is the document which wraps embedded 
+Ness scripts unless that is disabled via the preference 
+NessUseDialogBoxInsteadOfWarning.
 
 
 \section{octalimage.n}
@@ -14294,7 +14572,13 @@ black
 white
 \enddata{link,14383840}
 \enddata{link,14383840}
-\view{linkview,14383840,26392,0,0}
+\view{linkview,14383840,26392,0,0} is a Ness library for converting 
+integers to octal.  The following function is exported:
+
+
+marker function \bold{octalimage_cvt}(integer \italic{i})
+
+\indent{Convert the integer value \italic{i} to an octal string.}
 
 
 \section{sort.n}
@@ -14314,7 +14598,58 @@ black
 white
 \enddata{link,14384896}
 \enddata{link,14384896}
-\view{linkview,14384896,26393,0,0}
+\view{linkview,14384896,26393,0,0} is a Ness library to sort records 
+in a particular format.  Each record starts with a single dash on a 
+line by itself.  Each line of the record consists of a field name 
+(a capitalized ASCII word containing optional dashes), followed by a 
+colon, followed by spaces and tabs, followed by the record contents.  
+If the record text does not immediately begin with the start-record 
+sequence, all text preceeding the start-record sequence is ignored and 
+retained in the output.  The following functions are exported:
+
+
+marker function \bold{sort_records}(marker \italic{fieldname}, marker 
+\italic{text})
+
+\indent{Sort the records in \italic{text} by the fields specified in 
+\italic{fieldname}.  The fields are a colon-separated (and optionally 
+colon-terminated) list of fields to sort by, in the order they are to 
+be sorted by.  An empty \italic{fieldname} list means to sort by the 
+raw contents of the record.  Missing sort keys in fields are blank, 
+which end up at the top of the sort.}
+
+marker function \bold{sort_records_per_flags}(marker \italic{fieldname},
+marker \italic{text}, marker \italic{flags})
+
+\indent{Sort the records in \italic{text} by the fields specified in
+\italic{fieldname}, as described under \bold{sort_records}.  The 
+underlying sort procedure uses the \bold{sort}(1) command, and the 
+\italic{flags} parameter specifies optional flags to use, without 
+leading dashes or spaces except for the obsolete field specifier 
+flags.  The supported sort flags are, as per the standard POSIX 
+command:  \typewriter{u}, \typewriter{d}, \typewriter{f}, 
+\typewriter{i}, \typewriter{n}, \typewriter{r}, \typewriter{b}.  The 
+standard \typewriter{t} and \typewriter{k} flags are supported as 
+well, but they do not support spaces between the flag and its 
+argument.  The \typewriter{t} flag also doesn't support more than one 
+character (not even backslash escapes).  Finally, the obsolete 
+\typewriter{+}\italic{mmmm}[\typewriter{.}\italic{nnnn}] and 
+\typewriter{-}\italic{mmmm}[\typewriter{.}\italic{nnnn}] field 
+specifiers are passed on, but there is no guarantee that \bold{sort} 
+will understand them.
+}
+
+When run with \bold{nessrun}, the arguments are an optional field
+list and/or sort flag set, followed by the input file name.  The field 
+list consists of the \typewriter{-f} flag, followed by a 
+colon-separated (and optionally colon-terminated) list of fields to 
+sort by.  The flags are a \typewriter{-s} flag, followed by a list of 
+sort flags without spaces; see \bold{sort_records_per_flags}() for 
+details.  The sort is done as per \bold{sort_records_per_flags}(), and 
+the output is placed in a file with the same name as the input file, 
+but with \typewriter{.sorted} appended.  An attempt is first made to 
+move any existing output file to one whose name has \typewriter{.BAK} 
+appended.
 
 
 \section{swap.n}
@@ -14334,7 +14669,13 @@ black
 white
 \enddata{link,14385840}
 \enddata{link,14385840}
-\view{linkview,14385840,26394,0,0}
+\view{linkview,14385840,26394,0,0} is an example library function.  The 
+following function is exported:
+
+
+void function \bold{swap_Words}()
+
+\indent{Swaps the current selection with the next word.}
 
 
 \section{tokens.n}
@@ -14354,7 +14695,30 @@ black
 white
 \enddata{link,14387024}
 \enddata{link,14387024}
-\view{linkview,14387024,26395,0,0}
+\view{linkview,14387024,26395,0,0} is a Ness library containing ASCII 
+program text tokenizers.  The following functions are exported:
+
+
+marker function \bold{tokens_getC}(marker \italic{text})
+
+\indent{Get next C token after \bold{finish}(\italic{text}).}
+
+
+marker function \bold{tokens_getNess}(marker \italic{text})
+
+\indent{Get next Ness token after \bold{finish}(\italic{text}).}
+
+
+marker function \bold{tokens_PreSpace}()
+
+\indent{Get characters skipped to get to last token returned.}
+
+
+When run with \bold{nessrun}, the file its argument names is read, and 
+all tokens are printed to standard output, one per line.  The choice 
+of routine depends on the file name's last letter:  if it is 
+\typewriter{c}, the \bold{tokens_getC}() routine is used; otherwise, 
+the \bold{tokens_getNess} routine is used.
 
 
 \section{unscribe.n}
@@ -14374,7 +14738,14 @@ black
 white
 \enddata{link,14387968}
 \enddata{link,14387968}
-\view{linkview,14387968,26396,0,0}
+\view{linkview,14387968,26396,0,0} is a standalone program to convert 
+scribe documents to ATK documents.  When run with \bold{nessrun}, its 
+single argument is the name of the file to convert.  A \typewriter{.d} 
+extension is appended (replacing any non-\typewriter{.d} extension) to 
+form the output file name.  If the output file exists, it is moved 
+aside by appending a \typewriter{.BAK} extension.  Edit the script to 
+customize output styles, and to see further restrictions known at the 
+time it was written.
 
 
 \section{vp2scribe.n}
@@ -14394,7 +14765,22 @@ black
 white
 \enddata{link,14393936}
 \enddata{link,14393936}
-\view{linkview,14393936,26397,0,0}
+\view{linkview,14393936,26397,0,0} is a utility to convert 
+Ventura Print documents to scribe documents.  When loaded using 
+\bold{ness-load}, it adds the menu entry "File,VP to Scribe" to convert 
+the current selection.  When run with \bold{nessrun}, its single
+argument is the name of a file to convert in its entirety.  A 
+\typewriter{.mss} extension is appended (replacing any 
+non-\typewriter{.mss} extension) to form the output file name.  If the 
+output file exists, it is moved aside by appending a \typewriter{.BAK} 
+extension.  Examine the script for further details on supported 
+conversions.  The following function is exported:
+
+
+mark function \bold{vp2scribe_convert}(mark \italic{text})
+
+\indent{Returns a copy of \italic{text}, converted from Venture Print 
+to scribe.}
 
 
 \section{wc.n}
@@ -14414,7 +14800,25 @@ black
 white
 \enddata{link,14394848}
 \enddata{link,14394848}
-\view{linkview,14394848,26398,0,0}
+\view{linkview,14394848,26398,0,0} is a simple word counter.  Words are 
+defined as contiguous extents of ASCII alphabetic characters.  When 
+loaded using \bold{ness-load}, it adds the menu entry 
+"Search/Spell,Count words~60" to count the number of words in the 
+current selection.  When run using \bold{nessrun}, the single argument 
+is a file whose words are counted.  Unlike the UNIX \bold{wc} command, 
+the output is not easily parsable, making the latter version mostly 
+useless.  The following functions are exported:
+
+
+integer function \bold{wc_countwords}(marker \italic{text})
+
+\indent{Returns the number of words in \italic{text}.}
+
+
+void function \bold{wc_showcount}()
+
+\indent{Displays the number of words in the current selection (usually 
+in the message line).}
 
 
 \section{xwipe.n}
@@ -14434,7 +14838,17 @@ black
 white
 \enddata{link,14395952}
 \enddata{link,14395952}
-\view{linkview,14395952,26399,0,0}
+\view{linkview,14395952,26399,0,0} adds various erasure options to the 
+keyboard in textviews.  To use, add \typewriter{call ness-load xwipe.n} 
+to your initialization file.
+
+
+\typewriter{Esc-^W} - The same as \typewriter{^W}, but using mark and 
+point to delimit the cut region.
+
+\typewriter{^H} - Deletes the selection if active; otherwise, the 
+previous character.
+
 \begindata{bp,10272688}
 Version 2
 n 0
@@ -34100,6 +34514,46 @@ white
 \enddata{link,7981152}
 \enddata{link,7981152}
 \view{linkview,7981152,57,0,0}
+
+Undocumented init features:
+
+\bold{load} \italic{classname}
+
+\indent{Preload the class \italic{classname}.  Not usually needed.}
+
+\bold{call} \italic{proc} \italic{view} \italic{arg}
+
+\indent{Call the proctable entry \italic{proc}.  This is only useful 
+for procedures which do not require a view.  For most procedures, this 
+means using 0 as the \italic{view} parameter.  For procedures like 
+\bold{ness-load}, which don't even support a view parameter, this is 
+the first, and only, argument.  Otherwise, that argument is optionally 
+specified in \italic{arg}.}
+
+\bold{ifdef}/\bold{ifndef} \italic{envvar}
+
+\indent{Only execute following actions (up to \bold{else} or 
+\bold{endif}) if \italic{envvar} is defined in the environment.}
+
+\bold{ifsys}/\bold{ifnsys} \italic{systemid}
+
+\indent{Only execute following actions (up to \bold{else} or
+\bold{endif}) if the system type is \italic{systemid}.}
+
+\bold{else}
+
+\indent{Only execute following actions (up to \bold{endif}) if the 
+previous unterminated conditional execution command failed.}
+
+\bold{endif}
+
+\indent{Terminate a conditional execution section.}
+
+\bold{addbutton} \italic{proc} \italic{button} [\italic{viewclass} 
+[\italic{loadclass} [\italic{inheritp} [\italic{extraarg}]]]]]]
+
+\indent{Unimplemented support for rebinding button hits.}
+
 
 null: should probably have a sample proclist document
 

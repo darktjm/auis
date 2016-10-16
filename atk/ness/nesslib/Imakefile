@@ -3,7 +3,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-NFILES = ctype.n date.n enum.n fileconvert.n format.n fromrtf.n funchdr.n gnutranspose.n italicize.n octalimage.n sort.n swap.n tokens.n unscribe.n vp2scribe.n wc.n xwipe.n 
+NFILES = ctype.n date.n doubleword.n enum.n fileconvert.n format.n fromrtf.n gnutranspose.n italicize.n octalimage.n sort.n swap.n tokens.n unscribe.n vp2scribe.n wc.n xwipe.n 
 
 MkdirTarget($(DESTDIR)/lib/ness)
 

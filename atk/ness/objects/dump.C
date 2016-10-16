@@ -609,6 +609,7 @@ dumpAttrList(FILE  *file, class nesssym  *symlist) {
 	for ( ; symlist;  symlist = symlist->next)
 		switch (symlist->flags) {
 		case flag_function | flag_ness:
+		case flag_function | flag_ness | flag_builtin:
 		case flag_function | flag_ness | flag_xfunc:
 			dumpFuncDef(file, symlist);
 			break;

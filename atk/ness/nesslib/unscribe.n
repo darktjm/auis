@@ -1,5 +1,4 @@
-\begindata{text,538951240}
-\textdsversion{12}
+\begindata{ness,538951240}
 \template{default}
 \define{global
 }
@@ -362,4 +361,4 @@ n 0
 \view{bpv,539153816,6,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538951240}
+\enddata{ness,538951240}

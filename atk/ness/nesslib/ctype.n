@@ -1,5 +1,4 @@
-\begindata{text,538549432}
-\textdsversion{12}
+\begindata{ness,538549432}
 \template{default}
 -- ctype.n   Ness case translation library
 
@@ -89,4 +88,4 @@ n 0
 \view{bpv,538551704,0,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538549432}
+\enddata{ness,538549432}

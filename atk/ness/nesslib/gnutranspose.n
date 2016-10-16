@@ -1,5 +1,4 @@
-\begindata{text,538353528}
-\textdsversion{12}
+\begindata{ness,538353528}
 \template{default}
 -- Gnu Emacs style character transpose
 
@@ -43,4 +42,4 @@ end keys end extend
 \view{bpv,537558784,23,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538353528}
+\enddata{ness,538353528}

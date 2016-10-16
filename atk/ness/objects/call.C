@@ -370,6 +370,7 @@ var->sym is either undefined or a function.  Look around for a function
  relevant var->flags values  {inode value}
 
 flag_function | flag_ness	top level function in a script	{funcnode}
+flag_function | flag_ness | flag_builtin	top level function in a library script	{funcnode}
 flag_function | flag_ness | flag_forward  ness func declared FORWARD {funcnode}
 flag_function | flag_ness | flag_xfunc	function within an 'extend' {funcnode}
 flag_function | flag_ness | flag_xfunc | flag_forward	fwd func in 'extend' {funcnode}
@@ -407,7 +408,7 @@ callLoadFuncval(struct varnode  *var) {
 				&& fnode != NULL) {
 			/* found name in a Ness library */
 			nesssym_NSetINode(sym, funcnode, fnode);
-			sym->flags = flag_function | flag_ness;
+			sym->flags = flag_function | flag_ness | flag_builtin;
 		}
 		else if (callCheckProcTable(var,&specialexprnode)) {
 			/* ifsucceeded, var has callnode for proctable entry */
@@ -416,6 +417,7 @@ callLoadFuncval(struct varnode  *var) {
 
 	switch(sym->flags) {
 	case flag_function | flag_ness:
+	case flag_function | flag_ness | flag_builtin:
 	case flag_function | flag_ness | flag_xfunc:
 	case flag_function | flag_ness | flag_forward:
 	case flag_function | flag_ness | flag_xfunc | flag_forward:   {
@@ -796,6 +798,7 @@ callCheckProcTable(struct varnode  *varnode, struct exprnode *argtypes) {
 	flag_function | flag_ness		Ness library - find out so with callCheckLib
 	flag_function | flag_undef		unknown - may be a forward reference
 	flag_function | flag_ness		previously defined Ness func
+        flag_function | flag_ness | flag_builtin Ness library function
 	flag_function | flag_ness | flag_forward  FORWARD declared
 	flag_function | flag_ness | flag_xfunc	defined in an 'extend'
 	flag_function | flag_ness | flag_xfunc | flag_forward  FORWARD in 'extend'
@@ -809,7 +812,7 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 	long loc, len;
 	Texpr rettype = Tstr;
 	struct funcnode *fnode;
-	struct callnode *cnode;
+	struct callnode *cnode = NULL; /* to shut gcc up */
 	struct exprnode *e;
 	long n;
 	const char *msg;
@@ -847,7 +850,8 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 				&& fnode != NULL) {
 			/* found name in a Ness library */
 			nesssym_NSetINode(varbl, funcnode, fnode);
-			varbl->flags = flag_function | flag_ness;
+			/* hack: since it's not refcounted, prevent freeing of lib ref w/ builtin flag */
+			varbl->flags = flag_function | flag_ness | flag_builtin;
 		}
 		else if (callCheckProcTable(varnode, argtypes)) {
 			/* it is a call on the proctable */
@@ -884,6 +888,7 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 
 	/* ness code (has fnode) */
 	case flag_function | flag_ness:
+	case flag_function | flag_ness | flag_builtin :
 	case flag_function | flag_ness | flag_forward :
 	case flag_function | flag_ness | flag_xfunc:
 	case flag_function | flag_ness | flag_xfunc | flag_forward: {

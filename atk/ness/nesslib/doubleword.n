@@ -1,5 +1,4 @@
-\begindata{text,538268692}
-\textdsversion{12}
+\begindata{ness,538268692}
 \template{default}
 -- Bind ESC-x-2 to find double words in text.  
 
@@ -79,4 +78,4 @@ end extend
 \view{bpv,537558784,7,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538268692}
+\enddata{ness,538268692}
