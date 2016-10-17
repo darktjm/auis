@@ -114,4 +114,6 @@ int main(int argc, const char **argv)
 			L4 G >C   C < B A B  >C<  G G P4  \
 			G >C   C < B A B  >C<   G G P4  \
 			G L1 E D C");
+        /* hacky wait for queue to flush before exiting */
+	play::Notes("P128 P128 P128 P128 P128");
 }

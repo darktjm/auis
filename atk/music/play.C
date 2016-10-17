@@ -28,15 +28,17 @@
 
 #include <portaudio.h>
 #include <math.h>
+#define USE_LOCKS
+#ifdef USE_LOCKS
+#include <pthread.h>
+#endif
 
-ATKdefineRegistry(play, ATK, play::InitializeClass);
+ATKdefineRegistryNoInit(play, ATK);
 
 #define SAMPLE_SIZE 100
-#define BUFFER_SAMPLES 500
+#define BUFFER_SAMPLES 200
 
 static double sample[SAMPLE_SIZE];
-// tjm - fixme: assume short == int16 for now
-static short buffer[BUFFER_SAMPLES];
 
 #define WHOLENOTE  2000	/* milliseconds in a whole note at tempo 120 */
 
@@ -46,53 +48,25 @@ static PaStreamParameters stream_desc = {};
 static PaStream *stream = NULL;
 static double sample_rate;
 
-static long Retard;		/* slow down the music
+static long Retard = 0;		/* slow down the music
 			Applied after all other note duration computation.
 			The note length becomes  length(1+Retard/50) */
-static long Volume;		/* global volume */
+static long Volume = 9;		/* global volume */
+// the old global volume default was 3.  I prefer to start at high.
+// then again, I don't know how it sounded on an IBM PC/RT keyboard...
 
-static unsigned int speak_refcnt = 0;
-
-	boolean
-play::OpenSpeaker(long vol)
+static void play_start()
 {
-	ATKinit;
-
-	if(speak_refcnt)
-		return TRUE;
-	PaError err = Pa_OpenStream(&stream, NULL, &stream_desc, sample_rate,
-				    BUFFER_SAMPLES, paClipOff, NULL, NULL);
-	if(err != paNoError) {
-		fprintf(stderr, "PortAudio failed to open stream (%d): %s\n",
-			(int)err, Pa_GetErrorText(err));
-		return FALSE;
+	if(!Pa_IsStreamActive(stream) && !Pa_IsStreamStopped(stream))
+		Pa_StopStream(stream);
+	if(Pa_IsStreamStopped(stream)) {
+		PaError err = Pa_StartStream(stream);
+		if(err != paNoError) {
+			fprintf(stderr, "PortAudio failed to start stream (%d): %s\n",
+				(int)err, Pa_GetErrorText(err));
+			return;
+		}
 	}
-	err = Pa_StartStream(stream);
-	if(err != paNoError) {
-		fprintf(stderr, "PortAudio failed to open stream (%d): %s\n",
-			(int)err, Pa_GetErrorText(err));
-		Pa_CloseStream(stream);
-		return FALSE;
-	}
-	speak_refcnt++;
-	return TRUE;
-}
-
-void play::CloseSpeaker(void)
-{
-	ATKinit;
-
-	if(!speak_refcnt || --speak_refcnt)
-		return;
-	PaError err = Pa_StopStream(stream);
-	if(err != paNoError)
-		fprintf(stderr, "PortAudio failed to stop stream (%d): %s\n",
-			(int)err, Pa_GetErrorText(err));
-	err = Pa_CloseStream(stream);
-	if(err != paNoError)
-		fprintf(stderr, "PortAudio failed to close stream (%d): %s\n",
-			(int)err, Pa_GetErrorText(err));
-	speak_refcnt--;
 }
 
 /* play(note, length, tempo, vol)
@@ -100,50 +74,181 @@ void play::CloseSpeaker(void)
 	note is 0..84.  0 is rest;  1..84 are keys (O0C .. O6B)
 	length is duration in milliseconds at tempo 120
 */
-	void
-play::PlayOneNote(double freq, long length, long tempo, long vol)
-{
-	ATKinit;
+struct play_one {
+	double vol_adj, freq_skip;
+	long bufcount, mute_after_count;
+};
+static play_one * volatile queue;
+static volatile int queue_len = 5, queue_add = 0, queue_get = 0, queue_full = 0;
+// really need a lock or two as well.
+#ifdef USE_LOCKS
+pthread_mutex_t queue_lock = PTHREAD_MUTEX_INITIALIZER; // lock queue's value
+#define lock_queue pthread_mutex_lock(&queue_lock)
+#define unlock_queue pthread_mutex_unlock(&queue_lock)
+pthread_mutex_t used_lock = PTHREAD_MUTEX_INITIALIZER; // lock used_lock's value
+#define lock_used pthread_mutex_lock(&used_lock)
+#define unlock_used pthread_mutex_unlock(&used_lock)
 
-	if(!tempo || !length || !speak_refcnt)
+// and conds would be a better way to wait for queue to become ready...
+pthread_cond_t queue_ready = PTHREAD_COND_INITIALIZER;
+#define wait_queue_locked pthread_cond_wait(&queue_ready, &queue_lock)
+#define signal_queue pthread_cond_signal(&queue_ready)
+#else
+#define lock_queue
+#define unlock_queue
+#define lock_used
+#define unlock_used
+
+#define wait_queue_locked wait_for_sample_finish()
+static void wait_for_sample_finish(void);
+#define signal_queue
+#endif
+
+	static void
+playonenote(double freq, long length, long tempo, long vol)
+{
+	if(!tempo || !length)
 		return;
+
 	double act_len = (double) length * 120 / tempo * (1.0 + (double)::Retard / 50);
-	int bufcount = sample_rate * act_len / 1000 / BUFFER_SAMPLES;
-	double sinpos = 0.0, freq_skip;
+	long bufcount = sample_rate * act_len / 1000 / BUFFER_SAMPLES;
+	if(bufcount <= 0)
+		return;
+	double freq_skip;
 	// old code had weird volume mapping table.  I'm just going to scale
 	// incoming volume by global volume, but set 0 to 0.
 	double vol_adj;
 	if(!vol)
 		vol_adj = 0.0;
 	else
-		// too quiet at vol == 3/3
+		// too quiet at vol == 3/3; maybe linear scale?
 		// vol_adj = pow(10.0, vol - 9) * pow(10.0, ::Volume - 9);
 		vol_adj = (double)(::Volume + 1) * vol / 90;
 
 	if(freq > 0.0 && vol_adj > 0.0)
 		freq_skip = freq / (sample_rate / SAMPLE_SIZE);
-	else {
-		freq_skip = 0.0;
-		memset(buffer, 0, sizeof(buffer));
+	else
+		vol_adj = freq_skip = 0.0;
+	play_one ent;
+	ent.vol_adj = vol_adj;
+	ent.freq_skip = freq_skip;
+	ent.bufcount = bufcount;
+	// mute_after is clicky, but the only acceptable cure would be
+	// to apply an ADSR envelope to the sound.  It's a toy, so I don't
+	// care.
+	double mute_after = 2000.0 / 256 * 120 / tempo * (1.0 + (double)::Retard / 50);
+	ent.mute_after_count = sample_rate * mute_after / 1000 / BUFFER_SAMPLES;
+	while(1) {
+		lock_used;
+		if(!queue_full)
+			break;
+		unlock_used;
+		lock_queue;
+		wait_queue_locked;
+		unlock_queue;
 	}
-
-	for(int i = 0; i < bufcount; i++) {
-		if(freq > 0.0 && vol_adj > 0.0)
-			for(int j = 0; j < BUFFER_SAMPLES; j++) {
-				buffer[j] = 32768 * vol_adj * sample[(int)sinpos];
-				sinpos += freq_skip;
-				if((int)sinpos >= SAMPLE_SIZE)
-					sinpos = 0.0;
-			}
-		PaError err = Pa_WriteStream(stream, buffer, BUFFER_SAMPLES);
-		if(err != paNoError) {
-			fprintf(stderr, "PortAudio failed to write to stream (%d): %s\n",
-				(int)err, Pa_GetErrorText(err));
-			return;
-		}
-	}
+	lock_queue;
+	queue[queue_add] = ent;
+	// following is guaranteed to break if no locking
+	int to_queue_add = queue_add;
+	if(to_queue_add == queue_len - 1)
+		to_queue_add = 0;
+	else
+		++to_queue_add;
+	if(to_queue_add == queue_get)
+		queue_full = 1;
+	queue_add = to_queue_add;
+	// ...
+	unlock_queue;
+	unlock_used;
+	play_start();
 }
 
+static int process_sound(const void *in, void *out, unsigned long buflen,
+			 const PaStreamCallbackTimeInfo *timeinfo,
+			 PaStreamCallbackFlags flags, void *user)
+{
+	static double sinpos = 0.0;
+	short *buffer = (short *)out;
+	int now_playing = queue_get;
+
+	if(!queue_full && now_playing == queue_add)
+		return paComplete;
+	lock_queue;
+	play_one ent = queue[now_playing];
+	unlock_queue;
+	if(ent.vol_adj > 0.0) {
+		for(unsigned long j = 0; j < buflen; j++) {
+			buffer[j] = 32767 * ent.vol_adj * sample[(int)sinpos];
+			sinpos += ent.freq_skip;
+			if((int)sinpos >= SAMPLE_SIZE)
+				sinpos = 0.0;
+		}
+	} else
+		memset(buffer, 0, buflen * sizeof(*buffer));
+	// FIXME: is buflen always BUFFER_SAMPLES?  I'm assuming it is.
+	lock_queue;
+	if(--ent.bufcount) {
+		queue[now_playing].bufcount = ent.bufcount;
+	} else if(ent.mute_after_count) {
+		ent.vol_adj = 0.0;
+		ent.bufcount = ent.mute_after_count;
+		ent.mute_after_count = 0;
+		queue[now_playing] = ent;
+	} else {
+		lock_used;
+		// checking queue_len is potentially dangerous
+		if(now_playing == queue_len - 1)
+			now_playing = 0;
+		else
+			++now_playing;
+		// following is guaranteed to break w/o locking
+		int was_queue_full = queue_full;
+		queue_get = now_playing;
+		queue_full = 0; // especially tricky spot
+		if(was_queue_full) {
+			signal_queue;
+		}
+		// ...
+		unlock_used;
+	}
+	unlock_queue;
+	if(queue_full || queue_get != queue_add)
+		return paContinue;
+	return paComplete;
+}
+
+#ifndef USE_LOCKS
+static void wait_for_sample_finish(void)
+{
+	play_one ent;
+
+	ent = queue[queue_get];
+	unsigned long wait_time = ent.bufcount + ent.mute_after_count;
+
+	wait_time = (wait_time * BUFFER_SAMPLES) * 1000 / sample_rate;
+	Pa_Sleep(wait_time + 1);
+}
+#endif
+
+void play::SetBufLen(int len)
+{
+	if(len <= 0)
+		len = 1;
+	if(len == queue_len)
+		return;
+	lock_queue;
+	// this really needs locking.
+#ifndef USE_LOCKS
+	while(queue_full || queue_add != queue_get)
+		wait_for_sample_finish();
+#endif
+	if(len > queue_len)
+		queue = (play_one *)realloc(queue, sizeof(*queue) * len);
+		// yeah, just let it crash if no memory
+	queue_len = len;
+	unlock_queue;
+}
 
 enum interval {I76, I77, I90, I92, I100, I112, I114, I117};
 
@@ -206,8 +311,6 @@ InitFreq(const enum interval *tbl)
 	void
 play::Volume(long v)
 {
-	ATKinit;
-
 	if (v < 0) ::Volume = 0;
 	else if (v > 9) ::Volume = 9;
 	else ::Volume = v;
@@ -216,8 +319,6 @@ play::Volume(long v)
 	void
 play::Retard(long v)
 {
-	ATKinit;
-
 	if (v < -30) ::Retard = -30;
 	else if (v > 40) ::Retard = 40;
 	else ::Retard = v;
@@ -230,8 +331,6 @@ play::Retard(long v)
 	void
 play::Tuning(const char *name)
 {
-	ATKinit;
-
 	switch (*name) {
 	case 'E':		InitFreq(EqualTemper);	break;
 	case 'P':		InitFreq(Pythagorean);	break;
@@ -243,30 +342,23 @@ play::Tuning(const char *name)
 	static void
 play_tone(double freq, long duration)
 {
-	long vol = 3;
 	if (duration < 0) return;
 	if (duration > 10000) 
 		/* if more than 10 seconds, give 5 seconds */
 		duration = 5000;
-	if ( ! play::OpenSpeaker(vol))
-		return;
-	play::PlayOneNote(freq, duration, 120, vol);
-	play::CloseSpeaker();
+	playonenote(freq, duration, 120, 9);
+	/* the old default vol was 3, but 9 is more appropriate since the
+	 * user can never change this */
 }
 
 	void
 play::Tone(double freq, long duration, long volume)
 {
-	ATKinit;
-
 	if (volume < 0) volume = 0;
 	else if (volume > 9) volume = 9;
 	if (duration < 0) return;
 	if (duration > 10000) duration = 5000;	/* if more than 10 seconds, give 5 seconds */
-	if ( ! OpenSpeaker(volume))
-		return;
-	PlayOneNote(freq, duration, 120, volume);
-	CloseSpeaker();
+	playonenote(freq, duration, 120, volume);
 }
 
 
@@ -404,8 +496,6 @@ getnote(const char **codepp, long *lenp)
 	void
 play::Notes(const char *s)
 {
-	ATKinit;
-
 	const char *codep;	/* points to string being sounded */
 	long 	length;		/* milliseconds per note */
 	long	octave;		/* 0 <= octave <= 6:  3 C is middle C */
@@ -418,9 +508,6 @@ play::Notes(const char *s)
 	octave = 4;
 	vol = 3;
 
-	if ( ! OpenSpeaker(vol)) 
-		return;
-
 	for (codep = s; *codep != '\0'; codep ++) {
 		switch (*codep) {
 
@@ -432,7 +519,7 @@ play::Notes(const char *s)
 		case 'L': length = WHOLENOTE
 				 / getint(&codep, 1, 64);	break;
 
-		case 'P': PlayOneNote(freq[0], WHOLENOTE 
+		case 'P': playonenote(freq[0], WHOLENOTE 
 					/ getint(&codep, 1, 64), 
 				tempo, 0);		break;
 
@@ -440,13 +527,12 @@ play::Notes(const char *s)
 		case 'G':  case 'A':  case 'B': 
 			tlen = length;
 			t = getnote(&codep, &tlen);
-			PlayOneNote(freq[t + 12 * octave], 
-				tlen, tempo, vol);
-			PlayOneNote(freq[0], 1, tempo, 0); break;
+			playonenote(freq[t + 12 * octave], 
+				tlen, tempo, vol);   break;
 
 		case 'T':	 tempo = getint(&codep, 32, 255);	break;
 
-		case 'N':  PlayOneNote(freq[getint(&codep, 0, 84)], 
+		case 'N':  playonenote(freq[getint(&codep, 0, 84)], 
 				length, tempo, vol);		break;
 
 		case 'V':	 vol = getint(&codep, 0, 9);		
@@ -457,11 +543,15 @@ play::Notes(const char *s)
 					codep++;		break;
 		}
 	}
-	CloseSpeaker();
 }
 
-	boolean
-play::InitializeClass()
+static class NO_DLL_EXPORT init_play : public ATK {
+  public:
+    init_play();
+    // ~init_play(); // wait for queue to finish
+} do_init;
+
+init_play::init_play()
 {
 	proctable::DefineProc("play-volume",(proctable_fptr)play::Volume, NULL, NULL,
 		"set global volume for playing music   (arg is int)");
@@ -474,19 +564,17 @@ play::InitializeClass()
 	proctable::DefineProc("play-notes",(proctable_fptr)play::Notes, NULL, NULL,
 		"play music   (arg is string of codes)");
 
-	::Retard = 0;	/* normal speed */
-	::Volume = 3;
 	InitFreq(EqualTemper);
 
 	PaError err = Pa_Initialize();
 	if(err != paNoError) {
 		fprintf(stderr, "PortAudio failed to initialize (%d): %s\n",
 			(int)err, Pa_GetErrorText(err));
-		return FALSE;
+		THROWONFAILURE(FALSE);
 	}
 	if((stream_desc.device = Pa_GetDefaultOutputDevice()) == paNoDevice) {
 		fputs("No default PortAudio output device\n", stderr);
-		return FALSE;
+		THROWONFAILURE(FALSE);
 	}
 
 	stream_desc.channelCount = 1; /* mono is fine for a beep */
@@ -496,9 +584,19 @@ play::InitializeClass()
 		Pa_GetDeviceInfo(stream_desc.device)->defaultHighOutputLatency;
 	sample_rate = Pa_GetDeviceInfo(stream_desc.device)->defaultSampleRate;
 
+	err = Pa_OpenStream(&stream, NULL, &stream_desc, sample_rate,
+			    BUFFER_SAMPLES, paClipOff, process_sound, NULL);
+	if(err != paNoError) {
+		fprintf(stderr, "PortAudio failed to open stream (%d): %s\n",
+			(int)err, Pa_GetErrorText(err));
+		THROWONFAILURE(FALSE);
+	}
+
 	/* sample is 1 full sine wave */
 	/* maybe a square wave would be more accurate (it'd definitely be easier) */
 	for(int i = 0; i < SAMPLE_SIZE; i++)
 		sample[i] = sin(2 * M_PI * i / SAMPLE_SIZE);
-	return TRUE;
+
+	queue = (play_one *)malloc(sizeof(*queue) * queue_len);
+	THROWONFAILURE(TRUE);
 }

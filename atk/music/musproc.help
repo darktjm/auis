@@ -5,14 +5,16 @@
 }
 
 
-\chapter{Play: Play music on the RT keyboard
+\chapter{Play: Play music as if on the RT keyboard
 
 }
 \section{What play is
 
 }\leftindent{
-Play is a module that provides an interface for playing notes on the RT 
-keyboard.  The highest level interface  (play_notes) has the same music 
+Play is a module that used to provide an interface for playing notes on the RT 
+keyboard.  It now uses a generic audio interface to play notes on any 
+modern system (but not the RT keyboard anymore, alas).  
+The highest level interface  (play_notes) has the same music 
 encoding as is used in Advanced Basic for the IBM PC.
 
 }
@@ -59,7 +61,7 @@ is played in Ness with:
 
 Plays a tone of the given frequency for the given duration.  'freq' is a 
 double float value;  use 0.0 for a rest.  'Duration' is an integer and is 
-interpreted as the number of 128'ths of a second.
+interpreted as the number of milliseconds.
 
 
 

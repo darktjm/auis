@@ -55,8 +55,6 @@ The following classprocedures are defined for 'play'.  For details, see a
 subsequent section.
 
 
-	boolean InitializeClass();
-
 	void Volume(long v);
 
 	void Retard(long v);
@@ -67,6 +65,7 @@ subsequent section.
 
 	void Notes(unsigned char *s);
 
+	void SetBufLen(int len);
 
 
 \section{play proctable functions}
@@ -92,43 +91,6 @@ The following proctable functions are defined.  For details see
 ______________________________________________________				
 
 
-\paragraph{play::InitializeClass}
-
-				
-
-\majorheading{Function description}
-
-______________________________________________________
-
-
-\fixedtext{boolean \bold{play::InitializeClass }(}\fixedindent{);}
-
-
-\fieldheading{Category}
-
-\fieldtext{Classprocedure}
-
-
-\fieldheading{Description}   
-
-\fieldtext{Initializes the package, setting initial values for the volume and 
-tuning.\fieldtext{ }  Adds entries to the proctable.}\fieldtext{
-
-}
-\fieldheading{Return Value}
-
-\fieldtext{Always returns True.}
-
-
-\fieldheading{Usage}
-
-\fieldtext{This procedure is called automatically.  It is never called by 
-client code.}
-
-\view{bpv,538927368,654,0,0}
-______________________________________________________				
-
-
 \paragraph{play::Notes}
 
 				
@@ -149,27 +111,28 @@ ______________________________________________________
 
 \fieldheading{Description}   
 
-\fieldtext{play_notes plays a sequence of notes.  The 
+\fieldtext{play::Notes plays a sequence of notes.  The 
 string s encodes the notes as shown in /usr/andrew/help/musproc.help.}
 
 
 \fieldheading{Known Bugs}
 
-\fieldtext{Execution is halted until all notes of the string have been 
-played.  A future version may play asynchronously.
+\fieldtext{Execution is halted if the buffer of notes is full.  If the 
+program exists while the buffer is not empty, any queued notes will be 
+lost.
 }
 \fieldheading{Examples}\fieldtext{
 
 
 \bold{/* Happy birthday */}
 
-	play_notes("L8 CC 	L4 DC	FE P4");
+	play::Notes("L8 CC 	L4 DC	FE P4");
 
-	play_notes("L8 CC 	L4 DC	GF P4");
+	play::Notes("L8 CC 	L4 DC	GF P4");
 
-	play_notes("L8 CC 	L4 >C <A  	FED P4");
+	play::Notes("L8 CC 	L4 >C <A  	FED P4");
 
-	play_notes("L8 A#A# 	L4 AF 	GF.") ;	/* (the final dot doubles the duration) 
+	play::Notes("L8 A#A# 	L4 AF 	GF.") ;	/* (the final dot doubles the duration) 
 */
 
 }\fieldtext{
@@ -203,7 +166,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{void \bold{play_Retard }(}\fixedindent{long \paramname{v});}
+\fixedtext{void \bold{play::Retard }(}\fixedindent{long \paramname{v});}
 
 
 \fieldheading{Category}
@@ -221,8 +184,8 @@ Sets the global retardation  (-30<=slow<=40).   Note lengths are mutliplied by
 
 \fieldtext{This function can be utilized to speed up or slow down a piece of 
 music with changing the tempo or duration codes within the piece.  In general 
-the initial author of a piece of music script should avoid play_Retard in 
-favor of utilizing the tempo code Tx in the play_notes argument.  Then 
+the initial author of a piece of music script should avoid play::Retard in 
+favor of utilizing the tempo code Tx in the play::Notes argument.  Then 
  subsequent authors can adjust the overall speed without digging inside the 
 music itself.
 
@@ -231,7 +194,7 @@ music itself.
 ______________________________________________________				
 
 
-\paragraph{play_Tone}
+\paragraph{play::Tone}
 
 				
 
@@ -240,7 +203,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{void \bold{play_Tone }(}\fixedindent{double \paramname{freq},
+\fixedtext{void \bold{play::Tone }(}\fixedindent{double \paramname{freq},
 
 long \paramname{duration},
 
@@ -259,13 +222,13 @@ is a double float value;  use 0.0 for a rest;  reasonable frequencies on the
 RT/PC keyboard range from roughly  80.0 to 4000.0.  'Duration' is an integer 
 and is interpreted as the number of 128'ths of a second.  If the duration is 
 given as more than ten seconds, it is arbitrarily set to five seconds. 
-  'Volume' is defined as for play_Volume.}
+  'Volume' is defined as for play::Volume.}
 
 \view{bpv,538927368,657,0,0}
 ______________________________________________________				
 
 
-\paragraph{play_Tuning}
+\paragraph{play::Tuning}
 
 				
 
@@ -274,7 +237,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{void \bold{play_Tuning }(}\fixedindent{unsigned char 
+\fixedtext{void \bold{play::Tuning }(}\fixedindent{unsigned char 
 *\paramname{name});}
 
 
@@ -335,7 +298,7 @@ modes.}
 ______________________________________________________				
 
 
-\paragraph{play_Volume}
+\paragraph{play::Volume}
 
 				
 
@@ -344,7 +307,7 @@ ______________________________________________________
 ______________________________________________________
 
 
-\fixedtext{void \bold{play_Volume }(}\fixedindent{long \paramname{v});}
+\fixedtext{void \bold{play::Volume }(}\fixedindent{long \paramname{v});}
 
 
 \fieldheading{Category}
@@ -360,9 +323,8 @@ audible volume;  which is still pretty loud.}
 
 \fieldheading{Known Bugs}
 
-\fieldtext{The RT supports only three levels of audible volume and one of 
-silence.  There is a mapping which combines the global volume set by 
-play_Volume and the volume given with play_notes/play_tone.}
+\fieldtext{The new volume code acts differently than the old code, and 
+there is no reconciliation planned.}
 
 
 
@@ -371,6 +333,46 @@ play_Volume and the volume given with play_notes/play_tone.}
 \begindata{bp,537558784}
 \enddata{bp,537558784}
 \view{bpv,537558784,660,0,0}
+______________________________________________________				
+
+
+\paragraph{play::SetBufLen}
+
+				
+
+\majorheading{Function description}
+
+______________________________________________________
+
+
+\fixedtext{void \bold{play::SetBufLen }(}\fixedindent{int \paramname{len});}
+
+
+\fieldheading{Category}
+
+\fieldtext{Classprocedure}
+
+
+\fieldheading{Description}   
+
+\fieldtext{Sets the number of queued notes.  The minimum is 1.  The 
+default is 5, which appears to be what the RT used.}
+
+
+\fieldheading{Known Bugs}
+
+\fieldtext{If notes are playing from the queue when the program exits,
+they will be lost.  There is no way to check if the queue is empty.  
+The only reliable way to flush the queue is to insert enough silence 
+notes into the queue to push anything else out.}
+
+
+
+
+
+\begindata{bp,537558785}
+\enddata{bp,537558785}
+\view{bpv,537558785,661,0,0}
 Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
 
 \enddata{text,538481752}

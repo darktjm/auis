@@ -85,7 +85,8 @@ The following known dependencies currently exist:
     the crappy beeper class "play" and the sample piano inset.  I
     should probably make this a separate configuration option from
     enabling play itself, as the old play ran without it.
-    See http://www.portaudio.com.
+    See http://www.portaudio.com.  Note that the beeper class now also
+    uses pthreads, but that was a prerequisite for portaudio, anyway.
 
 I recommend the following preference settings in ~/.preferences:
 

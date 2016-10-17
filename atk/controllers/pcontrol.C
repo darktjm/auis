@@ -65,12 +65,12 @@ static void play(char  *buf,int  Speed)
     float f;
     sscanf(buf,"%d,%d,%f",&v,&d,&f);
     play::Retard(-Speed);
-    play::PlayOneNote(f, d * 16, 120, v);
+    play::Tone(f, d * 16, v * 3);
     if((note = strrchr(buf,',')) == NULL){
 	printf("bad format\n");
 	return;
     }
-    play::PlayOneNote(0, 1, 120, 0);
+    // play::Tone(0, 1, 0); this is built-in now
     note++;
 }
 
@@ -98,7 +98,7 @@ static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long
     char buf[256],*cp;
     int i,len;
     int Speed =  (self->speed)->GetValue();
-    if(self->score == NULL || !play::OpenSpeaker(9)) return;
+    if(self->score == NULL) return;
     len = (self->score)->GetLength();
     for(i = 0, cp = buf; i < len; i++){
 	*cp = (self->score)->GetChar(i);
@@ -109,7 +109,6 @@ static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long
 	}
 	else cp++;
     }
-    play::CloseSpeaker();
 /* user code ends here for replayCallBack */
 }
 static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2)
@@ -120,7 +119,7 @@ static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2
     int Speed =  (self->speed)->GetValue();
     if(self->score == NULL) return;
     w = (val)->GetValue();
-    if(w == 0 || !play::OpenSpeaker(9)) return;
+    if(w == 0) return;
     for(i = 1; i < 13; i++){
 	if(masks[i] & w){
 	    v = i + 2 + (r1 * 12);
@@ -137,7 +136,6 @@ static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2
 	}
     }
     (val)->SetValue(0);
-    play::CloseSpeaker();
 /* user code ends here for kbCallBack */
 }
 static void volumeCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2)

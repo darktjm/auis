@@ -178,6 +178,9 @@ DIRLIBS(APPS,apps,)
 #if SY_OS2 && defined(MK_CONSOLE)
 #undef MK_CONSOLE
 #endif
+#if defined(MK_CONTROLLERS) && !defined(MK_MUSIC)
+#define MK_MUSIC
+#endif
 
 
 /* ================================= */
@@ -290,7 +293,7 @@ ATKSUBDIRS = \
  $(DIR_CHART)   $(DIR_CONSOLE)   $(DIR_EZPRINT)  \
  $(DIR_EQ)   $(DIR_FAD)   $(DIR_TABLE)   $(DIR_ROFFTEXT)  \
  $(DIR_HELP)   $(DIR_SRCTEXT)   $(DIR_LOOKZ)  \
- $(DIR_LAYOUT)   $(DIR_CONTROLLERS)  \
+ $(DIR_LAYOUT)  $(DIR_MUSIC)  $(DIR_CONTROLLERS)  \
  $(DIR_CREATEINSET)  \
  $(DIR_FIGURE)   $(DIR_NESS)   $(DIR_WIDGETS)  \
  $(DIR_DATACAT)   $(DIR_TOEZ)   $(DIR_WEB)  \

@@ -194,8 +194,6 @@
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
-- use async portaudio interface for better performance.
-  - maybe also add configurable buffer for playonenote requests (5 default)
 - implement or get rid of alink, ezscan
 - install or chuck atkbook examples
   - con: use getstats from atk/console.  Builds OK, but not sure what it does
