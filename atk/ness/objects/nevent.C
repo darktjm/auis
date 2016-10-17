@@ -622,6 +622,7 @@ static boolean PostDebug = FALSE;	/* side arg to HandleNamedCell */
 	void
 InterpretEvent(class view  *obj, struct eventnode  *enode) {
 	class ness *ness = enode->parentness;
+	ness->Reference();
 	class view *RememberCurrentInset;
 		/* The "CurrentInset" value in a normal Ness is its text 
 			or maybe the inset active when ESC-ESC was picked
@@ -644,6 +645,7 @@ InterpretEvent(class view  *obj, struct eventnode  *enode) {
 		MapRunError(ness);
 		(ness)->Expose();
 	}
+	ness->Destroy();
 }
 
 

@@ -1,5 +1,4 @@
-\begindata{text,538353528}
-\textdsversion{12}
+\begindata{ness,538353528}
 \template{default}
 -- sort.n
 
@@ -59,6 +58,8 @@ file.
 --	utilizing the flags, as defined for the Unix function sort(1).  These flags
 
 --	are recognized:  bdfinru   tx     +mmm.nnn - mmm.nnn
+
+--	                 kmmmm.nnn[bdfinr],mmmm.nnn[bdfinr]
 
 --	where x is the tab char, mmm is the number of fields to skip over, 
 
@@ -127,12 +128,41 @@ function flagfield(flags)
 
 	outflags ~:= t
 
+	-- k must be last, and may appear multiple times
+
+	t := search(start(flags), "k")
+
+	while t /= "" and extent(t, flags) /= "" do
+
+		t := extent(t, span(next(t), "0123456789."))
+
+		t := extent(t, span(finish(t), "bdfinr,"))
+
+		t := extent(t, span(finish(t), "0123456789."))
+
+		t := extent(t, span(finish(t), "bdfinr"))
+
+		outflags ~:= t
+
+		replace (t, "")
+
+		t := search(start(flags), "k")
+
+		if t /= "" and extent(t, flags) /= "" then
+
+			outflags ~:= " -"
+
+		end if
+
+	end while
 
 	-- now handle the +nn and -nn fields
 
 	t := span(finish(t), " +-0123456789.0")
 
-	if extent(finish(flags), finish(t)) /= "" then t := extent(t, flags) end if
+	if extent(finish(flags), finish(t)) /= "" then
+
+		t := extent(t, flags) end if
 
 	outflags ~:= t
 
@@ -448,17 +478,17 @@ void
 
 function main(args)	
 
-	marker filename, outname, text, fieldname
+	marker filename, outname, text, fieldname, sortargs, parse
 
 
 	fieldname := search(start(args), "-f")
 
 	if fieldname /= "" then
 
+		parse := fieldname
+
 		fieldname := token (finish(fieldname), letters ~ "-:")
-
-		args := finish(fieldname)
-
+		
 	
 
 		if search("ABCDEFGHIJKLMNOPQRSTUVWXYZ", first(fieldname)) = "" then
@@ -469,6 +499,29 @@ function main(args)
 
 		end if
 
+		parse := extent(parse, fieldname)
+
+		fieldname := copy(fieldname)
+
+		replace(parse, "")
+
+	end if
+
+
+	sortargs := search(start(args), "-s")
+
+	if sortargs /= "" then
+
+		parse := sortargs
+
+		sortargs := token (finish(sortargs), letters ~ "-1234567890+,.")
+
+		parse := extent(parse, sortargs)
+
+		sortargs := copy(sortargs)
+
+		replace(parse, "")
+
 	end if
 
 
@@ -477,14 +530,14 @@ function main(args)
 	outname := filename ~ ".sorted"
 
 
-	printline("sort(" ~ fieldname ~ "): " ~ filename ~ " -> " ~ outname)
+	printline("sort(" ~ fieldname ~ " " ~ sortargs ~ "): " ~ filename ~ " -> " ~ outname)
 
 	text := readfile(filename)
 
 	system("mv " ~ outname ~ " " ~ outname ~ ".BAK")
 
 
-	text := sort_records(fieldname, text)
+	text := sort_records_per_flags(fieldname, text, sortargs)
 
 
 	writefile(outname, text)
@@ -498,4 +551,4 @@ end function
 \view{bpv,537558784,29,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538353528}
+\enddata{ness,538353528}

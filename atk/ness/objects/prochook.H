@@ -9,6 +9,8 @@ class ness_ProcHookType_Base : public aaction {
 	void (*func)(ATK *o, const avalueflex &aux, const avalueflex &in, avalueflex &out);
 	avalueflex auxargs;
 	avalueflex intypes, outtypes;
+  protected:
+        ~ness_ProcHookType_Base() {}
   public:
 	inline ness_ProcHookType_Base(void (*p)(ATK *o, const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : func(p), auxargs(a) {
     	}
@@ -31,6 +33,8 @@ class ness_ProcHookType_Base : public aaction {
 
 // DEFINE_AACTION_FUNC_CLASS(ness_ProcHookType_Base,ATK);
 class ness_ProcHookType : public ness_ProcHookType_Base {
+  protected:
+        ~ness_ProcHookType() {}
   public:
     inline ness_ProcHookType(void (*p)(ATK *o, const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : ness_ProcHookType_Base(p, a){ 
     	} 
@@ -48,5 +52,5 @@ class ness_ProcHookType : public ness_ProcHookType_Base {
 
 };
 
-NO_DLL_EXPORT extern ness_ProcHookType ness_ProcHook;
+NO_DLL_EXPORT extern traced_ptr<ness_ProcHookType> ness_ProcHook;
 #endif

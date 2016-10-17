@@ -1,5 +1,4 @@
-\begindata{text,538828088}
-\textdsversion{12}
+\begindata{ness,538828088}
 \template{default}
 -- fileconvert.n
 
@@ -198,4 +197,4 @@ n 0
 \view{bpv,538828632,1,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538828088}
+\enddata{ness,538828088}

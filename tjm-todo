@@ -15,7 +15,7 @@
     even though it may be gone.  Thus, crash.
 - adew: often clears regions and never redisplays contents (maybe due
   to my "fix" for lack of resize updates)
-- adew: samples for mbuttonv or clicklistV in vallist document anymore
+- adew: no samples for mbuttonv or clicklistV in vallist document anymore
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
   - pcontrol dies on init if not PC-RT
@@ -25,35 +25,29 @@
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
-- for some reason, doing a full clean deletes Imakefile from examples
-  ex2, ex5, ex8, ex19.
-- lots of valgrind access hits with letter.tpl
-  - parser::ParseNumber (317)
-    There is no end sentinel on GetBuf() returns, so to fix, either:
-    - all uses of GetBuf() must be checked to ensure they respect the length
-      - for this case, parser::ParseNumber() needs to take a len parm
-    - 1 extra byte needs to be allocated for simpletext strings to store a 0
-    Note also that GetBuf() cuts off at the gap (and, in general, gap can't
-    be handled w/o extra coding), so neither "fix" above is that great.
-  - InterpretEvent (661)
-  - InterpretEvent (662)
-  - InterpretEvent (664)
-    - all due to ness being deleted while being executed (or is it
-      "while being referenced by an nevent node"? ).
-  - celview::Hit (1510)
-    - due to celview being deleted while its Hit() being executed.
-      Need to defer deletes somehow to prevent this.  Perhaps have
-      anything that calls ness or may be referred to by callers of ness
-      check if currently executing ness; if so, defer deletion until
-      ness finishes.  That's a lot of work for little benefit.  Another
-      option would be to just crash more obviously when an in-progress
-      script deletes itself or the item it's executing for.
+- ending search should re-evaluate character in keymap, or something
+  should be done to prevent e.g. cursor keys from inserting the 2nd char
+  of their escape sequence equivalent into the doc if pressed.
+- apparently can't load & execute ness files w/ event handlers from
+  within ez.   Calling ness-load in the ness-stmt command-line discards
+  the script when the command-line completes.
+- there's no "evalbuffer" equivalent for ness, unless loaded as ness.
+  Actually, I could probably transfer the key bindings to use them in
+  textview as well, but it's still missing evaluation of current
+  selection, and ness-stmt is somewhat screwy as well (deletes most
+  side effects on completion)
+- compiling library ness should add all potential entry points to the
+  proctable list printed by desckey.  Also, there should be a way to
+  add a line of docs for exported functions similar to the proctable
+  help string.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
-- need play module to either work or ignore (atk/music was dropped in 8.0)
 - many 3d link buttons in ATK tour have text overlapping bottom edge
   probably some screwy interaction between table and button
-- pagedown eventually stops working (e.g. 2rtf)
+- pagedown eventually stops working (e.g. editing 2rtf binary), even
+  though scrollbar and cursor still work.  Maybe due to insistence on
+  ending at the start of a paragraph (which, in and of itself, is a
+  bad thing that makes page up/down weird and inconsistent)
 - questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
@@ -69,6 +63,11 @@
   - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
   - TOC is a nasty mess
 - enable mouse scroll wheel
+- provide method to override/supplement key binding list.  Maybe make
+  modifiers a canonically ordered prefix list (e.g. Esc-_scm1 for F1,
+  and Esc-!scm1 for 1, but the latter would be hard to figure out what
+  modifiers matter and which not, whereas we assume modifiers always
+  matter in the former).
 - implement addbutton init command properly (or remove)
   - current implementation just saves the commands in an unused list
     - need to check that it is unused in AMS as well, but probably is
@@ -80,10 +79,24 @@
 - add help-type hyperlink or other help button of some sort
   - add support for loading files directly in help, instead of just indexed
 - fix lack of updates when resizing windows
-- fix contrib/tm to use termios, etc.
+  - removing X clip at least allows resizing to the most part, but makes
+    overlap updates update the whole window, which is bad.  It also
+    doesn't fully fix the problem.  Esp. vertical updates are still
+    broken, and Arbcon updates are awful (randomly disappearing blocks
+    requiring manual ^L to update).
 - org doesn't mark entire doc as modified when doc inset is modified
 - view fixes:
-  - Implement CanView() everywhere, and use it where needed.
+  - Implement CanView() everywhere, and use it where needed.  It
+    should not be so easy for users to crash ez.
+    - check all procs to ensure that they check their arguments, for
+      same reason (e.g. too easy to crash a proc by passing wrong type
+      or 0 for an arg).  Of course this is almost impossible w/o adding
+      type info to the arguments.  Maybe always use avalues instead of
+      rocks for arg 2, and verify arg 1 is actually an ATK* (or use
+      avalues for that as well, so ness-load works still).  Note that
+      ness code actually verifies type of 1st arg if proctable entry
+      gives the type (*and the value is not NULL*, so procs still need
+      to check non-NULL).
   - Ensure SetDataObject() works with NULL data object
 - Get rid of ATKinit.  Use static variables with constructors instead.
 - test all apps, all insets, all docs, etc.
@@ -181,8 +194,8 @@
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
-- build (and clean up) atkbook examples, or chuck them
-  - most build and run OK now; need to install somewhere maybe
+- implement or get rid of alink, ezscan
+- install or chuck atkbook examples
   - con: use getstats from atk/console.  Builds OK, but not sure what it does
   - flex: builds OK.  Not sure what it does
     - renamed dataobject to flexd to avoid conflict
@@ -190,7 +203,6 @@
   - switcher: builds OK.  Not sure what it does
 - figure out what ANSI standard ansitext refers to, and document it
 - get rid of include/ prefix on all headers in doxygen
-- implement or get rid of alink, ezscan
 - maybe try converting doxy latex output to ez (rtf is hopeless, and
   like the rest of the www, html is javascript-laden bloated mess)
 - maybe incorporate app.doc into application.H as well.
@@ -202,19 +214,48 @@
     would be more worthwhile.
 - search for tjm comments and see if there are any TODOs there
 Long-term:
-  - add code snippet inset for literate programming
+  - add code snippet inset (or maybe just "style") for literate programming
   - make LaTeX a possible output format (and the default)
+  - maybe add more sophisticated styles (e.g. static pre/post text, alt.
+    formatting of numeric contents, etc.  Just like writedatestamp,
+    but less intrusive and more flexible (i.e. w/ text flow) than an inset.
   - unicode support
+    - initially, only left-to-right.  Enough to deal with already.
+      - don't ban any specific chars, including dir switchers, but don't
+        necesarily render properly, either.
+    - note that conveniently enough, 0xff (ATK view marker) is illegal in utf-8
+    - XLoadQueryFont -> XCreateFontSet (comma-separated list of fonts);
+      XFontStruct -> XFontSet; XDrawString -> XmbDrawString or
+      Xutf8DrawString if defined(X_HAVE_UTF8_STRING);
+      XTextWidth -> XmbTextExtents/Xutf8TextExtents
+    - UTF-8 input should be normalized, and written out normalized.  No
+      illegal or unnormalized UTF-8 should ever be supported, except
+      on input.  Illegal is obvious, but normalization is to make string
+      comparisons and searching sane.
+    - provide Unicode-style sorting and degenerate comparisons
+    - could just use BOM as an indicator that the text is UTF-8. Bumping
+      the text inset version seems obvious, but text is in a lot more
+      places than that.  *All* text should support UTF-8.  If an entire
+      string is passed, it can be analyzed for encoding rather than
+      requiring the BOM.
+    - modify pipescript and datacat and other plain ASCII readers to
+      auto-detect formats:
+        - 7-bit ASCII
+	- 8-bit UTF-8
+	- Other 8-bit (assume iso-8859-1 and auto-convert to UTF-8)
+      and always write unicode if 8-bit?  Or use cmd-line + pref to select
+      Or use $LANG + cmd-line to select on input/output
+    - map standard supplied fonts (esp. symbol and symbola) to UTF-8
   - internationalization support (probably just GNU gettext)
     currently menus can be replaced, but messages & the like cannot
-  - truetype font support using freetype
-    not sure if that's a good idea; in my experience, antialiasing makes
-    things uglier.  I can already use truetype fonts now directly from X.
-  - unicode-bidir support
-  - make index entries insets
+  - truetype font support using Xft
+    XFontWidth -> XftTextExtents8
+    Xutf8TextExtents/XmbTextExtents -> XftTextExtentsUtf8
+    XDrawString -> XftDrawString8
+    Xutf8DrawString/XmbDrawString -> XftDrawStringUtf8(?)
   - undo
   - freedesktop.org integration
-  - move from included bison to standard bison instead of cleaning it up
+  - move from included bison to standard bison
   - look at removed mail-related stuff to see if anything useful got deleted
     (e.g. ez2ascii claims descendence from messages)
   - look at auis-6.3.1 to see if anything useful got dropped in 8.0
@@ -242,3 +283,4 @@ Long-term:
     style used in general.  However, unless I can find a tool to do this
     without too much aggravation (GNU indent ain't it), this will wait.
   - make entire beast literate (yeah, right - way too much effort)
+  - unicode-bidir support

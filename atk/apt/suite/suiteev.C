@@ -2350,9 +2350,7 @@ suiteev::LinkTree(class view  *parent)
 	    while((item = ITEM(i++)))
 		if(Exposed(item)) {
 		    if(Active(item)) { 
-			if(item_AccessType & suite_ReadWrite)
-			    ((class suitecv *) item->viewobject)->LinkTree( this);
-			else if(item->viewobject)
+			if(item->viewobject)
 			    (item->viewobject)->LinkTree( this);
 		    }
 		    if(item == LastVisible) 

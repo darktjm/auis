@@ -90,7 +90,6 @@ suitecv::suitecv( )
 
 suitecv::~suitecv( )
     {
-	ATKinit;
 }
 
 static void
@@ -136,6 +135,7 @@ suitecv::ReceiveInputFocus( )
 {
     Update_Caption( this );
    (this)->CollapseDot();
+    textview::ReceiveInputFocus();
 }
 
 void

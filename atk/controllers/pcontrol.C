@@ -28,6 +28,7 @@ ATK_IMPL("pcontrol.H")
 #include <message.H>
 #include <completion.H>
 #include <im.H>
+#include <play.H> // The actual "hardare"
 #define NUM 4
 #define MAXNAMES 40
 #define WHOLE 0
@@ -36,14 +37,6 @@ ATK_IMPL("pcontrol.H")
 #define EIGHTH 3
 #define getspeed(self) ((self->duration) ? (8 << ((3 - (self->duration)->GetValue()))) : self->lastnoteval)
 
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
-
-#include  <machineio/speakerio.h>
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
-struct nh {
-    char *note;
-    float freq;
-};
 static float arr[61];
 
 ATKdefineRegistry(pcontrol, ATK, pcontrol::InitializeClass);
@@ -65,65 +58,21 @@ static void initself(class pcontrol  *self,class view  *v);
 static void pcontrol_start(class view  *v,long  dat);
 
 
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
-static void setbl(struct spk_blk  *b,float  freq)
-{
-    if (freq < 23) {
-	b->freqhigh=0;
-	b->freqlow=SPKOLOMIN;
-    } else if (freq < 46) {
-	b->freqhigh=64;
-	b->freqlow = (char) ((6000.0 /(float) freq) - 9.31);
-    } else if (freq < 91) {
-	b->freqhigh=32;
-	b->freqlow = (char) ((12000.0 /(float) freq) - 9.37);
-    } else if (freq < 182) {
-	b->freqhigh=16;
-	b->freqlow = (char) ((24000.0 /(float) freq) - 9.48);
-    } else if (freq < 363) {
-	b->freqhigh=8;
-	b->freqlow = (char) ((48000.0 /(float) freq) - 9.71);
-    } else if (freq < 725) {
-	b->freqhigh=4;
-	b->freqlow = (char) ((96000.0 /(float) freq) - 10.18);
-    } else if (freq < 1433) {
-	b->freqhigh=2;
-	b->freqlow = (char) ((192000.0 /(float) freq) - 11.10);
-    } else if (freq < 12020) {
-	b->freqhigh=1;
-	b->freqlow = (char) ((384000.0 /(float) freq) - 12.95);
-    } else {
-	b->freqhigh=0;
-	b->freqlow=SPKOLOMIN;
-    }
-}
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
-static int sp = 0;
 static void play(char  *buf,int  Speed)
 {
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
     char *note;
-    int ::v,d;
+    int v,d;
     float f;
-    struct spk_blk  b;
-    sscanf(buf,"%d,%d,%f",&::v,&d,&f);
-    b.volume = ::v;
-    b.duration = d + (d * Speed / 50) ;
+    sscanf(buf,"%d,%d,%f",&v,&d,&f);
+    play::Retard(-Speed);
+    play::Tone(f, d * 16, v * 3);
     if((note = strrchr(buf,',')) == NULL){
 	printf("bad format\n");
 	return;
     }
+    // play::Tone(0, 1, 0); this is built-in now
     note++;
-    setbl(&b,f);
-    write(sp,&b,sizeof(b));
-    b.volume = 0;	
-    b.duration = 1;
-    write(sp,&b,sizeof(b));
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 }
-
-#define openspk() ((sp = open("/dev/speaker",1)) > 0)
-#define closespk() close(sp)
 
 static int masks[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096 };
 static const char * const names[] = { "","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C" };
@@ -149,7 +98,7 @@ static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long
     char buf[256],*cp;
     int i,len;
     int Speed =  (self->speed)->GetValue();
-    if(self->score == NULL || !openspk()) return;
+    if(self->score == NULL) return;
     len = (self->score)->GetLength();
     for(i = 0, cp = buf; i < len; i++){
 	*cp = (self->score)->GetChar(i);
@@ -160,7 +109,6 @@ static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long
 	}
 	else cp++;
     }
-    closespk();
 /* user code ends here for replayCallBack */
 }
 static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2)
@@ -171,7 +119,7 @@ static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2
     int Speed =  (self->speed)->GetValue();
     if(self->score == NULL) return;
     w = (val)->GetValue();
-    if(w == 0 || !openspk()) return;
+    if(w == 0) return;
     for(i = 1; i < 13; i++){
 	if(masks[i] & w){
 	    v = i + 2 + (r1 * 12);
@@ -188,7 +136,6 @@ static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2
 	}
     }
     (val)->SetValue(0);
-    closespk();
 /* user code ends here for kbCallBack */
 }
 static void volumeCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2)
@@ -405,27 +352,14 @@ struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");
 firstpcontrol = NULL;
 proctable::DefineProc("pcontrol-start",(proctable_fptr)pcontrol_start, viewtype,NULL,"pcontrol start");
 /* user code begins here for InitializeClass */
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
     int i;
-/*
-    if((sp = open("/dev/speaker",1)) < 0) {
-	printf("can't open speaker\n");
-	return FALSE;
-    }
-    ioctl(sp,TIOCNXCL,NULL);
-*/
     arr[60] = 1760.0 * 4.0;
     for(i = 59; i >= 0; i--){
 	arr[i] = arr[i + 1] - (arr[i + 1] / 17.817);
 	/*	  printf("\"%s\",%4.2f,\n",notes[12 - (i %12)],arr[i]); */
     }
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
-#if !( defined (sys_rt_r3) || defined (sys_rt_aos4) )
-    return FALSE;
-#else /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 /* user code ends here for InitializeClass */
 return TRUE;
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 }
 pcontrol::pcontrol()
 {

@@ -19,6 +19,7 @@ ness.gra:
 	INode($3, funcnode, NULL)
 		for function that was forward referenced, ptr to funcnode
 		{flag_function | flag_ness}
+		{flag_function | flag_ness | flag_builtin}
 		{flag_function | flag_ness | flag_forward}
 		{flag_function | flag_ness | flag_xfunc}
 		{flag_function | flag_ness | flag_xfunc | flag_forward}

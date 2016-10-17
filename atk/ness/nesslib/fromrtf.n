@@ -1,5 +1,4 @@
-\begindata{text,538549464}
-\textdsversion{12}
+\begindata{ness,538549464}
 \template{default}
 \define{symbol
 menu:[Font~1,Symbol]
@@ -2678,4 +2677,4 @@ n 0
 \view{bpv,538650056,4,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538549464}
+\enddata{ness,538549464}

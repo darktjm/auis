@@ -216,13 +216,13 @@ attr:[FontSize ConstantFontSize Point 18]}
 
 function showcake(object cake)
 
-	raster_copy_subraster(cake)
+	rasterv_copy_subraster(cake)
 
-	raster_select_entire(inset("visible cake"))
+	rasterv_select_entire(inset("visible cake"))
 
-	raster_replace_subraster(inset("visible cake"))
+	rasterv_replace_subraster(inset("visible cake"))
 
-	raster_center_image(inset("visible cake"))
+	rasterv_center_image(inset("visible cake"))
 
 end function
 
@@ -495,27 +495,27 @@ function sing()
 
 	marker m := second(base(currentselection(inset("song text"))))
 
-	m := last(replace(m, "   \greeting{Happy birthday to you}\\n"))
+	m := replace(m, "   \greeting{Happy birthday to you}\\n")
 
 	im_ForceUpdate()
 
 	play_notes("L7 CC L4 DCF    E P4")
 
-	m := last(replace(m, "\\n    \greeting{Happy birthday to you}\\n"))
+	m := replace(m, "\\n    \greeting{Happy birthday to you}\\n")
 
 	play_notes("L7 CC L4 DCG   F P4")
 
 	im_ForceUpdate()
 
-	m := last(replace(m, "\\n    \greeting{Happy birthday,}\\n\\t"
+	m := replace(m, "\\n    \greeting{Happy birthday,}\\n\\t"
 
-			~ "\greeting{Dear Nessie}\\n"))
+			~ "\greeting{Dear Nessie}\\n")
 
 	play_notes("L7 CC L4 >C <A  FED P4")
 
 	im_ForceUpdate()
 
-	m := last(replace(m, "\\n    \greeting{Happy birthday to you}"))
+	m := replace(m, "\\n    \greeting{Happy birthday to you}")
 
 	play_notes("L7 A#A# L4 AF G  F.") 
 

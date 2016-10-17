@@ -41,7 +41,9 @@ typedef void (*observable_fptr)(ATK *rcvr, observable *self, long rock);
  *  There is a global trigger registry.  A class registers the triggers
  *  its objects may pull.  An object then registers a function to call for
  *  that specfic trigger.  When the event occurs on a triggering object,
- *  all functions are called, in an arbitrary order.
+ *  all functions are called, in an arbitrary order.  One way in which
+ *  a function can be registered for calling is the Ness `on event`
+ *  construct.
  */
 class observable : public  traced {
   public:

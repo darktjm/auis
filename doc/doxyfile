@@ -179,7 +179,6 @@ ALIASES += "sbuttonpref{4}=\
       The default is 2 for \"OSF/Motif\"(tm) and 4 otherwise.}\
 \pref{\1Font,String,The font to use for the \4 labels.\
       The default is andysans12b.}\
-\pref{\1Inherit,Boolean,If set to yes\, the settings will\
-      apply to all instances of \1 objects (for example in\
-      dialog boxes and scrollbars).  When this is no\,\
-      settings only apply to \1s.}"
+\pref{\1Inherit,Boolean,If set to yes\, the default sbutton settings\
+      will be used for unset preferences.  The default is No.\
+      Note that setting SbuttonAlwaysInherit to Yes overrides this.}"

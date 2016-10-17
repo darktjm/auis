@@ -1,5 +1,4 @@
-\begindata{text,538262708}
-\textdsversion{12}
+\begindata{ness,538262708}
 \template{default}
 -- swap.n
 
@@ -30,4 +29,4 @@ end function;
 \view{bpv,537558784,31,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538262708}
+\enddata{ness,538262708}

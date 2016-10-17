@@ -186,6 +186,8 @@ nesssym::~nesssym() {
 		eventnode_Destroy(nesssym_NGetINode(this, eventnode));
 	}	break;
 
+	case flag_function | flag_ness | flag_builtin:
+		/* a library function - do not destroy */
 	case flag_function | flag_builtin:
 		/* a builtin function (builtindef) */
 	case flag_var | flag_builtin:

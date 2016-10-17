@@ -56,8 +56,6 @@ short cel::Get(const class atom  *property, const class atom  **type, long  *roc
 
 cel::~cel()
 {
-	ATKinit;
-
     if(this->dataObject) { (this->dataObject)->RemoveObserver(this);
        (this->dataObject)->Destroy();
        this->dataObject=NULL;

@@ -370,6 +370,7 @@ var->sym is either undefined or a function.  Look around for a function
  relevant var->flags values  {inode value}
 
 flag_function | flag_ness	top level function in a script	{funcnode}
+flag_function | flag_ness | flag_builtin	top level function in a library script	{funcnode}
 flag_function | flag_ness | flag_forward  ness func declared FORWARD {funcnode}
 flag_function | flag_ness | flag_xfunc	function within an 'extend' {funcnode}
 flag_function | flag_ness | flag_xfunc | flag_forward	fwd func in 'extend' {funcnode}
@@ -407,7 +408,7 @@ callLoadFuncval(struct varnode  *var) {
 				&& fnode != NULL) {
 			/* found name in a Ness library */
 			nesssym_NSetINode(sym, funcnode, fnode);
-			sym->flags = flag_function | flag_ness;
+			sym->flags = flag_function | flag_ness | flag_builtin;
 		}
 		else if (callCheckProcTable(var,&specialexprnode)) {
 			/* ifsucceeded, var has callnode for proctable entry */
@@ -416,6 +417,7 @@ callLoadFuncval(struct varnode  *var) {
 
 	switch(sym->flags) {
 	case flag_function | flag_ness:
+	case flag_function | flag_ness | flag_builtin:
 	case flag_function | flag_ness | flag_xfunc:
 	case flag_function | flag_ness | flag_forward:
 	case flag_function | flag_ness | flag_xfunc | flag_forward:   {
@@ -661,7 +663,8 @@ static struct hack {
 	{"redraw", "im"},   /* obsolete */
 	{"start", "im"},   /* obsolete */
 	{"stop", "im"},   /* obsolete */
-	{"raster", "rasterv"},	/* obsolete */
+	{"raster", "rasterview"},	/* obsolete */
+	{"rasterv", "rasterview"},
 	{0, 0}
 };
 
@@ -796,6 +799,7 @@ callCheckProcTable(struct varnode  *varnode, struct exprnode *argtypes) {
 	flag_function | flag_ness		Ness library - find out so with callCheckLib
 	flag_function | flag_undef		unknown - may be a forward reference
 	flag_function | flag_ness		previously defined Ness func
+        flag_function | flag_ness | flag_builtin Ness library function
 	flag_function | flag_ness | flag_forward  FORWARD declared
 	flag_function | flag_ness | flag_xfunc	defined in an 'extend'
 	flag_function | flag_ness | flag_xfunc | flag_forward  FORWARD in 'extend'
@@ -809,7 +813,7 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 	long loc, len;
 	Texpr rettype = Tstr;
 	struct funcnode *fnode;
-	struct callnode *cnode;
+	struct callnode *cnode = NULL; /* to shut gcc up */
 	struct exprnode *e;
 	long n;
 	const char *msg;
@@ -847,7 +851,8 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 				&& fnode != NULL) {
 			/* found name in a Ness library */
 			nesssym_NSetINode(varbl, funcnode, fnode);
-			varbl->flags = flag_function | flag_ness;
+			/* hack: since it's not refcounted, prevent freeing of lib ref w/ builtin flag */
+			varbl->flags = flag_function | flag_ness | flag_builtin;
 		}
 		else if (callCheckProcTable(varnode, argtypes)) {
 			/* it is a call on the proctable */
@@ -884,6 +889,7 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 
 	/* ness code (has fnode) */
 	case flag_function | flag_ness:
+	case flag_function | flag_ness | flag_builtin :
 	case flag_function | flag_ness | flag_forward :
 	case flag_function | flag_ness | flag_xfunc:
 	case flag_function | flag_ness | flag_xfunc | flag_forward: {
@@ -1114,9 +1120,9 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	boolean malloced[10];	/* T if arg[i] pts to malloced space */
 	long n;		/* local var */
 	long nargs;	/* actual number of arg words in array */
-	TType lasttype;		/* local var */
+	TType lasttype = idleHdr;		/* local var */
 	boolean checkFirstArg;	/* whether first arg must be object */
-	class view *v, *v2;		/* first arg if any */
+	class view *v = NULL, *v2;		/* first arg if any */
 	class dataobject *d;
 	class text *textp;
 	boolean createdview;
@@ -1177,6 +1183,22 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	if(nargs>0 && NSP->l.hdr==ptrHdr) {
 	    v=(view *)NSP->p.v;
 	    NSPopSpace(ptrstkelt);
+	} else if(nargs>0 && !checkFirstArg) {
+	        // some procs take arbitrary args
+		lasttype = NSP->l.hdr;
+		switch (lasttype) {
+		    case longHdr:
+		    case boolHdr:
+			v = (view *)NSP->l.v;
+			break;
+		    case seqHdr:
+			v = (view *)(NSP->s.v)->ToC();
+			break;
+		    default:
+			/* ERROR: unknown arg type */
+			RunError(":unknown arg type", iar);
+			break;
+		}
 	} else v=NULL;
 	
 	/* 3. if required, check first arg and perhaps invent it */
@@ -1202,6 +1224,7 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	     from a call of inset() for an inset 
 	     whose view has never been exposed  */
 	    if (v != NULL)  {
+		view *v3 = v;
 		/* find view appropriate to type required by proc */
 		v2 = (view *)ProperPtr((ATK  *)v, call->requiredclass);
 		if (v2 == NULL && (v)->IsType( dataobjectClass)  
@@ -1226,19 +1249,24 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 		    char *buf, *wantname;
 		    wantname = (char *)(proctable::GetType(call->where.pe)   )->GetTypeName(
 											    );
-		    buf = (char *)malloc(60 + strlen((v)->GetTypeName()) 
+		    buf = (char *)malloc(60 + strlen((v3)->GetTypeName()) 
 					 + strlen(wantname));
 		    sprintf(buf, 
 			    "*first arg to proctable call is  /%s/, but should be /%s/",
-			    (v)->GetTypeName(),  wantname);
+			    (v3)->GetTypeName(),  wantname);
 		    RunError(buf, iar);
 		}
 	    }
-
-	    /* 4. call the function */
-	    proctable::Call(call->where.pe, v, arg, &retval);
+	    // tjm - FIXME: should probably check for NULL here and die
+	    // here instead of seg fault in proctable function
 	}
+
+	/* 4. call the function */
+	proctable::Call(call->where.pe, v, arg, &retval);
+
 	/* 5.  free allocated values */
+	if(nargs>0 && lasttype == seqHdr)
+		free((char *)v);
 	if(nargs>1) for (n = nargs-2; n >= 0; n--) 
 		if (malloced[n]) 
 			free((char *)arg[n].CString());
@@ -1313,7 +1341,17 @@ callCheat(unsigned char op, unsigned char *iar, class ness  *ness) {
 		NSP = popValue(NSP);		/* discard string */
 		NSPushSpace(ptrstkelt);
 		NSP->p.hdr = ptrHdr;
-		NSP->p.v = (ATK  *)v;
+		if(!v)
+			NSP->p.v = NULL;
+		else {
+			ATK *cv = (ATK *)v->GetTrueChild();
+			if(!cv) {
+				v->InitChildren();
+				cv = (ATK *)v->GetTrueChild();
+			}
+			NSP->p.v = cv;
+		}
+;
 	}	break;
 	case 's':	{				/* new() */
 		/* arg is ptr for the class */
@@ -2085,8 +2123,8 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 //		ScanForProcs, (long)libnode);
 }
 
-NO_DLL_EXPORT 	ness_ProcHookType 
-ness_ProcHook(ness_ProcHookFunc, 0L, avalue::cstring, 
-	avalue::voidatom);
+NO_DLL_EXPORT 	traced_ptr<ness_ProcHookType>
+ness_ProcHook(new ness_ProcHookType(ness_ProcHookFunc, 0L, avalue::cstring, 
+	avalue::voidatom));
 
 

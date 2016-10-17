@@ -103,6 +103,9 @@ DIRLIBS(APPS,apps,)
 #ifndef MK_WIDGETS
 #define MK_WIDGETS
 #endif
+#ifndef MK_MUSIC
+#define MK_MUSIC
+#endif
 #endif				/* MK_BASIC_INSETS */
 
 #ifdef 				MK_HELP_APP
@@ -174,6 +177,9 @@ DIRLIBS(APPS,apps,)
 #endif
 #if SY_OS2 && defined(MK_CONSOLE)
 #undef MK_CONSOLE
+#endif
+#if defined(MK_CONTROLLERS) && !defined(MK_MUSIC)
+#define MK_MUSIC
 #endif
 
 
@@ -265,6 +271,9 @@ DIRLIBS(TYPESCRIPT,typescript,typescript)
 #ifdef MK_WIDGETS
 DIRLIBS(WIDGETS,widgets,awidget)
 #endif
+#ifdef MK_MUSIC
+DIRLIBS(MUSIC,music,music)
+#endif
 
 
 /* ================================= */
@@ -284,7 +293,7 @@ ATKSUBDIRS = \
  $(DIR_CHART)   $(DIR_CONSOLE)   $(DIR_EZPRINT)  \
  $(DIR_EQ)   $(DIR_FAD)   $(DIR_TABLE)   $(DIR_ROFFTEXT)  \
  $(DIR_HELP)   $(DIR_SRCTEXT)   $(DIR_LOOKZ)  \
- $(DIR_LAYOUT)   $(DIR_CONTROLLERS)  \
+ $(DIR_LAYOUT)  $(DIR_MUSIC)  $(DIR_CONTROLLERS)  \
  $(DIR_CREATEINSET)  \
  $(DIR_FIGURE)   $(DIR_NESS)   $(DIR_WIDGETS)  \
  $(DIR_DATACAT)   $(DIR_TOEZ)   $(DIR_WEB)  \

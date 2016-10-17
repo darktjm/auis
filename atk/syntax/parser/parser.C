@@ -275,11 +275,23 @@ parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblv
 	int x;
 	const char *bx;
 	int success;
+	long maxlen = plen ? *plen : (long)strlen(buf);
 
-	if (*buf == '\'') {
+	if(!maxlen)
+		return 0;
+	if (*buf == '\'' && maxlen >= 3) {
 		/* process quoted character */
 		val = buf[1];
 		if (val == '\\') {
+			/* I'm only changing ParseNumber(), so len has to be
+			 * checked here.   max == 3+3 ('\000') */
+			int i;
+			for(i = 0; i < 3; i++) {
+				if(maxlen < 3 + i)
+					return 0;
+				if(buf[3 + i] == '\'')
+					break;
+			}
 			val = parser::TransEscape(buf+2, &len);
 			len += 3;  /* two apostrophes and the backslash */
 		}
@@ -293,6 +305,7 @@ parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblv
 	val = 0;
 	currstate = 8;
 	bx = buf;
+	--maxlen;
 	x = *bx++;
 	while ( 1 ) {
 		x = (x < '+' || x > 'x')  ?  20  :  xlate[x - '+'];
@@ -313,7 +326,12 @@ parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblv
 				val = val * 16 + x;
 			break;
 		}
-		x = *bx++;
+		if(!maxlen)
+			x = 0;
+		else {
+			x = *bx++;
+			--maxlen;
+		}
 	}
 	len = bx - buf - 1 - ((currstate == 9) ? 1 : 0);
 	if (plen)

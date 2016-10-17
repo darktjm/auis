@@ -1,5 +1,4 @@
-\begindata{text,538268692}
-\textdsversion{12}
+\begindata{ness,538268692}
 \template{default}
 -- format.ness
 
@@ -230,4 +229,4 @@ end function
 \view{bpv,537558784,13,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538268692}
+\enddata{ness,538268692}

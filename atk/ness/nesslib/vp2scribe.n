@@ -1,5 +1,4 @@
-\begindata{text,539133352}
-\textdsversion{12}
+\begindata{ness,539133352}
 \template{default}
 -- vp2scribe.n
 
@@ -560,4 +559,4 @@ n 0
 \view{bpv,539133592,7,0,0}
 
 -- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,539133352}
+\enddata{ness,539133352}

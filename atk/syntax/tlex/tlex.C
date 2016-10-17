@@ -308,6 +308,7 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 	int success;
 	double treal;
 	long tlen, got;
+	const char *buf;
 
 	tlen = self->currpos - self->tokpos;  /* usually : 1 */
 	if (tlen > 0)
@@ -315,8 +316,10 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 		DEBUG(("ScanNumber: tlen %d start %d pos %d\n", 
 			tlen, self->tokpos, self->currpos));
 	tlen = (self->text)->GetLength() - self->tokpos;
+	buf = (self->text)->GetBuf( self->tokpos, tlen, &got);
+	len = got;
 	success = parser::ParseNumber(
-			(self->text)->GetBuf( self->tokpos, tlen, &got),
+			buf,
 			&len, &parm->intval, &treal);
 	if (success == 0) {
 		(self)->Error( "Error ends number");

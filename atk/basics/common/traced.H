@@ -82,6 +82,7 @@ class traced : public ATK  {
 /// This is a pointer which automatically deletes a traced object when it
 /// is deleted.  This somewhat simulates direct object creation, but the
 /// usage is that of a pointer, rather than an object.
+/// \param T The traced descendent type.
 template <class T> class traced_ptr {
   private:
     T *ptr;
@@ -93,6 +94,8 @@ template <class T> class traced_ptr {
     // accidentally deref the pointer right away, causing it to be
     // freed, making for hard-to-trace crashes later on.
     /// Construction may just take ownership of an existing heap object.
+    /// This is necessary if you want to use a constructor other than
+    /// the default.
     /// \param p The pointer to take over.
     inline traced_ptr(T *p) { ptr = p;  ptr->Reference(); }
     /// Destruction calls T's Destroy().

@@ -81,6 +81,12 @@ The following known dependencies currently exist:
     installation or $ANDREWDIR/X11fonts/fonts.alias after installation,
     or inserting your own set of font aliases in the font path before
     andrew's.
+  - portaudio (only tested with 19_pre20140130) if you want to use
+    the crappy beeper class "play" and the sample piano inset.  I
+    should probably make this a separate configuration option from
+    enabling play itself, as the old play ran without it.
+    See http://www.portaudio.com.  Note that the beeper class now also
+    uses pthreads, but that was a prerequisite for portaudio, anyway.
 
 I recommend the following preference settings in ~/.preferences:
 
@@ -211,7 +217,8 @@ So far, the following incompatibilities have been introduced:
     particular, the Single UNIX Spec make does not support these
     features.  Fix atk/basics/{common,lib}/Imakefile if this is a
     problem for you.  Adding doxygen support made such a dependency as 
-    well; fix doc/Imakefile if you don't have `$(shell ...)`.
+    well; fix doc/Imakefile if you don't have `$(shell ...)`.  My 
+    implementation of the play class also uses this.
 
   - I have removed many obsolete symbols.  Any external code relying on
     them should study the SVN logs and update to the correct symbol (or
@@ -232,6 +239,13 @@ So far, the following incompatibilities have been introduced:
     the AUIS directory.  If you're using a dumb X terminal, you
     can probably get a font server to give you the appropriate
     fonts.
+
+  - I changed parser::ParseNumber and cparser_ParseNumber without
+    changing their documentation or prototypes:  beware!  If you pass
+    in a length pointer, it must be initialized to the length of the
+    text you want to parse.  This is to fix a bug where all current
+    usages are in text buffers without termination, even though the
+    routines assumed zero termination.
 
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:

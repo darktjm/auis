@@ -414,7 +414,8 @@ MapRunError(class ness  *ness) {
 	fnode = nesssym_NGetINode(errsym, funcnode);	/* (might be
 			an event node.  KLUDGE leading fields are the same) */
 	objcode = ness_Globals[fnode->SysGlobOffset].e.s.v;
-	if (errsym->flags == (flag_function | flag_ness)) {
+	if (errsym->flags == (flag_function | flag_ness) ||
+	    errsym->flags == (flag_function | flag_ness | flag_builtin)) {
 		/* top level function */
 		if (ness != errsym->parent.ness)
 			fprintf(stderr, "MapRunErr - ness mismatch 1\n");
@@ -469,7 +470,8 @@ LocateErrorFunc(unsigned const char *loc , unsigned const char *base, const char
 	wheresym = codelocFind(loc - base);
 	if (wheresym == NULL) 
 		return errornode_Create(ness, 0, 0, loc - base, msg, (*msg == '*'), NULL);
-	whereness = (wheresym->flags == (flag_function | flag_ness)) 
+	whereness = (wheresym->flags == (flag_function | flag_ness) ||
+		     wheresym->flags == (flag_function | flag_ness | flag_builtin))
 				? wheresym->parent.ness
 				: wheresym->parent.nesssym->parent.ness;
 	if (whereness == ness) 
@@ -493,7 +495,8 @@ LocateErrorFunc(unsigned const char *loc , unsigned const char *base, const char
 				":error in subroutine called from unknown location", 
 				FALSE, NULL);
 		wheresym = codelocFind(frame->returnaddress - base - 2);
-		whereness = (wheresym->flags == (flag_function | flag_ness)) 
+		whereness = (wheresym->flags == (flag_function | flag_ness) ||
+			     wheresym->flags == (flag_function | flag_ness | flag_builtin))
 				? wheresym->parent.ness
 				: wheresym->parent.nesssym->parent.ness;
 		if (whereness == ness) 
