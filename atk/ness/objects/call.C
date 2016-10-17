@@ -663,7 +663,8 @@ static struct hack {
 	{"redraw", "im"},   /* obsolete */
 	{"start", "im"},   /* obsolete */
 	{"stop", "im"},   /* obsolete */
-	{"raster", "rasterv"},	/* obsolete */
+	{"raster", "rasterview"},	/* obsolete */
+	{"rasterv", "rasterview"},
 	{0, 0}
 };
 
@@ -1119,9 +1120,9 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	boolean malloced[10];	/* T if arg[i] pts to malloced space */
 	long n;		/* local var */
 	long nargs;	/* actual number of arg words in array */
-	TType lasttype;		/* local var */
+	TType lasttype = idleHdr;		/* local var */
 	boolean checkFirstArg;	/* whether first arg must be object */
-	class view *v, *v2;		/* first arg if any */
+	class view *v = NULL, *v2;		/* first arg if any */
 	class dataobject *d;
 	class text *textp;
 	boolean createdview;
@@ -1182,6 +1183,22 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	if(nargs>0 && NSP->l.hdr==ptrHdr) {
 	    v=(view *)NSP->p.v;
 	    NSPopSpace(ptrstkelt);
+	} else if(nargs>0 && !checkFirstArg) {
+	        // some procs take arbitrary args
+		lasttype = NSP->l.hdr;
+		switch (lasttype) {
+		    case longHdr:
+		    case boolHdr:
+			v = (view *)NSP->l.v;
+			break;
+		    case seqHdr:
+			v = (view *)(NSP->s.v)->ToC();
+			break;
+		    default:
+			/* ERROR: unknown arg type */
+			RunError(":unknown arg type", iar);
+			break;
+		}
 	} else v=NULL;
 	
 	/* 3. if required, check first arg and perhaps invent it */
@@ -1207,6 +1224,7 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	     from a call of inset() for an inset 
 	     whose view has never been exposed  */
 	    if (v != NULL)  {
+		view *v3 = v;
 		/* find view appropriate to type required by proc */
 		v2 = (view *)ProperPtr((ATK  *)v, call->requiredclass);
 		if (v2 == NULL && (v)->IsType( dataobjectClass)  
@@ -1231,19 +1249,24 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 		    char *buf, *wantname;
 		    wantname = (char *)(proctable::GetType(call->where.pe)   )->GetTypeName(
 											    );
-		    buf = (char *)malloc(60 + strlen((v)->GetTypeName()) 
+		    buf = (char *)malloc(60 + strlen((v3)->GetTypeName()) 
 					 + strlen(wantname));
 		    sprintf(buf, 
 			    "*first arg to proctable call is  /%s/, but should be /%s/",
-			    (v)->GetTypeName(),  wantname);
+			    (v3)->GetTypeName(),  wantname);
 		    RunError(buf, iar);
 		}
 	    }
-
-	    /* 4. call the function */
-	    proctable::Call(call->where.pe, v, arg, &retval);
+	    // tjm - FIXME: should probably check for NULL here and die
+	    // here instead of seg fault in proctable function
 	}
+
+	/* 4. call the function */
+	proctable::Call(call->where.pe, v, arg, &retval);
+
 	/* 5.  free allocated values */
+	if(nargs>0 && lasttype == seqHdr)
+		free((char *)v);
 	if(nargs>1) for (n = nargs-2; n >= 0; n--) 
 		if (malloced[n]) 
 			free((char *)arg[n].CString());
@@ -1318,7 +1341,17 @@ callCheat(unsigned char op, unsigned char *iar, class ness  *ness) {
 		NSP = popValue(NSP);		/* discard string */
 		NSPushSpace(ptrstkelt);
 		NSP->p.hdr = ptrHdr;
-		NSP->p.v = (ATK  *)v;
+		if(!v)
+			NSP->p.v = NULL;
+		else {
+			ATK *cv = (ATK *)v->GetTrueChild();
+			if(!cv) {
+				v->InitChildren();
+				cv = (ATK *)v->GetTrueChild();
+			}
+			NSP->p.v = cv;
+		}
+;
 	}	break;
 	case 's':	{				/* new() */
 		/* arg is ptr for the class */

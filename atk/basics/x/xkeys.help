@@ -131,7 +131,7 @@ meta and n for no modifiers).
     XK_R15	\string{Esc-;}
 
 
-There is no mechanism at preset to add more mappings or change existing 
+There is no mechanism at present to add more mappings or change existing 
 mappings, other than standard X key mapping routines.  Keep in mind 
 that the OS or window manager may intercept special keys, as with any 
 key bindings.  When in doubt about a key, it is generally safe to 
@@ -140,6 +140,6 @@ insert it into a buffer using ^Q to see what it maps to.
 One common pair of modifiers that may screw up the mapping is the caps
 lock and num lock keys.  If the preference NumAndCapsLockHack is set,
 all of the above key mappings will be independent of whether or not
-these modifiers are active.
+those two modifiers are active.
 
 \enddata{text,6765600}

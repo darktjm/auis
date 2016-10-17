@@ -103,6 +103,9 @@ DIRLIBS(APPS,apps,)
 #ifndef MK_WIDGETS
 #define MK_WIDGETS
 #endif
+#ifndef MK_MUSIC
+#define MK_MUSIC
+#endif
 #endif				/* MK_BASIC_INSETS */
 
 #ifdef 				MK_HELP_APP
@@ -264,6 +267,9 @@ DIRLIBS(TYPESCRIPT,typescript,typescript)
 #endif
 #ifdef MK_WIDGETS
 DIRLIBS(WIDGETS,widgets,awidget)
+#endif
+#ifdef MK_MUSIC
+DIRLIBS(MUSIC,music,music)
 #endif
 
 

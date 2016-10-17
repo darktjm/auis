@@ -1,0 +1,28 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
+\* ********************************************************************** */
+
+HFILES = play.H
+OBJS = play.o
+
+NormalObjectRule()
+NormalATKRule()
+
+DynamicObject(play,$(LIBS),,)
+InstallDynamicObjectClass(play,$(FULLATKDLIBDIR))
+InstallClassFiles($(HFILES))
+
+LOCAL_INCLUDES = $(shell pkg-config portaudio-2.0 --cflags-only-I)
+DEFINES = $(shell pkg-config portaudio-2.0 --clfags-only-other)
+LIBS = 	$(shell pkg-config portaudio-2.0 --libs) -lm
+ATKTestProgram(play, playtest.o,$(LIBS),,-r . -c play text)
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(play.help musproc.help, ${DESTDIR}/help)
+InstallHelpAlias(play, music)
+InstallHelpAlias(musproc, musicproc musicprocs playproc playprocs)
+
+InstallDocs(play.doc, $(DESTDIR)/doc/PROGRAMMER)
