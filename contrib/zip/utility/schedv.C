@@ -369,7 +369,9 @@ void schedv_private::Handle_Slot_Hit( class schedv *self, zip_type_figure slot_f
     else
     { DEBUGst(Reply,reply);
     PendingQuestion = false;
-    if ( strcmp( reply, (Zip)->Figure_Text(  text_figure ) ) )
+    const char *fig_text = (Zip)->Figure_Text(text_figure);
+    if(!fig_text) fig_text = "";
+    if ( strcmp( reply, fig_text ) )
     {
 	Modified = true;
 	(ZipView)->Clear_Figure(  text_figure, ChartPane );

@@ -21,6 +21,7 @@ zipocapt.H
 
 
 #include <zipobject.H>
+/** Zip text caption object. */
 class zipocapt : public  zipobject
   {
 public:

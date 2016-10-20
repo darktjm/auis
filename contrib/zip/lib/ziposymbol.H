@@ -45,6 +45,11 @@ struct symbol_set
 
 
 #include <ziporect.H>
+/** Zip symbol library object.
+ *  Symbols come from $ANDREWDIR/lib/zip/symbols.  Each file is a set of
+ *  symbols.  Each symbol in the set is a single zip "stream" to draw the
+ *  symbol.
+ */
 class ziposymbol : public  ziporect
   {
 public:

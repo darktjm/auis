@@ -21,6 +21,7 @@ zipopath.H
 #define  zipopath_VERSION    1
 
 #include <zipobject.H>
+/** Zip free-form drawn path object. */
 class zipopath : public  zipobject
   {
 public:

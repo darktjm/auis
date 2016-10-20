@@ -10,6 +10,9 @@
 /** \addtogroup libtimeoday
  * @{ */
 #include <timeodayview.H>
+/** A view for \ref writestamp objects.
+ *  Provides actions and menu to change date format.
+ */
 class writestampview: public  timeodayview {
 public:
 	TRACED_CLASS(writestampview);

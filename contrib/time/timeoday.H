@@ -14,6 +14,9 @@
 #include <time.h>
 
 #include <dataobject.H>
+/** Simple date stamp of current date.
+ *  Saves format and font information to stream.  Always gives current date.
+ *  View with \ref writestampv. */
 class timeoday: public  dataobject {
 public:
 	TRACED_CLASS(timeoday);

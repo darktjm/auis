@@ -246,6 +246,10 @@ static void lsetview_DestroyView(class lsetview  *self)
     lset_Initialize(ls);
 */
 /*    lset::InitializeObject(ls); XXX, huh? what's the purpose? -rr2b */
+    // the purpose is to delete the view properly, which is nearly
+    // impossible with this convoluted mess and its static caching.
+    ls->dataname[0] = ls->viewname[0] = ls->refname[0] = 0;
+    ls->dobj = NULL; // destroying isn't needed, I guess
     ls->revision = self->revision;
     if(self->app){
 	(self->app)->UnlinkTree(); 

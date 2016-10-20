@@ -22,6 +22,7 @@ zipofcapt.H
 
 
 #include <zipocapt.H>
+/** Zip flexible text caption object. */
 class zipofcapt : public  zipocapt
   {
 public:

@@ -21,6 +21,7 @@ zipocirc.H
 #define  zipocirc_VERSION    1
 
 #include <zipobject.H>
+/** Zip circle object. */
 class zipocirc : public  zipobject
   {
 public:

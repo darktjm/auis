@@ -27,6 +27,11 @@ END-SPECIFICATION  ************************************************************/
 #define  lt_VERSION    1
 
 #include <dataobject.H>
+/** Data object for storing LightTable data.
+ *  This is a mostly dummy data object which cannot read and write
+ *  streams.  Its sole purpose is to store data for the \ref ltv view,
+ *  and to load it at that view's request.
+ */
 class lt : public  dataobject  {
 public:
   TRACED_CLASS_NODEST(lt);

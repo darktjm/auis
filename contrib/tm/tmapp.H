@@ -8,6 +8,9 @@
 /** \addtogroup libtermulator
  * @{ */
 #include <application.H>
+/** Terminal emulator application.
+ *  Required to properly initialize \ref tm and adds useful command-line
+ *  options. */
 class tmapp : public  application {
 public:
 	virtual ATKregistryEntry *ATKregistry();

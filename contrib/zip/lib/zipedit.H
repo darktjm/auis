@@ -53,6 +53,10 @@ struct zipedit_states
 typedef enum view::MouseAction (*zip_keyboardfptr)(long anchor, zip_type_pane pane, char c, enum view::MouseAction action, long x, long y, long clicks);
 typedef long (*zip_pendingfptr)(class ziposymbol *self, zip_type_pane pane);
 
+/** Helper for editing zip (object figure) documents.
+ *  This should really be a view, since it does most of what you would
+ *  expect a view to do.
+ */
 class zipedit : public ATK 
 {
 public:

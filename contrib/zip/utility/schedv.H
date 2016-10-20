@@ -28,6 +28,13 @@ END-SPECIFICATION  ************************************************************/
 #include <zipfig.h>
 
 #include <view.H>
+/** A view for \ref sched objects.
+ *  This view displays a schedule document and allows rudimentary editing.
+ *  It requires a prefabricated schedule document for editing; one is
+ *  included with a sample (easily cleared out) schedule.
+ *  All text fields are editable, and there are 4 buttons at the bottom
+ *  to perform global actions (clear, print, save, quit).
+ */
 class schedv : public  view {
 public:
   TRACED_CLASS(schedv);

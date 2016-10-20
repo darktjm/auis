@@ -10,15 +10,48 @@
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
 - adew crashes a lot just doing the tutorial
-- adew: cut doesn't actually delete
-  - when cutting table, table attempts to update due to deferred update
-    even though it may be gone.  Thus, crash.
 - adew: often clears regions and never redisplays contents (maybe due
   to my "fix" for lack of resize updates)
 - adew: no samples for mbuttonv or clicklistV in vallist document anymore
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
   - pcontrol dies on init if not PC-RT
+- fix issues in zip (or chuck in favor of figure):
+  - schedapp should go away in favor of using ez on sched/schedapp
+  - schedv Clear button stays stuck down after clearing.
+  - ltapp should go away in favor of storing background in output file
+    somehow and only requiring one file for input.
+  - zip edit palette is overritten by the figure you're editing; manual
+    window resize is necessary to make them appear unmolested.
+    Instead, it should convert the item being edited into a scrollable pane.
+    It should also have a minimum size based on its own requirements,
+    and add a scroll assembly around itself if there isn't enough room.
+    This will generally force the user to resize the window for
+    usability.
+  - all zip figures have text whose size is in points, but is assumed to be
+    a particular number of pixels.  Text is independent of its surroundings,
+    so the surroundings are overlapped if the text is too big.  Even the
+    GUI, such as the symbol library listing, is all screwed up.  Everything
+    assumes 75 DPI fonts, and probably Adobe fonts at that.  The schedule,
+    for example, looks awful at 129pi.  Maybe it would be better if zip
+    figures scaled *all* their dimensions based on display DPI, including
+    line thickness.  The font mechanism in ATK does not support requesting
+    fonts at a particular DPI.  In fact, ATK doesn't even *know* the display
+    DPI.  One way around this would be to store the assumed font size, and
+    if the font size is different, scale.  For that, though, I'd need some
+    way of computing the expected size of a font at a particular DPI.
+    I could then store the actual font size at the time of write as an
+    extra parameter, and assume missing parameter means 75DPI fonts.
+    This is entirely computed based on the font size, and doesn't need
+    to know the actual display DPI.  I don't even really have to store
+    anything; instead, I could scale up when displaying based on the
+    current font size.
+  - updates often leave garbage on screen.  For example, Clear button of
+    schedv leaves lots of bits of the old text on-screen until ^L is
+    pressed.  Regular zip edits are also dirty.
+  - clicking in features.zip gives "A view just clicked in is broken."
+  - text does not scale with rest of figure (maybe other stuff as well,
+    such as insets - who knows?)
 - use qsort to sort in deskey instead of external sort command
 - adjusting controls doesn't always set modified flag for a document
 - sometimes just loading a doc with controls sets modified flag for it

@@ -20,6 +20,7 @@ ziporang.H
 #define  ziporang_VERSION    1
 
 #include <ziporect.H>
+/** Zip rounded angle object. */
 class ziporang : public  ziporect
   {
 public:

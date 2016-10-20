@@ -316,6 +316,8 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 		DEBUG(("ScanNumber: tlen %d start %d pos %d\n", 
 			tlen, self->tokpos, self->currpos));
 	tlen = (self->text)->GetLength() - self->tokpos;
+	/* tjm - this will fail if number straddles gap.  Sighing will not
+	 * fix it, no matter how often or loudly. */
 	buf = (self->text)->GetBuf( self->tokpos, tlen, &got);
 	len = got;
 	success = parser::ParseNumber(

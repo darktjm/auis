@@ -21,6 +21,7 @@ ziporect.H
 #define  ziporect_VERSION    1
 
 #include <zipobject.H>
+/** Zip rectangle object. */
 class ziporect : public  zipobject
   {
 public:

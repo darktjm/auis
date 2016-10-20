@@ -701,6 +701,7 @@ celview::celview()
     this->AddAppLayer = FALSE;
     this->script = NULL;
     this->level = 0;
+    this->mode = 0;
     (this->menus)->SetMask(1);
     THROWONFAILURE( TRUE);
 }
@@ -1268,6 +1269,11 @@ void celview::Copy ()
 
 celview::~celview()
 {
+    if(this->GetDataObject()) {
+	class cel *c = (class cel *)this->GetDataObject();
+	if(c->dataObject)
+	    c->dataObject->Destroy();
+    }
     if(this->olist){
 	struct overlay *ov; 
 	class view *vw[128];

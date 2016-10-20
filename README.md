@@ -38,6 +38,178 @@ make it unreasonably difficult for me to actually extract anything
 useful.  So, while my project might benefit from some of the changes
 made there, I won't even bother.
 
+Commentary: What is ATK?
+------------------------
+
+AUIS represents a promise.  This promise has been made many times, by
+many frameworks.  The promise is that you can develop independent
+components which easily interact with each other in an editor or
+viewer.  This means that the interaction mechanism is well-developed
+and easy to both use and implement.  It also means that components
+exist for many common applications, providing both a complete baseline
+from which to develop and a large number of useful examples.
+
+Independence can mean different things.  At the highest level, it
+could mean programs running on sepearate machines.  This requires
+communication of the API over a network, and dealing with unreliable,
+extremely slow response times and other network failures, as well as
+the possibility that remote applications may fail unexpectedly or not
+even be started yet.  It could just mean programs running on the same
+machine, with the same problems but slightly faster and slightly
+easier to deal with misbehaving component applications.  At the lowest
+level, it could be components that are statically or dynamically
+linked into the application, giving little to no overhead in
+communication and making the possibility of independent failure less
+likely, but generally leaving things which require separate
+applicaitons, such as privilege separation, more difficult.
+
+There are many ways in which components must interact.  For visual
+interaction, the component must present itself properly within its
+context.  The context may be that of an entire application window for
+editing or viewing the component, or as an embedded element for
+viewing (or printing), or as an embedded element for editing.  It
+should be able to deal with changes which alter its appearance, and
+communicate those changes to its context.  For example, many elements
+appear different depending on whether or not they have keyboard focus.
+
+For UI interaction, the common elements of the user interface must be
+easily adjustable by the embedded component.  Key bindings in the
+enclosing environment must be respected, but they must also be
+alterable by the component itself, at least while it is in focus.
+Similarly, other UI elements, such as menus, button bars, and mouse
+behavior must be alterable by the component when it is in focus via
+simple APIs.  Naturally, consistent methods for assiging focus must
+exist as well.  It should not be unusual to change the overall UI (not
+just the embedded component's appearance) depending on wheter or not a
+component has focus, or is the entire application window.
+
+For long-term storage interaction, a component must be able to
+serialize its persistent data in a manner compatible with its
+enclosing component(s), if applicable.  This means that the system
+must provide a consistent stream format that is easily implemented by
+any compoenents.  The format must uniquely identify the component
+which created it, and also must be consistently skippable and storable
+in a dummy component if the originating component is not available.
+
+AUIS delivers on some of these, but not all, and not as well as it
+could have.  AUIS defines a simple API and stream format.  AUIS
+provides no inter-application communication, but instead provides high
+performance dynamic linking (and static linking, as well, although
+there is no difference in performance either way).  AUIS provides a
+large number of components from which to build applications or to use
+as base code for additional components.  Really, its main failure is
+that its users and developers lost interest, making it a dead system.
+Some of the missing features, such as better color support, better
+support for high-resolution displays, undo support, button bars,
+Unicode, and other more modern elements would have come with time,
+anyway, if it had not died when it did.  Other things, such as IPC,
+would probably never have taken off, given that lack of a need.
+
+Is there anyone else out there trying to fulfill this promise?  I
+don't know.  I would probably have to put a lot more effort into
+researching alternatives to give a correct answer.  The following is
+mostly uninformed, but probably accurate.  Others may have done it
+better in the mean time, but most modern efforts are towards providing
+large, monolithic libraries and applications that do not even come
+close to representing the above promise.  MicroSoft COM seems to be
+the closest to deliver on this, but as with anything MicroSoft
+creates, it's tied to Windows, and is useless anywhere else.
+
+CORBA makes claims, but delivers nothing but a consistent IPC
+specification.  It claims to allow tighter linkage, but leaves all the
+details to the implementors (none of which do this, to my knowledge).
+It provides no hints at a consistent API for embedding.  It could be
+used as a basis for something which fulfills the promise. GNOME tried
+to do this with Bonobo, but failed by providing almost no components
+and failing to acquire developer or user interest; GNOME 3 has dropped
+this entirely in favor of DBus, which will never have tight
+integration.  Like most attempts using IPC, it simply ended up with
+large, bloated applications with numerous IPC entry points, rather
+than separate, smaller components.  This includes DCOP/KParts,
+COM/DCOM, UNO, and probably most others as well.  ATK at least tried
+to keep that sort of a thing to a minimum, at first, but with time I
+expect ATK would've gone the same route.  Most of these do not even
+attempt to support tight integration, and providing many small
+components without tight integration would bring performance to a
+crawl, anyway.  Not that it matters with multi-GHz CPUs and so much
+memory that nobody bats an eye at multi-gigabyte requirements for
+most modern applications.  In comparison, the entire stripped AUIS is
+less than 51MB (much of which is documents), and debugging only adds
+35MB.
+
+Commentary: How is ATK?
+-----------------------
+
+Significant technical effort went into some aspects of ATK.  For
+example, ATK predates X, so it has "window system independence".  This
+sounds great, until you realize that like all projects, the
+independece is loose at best, and deteriorated as time passed.  It
+would be very difficult to port ATK as it is now to something other
+than X.  Even porting it back to WM, the system it was originally
+designed for, would be unreasonably difficult.  The design of the
+interfaces seemed good at the time, but some were obviously in the
+process of being replaced by "something better" at the time AUIS was
+abandoned, so even the ATK authors realized their limitations.  Some
+interfaces were meant for future expansion that never happened, while
+missing out on things that actually did happen.  Some are just silly,
+such as those requiring text to select options when plain integers
+would do.  Color and sound, which are big missing features (with only
+basic color support, and sound that I could outdo on my 1981 VIC-20),
+are mostly missing due to the workstation market at the time of
+development:  no workstation support meant no ATK support.
+
+Regardless of how much effort went into the design, the implementation
+was often sloppy and full of bugs, both potential and actual.  A large
+proportion of the code was also undocumented or misdocumented (either
+for users or for maintainers); as with much code even today, 90% or
+more of the code comments were copyright notices, and 5% were change
+logs that really belong in a source code control system.  There were
+many skeleton documents, and quite a few incomplete or missing
+documents. The code has quite a bit of "maybe I'll implement this some
+day" type of garbage that makes maintenance harder.  Such notes belong
+in undistributed code or TODO lists.  What little documentation exists
+is often duplicated in several places (with maybe one or two places
+conflicting, due to different update rates), making maintenance that
+much harder.  Quite a bit of code is apparently a work in progress,
+and serves little purpose other than to provide a demonstration.
+
+In particular, the apt class and all its descendents (e.g. tree,
+suite, org, bush, chart) are full of unimplemented ideas and bugs which
+indicate that even the ipmlemented ideas never worked properly.  The
+atk/widgets hierarchy is documented only by a half-written design
+document that has more ideas than actual documentation.  The help
+facility seems great, until you find out that most of the help text is
+incomplete and inaccurate.  The initiative to document all proctable
+entries produced user-unfriendly, poorly documented skeletons at best.
+The zip component is an undocumented WIP that was apparently abandoned
+in '89, long before the rest.  Its replacement, figure, is not much
+better (and worse in some cases).
+
+The indentation scheme adopted by some of the code (but not all; some
+just indents willy-nilly or not at all, making it hard to figure out
+the intent for ambiguous if-else, for example) was pre-ANSI.  Having
+the type indented above the function declaration just plain looks
+ugly, even if the intent was to make it easier to see the important
+bit:  the name of the function.  The secondary purpose of that
+indentation was to make the type line up with parameters' types, which
+of course only makes sense with pre-ANSI-style parameters.
+
+ATK seems to have stagnated long before it was abandoned.  Very little
+was added in the 90s.  Only the bare minimum of ANSIfication was done
+to support a standard that was introduced in '89, and was available
+far before that (I was writing ANSI-style code in '88, for example).
+The only thing that prompted this ANSIfication was that it was needed
+to support C++.  I guess that's what happens when you close the source
+and run out of funding at the same time.  The work I've done here
+could never have happened at the time when only binary releases were
+done.  Saying that joining the Andrew Consortium is free does not make
+things any more open.  The complete lack of other AFS maintenance
+projects in the intervening years shows how much the lack of openness
+for much of its existence affected developer interest.  I'm surprised
+AFS survived its closed (DCE/DFS) phase; as is, I have no doubts it
+would be more popular than it is if it had remained opened, in spite
+of the CMU people saying that the TransArc transition was a success.
+
 Legal Information
 -----------------
 

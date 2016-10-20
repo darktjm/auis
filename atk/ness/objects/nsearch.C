@@ -1249,6 +1249,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		textp = (class text *)(subject)->GetText();
 		pos = (subject)->GetPos();
 
+	        /* tjm - this will fail if the number straddles the gap */
 		cstring = (textp)->GetBuf( pos, 200, &envlen);
 		len = envlen;
 		success = parser::ParseNumber(cstring, &len, &intval, &realval);
@@ -1270,6 +1271,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		/* set realval by scanning subject, use NaN for error 
 			save matched portion in WhereItWas */
 
+	        /* tjm - this will fail if the number straddles the gap */
 		cstring = (textp)->GetBuf( pos, 200, &envlen);
 		len = envlen;
 		success = parser::ParseNumber(cstring, &len, &intval, &realval);

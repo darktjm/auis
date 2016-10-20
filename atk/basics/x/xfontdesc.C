@@ -666,6 +666,7 @@ class graphic *xfontdesc::CvtCharToGraphic(class graphic  *graphic2, char  Speci
     char str[1];
     XGCValues gcattr;
     int depth;
+    unsigned char sc = SpecialChar;
 
     if((graphic = EnsureGraphic(graphic)) == NULL)
 	return(NULL);
@@ -675,8 +676,8 @@ class graphic *xfontdesc::CvtCharToGraphic(class graphic  *graphic2, char  Speci
 /* This is text code extracted from my test suite, not the real stuff */
 
     info = GETXFONT(this, graphic);
-    if ((unsigned char)SpecialChar >= info->min_char_or_byte2 && (unsigned char)SpecialChar <= info->max_char_or_byte2) {
-	ci = (info->per_char != NULL) ? &(info->per_char[SpecialChar - info->min_char_or_byte2]) : &(info->max_bounds);
+    if (sc >= info->min_char_or_byte2 && sc <= info->max_char_or_byte2) {
+	ci = (info->per_char != NULL) ? &(info->per_char[sc - info->min_char_or_byte2]) : &(info->max_bounds);
 	width = ci->width;
 	height = info->max_bounds.ascent + info->max_bounds.descent;
 /* Older code - no longer seems to work properly
@@ -798,7 +799,7 @@ short *xfontdesc::WidthTable(class graphic  *graphic2)
 					i > font->max_char_or_byte2)
 				 fontWidthTable[i] = 0;
 			else
-				fontWidthTable[i] = (font->per_char) 
+				fontWidthTable[i] = (font->per_char)
 					? font->per_char[i-font->min_char_or_byte2].width 
 					: font->max_bounds.width;
 	}
@@ -899,8 +900,9 @@ void xfontdesc::CharSummary(class graphic  * graphic2, char  LookUpChar, struct 
 	    RetValue->ySpacing = 0;
 		}
 	else {
-	    XCharStruct * c = (font->per_char != NULL) 
-			? &font->per_char[LookUpChar-font->min_char_or_byte2] 
+	    unsigned char lc = LookUpChar;
+	    XCharStruct * c = (font->per_char != NULL && lc <= font->max_char_or_byte2) 
+			? &font->per_char[lc-font->min_char_or_byte2] 
 			: &(font->max_bounds);
 	    RetValue->width = c->rbearing- c->lbearing;
 	    RetValue->height = c->ascent + c->descent;

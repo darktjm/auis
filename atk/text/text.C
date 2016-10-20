@@ -787,6 +787,8 @@ long text::HandleCloseBrace(long  pos, FILE  *file)
     if(HighBitStart != -1){
 	unsigned char *foo;
 	long rl;
+	/* tjm - does this guarantee rl == pos - HighBitStart? */
+	/*       if not, must do this at least twice */
 	foo =(unsigned char *) (this)->GetBuf(HighBitStart,pos - HighBitStart,&rl);
 	while(rl-- > 0)
 	    *foo++ |= '\200';
@@ -2554,6 +2556,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject::
 		*outp++ = basis_hex[c>>4];
 		*outp++ = basis_hex[c&0xF];
 	    } else if (c == '<' &&
+		       /* tjm - These comparisons assume bufLen >= 8/9 */
 		       (ULstrncmp(buf, "comment>", 8) && ULstrncmp(buf, "/comment>", 9)) &&
 		       (nextcode == COMING_STYLE)) {
 		*outp++ = '<';

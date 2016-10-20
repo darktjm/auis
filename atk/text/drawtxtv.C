@@ -761,6 +761,7 @@ static void GenerateLineItems(class textview  *self, class text  *text, class ma
 			    } RSKmoved*/
 			    if (bufLen == 0)    /* filbuf */
 				buf = (unsigned char *) (Text(self))->GetBuf( pos, 1024, &bufLen);
+			    /* tjm - code below assumes bufLen >= 2/3 */
 			    if (pos >= end) { /* we have to check the end-of-style condition AFTER we've "filbuffed", so we can make sure the next character isn't a newline before we waste another line of screen space. */
 				if (GETDCHAR(buf)=='\n') /*RSKadd*/
                                     tc = GETDCHAR(buf), buf++, bufLen--, pos++;

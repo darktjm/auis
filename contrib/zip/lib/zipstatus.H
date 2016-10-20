@@ -31,6 +31,9 @@ struct zipstatus_states
 
 
 #include <zipview.H>
+/** Helper for zipview to display messages to the user.
+ *  I'm not sure what this buys over using the status line directly.
+ */
 class zipstatus : public  zipview
   {
 public:

@@ -824,7 +824,6 @@ void arbcon::DestroyCurrentCelview()
 {
     class celview *cv = currentcelview();
     if(cv) {
-	cv->GetCel()->Destroy();
 	(cv)->UnlinkTree();
 	(cv)->Destroy();
     }

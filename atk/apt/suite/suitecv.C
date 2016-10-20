@@ -122,9 +122,19 @@ Update_Caption( class suitecv *self )
     class text *txt = (class text *) ParentItem->dataobject;
     long len = (txt)->GetLength(), returnedLen;
     char *buf = (txt)->GetBuf( 0, len, &returnedLen );
-    if (buf)
-	*(buf + returnedLen) = (char) 0;
-    if (ParentItem->caption && (buf == NULL || strcmp(buf, ParentItem->caption)) ) {
+    if (buf) {
+	int plen = strlen(ParentItem->caption);
+	if(strncmp(ParentItem->caption, buf, returnedLen))
+	    buf = NULL;
+	else if(plen > returnedLen && returnedLen < len) {
+	    long pos = returnedLen;
+	    len -= returnedLen;
+	    if(strncmp((txt)->GetBuf( returnedLen, len, &returnedLen),
+		       ParentItem->caption + pos, len))
+	       buf = NULL;
+	}
+    }
+    if (ParentItem->caption && buf == NULL) {
 	(txt)->Clear();
 	(txt)->InsertCharacters( 0, ParentItem->caption, strlen(ParentItem->caption) );
     }

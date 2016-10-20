@@ -74,7 +74,7 @@ class traced : public ATK  {
     /**< Get the current reference count.
      *   \return the current value of the reference count. */
   private:
-    unsigned long refcount;
+    long refcount;
 };
 
 // not quite auto_ptr
