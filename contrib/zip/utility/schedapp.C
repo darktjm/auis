@@ -33,12 +33,13 @@ boolean
 schedapp::ParseArgs( int  argc, const char **argv )
 {
     IN(schedapp_ParseArgs);
+    application::ParseArgs(argc, argv);
     while ( *++argv )
     {
 	DEBUGst(ARGV,*argv);
 	if ( **argv == '-' )
 	{
-	    if ( strcmp( *argv, "-d" ) == 0 )
+	    if ( strcmp( *argv, "-D" ) == 0 )
 		debug = 1;
 	    else  printf( "Sched: Unrecognized switch '%s'\n", *argv );
 	}

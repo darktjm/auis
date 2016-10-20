@@ -21,6 +21,7 @@ zipoimbed.H
 #define  zipoimbed_VERSION    1
 
 #include <ziporect.H>
+/** Zip inset object. */
 class zipoimbed : public  ziporect
   {
 public:

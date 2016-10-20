@@ -214,6 +214,10 @@ void spread_PartialUpdate(class spread  * V, enum view::UpdateType  how, struct 
     int zapped;
     int wanthigh;
 
+    // tjm - this is just a workaround.  I have no idea why this condition exists.
+    // but it does exist when attempting to cut a table in arbcon.
+    if (!V->colInfo || !V->rowInfo)
+	return;
     (V)->SetClippingRect( updateClipRect);
     if (V->lastTime < (T)->EverythingTimestamp()) {
 	zapped = 1;

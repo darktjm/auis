@@ -11,6 +11,9 @@
 /** \addtogroup libtimeoday
  * @{ */
 #include <view.H>
+/** A view for \ref timeoday objects.
+ *  Provides actions and menu to change date format.
+ */
 class timeodayview: public  view {
 public:
 	TRACED_CLASS(timeodayview);

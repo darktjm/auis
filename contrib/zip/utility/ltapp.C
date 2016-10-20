@@ -45,7 +45,7 @@ ltapp::ParseArgs( int  argc, const char **argv )
 	DEBUGst(ARGV,*argv);
 	if ( **argv == '-' )
 	{
-	    if ( strcmp( *argv, "-d" ) == 0 )
+	    if ( strcmp( *argv, "-D" ) == 0 )
 		debug = 1;
 	    else  printf( "LightTable: Unrecognized switch '%s'\n", *argv );
 	}

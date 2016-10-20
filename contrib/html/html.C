@@ -1692,7 +1692,7 @@ html::WriteSubString(long  pos, long  len, FILE * file, int  quoteCharacters)
 	    if (strchr(HTMLMagicCharacters, c)) {
 		char* s;
 		int len;
-		s = html_MagicToString(buf-1,&len);
+		s = html_MagicToString(buf-1,&len); /* tjm - probably fails if i is close to 1024 */
 		while (s && *s) {
 		    *outp++ = *s++;
 		}

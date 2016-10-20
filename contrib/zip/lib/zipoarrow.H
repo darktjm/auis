@@ -20,6 +20,7 @@ zipoarrow.H
 #define  zipoarrow_VERSION    1
 
 #include <zipobject.H>
+/** Zip arrow object. */
 class zipoarrow : public  zipobject
   {
 public:

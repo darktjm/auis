@@ -20,6 +20,7 @@ zipopolygon.H
 #define  zipopolygon_VERSION    1
 
 #include <zipocirc.H>
+/** Zip polygon object. */
 class zipopolygon : public  zipocirc
   {
 public:

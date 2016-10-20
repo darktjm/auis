@@ -27,6 +27,17 @@ END-SPECIFICATION  ************************************************************/
 
 
 #include <view.H>
+
+/** The viewer for \ref lt objects.
+ *  Given the complete lack of documentation, and the apparent reliance on
+ *  a template document (similar to \ref sched), I have no idea what this is
+ *  or what it is intended to do.  It requires a zip figure and a raster,
+ *  and has some menu entries and a list of buttons at the bottom:
+ *  Begin CHain/End Chain/Rename Chain/Delete Chain/Right:/Left:.  It then
+ *  displays the zip and raster, with the raster in the back and to the
+ *  right.  It seems to save as the zip file, and, like sched, has no way
+ *  to change the save file name.
+ */
 class ltv : public  view {
 public:
   TRACED_CLASS(ltv);

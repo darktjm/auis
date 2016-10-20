@@ -20,6 +20,7 @@ zipoarc.H
 #define  zipoarc_VERSION    1
 
 #include <zipobject.H>
+/** Zip arc object. */
 class zipoarc : public  zipobject
   {
 public:

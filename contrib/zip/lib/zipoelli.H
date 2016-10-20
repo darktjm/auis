@@ -21,6 +21,7 @@ zipoelli.H
 #define  zipoelli_VERSION    1
 
 #include <zipocirc.H>
+/** Zip ellipse object. */
 class zipoelli : public  zipocirc
   {
 public:

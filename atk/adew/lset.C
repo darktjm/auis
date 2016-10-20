@@ -57,7 +57,7 @@ static class dataobject *getregisteredobject(class lset  *self)
 	return (class dataobject *)val;
     return NULL;
 }
-char *lset::registername(char  *name)
+char *lset::registername(const char  *name)
 {
     strcpy(this->refname,name);
     if(getregisteredobject(this) != NULL){

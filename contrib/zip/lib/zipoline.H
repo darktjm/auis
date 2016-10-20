@@ -22,6 +22,7 @@ zipoline.ch
 #define  zipoline_VERSION    1
 
 #include <zipobject.H>
+/** Zip line object. */
 class zipoline : public  zipobject
   {
 public:

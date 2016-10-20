@@ -72,6 +72,14 @@ typedef long (*zip_panehitproc)(long anchor, zip_type_pane pane, enum view::Mous
 typedef long (*zip_panedisplayproc)(long anchor, zip_type_pane pane, long action);
 typedef void (*zip_paneexceptproc)(struct zipview *, zip_type_pane pane);
 
+/** Primary view for \ref zip (object figure) documents.
+ *  Zip is both a graphics editor and an object intended to be used by
+ *  applications that offer interactive graphical interfaces.  It can be used
+ *  as an application or as an inset.
+ *
+ *  The editor surrounds the figure with in-line toolbars (palettes) for
+ *  editing the figure, and handles editing requests in the figure.
+ */
 class zipview : public  view
   {
 public:

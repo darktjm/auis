@@ -353,7 +353,7 @@ static int deletelist(class arbiterview  *self,class celview  *cv)
     int shift ;
     class cel *cl = Cel(cv);
     shift = 0;
-    if(arbcon::currentcelview() == cv) arbcon::SetCurrentCelview(NULL);
+//    if(arbcon::currentcelview() == cv) arbcon::SetCurrentCelview(NULL);
 #ifdef DEBUG
 printf("in deletelist cv = %d\n",(long)cv);
 #endif /* DEBUG */

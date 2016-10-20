@@ -45,6 +45,12 @@ typedef long (*zip_imageexceptfptr) (class zip *zip, zip_type_image image);
 typedef long (*zip_streamexceptfptr) (class zip *zip, zip_type_stream stream);
 
 #include <dataobject.H>
+
+/** Data storage for zip (object figure) documents.
+ *  A zip document is a scalable drawing consisting of various objects
+ *  such as text, lines, curves, insets, library figures, and raster images.
+ *  This expects to be viewed with \ref zipview.
+ */
 class zip : public  dataobject {
 public:
 	TRACED_CLASS(zip);

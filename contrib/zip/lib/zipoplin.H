@@ -21,6 +21,7 @@ zipoplin.H
 
 
 #include <zipopath.H>
+/** Zip polyline object. */
 class zipoplin : public  zipopath
   {
 public:

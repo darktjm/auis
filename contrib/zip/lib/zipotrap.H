@@ -21,6 +21,7 @@ zipotrap.H
 
 
 #include <zipobject.H>
+/** Zip Trapezoid object. */
 class zipotrap : public  zipobject
   {
 public:

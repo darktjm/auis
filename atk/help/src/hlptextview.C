@@ -96,6 +96,7 @@ void hlptextview::GetClickPosition(long  position , long  numberOfClicks, enum v
 		    textlen = (env)->GetLength();
 		    text = (class text *)(this)->GetDataObject();
 		    if (text) {
+			/* tjm - the only reason this probably works is buf is read-only */
 			buf = (text)->GetBuf( textstart, textlen, &textlen);
 			if (buf && textlen < (int)sizeof(topic)) {
 			    strncpy(topic, buf, textlen);

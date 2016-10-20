@@ -12,6 +12,10 @@
  */
 
 #include <termulator.H>
+/** Data object which provides Heathkit H19 terminal escapes for \ref termulator.
+ *  This also provides a TERMCAP description of those sequences.
+ *  Like \ref termulator, it expects to be viewed with \ref tmview.
+ */
 class tm19: public  termulator {
 public:
 	TRACED_CLASS_NODEST(tm19);

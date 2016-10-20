@@ -8,6 +8,11 @@
 /** \addtogroup libtermulator
  * @{ */
 #include <textview.H>
+/** View for \ref termulator data object.
+ *  The \ref textview provides most of the display functionality; this
+ *  just adds some key and menu bindings appropriate for \ref termulator,
+ *  and starts it up properly if necessary.
+ */
 class tmview: public  textview {
 public:
 	TRACED_CLASS(tmview);

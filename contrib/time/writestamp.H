@@ -10,6 +10,10 @@
 /** \addtogroup libtimeoday
  * @{ */
 #include <timeoday.H>
+/** Simple date stamp of last save date.
+ *  When written to a stream, this updates its internal date and stores
+ *  that, as well.
+ *  View with \ref writestampv. */
 class writestamp: public  timeoday {
 public:
 	TRACED_CLASS(writestamp);

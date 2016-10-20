@@ -30,6 +30,7 @@ zipobject.ch
 #include <view.H>
 #include <zipfig.h>
 #include <zippane.h>
+/** Abstract base class for zip objects. */
 class zipobject : public  view {
 public:
 	TRACED_CLASS_NODEST(zipobject);

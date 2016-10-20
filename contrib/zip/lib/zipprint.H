@@ -40,6 +40,8 @@ struct zipprint_states
 
 
 #include <ATK.H>
+/** Support class for printing zip objects.
+ */
 class zipprint : public ATK 
   {
 public:

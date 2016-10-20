@@ -27,6 +27,12 @@ END-SPECIFICATION  ************************************************************/
 #define  sched_VERSION    1
 
 #include <dataobject.H>
+/** A data object for storing a schedule document.
+ *  This is basically a dummy wrapper for a zip document which requires
+ *  an API call to properly initialize (thus requiring use of the \ref
+ *  schedapp application, even though neither the app nor the data object
+ *  do anything special).  Its primary viewer is \ref schedv.
+ */
 class sched : public  dataobject {
 public:
   TRACED_CLASS_NODEST(sched);
