@@ -240,14 +240,13 @@ The following known dependencies currently exist:
 
   - X and other UNIX utilities scattered throughout.
     in particular, imake, even though it's not used much by X anymore.
-  - ImageMagick.  You can change this at build-time to DevIL or
-    FreeImage by changing IMAGEIO in config/site.mcr.
+  - ImageMagick.
   - GNU roff.
   - gv. This can be overridden with the PSCPreviewCommand preference.
   - xditview.  This can be overridden with the PreviewCommand
     preference.  See below for replacing this with gv.
   - GNU make, or at least a make capable of dealing with GNU-style
-    `$(shell ..)` and `ifeq` .. `endif`, such as makepp.
+    `$(shell ..)`, such as makepp.
   - URW Nimbus fonts, installed in your X font path.  This can be
     overridden by either editing xmkfontd/non-auis.alias before
     installation or $ANDREWDIR/X11fonts/fonts.alias after installation,
@@ -299,7 +298,10 @@ So far, the following incompatibilities have been introduced:
    which means they may be too large to read in correctly on 32-bit
    systems.  That is, you can read files from 32-bit versions, but
    32-bit versions may have trouble reading new files.  Correcting
-   this issue is on my todo list.
+   this issue is on my todo list.  This is now partially alleviated by
+   using an increasing sequence counter instead of addresses as the
+   unique ID, which should keep the numbers below the 32-bit range
+   for anything but very long editing sessions.
 
  - If the image serialization format is set to png (the new default),
    old versions of ATK will not be able to read it.  This change was
@@ -363,7 +365,9 @@ So far, the following incompatibilities have been introduced:
    take way too much effort).
 
  - I have removed all support for fbd font files (both the converter
-   and the fbd-format orignals of the Andrew fonts).
+   and the fbd-format orignals of the Andrew fonts).  While the fbd
+   format was the original format (I assume), it holds no information
+   which was not transferred to the BDF fonts, as far as I can tell.
 
  - I have removed all known compatibility aliases for proc names.
    This means that old key/menu binding files and ness scripts may no
@@ -385,12 +389,14 @@ So far, the following incompatibilities have been introduced:
 
   - When I added the generic image reader, I made the makefile somewhat
     dependent on GNU make.  That is, the make you use must support the
-    `$(shell ...)` function and the `ifeq` .. `endif` construct.  In
+    `$(shell ...)` function.  When I removed the alternatives to
+    ImageMagick, I removed the dependence the `ifeq` .. `endif`.  In
     particular, the Single UNIX Spec make does not support these
     features.  Fix atk/basics/{common,lib}/Imakefile if this is a
     problem for you.  Adding doxygen support made such a dependency as 
     well; fix doc/Imakefile if you don't have `$(shell ...)`.  My 
-    implementation of the play class also uses this.
+    implementation of the play class in atk/music also uses this.
+    I may go back one day and switch those back to backticks.
 
   - I have removed many obsolete symbols.  Any external code relying on
     them should study the SVN logs and update to the correct symbol (or
@@ -448,6 +454,9 @@ So far, the following incompatibilities have been introduced:
       inefficient.  Instead, document space ownership.  For example,
       if a function takes a string, it's likely the string is a constant
       whose lifetime is the program lifetime anyway, so why duplicate it?
+      Similarly, if the most common usage is to pass static storage,
+      such as for structural initialization descriptors, why not
+      take ownership without duplication?
 
     - One of the first things I introduced was UNUSED, which is a
       compiler-specific macro, in violation of AndrewCoding.ez.  I have
@@ -627,5 +636,6 @@ So far, what I've done is:
     names.
 
   - Removed internal, sometimes obsolete image import/export routines
-    and replaced with a generic external library (DevIL, FreeImage,
-    or ImageMagick).
+    and replaced with a generic external library (originally DevIL,
+    FreeImage, or ImageMagick, but they all suck and only ImageMagick
+    supports GIF properly, so I dropped the other two).

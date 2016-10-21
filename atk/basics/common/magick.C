@@ -30,7 +30,6 @@ static void magick_err(MagickWand *wand)
 
 long imageio::WriteNative(FILE  *file, const char  *filename)
 {
-    const char *fmt = NULL;
     MagickWand *wand = NewMagickWand();
     bool ret;
     unsigned long size = 0;
@@ -41,38 +40,43 @@ long imageio::WriteNative(FILE  *file, const char  *filename)
     /* hard to say if it's faster or not, but it's probably good enough */
     switch(this->Type()) {
       case IBITMAP:
-	fmt = "gray";
-	MagickSetImageDepth(wand, 1);
+	MagickSetFormat(wand, "gray");
+	MagickSetDepth(wand, 1);
 	size = (this->Width() + 7) / 8 * this->Height();
 	break;
       case IGREYSCALE:
-	fmt = "gray";
-	MagickSetImageDepth(wand, 8);
+	MagickSetFormat(wand, "gray");
+	MagickSetDepth(wand, 8);
 	size = this->Width() * this->Height();
 	break;
       case IRGB:
 	this->Expand();
       case ITRUE:
-	fmt = "rgb";
+	MagickSetFormat(wand, "rgb");
 	size = this->Width() * this->Height() * 3;
 	MagickSetDepth(wand, 8);
 	break;
     }
-    MagickSetFormat(wand, fmt);
     MagickSetSize(wand, this->Width(), this->Height());
     if(!MagickReadImageBlob(wand, this->Data(), size)) {
 	magick_err(wand);
 	return -1;
     }
+    if(this->Type() == IBITMAP)
+	MagickNegateImage(wand, MagickTrue);
     /* Allow format to change based on file name */
     MagickSetFormat(wand, NULL);
 
+    MagickSetImageFormat(wand, this->SaveFormatString());
     MagickSetImageCompressionQuality(wand, this->saveQuality);
-    if(file) {
-	MagickSetImageFormat(wand, this->SaveFormatString());
+    if(file)
 	ret = MagickWriteImageFile(wand, file);
-    } else
+    else {
+	const char *ext = strrchr(filename, '.');
+	if(ext)
+	    MagickSetImageFormat(wand, ext);
 	ret = MagickWriteImage(wand, filename);
+    }
     if(!ret) {
 	magick_err(wand);
 	return -1;

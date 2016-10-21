@@ -14,7 +14,9 @@ class menulist;
 class keystate;
 class keymap;
 class runbutton;
-
+/** Viewer for \ref runbutton, which executes commands on button presses.
+ *  When printed, the button text is displayed within a dotted box, with
+ *  a footnote indicating the command to be executed. */
 class runbuttonview : public sbuttonv {
   public:
     runbuttonview();

@@ -32,6 +32,10 @@ struct clock_options {
 };
 
 #include <dataobject.H>
+/** Data object for holding clock configuration data.
+ *  Its primary view is \ref clockview, which actually displays a clock
+ *  given the preferences stored here.  It saves and loads these preferences
+ *  as well. */
 class clock: public  dataobject {
 public:
 	TRACED_CLASS(clock);

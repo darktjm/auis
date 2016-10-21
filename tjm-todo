@@ -3,7 +3,7 @@
   - maybe de-gif ez2html and other HTML-related stuff
   - maybe build all 3 imageio implementations at once, w/ pref to choose which
     - would need to make them separate shared objects & move back to atk/image
-  - test with grayscale images (rasters) and 1-bit bitmaps
+  - test with grayscale images and 1-bit bitmaps (rasters)
   - look at raster library's import/export routines (at least xbm & xwd broken)
   - clean up export/import menus (combine into one, since it's so small)
   - support parameters (other han just quality) for export (needed for
@@ -12,6 +12,7 @@
 - adew crashes a lot just doing the tutorial
 - adew: often clears regions and never redisplays contents (maybe due
   to my "fix" for lack of resize updates)
+  - resizing in both vertical and horizontal at once only gets vertical resize?
 - adew: no samples for mbuttonv or clicklistV in vallist document anymore
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more

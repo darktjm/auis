@@ -3696,17 +3696,17 @@ htmltext::EnumerateInsets(htmlefptr f, arbval rock) {
 	while (pos < endpos) {
 		// fetch bufferful at pos
 		long tlen;	// how much we really got
-		char *patchloc, patchdata;
+		char *patchloc;
 		char *body = GetBuf(pos, endpos-pos, &tlen);
 		if (tlen <= 0) return -9;
 		patchloc = body+tlen;
 
 		// look for TEXT_VIEWREFCHAR
-		patchdata = *patchloc;
-		*patchloc = TEXT_VIEWREFCHAR;	// XXX KLUDGE
-		char *vrc = strchr(body, TEXT_VIEWREFCHAR);
-		*patchloc = patchdata;
-		if ( ! vrc || vrc >= patchloc)
+		char *vrc;
+		for(vrc = body; vrc < patchloc; vrc++)
+			if(*vrc == TEXT_VIEWREFCHAR)
+				break;
+		if ( vrc >= patchloc)
 			pos += patchloc-body;
 		else {
 			// process an inset

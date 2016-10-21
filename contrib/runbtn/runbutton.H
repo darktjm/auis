@@ -12,7 +12,12 @@
 
 #include <sbutton.H>
 class runbuttonview;
-
+/** Data object for storing executable command button information.
+ *  This stores the command and label for a run button.  It also actually
+ *  exedutes the command.  The command must be in a path specified by
+ *  the environment variable RUNBUTTONPATH.  Files found with an extension
+ *  of \c .n need not be executable; these are run as Ness scripts.
+ *  Its primary viewer is runbuttonview. */
 class runbutton : public  sbutton {
   public:
     runbutton();
