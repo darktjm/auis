@@ -18,7 +18,7 @@ static char *backgroundColorName = NULL; /* Name of the default background color
 ATKdefineRegistryNoInit(graphic, observable);
 
 
-void graphic::MoveToPt(struct point  * NewPosition )
+void graphic::MoveToPt(const struct point  * NewPosition )
 {
     (this)->MoveTo(point_X(NewPosition),point_Y(NewPosition));
 }
@@ -232,15 +232,6 @@ void graphic::DrawRRectSize(long  x,long  y,long  width,long  height,long  corne
 void graphic::DrawRRect(struct rectangle  * OuterBox, struct rectangle  * InnerBox)
 {
     (this)->DrawRRectSize(rectangle_Left(OuterBox), rectangle_Top(OuterBox), rectangle_Width(OuterBox), rectangle_Height(OuterBox), rectangle_Width(InnerBox), rectangle_Height(InnerBox));
-}
-
-void graphic::DrawRgn(class region  * Rgn)
-{
-    static boolean printed = FALSE;
-    if (! printed) {
-	printed = TRUE;
-	fprintf(stderr, "graphic: DrawRgn not impletemented for this wm\n");
-    }
 }
 
 void graphic::DrawTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth)
@@ -710,11 +701,6 @@ void graphic::SetTransferMode(short  NewTransferMode)
     this->transferMode = 0xFF & NewTransferMode;
 }
 
-short graphic::GetTransferMode()
-{
-    return this->transferMode;
-}
-
 void graphic::SetPatternOrigin(long  xpos , long  ypos)
 {
     point_SetPt(&(this->patternOrigin), xpos, ypos);
@@ -745,7 +731,7 @@ long graphic::GetVisualBottom()
 }
 
 
-void graphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, class region  *regionp)
+void graphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, const class region  *regionp)
 {
     /* Fill in the local bounds for the rectangle (always 0,0 based
 						    upon creation) */
@@ -831,7 +817,7 @@ void graphic::InsertGraphicSize(class graphic  * EnclosingGraphic, long  xOrigin
     (this)->InsertGraphic(EnclosingGraphic,&r);
 }
 
-void graphic::InsertGraphic(class graphic  * EnclosingGraphic, struct rectangle  * EnclosedRectangle)
+void graphic::InsertGraphic(class graphic  * EnclosingGraphic, const struct rectangle  * EnclosedRectangle)
 {
 
     /* Fill in the local bounds for the rectangle (always 0,0 based

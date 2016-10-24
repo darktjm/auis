@@ -27,6 +27,10 @@
  * @{ */
 
 #include <textview.H>
+/** A viewer for \ref html objects.
+ *  This view displays the HTML text as if it were an ATK document, and adds
+ *  proc commands to support HTML editing.
+ */
 class htmlview : public  textview {
 public:
 	TRACED_CLASS(htmlview);

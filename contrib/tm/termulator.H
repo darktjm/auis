@@ -39,7 +39,7 @@ typedef char *(*termulator_escfptr)(class termulator *self, char *buf, long len)
 typedef char *(*termulator_statefptr)(class termulator *self, char *buf, long len);
 /** Data object which uses a pseudo-tty to communicate to another process.
  *  It manages the user view of the process as if it were a regular text
- *  inset.   It expects to be viewd with \ref tmview. */
+ *  inset.   It expects to be viewed with \ref tmview. */
 class termulator: public  text {
 public:
 	TRACED_CLASS(termulator);

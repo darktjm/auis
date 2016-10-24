@@ -401,14 +401,14 @@ view_SetDefaultColors(class view  *self , class view  *parent)
     }
 }
 
-void view::InsertViewRegion(class view  *parent, class region  *region)
+void view::InsertViewRegion(class view  *parent, const class region  *region)
 {
     (this->drawable)->InsertGraphicRegion( parent->drawable, region);
     this->imPtr = parent->imPtr;
     this->parent = parent;
 }
 
-void view::InsertView(class view  *parent, struct rectangle  *enclosingRectangle)
+void view::InsertView(class view  *parent, const struct rectangle  *enclosingRectangle)
         {
     (this->drawable)->InsertGraphic( parent->drawable, enclosingRectangle);
     this->imPtr = parent->imPtr;

@@ -461,6 +461,7 @@ static void ChangeState()
     if (nsv.SpecialFlags & style_TabsCharacters) {
 	if (!(sv.SpecialFlags & style_TabsCharacters)) {
 	    /* only output tabstops if we havent done so already */
+	    PutNewlineIfNeeded();
 	    fprintf (troffFile, "'ta %dn\n", tabscharspaces);
 	}
     } else {

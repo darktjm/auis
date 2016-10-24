@@ -30,6 +30,12 @@
 #include <mark.H>
 
 #include <text.H>
+/** A data object for storing parsed HTML for editing.
+ *  This, along with its primary viewer \ref htmlview, presents HTML text
+ *  as plain ATK text for editing.  It uses the html.tpl template to
+ *  assign styles to loaded and new files alike.  It assumes it is at the
+ *  top level (i.e., not an inset) and only reads/writes raw HTML.
+ */
 class html : public  text {
 public:
 	TRACED_CLASS(html);

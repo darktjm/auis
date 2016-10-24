@@ -10,6 +10,39 @@
 /* user code begins here for HeaderInfo */
 /* user code ends here for HeaderInfo */
 #include <observable.H>
+/** A controller which is the primary ADEW interface.
+ *  Upon creation, a new window will be popped up with the Arb document
+ *  ($ANDREWDIR/lib/arbiters/Arb).  This controller is the "ADEW" GUI for
+ *  manipulating \ref arbiter views.  An arbiter view is a view which
+ *  wraps an ordinary inset that may have child insets.  The child insets
+ *  may be wrapped in \ref cel views.  A cel view holds an inset, and
+ *  assigns that inset a name which can be referred to in Ness scripts.
+ *  The name is managed by the arbiter to ensure all cels are uniquely named.
+ *
+ *  The GUI provides functions for creating new arbiters with a single inset,
+ *  and inserting and deleting cel-controlled insets, with or without
+ *  the application layer (scroll bars).  It may also be used to create
+ *  cel-encapsulated views on other insets in the document, although these
+ *  share a name (the name is associated with the data object, not the view).
+ *  It also provides the ability to view and edit \ref cel names, as well as
+ *  parameter values for objects with resource parameters.
+ *
+ *  The list of insets which can be created comes from the preferences
+ *  ObViewList, which is a comma-separated (and newline-separated) list
+ *  of names, and ObViewFile, which is a file containing the same.
+ *  In addition, a default list is appended, unless the IgnoreDefaultViewList
+ *  preference is true.  This default list comes from the file
+ *  $ANDREWDIR/lib/arbiters/viewlist, although the file can be changed
+ *  using the prefernece AdewObViewList.  If the file is not present,
+ *  a compiled-in default list will be used.  In any case, new entires
+ *  can be added manually while the GUI is running, although these added
+ *  names will not be saved.
+ *
+ *  In addition to the regular list of insets, a set of insets which are
+ *  meant to be GUI elements can be selected from; this is done by
+ *  popping up the document $ANDREDIR/lib/arbiters/vallist.  This file
+ *  name can be overridden with the ValueFile preference.
+ */
 class arbcon : public  observable  {
 public:
 	TRACED_CLASS(arbcon);

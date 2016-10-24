@@ -7,6 +7,11 @@
 /** \addtogroup libcirclepi
  * @{ */
 #include <view.H>
+/** A demonstration of ATK graphics.
+ *  This view visibly demonstrates an algorithm for the estimation of pi.
+ *  It uses \ref circlepi to store its depth preference, which can be set
+ *  by key or menu.  Otherwise, all work is done in the view.
+ */
 class circlepiview: public  view {
 public:
 	TRACED_CLASS(circlepiview);

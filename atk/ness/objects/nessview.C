@@ -1403,10 +1403,10 @@ nessview::Hit(enum view::MouseAction  action, long  x , long  y, long  numberOfC
 		class view *temp;
 
 		this->ButtonPending = 0;
-		tvx = physical_GlobalXToLogicalX((this->SourceText)->GetDrawable(),
-				physical_LogicalXToGlobalX((this)->GetDrawable(), x));
-		tvy = physical_GlobalYToLogicalY((this->SourceText)->GetDrawable(),
-				physical_LogicalYToGlobalY((this)->GetDrawable(), y));
+		tvx = physical::GlobalXToLogicalX((this->SourceText)->GetDrawable(),
+				physical::LogicalXToGlobalX((this)->GetDrawable(), x));
+		tvy = physical::GlobalYToLogicalY((this->SourceText)->GetDrawable(),
+				physical::LogicalYToGlobalY((this)->GetDrawable(), y));
 		if (tvx < 0 || tvy < 0)
 			return (this)->scroll::Hit( action, x, y, numberOfClicks);
 		initialx = x;

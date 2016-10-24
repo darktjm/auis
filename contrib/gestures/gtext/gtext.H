@@ -4,6 +4,10 @@
  *  A dynamically loadable ATK class file.  Contains gtext, gtextview.
  * @{ */
 #include <text.H>
+/** A version of \ref text that recognizes gestures.
+ *  By virtue of having \ref gtextv as its default view, this \ref text
+ *  clone adds gesture recognition to the standard ATK \ref text editor.
+ */
 class gtext : public  text {
 public:
 	TRACED_CLASS(gtext);

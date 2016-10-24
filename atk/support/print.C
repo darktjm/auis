@@ -173,7 +173,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	environ::Delete("troffpostprocessor");
     SetPrinterType(pt, v);
     if ((print == print_PRINTPOSTSCRIPT) 
-		&& strcmp(pt,"psc") != 0 && strcmp(pt,"postscript") != 0) {
+		&& strncmp(pt,"ps",2) != 0 && strcmp(pt,"postscript") != 0) {
 	return (-1);
     }
     if (DocumentName == NULL || *DocumentName == '\0') {

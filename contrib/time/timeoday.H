@@ -15,8 +15,9 @@
 
 #include <dataobject.H>
 /** Simple date stamp of current date.
- *  Saves format and font information to stream.  Always gives current date.
- *  View with \ref writestampv. */
+ *  This is a written date stamp inset.  It saves format and font
+ *  information for the stamp.  It always gives the current date.
+ *  View with \ref timeodayview. */
 class timeoday: public  dataobject {
 public:
 	TRACED_CLASS(timeoday);

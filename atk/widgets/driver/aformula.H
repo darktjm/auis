@@ -18,26 +18,23 @@ struct ADependNode {
     ADependerKey skey; // the key for the portion of the dependee which changed.
 };
 
-class ASHook {
-    unsigned long refs;
+class ASHook : public traced {
     aaction *setit;
     ADependNode *dependers;
     aaction *formula;
     boolean informula;
+  protected:
+    virtual ~ASHook();
   public:
     ASHook();
-    virtual ~ASHook();
-    virtual void Destroy();
-    inline void Reference() { refs++; }
-    inline void UnReference() { refs--; }
-    inline unsigned long ReferenceCount() { return refs; }
     inline void SetAssign(aaction *src) {
 	if(src) src->Reference();
 	if(setit) setit->Destroy();	
 	setit=src; }
     inline void SetFormula(aaction *act) {
-	formula=act;
 	if(act) act->Reference();
+	if(formula) formula->Destroy();
+	formula=act;
     }
     inline aaction *Formula() {
 	return formula;

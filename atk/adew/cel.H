@@ -22,6 +22,12 @@
 
 #define cel_UNDEFINEDVALUE -47474747
 #include <dataobject.H>
+/** A data object which acts as a container for another inset.
+ *  A cel has an associated name, making it easier to reference one in
+ *  a program.  It should be created as a child of an \ref arbiter to
+ *  prevent name conflicts with other \ref cel objects in the document.
+ *  It is meant to be viewed with \ref celview.
+ */
 class cel: public  dataobject {
 public:
 	TRACED_CLASS(cel);

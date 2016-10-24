@@ -120,7 +120,6 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
 static void SetForegroundBackground(class xim  *self, const char  **foregroundColor , const char  **backgroundColor, class xcolor  **foreground , class xcolor  **background);
 static struct menubar *MakeStartupMenu(struct mbinit  *mbi, const char  *progname);
 static void FreeSelectionData(struct seldata  *seldata);
-static boolean DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int flags=im_TRANSIENTMENUS, im_configurefptr cfp=NULL, long crock=0);
 static void  ExplodeMenuString(char  *str, char  *paneStr, long  paneStrLen, long  *panePriority,  		char  *selectionStr, long  selectionStrLen, long  *selectionPriority);
 static struct menuviews **menuviewp(class xim  *self, class view  *obj);
 static void Observe(class xim  *self, class view  *obj);
@@ -140,13 +139,10 @@ static void  GetValuesFromEvent(class xim  *im, XEvent  * event,XPoint  * tempRe
 static void TakeDownPopups(class xim  *im);
 static void PutUpPopups(class xim  *im);
 static void ReConfigurePopups(class xim  *im);
-static void HandleExposure(Display  *display, class xim  *im, XEvent  *event);
 static void ButtonTimerFire(struct mouseStatus  *mfacts, long  now);
 static void StartButtonTimeout(class xim  *xim, unsigned int button, long  x , long  y);
 static void CancelButtonTimeout(struct mouseStatus  *mfacts);
 static void SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y);
-static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im);
-static void HandleWindowEvent(Display  *display);
 static void xim_ActivateMenubar(class xim  *xim, long  rock);
 static const char *mygetdefaults(Display  *dpy, const char  *pname);
 static long *CalculateIncrementList(const char  *str, long  finalIncr, long  *listCount);
@@ -1698,8 +1694,8 @@ static void CheckError(class xim *self) {
 static int override_redirect_count=0;
 static class xim *last_grab=NULL;
 
-static boolean
-DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int flags, im_configurefptr cfp, long crock)
+boolean
+xim::DoCreateTransientWindow(class im  *iother, int  override, int flags, im_configurefptr cfp, long crock)
         {
     Display *xDisplay;
     Window oWindow, newWindow = 0;
@@ -1715,26 +1711,26 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
     class colormap **cmap;
     unsigned int width, height;
     class xim *other=(class xim *)iother; 
-    self->AtomCache=other->AtomCache;
+    this->AtomCache=other->AtomCache;
     
     if(override || !(flags&im_TRANSIENTMENUS)) {
-	self->menubaron=FALSE;
-	self->cmenuson=FALSE;
+	this->menubaron=FALSE;
+	this->cmenuson=FALSE;
     }
 
     if(flags&im_OVERRIDEREDIRECT) {
-	self->override_redirect=TRUE;
-	self->od_parent=other;
+	this->override_redirect=TRUE;
+	this->od_parent=other;
 	class xim *child=other;
 	while(child->od_child) child=child->od_child;
-	child->od_child=self;
-	child->AddObserver(self);
-	self->AddObserver(child);
+	child->od_child=this;
+	child->AddObserver(this);
+	this->AddObserver(child);
     }
     
     if (!(xim2window(other) && xim2display(other) && xim2valid(other))) {
 	fprintf(stderr,"Other window for this transient invalid. Creating top level window.\n");
-	return (self)->CreateWindow( NULL);
+	return (this)->CreateWindow( NULL);
     }
 
     xDisplay = xim2display(other);
@@ -1742,59 +1738,59 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 
     (void) XSynchronize(xDisplay,doSynch);
   
-    xim2display(self) = xDisplay;
-    xim2screen(self) = DefaultScreen(xDisplay);
+    xim2display(this) = xDisplay;
+    xim2screen(this) = DefaultScreen(xDisplay);
     cmap = (class colormap **) ColormapForDisplay(xDisplay);
-    (self)->SetInheritedColormap( cmap);
-    (self)->im::InstallColormap( *cmap);
-    xim2valid(self) = TRUE;
+    (this)->SetInheritedColormap( cmap);
+    (this)->im::InstallColormap( *cmap);
+    xim2valid(this) = TRUE;
 
     /* Note: the call to DoTransientGeometry has been moved down to just before the relevant XCreateSimpleWindow calls since DoTransientGeometry now needs to have the mbi structure if the menubar is on. */
-    SetForegroundBackground(self, &foregroundColor, &backgroundColor, &foreground, &background);
+    SetForegroundBackground(this, &foregroundColor, &backgroundColor, &foreground, &background);
 
     if(cfp) {
-	self->configfunc=cfp;
-	self->configcustomrock=crock;
+	this->configfunc=cfp;
+	this->configcustomrock=crock;
     }
-    if(self->menubaron) {
+    if(this->menubaron) {
 	
-	self->mbi=mb_Init(xDisplay,&foreground->GetXColor(), &background->GetXColor(), (menubar_exposefptr)HandleExposeFromMenubar, (long *)self, (menubar_freefptr)FreeSelectionData);
-	if(self->mbi==NULL) {
-	    self->menubaron=FALSE;
-	    self->cmenuson=TRUE;
+	this->mbi=mb_Init(xDisplay,&foreground->GetXColor(), &background->GetXColor(), (menubar_exposefptr)HandleExposeFromMenubar, (long *)this, (menubar_freefptr)FreeSelectionData);
+	if(this->mbi==NULL) {
+	    this->menubaron=FALSE;
+	    this->cmenuson=TRUE;
 	} else {
 	    /* note this cannot be an override because overrides don't have either menu system enabled */
-	    DoTransientGeometry(self, override, other, &left, &top, &width, &height, &sizehints, &zoomhints);
+	    DoTransientGeometry(this, override, other, &left, &top, &width, &height, &sizehints, &zoomhints);
 	    newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), left, top, width, height, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
-	    mb_InitWindows(self->mbi, newWindow);
-	    self->menu=self->startupmenu=MakeStartupMenu(self->mbi, xim2programname(self));
+	    mb_InitWindows(this->mbi, newWindow);
+	    this->menu=this->startupmenu=MakeStartupMenu(this->mbi, xim2programname(this));
 	}
     } else {
-	DoTransientGeometry(self, override && !self->override_redirect, other, &left, &top, &width, &height, &sizehints, &zoomhints);
+	DoTransientGeometry(this, override && !this->override_redirect, other, &left, &top, &width, &height, &sizehints, &zoomhints);
 	newWindow = XCreateSimpleWindow(xDisplay, override?oWindow:RootWindow(xDisplay, DefaultScreen(xDisplay)), left, top, width, height, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
     } 
     /* (This really should be a fake "insertgraphic" into its own graphic 
 	to guarantee that all graphic state exists alike for all views.) */
-    xim2window(self)= newWindow;
+    xim2window(this)= newWindow;
 
     unsigned long wa=0;
     if (useBackingStore)  {
 	windowAttributes.backing_store = WhenMapped;
 	wa|=CWBackingStore;
     }
-    if(self->override_redirect) {
+    if(this->override_redirect) {
 	windowAttributes.override_redirect = TRUE;
 	wa|=CWOverrideRedirect;
     }
     XChangeWindowAttributes(xDisplay, newWindow, wa, &windowAttributes);
 
-    if(!(override || self->override_redirect)) {
-	if(sizehints) XSetNormalHints(xDisplay, xim2window(self), sizehints);
-	if(zoomhints) XSetZoomHints(xDisplay, xim2window(self), zoomhints);
+    if(!(override || this->override_redirect)) {
+	if(sizehints) XSetNormalHints(xDisplay, xim2window(this), sizehints);
+	if(zoomhints) XSetZoomHints(xDisplay, xim2window(this), zoomhints);
     }
     
-    XSetWindowBorder(xDisplay, xim2window(self), (foreground)->PixelRef());
-    XSetWindowBackground(xDisplay, xim2window(self), (background)->PixelRef());
+    XSetWindowBorder(xDisplay, xim2window(this), (foreground)->PixelRef());
+    XSetWindowBackground(xDisplay, xim2window(this), (background)->PixelRef());
    
     /* Register our newly created window with whatever window manager is running (if any) */
 
@@ -1802,12 +1798,12 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
     
 
     /* MouseFacts, xDisplay, and Xfileno should be the same for 
-	both self and other */ 
+	both this and other */ 
 
     Xfileno = other->Xfileno;
-    self->MouseFacts = other->MouseFacts;
-    self->Xfileno = Xfileno;
-    xim2fd(self) = Xfileno;
+    this->MouseFacts = other->MouseFacts;
+    this->Xfileno = Xfileno;
+    xim2fd(this) = Xfileno;
    
     /* Increment count of windows on this file descriptor. */
     for (i = 0; i < xWindowCtr; i++)  {
@@ -1817,26 +1813,26 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 	}
     }
 
-    if(override) self->popup_parent = other;
+    if(override) this->popup_parent = other;
     
-    if(!(override || self->override_redirect)) {
+    if(!(override || this->override_redirect)) {
     /* Include all window header information */
-	SetWMProperties(self,  TRUE, im::GetDefaultIconic());
+	SetWMProperties(this,  TRUE, im::GetDefaultIconic());
 
     /* the most important property: TransientFor */
 	XSetTransientForHint(xDisplay, newWindow, oWindow);
     }
     
-    point_SetPt(&(self)->GetDrawable()->physicalOrigin, 0, MENUBARHEIGHT(self));
+    point_SetPt(&(this)->GetDrawable()->physicalOrigin, 0, MENUBARHEIGHT(this));
 
     /* Bring the process cursor situation up to date, 
 	i.e., if a process cursor is outstanding, make sure this new window picks it up */
-    updateGlobalCursors(self);
+    updateGlobalCursors(this);
 
-    im::SetLastUsed(self);
+    im::SetLastUsed(this);
 
-    /* for overrides, set self->popup_parent to 'other' */
-    /* Set other's popup_active to self */
+    /* for overrides, set this->popup_parent to 'other' */
+    /* Set other's popup_active to this */
     /* If it is already non-null, follow popup_active chain
       until we find one that is null */
 
@@ -1845,7 +1841,7 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 	XWindowChanges changes;
 	int mask = 0;
 
-	self->popup_parent = other;
+	this->popup_parent = other;
 	/* this will set parent to the last window and choose the right sibling window if any */
 	while (parent->popup_active) {
 	    parent = parent->popup_active;
@@ -1853,9 +1849,9 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 	    changes.stack_mode = Above;
 	    mask = CWSibling | CWStackMode;
 	}
-	if (mask) XConfigureWindow(xim2display(self), xim2window(self), mask, &changes);
-	CheckError(self);
-	parent->popup_active = self;
+	if (mask) XConfigureWindow(xim2display(this), xim2window(this), mask, &changes);
+	CheckError(this);
+	parent->popup_active = this;
     }
 
     return TRUE;
@@ -1864,13 +1860,13 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 boolean
 xim::CreateTransientWindow(class im  *other, int flags, im_configurefptr cfp, long crock)
     {
-    return (DoCreateTransientWindow(this, other, FALSE, flags, cfp, crock));
+    return (DoCreateTransientWindow(other, FALSE, flags, cfp, crock));
 }
 
 boolean
 xim::CreateOverrideWindow(class im  *other, im_configurefptr cfp, long crock)
     {
-    return (DoCreateTransientWindow(this, other, TRUE, 0, cfp, crock));
+    return (DoCreateTransientWindow(other, TRUE, 0, cfp, crock));
 }
 
 void xim::FlushAllWindows()
@@ -2783,8 +2779,7 @@ Get the size of the window. Note: this size should be good since HandleRedraw is
     if (width > 0 && height > 0)  {
 		/* It is actually on the screen, so display the top level view  */
 
-	this->GetDrawable()->visualBounds 
-	  = this->GetDrawable()->localBounds;
+	this->GetLogicalBounds(&this->GetDrawable()->visualBounds);
 	point_SetPt(&this->GetDrawable()->enclosedOrigin, 0, 0);
 		/* Clear out the view specific cursors */
 		/* if (im->header.im.cursorlist) xim_ClearCursorList(im); */
@@ -2964,8 +2959,8 @@ static void ReConfigurePopups(class xim  *im)
 	p=p->popup_active;
     }
 }
-static 	void
-HandleExposure(Display  *display, class xim  *im, XEvent  *event)
+void
+xim::HandleExposure(Display  *display, XEvent  *event)
 			{
 	XPoint tempRect[4];	/* used to hold exposure rectangle */
 	XEvent tempEvent;
@@ -2981,18 +2976,18 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 	/* initialize all variables */
 	exposedWindow = event->xany.window;
 	lastSeenWidth = lastSeenHeight = 0;
-	GetValuesFromEvent(im, event,tempRect, &lastSeenWidth,&lastSeenHeight);
+	GetValuesFromEvent(this, event,tempRect, &lastSeenWidth,&lastSeenHeight);
 
 
 	XGetGeometry(display, event->xany.window, &root, 
 		     &x, &y, &width, &height, &border, &depth);
-	ForceLocUpdate(im);
+	ForceLocUpdate(this);
 	rwidth=width;rheight=height;
-	width-=point_X(&(im)->GetDrawable()->physicalOrigin);
-	height-=point_Y(&(im)->GetDrawable()->physicalOrigin);
-	if(width!=(im)->GetLogicalWidth() || height!=(im)->GetLogicalHeight()) {
+	width-=point_X(&(this)->GetDrawable()->physicalOrigin);
+	height-=point_Y(&(this)->GetDrawable()->physicalOrigin);
+	if(width!=(this)->GetLogicalWidth() || height!=(this)->GetLogicalHeight()) {
 	    sizechanged=TRUE;
-	    if(im->popup_active) TakeDownPopups(im);
+	    if(this->popup_active) TakeDownPopups(this);
 	}
 
 	/* And start accumulating all of the areas into a region */
@@ -3016,7 +3011,7 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 		/* Note: we could get graphics exposure events, 
 			noevents and exposure events */
 		event = &tempEvent;
-		GetValuesFromEvent(im, event, tempRect,
+		GetValuesFromEvent(this, event, tempRect,
 				 &lastSeenWidth, &lastSeenHeight);
 		if (event->type != NoExpose) {
 			if (regionDebug) 
@@ -3032,13 +3027,13 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 	}
 	XGetGeometry(display, event->xany.window, &root, 
 		     &x, &y, &width, &height, &border, &depth);
-	ForceLocUpdate(im);
+	ForceLocUpdate(this);
 	rwidth=width;rheight=height;
-	width-=point_X(&(im)->GetDrawable()->physicalOrigin);
-	height-=point_Y(&(im)->GetDrawable()->physicalOrigin);
-	if(width!=(im)->GetLogicalWidth() || height!=(im)->GetLogicalHeight()) {	rectangle_SetRectSize( &im->GetDrawable()->localBounds, 0, 0, width,  height);
+	width-=point_X(&(this)->GetDrawable()->physicalOrigin);
+	height-=point_Y(&(this)->GetDrawable()->physicalOrigin);
+	if(width!=(this)->GetLogicalWidth() || height!=(this)->GetLogicalHeight()) {	rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width,  height);
 	    sizechanged=TRUE;
-	    if(im->menubaron && im->menu) mb_RefitMenubar(im->menu);
+	    if(this->menubaron && this->menu) mb_RefitMenubar(this->menu);
 	}
 	/* We have all of the events and we've accumulated the update regions in the region. Get the region and see if we are drawing whole window.
 	    Yes=> punt the region clipping and go for it, 
@@ -3076,8 +3071,8 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 		if (regionDebug) printf("xim: installing update region\n");
 		xgraphic::SetUpdateRegion(curUpdateRgn, display, event->xany.window);
 	}
-	if(im->menubaron) im->MenubarRedrawType=mb_Exposed;
-	(im)->HandleRedraw();
+	if(this->menubaron) this->MenubarRedrawType=mb_Exposed;
+	(this)->HandleRedraw();
 	if (curUpdateRgn) { 
 		if (regionDebug) printf("xim: reseting update region to 0\n");
 		xgraphic::SetUpdateRegion(0L,display, event->xany.window);
@@ -3088,8 +3083,8 @@ HandleExposure(Display  *display, class xim  *im, XEvent  *event)
 		curUpdateRgn = NULL;
 	}
 	if(sizechanged) {
-	    ReConfigurePopups(im);
-	    PutUpPopups(im);
+	    ReConfigurePopups(this);
+	    PutUpPopups(this);
 	}
 }
 
@@ -3188,12 +3183,12 @@ xim::Hit (enum view::MouseAction  action, long  x , long  y , long  clicks)
     else
 	return this->topLevel->Hit(action, x, y, clicks);	// Hit the toplevel view
 }
-	
-static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im)
+
+void xim::HandleExposeFromMenubar(XEvent  *ee,class xim  *im)
 {
 
     im->CurrentlyMapped = TRUE;
-    HandleExposure(xim2display(im), im, ee);
+    im->HandleExposure(xim2display(im), ee);
 }
 
 static void HandleSessionManagerEvent(xim *im)
@@ -3228,8 +3223,8 @@ class im * xim::DoKey(long  key) {
 
 
 
-static void
-HandleWindowEvent(Display  *display)
+void
+xim::HandleWindowEvent(Display  *display)
 {
 #define KEYEXPANSIONSIZE 80
     XEvent tempEvent, event;
@@ -3334,7 +3329,7 @@ HandleWindowEvent(Display  *display)
 		    self->CurrentlyMapped = TRUE;
 		    self->NotifyObservers(0);
 		}
-		HandleExposure(display, self, &event);
+		self->HandleExposure(display, &event);
 		break;
 
 	    case SelectionClear:
@@ -4056,7 +4051,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
     /* First. make sure we have a window for the cursor to appear in */
     if ( reqCursor->Xw == 0) {
 	(plainCur->view)->GetVisualBounds(&initRect);
-	physical_LogicalToGlobalRect((plainCur->view)->GetDrawable(), &initRect);
+	physical::LogicalToGlobalRect((plainCur->view)->GetDrawable(), &initRect);
 	initialWidth = rectangle_Width(&initRect);
 	initialHeight = rectangle_Height(&initRect);
 	initialX = rectangle_Left(&initRect);
@@ -4084,7 +4079,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
     /* Resize the input only window as appropriate */
     if (rec) {
 	rectangle_IntersectRect(&vrec, rec, &(plainCur->view->GetDrawable()->visualBounds));
-	physical_LogicalToGlobalRect((plainCur->view)->GetDrawable(), &vrec);
+	physical::LogicalToGlobalRect((plainCur->view)->GetDrawable(), &vrec);
 	/* This is a hack because of no 0-sized windows -- something better should be done */
 	if (vrec.height>0 && vrec.width>0) {
 	    if (cursordebug) printf("xim_PostCursor: moving window %lX for cursor %p to left %ld, top %ld, width %ld, height %ld\n", reqCursor->Xw, reqCursor, vrec.left, vrec.top, vrec.width, vrec.height);

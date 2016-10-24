@@ -70,6 +70,11 @@ class NO_DLL_EXPORT gflex;
 DEFINE_MFLEX_CLASS(gflex,stone,20);
 
 #include <dataobject.H>
+/** Data object for storing go game diagrams.
+ *  This inset stores data for a go diagram, including board, pieces, and
+ *  annotations.  These are all written to the stream.
+ *  This is meant to be used with the \ref gofigview view.
+ */
 class gofig : public  dataobject 
 {
 public:

@@ -148,10 +148,6 @@ short \paramname{OffsetAngle});} \
 *\paramname{graphic}, struct rectangle *\paramname{Rect});} \
 
 
-\fixedtext{void \bold{graphic::}DrawRgn }\fixedindent{(struct graphic 
-*\paramname{graphic}, struct region *\paramname{Rgn});} \
-
-
 \fixedtext{void \bold{graphic::}DrawRRectSize }\fixedindent{(struct graphic 
 *\paramname{graphic}, long \paramname{x}, long \paramname{y}, long 
 \paramname{width}, long \paramname{height}, long \paramname{cornerWidth}, 
@@ -1858,25 +1854,6 @@ struct rectangle *InnerBox;} \
 same as \italic{graphic::DrawPolygon }except it is used for drawing a 
 rounded rectangle, that is, a rectangle with rounded corners. \
 
-
-
-}
-\paragraph{Drawing a region} \indexi{Graphic++Draw region}
-
-\indexi{ \italic{graphic::DrawRgn}}
-
-\example{void graphic::DrawRgn(grphc,Rgn) \
-
-
-struct graphic *grphc;  \
-
-
-struct region *Rgn;} \
-
-
-
-\leftindent{\bold{Method description.}   \italic{graphic::DrawRgn} is the 
-same as \italic{graphic::DrawPolygon }except it is used for drawing regions. 
 
 
 }

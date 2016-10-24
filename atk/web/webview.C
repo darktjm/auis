@@ -859,9 +859,9 @@ class view *webview::Hit(enum view::MouseAction  action, long  x,  long  y,  lon
     view *nf=NULL;
     if(mouseFocus && mouseFocus!=this) {
         graphic *drawable=GetDrawable();
-        long mx=physical_LogicalXToGlobalX(drawable, x);
-        long my=physical_LogicalYToGlobalY(drawable, y);
-        nf=(mouseFocus)->Hit( action,                          physical_GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical_GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          numberOfClicks);
+        long mx=physical::LogicalXToGlobalX(drawable, x);
+        long my=physical::LogicalYToGlobalY(drawable, y);
+        nf=(mouseFocus)->Hit( action,                          physical::GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical::GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          numberOfClicks);
     } else nf=htmltextview::Hit( action,  x,  y, numberOfClicks);
 
     if(nf->GetIM()!=GetIM()) {

@@ -34,6 +34,8 @@ typedef struct {
 
 class ddimage;
 
+struct xgraphic_UpdateBlock;
+
 class xgraphic : public  graphic {
 public:
 	TRACED_CLASS(xgraphic);
@@ -80,8 +82,8 @@ public:
 			    long width, long height);
 
    
-    virtual void InsertGraphicRegion(class graphic *EnclosingGraphic, class region *regions);
-    virtual void InsertGraphic(class graphic *EnclosingGraphic, struct rectangle *EnclosedRectangle);
+    virtual void InsertGraphicRegion(class graphic *EnclosingGraphic, const class region *regions);
+    virtual void InsertGraphic(class graphic *EnclosingGraphic, const struct rectangle *EnclosedRectangle);
     virtual void InsertGraphicSize(class graphic *EnclosingGraphic, 
 		long xOriginInParent, long yOriginInParent, long width, long height);
 
@@ -111,7 +113,22 @@ public:
     virtual void SetBackgroundColor(const char *name, long r, long g, long b);
     
     virtual long GetHorizontalResolution()  ;
+    /**< Obtain the X display resolution, in dots per inch.
+     *   \return the horizontal display resolution.
+     *   \pref{XDPI,Integer,The default X display resolution.  This overrides
+     *                       computation from the X server.}
+     *   \pref{XHorizontalDPI,Integer,The default X horizontal resolution.
+     *                                This overrides computation from the
+     *                                X server as well as the XDPI preference.}
+     */
     virtual long GetVerticalResolution()  ;
+    /**< Obtain the X display resolution, in dots per inch.
+     *   This will also default to the XDPI preference, if present.
+     *   \return the vertical display resolution.
+     *   \pref{XVerticalDPI,Integer,The default X vertical resolution.
+     *                              This overrides computation from the
+     *                              X server as well as the XDPI preference.}
+     */
     virtual const char * GetWindowManagerType()  ;
     virtual long GetDevice()  ;
     virtual long DisplayClass()  ;
@@ -161,6 +178,16 @@ public:
     XImageInfo *ximageinfo;
     boolean flipforstipple;
     boolean haveMapInfo;
+  private:
+    void DrawChars(const char  * Text,short  Operation ,short  StringMode,long  TextLength );
+    boolean SetupFillGC(class graphic  * Tile );
+    void SetStipple(long  index);
+    void LocalSetClippingRect(struct xgraphic_UpdateBlock  * updateBlk );
+    void InstallUpdateRegion();
+    void SetUpPixImage(class pixelimage  *pixelimage);
+    void SetUpXImage( class image  *image );
+    void HandleInsertion(class graphic  *E);
+
 };
 /** @} */
 #endif /* _xgraphic_H_ */

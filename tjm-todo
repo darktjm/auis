@@ -1,9 +1,6 @@
 - finish image rewrite:
   - maybe replace Gifify with SnapshotToFile for generic image output
   - maybe de-gif ez2html and other HTML-related stuff
-  - maybe build all 3 imageio implementations at once, w/ pref to choose which
-    - would need to make them separate shared objects & move back to atk/image
-  - test with grayscale images and 1-bit bitmaps (rasters)
   - look at raster library's import/export routines (at least xbm & xwd broken)
   - clean up export/import menus (combine into one, since it's so small)
   - support parameters (other han just quality) for export (needed for
@@ -37,23 +34,31 @@
     for example, looks awful at 129pi.  Maybe it would be better if zip
     figures scaled *all* their dimensions based on display DPI, including
     line thickness.  The font mechanism in ATK does not support requesting
-    fonts at a particular DPI.  In fact, ATK doesn't even *know* the display
-    DPI.  One way around this would be to store the assumed font size, and
-    if the font size is different, scale.  For that, though, I'd need some
-    way of computing the expected size of a font at a particular DPI.
-    I could then store the actual font size at the time of write as an
-    extra parameter, and assume missing parameter means 75DPI fonts.
-    This is entirely computed based on the font size, and doesn't need
-    to know the actual display DPI.  I don't even really have to store
-    anything; instead, I could scale up when displaying based on the
-    current font size.
+    fonts at a particular DPI.  There are routines to determine the
+    resolution, but almost nobody uses them.  This would have to be stored in
+    any file that makes assumptions about pixel sizes, and assumed to be
+    75 if not present (although graphic defaults it to 80).  Right now,
+    users appear to be AWidget and figure, although I have not looked
+    into how well they use it.
   - updates often leave garbage on screen.  For example, Clear button of
     schedv leaves lots of bits of the old text on-screen until ^L is
     pressed.  Regular zip edits are also dirty.
   - clicking in features.zip gives "A view just clicked in is broken."
   - text does not scale with rest of figure (maybe other stuff as well,
     such as insets - who knows?)
+- fix issues in html/htmlview or chuck:
+  - doesn't support js, css, or any other html3+ features
+  - pervasive use of fixed-sized buffers with no overflow checks
+  - Possible to set title, but not to retrieve it.
+  - probably many more...
+- fix issues in htmltext/htmltextview or chuck:
+  - doesn't support js, css, or any other html3+ features
+    - but it does have "raw HTML" support, unlike html/htmlview.
+  - crashes on "show raw HTML"
+  - displays entire text red due to header being red
+  - probably many more...
 - use qsort to sort in deskey instead of external sort command
+- make bdffont not crash on selecting chars > 128
 - adjusting controls doesn't always set modified flag for a document
 - sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
@@ -88,16 +93,48 @@
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
 - org/bush/treev: kb navigation of nodes, printing (outline?)
+  - note: there is actually printing, but it's retarded.  It doesn't
+    display the whole tree, what it does print is all on one page, so it
+    just cuts off if too big.  Rotating is even worse: nodes are cut off
+    even though they fit.  Also, it's troff only, and can't be printed
+    from ezprint.
 - sometimes, bush's ^X^C action is to quit without confirmation
   (maybe has to do with bush not setting change flag correctly as well)
 - hyperlink: don't update label if label isn't default (or at least
   allow undo of label change)
 - printing doesn't really work right:
-  - crashes on cleanup (e.g. AndrewProgramming.ez)
-  - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
-  - TOC is a nasty mess
+  - on auis.doc:
+    - TOC looks OK in roff, but in ps it is not so hot:
+      - unenumerated (-E does nothing in ps output)
+      - arabic rather than lower-case roman page numbers
+      - no vertical space between chapters.
+    - roff sometimes has missing spaces at style boundaries, causing
+      words to run together.
+    - links are boxed with dotted lines in ps, solid in troff.  Also,
+      troff boxes have some glitches:
+      when at beginning of line, extends to left margin
+      when it straddles the end of line, extends to left margin and no
+        marking on pref. line.  Sometimes the vertical lines don't
+	extend far enough left even in mid-line.
+  - on AndrewProgramming.ez:
+    - -E doesn't re-enumerate like the editor does, so don't use -E!
+    - AndrewProgramming.ez does not mark sections and chapters properly
+      so TOC is incomplete at best.
+      - TOC is tolerably wrong in roff output, but in PS, it's a random
+        looking mess.
+  - troff insets ("stroffet") are sliently dropped in ps output.
+    a warning of some sort would be nice.
+  - Direct-to-PS was the trend at time of abandonment.  It was an
+    extremely bad idea.  This places the burden of all text formatting
+    on the PS generator.  I guess that in WYSIWYG fasion, they figured
+    that if you can render it on screen, you can render it the same
+    way on paper.  At the very least, the line breaking algorithm used
+    for full justification is pretty awful compared to troff or TeX.
+    Plus of course all of the troff tweaks in existing documents no
+    longer work, but that's to be expected when using blank line to
+    put a notice at the bottom of a page.
 - enable mouse scroll wheel
-- provide method to override/supplement key binding list.  Maybe make
+- provide method to override/supplement X key binding list.  Maybe make
   modifiers a canonically ordered prefix list (e.g. Esc-_scm1 for F1,
   and Esc-!scm1 for 1, but the latter would be hard to figure out what
   modifiers matter and which not, whereas we assume modifiers always
@@ -122,15 +159,16 @@
 - view fixes:
   - Implement CanView() everywhere, and use it where needed.  It
     should not be so easy for users to crash ez.
-    - check all procs to ensure that they check their arguments, for
-      same reason (e.g. too easy to crash a proc by passing wrong type
-      or 0 for an arg).  Of course this is almost impossible w/o adding
-      type info to the arguments.  Maybe always use avalues instead of
-      rocks for arg 2, and verify arg 1 is actually an ATK* (or use
-      avalues for that as well, so ness-load works still).  Note that
-      ness code actually verifies type of 1st arg if proctable entry
-      gives the type (*and the value is not NULL*, so procs still need
-      to check non-NULL).
+  - Check all arguments to named procs for same reason.  Best method would
+    be to convert all proc table entries that take 2nd arg or whose 1st
+    arg is not given an explicit type to check to action-style procs.
+    This forces them to check their argument types, at least from ness.
+    It does nothing for key and menu callbacks, as far as I can tell.
+    - also fail rather than crash on NULL 1st arg.
+    - maybe even covert others as well, and remove the ability to
+      produce non-action procs, or adjust DefineProc() to create an
+      aaction automatically with a void 2nd arg for some backwards
+      compatibility.
   - Ensure SetDataObject() works with NULL data object
 - Get rid of ATKinit.  Use static variables with constructors instead.
 - test all apps, all insets, all docs, etc.

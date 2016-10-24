@@ -143,9 +143,6 @@ FILE *\paramname{file}, long \paramname{rock});}
 \fixedtext{\bold{view::}DrawRect }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Rect});} 
 
-\fixedtext{\bold{view::}DrawRgn }\fixedindent{(struct view 
-*\paramname{view}, \paramname{Rgn});} 
-
 \fixedtext{\bold{view::}DrawRRectSize }\fixedindent{(struct view 
 *\paramname{view}, \paramname{x}, \paramname{y}, \paramname{width}, 
 \paramname{height}, \paramname{cornerWidth}, \paramname{cornerHeight});} 

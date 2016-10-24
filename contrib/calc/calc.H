@@ -65,6 +65,11 @@ END-SPECIFICATION  ************************************************************/
 
 
 #include <apt.H>
+/** Data object for storing calculator value.
+ *  Using this as an inset, with the default \ref calcv view, gives a
+ *  simple 4-function calculator.  This object stores the value and font
+ *  information, and stores that to the stream.
+ */
 class calc : public  apt
   {
 public:

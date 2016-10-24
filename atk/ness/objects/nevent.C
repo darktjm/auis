@@ -498,7 +498,7 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		else {
 			/* move or up, with inset the same as where we sent the last hit:
 				 send to hitee */
-		    hitee = (hitee)->Hit( act,physical_GlobalXToLogicalX((hitee)->GetDrawable(), physical_LogicalXToGlobalX((inset)->GetDrawable(), x)), physical_GlobalYToLogicalY((hitee)->GetDrawable(), physical_LogicalYToGlobalY((inset)->GetDrawable(), y)), SavedClickCount); /* XXX do we need a click count? */
+		    hitee = (hitee)->Hit( act,physical::GlobalXToLogicalX((hitee)->GetDrawable(), physical::LogicalXToGlobalX((inset)->GetDrawable(), x)), physical::GlobalYToLogicalY((hitee)->GetDrawable(), physical::LogicalYToGlobalY((inset)->GetDrawable(), y)), SavedClickCount); /* XXX do we need a click count? */
 		}
 		if(hitee) vptr=hitee;
 		else vptr=ness->CurrentInset;

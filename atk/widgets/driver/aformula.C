@@ -32,7 +32,6 @@ static void FreeNode(ADependNode *node) {
 }
 
 ASHook::ASHook() {
-    refs=1;
     setit=NULL;
     dependers=NULL;
     formula=NULL;
@@ -49,13 +48,6 @@ ASHook::~ASHook() {
     }
 }
 
-void ASHook::Destroy() {
-    if(refs>0) {
-	refs--;
-	delete this;
-    }
-}
-    
 static atom_def union_src("union_src");
 static atom_def in0type("avalue_u");
 static ADependNode *pendingvalidations=NULL;

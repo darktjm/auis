@@ -1,4 +1,4 @@
 designHeight:(Int) 80
 designWidth:(Int) 170
 screenImage: (Figure) FILE:$(ANDREWDIR)/lib/widgets/Selector.fig
-mouseLeftUp:(Function)PROC:butactions-wgtsel-left-up
+mouseLeftUp:(Function)PROC:wsactions-mouse-left-up

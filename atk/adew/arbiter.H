@@ -11,6 +11,9 @@
  *  wincelview.
  * @{ */
 #include <cel.H>
+/** A data object to manage \ref cel names.
+ *  This is meant to be viewed with the \ref arbiterview class.
+ */
 class arbiter : public  cel {
 public:
 	TRACED_CLASS_NODEST(arbiter);

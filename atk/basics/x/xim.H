@@ -176,6 +176,11 @@ public:
 	boolean override_redirect;
 	boolean pointer_grabbed;
 	class xim *od_parent, *od_child;
+  private:
+    boolean DoCreateTransientWindow(class im  *iother, int  override, int flags, im_configurefptr cfp, long crock);
+    void HandleExposure(Display  *display, XEvent  *event);
+    static void HandleWindowEvent(Display  *display);
+    static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im);
 };
 /** @} */
 #endif /* _xim_H_ */

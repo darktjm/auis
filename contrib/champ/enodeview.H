@@ -19,6 +19,10 @@
 #define NUMBUTTS 10 /* one plus previous */
 
 #include <lpair.H>
+/** A buton list for editing events.
+ *  This view displays the buttons in the \ref chimpview event editor, and
+ *  communicates the results of interaction with \ref chimp.
+ */
 class enodeview: public lpair {
 public:
 	TRACED_CLASS_NODEST(enodeview);
