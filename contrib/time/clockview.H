@@ -13,6 +13,8 @@
 #include <cursor.H>
 
 #include <view.H>
+/** Active clock display.
+ *  Views \ref clock objects.  */
 class clockview: public  view {
 public:
 	TRACED_CLASS(clockview);

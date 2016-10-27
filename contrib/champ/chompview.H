@@ -7,6 +7,12 @@
 /** \addtogroup libchamp
  * @{ */
 #include <view.H>
+/** View two months' worth of events.
+ *  Two one-month calandars are displayed, along with a text area with
+ *  nearby events.  Clicking in the month displays selects the day around
+ *  which events are displayed.  Arrows in the month displays allow selection
+ *  of different months.  This "views" the dummy \ref chomp object.
+ */
 class chompview: public  view {
 public:
 	TRACED_CLASS(chompview);

@@ -25,6 +25,10 @@ enum noteopts {Number,Letter,None};
 
 #include "gofig.H"
 #include <view.H>
+/** A view for \ref gofig objects.
+ *  This view presents a full or partial 25x25 Go board with pieces and
+ *  annotations.
+ */
 class gofigview  : public  view    {
 public:
 	TRACED_CLASS(gofigview);

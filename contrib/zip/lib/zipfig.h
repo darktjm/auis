@@ -161,6 +161,7 @@ struct zip_figure_mode
   unsigned int					  zip_figure_mode_halo			:1;
   };
 
+#include <graphic.H>
 
 typedef  struct zip_figure			 *zip_type_figure;
 struct zip_figure
@@ -180,11 +181,11 @@ struct zip_figure
   zip_type_figure_mode				  zip_figure_mode;
   unsigned char					  zip_figure_style;
   unsigned char					  zip_figure_line_width;
-  short						  zip_figure_line_cap;
-  short						  zip_figure_line_join;
-  char						  *zip_figure_line_dash_pattern;
+  graphic::LineCap				  zip_figure_line_cap;
+  graphic::LineJoin				  zip_figure_line_join;
+  unsigned char					  *zip_figure_line_dash_pattern;
   int						  zip_figure_line_dash_offset;
-  short						  zip_figure_line_dash_type;
+  graphic::LineDash				  zip_figure_line_dash_type;
   struct zip_color_values			  *zip_figure_color_values;
   union
     {

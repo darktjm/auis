@@ -15,6 +15,7 @@ BEGINCPLUSPLUSPROTOS
 #include <point.h>
 
 struct rectangle {
+    // height and width should really be enforced to be positive.
     long top,left,height,width;
 };
 

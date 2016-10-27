@@ -102,11 +102,11 @@ struct zip_image
   unsigned char					  zip_image_zoom_level;
   unsigned char					  zip_image_detail_level;
   unsigned char					  zip_image_line_width;
-  short						  zip_image_line_cap;
-  short						  zip_image_line_join;
-  char						  *zip_image_line_dash_pattern;
+  graphic::LineCap				  zip_image_line_cap;
+  graphic::LineJoin				  zip_image_line_join;
+  unsigned char					  *zip_image_line_dash_pattern;
   int						  zip_image_line_dash_offset;
-  short						  zip_image_line_dash_type;
+  graphic::LineDash				  zip_image_line_dash_type;
   struct zip_color_values			  *zip_image_color_values;
   union
     {

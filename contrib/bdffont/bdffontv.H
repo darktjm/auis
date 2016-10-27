@@ -10,6 +10,9 @@
 #include <bdffont.H>
 
 #include <lpair.H>
+/** A view to edit \ref bdffont objects.
+ *  This is a graphical font editor.
+ */
 class bdffontv : public  lpair {
 public:
 	TRACED_CLASS(bdffontv);

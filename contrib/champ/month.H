@@ -7,6 +7,11 @@
 /** \addtogroup libchamp
  * @{ */
 #include <dataobject.H>
+/** Data object to store month inset information.
+ *  This data object just stores the month offset from pressing the
+ *  arrows in the \ref monthview display.  It stores this in the
+ *  data stream, as well.
+ */
 class month: public dataobject {
 public:
 	TRACED_CLASS_NODEST(month);

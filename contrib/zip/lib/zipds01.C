@@ -291,8 +291,11 @@ zip::Parse_Figure_Attributes( zip_type_figure	       figure )
   long			      status = zip_ok;
   char			      c, first, second;
   unsigned char			      element = 1;
-  char				     *attribute_ptr,  pattern[10];
-  short			cap = 0; // init to shut gcc up
+  char				     *attribute_ptr;
+  unsigned char			pattern[10];
+  graphic::LineCap		cap;
+  graphic::LineJoin             join;
+  graphic::LineDash             dash = graphic::LineSolid;
   double			red, green, blue;
 
   IN(zip::Parse_Figure_Attributes);
@@ -429,14 +432,14 @@ zip::Parse_Figure_Attributes( zip_type_figure	       figure )
 		else if ( c == 'P' ) cap = graphic::CapProjecting;
 		else { cap = graphic::CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
 		(this)->Set_Figure_Line_Cap(  figure, cap ); break;
-	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic::JoinMiter;
-		else if ( c == 'R' ) cap = graphic::JoinRound;
-		else if ( c == 'B' ) cap = graphic::JoinBevel;
-		else { cap = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
-		(this)->Set_Figure_Line_Join(  figure, cap ); break;
-	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic::LineSolid;
-	        else if ( c == 'D' ) cap = graphic::LineDoubleDash;
-		else if ( c == 'O' ) cap = graphic::LineOnOffDash;
+	    case 'J': if (( c = NextChar()) == 'M' ) join = graphic::JoinMiter;
+		else if ( c == 'R' ) join = graphic::JoinRound;
+		else if ( c == 'B' ) join = graphic::JoinBevel;
+		else { join = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
+		(this)->Set_Figure_Line_Join(  figure, join ); break;
+	    case 'D': if (( c = NextChar()) == 'S' ) dash = graphic::LineSolid;
+	        else if ( c == 'D' ) dash = graphic::LineDoubleDash;
+		else if ( c == 'O' ) dash = graphic::LineOnOffDash;
 		NextChar(); offset = Parse_Stream_Integer(); NextChar();
 		while( element != 0 )
 		{
@@ -444,7 +447,7 @@ zip::Parse_Figure_Attributes( zip_type_figure	       figure )
 		    if ( element ) NextChar();
 		}
 		pattern[i] = 0;
-		(this)->Set_Figure_Line_Dash(  figure, pattern, offset, cap );
+		(this)->Set_Figure_Line_Dash(  figure, pattern, offset, dash );
 		break;
 	}
         break;
@@ -555,10 +558,13 @@ Parse_Stream_Image_Ending( class zip		      *self )
 static int
 Parse_Image_Attributes( class zip		      *self )
     {
-  short			cap = 0; // init to shut gcc up
+  graphic::LineCap		cap;
+  graphic::LineJoin             join;
+  graphic::LineDash             dash = graphic::LineSolid;
   boolean		      end_of_attributes;
   int			      status = zip_ok, offset;
-  char				     *attribute_ptr, pattern[10];
+  char				     *attribute_ptr;
+  unsigned char		      pattern[10];
   char			      c, element = 1;
   long			      i = 0;
   double			red, green, blue;
@@ -647,14 +653,14 @@ Parse_Image_Attributes( class zip		      *self )
 		else if ( c == 'P' ) cap = graphic::CapProjecting;
 		else { cap = graphic::CapButt; printf( "zip: unrecognized line cap attribute: '%c'\n", c ); }
 		(self)->Set_Image_Line_Cap(  Image, cap ); break;
-	    case 'J': if (( c = NextChar()) == 'M' ) cap = graphic::JoinMiter;
-		else if ( c == 'R' ) cap = graphic::JoinRound;
-		else if ( c == 'B' ) cap = graphic::JoinBevel;
-		else { cap = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
-		(self)->Set_Image_Line_Join(  Image, cap ); break;
-	    case 'D': if (( c = NextChar()) == 'S' ) cap = graphic::LineSolid;
-	        else if ( c == 'D' ) cap = graphic::LineDoubleDash;
-		else if ( c == 'O' ) cap = graphic::LineOnOffDash;
+	    case 'J': if (( c = NextChar()) == 'M' ) join = graphic::JoinMiter;
+		else if ( c == 'R' ) join = graphic::JoinRound;
+		else if ( c == 'B' ) join = graphic::JoinBevel;
+		else { join = graphic::JoinMiter; printf( "zip: unrecognized line join attribute: '%c'\n", c ); }
+		(self)->Set_Image_Line_Join(  Image, join ); break;
+	    case 'D': if (( c = NextChar()) == 'S' ) dash = graphic::LineSolid;
+	        else if ( c == 'D' ) dash = graphic::LineDoubleDash;
+		else if ( c == 'O' ) dash = graphic::LineOnOffDash;
 		NextChar(); offset = Parse_Stream_Integer(); NextChar(); i = 0;
 		while( element != 0 )
 		{
@@ -662,7 +668,7 @@ Parse_Image_Attributes( class zip		      *self )
 		    if ( element ) NextChar();
 		}
 		pattern[i] = 0;
-		(self)->Set_Image_Line_Dash(  Image, pattern, offset, cap );
+		(self)->Set_Image_Line_Dash(  Image, pattern, offset, dash );
 		break;
 	}
         break;

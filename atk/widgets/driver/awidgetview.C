@@ -309,9 +309,9 @@ AWidgetView::Hit(enum view::MouseAction action,
         view *nf=NULL;
         if(mouseFocus) {
             graphic *drawable=GetDrawable();
-            long mx=physical_LogicalXToGlobalX(drawable, x);
-            long my=physical_LogicalYToGlobalY(drawable, y);
-            nf=(mouseFocus)->Hit( action,                          physical_GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical_GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
+            long mx=physical::LogicalXToGlobalX(drawable, x);
+            long my=physical::LogicalYToGlobalY(drawable, y);
+            nf=(mouseFocus)->Hit( action,                          physical::GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical::GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
             if(action==view::LeftUp || action==view::RightUp || action==view::UpMovement) nf=NULL;
         } else {
             // see if hit is within the rectangle

@@ -9,6 +9,12 @@
 #include "champ.h"
 
 #include <dataobject.H>
+/** Data object associated with event editor buttons.
+ *  This is used along with \ref enodeview to display and
+ *  manage the event editor buttons for \ref chimpview.  While this
+ *  can be used as an independent inset, it is only intended for use with
+ *  \ref chimp.
+ */
 class enode: public dataobject {
 public:
 	TRACED_CLASS_NODEST(enode);

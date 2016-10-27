@@ -60,27 +60,37 @@ COPT = -O2
 /*
  * Andrew used to do all image formats itself.  I can't maintain
  * that, so I've implemented image I/O using a helper library.
- * Unfortunately, all helper libraries suck in some way, so choose your
- * poison.
- * Options:
- *   devil     - DevIL                  http://openil.sourceforge.net/
- *     works OK, but doesn't support as many file formats as others
- *     (in particular, it doesn't support writing GIF)
- *   freeimage - FreeImage              http://freeimage.sourceforge.net/
- *     weird license; hard to say if it's even legal to use
- *   magick    - ImageMagick/MagickWand http://www.imagemagick.org/
- *     rather heavy, probably slow, but most complete format support
+ * Unfortunately, all helper libraries suck in some way, so I went with
+ * the one that was the most compatible with what I needed to do:
+ * ImageMagick/MagickWand (http://www.imagemagick.org/).  It's rather
+ * heavy, probably slow, but it supports most any format and doesn't barf
+ * if it has to autocovert the input format.
  *
- *  Considering: (only libraries available in gentoo at this time)
+ * DevIL not only does not support writing GIF, it behaves badly with
+ * single-bit and grayscale images.  In general it has very few formats
+ * it supports.  It was my first "working" attempt at a generic converter,
+ * but now it's gone.
+ *
+ * FreeImage has a weird license that makes it hard to tell if it's even
+ * legal to use in this way.  Also, it can't write GIF from RGB, and
+ * I don't feel like messing with trying to adapt, since it can't
+ * distinguish between that issue and any other error writing the file.
+ * It also has a confusing way of specifying internal image formats,
+ * and required using undocumented/internal functions and swapping the
+ * RGB order manually to get it to work.
+ *
+ * I was considering some other libraries available in gentoo at this time:
  *   imlib - doesn't build on gentoo
  *   imlib2 - poorly documented, hard to integrate
  *   AfterImage - probably worse than devil; not worth trying
  *   SDL[2]-image - too tied to SDL
  *   OpenImageIO - doesn't support reading/writing anything but named files
  *   ImageMagick/Magick++ - too C++-centric (hard to implement FILE * I/O)
+ *   ImageMagick/MagickCore - don't want to invest that much time.
  */
-
-IMAGEIO = magick
+/* Too much depends on this now to allow this to be turned off
+#define USE_IMAGEIO
+*/
 
 #if 0
  Other variables we set in our local site.mcr files 

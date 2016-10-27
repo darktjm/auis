@@ -12,6 +12,11 @@ struct comment {
 };
 
 #include <chlist.H>
+/** A data object for storing event calendars.
+ *  This is meant to be viewed using \ref chimpview.  The event calendar
+ *  is written out and read in its internal text format.  It will wrap
+ *  this so that it is a valid stream element if embedded as an inset.
+ */
 class chimp: public  chlist {
 public:
 	TRACED_CLASS_NODEST(chimp);

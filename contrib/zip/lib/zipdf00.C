@@ -87,8 +87,8 @@ zip::Create_Figure( zip_type_figure	      *figure, const char			      *name, uns
         }
       (*figure)->zip_figure_type = type;
       (*figure)->zip_figure_line_width = 255;
-      (*figure)->zip_figure_line_cap = -1;
-      (*figure)->zip_figure_line_join = -1;
+      (*figure)->zip_figure_line_cap = (graphic::LineCap)-1;
+      (*figure)->zip_figure_line_join = (graphic::LineJoin)-1;
       if ( name  &&  *name )
         status = (self)->Set_Figure_Name(  *figure, name );
       }
@@ -393,7 +393,7 @@ zip::Set_Figure_Line_Width( zip_type_figure figure, short width )
   }
 
 long
-zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, int				 offset, short			 type )
+zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const unsigned char				 *pattern, int				 offset, graphic::LineDash			 type )
             {
   int			      status = zip_ok;
 
@@ -402,7 +402,7 @@ zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, in
       {
 	  if ( pattern )
             {
-	      figure->zip_figure_line_dash_pattern = strdup( pattern );
+	      figure->zip_figure_line_dash_pattern = (unsigned char *)strdup( (char *)pattern );
 	      figure->zip_figure_line_dash_offset = offset;
 	      figure->zip_figure_line_dash_type = type;
 	    }
@@ -417,7 +417,7 @@ zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, in
   }
 
 long
-zip::Set_Figure_Line_Cap( zip_type_figure		 figure, short			 cap )
+zip::Set_Figure_Line_Cap( zip_type_figure		 figure, graphic::LineCap			 cap )
         {
   int			      status = zip_ok;
 
@@ -435,7 +435,7 @@ zip::Set_Figure_Line_Cap( zip_type_figure		 figure, short			 cap )
   }
 
 long
-zip::Set_Figure_Line_Join( zip_type_figure		 figure, short			 join )
+zip::Set_Figure_Line_Join( zip_type_figure		 figure, graphic::LineJoin			 join )
         {
   int			      status = zip_ok;
 

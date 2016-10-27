@@ -70,10 +70,10 @@ struct zip_printing
   long					  zip_printing_orientation;
   const char				 *zip_printing_prefix;
   char					  zip_printing_line_width;
-  const char				 *zip_printing_line_dash_pattern;
+  const unsigned char			 *zip_printing_line_dash_pattern;
   int					  zip_printing_line_dash_offset;
-  short					  zip_printing_line_cap;
-  short					  zip_printing_line_join;
+  graphic::LineCap			  zip_printing_line_cap;
+  graphic::LineJoin			  zip_printing_line_join;
   float					  zip_printing_shade;
   };
 

@@ -7,6 +7,9 @@
 /** \addtogroup libchamp
  * @{ */
 #include <view.H>
+/** Viewer for \ref butter data objects.
+ *  This is simple text view that acts as a clickable button.
+ */
 class butterview: public  view {
 public:
 	TRACED_CLASS_NODEST(butterview);

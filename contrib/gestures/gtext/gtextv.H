@@ -21,6 +21,18 @@
  *****************************************************************************/
 
 #include <textview.H>
+/** A \ref textview with gesture recognition.
+ *  Gestures are invoked by holding down the mouse button.  Lines are drawn
+ *  as the mouse moves, which are removed on release of the mouse.  The
+ *  recognized gestures invoke standard \ref textview operations.  It is
+ *  not possible to change the set of recognized gestures or their
+ *  actions, and the documentation for the currently recognized gestures
+ *  leaves much to be desired (no arrows on those lines, for example).
+ *  Since it only works when this view is being used, and changing the
+ *  view is cumbersome at best, this serves as little more than a demo.
+ *  It would have been better implemented as an interception of all mouse
+ *  hits, similar to how Ness event handlers work.
+ */
 class gtextv : public  textview  {
 public:
 	TRACED_CLASS(gtextv);

@@ -104,16 +104,11 @@ typedef struct _XRegion {
 ATKdefineRegistry(xgraphic, graphic, xgraphic::InitializeClass);
 class xgraphic * * xgraphic_FindGrayBlock(Display  * WhichDisplay, int  WhichScreen );
 struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay, Drawable  WhichWindow);
-static void InstallUpdateRegion(class xgraphic  * self );
 static void xgraphic_LocalSetTransferFunction(class xgraphic  * self, int  prevValue);
 static void  ReallySetFont(class xgraphic  *self);
-static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength );
-static void SetUpPixImage(class xgraphic  *self, class pixelimage  *pixelimage);
 static unsigned int  bitsPerPixelAtDepth(Display       *disp, int            scrn, unsigned int depth);
 XImageInfo * imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_cmap, unsigned int fit );
-static void SetUpXImage( class xgraphic  *self, class image  *image );
 void  sendXImage( class xgraphic  *self, XImageInfo   *ximageinfo, int           src_x , int           src_y , int           dst_x , int           dst_y, unsigned int w , unsigned int h );
-void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_UpdateBlock  * updateBlk );
 static void xgraphicClearGrayLevels(class xgraphic  *self);
 static void CacheShades(class xgraphic  *self);
 static void GetShades(class xgraphic  *self);
@@ -121,7 +116,6 @@ class xgraphic * xgraphicGrayShade (class xgraphic  *self, long  index	);
 static void SetFGPixel( class xgraphic  *self, unsigned long  pixel );
 static void SetBGPixel( class xgraphic  *self, unsigned long  pixel );
 static short xgraphic_ApproximateColor( class xgraphic  *self, unsigned short  *red , unsigned short  *green , unsigned short  *blue );
-static void SetStipple(class xgraphic  *self, long  index);
 static long RealDisplayClass( class xgraphic		     *self );
 
 
@@ -152,7 +146,7 @@ struct font {
 
 
 #define VerifyUpdateClipping(selfParam) \
-    if ((selfParam)->lastUpdateRegionIDUsed != curUpdateRegionID) InstallUpdateRegion((selfParam))
+    if ((selfParam)->lastUpdateRegionIDUsed != curUpdateRegionID) (selfParam)->InstallUpdateRegion()
 
 static long curUpdateRegionID = 0; /* which region is currently being used */
 
@@ -196,21 +190,21 @@ struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay,
 
 
 
-static void InstallUpdateRegion(class xgraphic  * self )
+void xgraphic::InstallUpdateRegion()
 {
     struct xgraphic_UpdateBlock * curBlock;
 
     if (regionDebug) printf("InstallUpdateRegion: new region, cur glob ID %ld\n", curUpdateRegionID);
     /* find out whether a real change has happened or just a false alarm */
-    curBlock = xgraphic_FindUpdateBlock((self)->XDisplay(), (self)->XWindow());
-    if (curBlock->RegionCounter == self->lastUpdateRegionIDUsed) {
+    curBlock = xgraphic_FindUpdateBlock((this)->XDisplay(), (this)->XWindow());
+    if (curBlock->RegionCounter == this->lastUpdateRegionIDUsed) {
 	/* False alarm, someone else bumped counter, nothing for this graphic (window/display) has changed, so update our counter to show that we really are current with the latest changes */
-	if (regionDebug) printf("InstallUpdateRegion: no change, curBlockID %ld, graphic ID %ld\n", curBlock->RegionCounter, self->lastUpdateRegionIDUsed);
-	self->lastUpdateRegionIDUsed = curUpdateRegionID;
+	if (regionDebug) printf("InstallUpdateRegion: no change, curBlockID %ld, graphic ID %ld\n", curBlock->RegionCounter, this->lastUpdateRegionIDUsed);
+	this->lastUpdateRegionIDUsed = curUpdateRegionID;
     }
     else {
 	/* New region, so let's go use it */
-	xgraphic_LocalSetClippingRect(self,curBlock);
+	this->LocalSetClippingRect(curBlock);
     }
 }
 
@@ -344,12 +338,12 @@ transfer mode.
 
  */
 
-    int xMode = (~self->transferMode) & 0xF;
+    int xMode = (~self->GetTransferMode()) & 0xF;
 
 /* Setup the foreground and background colors right. One would like to do this
  * using the transfer modes, but that is not the way X11 works...
  */
-    if (self->transferMode == graphic::WHITE)  {
+    if (self->GetTransferMode() == graphic::WHITE)  {
         xMode = GXcopy;
         if (prevValue != graphic::WHITE)  {
             XSetBackground((self)->XDisplay(), (self)->XGC(),	self->foregroundpixel);
@@ -360,7 +354,7 @@ transfer mode.
         }
     }
 #ifndef PLANEMASK_ENV
-    else if (self->transferMode == graphic::XOR)  {
+    else if (self->GetTransferMode() == graphic::XOR)  {
         if (prevValue != graphic::XOR)  {
             XSetBackground((self)->XDisplay(), (self)->XGC(),	0);
             XSetBackground((self)->XDisplay(), (self)->XFillGC(), 0);
@@ -379,11 +373,11 @@ transfer mode.
             XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel);
             self->lastFillPixel = self->foregroundpixel;
         }
-        if (self->transferMode == graphic::BLACK)
+        if (self->GetTransferMode() == graphic::BLACK)
             xMode = GXcopy;
     }
 
-    if (self->transferMode == graphic::INVERT)  {
+    if (self->GetTransferMode() == graphic::INVERT)  {
 	if (prevValue != graphic::INVERT)  {
 	    XSetPlaneMask((self)->XDisplay(), (self)->XGC(), self->foregroundpixel ^ self->backgroundpixel);
 	    XSetPlaneMask((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel ^ self->backgroundpixel);
@@ -407,7 +401,7 @@ transfer mode.
                   self->localFillGraphicContext,
 		  xMode);
 
-    if(self->transferMode == graphic::XOR) {
+    if(self->GetTransferMode() == graphic::XOR) {
 	class xgraphic *tile=xgraphicGrayShade(self, 16);
 	XSetStipple((self)->XDisplay(),  (self)->XGC(), tile->localWindow);
     } else if(self->lastStipple) XSetStipple((self)->XDisplay(), (self)->XGC(), self->lastStipple->localWindow);
@@ -422,10 +416,10 @@ void xgraphic::DrawLineTo(long  XEnd, long  YEnd )
     XDrawLine((this)->XDisplay(),
 	  (this)->XWindow(),
 	  (this)->XGC(),
-	  physical_LogicalPtToGlobalX(this,&this->currentPoint),
-	  physical_LogicalPtToGlobalY(this,&this->currentPoint),
-	  physical_LogicalXToGlobalX(this,XEnd),
-	  physical_LogicalYToGlobalY(this,YEnd));
+	  physical::LogicalPtToGlobalX(this,&this->currentPoint),
+	  physical::LogicalPtToGlobalY(this,&this->currentPoint),
+	  physical::LogicalXToGlobalX(this,XEnd),
+	  physical::LogicalYToGlobalY(this,YEnd));
     point_SetPt(&this->currentPoint,XEnd,YEnd);
 }
 
@@ -441,10 +435,10 @@ void xgraphic::DrawLine(long  DeltaX , long  DeltaY )
     XDrawLine((this)->XDisplay(),
 	  (this)->XWindow(),
 	  (this)->XGC(),
-	  physical_LogicalPtToGlobalX(this,&OldPt),
-	  physical_LogicalPtToGlobalY(this,&OldPt),
-	  physical_LogicalPtToGlobalX(this,&this->currentPoint),
-	  physical_LogicalPtToGlobalY(this,&this->currentPoint));
+	  physical::LogicalPtToGlobalX(this,&OldPt),
+	  physical::LogicalPtToGlobalY(this,&OldPt),
+	  physical::LogicalPtToGlobalX(this,&this->currentPoint),
+	  physical::LogicalPtToGlobalY(this,&this->currentPoint));
 
 }
 
@@ -453,7 +447,7 @@ ReallySetFont(class xgraphic  *self)
 	{
 	/* Select the font for later text drawing:
 		Note: only localGC used for text, not fillGC */
-	XFontStruct *f = (XFontStruct *)((class xfontdesc *)self->currentFont)->GetRealFontDesc(
+	XFontStruct *f = (XFontStruct *)((class xfontdesc *)self->GetFont())->GetRealFontDesc(
 			 self);
 	if (f != NULL)  
 		XSetFont((self)->XDisplay(),  (self)->XGC(), f->fid);
@@ -485,14 +479,14 @@ void xgraphic::SetFont(class fontdesc  * ChosenFont)
 #define xgraphic_NULLTERMINATED 0
 #define xgraphic_LENGTHGIVEN 1
 
-static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength )
+void xgraphic::DrawChars(const char  * Text,short  Operation ,short  StringMode,long  TextLength )
 {
 
     XCharStruct *maxChar;
-    long x = point_X(&self->currentPoint);
-    long y = point_Y(&self->currentPoint);
+    long x = point_X(&this->currentPoint);
+    long y = point_Y(&this->currentPoint);
 
-    VerifyUpdateClipping(self);
+    VerifyUpdateClipping(this);
 
     /* Do we need to generate a count? */
     if (StringMode==xgraphic_NULLTERMINATED) TextLength = strlen(Text);
@@ -500,7 +494,7 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
     if (Operation /* !=graphic::NOMOVEMENT */) {
         /* GetRealFontDesc is used to load the font cache in fontdesc */
         maxChar =
-        &(self->currentFont)->GetRealFontDesc( self)->dummy.max_bounds;
+        &(this->currentFont)->GetRealFontDesc( this)->dummy.max_bounds;
 
         if (Operation&
 	   (graphic::ATTOP|graphic::BETWEENTOPANDBOTTOM|graphic::ATBOTTOM)){
@@ -518,7 +512,7 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
         if (Operation&(graphic::ATRIGHT|graphic::BETWEENLEFTANDRIGHT)) {
 	    long LastXWidth;
 	    LastXWidth = XTextWidth(
-	        &((self->currentFont)->GetRealFontDesc( self)->dummy),
+	        &((this->currentFont)->GetRealFontDesc( this)->dummy),
 	        Text,TextLength);
 	    if (Operation&graphic::ATRIGHT) {
 	        x -= LastXWidth;
@@ -530,7 +524,7 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
     }
     /* Put out the actual characters */
     
-    if (self->spaceShim) {
+    if (this->spaceShim) {
 	/* Have space shim, must break up text and dump it */
 
 #define InitialWordGuess 10
@@ -569,7 +563,7 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
 		}
 		/* Fill in next slot */
 		tip[WdCnt].chars = (char *)WordStart;
-		tip[WdCnt].delta = self->spaceShim;
+		tip[WdCnt].delta = this->spaceShim;
 		tip[WdCnt].font = 0; /* use GC font */
 	    }
 	}
@@ -580,19 +574,19 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
 	    WdCnt++;
 	}
 	/* Go write it */
-	XDrawText((self)->XDisplay(),
-	    (self)->XWindow(),
-	    (self)->XGC(),
-	    physical_LogicalXToGlobalX(self,x),
-	    physical_LogicalYToGlobalY(self,y),tip,WdCnt);
+	XDrawText((this)->XDisplay(),
+	    (this)->XWindow(),
+	    (this)->XGC(),
+	    physical::LogicalXToGlobalX(this,x),
+	    physical::LogicalYToGlobalY(this,y),tip,WdCnt);
     } /* end of space shim test */
     else {
 	/* No shim, we can just go for it */
-	XDrawString((self)->XDisplay(),
-	    (self)->XWindow(),
-	    (self)->XGC(),
-	    physical_LogicalXToGlobalX(self,x),
-	    physical_LogicalYToGlobalY(self,y),Text,TextLength);	
+	XDrawString((this)->XDisplay(),
+	    (this)->XWindow(),
+	    (this)->XGC(),
+	    physical::LogicalXToGlobalX(this,x),
+	    physical::LogicalYToGlobalY(this,y),Text,TextLength);	
     }
 
 }
@@ -600,14 +594,14 @@ static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  
 void xgraphic::DrawString(const char  * Text, short  Operation )
 {
 
-    xgraphic_DrawChars(this,Text,Operation,xgraphic_NULLTERMINATED,0);
+    DrawChars(Text,Operation,xgraphic_NULLTERMINATED,0);
 }
 
 
 void xgraphic::DrawText(const char  * Text, long  TextLength, short  Operation )
 {
 
-    xgraphic_DrawChars(this,Text,Operation,xgraphic_LENGTHGIVEN,
+    DrawChars(Text,Operation,xgraphic_LENGTHGIVEN,
 			    TextLength);
 }
 
@@ -615,16 +609,20 @@ void xgraphic::DrawRectSize(long  x, long  y,long  width,long  height)
 {
     VerifyUpdateClipping(this);
 
+    if(width < 0 || height < 0)
+	return; // tjm - matches default (graphic.C) behavior
+    // note: width, height silently converted to unsigned int.
+    //       Also, X disallows values > 0xffff
     XDrawRectangle((this)->XDisplay(),
 		(this)->XWindow(),
 		(this)->XGC(),
-		physical_LogicalXToGlobalX(this,x),
-		physical_LogicalYToGlobalY(this,y),
+		physical::LogicalXToGlobalX(this,x),
+		physical::LogicalYToGlobalY(this,y),
 		width,height);
 
 }
 
-void xgraphic::DrawPolygon(struct point  * PointArray, short  PointCount )
+void xgraphic::DrawPolygon(const struct point  * PointArray, short  PointCount )
 {
     static XPoint * PolygonPts = NULL;
     static int numXPoints = 0;
@@ -640,15 +638,15 @@ void xgraphic::DrawPolygon(struct point  * PointArray, short  PointCount )
 	    PolygonPts = (XPoint *) realloc(PolygonPts, numXPoints * sizeof(XPoint));
     }
     for(i=0;i<PointCount;i++){
-	PolygonPts[i].x = physical_LogicalXToGlobalX(this, PointArray[i].x);
-	PolygonPts[i].y = physical_LogicalYToGlobalY(this, PointArray[i].y);
+	PolygonPts[i].x = physical::LogicalXToGlobalX(this, PointArray[i].x);
+	PolygonPts[i].y = physical::LogicalYToGlobalY(this, PointArray[i].y);
 	}
-    PolygonPts[PointCount].x = physical_LogicalXToGlobalX(this, PointArray[0].x);
-    PolygonPts[PointCount].y = physical_LogicalYToGlobalY(this, PointArray[0].y);
+    PolygonPts[PointCount].x = physical::LogicalXToGlobalX(this, PointArray[0].x);
+    PolygonPts[PointCount].y = physical::LogicalYToGlobalY(this, PointArray[0].y);
     XDrawLines((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), PolygonPts, PointCount+1, CoordModeOrigin);
 }
 
-void xgraphic::DrawPath(struct point  * PointArray, short  PointCount )
+void xgraphic::DrawPath(const struct point  * PointArray, short  PointCount )
 {
     static XPoint * PolygonPts = NULL;
     static int numXPoints = 0;
@@ -664,8 +662,8 @@ void xgraphic::DrawPath(struct point  * PointArray, short  PointCount )
 	    PolygonPts = (XPoint *) realloc(PolygonPts, numXPoints * sizeof(XPoint));
     }
     for(i=0;i<PointCount;i++){
-	PolygonPts[i].x = physical_LogicalXToGlobalX(this, PointArray[i].x);
-	PolygonPts[i].y = physical_LogicalYToGlobalY(this, PointArray[i].y);
+	PolygonPts[i].x = physical::LogicalXToGlobalX(this, PointArray[i].x);
+	PolygonPts[i].y = physical::LogicalYToGlobalY(this, PointArray[i].y);
 	}
     XDrawLines((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), PolygonPts, PointCount, CoordModeOrigin);
 }
@@ -675,7 +673,7 @@ void xgraphic::DrawOvalSize(long  x,long  y,long  width,long  height )
 
     VerifyUpdateClipping(this);
 
-    XDrawArc((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), physical_LogicalXToGlobalX(this,x), physical_LogicalYToGlobalY(this,y), width, height, 0, 360*64);
+    XDrawArc((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), physical::LogicalXToGlobalX(this,x), physical::LogicalYToGlobalY(this,y), width, height, 0, 360*64);
 
 }
 
@@ -688,7 +686,7 @@ void xgraphic::DrawArcSize(long  x,long  y,long  width,long  height, short  Star
     StartXAngle = (90-StartAngle) <<6;
     OffsetXAngle = (-OffsetAngle) <<6;
 
-    XDrawArc((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), physical_LogicalXToGlobalX(this,x), physical_LogicalYToGlobalY(this,y), width, height, StartXAngle, OffsetXAngle);
+    XDrawArc((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), physical::LogicalXToGlobalX(this,x), physical::LogicalYToGlobalY(this,y), width, height, StartXAngle, OffsetXAngle);
 }
 
 void xgraphic::DrawRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight )
@@ -734,8 +732,8 @@ void xgraphic::DrawRRectSize(long  x,long  y,long  width,long  height,long  corn
 {   XArc RRPath[8];
     long realX, realY, realEndX, realEndY;
 
-    realX = physical_LogicalXToGlobalX(this,x);
-    realY = physical_LogicalYToGlobalY(this,y);
+    realX = physical::LogicalXToGlobalX(this,x);
+    realY = physical::LogicalYToGlobalY(this,y);
     realEndX = realX + width;
     realEndY = realY + height;
 
@@ -808,80 +806,80 @@ void xgraphic::DrawTrapezoid(long  topX ,long  topY ,long  topWidth ,long  botto
 
     VerifyUpdateClipping(this);
 
-    PolygonPts[0].x = PolygonPts[4].x = physical_LogicalXToGlobalX(this, topX);
-    PolygonPts[0].y = PolygonPts[4].y = physical_LogicalYToGlobalY(this, topY);
-    PolygonPts[1].x = physical_LogicalXToGlobalX(this, topX+topWidth);
-    PolygonPts[1].y = physical_LogicalYToGlobalY(this, topY);
-    PolygonPts[2].x = physical_LogicalXToGlobalX(this, bottomX+bottomWidth);
-    PolygonPts[2].y = physical_LogicalYToGlobalY(this, bottomY);
-    PolygonPts[3].x = physical_LogicalXToGlobalX(this, bottomX);
-    PolygonPts[3].y = physical_LogicalYToGlobalY(this, bottomY);
+    PolygonPts[0].x = PolygonPts[4].x = physical::LogicalXToGlobalX(this, topX);
+    PolygonPts[0].y = PolygonPts[4].y = physical::LogicalYToGlobalY(this, topY);
+    PolygonPts[1].x = physical::LogicalXToGlobalX(this, topX+topWidth);
+    PolygonPts[1].y = physical::LogicalYToGlobalY(this, topY);
+    PolygonPts[2].x = physical::LogicalXToGlobalX(this, bottomX+bottomWidth);
+    PolygonPts[2].y = physical::LogicalYToGlobalY(this, bottomY);
+    PolygonPts[3].x = physical::LogicalXToGlobalX(this, bottomX);
+    PolygonPts[3].y = physical::LogicalYToGlobalY(this, bottomY);
 
     XDrawLines((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), PolygonPts, 5, CoordModeOrigin);
 }
 
-static boolean xgraphic_SetupFillGC(class xgraphic  * self, class graphic  * Tile )
+boolean xgraphic::SetupFillGC(const class graphic  * Tile )
 {
     int grayIndex;
 
-class xgraphic * tile = (class xgraphic *)Tile;
+const class xgraphic * tile = (const class xgraphic *)Tile;
 unsigned long	fgPixel;
 
     /* See if transfer mode will take care of it, i.e., mode is source independent. If so, just make sure that a fillsolid mode is picked in the belief that the server won't be smart enough to realize that only the shape matters and not to waste time aligning any random tile that was left over */
-    if ( (self->transferMode == graphic::BLACK) ||
-	 (self->transferMode == graphic::WHITE) ||
-         (self->transferMode == graphic::INVERT) ||
-	 (self->transferMode == graphic::DEST) ) {
+    if ( (this->GetTransferMode() == graphic::BLACK) ||
+	 (this->GetTransferMode() == graphic::WHITE) ||
+         (this->GetTransferMode() == graphic::INVERT) ||
+	 (this->GetTransferMode() == graphic::DEST) ) {
 	 /* source independent, just optimize server */
-         if (self->lastFillStyle != FillSolid) {
-	    XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillSolid);
-	    self->lastFillStyle = FillSolid;
+         if (this->lastFillStyle != FillSolid) {
+	    XSetFillStyle((this)->XDisplay(), (this)->XFillGC(), FillSolid);
+	    this->lastFillStyle = FillSolid;
 	 }
-	 if(self->transferMode==graphic::BLACK && self->fore->name==trans) return FALSE;
-	 else if(self->transferMode==graphic::WHITE && self->back->name==trans) return FALSE;
+	 if(this->GetTransferMode()==graphic::BLACK && this->fore->name==trans) return FALSE;
+	 else if(this->GetTransferMode()==graphic::WHITE && this->back->name==trans) return FALSE;
 	 return TRUE;
     }
 
     if ( tile == NULL &&
-	(( (self )->DisplayClass( ) & (graphic::Color | graphic::gGrayScale)) /* ||
-	 ( xgraphic_DisplayClass( self ) & graphic::gStaticGray ) */))
-      tile = ( class xgraphic * ) (self)->BlackPattern();
+	(( (this )->DisplayClass( ) & (graphic::Color | graphic::gGrayScale)) /* ||
+	 ( xgraphic_DisplayClass( this ) & graphic::gStaticGray ) */))
+      tile = ( class xgraphic * ) (this)->BlackPattern();
     else if ( tile == NULL )
-      tile = (self->lastFillTile != NULL) ? self->lastFillTile : (class xgraphic *) (self)->BlackPattern();
+      tile = (this->lastFillTile != NULL) ? this->lastFillTile : (class xgraphic *) (this)->BlackPattern();
 
-    if(self->transferMode == graphic::XOR ) {
-	if(tile==(class xgraphic *)(self)->BlackPattern()) tile = self->gray_shades[16];
+    if(this->GetTransferMode() == graphic::XOR ) {
+	if(tile==(class xgraphic *)(this)->BlackPattern()) tile = this->gray_shades[16];
     }
     
     /* Hm, depends on sources, but source may be white or black, so let's special case those as well */
-    if (!((self)->DisplayClass() & graphic::gStaticGray)
-	&& self->gray_levels[16] != NULL && self->gray_levels[16] == tile) {
+    if (!((this)->DisplayClass() & graphic::gStaticGray)
+	&& this->gray_levels[16] != NULL && this->gray_levels[16] == tile) {
 	/* We're using black, make sure context is OK */
-	fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	fgPixel = (this->GetTransferMode() == graphic::XOR) ? this->foregroundpixel ^ this->backgroundpixel : this->foregroundpixel;
 
-        if (self->lastFillStyle != FillSolid) {
-	    XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillSolid);
-	    self->lastFillStyle = FillSolid;
+        if (this->lastFillStyle != FillSolid) {
+	    XSetFillStyle((this)->XDisplay(), (this)->XFillGC(), FillSolid);
+	    this->lastFillStyle = FillSolid;
 	}
-        if (self->lastFillPixel != fgPixel) {
-	    XSetForeground((self)->XDisplay(), (self)->XFillGC(),  fgPixel);
-	    self->lastFillPixel = fgPixel;
+        if (this->lastFillPixel != fgPixel) {
+	    XSetForeground((this)->XDisplay(), (this)->XFillGC(),  fgPixel);
+	    this->lastFillPixel = fgPixel;
 	}
-	self->lastFillTile = self->gray_levels[16];
+	this->lastFillTile = this->gray_levels[16];
     }
-    else if (!((self)->DisplayClass() & graphic::gStaticGray)
-	     && self->gray_levels[0] != NULL && self->gray_levels[0] == tile) {
+    else if (!((this)->DisplayClass() & graphic::gStaticGray)
+	     && this->gray_levels[0] != NULL && this->gray_levels[0] == tile) {
 	/* We're using white, make sure content is OK */
 
-       if (self->lastFillStyle != FillSolid) {
-	    XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillSolid);
-	    self->lastFillStyle = FillSolid;
+       if (this->lastFillStyle != FillSolid) {
+	    XSetFillStyle((this)->XDisplay(), (this)->XFillGC(), FillSolid);
+	    this->lastFillStyle = FillSolid;
 	}
-        if (self->lastFillPixel !=  self->backgroundpixel) {
-	    XSetForeground((self)->XDisplay(), (self)->XFillGC(),  self->backgroundpixel);
-	    self->lastFillPixel = self->backgroundpixel;
+        if (this->lastFillPixel !=  this->backgroundpixel) {
+	    XSetForeground((this)->XDisplay(), (this)->XFillGC(),  this->backgroundpixel);
+	    this->lastFillPixel = this->backgroundpixel;
 	}
-	self->lastFillTile = self->gray_levels[0];
+	this->lastFillTile = this->gray_levels[0];
     }
     /* Not black or white, but maybe predefind gray that is already down loaded, if so just set fill style and don't download pixmap again. Note: we are exceedingly tricky by using the assignment statement to pickup the gray shade that matches, and by picking what we think will be most common ones first. We assume, as per C book, that evaluatio stops with first true test.  We include 0 and 16 for the monochrome case. */
     else   {
@@ -889,61 +887,61 @@ unsigned long	fgPixel;
 	unsigned int i = sizeof(ind)/sizeof(int);
 
 	if (tile != NULL)  {
-	    for (i = 0; i < (sizeof(ind)/sizeof(int)) && self->gray_shades[ind[i]] != tile; i++)
+	    for (i = 0; i < (sizeof(ind)/sizeof(int)) && this->gray_shades[ind[i]] != tile; i++)
 		;
 	}
 	if (i < (sizeof(ind)/sizeof(int)))  {
 	    grayIndex = ind[i];
 
 	    /* Lucky us, reusing a preloaded gray shade, so just make sure that fill style is set correctly, and see if we have alredy downloaded tile */
-	    fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	    fgPixel = (this->GetTransferMode() == graphic::XOR) ? this->foregroundpixel ^ this->backgroundpixel : this->foregroundpixel;
 	    
-	    if (self->lastFillPixel != fgPixel) {
-		XSetForeground((self)->XDisplay(), (self)->XFillGC(),  fgPixel);
-		self->lastFillPixel = fgPixel;
+	    if (this->lastFillPixel != fgPixel) {
+		XSetForeground((this)->XDisplay(), (this)->XFillGC(),  fgPixel);
+		this->lastFillPixel = fgPixel;
 	    }
-	    if (self->lastFillStyle != FillOpaqueStippled) {
-		XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillOpaqueStippled );
-		self->lastFillStyle = FillOpaqueStippled;
+	    if (this->lastFillStyle != FillOpaqueStippled) {
+		XSetFillStyle((this)->XDisplay(), (this)->XFillGC(), FillOpaqueStippled );
+		this->lastFillStyle = FillOpaqueStippled;
 	    }
-	    if (self->lastFillTile != self->gray_shades[grayIndex]) {
+	    if (this->lastFillTile != this->gray_shades[grayIndex]) {
 		/* oh well, let's download the gray pattern */
-		XSetStipple((self)->XDisplay(),
-			 self->localFillGraphicContext,
+		XSetStipple((this)->XDisplay(),
+			 this->localFillGraphicContext,
 			 tile->localWindow);
-		self->lastFillTile = self->gray_shades[grayIndex];
+		this->lastFillTile = this->gray_shades[grayIndex];
 	    }
 	}
 	/* Unknown, or unused tile, so download it and use it */
 	else {
-	    fgPixel = (self->transferMode == graphic::XOR) ? self->foregroundpixel ^ self->backgroundpixel : self->foregroundpixel;
+	    fgPixel = (this->GetTransferMode() == graphic::XOR) ? this->foregroundpixel ^ this->backgroundpixel : this->foregroundpixel;
 
-	    if (self->lastFillPixel != fgPixel) {
-		XSetForeground((self)->XDisplay(), (self)->XFillGC(),  fgPixel);
-		self->lastFillPixel = fgPixel;
+	    if (this->lastFillPixel != fgPixel) {
+		XSetForeground((this)->XDisplay(), (this)->XFillGC(),  fgPixel);
+		this->lastFillPixel = fgPixel;
 	    }
 	    /* Let's see if style is right */
-	    if (self->lastFillStyle != FillOpaqueStippled) {
-		XSetFillStyle((self)->XDisplay(), (self)->XFillGC(), FillOpaqueStippled);
-		self->lastFillStyle = FillOpaqueStippled;
+	    if (this->lastFillStyle != FillOpaqueStippled) {
+		XSetFillStyle((this)->XDisplay(), (this)->XFillGC(), FillOpaqueStippled);
+		this->lastFillStyle = FillOpaqueStippled;
 	    }
 	    /* And let's send down the tile */
-	    XSetStipple((self)->XDisplay(),
-		     self->localFillGraphicContext,
+	    XSetStipple((this)->XDisplay(),
+		     this->localFillGraphicContext,
 		     tile->localWindow);
-	    self->lastFillTile = tile;
+	    this->lastFillTile = tile;
 
 	}
     }
-    if(self->fore->name==trans && self->lastFillTile==self->BlackPattern()) {
+    if(this->fore->name==trans && this->lastFillTile==this->BlackPattern()) {
 	return FALSE;
-    } else if(self->back->name==trans && self->lastFillTile==self->WhitePattern()) {
+    } else if(this->back->name==trans && this->lastFillTile==this->WhitePattern()) {
 	return FALSE;
     }
     return TRUE;
 }
 
-void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,class graphic *Tile )
+void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,const class graphic *Tile )
 {
 
     if (width <= 0 || height <= 0)  return;
@@ -952,15 +950,15 @@ void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,class graph
 
     /* First change the pattern to match the tile
 	    (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
+    if(SetupFillGC(Tile)) {
 
     /* And fill */
-	XFillRectangle((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical_LogicalXToGlobalX(this,x), physical_LogicalYToGlobalY(this,y), width, height);
+	XFillRectangle((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical::LogicalXToGlobalX(this,x), physical::LogicalYToGlobalY(this,y), width, height);
     }
 }
 
 
-void xgraphic::FillPolygon(struct point  *PointArray, short  PointCount, class graphic  *Tile)
+void xgraphic::FillPolygon(const struct point  *PointArray, short  PointCount, const class graphic *Tile)
 {
 
     static XPoint *PolygonPts = NULL;
@@ -977,31 +975,31 @@ void xgraphic::FillPolygon(struct point  *PointArray, short  PointCount, class g
 	    PolygonPts = (XPoint *) realloc(PolygonPts, numXPoints * sizeof(XPoint));
     }
     for(i=0;i<PointCount;i++){
-	PolygonPts[i].x = physical_LogicalXToGlobalX(this, PointArray[i].x);
-	PolygonPts[i].y = physical_LogicalYToGlobalY(this, PointArray[i].y);
+	PolygonPts[i].x = physical::LogicalXToGlobalX(this, PointArray[i].x);
+	PolygonPts[i].y = physical::LogicalYToGlobalY(this, PointArray[i].y);
 	}
 	
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if( xgraphic_SetupFillGC(this, Tile)) {
+    if( SetupFillGC(Tile)) {
 
 	XFillPolygon((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), PolygonPts, PointCount, Complex, CoordModeOrigin);
     }
 }
 
-void xgraphic::FillOvalSize(long  x,long  y,long  width,long  height,class graphic *Tile)
+void xgraphic::FillOvalSize(long  x,long  y,long  width,long  height,const class graphic *Tile)
 {
 
     VerifyUpdateClipping(this);
 
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
+    if(SetupFillGC(Tile)) {
 
-	XFillArc((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical_LogicalXToGlobalX(this,x), physical_LogicalYToGlobalY(this,y), width, height, 0, 360 * 64);
+	XFillArc((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical::LogicalXToGlobalX(this,x), physical::LogicalYToGlobalY(this,y), width, height, 0, 360 * 64);
     }
 
 }
 
-void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,class graphic *Tile)
+void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,const class graphic *Tile)
 {
     int StartXAngle, OffsetXAngle;
 
@@ -1011,17 +1009,17 @@ void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  Start
     OffsetXAngle = (-OffsetAngle) <<6;
 
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
-/*    XSetTile(xgraphic_XDisplay(self),
-		xgraphic_XFillGC(self),
+    if(SetupFillGC(Tile)) {
+/*    XSetTile(xgraphic_XDisplay(this),
+		xgraphic_XFillGC(this),
 		Tile->localWindow,0,0); */
-	XFillArc((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical_LogicalXToGlobalX(this,x), physical_LogicalYToGlobalY(this,y), width, height, StartXAngle, OffsetXAngle);
+	XFillArc((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), physical::LogicalXToGlobalX(this,x), physical::LogicalYToGlobalY(this,y), width, height, StartXAngle, OffsetXAngle);
     }
 
 }
 
 
-void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,class graphic *Tile)
+void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,const class graphic *Tile)
 {
     /* Handle pathologic cases in system indepedent manner
 	(luser desires to bite bullet in efficiency) */
@@ -1058,15 +1056,15 @@ void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  corn
     long realX, realY, realEndX, realEndY;
 
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
-	/*    XSetTile(xgraphic_XDisplay(self),
-	 xgraphic_XFillGC(self),
+    if(SetupFillGC(Tile)) {
+	/*    XSetTile(xgraphic_XDisplay(this),
+	 xgraphic_XFillGC(this),
 	 Tile->localWindow,0,0); */
 
 	/* Now, we have to fill in four arcs and three rectangles */
 
-	realX = physical_LogicalXToGlobalX(this,x);
-	realY = physical_LogicalYToGlobalY(this,y);
+	realX = physical::LogicalXToGlobalX(this,x);
+	realY = physical::LogicalYToGlobalY(this,y);
 	realEndX = realX + width;
 	realEndY = realY + height;
 	for (i=0;i<4;i++) {
@@ -1106,16 +1104,16 @@ void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  corn
 
 }
 
-void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
+void xgraphic::FillRgn(class region  * Rgn,const class graphic *Tile)
 {
     class region * tmpRegion;
     class region * visRegion;
     struct xgraphic_UpdateBlock * curBlock;
 
-/*    VerifyUpdateClipping(self); */ /* unneeded here since we will explicitly pull out the update region for our graphics hack */
+/*    VerifyUpdateClipping(this); */ /* unneeded here since we will explicitly pull out the update region for our graphics hack */
 
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
+    if(SetupFillGC(Tile)) {
 
 	/* Now we do something tricky: we set the clipping rectangles of the GC to match those of the region and then fill everything. The steps are:
 	 1. Copy the region
@@ -1146,7 +1144,7 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
 	}
 
 	/* Step 4 - offset by physical coordinates */
-	(tmpRegion)->OffsetRegion( physical_LogicalXToGlobalX(this,0), physical_LogicalYToGlobalY(this,0));
+	(tmpRegion)->OffsetRegion( physical::LogicalXToGlobalX(this,0), physical::LogicalYToGlobalY(this,0));
 
 #if 0  // disable updateRegionInUse; see comments in xgraphic_LocalSetClippingRect below for why
 	/* Step 4a Check for compounding update regions */
@@ -1169,36 +1167,36 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
 		       (this)->GetVisualHeight());
 
 	/* reset the clipping rectangle */
-	xgraphic_LocalSetClippingRect(this,curBlock);
+	LocalSetClippingRect(curBlock);
 
 	/* throw away temp region */
 	delete tmpRegion;
     }
 }
 
-void xgraphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , class graphic  *Tile)
+void xgraphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , const class graphic *Tile)
 {
     XPoint PolygonPts[4];
 
     VerifyUpdateClipping(this);
 
-    PolygonPts[0].x = physical_LogicalXToGlobalX(this, topX);
-    PolygonPts[0].y = physical_LogicalYToGlobalY(this, topY);
-    PolygonPts[1].x = physical_LogicalXToGlobalX(this, topX+topWidth);
-    PolygonPts[1].y = physical_LogicalYToGlobalY(this, topY);
-    PolygonPts[2].x = physical_LogicalXToGlobalX(this, bottomX+bottomWidth);
-    PolygonPts[2].y = physical_LogicalYToGlobalY(this, bottomY);
-    PolygonPts[3].x = physical_LogicalXToGlobalX(this, bottomX);
-    PolygonPts[3].y = physical_LogicalYToGlobalY(this, bottomY);
+    PolygonPts[0].x = physical::LogicalXToGlobalX(this, topX);
+    PolygonPts[0].y = physical::LogicalYToGlobalY(this, topY);
+    PolygonPts[1].x = physical::LogicalXToGlobalX(this, topX+topWidth);
+    PolygonPts[1].y = physical::LogicalYToGlobalY(this, topY);
+    PolygonPts[2].x = physical::LogicalXToGlobalX(this, bottomX+bottomWidth);
+    PolygonPts[2].y = physical::LogicalYToGlobalY(this, bottomY);
+    PolygonPts[3].x = physical::LogicalXToGlobalX(this, bottomX);
+    PolygonPts[3].y = physical::LogicalYToGlobalY(this, bottomY);
 	
     /* First change the pattern to match the tile (we should special case white and black for efficiency) */
-    if(xgraphic_SetupFillGC(this, Tile)) {
+    if(SetupFillGC(Tile)) {
 	XFillPolygon((this)->XDisplay(), (this)->XWindow(), (this)->XFillGC(), PolygonPts, 4, Convex, CoordModeOrigin);
     }
 }
 
 
-void xgraphic::BitBlt(struct rectangle  * SrcRect, class graphic  *DstGraphic, struct point  * DstOrigin, struct rectangle  * ClipRect)
+void xgraphic::BitBlt(const struct rectangle  * SrcRect, class graphic  *DstGraphic, const struct point  * DstOrigin, const struct rectangle  * ClipRect)
 {
     if (rectangle_Width(SrcRect) != 0 && rectangle_Height(SrcRect) != 0)  {
 
@@ -1209,24 +1207,24 @@ void xgraphic::BitBlt(struct rectangle  * SrcRect, class graphic  *DstGraphic, s
 		   (this)->XWindow(),
 		   ((class xgraphic *)DstGraphic)->XWindow());
 	    printf("src (%d,%d)  %ud x %ud  dest (%d,%d)\n",
-		  (int)physical_LogicalXToGlobalX(this,rectangle_Left(SrcRect)),
-		  (int)physical_LogicalYToGlobalY(this,rectangle_Top(SrcRect)),
+		  (int)physical::LogicalXToGlobalX(this,rectangle_Left(SrcRect)),
+		  (int)physical::LogicalYToGlobalY(this,rectangle_Top(SrcRect)),
 		  (unsigned int)rectangle_Width(SrcRect),
 		  (unsigned int)rectangle_Height(SrcRect),
-		  (int)physical_LogicalXToGlobalX(DstGraphic,point_X(DstOrigin)),
-		  (int)physical_LogicalYToGlobalY(DstGraphic,point_Y(DstOrigin)));
+		  (int)physical::LogicalXToGlobalX(DstGraphic,point_X(DstOrigin)),
+		  (int)physical::LogicalYToGlobalY(DstGraphic,point_Y(DstOrigin)));
 	}
 	if(this->flipforstipple) {
 	    XSetFunction((this)->XDisplay(), ((class xgraphic *)DstGraphic)->XGC(), GXcopy);
 	}
 	XCopyArea((this)->XDisplay(), (this)->XWindow(), ((class xgraphic *)DstGraphic)->XWindow(),
 		  ((class xgraphic *)DstGraphic)->XGC(),
-		  (int)physical_LogicalXToGlobalX(this,rectangle_Left(SrcRect)),
-		  (int)physical_LogicalYToGlobalY(this,rectangle_Top(SrcRect)),
+		  (int)physical::LogicalXToGlobalX(this,rectangle_Left(SrcRect)),
+		  (int)physical::LogicalYToGlobalY(this,rectangle_Top(SrcRect)),
 		  (unsigned int)rectangle_Width(SrcRect),
 		  (unsigned int)rectangle_Height(SrcRect),
-		  (int)physical_LogicalXToGlobalX(DstGraphic,point_X(DstOrigin)),
-		  (int)physical_LogicalYToGlobalY(DstGraphic,point_Y(DstOrigin)));
+		  (int)physical::LogicalXToGlobalX(DstGraphic,point_X(DstOrigin)),
+		  (int)physical::LogicalYToGlobalY(DstGraphic,point_Y(DstOrigin)));
 	if(this->flipforstipple) {
 	    XSetFunction((this)->XDisplay(), ((class xgraphic *)DstGraphic)->XGC(), GXcopyInverted);
 	}
@@ -1261,17 +1259,20 @@ void xgraphic::SetBitAtLoc(long  XPos ,long  YPos,boolean  NewValue )
 static XImage *PixImage = NULL;
 static Display *PixDisplay = NULL;
 
-static void
-SetUpPixImage(class xgraphic  *self, class pixelimage  *pixelimage)
+// tjm - this seems like a hack.  Caching the output of XCreateImage
+//       and then making modifications to the result is not supported
+//       by the official documentation.
+void
+xgraphic::SetUpPixImage(const class pixelimage  *pixelimage)
 		{
-    VerifyUpdateClipping(self);
+    VerifyUpdateClipping(this);
 
-    if(!PixImage || (self)->XDisplay() != PixDisplay) {
+    if(!PixImage || (this)->XDisplay() != PixDisplay) {
 	/* make a new PixImage */
 	if (PixImage != NULL) {
 	    XDestroyImage(PixImage);
 	}
-	PixDisplay = (self)->XDisplay();
+	PixDisplay = (this)->XDisplay();
 	PixImage = XCreateImage(PixDisplay, DefaultVisualOfScreen( DefaultScreenOfDisplay(PixDisplay)), 1, XYBitmap, 0, NULL, 0, 0, 16, 0);
 	/* XXX ? Should the following affect the routines in the PixImage ??? */
 	PixImage->bitmap_bit_order = MSBFirst;
@@ -1286,19 +1287,19 @@ SetUpPixImage(class xgraphic  *self, class pixelimage  *pixelimage)
 	
 
 void 
-xgraphic::WritePixImage(long  DestX , long  DestY , class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
+xgraphic::WritePixImage(long  DestX , long  DestY , const class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
 			{
     if (width > 0 && height > 0) {
 	VerifyUpdateClipping(this);
 
-	SetUpPixImage(this, SrcPixels);
+	SetUpPixImage(SrcPixels);
 	XPutImage(PixDisplay, 
 		  (this)->XWindow(),
 		  (this)->XGC(),
 		  PixImage,
 		  SrcX, SrcY, 
-		  physical_LogicalXToGlobalX(this, DestX),
-		  physical_LogicalYToGlobalY(this, DestY),
+		  physical::LogicalXToGlobalX(this, DestX),
+		  physical::LogicalYToGlobalY(this, DestY),
 		  width, height);
     }
 }
@@ -1308,11 +1309,11 @@ xgraphic::ReadPixImage(long  SrcX , long  SrcY , class pixelimage  *DestPixels, 
 {
     VerifyUpdateClipping(this);
 
-    SetUpPixImage(this, DestPixels);
+    SetUpPixImage(DestPixels);
     /* The following will not necessarily work; it can fail and generate an X error. The necessary conditions are that the window be mapped and that the subrect requested be within the window bounds, or that the drawable be an off-screen pixmap.  */
     XGetSubImage(PixDisplay, 
 		  (this)->XWindow(),
-		  physical_LogicalXToGlobalX(this, SrcX), physical_LogicalYToGlobalY(this, SrcY), width, height, 
+		  physical::LogicalXToGlobalX(this, SrcX), physical::LogicalYToGlobalY(this, SrcY), width, height, 
 		  1,  /* mask for only one plane,  XXX I hope.*/
 		  XYPixmap, PixImage,  DestX, DestY);
 }
@@ -1748,28 +1749,28 @@ static void DestroyXImageInfo(xgraphic *self) {
     }
 }
 
-static void
-SetUpXImage( class xgraphic  *self, class image  *image )
+void
+xgraphic::SetUpXImage( class image  *image )
         { static int private_cmap = FALSE;
   static int fit = FALSE;
-  Display *dpy = (self)->XDisplay();
+  Display *dpy = (this)->XDisplay();
   int scrn = DefaultScreen(dpy);
-  class xcolormap **cmap = (class xcolormap**) (self)->CurrentColormap();
+  class xcolormap **cmap = (class xcolormap**) (this)->CurrentColormap();
 
   if (cmap == NULL)
       return;
   private_cmap = (DefaultColormap(dpy,scrn) != (*cmap)->XColorMap);
   fit = imagePrefs.alwaysFitFixed;
-  VerifyUpdateClipping(self);
+  VerifyUpdateClipping(this);
  
-  if ((self)->XDisplay() != PixDisplay) {
-      if (self->ximageinfo) DestroyXImageInfo(self);
-      PixDisplay = (Display *) (self)->XDisplay();
+  if ((this)->XDisplay() != PixDisplay) {
+      if (this->ximageinfo) DestroyXImageInfo(this);
+      PixDisplay = (Display *) (this)->XDisplay();
   }
-  if(!image->inited || !self->ximageinfo) {
-      if(self->ximageinfo) DestroyXImageInfo(self);
+  if(!image->inited || !this->ximageinfo) {
+      if(this->ximageinfo) DestroyXImageInfo(this);
       
-      if((self->ximageinfo = imageToXImage(self, image, private_cmap, fit))) {
+      if((this->ximageinfo = imageToXImage(this, image, private_cmap, fit))) {
 	  image->inited = TRUE;
   }
       }
@@ -1794,9 +1795,9 @@ xgraphic::WriteImage(long  DestX , long  DestY , class image  *image, long  SrcX
     if ((width>0) && (height>0)) {
 	VerifyUpdateClipping(this);
 
-	SetUpXImage(this, image);
+	SetUpXImage(image);
 	if(image->inited && this->ximageinfo)
-	    sendXImage(this, this->ximageinfo, SrcX, SrcY, physical_LogicalXToGlobalX(this, DestX), physical_LogicalYToGlobalY(this, DestY), width, height);
+	    sendXImage(this, this->ximageinfo, SrcX, SrcY, physical::LogicalXToGlobalX(this, DestX), physical::LogicalYToGlobalY(this, DestY), width, height);
     }
 }
 
@@ -2016,13 +2017,13 @@ void xgraphic::ReadImage(long SrcX, long SrcY, class image *img, long DestX, lon
     XDestroyImage(ximg);
 }
 
-void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_UpdateBlock  * updateBlk )
+void xgraphic::LocalSetClippingRect(struct xgraphic_UpdateBlock  * updateBlk )
 {
     struct rectangle Temp;
     XRectangle XRect[1];
 
     /* If the visualBounds rect is empty convert it to an empty rectangle X can grok. */
-    if(self->visualBounds.width<0 || self->visualBounds.height<0) self->visualBounds.width=self->visualBounds.height=0;
+    if(this->visualBounds.width<0 || this->visualBounds.height<0) this->visualBounds.width=this->visualBounds.height=0;
     
 /* The clipping rectangle for a graphic is the intersection of the visual bounds of the graphic, the updtae clipping rectangle, and any clipping rectangle provided by the client of the graphic */
 
@@ -2033,27 +2034,27 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 
     /* First check to see if we have any kind of update region to contend with */
 
-    if (!updateBlk) updateBlk = xgraphic_FindUpdateBlock((self)->XDisplay(), (self)->XWindow());
+    if (!updateBlk) updateBlk = xgraphic_FindUpdateBlock((this)->XDisplay(), (this)->XWindow());
 
     /* Calculate the limiting rectangle based on visual bounds and any set rectangle (and turn them into physical coorindates) */
 
-    if (self->visualRegion == NULL &&
-	 self->clippingRegion == NULL &&
+    if (this->visualRegion == NULL &&
+	 this->clippingRegion == NULL &&
 	 ! updateBlk->updateRegionInUse) {
-	(self)->GetVisualBounds(&Temp);
-	physical_LogicalToGlobalRect(self,&Temp);
+	(this)->GetVisualBounds(&Temp);
+	physical::LogicalToGlobalRect(this,&Temp);
 	XRect[0].x = rectangle_Left(&Temp);
 	XRect[0].y = rectangle_Top(&Temp);
 	XRect[0].width = rectangle_Width(&Temp);
 	XRect[0].height = rectangle_Height(&Temp);
 
 	if (regionDebug) printf("localsetclip: no update rgn, ignoring it\n");
-	XSetClipRectangles((self)->XDisplay(),
-			   (self)->XGC(),
+	XSetClipRectangles((this)->XDisplay(),
+			   (this)->XGC(),
 			   /* Clip origin */0,0,XRect,/* Num Rects */1,
 			   YXBanded);
-	XSetClipRectangles((self)->XDisplay(),
-			   (self)->XFillGC(),
+	XSetClipRectangles((this)->XDisplay(),
+			   (this)->XFillGC(),
 			   /* Clip origin */0,0,XRect,/* Num Rects */1,
 			   YXBanded);
 	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Height(&Temp));
@@ -2061,28 +2062,28 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
     else {
 	class region *clipRegion;
 
-	if (self->visualRegion == NULL) {
-	    clipRegion = region::CreateRectRegion(&self->visualBounds);
+	if (this->visualRegion == NULL) {
+	    clipRegion = region::CreateRectRegion(&this->visualBounds);
 	}
 	else {
 	    clipRegion = new region;
 
-	    region::CopyRegion(clipRegion, self->visualRegion);
+	    region::CopyRegion(clipRegion, this->visualRegion);
 	}
 
 	/* If we have a clipping region, factor it in */
 
-	if (self->clippingRegion != NULL)  {
-	    (clipRegion)->IntersectRegion( self->clippingRegion, clipRegion);
+	if (this->clippingRegion != NULL)  {
+	    (clipRegion)->IntersectRegion( this->clippingRegion, clipRegion);
 	    if (regionDebug)
-		self->clippingRegion->GetBoundingBox(&Temp);
+		this->clippingRegion->GetBoundingBox(&Temp);
 	    if (regionDebug) printf("LocalSetClip: clip: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Height(&Temp));
 	}
 
 	/* map it to physical space (X coordinates) */
 
-	(clipRegion)->OffsetRegion( physical_LogicalXToGlobalX(self, 0),
-			    physical_LogicalYToGlobalY(self, 0));
+	(clipRegion)->OffsetRegion( physical::LogicalXToGlobalX(this, 0),
+			    physical::LogicalYToGlobalY(this, 0));
 
 	if (regionDebug)
 	    clipRegion->GetBoundingBox(&Temp);
@@ -2116,13 +2117,13 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 	    }
 	}
 
-	XSetRegion((self)->XDisplay(), (self)->XGC(), (clipRegion)->GetRegionData());
-	XSetRegion((self)->XDisplay(), (self)->XFillGC(), (clipRegion)->GetRegionData());
+	XSetRegion((this)->XDisplay(), (this)->XGC(), (clipRegion)->GetRegionData());
+	XSetRegion((this)->XDisplay(), (this)->XFillGC(), (clipRegion)->GetRegionData());
 	/* and toss temporary region */
         delete clipRegion;
     }
 
-    self->lastUpdateRegionIDUsed = curUpdateRegionID;
+    this->lastUpdateRegionIDUsed = curUpdateRegionID;
 }
 
 void xgraphic::SetClippingRegion(class region  *region)
@@ -2130,7 +2131,7 @@ void xgraphic::SetClippingRegion(class region  *region)
     /* Machine independent stuff */
     (this)->graphic::SetClippingRegion(region);
     /* Machine dependent actions */
-    xgraphic_LocalSetClippingRect(this,NULL);
+    LocalSetClippingRect(NULL);
 }
 
 void xgraphic::SetClippingRect(struct rectangle  * AdditionalRect)
@@ -2138,7 +2139,7 @@ void xgraphic::SetClippingRect(struct rectangle  * AdditionalRect)
     /* Machine independent stuff */
     (this)->graphic::SetClippingRect(AdditionalRect);
     /* Machine dependent actions */
-    xgraphic_LocalSetClippingRect(this,NULL);
+    LocalSetClippingRect(NULL);
 }
 
 void xgraphic::ClearClippingRect()
@@ -2146,7 +2147,7 @@ void xgraphic::ClearClippingRect()
     /* Machine independent part */
     (this)->graphic::ClearClippingRect();
     /* Machine dependent */
-    xgraphic_LocalSetClippingRect(this,NULL);
+    LocalSetClippingRect(NULL);
 }
 
 void xgraphic::SetLineWidth(short  NewLineWidth)
@@ -2167,19 +2168,19 @@ void xgraphic::SetLineWidth(short  NewLineWidth)
     }
 }
 
-void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
+void xgraphic::SetLineDash( const unsigned char		 *dashPattern, int		 dashOffset, LineDash		 dashType )
 {
     XGCValues tempGC;
     int	n = 0;
-    const char	*p;
-    short	type = dashType;
-    char		*oldPattern = NULL;
+    const unsigned char	*p;
+    LineDash	type = dashType;
+    unsigned char	*oldPattern = NULL;
     int			oldOffset;
-    short		oldType;
+    LineDash		oldType;
 
     if ( dashPattern == NULL ) type = graphic::gLineSolid;
     (this)->GetLineDash(  &oldPattern, &oldOffset, &oldType );
-    if ( oldPattern && dashPattern && ( strcmp( oldPattern, dashPattern ) == 0 ) && dashOffset == oldOffset && type == oldType );
+    if ( oldPattern && dashPattern && ( strcmp( (char *)oldPattern, (char *)dashPattern ) == 0 ) && dashOffset == oldOffset && type == oldType );
     else
     {
       (this)->graphic::SetLineDash(  dashPattern, dashOffset, type );
@@ -2195,13 +2196,13 @@ void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		
       {
         p = dashPattern;
         while ( *p++ != 0 ) n++;
-        if ( n ) XSetDashes( (this )->XDisplay( ), (this )->XGC( ), dashOffset, dashPattern, n );
+        if ( n ) XSetDashes( (this )->XDisplay( ), (this )->XGC( ), dashOffset, (const char *)dashPattern, n );
       }
     }
     if(oldPattern) free(oldPattern);
 }
 
-void xgraphic::SetLineCap( short		 newLineCap )
+void xgraphic::SetLineCap( LineCap		 newLineCap )
 {
     XGCValues tempGC;
 
@@ -2220,7 +2221,7 @@ void xgraphic::SetLineCap( short		 newLineCap )
     }
 }
 
-void xgraphic::SetLineJoin( short		 newLineJoin )
+void xgraphic::SetLineJoin( LineJoin		 newLineJoin )
 {
     XGCValues tempGC;
 
@@ -2255,7 +2256,7 @@ static void xgraphicClearGrayLevels(class xgraphic  *self)
     self->gray_levels[i] = NULL;
 }
 
-static void HandleInsertion(class xgraphic  *self, class graphic  *E)
+void xgraphic::HandleInsertion(class graphic  *E)
 {
     XGCValues tempGCValues;
     long tmpx, tmpy;
@@ -2268,82 +2269,82 @@ static void HandleInsertion(class xgraphic  *self, class graphic  *E)
        since an offscreen bitmap may have a differentdepth even if
        created on the same display/screen pair. */
     if (
-        (self->localWindow != 
+        (this->localWindow != 
 	    (EnclosingGraphic)->XWindow()) ||
-	(self->displayUsed !=
+	(this->displayUsed !=
 	    (EnclosingGraphic)->XDisplay()) ||
-	(self->screenUsed !=
+	(this->screenUsed !=
 	 (EnclosingGraphic)->XScreen() ) ) {
 
 	/* Yep, we changed, everything you know is wrong! */
-	if ((self)->XGC()) {
-	    XFreeGC((self)->XDisplay(), (self)->XGC());
-	    XFreeGC((self)->XDisplay(), (self)->XFillGC());
-	    (self)->XGC() = NULL;
-	    (self)->XFillGC() = NULL;
+	if ((this)->XGC()) {
+	    XFreeGC((this)->XDisplay(), (this)->XGC());
+	    XFreeGC((this)->XDisplay(), (this)->XFillGC());
+	    (this)->XGC() = NULL;
+	    (this)->XFillGC() = NULL;
 	}
-	self->DisplayClassVal = E->DisplayClass();
+	this->DisplayClassVal = E->DisplayClass();
 
 	/* Copy over the machine dependent window capability */
-	self->localWindow = (EnclosingGraphic)->XWindow();
-	self->displayUsed = (EnclosingGraphic)->XDisplay();
-	self->screenUsed =  (EnclosingGraphic)->XScreen();
-	self->xfd = EnclosingGraphic->xfd;
+	this->localWindow = (EnclosingGraphic)->XWindow();
+	this->displayUsed = (EnclosingGraphic)->XDisplay();
+	this->screenUsed =  (EnclosingGraphic)->XScreen();
+	this->xfd = EnclosingGraphic->xfd;
     }
-    self->valid = (EnclosingGraphic)->Valid();
+    this->valid = (EnclosingGraphic)->Valid();
 
     /* And pick up the appropriate gray shades for this display */
-    xgraphicClearGrayLevels(self);
-    self->gray_shades = xgraphic_FindGrayBlock((self)->XDisplay(),
-	    (self)->XScreen());
+    xgraphicClearGrayLevels(this);
+    this->gray_shades = xgraphic_FindGrayBlock((this)->XDisplay(),
+	    (this)->XScreen());
 
-    if ((self)->Valid())  {
-	if (!(self)->XGC()) {
+    if ((this)->Valid())  {
+	if (!(this)->XGC()) {
 
-	    tempGCValues.line_width=self->lineWidth;
+	    tempGCValues.line_width=this->lineWidth;
 	    /* special case hardware (width 0) for line width of 1 */
 	    if (tempGCValues.line_width == 1 ) tempGCValues.line_width = 0;
-	    self->foregroundpixel = BlackPixel((self)->XDisplay(), (self)->XScreen());
-	    tempGCValues.foreground = self->foregroundpixel;
-	    self->backgroundpixel = WhitePixel((self)->XDisplay(), (self)->XScreen());
-	    tempGCValues.background = self->backgroundpixel;
+	    this->foregroundpixel = BlackPixel((this)->XDisplay(), (this)->XScreen());
+	    tempGCValues.foreground = this->foregroundpixel;
+	    this->backgroundpixel = WhitePixel((this)->XDisplay(), (this)->XScreen());
+	    tempGCValues.background = this->backgroundpixel;
 #ifdef PLANEMASK_ENV
 	    tempGCValues.plane_mask = tempGCValues.foreground ^ tempGCValues.background;
 
-	    (self)->XGC() = XCreateGC((self)->XDisplay(),
-					   (self)->XWindow(),  GCLineWidth | GCForeground | GCBackground | GCPlaneMask, &tempGCValues);
+	    (this)->XGC() = XCreateGC((this)->XDisplay(),
+					   (this)->XWindow(),  GCLineWidth | GCForeground | GCBackground | GCPlaneMask, &tempGCValues);
 #else /* PLANEMASK_ENV */
-	    (self)->XGC() = XCreateGC((self)->XDisplay(),
-					   (self)->XWindow(),  GCLineWidth | GCForeground | GCBackground, &tempGCValues);
+	    (this)->XGC() = XCreateGC((this)->XDisplay(),
+					   (this)->XWindow(),  GCLineWidth | GCForeground | GCBackground, &tempGCValues);
 #endif /* PLANEMASK_ENV */
 
 	    tempGCValues.fill_style = FillSolid;
-	    self->lastFillStyle = FillSolid;
-	    self->lastFillPixel = self->foregroundpixel;
-	    self->lastFillTile = NULL;
+	    this->lastFillStyle = FillSolid;
+	    this->lastFillPixel = this->foregroundpixel;
+	    this->lastFillTile = NULL;
 
-	    (self)->GetPatternOrigin( &tmpx, &tmpy);
+	    (this)->GetPatternOrigin( &tmpx, &tmpy);
 	    tempGCValues.ts_x_origin = tmpx;
 	    tempGCValues.ts_y_origin = tmpy;
 
 #ifdef PLANEMASK_ENV
-	    (self)->XFillGC() =
-	      XCreateGC((self)->XDisplay(),
-			(self)->XWindow(),GCFillStyle | GCForeground | GCBackground | GCPlaneMask | GCTileStipXOrigin | GCTileStipYOrigin, &tempGCValues);
+	    (this)->XFillGC() =
+	      XCreateGC((this)->XDisplay(),
+			(this)->XWindow(),GCFillStyle | GCForeground | GCBackground | GCPlaneMask | GCTileStipXOrigin | GCTileStipYOrigin, &tempGCValues);
 #else /* PLANEMASK_ENV */
-	    (self)->XFillGC() =
-	      XCreateGC((self)->XDisplay(),
-			(self)->XWindow(),GCFillStyle | GCForeground | GCBackground | GCTileStipXOrigin | GCTileStipYOrigin, &tempGCValues);
+	    (this)->XFillGC() =
+	      XCreateGC((this)->XDisplay(),
+			(this)->XWindow(),GCFillStyle | GCForeground | GCBackground | GCTileStipXOrigin | GCTileStipYOrigin, &tempGCValues);
 
 #endif /* PLANEMASK_ENV */
 
-	    xgraphic_LocalSetTransferFunction(self, graphic::COPY);
-	    ReallySetFont(self);
+	    xgraphic_LocalSetTransferFunction(this, graphic::COPY);
+	    ReallySetFont(this);
 
 	}
-	xgraphic_LocalSetClippingRect(self,NULL);
-	self->SetForegroundColor(self->fore);
-	self->SetBackgroundColor(self->back);
+	LocalSetClippingRect(NULL);
+	this->SetForegroundColor(this->fore);
+	this->SetBackgroundColor(this->back);
     }
 }
 
@@ -2358,27 +2359,27 @@ void xgraphic::InsertGraphicSize(class graphic  * EnclosingGraphic, long  xOrigi
     (this)->InsertGraphic(EnclosingGraphic,&r);
 }
 
-void xgraphic::InsertGraphic(class graphic  * EnclosingGraphic, struct rectangle  * EnclosedRectangle)
+void xgraphic::InsertGraphic(class graphic  * EnclosingGraphic, const struct rectangle  * EnclosedRectangle)
 {
     /* First do the machine independent stuff */
 
     (this)->graphic::InsertGraphic(EnclosingGraphic, EnclosedRectangle);
 
-    HandleInsertion(this, EnclosingGraphic);
+    HandleInsertion(EnclosingGraphic);
 }
 
-void xgraphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, class region  * region)
+void xgraphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, const class region  * region)
 {
     (this)->graphic::InsertGraphicRegion(EnclosingGraphic, region);
 
-    HandleInsertion(this, EnclosingGraphic);
+    HandleInsertion(EnclosingGraphic);
 }
 
 void xgraphic::SetVisualRegion(class region  *region)
 {
     (this)->graphic::SetVisualRegion( region);
 
-    xgraphic_LocalSetClippingRect(this,NULL);
+    LocalSetClippingRect(NULL);
 }
     
 void xgraphic::FlushGraphics()
@@ -2615,12 +2616,12 @@ class graphic * xgraphic::GrayPattern(short  IntensityNum , short  IntensityDeno
 static void SetFGPixel( class xgraphic  *self, unsigned long  pixel )
         {
     self->lastFillPixel = self->foregroundpixel = pixel;
-    if (self->transferMode == graphic::WHITE)  {
+    if (self->GetTransferMode() == graphic::WHITE)  {
 	XSetBackground((self)->XDisplay(), (self)->XGC(), self->foregroundpixel);
 	XSetBackground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel);
     }
 #ifndef PLANEMASK_ENV 
-    else if (self->transferMode == graphic::XOR) {
+    else if (self->GetTransferMode() == graphic::XOR) {
 	XSetForeground((self)->XDisplay(), (self)->XGC(), self->foregroundpixel ^ self->backgroundpixel);
 	XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->foregroundpixel ^ self->backgroundpixel);
     }
@@ -2638,12 +2639,12 @@ static void SetFGPixel( class xgraphic  *self, unsigned long  pixel )
 static void SetBGPixel( class xgraphic  *self, unsigned long  pixel )
         {
     self->backgroundpixel = pixel;
-    if (self->transferMode == graphic::WHITE)  {
+    if (self->GetTransferMode() == graphic::WHITE)  {
 	XSetForeground((self)->XDisplay(), (self)->XGC(), self->backgroundpixel);
 	XSetForeground((self)->XDisplay(), (self)->XFillGC(), self->backgroundpixel);
     }
 #ifndef PLANEMASK_ENV 
-    else if (self->transferMode == graphic::XOR) {
+    else if (self->GetTransferMode() == graphic::XOR) {
 	/* At this point background should be 0.  And should remain so */
     }
 #endif /* PLANEMASK_ENV  */
@@ -2681,25 +2682,25 @@ static short xgraphic_ApproximateColor( class xgraphic  *self,unsigned short  *r
     return ind;
 }
 
-static void SetStipple(class xgraphic  *self, long  index)
+void xgraphic::SetStipple(long  index)
 {
     class xgraphic	*tile;
 
-    tile = xgraphicGrayShade (self, index);
-    xgraphic_SetupFillGC( self, tile );
-    if (((self)->DisplayClass() & graphic::Monochrome) && (index == 0 || index == 16))
+    tile = xgraphicGrayShade (this, index);
+    this->SetupFillGC( tile );
+    if (((this)->DisplayClass() & graphic::Monochrome) && (index == 0 || index == 16))
      {
-	XSetFillStyle((self)->XDisplay(), (self)->XGC(), FillSolid );
-	self->flipforstipple=(index==0);
-	(self)->SetTransferMode( self->transferMode);
-	self->lastStipple=NULL;
+	XSetFillStyle((this)->XDisplay(), (this)->XGC(), FillSolid );
+	this->flipforstipple=(index==0);
+	(this)->SetTransferMode( this->transferMode);
+	this->lastStipple=NULL;
      }
     else {
-	self->flipforstipple=FALSE;
-	XSetFillStyle((self)->XDisplay(), (self)->XGC(), FillOpaqueStippled );
-	self->lastStipple=tile;
-	if(self->transferMode==graphic::XOR) XSetStipple((self)->XDisplay(), (self)->XGC(), self->lastFillTile?self->lastFillTile->localWindow:None);
-	else XSetStipple((self)->XDisplay(),  (self)->XGC(), tile->localWindow);
+	this->flipforstipple=FALSE;
+	XSetFillStyle((this)->XDisplay(), (this)->XGC(), FillOpaqueStippled );
+	this->lastStipple=tile;
+	if(this->transferMode==graphic::XOR) XSetStipple((this)->XDisplay(), (this)->XGC(), this->lastFillTile?this->lastFillTile->localWindow:None);
+	else XSetStipple((this)->XDisplay(),  (this)->XGC(), tile->localWindow);
     }
 }
 void xgraphic::SetForegroundColor(const char *name, long r, long g, long b) {
@@ -2734,7 +2735,7 @@ void xgraphic::SetForegroundColor(color *c) {
 	xc->ddcolor::GetRGB(R, G, B);
 	short ind = xgraphic_ApproximateColor( this, &R, &G, &B );
 	if (ind != 0 || ind != 16) {
-	    SetStipple(this, ind);
+	    SetStipple(ind);
 	} else {
 	    XSetFillStyle((this)->XDisplay(), (this)->XGC(), FillSolid);
 	}
@@ -2764,7 +2765,7 @@ void xgraphic::SetBackgroundColor(color *c) {
 	xc->ddcolor::GetRGB(R, G, B);
 	short ind = xgraphic_ApproximateColor( this, &R, &G, &B );
 	if (ind != 0 && ind != 16) {
-	    SetStipple(this, ind);
+	    SetStipple(ind);
 	} else {
 	    XSetFillStyle((this)->XDisplay(), (this)->XGC(), FillSolid);
 	}
@@ -2775,8 +2776,11 @@ void xgraphic::SetBackgroundColor(color *c) {
 
 long xgraphic::GetHorizontalResolution()
 {
-    long res;
+    static long res = 0; // don't support mid-run res changes
+    static Display *res_disp = NULL;
     if (!(this)->XDisplay()) return 72;
+    if(res && XDisplay() == res_disp) return res;
+    res_disp = XDisplay();
     res=(long) ((25.4 * DisplayWidth((this)->XDisplay(), (this)->XScreen())) / (DisplayWidthMM((this)->XDisplay(), (this)->XScreen())));
     res=environ::GetProfileInt("XDPI", res);
     res=environ::GetProfileInt("XHorizontalDPI", res);
@@ -2786,8 +2790,11 @@ long xgraphic::GetHorizontalResolution()
 
 long xgraphic::GetVerticalResolution()
 {
-    long res;
+    static long res = 0; // don't support mid-run res changes
+    static Display *res_disp = NULL;
     if (!(this)->XDisplay()) return (long) 72;
+    if(res && XDisplay() == res_disp) return res;
+    res_disp = XDisplay();
     res=(long) ((25.4 * DisplayHeight((this)->XDisplay(), (this)->XScreen())) / (DisplayHeightMM((this)->XDisplay(), (this)->XScreen())));
     res=environ::GetProfileInt("XDPI", res);
     res=environ::GetProfileInt("XVerticalDPI", res);

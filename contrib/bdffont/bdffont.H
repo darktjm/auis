@@ -54,6 +54,11 @@ struct bdffont_fontchar
 #define bdffont_BitmapSize(fc) ((fc)->bbh * bdffont_AlignedWidthInBytes(fc))
 
 #include <dataobject.H>
+/** A data object for storing BDF-format fonts.
+ *  This is meant to be viewed with \ref bdffontv.  It always assumes it is
+ *  at top level, and reads and writes its stream in BDF font format, so it
+ *  is not possible to use this as an inset.
+ */
 class bdffont : public  dataobject {
 public:
 	TRACED_CLASS(bdffont);

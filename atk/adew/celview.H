@@ -23,6 +23,9 @@
 #include <view.H>
 class celview;
 typedef class view *(*celview_hitfptr)(class celview *self, enum view::MouseAction, long x, long y, long clicks, long rock);
+/** The view for a \ref cel data object.
+ *  If the \ref cel does not yet have an associated inset, an X is displayed.
+ */
 class celview: public view {
     public:
       TRACED_CLASS(celview);

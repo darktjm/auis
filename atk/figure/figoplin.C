@@ -347,7 +347,7 @@ void figoplin::Draw(class figview  *v)
     dash = ((this)->GetVAttributes())->GetLineStyle( (this)->GetIVAttributes());
     if (dash != figattr_LineSolid) {
 	char *patterns = figattr::LineStylePattern(dash, lw);
-	(v)->SetLineDash(patterns, 0, graphic::LineOnOffDash);
+	(v)->SetLineDash((unsigned char *)patterns, 0, graphic::LineOnOffDash);
     }
 
     basex = this->pts[0].x;

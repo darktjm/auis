@@ -12,6 +12,13 @@
 #include "champ.h"
 
 #include <ATK.H>
+/** Load and check an event calendar.
+ *  Objects of this class manage an event list.  It is loaded from a file
+ *  in its own crontab-like format.  By default, this file is
+ *  ~/events.champ or ~/.events.champ, whichever is found first.  However,
+ *  that can be overridden with colon-separated list of file names in the
+ *  ChampPath preference.
+ */
 class champ : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();

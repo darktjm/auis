@@ -9,16 +9,6 @@ point_AddPt
 point_SubPt
 point_ArePtsEqual
 point_CreatePoint
-physical_LogicalPtToGlobalX
-physical_LogicalPtToGlobalY
-physical_LogicalPtToGlobalPt
-physical_GlobalPtToLogicalPt
-physical_LogicalXToGlobalX
-physical_LogicalYToGlobalY
-physical_GlobalXToLogicalX
-physical_GlobalYToLogicalY
-physical_LogicalToGlobalRect
-physical_GlobalToLogicalRect
 rectangle_UnionRect
 rectangle_IsEmptyRect
 rectangle_IntersectRect

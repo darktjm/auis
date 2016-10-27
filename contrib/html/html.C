@@ -422,6 +422,16 @@ html_StringToMagic(const char * str)
 	    return hm->magicstring;
 	}
     }
+    if(*str == '#') {
+	static char cbuf[2];
+	char *eb;
+	unsigned long n = strtoul(str + 1, &eb, 10);
+	if(n < 256 && !*eb) {
+	    cbuf[0] = n;
+	    cbuf[1] = 0;
+	}
+	return cbuf;
+    }
     return 0;
 }
 
@@ -503,7 +513,7 @@ addVars(class style * style, char * vars)
 {
     char* s = vars;
     char* value = 0;
-    char* key = s;
+    char* key = NULL;
     int inquote = 0;
 
     for ( ; s && *s; s++) {
@@ -513,16 +523,17 @@ addVars(class style * style, char * vars)
 	    *s = '\0';
 	    value = s+1;
 	} else if (strchr(whiteSpace, *s)) {
-	    if (!inquote) {
+	    if (key && !inquote) {
 		/* We have the end of a variable. Store it */
 		*s = '\0';
 		storeVar(style, key, value);
 		value = 0;
-		key = s+1;
+		key = NULL;
 	    } /* else ignore it */
-	}
+	} else if(!key)
+            key = s; // assuming valid syntax, this is the 1st non-space char
     }
-    if (*key != '\0') {
+    if (key) {
 	storeVar(style, key, value);
     }
 }
@@ -927,7 +938,7 @@ html_FindEntity(char * buf, long * pos, char * entity, char * vars)
 		    *s = tolower(*s);
 		}
 	    }
-	    strcpy(posStart, posEnd+1); /* delete the token from the string */
+	    memmove(posStart, posEnd+1, strlen(posEnd+1) + 1); /* delete the token from the string */
 	    return htmlFoundEntity;
 	} else {
 	    return htmlPartialEntity;
@@ -1145,7 +1156,9 @@ maybeDisplay(class html * self, long * pos, char * buf, long * inlen)
 		realLen -= x;
 		len -= x -1; /* -1 coz we're adjusting it a few lines later */
 		/* Put the new string in there and the rest of the buffer */
-		sprintf(s, "%s%s", newstring, endtok);
+		x = strlen(newstring);
+		memmove(s + x, endtok, strlen(endtok) + 1);
+		memcpy(s, newstring, x);
 	    } else {
 		*(endtok-1) = c;
 	    }

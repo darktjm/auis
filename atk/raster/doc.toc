@@ -1,3 +1,2 @@
 @include(cmd/doc.toc)
 @include(convert/doc.toc)
-@include(scan/doc.toc)

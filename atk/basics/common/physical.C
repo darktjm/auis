@@ -11,23 +11,11 @@
 #include <andrewos.h>
 
 #include <graphic.H>
-
+#include <physical.h>
 
 #define SINGLEWINDOW 1
 
-long physical_LogicalPtToGlobalX(class graphic  * CoordinateSystem,struct point  * LogicalPoint );
-long physical_LogicalPtToGlobalY(class graphic  * CoordinateSystem,struct point  * LogicalPoint );
-void physical_LogicalPtToGlobalPt(class graphic  * CoordinateSystem,struct point  * tempPoint );
-void physical_GlobalPtToLogicalPt(class graphic  * CoordinateSystem,struct point  * tempPoint );
-long physical_LogicalXToGlobalX(class graphic  * CoordinateSystem,long  LogicalX );
-long physical_LogicalYToGlobalY(class graphic  * CoordinateSystem,long  LogicalY );
-long physical_GlobalXToLogicalX(class graphic  * CoordinateSystem,long  PhysicalX );
-long physical_GlobalYToLogicalY(class graphic  * CoordinateSystem,long  PhysicalY );
-void physical_LogicalToGlobalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect );
-void physical_GlobalToLogicalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect );
-
-
-long physical_LogicalPtToGlobalX(class graphic  * CoordinateSystem,struct point  * LogicalPoint )
+long physical::LogicalPtToGlobalX(class graphic  * CoordinateSystem,struct point  * LogicalPoint )
 {
 #if SINGLEWINDOW
     return point_X(LogicalPoint)+
@@ -39,7 +27,7 @@ long physical_LogicalPtToGlobalX(class graphic  * CoordinateSystem,struct point 
 #endif /* SINGLEWINDOW */
 }   
 
-long physical_LogicalPtToGlobalY(class graphic  * CoordinateSystem,struct point  * LogicalPoint )
+long physical::LogicalPtToGlobalY(class graphic  * CoordinateSystem,struct point  * LogicalPoint )
 {
 #if SINGLEWINDOW
     return point_Y(LogicalPoint)+
@@ -51,7 +39,7 @@ long physical_LogicalPtToGlobalY(class graphic  * CoordinateSystem,struct point 
 #endif /* SINGLEWINDOW */
 }   
 
-void physical_LogicalPtToGlobalPt(class graphic  * CoordinateSystem,struct point  * tempPoint )
+void physical::LogicalPtToGlobalPt(class graphic  * CoordinateSystem,struct point  * tempPoint )
 {
 #if SINGLEWINDOW
     point_OffsetPoint(tempPoint,
@@ -66,7 +54,7 @@ void physical_LogicalPtToGlobalPt(class graphic  * CoordinateSystem,struct point
 #endif /* SINGLEWINDOW */
 }   
 
-void physical_GlobalPtToLogicalPt(class graphic  * CoordinateSystem,struct point  * tempPoint )
+void physical::GlobalPtToLogicalPt(class graphic  * CoordinateSystem,struct point  * tempPoint )
 {
 #if SINGLEWINDOW
     point_OffsetPoint(tempPoint,
@@ -83,7 +71,7 @@ void physical_GlobalPtToLogicalPt(class graphic  * CoordinateSystem,struct point
 
 
 
-long physical_LogicalXToGlobalX(class graphic  * CoordinateSystem,long  LogicalX )
+long physical::LogicalXToGlobalX(class graphic  * CoordinateSystem,long  LogicalX )
 {
 #if SINGLEWINDOW
     return LogicalX +
@@ -95,7 +83,7 @@ long physical_LogicalXToGlobalX(class graphic  * CoordinateSystem,long  LogicalX
 #endif /* SINGLEWINDOW */
 }   
 
-long physical_LogicalYToGlobalY(class graphic  * CoordinateSystem,long  LogicalY )
+long physical::LogicalYToGlobalY(class graphic  * CoordinateSystem,long  LogicalY )
 {
 #if SINGLEWINDOW
     return LogicalY +
@@ -107,7 +95,7 @@ long physical_LogicalYToGlobalY(class graphic  * CoordinateSystem,long  LogicalY
 #endif /* SINGLEWINDOW */
 }   
 
-long physical_GlobalXToLogicalX(class graphic  * CoordinateSystem,long  PhysicalX )
+long physical::GlobalXToLogicalX(class graphic  * CoordinateSystem,long  PhysicalX )
 {
 #if SINGLEWINDOW
     return PhysicalX - (
@@ -119,7 +107,7 @@ long physical_GlobalXToLogicalX(class graphic  * CoordinateSystem,long  Physical
 #endif /* SINGLEWINDOW */
 }
 
-long physical_GlobalYToLogicalY(class graphic  * CoordinateSystem,long  PhysicalY )
+long physical::GlobalYToLogicalY(class graphic  * CoordinateSystem,long  PhysicalY )
 {
 #if SINGLEWINDOW
     return PhysicalY - (
@@ -131,7 +119,7 @@ long physical_GlobalYToLogicalY(class graphic  * CoordinateSystem,long  Physical
 #endif /* SINGLEWINDOW */
 }
 
-void physical_LogicalToGlobalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect )
+void physical::LogicalToGlobalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect )
 {
 #if SINGLEWINDOW
     rectangle_OffsetRect(TempRect,
@@ -146,7 +134,7 @@ void physical_LogicalToGlobalRect(class graphic  * CoordinateSystem,struct recta
 #endif /* SINGLEWINDOW */
 }
 
-void physical_GlobalToLogicalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect )
+void physical::GlobalToLogicalRect(class graphic  * CoordinateSystem,struct rectangle  * TempRect )
 {
 #if SINGLEWINDOW
     rectangle_OffsetRect(TempRect,

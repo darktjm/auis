@@ -18,7 +18,7 @@ static char *backgroundColorName = NULL; /* Name of the default background color
 ATKdefineRegistryNoInit(graphic, observable);
 
 
-void graphic::MoveToPt(struct point  * NewPosition )
+void graphic::MoveToPt(const struct point  * NewPosition )
 {
     (this)->MoveTo(point_X(NewPosition),point_Y(NewPosition));
 }
@@ -39,7 +39,7 @@ void graphic::GetCurrentPt(struct point  * Pt)
     *Pt = this->currentPoint;
 }
 
-void graphic::DrawLineToPt(struct point  * LineEnd)
+void graphic::DrawLineToPt(const struct point  * LineEnd)
 {
     (this)->DrawLineTo(point_X(LineEnd),point_Y(LineEnd));
 }
@@ -117,12 +117,12 @@ void graphic::DrawRectSize(long  x, long  y,long  width,long  height)
     (this)->DrawLineTo(left,top);
 }
 
-void graphic::DrawRect(struct rectangle  * Rect)
+void graphic::DrawRect(const struct rectangle  * Rect)
 {
     (this)->DrawRectSize(rectangle_Left(Rect),rectangle_Top(Rect), rectangle_Width(Rect), rectangle_Height(Rect));
 }
 
-void graphic::DrawPolygon(struct point  * PointArray, short  PointCount)
+void graphic::DrawPolygon(const struct point  * PointArray, short  PointCount)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -131,7 +131,7 @@ void graphic::DrawPolygon(struct point  * PointArray, short  PointCount)
     }
 }
 
-void graphic::DrawPath(struct point  * PointArray, short  PointCount )
+void graphic::DrawPath(const struct point  * PointArray, short  PointCount )
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -146,7 +146,7 @@ void graphic::DrawOvalSize(long  x,long  y,long  width,long  height)
     (this)->DrawRectSize(x,y,width,height);
 }
 
-void graphic::DrawOval(struct rectangle  * Rect)
+void graphic::DrawOval(const struct rectangle  * Rect)
 {
     (this)->DrawOvalSize(rectangle_Left(Rect),
 			  rectangle_Top(Rect),rectangle_Width(Rect),
@@ -160,7 +160,7 @@ void graphic::DrawArcSize(long  x,long  y,long  width,long  height, short  Start
     (this)->DrawLineTo(x+width,y+height);
 }
 
-void graphic::DrawArc(struct rectangle  * EnclRect, short  StartAngle, short  OffsetAngle)
+void graphic::DrawArc(const struct rectangle  * EnclRect, short  StartAngle, short  OffsetAngle)
 {
 
     (this)->DrawArcSize(rectangle_Left(EnclRect),
@@ -229,18 +229,9 @@ void graphic::DrawRRectSize(long  x,long  y,long  width,long  height,long  corne
     (this)->DrawLine(0,-(height-2*cornerHeight));
 }
 
-void graphic::DrawRRect(struct rectangle  * OuterBox, struct rectangle  * InnerBox)
+void graphic::DrawRRect(const struct rectangle  * OuterBox, const struct rectangle  * InnerBox)
 {
     (this)->DrawRRectSize(rectangle_Left(OuterBox), rectangle_Top(OuterBox), rectangle_Width(OuterBox), rectangle_Height(OuterBox), rectangle_Width(InnerBox), rectangle_Height(InnerBox));
-}
-
-void graphic::DrawRgn(class region  * Rgn)
-{
-    static boolean printed = FALSE;
-    if (! printed) {
-	printed = TRUE;
-	fprintf(stderr, "graphic: DrawRgn not impletemented for this wm\n");
-    }
 }
 
 void graphic::DrawTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth)
@@ -253,7 +244,7 @@ void graphic::DrawTrapezoid(long  topX , long  topY , long  topWidth , long  bot
 }
 
 
-void graphic::FillRectSize(long  x,long  y,long  width,long  height,class graphic  * Tile )
+void graphic::FillRectSize(long  x,long  y,long  width,long  height,const class graphic * Tile )
 {
     static boolean printed = FALSE;
 
@@ -264,14 +255,14 @@ void graphic::FillRectSize(long  x,long  y,long  width,long  height,class graphi
     }
 }
 
-void graphic::FillRect(struct rectangle  * Rect, class graphic  * Tile)
+void graphic::FillRect(const struct rectangle  * Rect, const class graphic * Tile)
 {
     (this)->FillRectSize( rectangle_Left(Rect),
 			  rectangle_Top(Rect), rectangle_Width(Rect),
 			  rectangle_Height(Rect),Tile);
 }
 
-void graphic::FillPolygon(struct point  * PointArray, short  PointCount, class graphic  * Tile)
+void graphic::FillPolygon(const struct point  * PointArray, short  PointCount, const class graphic * Tile)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -280,7 +271,7 @@ void graphic::FillPolygon(struct point  * PointArray, short  PointCount, class g
     }
 }
 
-void graphic::FillOvalSize(long  x,long  y,long  width,long  height,class graphic  * Tile)
+void graphic::FillOvalSize(long  x,long  y,long  width,long  height,const class graphic * Tile)
 {
     /* ************************
       **** test dummy code ****
@@ -288,12 +279,12 @@ void graphic::FillOvalSize(long  x,long  y,long  width,long  height,class graphi
     (this)->FillRectSize(x,y,width,height,Tile);
 }
 
-void graphic::FillOval(struct rectangle  * Rect, class graphic  * Tile)
+void graphic::FillOval(const struct rectangle  * Rect, const class graphic * Tile)
 {
     (this)->FillOvalSize( rectangle_Left(Rect), rectangle_Top(Rect), rectangle_Width(Rect), rectangle_Height(Rect), Tile);
 }
 
-void graphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,class graphic  * Tile)
+void graphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,const class graphic * Tile)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -303,14 +294,14 @@ void graphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartA
     (this)->FillRectSize(x,y,width,height,Tile);
 }
 
-void graphic::FillArc(struct rectangle  * EnclRect,short  StartAngle, short  OffsetAngle,class graphic  * Tile)
+void graphic::FillArc(const struct rectangle  * EnclRect,short  StartAngle, short  OffsetAngle,const class graphic * Tile)
 {
     (this)->FillArcSize( rectangle_Left(EnclRect), rectangle_Top(EnclRect),
 			 rectangle_Width(EnclRect), rectangle_Height(EnclRect),
 			 StartAngle, OffsetAngle, Tile);
 }
 
-void graphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,class graphic  * Tile)
+void graphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,const class graphic * Tile)
 {
     static boolean printed = FALSE;
 
@@ -351,14 +342,14 @@ void graphic::FillRRectSize(long  x,long  y,long  width,long  height,long  corne
     }
 }
 
-void graphic::FillRRect(struct rectangle  * OuterBox,struct rectangle  * InnerBox,class graphic  * Tile)
+void graphic::FillRRect(const struct rectangle  * OuterBox,const struct rectangle  * InnerBox,const class graphic * Tile)
 {
     (this)->FillRRectSize( rectangle_Left(OuterBox),rectangle_Top(OuterBox),
 			   rectangle_Width(OuterBox), rectangle_Height(OuterBox),
 			   rectangle_Width(InnerBox), rectangle_Height(InnerBox), Tile);
 }
 
-void graphic::FillRgn(class region  * Rgn,class graphic  * Tile)
+void graphic::FillRgn(class region  * Rgn,const class graphic * Tile)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -367,7 +358,7 @@ void graphic::FillRgn(class region  * Rgn,class graphic  * Tile)
     }
 }
 
-void graphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , class graphic  *Tile)
+void graphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , const class graphic * Tile)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -377,7 +368,7 @@ void graphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bot
 }
 
 
-void graphic::EraseRect(struct rectangle  * Rect)
+void graphic::EraseRect(const struct rectangle  * Rect)
 {
     short mode=GetTransferMode();
     if(mode!=graphic::COPY) SetTransferMode(graphic::COPY);
@@ -423,7 +414,7 @@ void graphic::BitBltSize(long  srcX , long  srcY , long  dstX , long  dstY , lon
     (this)->BitBlt(&tmpSrcRect,DstGraphic,&tmpDestOrigin,passedClipRect);
 }
 
-void graphic::BitBlt(struct rectangle  * SrcRect, class graphic  *DstGraphic, struct point  * DstOrigin, struct rectangle  * ClipRect)
+void graphic::BitBlt(const struct rectangle  * SrcRect, class graphic  *DstGraphic, const struct point  * DstOrigin, const struct rectangle  * ClipRect)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -481,9 +472,12 @@ void graphic::ReadPixImage(long  SrcX , long  SrcY , class pixelimage  *DestPixe
 void graphic::SetBitAtLoc(long  XPos,long  YPos, boolean  NewValue)
 {
     struct point tempPt;
-    short tempLineWidth, tempTMode, dashStyle, tempLineCap, tempLineJoin;
+    short tempLineWidth, tempTMode;
+    LineDash dashStyle;
+    LineCap tempLineCap;
+    LineJoin tempLineJoin;
     int dashOffset;
-    char *dashPattern;
+    unsigned char *dashPattern;
 
     /* Slow, but correct -- instead of filling a rectangle, we should
       probably draw a one pixel long, one pixel wide line. */
@@ -503,8 +497,8 @@ void graphic::SetBitAtLoc(long  XPos,long  YPos, boolean  NewValue)
     (this)->MoveTo(XPos,YPos);
     (this)->SetLineWidth(1);
     (this)->SetLineDash(  NULL, 0, graphic::LineSolid );
-    (this)->SetLineCap(  1 );
-    (this)->SetLineJoin(  0);
+    (this)->SetLineCap(  CapButt );
+    (this)->SetLineJoin(  JoinMiter);
     (this)->DrawLineTo(XPos,YPos); /* yep, this draws one dot in wm */
 
     (this)->MoveToPt(&tempPt);
@@ -517,43 +511,6 @@ void graphic::SetBitAtLoc(long  XPos,long  YPos, boolean  NewValue)
     (this)->SetTransferMode(tempTMode);
 
 }
-
-void graphic::MoveLogicalOrigin(long  DeltaX, long  DeltaY)
-{
-    point_OffsetPoint(&this->savedOrigin,DeltaX,DeltaY);
-    rectangle_OffsetRect(&this->localBounds,DeltaX,DeltaY);
-    rectangle_OffsetRect(&this->visualBounds,DeltaX,DeltaY);
-    if (this->localRegion) {
-	(this->localRegion)->OffsetRegion( DeltaX, DeltaY);
-    }
-    if (this->visualRegion) {
-	(this->visualRegion)->OffsetRegion( DeltaX, DeltaY);
-    }
-    if (this->clippingRegion) {
-	(this->clippingRegion)->OffsetRegion( DeltaX, DeltaY);
-    }
-    point_OffsetPoint(&this->currentPoint, DeltaX, DeltaY);
-
-    /* *********Previous BUG statement ************* */
-    /* Added code for doing offsets to clipping and currnet point */
-    /* Still might be wrong */
-    /*   Must change clipping rectangle  */
-    /* specification uncertainity: should currentpoint be mnoved? */
-    /* view bug : all children should have enclosed origins reset */
-    /* *************** */
-}
-
-void graphic::SetLogicalOrigin(long  NewX ,long  NewY)
-{
-    (this)->MoveLogicalOrigin(NewX-(this)->GetLogicalLeft(),
-			       NewY-(this)->GetLogicalTop());
-}
-
-void graphic::SetLogicalOriginPt(struct point  * Pt)
-{
-    (this)->SetLogicalOrigin(point_X(Pt),point_Y(Pt));
-}
-
 
 void graphic::GetLogicalBounds(struct rectangle  * Rect)
 {
@@ -658,20 +615,20 @@ short graphic::GetLineWidth()
     return this->lineWidth;
 }
 
-void graphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
+void graphic::SetLineDash( const unsigned char		 *dashPattern, int		 dashOffset, LineDash		 dashType )
 {
-char		*oldDash = this->lineDashPattern;
+unsigned char		*oldDash = this->lineDashPattern;
 
     this->lineDashType = dashType;
     this->lineDashOffset = dashOffset;
-    if ( dashPattern && ( this->lineDashPattern = strdup( dashPattern ) ))
+    if ( dashPattern && ( this->lineDashPattern = (unsigned char *)strdup( (char *)dashPattern ) ))
     {
       if ( oldDash ) free( oldDash );
     }
     else this->lineDashPattern = oldDash;
 }
 
-void graphic::GetLineDash( char		 **dashPattern, int		 *dashOffset, short		 *dashType )
+void graphic::GetLineDash( unsigned char		 **dashPattern, int		 *dashOffset, LineDash		 *dashType )
 {
     if ( dashOffset ) *dashOffset = this->lineDashOffset;
     if ( dashType ) *dashType = this->lineDashType;
@@ -679,28 +636,28 @@ void graphic::GetLineDash( char		 **dashPattern, int		 *dashOffset, short		 *das
     {
       if ( this->lineDashPattern )
       {
-        *dashPattern = strdup(this->lineDashPattern);
+        *dashPattern = (unsigned char *)strdup((char *)this->lineDashPattern);
       }
       else *dashPattern = NULL;
     }
 }
 
-void graphic::SetLineCap( short		 newLineCap )
+void graphic::SetLineCap( LineCap		 newLineCap )
 {
     this->lineCap = newLineCap;
 }
 
-short graphic::GetLineCap( )
+graphic::LineCap graphic::GetLineCap( )
 {
     return this->lineCap;
 }
 
-void graphic::SetLineJoin( short		 newLineJoin )
+void graphic::SetLineJoin( LineJoin		 newLineJoin )
 {
     this->lineJoin = newLineJoin;
 }
 
-short graphic::GetLineJoin( )
+graphic::LineJoin graphic::GetLineJoin( )
 {
     return this->lineJoin;
 }
@@ -708,11 +665,6 @@ short graphic::GetLineJoin( )
 void graphic::SetTransferMode(short  NewTransferMode)
 {
     this->transferMode = 0xFF & NewTransferMode;
-}
-
-short graphic::GetTransferMode()
-{
-    return this->transferMode;
 }
 
 void graphic::SetPatternOrigin(long  xpos , long  ypos)
@@ -745,7 +697,7 @@ long graphic::GetVisualBottom()
 }
 
 
-void graphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, class region  *regionp)
+void graphic::InsertGraphicRegion(class graphic  * EnclosingGraphic, const class region  *regionp)
 {
     /* Fill in the local bounds for the rectangle (always 0,0 based
 						    upon creation) */
@@ -831,7 +783,7 @@ void graphic::InsertGraphicSize(class graphic  * EnclosingGraphic, long  xOrigin
     (this)->InsertGraphic(EnclosingGraphic,&r);
 }
 
-void graphic::InsertGraphic(class graphic  * EnclosingGraphic, struct rectangle  * EnclosedRectangle)
+void graphic::InsertGraphic(class graphic  * EnclosingGraphic, const struct rectangle  * EnclosedRectangle)
 {
 
     /* Fill in the local bounds for the rectangle (always 0,0 based
@@ -1161,11 +1113,11 @@ graphic::graphic()
     this->spaceShim = 0;
     this->transferMode = graphic::COPY;
     this->lineWidth = 1;
-    this->lineDashType = 0;
+    this->lineDashType = LineSolid;
     this->lineDashOffset = 0;
     this->lineDashPattern = NULL;
-    this->lineCap = 1;
-    this->lineJoin = 0;
+    this->lineCap = CapButt;
+    this->lineJoin = JoinMiter;
     this->clippingRegion = (class region * ) NULL;
     point_SetPt(&this->currentPoint,0,0);
 

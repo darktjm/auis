@@ -517,7 +517,7 @@ drawspot(gofigview *self, struct stone *s, boolean isclear) {
 	self->SetLineWidth( lthick );
 	if (isselected && self->HasInputFocus) {
 		/* dotted border for the selected spot */
-		char dotted[3];
+		unsigned char dotted[3];
 		/* the following fails 
 		 *	dotted[0] = dotted[1] = 2*lthick;
 		 */

@@ -6,7 +6,7 @@
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
 
-extern void shadows_SetPreferences(int  (*getint)());
+extern void shadows_SetPreferences(int  (*getint)(const char *, int));
 extern void shadows_ComputeColor(unsigned int  br , unsigned int  bg , unsigned int  bb, unsigned short  *rr , unsigned short  *rg , unsigned short  *rb, int  color);
 
 #define shadows_PRESSED 0

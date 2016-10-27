@@ -100,9 +100,9 @@ START_ATEXTV_MOUSE_METHOD(HitMethod) {
         view *nf=NULL;
         if(mouseFocus) {
             graphic *drawable=GetDrawable();
-            long mx=physical_LogicalXToGlobalX(drawable, ToPixX(x));
-            long my=physical_LogicalYToGlobalY(drawable, ToPixY(y));
-            nf=(mouseFocus)->Hit( action,                          physical_GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical_GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
+            long mx=physical::LogicalXToGlobalX(drawable, ToPixX(x));
+            long my=physical::LogicalYToGlobalY(drawable, ToPixY(y));
+            nf=(mouseFocus)->Hit( action,                          physical::GlobalXToLogicalX( (mouseFocus)->GetDrawable(), mx),                          physical::GlobalYToLogicalY( (mouseFocus)->GetDrawable(), my),                          num_clicks);
             if(action==view::LeftUp || action==view::RightUp || action==view::UpMovement) nf=NULL;
         } else nf=child->Hit(action, child->EnclosedXToLocalX(ToPixX(x)), child->EnclosedYToLocalY(ToPixY(y)), num_clicks);
         if(nf!=mouseFocus && (action==view::LeftDown || action==view::RightDown || nf==NULL)) {

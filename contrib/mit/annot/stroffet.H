@@ -8,6 +8,10 @@
  *  A dynamically loadable ATK class file.  Contains stroffet, stroffetview.
  * @{ */
 #include <icon.H>
+/** A data object for storing raw (t)roff commands.
+ *  This inset stores plain text for insertion into the print stream.
+ *  Its primary viewer is \ref stroffetview.
+ */
 class stroffet : public  icon {
 public:
 	TRACED_CLASS_NODEST(stroffet);

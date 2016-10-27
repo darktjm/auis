@@ -1839,7 +1839,8 @@ void
 treev::Print( FILE		      *file, const char		      *processor, const char		      *format, boolean	       level )
 {
     class treev *self=this;
-  static struct aptv_print_stream   *print_stream;
+  // tjm - not sure what this is for, but...
+  static struct aptv_print_stream   *print_stream = NULL;
 
   IN(treev_Print);
   if ( ScrollView )
@@ -1849,11 +1850,14 @@ treev::Print( FILE		      *file, const char		      *processor, const char		     
     }
   else
   {
-  if ( print_stream )
-    (this)->SetPrintStream(  print_stream );
   if ( ! GraphicsInitialized )
       return; /* can't print from ezprint yet */
+  struct aptv_print_stream *ops = this->PrintStream();
+  if ( print_stream )
+    (this)->SetPrintStream(  print_stream );
   (this)->PrintObject(  file, processor, format, level, (aptv_printfptr)Printer );
+  // tjm - ... at least clean up when you're done!
+  this->SetPrintStream(ops);
   }
   OUT(treev_Print);
   }

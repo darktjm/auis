@@ -3,17 +3,10 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-# The following has GNU make dependencies:
-#  $(shell ..) ifeq
-ifeq ($(IMAGEIO),devil)
-  IMAGEIO_LIBS = $(shell pkg-config IL ILU --libs)
-endif
-ifeq ($(IMAGEIO),freeimage)
-  IMAGEIO_LIBS = -lfreeimage
-endif
-ifeq ($(IMAGEIO),magick)
-  IMAGEIO_LIBS = $(shell pkg-config MagickWand --libs) $(UTILLIB)
-endif
+# The following has GNU make dependency:
+#  $(shell ..)
+IMAGEIO_LIBS = $(shell pkg-config MagickWand --libs) $(UTILLIB)
+IMAGEIO = magick
 
 COMMOBJS = ../common/application.o ../common/ATKdebug.o ../common/atom.o ../common/atomlist.o \
 	../common/bind.o ../common/cursor.o ../common/dataobject.o \

@@ -71,6 +71,14 @@ usage:
 #include <andrewos.h>
 #include <stdio.h>
 
+/** Dynamic string package.
+ *  Unlike \ref simpletext, this is geared towards easy integration with
+ *  C strings.  It does not sport a "gap", and is 0-terminated, so casting
+ *  to a C string just returns its buffer pointer.  Operators, casts, and
+ *  utility functions are added to make this conversion unnecessary for
+ *  operations such as searching and modification.  This also appears to
+ *  be ATK's only implementation of an auto-allocating sprintf(3).
+ */
 class AString {
 private:
 	size_t space, used;

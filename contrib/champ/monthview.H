@@ -9,6 +9,14 @@
  * @{ */
 
 #include <view.H>
+/** A view of a month of events.
+ *  This presents a display of the days of the month, with days
+ *  containing events bolded.  See \ref champ for details on
+ *  how events work.  Days may be clicked to see events on that day.
+ *  Clicking on the header gives an event summary for the month.  Arrows may
+ *  be used to offset the month.  The \ref month data object it is meant
+ *  to view stores the offset from the current month due to arrow presses.
+ */
 class monthview: public view {
 public:
 	TRACED_CLASS(monthview);

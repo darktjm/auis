@@ -4,13 +4,14 @@ Andrew Toolkit
 I decided to revive and clean up the Andrew User Interface System
 (http://www.cs.cmu.edu/~AUIS/), formerly known as the Andrew Toolkit
 (ATK), known mostly for its editor, ez, whose main appeal was the
-ability to embed documents of different types in each other.  I have
-since removed one of its biggest non-ATK components, AMS, so I've
-changed the title of this README back to "Andrew Toolkit".  Why did I
-do it?  I don't know.  I guess I sort of liked ez back in the day, as
-well as some of the other concepts introduced by atk.  I'm sure I'll
-abandon this again soon enough as the frustration and futility
-overwhelm me, so take advantage of my work while you can.
+ability to embed documents of different types in each other.  Why did
+I do it?  I don't know.  I guess I sort of liked ez back in the day,
+as well as some of the other concepts introduced by atk.  I have since
+removed one of its biggest non-ATK components, AMS, so I've changed
+the title of this README back to "Andrew Toolkit".  The futility is
+finally catching up with me.  I will probably stop working on this
+very soon.  Documenting other people's poor design decisions really
+isn't that much fun.
 
 I downloaded the latest version, released nearly 20 years ago in
 February 1997 (ftp://ftp.andrew.cmu.edu/pub/AUIS/andrew-8.0.Z), and
@@ -32,22 +33,33 @@ There is a similar atk maintenance project on sourceforge
 (https://sourceforge.net/projects/atk).  It appears to be abandoned;
 the last actual code change was made in 2002.  Some of the changes
 include renaming symbols, moving files around, and source code
-reformatting, all without any kind of document describing (in CVS or
-otherwise) what they did, or why.  These and other pointless changes
-make it unreasonably difficult for me to actually extract anything
-useful.  So, while my project might benefit from some of the changes
-made there, I won't even bother.
+reformatting, all without any kind of document (in CVS change logs or
+otherwise) describing what they did, or why.  These and other
+pointless changes make it unreasonably difficult for me to actually
+extract anything useful.  So, while my project might benefit from some
+of the changes made there, I won't even bother.
 
 Commentary: What is ATK?
 ------------------------
 
-AUIS represents a promise.  This promise has been made many times, by
-many frameworks.  The promise is that you can develop independent
-components which easily interact with each other in an editor or
-viewer.  This means that the interaction mechanism is well-developed
-and easy to both use and implement.  It also means that components
-exist for many common applications, providing both a complete baseline
-from which to develop and a large number of useful examples.
+ATK is both a graphical toolkit and a higher level collection of
+software.  At the graphical toolkit level, it failed in many ways.  It
+was too limited, and was surpased even by Xaw3D in appearance,
+performance, and configurability.  Maybe part of the issue was its
+initial focus around WM, which I've never used or seen.  Various
+projects tried to modernize the toolkit before it died, but nothing
+ever got finished and is now a bunch of undocumented, incomplete,
+convoluted and pointless code. That is all I have to say about the
+lower-level aspects of AUIS.
+
+At the higher level, AUIS represents a promise.  This promise has been
+made many times, by many frameworks.  The promise is that you can
+develop independent components which easily interact with each other
+in an editor or viewer.  This means that the interaction mechanism is
+well-developed and easy to both use and implement.  It also means that
+components exist for many common applications, providing both a
+complete baseline from which to develop and a large number of useful
+examples.
 
 Independence can mean different things.  At the highest level, it
 could mean programs running on sepearate machines.  This requires
@@ -61,7 +73,7 @@ level, it could be components that are statically or dynamically
 linked into the application, giving little to no overhead in
 communication and making the possibility of independent failure less
 likely, but generally leaving things which require separate
-applicaitons, such as privilege separation, more difficult.
+applications, such as privilege separation, more difficult.
 
 There are many ways in which components must interact.  For visual
 interaction, the component must present itself properly within its
@@ -197,7 +209,7 @@ of course only makes sense with pre-ANSI-style parameters.
 ATK seems to have stagnated long before it was abandoned.  Very little
 was added in the 90s.  Only the bare minimum of ANSIfication was done
 to support a standard that was introduced in '89, and was available
-far before that (I was writing ANSI-style code in '88, for example).
+long before that (I was writing ANSI-style code in '88, for example).
 The only thing that prompted this ANSIfication was that it was needed
 to support C++.  I guess that's what happens when you close the source
 and run out of funding at the same time.  The work I've done here
@@ -240,14 +252,13 @@ The following known dependencies currently exist:
 
   - X and other UNIX utilities scattered throughout.
     in particular, imake, even though it's not used much by X anymore.
-  - ImageMagick.  You can change this at build-time to DevIL or
-    FreeImage by changing IMAGEIO in config/site.mcr.
+  - ImageMagick.
   - GNU roff.
   - gv. This can be overridden with the PSCPreviewCommand preference.
   - xditview.  This can be overridden with the PreviewCommand
     preference.  See below for replacing this with gv.
   - GNU make, or at least a make capable of dealing with GNU-style
-    `$(shell ..)` and `ifeq` .. `endif`, such as makepp.
+    `$(shell ..)`, such as makepp.
   - URW Nimbus fonts, installed in your X font path.  This can be
     overridden by either editing xmkfontd/non-auis.alias before
     installation or $ANDREWDIR/X11fonts/fonts.alias after installation,
@@ -299,7 +310,10 @@ So far, the following incompatibilities have been introduced:
    which means they may be too large to read in correctly on 32-bit
    systems.  That is, you can read files from 32-bit versions, but
    32-bit versions may have trouble reading new files.  Correcting
-   this issue is on my todo list.
+   this issue is on my todo list.  This is now partially alleviated by
+   using an increasing sequence counter instead of addresses as the
+   unique ID, which should keep the numbers below the 32-bit range
+   for anything but very long editing sessions.
 
  - If the image serialization format is set to png (the new default),
    old versions of ATK will not be able to read it.  This change was
@@ -349,6 +363,20 @@ So far, the following incompatibilities have been introduced:
    this is a problem, but since I never compiled the associated code,
    it probably doesn't compile and/or work.
 
+ - I have constified a lot of parameters.  Usually adding const to your
+   own variables as well will fix this.  Otherwise, you'll have to
+   examine your code and fix it, just like I fixed thousands of places
+   where these were misused.   I also changed some parameter types to
+   enumerations, where appropriate.  I also moved many symbols that were
+   `#define`s into the class that owns them.  Thus, you may have to
+   replace *class*_X with *class*::X.  I also eliminated a lot of
+   unused code rather than documenting it, although that was usually
+   also if the code was broken or unimplemented, as well.  I also made
+   a lot of members private that could be accessed via other methods.
+   In short, compile your code and fix errors as you find them.  If
+   you find something you really need, grab it from old sources and
+   document and fix it yourself.
+
  - I have removed FlexOrLexFileRule(file); only flex should be supported.
    This means that any project using this rule must rename file.flex
    to file.l, and remove file.lex.  Maintaining two versions, one of
@@ -363,7 +391,9 @@ So far, the following incompatibilities have been introduced:
    take way too much effort).
 
  - I have removed all support for fbd font files (both the converter
-   and the fbd-format orignals of the Andrew fonts).
+   and the fbd-format orignals of the Andrew fonts).  While the fbd
+   format was the original format (I assume), it holds no information
+   which was not transferred to the BDF fonts, as far as I can tell.
 
  - I have removed all known compatibility aliases for proc names.
    This means that old key/menu binding files and ness scripts may no
@@ -385,12 +415,14 @@ So far, the following incompatibilities have been introduced:
 
   - When I added the generic image reader, I made the makefile somewhat
     dependent on GNU make.  That is, the make you use must support the
-    `$(shell ...)` function and the `ifeq` .. `endif` construct.  In
+    `$(shell ...)` function.  When I removed the alternatives to
+    ImageMagick, I removed the dependence the `ifeq` .. `endif`.  In
     particular, the Single UNIX Spec make does not support these
     features.  Fix atk/basics/{common,lib}/Imakefile if this is a
     problem for you.  Adding doxygen support made such a dependency as 
     well; fix doc/Imakefile if you don't have `$(shell ...)`.  My 
-    implementation of the play class also uses this.
+    implementation of the play class in atk/music also uses this.
+    I may go back one day and switch those back to backticks.
 
   - I have removed many obsolete symbols.  Any external code relying on
     them should study the SVN logs and update to the correct symbol (or
@@ -448,6 +480,9 @@ So far, the following incompatibilities have been introduced:
       inefficient.  Instead, document space ownership.  For example,
       if a function takes a string, it's likely the string is a constant
       whose lifetime is the program lifetime anyway, so why duplicate it?
+      Similarly, if the most common usage is to pass static storage,
+      such as for structural initialization descriptors, why not
+      take ownership without duplication?
 
     - One of the first things I introduced was UNUSED, which is a
       compiler-specific macro, in violation of AndrewCoding.ez.  I have
@@ -627,5 +662,6 @@ So far, what I've done is:
     names.
 
   - Removed internal, sometimes obsolete image import/export routines
-    and replaced with a generic external library (DevIL, FreeImage,
-    or ImageMagick).
+    and replaced with a generic external library (originally DevIL,
+    FreeImage, or ImageMagick, but they all suck and only ImageMagick
+    supports GIF properly, so I dropped the other two).

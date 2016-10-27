@@ -13,6 +13,13 @@
 typedef void (*arbiterview_hfptr)(class celview *self, long rock);
 class value;
 class text;
+/** A view to manage \ref arbiter objects.
+ *  A \ref celview will try to search its parents for an \ref arbiterview.
+ *  Its associated  \ref arbiter object ensures that the \ref celview's
+ *  \ref cel has a unique name within its control.  If an \ref arbiterview
+ *  is created under the control of another \ref arbiterview, it acts as a
+ *  plain \ref celview. (FIXME: is this true?)
+ */
 class arbiterview: public  celview {
 public:
 	TRACED_CLASS(arbiterview);

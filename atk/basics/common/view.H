@@ -107,7 +107,7 @@ class view : public  observable {
      *   The old resource manager is deprecated.
      *   \return The name of this class. */
 
-    virtual void InsertViewRegion(view *parent, region *region);
+    virtual void InsertViewRegion(view *parent, const region *region);
     /**< Display this view in a rectangle.
      *   This sets up the logical bounds and clipping to the given region.
      *   The parameters are the same as for graphic::InsertGraphicRegion.
@@ -115,7 +115,7 @@ class view : public  observable {
      *   \param parent The parent class; this is generally the one who
      *                 calls this method.
      *   \param region Where to place this view. */
-    virtual void InsertView(view *parent, struct rectangle *enclosingRect);
+    virtual void InsertView(view *parent, const struct rectangle *enclosingRect);
     /**< Display this view in a rectangle.
      *   This sets up the logical bounds and clipping to the given rectangle.
      *   The parameters are the same as for graphic::InsertGraphic.
@@ -586,251 +586,356 @@ class view : public  observable {
 
 #define DRAW(x) (drawable->x)
 
-    inline void MoveToPt(struct point *Pt) { DRAW(MoveToPt((Pt))); }
+    inline void MoveToPt(const struct point *Pt) { DRAW(MoveToPt((Pt))); }
+    /**< \copydoc graphic::MoveToPt */
     inline void MoveTo(long NewX,long NewY) { DRAW(MoveTo((NewX),(NewY))); }
+    /**< \copydoc graphic::MoveTo */
     inline void Move(long DX, long DY) { DRAW(Move((DX),(DY))); }
+    /**< \copydoc graphic::Move */
 
     inline void GetLogicalBounds(struct rectangle *Rect) 
 		{ DRAW(GetLogicalBounds((Rect))); }
+    /**< \copydoc graphic::GetLogicalBounds */
     inline long GetLogicalRight() { return DRAW(GetLogicalRight()); }
+    /**< \copydoc graphic::GetLogicalRight */
     inline long GetLogicalBottom() { return DRAW(GetLogicalBottom()); }
+    /**< \copydoc graphic::GetLogicalBottom */
     inline long GetLogicalLeft() { return DRAW(GetLogicalLeft()); }
+    /**< \copydoc graphic::GetLogicalLeft */
     inline long GetLogicalHeight() { return DRAW(GetLogicalHeight()); }
+    /**< \copydoc graphic::GetLogicalHeight */
     inline long GetLogicalWidth() { return DRAW(GetLogicalWidth()); }
+    /**< \copydoc graphic::GetLogicalWidth */
     inline long GetLogicalTop() { return DRAW(GetLogicalTop()); }
+    /**< \copydoc graphic::GetLogicalTop */
 
     inline void SetVisualRegion(region *region) 
 		{ DRAW(SetVisualRegion((region))); }
+    /**< \copydoc graphic::SetVisualRegion */
     inline region *GetVisualRegion(region *region) 
 		{ return DRAW(GetVisualRegion((region))); }
+    /**< \copydoc graphic::GetVisualRegion */
     inline void GetVisualBounds(struct rectangle *Rect) 
 		{ DRAW(GetVisualBounds((Rect))); }
+    /**< \copydoc graphic::GetVisualBounds */
     inline long GetVisualRight() { return DRAW(GetVisualRight()); }
+    /**< \copydoc graphic::GetVisualRight */
     inline long GetVisualBottom() { return DRAW(GetVisualBottom()); }
+    /**< \copydoc graphic::GetVisualBottom */
     inline long GetVisualWidth() { return DRAW(GetVisualWidth()); }
+    /**< \copydoc graphic::GetVisualWidth */
     inline long GetVisualHeight() { return DRAW(GetVisualHeight()); }
+    /**< \copydoc graphic::GetVisualHeight */
     inline long GetVisualLeft() { return DRAW(GetVisualLeft()); }
+    /**< \copydoc graphic::GetVisualLeft */
     inline long GetVisualTop() { return DRAW(GetVisualTop()); }
+    /**< \copydoc graphic::GetVisualTop */
 
     inline void GetEnclosedBounds(struct rectangle *Rect)
 		{ DRAW(GetEnclosedBounds(Rect)); }
+    /**< \copydoc graphic::GetEnclosedBounds */
     inline long GetEnclosedRight() { return DRAW(GetEnclosedRight()); }
+    /**< \copydoc graphic::GetEnclosedRight */
     inline long GetEnclosedBottom() { return DRAW(GetEnclosedBottom()); }
+    /**< \copydoc graphic::GetEnclosedBottom */
     inline long GetEnclosedLeft() { return DRAW(GetEnclosedLeft()); }
+    /**< \copydoc graphic::GetEnclosedLeft */
     inline long GetEnclosedTop() { return DRAW(GetEnclosedTop()); }
+    /**< \copydoc graphic::GetEnclosedTop */
     inline long GetEnclosedWidth() { return DRAW(GetEnclosedWidth()); }
+    /**< \copydoc graphic::GetEnclosedWidth */
     inline long GetEnclosedHeight() { return DRAW(GetEnclosedHeight()); }
+    /**< \copydoc graphic::GetEnclosedHeight */
 
     inline void GetCurrentPt(struct point *Pt) { DRAW(GetCurrentPt((Pt))); }
+    /**< \copydoc graphic::GetCurrentPt */
 
-    inline void DrawLineToPt(struct point *LineEnd)
+    inline void DrawLineToPt(const struct point *LineEnd)
 		{ DRAW(DrawLineToPt((LineEnd))); }
+    /**< \copydoc graphic::DrawLineToPt */
     inline void DrawLineTo(long XEnd, long YEnd)
 		{ DRAW(DrawLineTo((XEnd), (YEnd))); }
+    /**< \copydoc graphic::DrawLineTo */
     inline void DrawLine(long DeltaX, long DeltaY)
 		{ DRAW(DrawLine((DeltaX), (DeltaY))); }
+    /**< \copydoc graphic::DrawLine */
 
     inline void DrawString(const char *Text, short Operation)
 		{ DRAW(DrawString((Text), (Operation))); }
+    /**< \copydoc graphic::DrawString */
     inline void DrawText(const char *Text, long TextLength, short Operation)
 		{ DRAW(DrawText((Text), (TextLength), (Operation))); }
+    /**< \copydoc graphic::DrawText */
     inline void SetSpaceShim(short Amount) { DRAW(SetSpaceShim((Amount))); }
+    /**< \copydoc graphic::SetSpaceShim */
     inline short GetSpaceShim() { return DRAW(GetSpaceShim()); }
+    /**< \copydoc graphic::GetSpaceShim */
     inline void SetFont(fontdesc *ChosenFont)
 		{ DRAW(SetFont((ChosenFont))); }
+    /**< \copydoc graphic::SetFont */
     inline fontdesc *GetFont() { return DRAW(GetFont()); }
+    /**< \copydoc graphic::GetFont */
 
-    inline void DrawRect(struct rectangle *Rect) { DRAW(DrawRect((Rect))); }
+    inline void DrawRect(const struct rectangle *Rect) { DRAW(DrawRect((Rect))); }
+    /**< \copydoc graphic::DrawRect */
     inline void DrawRectSize(long x,long y,long w,long h)
 		{ DRAW(DrawRectSize((x),(y),(w),(h))); }
+    /**< \copydoc graphic::DrawRectSize */
     inline void DrawTrapezoid(long topX, long topY, long topW, 
 			long botX, long botY, long botW)
 		{ DRAW(DrawTrapezoid((topX),(topY),(topW),
 			(botX),(botY),(botW))); }
-    inline void DrawPolygon(struct point *PointArray, short PointCount)
+    /**< \copydoc graphic::DrawTrapezoid */
+    inline void DrawPolygon(const struct point *PointArray, short PointCount)
 		{ DRAW(DrawPolygon((PointArray), (PointCount))); }
-    inline void DrawPath(struct point *PointArray, short PointCount)
+    /**< \copydoc graphic::DrawPolygon */
+    inline void DrawPath(const struct point *PointArray, short PointCount)
 		{ DRAW(DrawPath((PointArray), (PointCount))); }
-    inline void DrawOval(struct rectangle *Rect) { DRAW(DrawOval((Rect))); }
+    /**< \copydoc graphic::DrawPath */
+    inline void DrawOval(const struct rectangle *Rect) { DRAW(DrawOval((Rect))); }
+    /**< \copydoc graphic::DrawOval */
     inline void DrawOvalSize(long x,long y,long w,long h)
 		{ DRAW(DrawOvalSize((x), (y), (w), (h))); }
-    inline void DrawArc(struct rectangle *EnclRect, 
+    /**< \copydoc graphic::DrawOvalSize */
+    inline void DrawArc(const struct rectangle *EnclRect, 
 			short StartAngle, short OffsetAngle)
 		{ DRAW(DrawArc((EnclRect),(StartAngle),(OffsetAngle))); }
+    /**< \copydoc graphic::DrawArc */
     inline void DrawArcSize(long x,long y,long w,long h, 
 			short StartAngle, short OffsetAngle)
 		{ DRAW(DrawArcSize((x),(y),(w),(h),
 			(StartAngle),(OffsetAngle))); }
-    inline void DrawRRect(struct rectangle *Outer, struct rectangle *Inner)
+    /**< \copydoc graphic::DrawArcSize */
+    inline void DrawRRect(const struct rectangle *Outer, const struct rectangle *Inner)
 		{ DRAW(DrawRRect((Outer), (Inner))); }
+    /**< \copydoc graphic::DrawRRect */
     inline void DrawRRectSize(long x,long y,long w,long h, 
 			long cornerWidth,long cornerHeight)
 		{ DRAW(DrawRRectSize((x), (y), (w), (h), 
 			(cornerWidth), (cornerHeight))); }
-    inline void DrawRgn(region *Rgn)
-		{ DRAW(DrawRgn((Rgn))); }
+    /**< \copydoc graphic::DrawRRectSize */
 
-    inline void FillRect(struct rectangle *Rect, graphic *Tile)
+    inline void FillRect(const struct rectangle *Rect, const graphic *Tile)
 		{ DRAW(FillRect((Rect),(Tile))); }
-    inline void FillRectSize(long x,long y,long w,long h, graphic *Tile)
+    /**< \copydoc graphic::FillRect */
+    inline void FillRectSize(long x,long y,long w,long h, const graphic *Tile)
 		{ DRAW(FillRectSize((x), (y), (w), (h), (Tile))); }
+    /**< \copydoc graphic::FillRectSize */
     inline void FillTrapezoid(long topX, long topY, long topW, 
-			long botX, long botY, long botW, graphic *Tile)
+			long botX, long botY, long botW, const graphic *Tile)
 		{ DRAW(FillTrapezoid((topX), (topY), (topW), 
 			(botX), (botY), (botW), (Tile))); }
-    inline void FillPolygon(struct point *PtArray, short PtCount, 
-			graphic *Tile)
+    /**< \copydoc graphic::FillTrapezoid */
+    inline void FillPolygon(const struct point *PtArray, short PtCount, 
+			const graphic *Tile)
 		{ DRAW(FillPolygon((PtArray), (PtCount), (Tile))); }
-    inline void FillOval(struct rectangle *Rect, graphic *Tile)
+    /**< \copydoc graphic::FillPolygon */
+    inline void FillOval(const struct rectangle *Rect, const graphic *Tile)
 		{ DRAW(FillOval((Rect), (Tile))); }
-    inline void FillOvalSize(long x,long y,long w,long h, graphic *Tile)
+    /**< \copydoc graphic::FillOval */
+    inline void FillOvalSize(long x,long y,long w,long h, const graphic *Tile)
 		{ DRAW(FillOvalSize((x), (y), (w), (h), (Tile))); }
-    inline void FillArc(struct rectangle *EnclRect, 
-			short StartAngle, short OffsetAngle, graphic *Tile)
+    /**< \copydoc graphic::FillOvalSize */
+    inline void FillArc(const struct rectangle *EnclRect, 
+			short StartAngle, short OffsetAngle, const graphic *Tile)
 		{ DRAW(FillArc((EnclRect), (StartAngle), (OffsetAngle),(Tile))); }
+    /**< \copydoc graphic::FillArc */
     inline void FillArcSize(long x,long y,long w,long h, 
-			short StartAngle, short OffsetAngle, graphic *Tile)
+			short StartAngle, short OffsetAngle, const graphic *Tile)
 		{ DRAW(FillArcSize((x), (y), (w), (h), 
 			(StartAngle), (OffsetAngle), (Tile))); }
-    inline void FillRRect(struct rectangle *Outer, struct rectangle *Inner, 
-			graphic *Tile)
+    /**< \copydoc graphic::FillArcSize */
+    inline void FillRRect(const struct rectangle *Outer, const struct rectangle *Inner, 
+			const graphic *Tile)
 		{ DRAW(FillRRect((Outer), (Inner), (Tile))); }
+    /**< \copydoc graphic::FillRRect */
     inline void FillRRectSize(long x, long y, long w, long h, 
-			long cornerW, long cornerHeight, graphic *Tile)
+			long cornerW, long cornerHeight, const graphic *Tile)
 		{ DRAW(FillRRectSize((x), (y), (w), (h), 
 			(cornerW), (cornerHeight), (Tile))); }
-    inline void FillRgn(region *Rgn, graphic *Tile)
+    /**< \copydoc graphic::FillRRectSize */
+    inline void FillRgn(region *Rgn, const graphic *Tile)
 		{ DRAW(FillRgn((Rgn), (Tile))); }
+    /**< \copydoc graphic::FillRgn */
 
-    inline void EraseRect(struct rectangle *Rect) { DRAW(EraseRect((Rect))); }
+    inline void EraseRect(const struct rectangle *Rect) { DRAW(EraseRect((Rect))); }
+    /**< \copydoc graphic::EraseRect */
     inline void EraseRectSize(long x,long y,long w,long h)
 		{ DRAW(EraseRectSize((x), (y), (w), (h))); }
+    /**< \copydoc graphic::EraseRectSize */
     inline void EraseVisualRect() { DRAW(EraseVisualRect()); }
+    /**< \copydoc graphic::EraseVisualRect */
 
-    inline void BitBlt(struct rectangle *SrcRect, view *DestView, 
-		struct point *DstOrigin, struct rectangle *ClipRectList)
+    inline void BitBlt(const struct rectangle *SrcRect, view *DestView, 
+		const struct point *DstOrigin, const struct rectangle *ClipRectList)
 		{ DRAW(BitBlt((SrcRect), (((DestView))->drawable), 
 			(DstOrigin), (ClipRectList))); }
+    /**< \copydoc graphic::BitBlt */
     inline void BitBltSize(long srcX, long srcY, long dstX, long dstY, 
 			long W, long H, view *DstView, 
 			long clipX, long clipY, long clipW, long clipH)
 		{ DRAW(BitBltSize((srcX), (srcY), (dstX), (dstY), (W),(H), 
 			((DstView)->drawable), 
 			(clipX),(clipY), (clipW), (clipH))); }
+    /**< \copydoc graphic::BitBltSize */
     inline void SetBitAtLoc(long XPos, long YPos, boolean NewValue)
 		{ DRAW(SetBitAtLoc((XPos), (YPos), (NewValue))); }
+    /**< \copydoc graphic::SetBitAtLoc */
 
     inline void WritePixImage(long DestX, long DestY, pixelimage *SrcPixels, 
 				long SrcX, long SrcY, long w, long h) 
 		{ DRAW(WritePixImage(DestX,DestY, SrcPixels, SrcX,SrcY, w,h));}
+    /**< \copydoc graphic::WritePixImage */
     inline void ReadPixImage(long SrcX, long SrcY, pixelimage *DestPixels, 
 				long DestX, long DestY, long w, long h)
 		{ DRAW(ReadPixImage(SrcX,SrcY, DestPixels, DestX,DestY, w,h));}
+    /**< \copydoc graphic::ReadPixImage */
     inline void ReadImage(long SrcX, long SrcY, image *DestImage, 
 				long DestX, long DestY, long w, long h)
 		{ DRAW(ReadImage(SrcX, SrcY, DestImage, DestX, DestY, w, h)); }
+    /**< \copydoc graphic::ReadImage */
     inline void WriteImage(long DestX, long DestY, ddimage &SrcImage, 
 				long SrcX, long SrcY, long w, long h) 
 		{ DRAW(WriteImage(DestX, DestY, SrcImage, SrcX, SrcY, w, h)); }
-
-    inline void MoveLogicalOrigin(long DeltaX, long DeltaY)
-		{ DRAW(MoveLogicalOrigin((DeltaX), (DeltaY))); }
-    inline void SetLogicalOrigin(long NewX, long NewY)
-		{ DRAW(SetLogicalOrigin((NewX), (NewY))); }
-    inline void SetLogicalOriginPt(struct point *Pt)
-		{ DRAW(SetLogicalOriginPt((Pt))); }
-
+    /**< \copydoc graphic::WriteImage */
 
     inline void SetClippingRegion(region *region)
 		{ DRAW(SetClippingRegion((region))); }
+    /**< \copydoc graphic::SetClippingRegion */
     inline region *GetClippingRegion(/*MAYBE MISSING */ region *region)
 		{ return DRAW(GetClippingRegion((region))); }
+    /**< \copydoc graphic::GetClippingRegion */
     inline void SetClippingRect(/*MAYBE MISSING */ struct rectangle *ClipRect)
 		{ DRAW(SetClippingRect((ClipRect))); }
+    /**< \copydoc graphic::SetClippingRect */
     inline void SetClippingRectSize(long x, long y, long w, long h)
 		{ DRAW(SetClippingRectSize((x),(y),(w),(h))); }
+    /**< \copydoc graphic::SetClippingRectSize */
     inline void ClearClippingRect() { DRAW(ClearClippingRect()); }
+    /**< \copydoc graphic::ClearClippingRect */
     inline void GetClippingRect(struct rectangle *Rect)
 		{ DRAW(GetClippingRect((Rect))); }
+    /**< \copydoc graphic::GetClippingRect */
 
     inline void SetLineWidth(short NewLineW) { DRAW(SetLineWidth((NewLineW)));}
+    /**< \copydoc graphic::SetLineWidth */
     inline short GetLineWidth() { return DRAW(GetLineWidth()); }
+    /**< \copydoc graphic::GetLineWidth */
 
-    inline void SetLineDash(const char *dashPattern, int dashOffset, short dashType)
+    inline void SetLineDash(const unsigned char *dashPattern, int dashOffset, graphic::LineDash dashType)
 		{ DRAW(SetLineDash((dashPattern), (dashOffset), (dashType))); }
-    inline void GetLineDash(char **dashPat, int *dashOffset, short *dashType)
+    /**< \copydoc graphic::SetLineDash */
+    inline void GetLineDash(unsigned char **dashPat, int *dashOffset, graphic::LineDash *dashType)
 		{ DRAW(GetLineDash((dashPat), (dashOffset), (dashType))); }
+    /**< \copydoc graphic::GetLineDash */
 
-    inline void SetLineCap(short NewLineCap) { DRAW(SetLineCap((NewLineCap)));}
-    inline short GetLineCap() { return DRAW(GetLineCap()); }
+    inline void SetLineCap(graphic::LineCap NewLineCap) { DRAW(SetLineCap((NewLineCap)));}
+    /**< \copydoc graphic::SetLineCap */
+    inline graphic::LineCap GetLineCap() { return DRAW(GetLineCap()); }
+    /**< \copydoc graphic::GetLineCap */
 
-    inline void SetLineJoin(short NewLineJoin)
+    inline void SetLineJoin(graphic::LineJoin NewLineJoin)
 		{ DRAW(SetLineJoin((NewLineJoin))); }
-    inline short GetLineJoin() { return DRAW(GetLineJoin()); }
+    /**< \copydoc graphic::SetLineJoin */
+    inline graphic::LineJoin GetLineJoin() { return DRAW(GetLineJoin()); }
+    /**< \copydoc graphic::GetLineJoin */
 
     inline void SetTransferMode(short mode){ DRAW(SetTransferMode(mode)); }
+    /**< \copydoc graphic::SetTransferMode */
     inline short GetTransferMode() { return DRAW(GetTransferMode()); }
+    /**< \copydoc graphic::GetTransferMode */
 
     inline void FlushGraphics() { DRAW(FlushGraphics()); }
+    /**< \copydoc graphic::FlushGraphics */
 
     inline graphic *WhitePattern() { return DRAW(WhitePattern()); }
+    /**< \copydoc graphic::WhitePattern */
     inline graphic *BlackPattern() { return DRAW(BlackPattern()); }
+    /**< \copydoc graphic::BlackPattern */
     inline graphic *GrayPattern(short IntensityNum, short IntensityDenom)
 		{ return DRAW(GrayPattern((IntensityNum), (IntensityDenom))); }
+    /**< \copydoc graphic::GrayPattern */
     inline void SetPatternOrigin(long xpos, long ypos) 
 		{ DRAW(SetPatternOrigin((xpos), (ypos))); }
+    /**< \copydoc graphic::SetPatternOrigin */
     inline void GetPatternOrigin(long *xpos, long *ypos)
 		{ DRAW(GetPatternOrigin((xpos), (ypos))); }
+    /**< \copydoc graphic::GetPatternOrigin */
     inline void SetForegroundColor(color *c) { DRAW(SetForegroundColor(c)); }
+    /**< \copydoc graphic::SetForegroundColor */
     inline void SetBackgroundColor(color *c) { DRAW(SetBackgroundColor(c)); }
+    /**< \copydoc graphic::SetBackgroundColor */
     inline void SetForegroundColor(const char *colorName, long r, long g, long b)
 		{ DRAW(SetForegroundColor((colorName), (r), (g), (b))); }
+    /**< \copydoc graphic::SetForegroundColor */
     inline void GetForegroundColor(const char **name, long*retr,long*retg,long*retb)
 		{ DRAW(GetForegroundColor((name), (retr), (retg), (retb))); }
+    /**< \copydoc graphic::GetForegroundColor */
     inline void SetBackgroundColor(const char *colorName, long r, long g, long b)
 		{ DRAW(SetBackgroundColor((colorName), (r),(g),(b))); }
+    /**< \copydoc graphic::SetBackgroundColor */
     inline void GetBackgroundColor(const char **name, long*retr,long*retg,long*retb)
 		{ DRAW(GetBackgroundColor((name), (retr), (retg), (retb))); }
+    /**< \copydoc graphic::GetBackgroundColor */
 
     inline void SetFGColorCell(color *color)
 		{  DRAW(SetFGColorCell(color)); }
+    /**< \copydoc graphic::SetFGColorCell */
     inline void SetBGColorCell(color *color)
 		{  DRAW(SetBGColorCell(color)); }
+    /**< \copydoc graphic::SetBGColorCell */
 
     inline void SetFGColor(double red, double green, double blue)
 		{ DRAW(SetFGColor((red),(green),(blue))); }
+    /**< \copydoc graphic::SetFGColor */
     inline void GetFGColor(double *red, double *green, double *blue)
 		{ DRAW(GetFGColor((red),(green),(blue))); }
+    /**< \copydoc graphic::GetFGColor */
     inline void SetBGColor(double red, double green, double blue)
 		{ DRAW(SetBGColor((red),(green),(blue))); }
+    /**< \copydoc graphic::SetBGColor */
     inline void GetBGColor(double *red, double *green, double *blue)
 		{ DRAW(GetBGColor((red),(green),(blue))); }
+    /**< \copydoc graphic::GetBGColor */
 
     inline long GetHorizontalResolution()
 		{ return DRAW(GetHorizontalResolution()); }
+    /**< \copydoc graphic::GetHorizontalResolution */
     inline long GetVerticalResolution()
 		{ return DRAW(GetVerticalResolution()); }
+    /**< \copydoc graphic::GetVerticalResolution */
 
     inline class im *GetIM() { return imPtr; }
+    /**< \copydoc graphic::GetIM */
     inline class graphic *GetDrawable() { return drawable; }
+    /**< \copydoc graphic::GetDrawable */
 
     inline colormap **GetColormap() { return DRAW(GetColormap()); }
+    /**< \copydoc graphic::GetColormap */
     inline void SetColormap(colormap **cmap) {DRAW(SetColormap(cmap));}
+    /**< \copydoc graphic::SetColormap */
     inline colormap **GetInheritedColormap()
 		{ return DRAW(GetInheritedColormap()); }
+    /**< \copydoc graphic::GetInheritedColormap */
     inline void SetInheritedColormap(colormap **cmap) 
 		{ DRAW(SetInheritedColormap(cmap)); }
+    /**< \copydoc graphic::SetInheritedColormap */
     inline void ClearInheritedColormap()
 		{  DRAW(ClearInheritedColormap()); }
+    /**< \copydoc graphic::ClearInheritedColormap */
     inline colormap **CurrentColormap()
 		{ return DRAW(CurrentColormap()); }
+    /**< \copydoc graphic::CurrentColormap */
 
     inline long  EnclosedXToLocalX(long xvalue)  
 		{return (xvalue)-DRAW(GetEnclosedLeft())+DRAW(GetLogicalLeft());}
+    /**< \copydoc graphic::EnclosedXToLocalX */
     inline long  EnclosedYToLocalY(long yvalue)   
 		{return (yvalue)-DRAW(GetEnclosedTop())+DRAW(GetLogicalTop());}
+    /**< \copydoc graphic::EnclosedYToLocalY */
 
     inline long DisplayClass() { return DRAW(DisplayClass()); }
+    /**< \copydoc graphic::DisplayClass */
 
 #undef DRAW
 

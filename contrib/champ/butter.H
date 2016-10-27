@@ -10,6 +10,11 @@
 #include <view.H>
 class butter;
 typedef void (*butter_hitfptr)(char *rockptr, long rocklong, class butter *self, enum view::MouseAction act);
+/** Text meant to be displayed as a simple, clickable button.
+ *  This is meant to be used with the \ref butterview view.  The button
+ *  itself cannot be edited; this can only be initialized via the API.
+ *  It is not usable as a generic inset.
+ */
 class butter: public  dataobject {
 public:
 	TRACED_CLASS_NODEST(butter);

@@ -10,9 +10,9 @@
 /** \addtogroup libtimeoday
  * @{ */
 #include <timeoday.H>
-/** Simple date stamp of last save date.
- *  When written to a stream, this updates its internal date and stores
- *  that, as well.
+/** Simple date stamp data object of last save date.
+ *  When this inset is written to a stream, this updates its internal
+ *  date and stores that, as well.
  *  View with \ref writestampv. */
 class writestamp: public  timeoday {
 public:

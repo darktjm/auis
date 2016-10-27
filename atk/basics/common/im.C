@@ -1336,8 +1336,8 @@ im::HandleMouse(enum view::MouseAction  action, long  x, long  y, long  newButto
 
 			this->buttonState = newButtonState;
 			(hitee)->Hit( action,
-			 	physical_GlobalXToLogicalX((hitee)->GetDrawable(),x),
-				physical_GlobalYToLogicalY((hitee)->GetDrawable(),y),
+			 	physical::GlobalXToLogicalX((hitee)->GetDrawable(),x),
+				physical::GlobalYToLogicalY((hitee)->GetDrawable(),y),
 				this->clickCount);
 		}
 	}
@@ -1881,12 +1881,16 @@ void im::SetView(class view  *topLevel)
 	    // and give the toplevel view to the bbar.
 	    ((viewholderv *)this->bbarv)->setChild(topLevel);
 	    this->bbarv->LinkTree(this); /* Sets up parent and imPtr fields. */
-	    this->bbarv->InsertView(this, &this->GetDrawable()->localBounds);
+	    struct rectangle lb;
+	    this->GetLogicalBounds(&lb);
+	    this->bbarv->InsertView(this, &lb);
 	} else {
 	    // No buttonbar.  Be lightweight.  Insert the toplevel directly.
 	    // Alternatively, we could implement a dummy viewholderv.
 	    topLevel->LinkTree(this); /* Sets up parent and imPtr fields. */
-	    topLevel->InsertView(this, &this->GetDrawable()->localBounds);
+	    struct rectangle lb;
+	    this->GetLogicalBounds(&lb);
+	    topLevel->InsertView(this, &lb);
 	}
     }
     globalDoRedraw = TRUE;

@@ -8,6 +8,11 @@
  *  A dynamically loadable ATK class file.  Contains circlepi circlepiview.
  * @{ */
 #include <dataobject.H>
+/** A support object for a demonstration of ATK graphics.
+ *  This inset is a demonstration of ATK graphics, by virtue of its
+ *  default viewer, circlepiview.  It stores a preference for the view, but
+ *  does not read/write stream data.
+ */
 class circlepi: public  dataobject {
 public:
 	TRACED_CLASS(circlepi);

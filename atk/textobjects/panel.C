@@ -387,7 +387,9 @@ void panel::FullUpdate(enum view::UpdateType  type, long  x , long  y , long  w 
 
     graphic = (this)->GetDrawable();
     (this->cursor)->SetGlyph( this->iconFont, this->icon);
-    (this)->PostCursor( &graphic->visualBounds, this->cursor);
+    struct rectangle vb;
+    graphic->GetVisualBounds(&vb);
+    (this)->PostCursor( &vb, this->cursor);
 
     (this)->textview::FullUpdate( type, x, y, w, h);
 }

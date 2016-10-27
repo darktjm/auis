@@ -21,22 +21,22 @@ ATK_IMPL("region.H")
 
 ATKdefineRegistryNoInit(region, ATK);
 
-void region::XorRegion(class region  * RHS, class region  * Result)
+void region::XorRegion(const class region  * RHS, class region  * Result)
 {
     XXorRegion(this->regionData,RHS->regionData,Result->regionData);
 }
 
-void region::UnionRegion(class region  * RHS , class region  * Result )
+void region::UnionRegion(const class region  * RHS , class region  * Result )
 {
     XUnionRegion(this->regionData,RHS->regionData,Result->regionData);
 }
 
-void region::IntersectRegion(class region  * RHS, class region  * Result )
+void region::IntersectRegion(const class region  * RHS, class region  * Result )
 {
     XIntersectRegion(this->regionData,RHS->regionData,Result->regionData);
 }
 
-void region::SubtractRegion(class region  * RHS, class region  * Result )
+void region::SubtractRegion(const class region  * RHS, class region  * Result )
 {
     XSubtractRegion(this->regionData,RHS->regionData,Result->regionData);
 }
@@ -49,7 +49,7 @@ void region::ClearRegion()
     this->regionData = XCreateRegion();
 }
 
-void region::RectRegion(struct rectangle  * NewRegnRect)
+void region::RectRegion(const struct rectangle  * NewRegnRect)
 {
     XPoint rectPoint[5];
     rectPoint[0].x = rectPoint[4].x = rectangle_Left(NewRegnRect);
@@ -86,27 +86,27 @@ void region::InsetRegion(long  DeltaX, long  DeltaY)
     XShrinkRegion(this->regionData,DeltaX,DeltaY);
 }
 
-boolean region::IsRegionEmpty()
+boolean region::IsRegionEmpty() const
 {
     return XEmptyRegion(this->regionData);
 }
 
-boolean region::IsPointInRegion(struct point  * TestPt)
+boolean region::IsPointInRegion(const struct point  * TestPt) const
 {
     return XPointInRegion(this->regionData,point_X(TestPt), point_Y(TestPt));
 }
 
-boolean region::IsRectInRegion(struct rectangle  * TestRect)
+boolean region::IsRectInRegion(const struct rectangle  * TestRect) const
 {
     return XRectInRegion(this->regionData, rectangle_Left(TestRect), rectangle_Top(TestRect), rectangle_Width(TestRect), rectangle_Height(TestRect));
 }
 
-boolean region::AreRegionsEqual(class region  * TestRegion)
+boolean region::AreRegionsEqual(const class region  * TestRegion) const
 {
     return XEqualRegion(this->regionData, TestRegion->regionData);
 }
 
-struct rectangle *region::GetBoundingBox(struct rectangle  *retRect)
+struct rectangle *region::GetBoundingBox(struct rectangle  *retRect) const
 {
     XRectangle rect;
 
@@ -129,7 +129,7 @@ class region * region::CreateEmptyRegion()
     return retValue;
 }
 
-class region * region::CreateRectRegion(struct rectangle  * RegionShape)
+class region * region::CreateRectRegion(const struct rectangle  * RegionShape)
 {
     class region * self;
 
@@ -138,12 +138,12 @@ class region * region::CreateRectRegion(struct rectangle  * RegionShape)
     return self;
 }
 
-class region * region::CreateOvalRegion(struct rectangle  * RegionShape)
+class region * region::CreateOvalRegion(const struct rectangle  * RegionShape)
 {
     return region::CreateRectRegion(RegionShape);
 }
 
-class region * region::CreatePolyRegion(struct point  * PointArray,short  PointCount)
+class region * region::CreatePolyRegion(const struct point  * PointArray,short  PointCount)
 {
     XPoint * polyPts;
     int i;
@@ -170,7 +170,7 @@ class region * region::CreatePolyRegion(struct point  * PointArray,short  PointC
     return retValue;
 }
 
-void region::CopyRegion(class region  * Destination,class region  * Source)
+void region::CopyRegion(class region  * Destination,const class region  * Source)
 {
     if (!Destination) return;
     if (Destination->regionData) {

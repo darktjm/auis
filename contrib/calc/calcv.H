@@ -84,6 +84,16 @@ struct calcv_area
   };
 
 
+/** View for a simple calculator.
+ *  This is a 4-function calculator with hard-coded key bindings.  The
+ *  display assumes the size of text in pixels while specifying them in
+ *  points, so there is a lot of overwriting at more than 75dpi.
+ *  The value displayed is the only thing remembered; use this with a
+ *  \ref calc data object to save it.  It claims the ability to print,
+ *  but that ability is limited: it only supports troff printing, and it
+ *  refuses to print from \b ezprint.  Otherwise, the printout looks
+ *  just like the view, except the fonts don't overlap the boundaries.
+ */
 class calcv : public  aptv
   {
 public:

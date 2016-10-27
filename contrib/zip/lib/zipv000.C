@@ -183,9 +183,11 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
   unsigned char		lwidth;
   double				red, green, blue;
   long				status = zip_failure;
-  char					*pattern = NULL;
+  unsigned char				*pattern = NULL;
   int					offset;
-  short					dashtype, value;
+  graphic::LineDash			dashtype;
+  graphic::LineCap			cap;
+  graphic::LineJoin			join;
   const char				*def_bg, *def_fg;
   class zipview *self=this;
 
@@ -203,18 +205,18 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
         else (self)->SetForegroundColor(  def_fg, 0, 0, 0 );
     }
     (this->data_object)->Contextual_Figure_Line_Dash(  figure, &pattern, &offset, &dashtype );
-    if ( pattern ) (self)->SetLineDash(  pattern, offset, dashtype );
+    if ( pattern ) (self)->SetLineDash(  (unsigned char *)pattern, offset, dashtype );
     else
     {
       (self)->GetLineDash( NULL, NULL, &dashtype );
       if ( dashtype != graphic::LineSolid )
         (self)->SetLineDash(  NULL, 0, graphic::LineSolid );
     }
-    if (( value = (this->data_object)->Contextual_Figure_Line_Cap(  figure )) != -1 )
-      (self)->SetLineCap(  value );
+    if (( cap = (this->data_object)->Contextual_Figure_Line_Cap(  figure )) != -1 )
+      (self)->SetLineCap(  cap );
     else (self)->SetLineCap(  graphic::CapButt );
-    if (( value = (this->data_object)->Contextual_Figure_Line_Join(  figure )) != -1 )
-      (self)->SetLineJoin(  value );
+    if (( join = (this->data_object)->Contextual_Figure_Line_Join(  figure )) != -1 )
+      (self)->SetLineJoin(  join );
     else (self)->SetLineJoin(  graphic::JoinMiter );
     }
     return status;

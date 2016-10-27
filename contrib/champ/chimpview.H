@@ -7,6 +7,11 @@
 /** \addtogroup libchamp
  * @{ */
 #include <lpair.H>
+/** A view for editing event calendars.
+ *  This view provides a button list on the right and a list of events
+ *  in a text area on the left.  The description is edited on the left,
+ *  and the event dates are edited by clicking buttons on the right.
+ */
 class chimpview: public lpair {
 public:
 	TRACED_CLASS_NODEST(chimpview);

@@ -66,7 +66,7 @@ long arbiter::ReadFile(FILE  *thisFile)
 FILE *arbiter::DeclareRead(class cel  *cel)
 {
 #ifdef DEBUG
-    fprintf(stdout,"declaring %d(%s) to %d(%s)\n",cel,(cel)->GetRefName(),this,(this)->GetRefName());fflush(stdout);
+    fprintf(stdout,"declaring %p(%s) to %p(%s)\n",cel,(cel)->GetRefName(),this,(this)->GetRefName());fflush(stdout);
 #endif /* DEBUG */
     if(cel != (class cel *) this){
 	cel->chain = this->first;

@@ -78,7 +78,7 @@ WorkProc_Status xddimage_draw::Process() {
 	    h=1;
 	    w=MIN(width-x+left,pixelsper);
 	}
-	XPutImage(src->xgd->XDisplay(), src->xgd->XWindow(), src->xgd->XGC(), src->ximage, x, y, (int)physical_LogicalXToGlobalX(src->xgd, dx), (int)physical_LogicalYToGlobalY(src->xgd, dy), (unsigned int)w, (unsigned int)h);
+	XPutImage(src->xgd->XDisplay(), src->xgd->XWindow(), src->xgd->XGC(), src->ximage, x, y, (int)physical::LogicalXToGlobalX(src->xgd, dx), (int)physical::LogicalYToGlobalY(src->xgd, dy), (unsigned int)w, (unsigned int)h);
 	x+=w;
 	dx+=w;
 	if(x>=left+width) {
@@ -965,8 +965,8 @@ void xddimage::Draw(graphic *dest, long left, long top, long width, long height,
 			ximage=NULL;
 		    }
 		}
-		XCopyArea(disp, pixmap, xdest->XWindow(), xdest->XGC(), (int)left, (int)top, (unsigned int)width, (unsigned int)height, (int)physical_LogicalXToGlobalX(xgd, destLeft), (int)physical_LogicalYToGlobalY(xgd, destTop));
-	    } else XPutImage(disp, xdest->XWindow(), xdest->XGC(), ximage, (int)left, (int)top, (int)physical_LogicalXToGlobalX(xgd, destLeft), (int)physical_LogicalYToGlobalY(xgd, destTop), (unsigned int)width, (unsigned int)height);
+		XCopyArea(disp, pixmap, xdest->XWindow(), xdest->XGC(), (int)left, (int)top, (unsigned int)width, (unsigned int)height, (int)physical::LogicalXToGlobalX(xgd, destLeft), (int)physical::LogicalYToGlobalY(xgd, destTop));
+	    } else XPutImage(disp, xdest->XWindow(), xdest->XGC(), ximage, (int)left, (int)top, (int)physical::LogicalXToGlobalX(xgd, destLeft), (int)physical::LogicalYToGlobalY(xgd, destTop), (unsigned int)width, (unsigned int)height);
 	}
 #else 
 	if(draw) {
@@ -1010,8 +1010,8 @@ void xddimage::Draw(graphic *dest, const struct rectangle *src, long destLeft, l
 			ximage=NULL;
 		    }
 		}
-		XCopyArea(disp, pixmap, xdest->XWindow(), xdest->XGC(), (int)src->left, (int)src->top, (unsigned int)src->width, (unsigned int)src->height, (int)physical_LogicalXToGlobalX(xgd, destLeft), (int)physical_LogicalYToGlobalY(xgd, destTop));
-	    } else XPutImage(disp, xdest->XWindow(), xdest->XGC(), ximage, (int)src->left, (int)src->top, (int)physical_LogicalXToGlobalX(xgd, destLeft), (int)physical_LogicalYToGlobalY(xgd, destTop), (unsigned int)src->width, (unsigned int)src->height);
+		XCopyArea(disp, pixmap, xdest->XWindow(), xdest->XGC(), (int)src->left, (int)src->top, (unsigned int)src->width, (unsigned int)src->height, (int)physical::LogicalXToGlobalX(xgd, destLeft), (int)physical::LogicalYToGlobalY(xgd, destTop));
+	    } else XPutImage(disp, xdest->XWindow(), xdest->XGC(), ximage, (int)src->left, (int)src->top, (int)physical::LogicalXToGlobalX(xgd, destLeft), (int)physical::LogicalYToGlobalY(xgd, destTop), (unsigned int)src->width, (unsigned int)src->height);
 	}
 #else	
 	if(draw) {

@@ -128,7 +128,7 @@ zip::Contextual_Figure_Line_Width( zip_type_figure	   figure )
   }
 
 void
-zip::Contextual_Figure_Line_Dash( zip_type_figure	   figure, char			  **pattern, int			  *offset, short		  *type )
+zip::Contextual_Figure_Line_Dash( zip_type_figure	   figure, unsigned char			  **pattern, int			  *offset, graphic::LineDash		  *type )
             {
   IN(zip_Contextual_Figure_Line_Dash);
   if ( figure->zip_figure_line_dash_pattern )
@@ -157,7 +157,7 @@ zip::Contextual_Figure_Line_Dash( zip_type_figure	   figure, char			  **pattern,
   OUT(zip_Contextual_Figure_Line_Dash);
   }
 
-short
+graphic::LineJoin
 zip::Contextual_Figure_Line_Join( zip_type_figure	   figure )
       {
   short	  join = -1;
@@ -177,10 +177,10 @@ zip::Contextual_Figure_Line_Join( zip_type_figure	   figure )
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_line_join != -1 )
     join = figure->zip_figure_image->zip_image_stream->zip_stream_line_join;
   OUT(zip_Contextual_Figure_Line_Join);
-  return  join;
+  return  (graphic::LineJoin)join; // tjm - -1 isn't really LineJoin
   }
 
-short
+graphic::LineCap
 zip::Contextual_Figure_Line_Cap( zip_type_figure	   figure )
       {
   short	  cap = -1;
@@ -200,7 +200,7 @@ zip::Contextual_Figure_Line_Cap( zip_type_figure	   figure )
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_line_cap != -1 )
     cap = figure->zip_figure_image->zip_image_stream->zip_stream_line_cap;
   OUT(zip_Contextual_Figure_Line_Cap);
-  return  cap;
+  return  (graphic::LineCap)cap; // tjm - -1 isn't really LineCap
   }
 
 long
