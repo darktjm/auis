@@ -99,7 +99,7 @@ zip::Superior_Image_Line_Width( zip_type_image	       image )
   }
 
 long
-zip::Superior_Image_Line_Dash( zip_type_image	       image, char			      **pattern, int			      *offset, short		      *type )
+zip::Superior_Image_Line_Dash( zip_type_image	       image, unsigned char			      **pattern, int			      *offset, graphic::LineDash		      *type )
             {
   long			    status = zip_failure;
 
@@ -118,7 +118,7 @@ zip::Superior_Image_Line_Dash( zip_type_image	       image, char			      **patte
   return status;
   }
 
-short
+graphic::LineCap
 zip::Superior_Image_Line_Cap( zip_type_image	       image )
       {
   short	      cap = -1;
@@ -132,10 +132,10 @@ zip::Superior_Image_Line_Cap( zip_type_image	       image )
       }
     image = image->zip_image_superior;
     }
-  return cap;
+  return (graphic::LineCap)cap; // tjm - -1 isn't really LineCap
   }
 
-short
+graphic::LineJoin
 zip::Superior_Image_Line_Join( zip_type_image	       image )
       {
   short	      join = -1;
@@ -149,7 +149,7 @@ zip::Superior_Image_Line_Join( zip_type_image	       image )
       }
     image = image->zip_image_superior;
     }
-  return join;
+  return (graphic::LineJoin)join; // tjm - -1 isn't really LineJoin
   }
 
 struct zip_color *

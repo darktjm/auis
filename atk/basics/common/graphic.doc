@@ -413,11 +413,6 @@ long \paramname{xOriginInParent}, long \paramname{yOriginInParent}, long
 rectangle *\paramname{EnclosedRectangle});} \
 
 
-\fixedtext{void \bold{graphic::}MoveLogicalOrigin }\fixedindent{(struct 
-graphic *\paramname{graphic}, long \paramname{DeltaX}, long 
-\paramname{DeltaY});} \
-
-
 \fixedtext{void \bold{graphic::}MoveToPt }\fixedindent{(struct graphic 
 *\paramname{graphic}, struct point *\paramname{Pt});} \
 
@@ -475,15 +470,6 @@ graphic *\paramname{graphic}, char *\paramname{colorName}, long
 
 \fixedtext{void \bold{graphic::}SetLineWidth }\fixedindent{(struct graphic 
 *\paramname{graphic}, short \paramname{NewLineWidth});} \
-
-
-\fixedtext{void \bold{graphic::}SetLogicalOriginPt }\fixedindent{(struct 
-graphic *\paramname{graphic}, struct point *\paramname{Pt});} \
-
-
-\fixedtext{void \bold{graphic::}SetLogicalOrigin }\fixedindent{(struct 
-graphic *\paramname{graphic}, long \paramname{NewX}, long 
-\paramname{NewY});} \
 
 
 \fixedtext{void \bold{graphic::}SetSpaceShim }\fixedindent{(struct graphic 

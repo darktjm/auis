@@ -262,11 +262,11 @@ struct zip_stream
   unsigned char					  zip_stream_type;
   unsigned char					  zip_stream_zoom_level;
   unsigned char					  zip_stream_line_width;
-  short						  zip_stream_line_cap;
-  short						  zip_stream_line_join;
-  char						  *zip_stream_line_dash_pattern;
+  graphic::LineCap				  zip_stream_line_cap;
+  graphic::LineJoin				  zip_stream_line_join;
+  unsigned char					  *zip_stream_line_dash_pattern;
   int						  zip_stream_line_dash_offset;
-  short						  zip_stream_line_dash_type;
+  graphic::LineDash				  zip_stream_line_dash_type;
   struct zip_color_values			  *zip_stream_color_values;
   union
     {

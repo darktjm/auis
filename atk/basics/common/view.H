@@ -650,7 +650,7 @@ class view : public  observable {
     inline void GetCurrentPt(struct point *Pt) { DRAW(GetCurrentPt((Pt))); }
     /**< \copydoc graphic::GetCurrentPt */
 
-    inline void DrawLineToPt(struct point *LineEnd)
+    inline void DrawLineToPt(const struct point *LineEnd)
 		{ DRAW(DrawLineToPt((LineEnd))); }
     /**< \copydoc graphic::DrawLineToPt */
     inline void DrawLineTo(long XEnd, long YEnd)
@@ -676,7 +676,7 @@ class view : public  observable {
     inline fontdesc *GetFont() { return DRAW(GetFont()); }
     /**< \copydoc graphic::GetFont */
 
-    inline void DrawRect(struct rectangle *Rect) { DRAW(DrawRect((Rect))); }
+    inline void DrawRect(const struct rectangle *Rect) { DRAW(DrawRect((Rect))); }
     /**< \copydoc graphic::DrawRect */
     inline void DrawRectSize(long x,long y,long w,long h)
 		{ DRAW(DrawRectSize((x),(y),(w),(h))); }
@@ -686,18 +686,18 @@ class view : public  observable {
 		{ DRAW(DrawTrapezoid((topX),(topY),(topW),
 			(botX),(botY),(botW))); }
     /**< \copydoc graphic::DrawTrapezoid */
-    inline void DrawPolygon(struct point *PointArray, short PointCount)
+    inline void DrawPolygon(const struct point *PointArray, short PointCount)
 		{ DRAW(DrawPolygon((PointArray), (PointCount))); }
     /**< \copydoc graphic::DrawPolygon */
-    inline void DrawPath(struct point *PointArray, short PointCount)
+    inline void DrawPath(const struct point *PointArray, short PointCount)
 		{ DRAW(DrawPath((PointArray), (PointCount))); }
     /**< \copydoc graphic::DrawPath */
-    inline void DrawOval(struct rectangle *Rect) { DRAW(DrawOval((Rect))); }
+    inline void DrawOval(const struct rectangle *Rect) { DRAW(DrawOval((Rect))); }
     /**< \copydoc graphic::DrawOval */
     inline void DrawOvalSize(long x,long y,long w,long h)
 		{ DRAW(DrawOvalSize((x), (y), (w), (h))); }
     /**< \copydoc graphic::DrawOvalSize */
-    inline void DrawArc(struct rectangle *EnclRect, 
+    inline void DrawArc(const struct rectangle *EnclRect, 
 			short StartAngle, short OffsetAngle)
 		{ DRAW(DrawArc((EnclRect),(StartAngle),(OffsetAngle))); }
     /**< \copydoc graphic::DrawArc */
@@ -706,7 +706,7 @@ class view : public  observable {
 		{ DRAW(DrawArcSize((x),(y),(w),(h),
 			(StartAngle),(OffsetAngle))); }
     /**< \copydoc graphic::DrawArcSize */
-    inline void DrawRRect(struct rectangle *Outer, struct rectangle *Inner)
+    inline void DrawRRect(const struct rectangle *Outer, const struct rectangle *Inner)
 		{ DRAW(DrawRRect((Outer), (Inner))); }
     /**< \copydoc graphic::DrawRRect */
     inline void DrawRRectSize(long x,long y,long w,long h, 
@@ -715,50 +715,50 @@ class view : public  observable {
 			(cornerWidth), (cornerHeight))); }
     /**< \copydoc graphic::DrawRRectSize */
 
-    inline void FillRect(struct rectangle *Rect, graphic *Tile)
+    inline void FillRect(const struct rectangle *Rect, const graphic *Tile)
 		{ DRAW(FillRect((Rect),(Tile))); }
     /**< \copydoc graphic::FillRect */
-    inline void FillRectSize(long x,long y,long w,long h, graphic *Tile)
+    inline void FillRectSize(long x,long y,long w,long h, const graphic *Tile)
 		{ DRAW(FillRectSize((x), (y), (w), (h), (Tile))); }
     /**< \copydoc graphic::FillRectSize */
     inline void FillTrapezoid(long topX, long topY, long topW, 
-			long botX, long botY, long botW, graphic *Tile)
+			long botX, long botY, long botW, const graphic *Tile)
 		{ DRAW(FillTrapezoid((topX), (topY), (topW), 
 			(botX), (botY), (botW), (Tile))); }
     /**< \copydoc graphic::FillTrapezoid */
-    inline void FillPolygon(struct point *PtArray, short PtCount, 
-			graphic *Tile)
+    inline void FillPolygon(const struct point *PtArray, short PtCount, 
+			const graphic *Tile)
 		{ DRAW(FillPolygon((PtArray), (PtCount), (Tile))); }
     /**< \copydoc graphic::FillPolygon */
-    inline void FillOval(struct rectangle *Rect, graphic *Tile)
+    inline void FillOval(const struct rectangle *Rect, const graphic *Tile)
 		{ DRAW(FillOval((Rect), (Tile))); }
     /**< \copydoc graphic::FillOval */
-    inline void FillOvalSize(long x,long y,long w,long h, graphic *Tile)
+    inline void FillOvalSize(long x,long y,long w,long h, const graphic *Tile)
 		{ DRAW(FillOvalSize((x), (y), (w), (h), (Tile))); }
     /**< \copydoc graphic::FillOvalSize */
-    inline void FillArc(struct rectangle *EnclRect, 
-			short StartAngle, short OffsetAngle, graphic *Tile)
+    inline void FillArc(const struct rectangle *EnclRect, 
+			short StartAngle, short OffsetAngle, const graphic *Tile)
 		{ DRAW(FillArc((EnclRect), (StartAngle), (OffsetAngle),(Tile))); }
     /**< \copydoc graphic::FillArc */
     inline void FillArcSize(long x,long y,long w,long h, 
-			short StartAngle, short OffsetAngle, graphic *Tile)
+			short StartAngle, short OffsetAngle, const graphic *Tile)
 		{ DRAW(FillArcSize((x), (y), (w), (h), 
 			(StartAngle), (OffsetAngle), (Tile))); }
     /**< \copydoc graphic::FillArcSize */
-    inline void FillRRect(struct rectangle *Outer, struct rectangle *Inner, 
-			graphic *Tile)
+    inline void FillRRect(const struct rectangle *Outer, const struct rectangle *Inner, 
+			const graphic *Tile)
 		{ DRAW(FillRRect((Outer), (Inner), (Tile))); }
     /**< \copydoc graphic::FillRRect */
     inline void FillRRectSize(long x, long y, long w, long h, 
-			long cornerW, long cornerHeight, graphic *Tile)
+			long cornerW, long cornerHeight, const graphic *Tile)
 		{ DRAW(FillRRectSize((x), (y), (w), (h), 
 			(cornerW), (cornerHeight), (Tile))); }
     /**< \copydoc graphic::FillRRectSize */
-    inline void FillRgn(region *Rgn, graphic *Tile)
+    inline void FillRgn(region *Rgn, const graphic *Tile)
 		{ DRAW(FillRgn((Rgn), (Tile))); }
     /**< \copydoc graphic::FillRgn */
 
-    inline void EraseRect(struct rectangle *Rect) { DRAW(EraseRect((Rect))); }
+    inline void EraseRect(const struct rectangle *Rect) { DRAW(EraseRect((Rect))); }
     /**< \copydoc graphic::EraseRect */
     inline void EraseRectSize(long x,long y,long w,long h)
 		{ DRAW(EraseRectSize((x), (y), (w), (h))); }
@@ -766,8 +766,8 @@ class view : public  observable {
     inline void EraseVisualRect() { DRAW(EraseVisualRect()); }
     /**< \copydoc graphic::EraseVisualRect */
 
-    inline void BitBlt(struct rectangle *SrcRect, view *DestView, 
-		struct point *DstOrigin, struct rectangle *ClipRectList)
+    inline void BitBlt(const struct rectangle *SrcRect, view *DestView, 
+		const struct point *DstOrigin, const struct rectangle *ClipRectList)
 		{ DRAW(BitBlt((SrcRect), (((DestView))->drawable), 
 			(DstOrigin), (ClipRectList))); }
     /**< \copydoc graphic::BitBlt */
@@ -799,17 +799,6 @@ class view : public  observable {
 		{ DRAW(WriteImage(DestX, DestY, SrcImage, SrcX, SrcY, w, h)); }
     /**< \copydoc graphic::WriteImage */
 
-    inline void MoveLogicalOrigin(long DeltaX, long DeltaY)
-		{ DRAW(MoveLogicalOrigin((DeltaX), (DeltaY))); }
-    /**< \copydoc graphic::MoveLogicalOrigin */
-    inline void SetLogicalOrigin(long NewX, long NewY)
-		{ DRAW(SetLogicalOrigin((NewX), (NewY))); }
-    /**< \copydoc graphic::SetLogicalOrigin */
-    inline void SetLogicalOriginPt(struct point *Pt)
-		{ DRAW(SetLogicalOriginPt((Pt))); }
-    /**< \copydoc graphic::SetLogicalOriginPt */
-
-
     inline void SetClippingRegion(region *region)
 		{ DRAW(SetClippingRegion((region))); }
     /**< \copydoc graphic::SetClippingRegion */
@@ -833,22 +822,22 @@ class view : public  observable {
     inline short GetLineWidth() { return DRAW(GetLineWidth()); }
     /**< \copydoc graphic::GetLineWidth */
 
-    inline void SetLineDash(const char *dashPattern, int dashOffset, short dashType)
+    inline void SetLineDash(const unsigned char *dashPattern, int dashOffset, graphic::LineDash dashType)
 		{ DRAW(SetLineDash((dashPattern), (dashOffset), (dashType))); }
     /**< \copydoc graphic::SetLineDash */
-    inline void GetLineDash(char **dashPat, int *dashOffset, short *dashType)
+    inline void GetLineDash(unsigned char **dashPat, int *dashOffset, graphic::LineDash *dashType)
 		{ DRAW(GetLineDash((dashPat), (dashOffset), (dashType))); }
     /**< \copydoc graphic::GetLineDash */
 
-    inline void SetLineCap(short NewLineCap) { DRAW(SetLineCap((NewLineCap)));}
+    inline void SetLineCap(graphic::LineCap NewLineCap) { DRAW(SetLineCap((NewLineCap)));}
     /**< \copydoc graphic::SetLineCap */
-    inline short GetLineCap() { return DRAW(GetLineCap()); }
+    inline graphic::LineCap GetLineCap() { return DRAW(GetLineCap()); }
     /**< \copydoc graphic::GetLineCap */
 
-    inline void SetLineJoin(short NewLineJoin)
+    inline void SetLineJoin(graphic::LineJoin NewLineJoin)
 		{ DRAW(SetLineJoin((NewLineJoin))); }
     /**< \copydoc graphic::SetLineJoin */
-    inline short GetLineJoin() { return DRAW(GetLineJoin()); }
+    inline graphic::LineJoin GetLineJoin() { return DRAW(GetLineJoin()); }
     /**< \copydoc graphic::GetLineJoin */
 
     inline void SetTransferMode(short mode){ DRAW(SetTransferMode(mode)); }

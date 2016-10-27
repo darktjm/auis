@@ -992,12 +992,12 @@ static void DrawBar(class textview  *self, struct lineitem  *tt, long  bx , long
     }
 
     if (tt->ti_styleFlags & style_DottedBox) {
-	char *oldpattern;
+	unsigned char *oldpattern;
 	int oldoffset;
-	short oldtype;
+	graphic::LineDash oldtype;
 
 	(self)->GetLineDash( &oldpattern, &oldoffset, &oldtype);
-	(self)->SetLineDash( "\001\001", 0, graphic::LineDoubleDash);
+	(self)->SetLineDash( (const unsigned char *)"\001\001", 0, graphic::LineDoubleDash);
         (self)->MoveTo( bx - 1, by - above + 1);
         (self)->DrawLineTo( bx + width, by - above + 1);
         (self)->DrawLineTo( bx + width, by + below);

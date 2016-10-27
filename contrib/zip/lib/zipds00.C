@@ -284,7 +284,7 @@ zip::Set_Stream_Line_Width( zip_type_stream	       stream, long			       width )
   }
 
 long
-zip::Set_Stream_Line_Dash( zip_type_stream		 stream, char				 *pattern, int				 offset, short			 type )
+zip::Set_Stream_Line_Dash( zip_type_stream		 stream, unsigned char				 *pattern, int				 offset, graphic::LineDash			 type )
             {
   int			      status = zip_ok;
 
@@ -293,7 +293,7 @@ zip::Set_Stream_Line_Dash( zip_type_stream		 stream, char				 *pattern, int				 
       {
 	  if ( pattern )
             {
-	      stream->zip_stream_line_dash_pattern = strdup( pattern );
+	      stream->zip_stream_line_dash_pattern = (unsigned char *)strdup( (char *)pattern );
 	      stream->zip_stream_line_dash_offset = offset;
 	      stream->zip_stream_line_dash_type = type;
 	    }
@@ -307,7 +307,7 @@ zip::Set_Stream_Line_Dash( zip_type_stream		 stream, char				 *pattern, int				 
   }
 
 long
-zip::Set_Stream_Line_Cap( zip_type_stream		 stream, short			 cap )
+zip::Set_Stream_Line_Cap( zip_type_stream		 stream, graphic::LineCap			 cap )
         {
   int			      status = zip_ok;
 
@@ -322,7 +322,7 @@ zip::Set_Stream_Line_Cap( zip_type_stream		 stream, short			 cap )
   }
 
 long
-zip::Set_Stream_Line_Join( zip_type_stream		 stream, short			 join )
+zip::Set_Stream_Line_Join( zip_type_stream		 stream, graphic::LineJoin			 join )
         {
   int			      status = zip_ok;
 

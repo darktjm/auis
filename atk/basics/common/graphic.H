@@ -17,14 +17,46 @@
 class ddimage;
 /** Generic graphic context.
  *  This context is generally associated with a view; it is where
- *  all things are drawn.  This is mostly an abstract class; children
- *  are created specific to the type of graphics device (e.g. \ref xgraphic).
+ *  all things are drawn.  Both the context and the methods to use this
+ *  context to draw graphics are held here.  This is mostly an abstract
+ *  class; children are created specific to the type of graphics device
+ *  (e.g. \ref xgraphic).
  *
  *  The graphic context contains the following elements:
+ *  -  A rectangle of bits representing pixels on the display.  The
+ *     mapping of bits to pixels is set up by the interaction manager
+ *     (\ref im) using the \ref pixmap class.  This defines the
+ *     context's <em>visual rectangle</em>.  A new grpahic object must
+ *     be associated with real pixels either by calling im::SetView or
+ *     graphic::InsertGraphic.
+ *  -  A logical coordinate system is set up on a virtual plane of pixels.
+ *     Its origin coincides with the visual rectangle.  Its size is
+ *     effectively infinite, but it is clipped to the visual rectangle for
+ *     display and storage.
+ *  -  An enclosing transformation from the logical coordinate system to
+ *     the enclosing context's coordinate system.
  *  -  A drawing cursor.  This is an invisible point used by other
- *     drawing functions as a point of origin.
+ *     drawing functions as a point of origin.  This is currently only used
+ *     by a limited set of line drawing functions and the text drawing
+ *     function.  Officially, all other functions ignore and invalidate the
+ *     drawing cursor.  In addition, resizing the graphic context invalidates
+ *     the drawing cursor.  Its initial position is (0,0).
  *  -  A drawing color.  The interpretation of this color is dependent on
- *     the display hardware.
+ *     the display hardware.  This includes a foreground color and a
+ *     background color.
+ *  -  A line width.  Solid lines and curves are extended from their
+ *     nominal path perpendicular to the path by 1/2 the line width in
+ *     either direction.  A line width of 0 is a special degenerate, fast
+ *     version of 1.  Its initial value is 1.
+ *  -  A line drawing pattern.  This includes a method (\ref LineDash)
+ *     to draw alternating segments, and a pattern of alternating segments,
+ *     and a "phase" adustments to make continued lines' patterns line up.
+ *  -  A tiling pattern offset.  This is used with the tiling pattern to
+ *     properly align multiple regions' patterns.
+ *  -  Line end point drawing techniques (\ref LineCap, \ref LineJoin).
+ *  -  A text font.  The default is andysans 12.
+ *  -  Text spacing.  After each space, additional pixels may be skipped
+ *     via a "shim".
  *  -  A transfer function.  This is a set of bits.  This set is indexed
  *     by a 3-bit number.  The lowest bit of that number is the destination
  *     bit.  The second is the source bit.  The third is the mask bit.
@@ -41,7 +73,11 @@ class ddimage;
  *     the bit-by-bit calculations.  Instead, one can just perform the
  *     logical operations directly on the constants. For example, the
  *     AND operation can be expressed as (graphic::SOURCE & graphic::DEST).
- *     Some common combinations are provided as well.
+ *     Some common combinations are provided as well.  The default value
+ *     is graphic::COPY.
+ *  -  A clip region.  This can be used to reduce the number of drawing
+ *     commands.  The drawing will be clipped to this, regardless.  The
+ *     default is NULL, i.e., no clipping region.
  */
 class graphic : public  observable {
 public:
@@ -179,7 +215,7 @@ as well.
 	CapNotLast, /**< Same as \ref CapButt, but last endpoint is not drawn if width is 0. */
 	CapButt, /**< Line stops at end point and is strictly rectangular, centered at the end point. */
 	CapRound, /**< In addition to CapButt behavior, a semicircle is extended beyond the line end centered at the end point if the line width is greater than 0. */
-	CapProjecting /**< Like CapButt, but the rectangle extends beyond the end points by 1/2 the line width. */
+	CapProjecting /**< Like \ref CapButt, but the rectangle extends beyond the end points by 1/2 the line width. */
     };
 
     /** For multi-line drawing, such as polyline or polygons, the joints
@@ -196,8 +232,8 @@ as well.
      *  of the same name.  See the Xlib - C Language X Interface, chapter 3,
      *  "Window Functions" for details. */
     enum DisplayClass {
-	Monochrome = (1<<1), /**< Psudeo-class used for matching against monochrome classes (GrayScale, StaticGray). */
-	Color = (1<<2), /**< Pseudo-class used for class matching against color classes (PseudoColor, StaticColor, TrueColor, DirectColor). */
+	Monochrome = (1<<1), /**< A \ref StaticGray display with 2 colors has this ored in. */
+	Color = (1<<2), /**< Any color display has this ored in. */
 	PseudoColor = (1<<3), /**< Color display; User-modifyable color table maps pixel values to colors.  This used to be the most common display type:  a limited number of bits per pixel (e.g. 8) with a full RGB palette. */
 	GrayScale = (1<<4), /**< Monochrome display; Pixel values map to user-modifyable gray scale.   I'm not sure I've ever seen such a display.  */
 	DirectColor = (1<<5), /**< Color display; RGB values map to user-modifyable RGB levels.  I'm not sure I've ever seen such a display.  */
@@ -225,7 +261,7 @@ as well.
      *   \param Pt Filled with the position relative to the graphic context
      *             origin.
      */
-    virtual void DrawLineToPt(struct point * LineEnd);
+    virtual void DrawLineToPt(const struct point * LineEnd);
     /**< Draw a line to a point.
      *   The line starts at the current drawing cursor, using the current
      *   line drawing styles.  The drawing cursor is also moved to the
@@ -261,7 +297,7 @@ as well.
      *   \param Text The string to display.
      *   \param Operation Where to draw the text relative to the drawing
      *          cursor.  The default vertical position is the baseline,
-     *          and the default horizontal position os the left edge.
+     *          and the default horizontal position is the left edge.
      *          Use a combination of graphic::position constants.
      */
     virtual void DrawText(const char * Text, long TextLength, short Operation);
@@ -273,27 +309,29 @@ as well.
      *   \param TextLength How many characters to display.
      *   \param Operation Where to draw the text relative to the drawing
      *          cursor.  The default vertical position is the baseline,
-     *          and the default horizontal position os the left edge.
+     *          and the default horizontal position is the left edge.
      *          Use a combination of graphic::position constants.
      */
     virtual void SetSpaceShim(short Amount);
     /**< Set the width of spaces in drawn text.
-     *   This width is in pixels.  When a shim is active, spaces in text
-     *   are not drawn; instead, the number of pixels given is simply skipped
-     *   before starting to draw the text after the space(s).
-     *   \param Amount The width of a space.  Set to zero to disable, and draw
-     *          spaces as part of the text.
+     *   This width is in pixels.  Spaces in text are followed by a skip of
+     *   this length before continuing.  This does not apply to tabs (which
+     *   are generally not directly supported,
+     *   anyway).
+     *   \param Amount Additional width of a space.  Default is 0.
      */
     virtual short GetSpaceShim()  ;
-    /**< Find out how spaces are drawn in text.
-     *   \return If zero, spaces are drawn as part of the text font.
-     *           Otherwise, spaces are "drawn" by displaying text before
-     *           and after the space, with the given number of pixels between.
+    /**< Find out how much additional space is drawn in text.
+     *   \return The amount skipped after each space.
      */
     virtual void SetFont(class fontdesc * ChosenFont);
     /**< Set the font for text rendering.
      *   This includes styles, such as bold and italic.
      *   \param ChosenFont The font to use.  The default is andysans12.
+     *                     The actual font used depends on display
+     *                     characteristics and available font resolutions,
+     *                     so font metrics may need updating if these
+     *                     characteristics change.
      */
     virtual class fontdesc * GetFont()  ;
     /**< Find out what font is being used for text rendering.
@@ -302,7 +340,7 @@ as well.
 
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void DrawRect(struct rectangle * Rect);
+    virtual void DrawRect(const struct rectangle * Rect);
     /**< Draw a rectangle.
      *   The current drawing cursor position is ignored and invalidated
      *   by this function.  Note that line thickness greater than zero
@@ -332,7 +370,7 @@ as well.
      */
     // tjm - PointCount should be unsigned.  This should also fail gracefully
     //       if PointArray is NULL or PointCount is 0.
-    virtual void DrawPolygon(struct point * PointArray, short PointCount);
+    virtual void DrawPolygon(const struct point * PointArray, short PointCount);
     /**< Draw a set of lines in a closed path.
      *   Starting at the first given point, line segments are drawn as
      *   per DrawLineTo() except that the drawing cursor is not read or
@@ -360,7 +398,7 @@ as well.
      *   \param bottomY The Y coordinate of the "left" edge of the bottom horizontal line.
      *   \param bottomWidth The width of the bottom horizontal line.
      */
-    virtual void DrawPath(struct point * PointArray, short PointCount);
+    virtual void DrawPath(const struct point * PointArray, short PointCount);
     /**< Draw a set of lines in a path.
      *   Starting at the first given point, line segments are drawn as
      *   per DrawLineTo() except that the drawing cursor is not read or
@@ -378,7 +416,7 @@ as well.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void DrawOval(struct rectangle * Rect);
+    virtual void DrawOval(const struct rectangle * Rect);
     /**< Draws an oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   ellipse may not look as intended.  Only the edge is drawn.
@@ -404,7 +442,7 @@ as well.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void DrawArc(struct rectangle * EnclRect, short StartAngle, short OffsetAngle);
+    virtual void DrawArc(const struct rectangle * EnclRect, short StartAngle, short OffsetAngle);
     /**< Draws part of an oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   elliptical arc may not look as intended.  Angles begin at 12 o'clock
@@ -444,7 +482,7 @@ as well.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void DrawRRect(struct rectangle * OuterBox, struct rectangle * InnerBox);
+    virtual void DrawRRect(const struct rectangle * OuterBox, const struct rectangle * InnerBox);
     /**< Draw a rectangle with rounded edges.
      *   The corners of the rectangle are trimmed by the corner size,
      *   and quarter-circle arcs are drawn to connect the edges.  If the
@@ -453,8 +491,8 @@ as well.
      *   This will produce an ellipse if both dimensions are exceeded.
      *   \param OuterBox The outer rectangle.
      *   \param InnerBox The location of this rectangle is ignored.  Its
-     *                   width is the width of the corner, and its height
-     *                   is the height of the corner.  If either dimension
+     *                   width is twice the width of the corner, and its height
+     *                   is twice the height of the corner.  If either dimension
      *                   is negative, results are undefined.
      */
     // tjm - width & height should really be unsigned.  Also, the X
@@ -480,7 +518,7 @@ as well.
 
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillRect(struct rectangle * Rect, class graphic * Tile);
+    virtual void FillRect(const struct rectangle * Rect, const class graphic * Tile);
     /**< Draw a filled rectangle.
      *   The current drawing cursor position is ignored and invalidated
      *   by this function.  Note that line thickness greater than zero
@@ -489,11 +527,13 @@ as well.
      *   \param Rect The rectangle size and coordinates relative to the
      *               graphic context origin.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillRectSize(long x,long y,long width,long height, class graphic * Tile);
+    virtual void FillRectSize(long x,long y,long width,long height, const class graphic * Tile);
     /**< Draw a filled rectangle at the given position and size.
      *   The current drawing cursor position is ignored and invalidated
      *   by this function.  Note that line thickness greater than zero
@@ -508,10 +548,12 @@ as well.
      *   \param height The nominal height of the rectangle, in pixels.
      *                 Negative values draw nothing.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     virtual void FillTrapezoid(long topX, long topY, long topWidth, 
-		long bottomX, long bottomY, long bottomWidth, class graphic * Tile);
+		long bottomX, long bottomY, long bottomWidth, const class graphic * Tile);
     /**< Draw a filled, closed figure with parallel horizontal edges.
      *   This ignores and invalidates the current drawing cursor position.
      *   Negative widths move in the opposite direction.  The "left" edges
@@ -527,9 +569,11 @@ as well.
      *                      the size of this does not match the sign of
      *                      \p topWidth, undefined behavior results.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
-    virtual void FillPolygon(struct point * PointArray, short PointCount, class graphic * Tile);
+    virtual void FillPolygon(const struct point * PointArray, short PointCount, const class graphic * Tile);
     /**< Draw a set of lines in a filled, closed path.
      *   Starting at the first given point, line segments are drawn as
      *   per DrawLineTo() except that the drawing cursor is not read or
@@ -545,11 +589,13 @@ as well.
      *   \param PointCount The number of elements in \p PointArray.  A
      *                     value less than one produces undefined behavior.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillOval(struct rectangle * Rect, class graphic * Tile);
+    virtual void FillOval(const struct rectangle * Rect, const class graphic * Tile);
     /**< Draws a filled oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   ellipse may not look as intended.
@@ -558,11 +604,13 @@ as well.
      *               Its center is the rectangle's center.
      *               Negative width and height produce undefined results.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillOvalSize(long x,long y,long width,long height, class graphic * Tile);
+    virtual void FillOvalSize(long x,long y,long width,long height, const class graphic * Tile);
     /**< Draws a filled oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   ellipse may not look as intended.
@@ -575,11 +623,13 @@ as well.
      *   \param height The oval's vertical axis length.  Negative height
      *                 produces undefined results.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillArc(struct rectangle * EnclRect, short StartAngle, short OffsetAngle, class graphic * Tile);
+    virtual void FillArc(const struct rectangle * EnclRect, short StartAngle, short OffsetAngle, const class graphic * Tile);
     /**< Draws part of a filled oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   elliptical arc may not look as intended.  Angles begin at 12 o'clock
@@ -595,12 +645,14 @@ as well.
      *                     start (i.e. end = \p StartAngle + \p OffsetAngle).
      *                     Its sign indicates the direction of travel.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
     virtual void FillArcSize(long x,long y,long width,long height, 
-		short StartAngle, short OffsetAngle, class graphic * Tile);
+		short StartAngle, short OffsetAngle, const class graphic * Tile);
     /**< Draws part of a filled oval with horizontal and vertical axes.
      *   Note that display pixel aspect is not taken into account, so the
      *   elliptical arc may not look as intended.  Angles begin at 12 o'clock
@@ -620,11 +672,13 @@ as well.
      *                     start (i.e. end = \p StartAngle + \p OffsetAngle).
      *                     Its sign indicates the direction of travel.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillRRect(struct rectangle * OuterBox, struct rectangle * InnerBox, class graphic * Tile);
+    virtual void FillRRect(const struct rectangle * OuterBox, const struct rectangle * InnerBox, const class graphic * Tile);
     /**< Draw a filled rectangle with rounded edges.
      *   The corners of the rectangle are trimmed by the corner size,
      *   and quarter-circle arcs are drawn to connect the edges.  If the
@@ -637,11 +691,13 @@ as well.
      *                   is the height of the corner.  If either dimension
      *                   is negative, results are undefined.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
     // tjm - width & height should really be unsigned.  Also, the X
     //       routine should deal w/ >16-bit width/height.
-    virtual void FillRRectSize(long x, long y, long width, long height, long cornerWidth, long cornerHeight, class graphic * Tile);
+    virtual void FillRRectSize(long x, long y, long width, long height, long cornerWidth, long cornerHeight, const class graphic * Tile);
     /**< Draw a filled rectangle with rounded edges.
      *   The corners of the rectangle are trimmed by the corner size,
      *   and quarter-circle arcs are drawn to connect the edges.  If the
@@ -659,17 +715,21 @@ as well.
      *   \param cornerHeight The height of the rounded corner.  Negative values
      *                       result in undefined behavior.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
-    virtual void FillRgn(class region * Rgn, class graphic * Tile);
+    virtual void FillRgn(class region * Rgn, const class graphic * Tile);
     /**< Fills in pixels contained in a region.
      *   Any pixel within the given region is drawn as if it was intersected
      *   with a filled rectangle enclosing its boundaries.
      *   \param Rgn The region to fill.
      *   \param Tile A fill pattern.  Must be generated with WhitePattern(),
-     *          BlackPattern(), or GrayPattern().
+     *          BlackPattern(), or GrayPattern().  NULL is a solid foreground
+     *          color fill.  On true monochrome displays, that foreground
+     *          color fill is a stipple pattern estimate of the color.
      */
-    virtual void EraseRect(struct rectangle *Rect);
+    virtual void EraseRect(const struct rectangle *Rect);
     /**< Draws a filled rectangle of the background color.
      *   The current drawing cursor position is ignored and invalidated
      *   by this function.
@@ -701,9 +761,9 @@ as well.
     //       probably just be dropped.  It should probably be replaced by
     //       a mask (for proper blitting) or a region (as a way of giving
     //       a mask).
-    virtual void BitBlt(struct rectangle *SrcRect, 
-		class graphic *DestGraphic, struct point * DstOrigin, 
-		struct rectangle *ClipRectList);
+    virtual void BitBlt(const struct rectangle *SrcRect, 
+		class graphic *DestGraphic, const struct point * DstOrigin, 
+		const struct rectangle *ClipRectList);
     /**< Copy a rectangular region of pixels.
      *   \param SrcRect The region to copy.  Coordinates are relative to the
      *                  origin of the source graphic context (this).
@@ -711,7 +771,8 @@ as well.
      *   \param DstOrigin The location in the target corresponding to the
      *                    upper-left corner of the rectangle.
      *   \param ClipRectList A rectangle to optionally limit drawing to a
-     *                       sub-region of the target.
+     *                       sub-region of the target.  This is currently
+     *                       ignored.
      */
     // tjm - width & height should really be unsigned.
     virtual void BitBltSize(long srcX, long srcY, 
@@ -719,6 +780,7 @@ as well.
 		class graphic *DstGraphic, 
 		long clipX, long clipY, long clipWidth, long clipHeight);
     /**< Copy a rectangular region of pixels.
+     *   Note that the clipping parameters are currently ignored.
      *   \param SrcX The X coordinate of the left edge of the rectangle to copy,
      *               relative to the origin of the source graphic context (this).
      *   \param SrcY The Y coordinate of the top edge of the rectangle to copy,
@@ -749,11 +811,64 @@ as well.
      */
 
     virtual void WritePixImage(long DestX, long DestY, 
-		class pixelimage *SrcPixels, long SrcX, long SrcY, 
+		const class pixelimage *SrcPixels, long SrcX, long SrcY, 
 		long width, long height);
+    /**< Copy a \ref pixelimage into the graphic.
+     *   Set pixels in the \ref pixelimage are drawn in the foreground
+     *   color, and unset pixels are drawn in the background color.
+     *   The transfer mode may change this, of course.
+     *   \param DestX The X coordinate of the upper-left corner of the
+     *          destination, relative to the graphic context origin.
+     *   \param DestY The Y coordinate of the upper-left corner of the
+     *          destination, relative to the graphic context origin.
+     *   \param SrcPixels The image to copy.
+     *   \param SrcX The X offset of the start of the pixels to copy,
+     *               within the pixel image.  Values outside of the
+     *               width of the source image will result in undefined
+     *               behavior.  Under X, an protocol error will be given.
+     *   \param SrcY The Y offset of the start of the pixels to copy,
+     *               within the pixel image.  Values outside of the
+     *               height of the source image will result in undefined
+     *               behavior.  Under X, a protocol error will be given.
+     *   \param width The width of the pixel area to copy.  Zero or
+     *                negative values cause this function to do nothing.
+     *                Values which, combined with \p SrcX, exceed the
+     *                width of the source image result in undefined
+     *                behavior.  Under X, a protocol error will be given.
+     *   \param height The height of the pixel area to copy.  Zero or
+     *                negative values cause this function to do nothing.
+     *                Values which, combined with \p SrcY, exceed the
+     *                height of the source image result in undefined
+     *                behavior.  Under X, a protocol error will be given.
+     */
     virtual void ReadPixImage(long SrcX, long SrcY, 
 		class pixelimage *DestPixels, long DestX, long DestY, 
 		long width, long height);
+    /**< Copy pixels from the graphic to a \ref pixelimage.
+     *   Behavior on non-monochrome graphic contexts is undefined.
+     *   Otherwise, the color interpretation for the pixels is given by
+     *   IsImageInverted().
+     *   \param SrcX The X coordinate of the upper-left corner of the region
+     *               to copy, relative to the graphic context origin.
+     *   \param SrcY The Y coordinate of the upper-left corner of the region
+     *               to copy, relative to the graphic context origin.
+     *   \param DestPixels The destination image.  Bits within the selected
+     *                     rectangle will be updated.
+     *   \param DestX The X offset of the start of the area to update,
+     *                relative to the left edge of \p DestPixels.  Values
+     *                outside of the image's width result in undefined
+     *                behavior.
+     *   \param DestY The Y offset of the start of the area to update,
+     *                relative to the top edge of \p DestPixels.  Values
+     *                outside of the image's height result in undefined
+     *                behavior.
+     *   \param width The width of the rectangular area to copy.  If this
+     *                plus \p DestX exceeds the width of the target
+     *                pixel image or source view window, behavior is undefined.
+     *   \param height The height of the rectangular area to copy.  If this
+     *                 plus \p DestY exceeds the height of the target
+     *                 pixel image or source view window, behavior is undefined.
+     */
 
     virtual void InsertGraphic(class graphic * EnclosingGraphic, const struct rectangle * EnclosedRectangle);
     virtual void InsertGraphicSize(class graphic * EnclosingGraphic, 
@@ -763,9 +878,6 @@ as well.
     virtual void SetVisualRegion(class region *region);
     virtual class region * GetVisualRegion(class region *retRegion)  ;
 
-    virtual void MoveLogicalOrigin(long DeltaX, long DeltaY);
-    virtual void SetLogicalOrigin(long NewX, long NewY);
-    virtual void SetLogicalOriginPt(struct point * Pt);
     virtual void GetLogicalBounds(struct rectangle * Rect);
     virtual long GetLogicalRight()  ;
     virtual long GetLogicalBottom()  ;
@@ -795,34 +907,120 @@ as well.
      *   which is usually one pixel wide, has no guarantee of single draw
      *   only, and has no special end caps or joins.  The default is 1.
      *   \param NewLineWidth The new line width.  Negative values have
-     *          undefined behavior.
+     *          undefined behavior, as do values above $2^8-1$.
      */
     virtual short GetLineWidth()  ;
     /**< Return the line width used by this context.
      *   \return the line width used by this context.
      */
 
-    virtual void SetLineDash( const char *dashPattern, int dashOffset, short dashType );
-    virtual void GetLineDash( char **dashPattern, int *dashOffset, short *dashType );
+    // note: xgraphic says NULL disables, but graphic says NULL keeps old
+    //   since there is no other graphic implementation, I'll doc as xgraphic
+    // note:  xgraphic says pat len of 0 semi-keeps (updates value to blank,
+    //         but retains old value in X GC).   Bad code.
+    virtual void SetLineDash( const unsigned char *dashPattern, int dashOffset, LineDash dashType );
+    /**< Sets line dash pattern.
+     *   A dash pattern consists of odd and even segments.  Even segments are
+     *   always drawn in the foreground color.  The color of odd semengs is
+     *   dependent on \p dashType.
+     *   \param dashPattern If NULL, use only solid lines.  Otherwise,
+     *                      it is a zero-terminated array of dash lengths,
+     *                      containing at least one length.  If the number
+     *                      of elements is odd, the entire array is appended
+     *                      to itself to make it even.  Each element is the
+     *                      length of that segment.  Note that segment lengths
+     *                      are only guaranteed to be accurate in vertical and
+     *                      horizontal lines.
+     *   \param dahsOffset The start element of \p dashPattern.  If this points
+     *                     to an odd element, the odd color is used first.
+     *   \param dashType The color of odd dashes.  See graphic::LineType.
+     */
+    virtual void GetLineDash( unsigned char **dashPattern, int *dashOffset, LineDash *dashType );
+    /**< Obtain current dash pattern.
+     *   See SetLineDash() for interpretation of dash parameters.
+     *   \param dashPattern The current pattern string.  This must be freed with
+     *                      free(3) when done.
+     *   \param dashOffset The current dash offset.
+     *   \param dashType The current color of odd dashes.
+     */
 
-    virtual void SetLineCap( short NewLineCap );
-    virtual short GetLineCap()  ;
+    virtual void SetLineCap( LineCap NewLineCap );
+    /**< Set line end point style.
+     *   \param NewLineCap See graphic::LineCap.  The default is CapButt.
+     */
+    virtual LineCap GetLineCap()  ;
+    /**< Obtain current line end point style.
+     *   \return the current line end point style.  See graphic::LineCap.
+     */
 
-    virtual void SetLineJoin( short NewLineJoin );
-    virtual short GetLineJoin()  ;
+    virtual void SetLineJoin( LineJoin NewLineJoin );
+    /**< Set line join point style.
+     *   \param NewLineJoin See graphic::LineJoin.  The default is JoinMiter.
+     */
+    virtual LineJoin GetLineJoin()  ;
+    /**< Obtain current line join point style.
+     *   \return the current line join point style.  See graphic::LineJoin.
+     */
 
     virtual void SetTransferMode(short NewTransferMode);
-    virtual inline short GetTransferMode() { return transferMode; }  ;
+    /**< Set default drawing transfer mode.
+     *   See the class summary for details on how this works.
+     *   \param NewTransferMode A transfer mode bit array.
+     */
+    virtual inline short GetTransferMode() { return transferMode; }
+    /**< Get current default drawing transfer mode.
+     *   See the class summary for details on how this works.
+     *   \return the current transfer mode bit array.
+     */
 
+    // tjm - FIXME: Is this call necessary?  If so, why did they design it
+    //              this way?  It seems retarded.
     virtual void RestoreGraphicsState();
+    /**< Place this graphic context into the global state.
+     *   This is intended to be called before any drawing session.  While
+     *   the graphic context was presented as active for all drawing, it
+     *   is not guaranteed.  This routine must be called to guarantee that
+     *   the local state is also the global state.  It should be called
+     *   any time some other graphic context may have drawn something.
+     */
     virtual void FlushGraphics();
+    /**< Force immediate drawing.
+     *   Drawing commands may be buffered for efficiency.  This forces the
+     *   buffer out to the display.
+     */
 
     virtual class graphic * WhitePattern()  ;
+    /**< Returns a graphic context for filling with the background color.
+     *   \return A graphic for the Tile argument for various filled objects.
+     */
     virtual class graphic * BlackPattern()  ;
+    /**< Returns a graphic context for filling with the foreground color.
+     *   \return A graphic for the Tile argument for various filled objects.
+     */
     virtual class graphic * GrayPattern(short IntensityNum, short IntensityDenom)  ;
+    /**< Returns a graphic context for filling with a dither pattern.
+     *   The pattern is as close as possible to \p IntensityNum * 100 /
+     *   \p InensityDenom % foreground and the rest background.
+     *   \return A graphic for the Tile argument for various filled objects.
+     */
     // tjm - should support other patterns as well.
     virtual void SetPatternOrigin(long xpos, long ypos);
+    /**< Set tiling pattern offset.
+     *   If an object with a tiling pattern has been moved, and additional
+     *   fills are to made adjacent to that, the tiling pattern origin should
+     *   be adjusted by the amount that the object moved in order to line the
+     *   patterns up.
+     *   \param xpos The new tiling pattern origin X offset.
+     *   \param ypos The new tiling pattern origin Y offset.
+     */
     virtual void GetPatternOrigin(long *xpos, long *ypos);
+    /**< Get tiling pattern offset.
+     *   See SetPatternOrigin() for how these values are used.  Generally,
+     *   after an object move, this is called, the values are adjusted, and
+     *   then SetPatternOrigin() is called.
+     *   \param xpos The current tiling pattern origin X offset.
+     *   \param ypos The current tiling pattern origin Y offset.
+     */
 
     /* If colorName is NULL, use the RGB. */
     virtual void SetForegroundColor(const char *colorName, long red, long green, long blue);
@@ -849,9 +1047,33 @@ as well.
      *   \return the vertical resolution.
      */
     virtual const char * GetWindowManagerType()  ;
+    /**< Obtain a name for the low-level device driver.
+     *   This is referred to often as the window manager, or the windowing
+     *   system, or simply the display interface driver.  Since WM is no
+     *   longer supported, the only value you will ever get here is
+     *   "XV11R1".
+     *   \return A name for the "window manager" type.
+     */
     virtual long GetDevice()  ;
+    /**< Obtain the window system-specific device handle.
+     *   The only thing that can be done with this value is to compare it
+     *   with another context's value to determine if it is on the same
+     *   device.  This can also be used to avoid re-checking display
+     *   resolution or font metrics.
+     *   \return an opaque device handle for this graphic context.
+     */
     virtual long DisplayClass()  ;
+    /**< Find the current display type.
+     *   Symbols of the \ref DisplayClass enumeration are ored together to
+     *   form the return value.
+     *   \return the type of display this graphic is on.
+     */
     virtual boolean IsImageInverted()  ;
+    /**< Find interpretation of colors in ReadPixImage() results.
+     *   This interpretation of "inverted" is with respect to white
+     *   backgrounds (such as paper, or the default ATK background).
+     *   \return TRUE is 1 is white and 0 black; FALSE if vice-versa.
+     */
     virtual void WriteImage(long DestX, long DestY, 
 		class image *image, long SrcX, long SrcY, 
 		long width, long height);
@@ -918,11 +1140,11 @@ as well.
     short  spaceShim;
     short  transferMode;	    /* ALU function for bitblit */
     short  lineWidth;		    /* How thick to make outlines */
-    short  lineDashType;	    /* Dash style for lines */
+    LineDash lineDashType;	    /* Dash style for lines */
     int	   lineDashOffset;	    /* Dash offset (phase) for lines */
-    char   *lineDashPattern;	    /* Dash pattern for lines */
-    short  lineCap;		    /* Cap style for lines */
-    short  lineJoin;		    /* Join style for lines */
+    unsigned char *lineDashPattern;	    /* Dash pattern for lines */
+    LineCap  lineCap;		    /* Cap style for lines */
+    LineJoin lineJoin;		    /* Join style for lines */
     class region * clippingRegion; /* Rects for clipping */
     struct point    currentPoint;	    /* Start of drawing operations */
     class colormap **colormap,**inheritedColormap;

@@ -784,7 +784,7 @@ void Draw_Left_Scale( class chartobj	  *self )
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleTop );
   (self)->MoveTo(  LeftScaleBarX, LeftScaleBottom );
   (self)->DrawLineTo(  LeftScaleRight, LeftScaleBottom );
-  (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
+  (self)->SetLineDash(  (const unsigned char *)"\001\004", 0, graphic::LineOnOffDash);
   (self)->MoveTo(  LeftScaleRight, LeftScaleTop );
   (self)->DrawLineTo(  LeftScaleRight+ChartWidth, LeftScaleTop );
   (self)->MoveTo(  LeftScaleRight, LeftScaleBottom );
@@ -810,7 +810,7 @@ void Draw_Left_Scale( class chartobj	  *self )
       {
       (self)->MoveTo(  LeftScaleBarX, Y );
       (self)->DrawLineTo(  LeftScaleRight, Y );
-      (self)->SetLineDash(  "\001\004", 0, graphic::LineOnOffDash);
+      (self)->SetLineDash(  (const unsigned char *)"\001\004", 0, graphic::LineOnOffDash);
       (self)->MoveTo(  LeftScaleRight, Y );
       (self)->DrawLineTo(  LeftScaleRight+ChartWidth, Y );
       (self)->SetLineDash(  NULL, 0, graphic::LineSolid);

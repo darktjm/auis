@@ -268,9 +268,11 @@ long zipprint::Ensure_Line_Attributes( zip_type_figure		 figure )
 {
   class zipprint *self=this;
   long				status = zip_ok;
-  char					*pattern = NULL;
+  unsigned char				*pattern = NULL;
   int					offset;
-  short					dashtype, value;
+  graphic::LineDash			dashtype;
+  graphic::LineCap			cap;
+  graphic::LineJoin			join;
 
   if ((  Printing->zip_printing_line_width =
 	 (Data)->Contextual_Figure_Line_Width(  figure )) > 0 )
@@ -282,11 +284,11 @@ long zipprint::Ensure_Line_Attributes( zip_type_figure		 figure )
       Printing->zip_printing_line_dash_offset = offset;
     }
     else Printing->zip_printing_line_dash_pattern = NULL;
-    if (( value = (Data)->Contextual_Figure_Line_Cap(  figure )) != -1 )
-      Printing->zip_printing_line_cap = value;
+    if (( cap = (Data)->Contextual_Figure_Line_Cap(  figure )) != -1 )
+      Printing->zip_printing_line_cap = cap;
     else       Printing->zip_printing_line_cap = graphic::CapButt;
-    if (( value = (Data)->Contextual_Figure_Line_Join(  figure )) != -1 )
-      Printing->zip_printing_line_join = value;
+    if (( join = (Data)->Contextual_Figure_Line_Join(  figure )) != -1 )
+      Printing->zip_printing_line_join = join;
     else Printing->zip_printing_line_join = graphic::JoinMiter;
     }
     else Printing->zip_printing_line_dash_pattern = NULL;
@@ -298,7 +300,7 @@ zipprint_Line_Attributes_String( class zipprint	          *self )
     {
   static char			string[300];
   char				temp[100];
-  const char		       *p;
+  const unsigned char	       *p;
   short				cap = 0, join = 0; /* init to shut gcc up */
 
     switch ( Printing->zip_printing_line_cap )

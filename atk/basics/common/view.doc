@@ -421,9 +421,6 @@ view *\paramname{view});}
 \fixedtext{void \bold{view::}LoseInputFocus }\fixedindent{(struct view 
 *\paramname{view});} 
 
-\fixedtext{\bold{view::}MoveLogicalOrigin }\fixedindent{(struct view 
-*\paramname{view}, \paramname{DeltaX}, \paramname{DeltaY});} 
-
 \fixedtext{\bold{view::}MoveToPt }\fixedindent{(struct view 
 *\paramname{view}, \paramname{Pt});} 
 
@@ -497,12 +494,6 @@ char *\paramname{finalFormat}, boolean \paramname{topLevel});}
 
 \fixedtext{\bold{view::}SetLineWidth }\fixedindent{(struct view 
 *\paramname{view}, \paramname{NewLineWidth});} 
-
-\fixedtext{\bold{view::}SetLogicalOriginPt }\fixedindent{(struct view 
-*\paramname{view}, \paramname{Pt});} 
-
-\fixedtext{\bold{view::}SetLogicalOrigin }\fixedindent{(struct view 
-*\paramname{view}, \paramname{NewX}, \paramname{NewY});} 
 
 \fixedtext{void \bold{view::}SetName }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{name});} 

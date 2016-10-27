@@ -622,7 +622,7 @@ void xgraphic::DrawRectSize(long  x, long  y,long  width,long  height)
 
 }
 
-void xgraphic::DrawPolygon(struct point  * PointArray, short  PointCount )
+void xgraphic::DrawPolygon(const struct point  * PointArray, short  PointCount )
 {
     static XPoint * PolygonPts = NULL;
     static int numXPoints = 0;
@@ -646,7 +646,7 @@ void xgraphic::DrawPolygon(struct point  * PointArray, short  PointCount )
     XDrawLines((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), PolygonPts, PointCount+1, CoordModeOrigin);
 }
 
-void xgraphic::DrawPath(struct point  * PointArray, short  PointCount )
+void xgraphic::DrawPath(const struct point  * PointArray, short  PointCount )
 {
     static XPoint * PolygonPts = NULL;
     static int numXPoints = 0;
@@ -818,11 +818,11 @@ void xgraphic::DrawTrapezoid(long  topX ,long  topY ,long  topWidth ,long  botto
     XDrawLines((this)->XDisplay(), (this)->XWindow(), (this)->XGC(), PolygonPts, 5, CoordModeOrigin);
 }
 
-boolean xgraphic::SetupFillGC(class graphic  * Tile )
+boolean xgraphic::SetupFillGC(const class graphic  * Tile )
 {
     int grayIndex;
 
-class xgraphic * tile = (class xgraphic *)Tile;
+const class xgraphic * tile = (const class xgraphic *)Tile;
 unsigned long	fgPixel;
 
     /* See if transfer mode will take care of it, i.e., mode is source independent. If so, just make sure that a fillsolid mode is picked in the belief that the server won't be smart enough to realize that only the shape matters and not to waste time aligning any random tile that was left over */
@@ -941,7 +941,7 @@ unsigned long	fgPixel;
     return TRUE;
 }
 
-void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,class graphic *Tile )
+void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,const class graphic *Tile )
 {
 
     if (width <= 0 || height <= 0)  return;
@@ -958,7 +958,7 @@ void xgraphic::FillRectSize(long  x,long  y,long  width,long  height,class graph
 }
 
 
-void xgraphic::FillPolygon(struct point  *PointArray, short  PointCount, class graphic  *Tile)
+void xgraphic::FillPolygon(const struct point  *PointArray, short  PointCount, const class graphic *Tile)
 {
 
     static XPoint *PolygonPts = NULL;
@@ -986,7 +986,7 @@ void xgraphic::FillPolygon(struct point  *PointArray, short  PointCount, class g
     }
 }
 
-void xgraphic::FillOvalSize(long  x,long  y,long  width,long  height,class graphic *Tile)
+void xgraphic::FillOvalSize(long  x,long  y,long  width,long  height,const class graphic *Tile)
 {
 
     VerifyUpdateClipping(this);
@@ -999,7 +999,7 @@ void xgraphic::FillOvalSize(long  x,long  y,long  width,long  height,class graph
 
 }
 
-void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,class graphic *Tile)
+void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  StartAngle, short  OffsetAngle,const class graphic *Tile)
 {
     int StartXAngle, OffsetXAngle;
 
@@ -1019,7 +1019,7 @@ void xgraphic::FillArcSize(long  x,long  y,long  width,long  height,short  Start
 }
 
 
-void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,class graphic *Tile)
+void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  cornerWidth ,long  cornerHeight,const class graphic *Tile)
 {
     /* Handle pathologic cases in system indepedent manner
 	(luser desires to bite bullet in efficiency) */
@@ -1104,7 +1104,7 @@ void xgraphic::FillRRectSize(long  x,long  y,long  width,long  height,long  corn
 
 }
 
-void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
+void xgraphic::FillRgn(class region  * Rgn,const class graphic *Tile)
 {
     class region * tmpRegion;
     class region * visRegion;
@@ -1174,7 +1174,7 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
     }
 }
 
-void xgraphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , class graphic  *Tile)
+void xgraphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bottomX , long  bottomY , long  bottomWidth , const class graphic *Tile)
 {
     XPoint PolygonPts[4];
 
@@ -1196,7 +1196,7 @@ void xgraphic::FillTrapezoid(long  topX , long  topY , long  topWidth , long  bo
 }
 
 
-void xgraphic::BitBlt(struct rectangle  * SrcRect, class graphic  *DstGraphic, struct point  * DstOrigin, struct rectangle  * ClipRect)
+void xgraphic::BitBlt(const struct rectangle  * SrcRect, class graphic  *DstGraphic, const struct point  * DstOrigin, const struct rectangle  * ClipRect)
 {
     if (rectangle_Width(SrcRect) != 0 && rectangle_Height(SrcRect) != 0)  {
 
@@ -1259,8 +1259,11 @@ void xgraphic::SetBitAtLoc(long  XPos ,long  YPos,boolean  NewValue )
 static XImage *PixImage = NULL;
 static Display *PixDisplay = NULL;
 
+// tjm - this seems like a hack.  Caching the output of XCreateImage
+//       and then making modifications to the result is not supported
+//       by the official documentation.
 void
-xgraphic::SetUpPixImage(class pixelimage  *pixelimage)
+xgraphic::SetUpPixImage(const class pixelimage  *pixelimage)
 		{
     VerifyUpdateClipping(this);
 
@@ -1284,7 +1287,7 @@ xgraphic::SetUpPixImage(class pixelimage  *pixelimage)
 	
 
 void 
-xgraphic::WritePixImage(long  DestX , long  DestY , class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
+xgraphic::WritePixImage(long  DestX , long  DestY , const class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
 			{
     if (width > 0 && height > 0) {
 	VerifyUpdateClipping(this);
@@ -2165,19 +2168,19 @@ void xgraphic::SetLineWidth(short  NewLineWidth)
     }
 }
 
-void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
+void xgraphic::SetLineDash( const unsigned char		 *dashPattern, int		 dashOffset, LineDash		 dashType )
 {
     XGCValues tempGC;
     int	n = 0;
-    const char	*p;
-    short	type = dashType;
-    char		*oldPattern = NULL;
+    const unsigned char	*p;
+    LineDash	type = dashType;
+    unsigned char	*oldPattern = NULL;
     int			oldOffset;
-    short		oldType;
+    LineDash		oldType;
 
     if ( dashPattern == NULL ) type = graphic::gLineSolid;
     (this)->GetLineDash(  &oldPattern, &oldOffset, &oldType );
-    if ( oldPattern && dashPattern && ( strcmp( oldPattern, dashPattern ) == 0 ) && dashOffset == oldOffset && type == oldType );
+    if ( oldPattern && dashPattern && ( strcmp( (char *)oldPattern, (char *)dashPattern ) == 0 ) && dashOffset == oldOffset && type == oldType );
     else
     {
       (this)->graphic::SetLineDash(  dashPattern, dashOffset, type );
@@ -2193,13 +2196,13 @@ void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		
       {
         p = dashPattern;
         while ( *p++ != 0 ) n++;
-        if ( n ) XSetDashes( (this )->XDisplay( ), (this )->XGC( ), dashOffset, dashPattern, n );
+        if ( n ) XSetDashes( (this )->XDisplay( ), (this )->XGC( ), dashOffset, (const char *)dashPattern, n );
       }
     }
     if(oldPattern) free(oldPattern);
 }
 
-void xgraphic::SetLineCap( short		 newLineCap )
+void xgraphic::SetLineCap( LineCap		 newLineCap )
 {
     XGCValues tempGC;
 
@@ -2218,7 +2221,7 @@ void xgraphic::SetLineCap( short		 newLineCap )
     }
 }
 
-void xgraphic::SetLineJoin( short		 newLineJoin )
+void xgraphic::SetLineJoin( LineJoin		 newLineJoin )
 {
     XGCValues tempGC;
 

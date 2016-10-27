@@ -50,28 +50,28 @@ public:
     virtual void SetFont(class fontdesc *ChosenFont);
 
     virtual void DrawRectSize(long x,long y,long width,long height);
-    virtual void DrawPolygon(struct point *PointArray, short PointCount);
-    virtual void DrawPath(struct point *PointArray, short PointCount);
+    virtual void DrawPolygon(const struct point *PointArray, short PointCount);
+    virtual void DrawPath(const struct point *PointArray, short PointCount);
     virtual void DrawOvalSize(long x,long y,long width,long height);
     virtual void DrawArcSize(long x,long y,long width,long height, short StartAngle, short OffsetAngle);
     virtual void DrawRRectSize(long x,long y,long width,long height, long cornerWidth,long cornerHeight);
     virtual void DrawTrapezoid(long topX, long topY, long topWidth, long bottomX, long bottomY, long bottomWidth);
 
 
-    virtual void FillRectSize(long x,long y,long width,long height, class graphic *Tile);
-    virtual void FillPolygon(struct point * PointArray, short PointCount, class graphic *Tile);
-    virtual void FillOvalSize(long x,long y,long width,long height, class graphic *Tile);
-    virtual void FillArcSize(long x,long y,long width,long height, short StartAngle, short OffsetAndle, class graphic *Tile);
-    virtual void FillRRectSize(long x, long y, long width, long height, long cornerWidth, long cornerHeight, class graphic *Tile);
-    virtual void FillRgn(region * Rgn, class graphic *Tile);
-    virtual void FillTrapezoid(long topX, long topY, long topWidth, long bottomX, long bottomY, long bottomWidth, class graphic *Tile);
+    virtual void FillRectSize(long x,long y,long width,long height, const class graphic *Tile);
+    virtual void FillPolygon(const struct point * PointArray, short PointCount, const class graphic *Tile);
+    virtual void FillOvalSize(long x,long y,long width,long height, const class graphic *Tile);
+    virtual void FillArcSize(long x,long y,long width,long height, short StartAngle, short OffsetAndle, const class graphic *Tile);
+    virtual void FillRRectSize(long x, long y, long width, long height, long cornerWidth, long cornerHeight, const class graphic *Tile);
+    virtual void FillRgn(region * Rgn, const class graphic *Tile);
+    virtual void FillTrapezoid(long topX, long topY, long topWidth, long bottomX, long bottomY, long bottomWidth, const class graphic *Tile);
 
-    virtual void BitBlt(struct rectangle *SrcRect, 
-		class graphic *DestGraphic, struct point *DstOrigin, 
-		struct rectangle *ClipRectList);
+    virtual void BitBlt(const struct rectangle *SrcRect, 
+		class graphic *DestGraphic, const struct point *DstOrigin, 
+		const struct rectangle *ClipRectList);
     virtual void SetBitAtLoc(long XPos, long YPos, boolean NewValue);
     virtual void WritePixImage( long DestX, long DestY, 
-		class pixelimage *SrcPixels, long SrcX, long SrcY, 
+		const class pixelimage *SrcPixels, long SrcX, long SrcY, 
 		long width, long height);
 
     virtual void ReadPixImage(long SrcX, long SrcY, 
@@ -93,9 +93,9 @@ public:
     virtual void ClearClippingRect();
 
     virtual void SetLineWidth(short NewLineWidth);
-    virtual void SetLineDash( const char *dashPattern, int dashOffset, short dashType );
-    virtual void SetLineCap( short newLineCap );
-    virtual void SetLineJoin( short newLineJoin );
+    virtual void SetLineDash( const unsigned char *dashPattern, int dashOffset, LineDash dashType );
+    virtual void SetLineCap( LineCap newLineCap );
+    virtual void SetLineJoin( LineJoin newLineJoin );
 
     virtual void SetTransferMode(short NewTransferMode);
 
@@ -162,7 +162,7 @@ public:
     GC localFillGraphicContext;	/* Context for filling */
     long lastFillStyle;		/* Fill style used for fill gc */
     unsigned long lastFillPixel; /* Pixel used for fill gc */
-    class xgraphic *lastFillTile;  /* Tile used for fill gc */
+    const class xgraphic *lastFillTile;  /* Tile used for fill gc */
     Drawable localWindow;		/* X pixmap id  */
     Display *displayUsed;		/* which display is used */
     int xfd;				/* fd for X connection (from *displayUsed) */
@@ -180,7 +180,7 @@ public:
     boolean haveMapInfo;
   private:
     void DrawChars(const char  * Text,short  Operation ,short  StringMode,long  TextLength );
-    boolean SetupFillGC(class graphic  * Tile );
+    boolean SetupFillGC(const class graphic  * Tile );
     void SetStipple(long  index);
     void LocalSetClippingRect(struct xgraphic_UpdateBlock  * updateBlk );
     void InstallUpdateRegion();

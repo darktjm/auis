@@ -128,8 +128,8 @@ int Allocate_Image( class zip		      *self, struct zip_stream	      *stream, str
     (*image)->zip_image_stream = stream;
     (*image)->zip_image_stream->zip_stream_states.zip_stream_state_modified = 1;
     (*image)->zip_image_line_width = 255;
-    (*image)->zip_image_line_cap = -1;
-    (*image)->zip_image_line_join = -1;
+    (*image)->zip_image_line_cap = (graphic::LineCap)-1;
+    (*image)->zip_image_line_join = (graphic::LineJoin)-1;
     if ( name  &&  *name )
       status = (self)->Set_Image_Name(  *image, name );
     }
@@ -571,7 +571,7 @@ zip::Set_Image_Line_Width( struct zip_image	      *image, long			       width )
   }
 
 long
-zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 offset, short			 type )
+zip::Set_Image_Line_Dash( zip_type_image		 image, unsigned char				 *pattern, int				 offset, graphic::LineDash			 type )
             {
   int			      status = zip_ok;
 
@@ -580,7 +580,7 @@ zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 off
       {
 	  if ( pattern )
             {
-	      image->zip_image_line_dash_pattern = strdup( pattern );
+	      image->zip_image_line_dash_pattern = (unsigned char *)strdup( (char *)pattern );
 	      image->zip_image_line_dash_offset = offset;
 	      image->zip_image_line_dash_type = type;
 	    }
@@ -595,7 +595,7 @@ zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 off
   }
 
 long
-zip::Set_Image_Line_Cap( zip_type_image		 image, short			 cap )
+zip::Set_Image_Line_Cap( zip_type_image		 image, graphic::LineCap			 cap )
         {
   int			      status = zip_ok;
 
@@ -613,7 +613,7 @@ zip::Set_Image_Line_Cap( zip_type_image		 image, short			 cap )
   }
 
 long
-zip::Set_Image_Line_Join( zip_type_image		 image, short			 join )
+zip::Set_Image_Line_Join( zip_type_image		 image, graphic::LineJoin			 join )
         {
   int			      status = zip_ok;
 
