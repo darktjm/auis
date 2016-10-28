@@ -273,7 +273,6 @@
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
   - make a way to declare a key as one, so that breaking out of a
     search loop doesn't deposite the rest of the keystroke (e.g. up -> A)
-- implement or get rid of alink, ezscan
 - install or chuck atkbook examples
   - con: use getstats from atk/console.  Builds OK, but not sure what it does
   - flex: builds OK.  Not sure what it does

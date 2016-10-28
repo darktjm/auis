@@ -187,7 +187,7 @@ and serves little purpose other than to provide a demonstration.
 
 In particular, the apt class and all its descendents (e.g. tree,
 suite, org, bush, chart) are full of unimplemented ideas and bugs which
-indicate that even the ipmlemented ideas never worked properly.  The
+indicate that even the implemented ideas never worked properly.  The
 atk/widgets hierarchy is documented only by a half-written design
 document that has more ideas than actual documentation.  The help
 facility seems great, until you find out that most of the help text is
@@ -270,6 +270,10 @@ The following known dependencies currently exist:
     enabling play itself, as the old play ran without it.
     See http://www.portaudio.com.  Note that the beeper class now also
     uses pthreads, but that was a prerequisite for portaudio, anyway.
+  - sox (http://sox.sourceforge.net) if you want to use the "alink" inset
+    (but why would you want to?).  I should use either sox or portaudio
+    for sound, but sox's API is a pain and portaudio doesn't support
+    u-law conversion.
 
 I recommend the following preference settings in ~/.preferences:
 

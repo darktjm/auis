@@ -24,10 +24,10 @@
 
 
 ATKdefineRegistry(alink, pushbutton, alink::InitializeClass);
-long A64L(char  *s );
-char *L64A(long  l );
+int A64L(char  *s );
+char *L64A(int  l );
 static void WriteAudio(FILE  *fp, long  len , char  *audio );
-static void WriteLine(FILE  *f, char  *l );
+static void WriteLine(FILE  *f, const char  *l );
 static char * ReadAudio(FILE  *fp, long  len );
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
@@ -90,12 +90,12 @@ alink::Write(FILE  *fp, long  id, int  level )
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
     (this)->SetWriteID( id);
-    fprintf(fp, "\\begindata{%s,%d}\nDatastream version: %d\n",
+    fprintf(fp, "\\begindata{%s,%ld}\nDatastream version: %d\n",
 	    (this)->GetTypeName(), uniqueid, DS_VERSION);
     WriteLine(fp, (this)->GetText() ? (this)->GetText() : "");
     fprintf(fp, "%ld\n", (this)->GetAudioLength());
     WriteAudio(fp, (this)->GetAudioLength(), (this)->GetAudio());
-    fprintf(fp, "\\enddata{%s,%d}\n",
+    fprintf(fp, "\\enddata{%s,%ld}\n",
 	    (this)->GetTypeName(), uniqueid);
   }
   return(uniqueid);
@@ -168,7 +168,7 @@ alink::Read(FILE  *fp, long  id)
 
 
 void
-alink::SetText(char  *txt)
+alink::SetText(const char  *txt)
 {
 /*
   Set the text label for this object.
@@ -200,10 +200,10 @@ alink::SetAudio(long  len, char  *audio)
     }
 }
 
-long A64L(char  *s )
+int A64L(char  *s )
 {
     int i;
-    long out = 0;
+    int out = 0;
     for (i = 5; i >= 0; i--) {
 	char c = s[i];
 	int n;
@@ -215,7 +215,7 @@ long A64L(char  *s )
     return out;
 }
 
-char *L64A(long  l )
+char *L64A(int  l )
 {
     int i;
     static char out[6];
@@ -236,16 +236,16 @@ WriteAudio(FILE  *fp, long  len , char  *audio )
   Output the audio onto the datastream.
 */
     char *buf;
-    long llen = len / 4;
-    long buflen = llen * 6  + llen / 10;
-    long *lbuf;
+    long llen = (len + 3) / 4;
+    long buflen = llen * 6  + (llen + 9) / 10;
+    int *lbuf;
     long bptr = 0;
     int i;
     int lcount = 1;
 
     buf = (char *)malloc(buflen);
     if (buf == NULL) return;
-    lbuf = (long *) audio;
+    lbuf = (int *) audio;
     for (i = 0; i < llen; i++) {
 	char *s = L64A(lbuf[i]);
 	bcopy(s, buf + bptr, 6);
@@ -262,7 +262,7 @@ WriteAudio(FILE  *fp, long  len , char  *audio )
 }
 
 static void
-WriteLine(FILE  *f, char  *l )
+WriteLine(FILE  *f, const char  *l )
 {
 /* 
   Output a single line onto the data stream, quoting
@@ -312,20 +312,20 @@ static char *
 ReadAudio(FILE  *fp, long  len )
 {
     char *buf;
-    long *lbuf;
-    long llen = len / 4;
-    long buflen = llen * 6  + llen / 10;
+    int *lbuf;
+    long llen = (len + 3) / 4;
+    long buflen = llen * 6  + (llen + 9) / 10;
     int i;
     int bptr = 0;
     int lcount = 1;
 
     buf = (char *)malloc(buflen);
     if (buf == NULL) return NULL;
-    if (fread(buf, 1, buflen, fp) != buflen) {
+    if ((int)fread(buf, 1, buflen, fp) != buflen) {
 	free(buf);
 	return NULL;
     }
-    lbuf = (long *) malloc(len);
+    lbuf = (int *) malloc(len);
     if (lbuf == NULL) {
 	free(buf);
 	return NULL;
@@ -429,8 +429,8 @@ long alink::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject:
     unsigned char c1, c2, c3;
     int ct=0;
 
-    if (this->writeID == writeID)  return(this->id);
-    this->writeID = writeID;
+    if (this->GetWriteID() == writeID)  return(this->GetID());
+    this->SetWriteID(writeID);
     
     fprintf(file, "\n--%s\nContent-type: audio/basic\nContent-Transfer-Encoding: base64\n", boundary);
     if (this->label_set) {
@@ -459,7 +459,7 @@ long alink::WriteOtherFormat(FILE  *file, long  writeID, int  level, dataobject:
         }
     }
     if (ct) putc('\n', file);
-    return(this->id);
+    return(this->GetID());
 }
 
 boolean alink::ReadOtherFormat(FILE  *file, const char  *fmt, const char  *encoding, const char  *desc)

@@ -16,8 +16,6 @@ LIBS =  ${UTILLIB}
 DynamicMultiObject(alink,alinkview,$(OBJS),$(LIBS),,)
 InstallDynamicObject(alink,alinkview,$(FULLATKDLIBDIR))
 
-OptionalATKLibrary(alink, ${OBJS}, ${LIBS},)
-InstallOptionalATKLibrary(alink, ${DESTDIR}/lib/atk)
 InstallClassFiles($(IHFILES))
 InstallDocs(alink.help, ${DESTDIR}/help)
 InstallDocs(alink.pr, ${DESTDIR}/lib/prs)

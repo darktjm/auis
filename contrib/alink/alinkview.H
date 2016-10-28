@@ -4,7 +4,7 @@
  * Copyright (c) AT&T Bell Laboratories	1990  -	All Rights Reserved	  *
 \* ********************************************************************** */
 
-#include <pushbuttonview.H>
+#include <pshbttnv.H>
 class alinkview: public  pushbuttonview {
 public:
 	virtual ATKregistryEntry *ATKregistry();
