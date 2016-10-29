@@ -451,7 +451,7 @@ void graphic::ReadImage(long  SrcX , long  SrcY , class image  *DestImage, long 
     }
 }
 
-void graphic::WritePixImage(long  DestX , long  DestY , class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
+void graphic::WritePixImage(long  DestX , long  DestY , const class pixelimage  *SrcPixels, long  SrcX , long  SrcY , long  width , long  height)
 {
     static boolean printed = FALSE;
     if (! printed) {

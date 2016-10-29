@@ -32,13 +32,6 @@ Sets the playback volume, 0 is effectively off, 99 is the loudest.
 #~endhelp
 PlayLevel: 50
 
-#~type boolean
-#~views string boolean
-#~help
-When yes, sets the playback destination to be the headphones, otherwise playback is sent to the speaker.
-#~endhelp
-Earphones: no
-
 #~type integer
 #~views integer slider
 #~range 0 99

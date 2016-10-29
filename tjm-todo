@@ -7,18 +7,20 @@
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
 - adew crashes a lot just doing the tutorial
-- adew: often clears regions and never redisplays contents (maybe due
-  to my "fix" for lack of resize updates)
+- adew: often clears regions and only redisplays contents after manual
+  refresh (maybe due to my "fix" for lack of resize updates)
   - resizing in both vertical and horizontal at once only gets vertical resize?
 - adew: no samples for mbuttonv or clicklistV in vallist document anymore
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
-  - pcontrol dies on init if not PC-RT
+    - awww dies consistently, probably because the remote sites it
+      depends on don't exist any more.
 - fix issues in zip (or chuck in favor of figure):
-  - schedapp should go away in favor of using ez on sched/schedapp
+  - schedapp should go away in favor of using ez on sched doc
   - schedv Clear button stays stuck down after clearing.
   - ltapp should go away in favor of storing background in output file
     somehow and only requiring one file for input.
+    - I need to figure out what lt is even supposed to do, first.
   - zip edit palette is overritten by the figure you're editing; manual
     window resize is necessary to make them appear unmolested.
     Instead, it should convert the item being edited into a scrollable pane.
@@ -261,8 +263,6 @@
   - make top-level Makefile not disappear w/ "make Makefiles"
   - fix corruption of flags (empty flags become -- eventually)
   - distclean target that removes .depends and Makefile
-  - maybe remove GNU make deps.  with removal of imageio switchability,
-    that just means figuring out why I was using $(shell) instead of backticks.
   - maybe just switch to cmake:
     - identify what config options I want to support, and make them
       all cmake options
@@ -273,7 +273,6 @@
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
   - make a way to declare a key as one, so that breaking out of a
     search loop doesn't deposite the rest of the keystroke (e.g. up -> A)
-- implement or get rid of alink, ezscan
 - install or chuck atkbook examples
   - con: use getstats from atk/console.  Builds OK, but not sure what it does
   - flex: builds OK.  Not sure what it does

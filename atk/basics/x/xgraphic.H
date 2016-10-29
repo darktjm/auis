@@ -184,7 +184,7 @@ public:
     void SetStipple(long  index);
     void LocalSetClippingRect(struct xgraphic_UpdateBlock  * updateBlk );
     void InstallUpdateRegion();
-    void SetUpPixImage(class pixelimage  *pixelimage);
+    void SetUpPixImage(const class pixelimage  *pixelimage);
     void SetUpXImage( class image  *image );
     void HandleInsertion(class graphic  *E);
 

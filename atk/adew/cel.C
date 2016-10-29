@@ -28,7 +28,6 @@ static void SetVisible(class cel  *self);
 static void SetInvisible(class cel  *self);
 static const class atom *getline(char  **place);
 static long                      searchatt(class cel  *self,char  *attname,long  *len);
-void cel__FinializeObject(struct classheader  *classID, class cel  *self);
 #if 0
 void cel__ClearChain(class cel  *self);
 #endif
@@ -39,6 +38,7 @@ void cel::ObservedChanged(class observable  *changed, long  value)
     if(changed==(class	observable *)this->dataObject) {
 	
 	if(value==observable::OBJECTDESTROYED) {
+	    changed->RemoveObserver(this);
 	    this->dataObject=NULL;
 	    (this)->Destroy();
 	} else (this)->NotifyObservers(value);
@@ -184,6 +184,10 @@ long cel::GetModified()
 boolean cel::SetObject(class dataobject  *newobject)
 {
     if(newobject){
+	if(this->dataObject) {
+	    this->dataObject->RemoveObserver(this);
+	    this->dataObject->Destroy();
+	}
 	/* 	    Register the object with the dictionary */
 	dictionary::Insert(NULL,(char *)newobject->GetID(),(char *) newobject);
 	this->dataObject = newobject;
@@ -279,6 +283,10 @@ void cel::InsertObject (class dataobject  *newobject, char  *dataname,const char
 	}
     }
     if(newobject){
+	if(this->dataObject) {
+	    this->dataObject->RemoveObserver(this);
+	    this->dataObject->Destroy();
+	}
 	/* 	    Register the object with the dictionary */
 	dictionary::Insert(NULL,(char *)newobject->GetID(),(char *) newobject);
 	this->dataObject = newobject;
@@ -511,6 +519,10 @@ long cel::Read(FILE  *file, long  id)
 #endif /* DEBUG */
    
     if(did) {
+	if(this->dataObject) {
+	    this->dataObject->RemoveObserver(this);
+	    this->dataObject->Destroy();
+	}
 	this->dataObject = (class dataobject *) dictionary::LookUp(NULL,(char *) did);
 	(this->dataObject)->Reference();
 	(this->dataObject)->AddObserver(this);

@@ -25,7 +25,7 @@ ZIP = zip
 TM = tm
 #endif
 
-#if defined(sys_sun4_41) || defined(sys_sun3_41)
+#if defined(sys_sun4_41) || defined(sys_sun3_41) || defined(sys_ix86_Linux)
 ALINK = alink
 #endif
 

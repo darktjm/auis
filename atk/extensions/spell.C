@@ -191,7 +191,7 @@ void spell::CheckDocument(class textview  *self, long  rock)
     tempMark = (text)->CreateMark( 0, 0);
     
 /* Start up process and free process structure. */
-    if ((speller = StartProcess("ispell -a", &inFile, &outFile)) != NULL)
+    if ((speller = StartProcess("aspell -a", &inFile, &outFile)) != NULL)
         free(speller); /* Not used for now. */
     else {
 	message::DisplayString(self, 0, "Unable to execute ispell.");

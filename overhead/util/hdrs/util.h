@@ -496,7 +496,7 @@ extern FILE *topen(const char  *name , const char  * const argv[] , const char  
  *   \return stdio FILE descriptor for local end of pipe */
 extern FILE *qopen(const char  *name , const char  * const argv[] , const char  *mode);
 /**< Spawn a process in a pipe.  To be used with qclose() or tclose(), which
- *   provide a timeout for closing.  Unlike tclose(), the child process ID is
+ *   provide a timeout for closing.  Unlike topen(), the child process ID is
  *   not returned.
  *   \param name Process name for execv()
  *   \param argv Process arguments for exec()

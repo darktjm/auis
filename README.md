@@ -4,20 +4,22 @@ Andrew Toolkit
 I decided to revive and clean up the Andrew User Interface System
 (http://www.cs.cmu.edu/~AUIS/), formerly known as the Andrew Toolkit
 (ATK), known mostly for its editor, ez, whose main appeal was the
-ability to embed documents of different types in each other.  Why did
-I do it?  I don't know.  I guess I sort of liked ez back in the day,
-as well as some of the other concepts introduced by atk.  I have since
-removed one of its biggest non-ATK components, AMS, so I've changed
-the title of this README back to "Andrew Toolkit".  The futility is
-finally catching up with me.  I will probably stop working on this
-very soon.  Documenting other people's poor design decisions really
-isn't that much fun.
+ability to embed documents of different types in each other.  I have
+since removed one of its biggest non-ATK components, AMS, so I've
+changed the title of this README back to "Andrew Toolkit".  Why did I
+start this project?  I don't know.  I guess I sort of liked ez back in
+the day, as well as some of the other concepts introduced by atk.
 
 I downloaded the latest version, released nearly 20 years ago in
 February 1997 (ftp://ftp.andrew.cmu.edu/pub/AUIS/andrew-8.0.Z), and
 checked that in as the first revision.  I then made it compile, and
 somewhat work on my Linux-amd64 system.  I then proceeded to do
-further cleanups and enhancements.
+further cleanups and enhancements.  In the mean time, I've completely
+run out of motivation for this.  There's just no point, whatsoever.
+Even the people who want to preserve ez documents should probably work
+on converters, rather than trying to get this crap to work.  I just
+wish there were a similar project that isn't in such bad shape that I
+could get motivated over.
 
 If you are looking for the original AUIS README, look at
 doc/README.ez.  Yes, you'll need a working ez to read this properly,
@@ -39,6 +41,20 @@ pointless changes make it unreasonably difficult for me to actually
 extract anything useful.  So, while my project might benefit from some
 of the changes made there, I won't even bother.
 
+Legal Information
+-----------------
+
+AUIS is copyrighted material; see the COPYRITE files in doc/ for
+details on that.  Any changes I made are not assigned to the Andrew
+Consortium, IBM, or anyone else, but instead are released in the
+public domain.  That is, the product I'm making here is a cumulative
+"diff" file from the last release, rather than a release in and of
+itself.  Unfortunately, SVN flagged some files as binary on initial
+checkin which weren't, so a plain git/SVN diff may not work as
+expected.  Instead, just diff the latest with upstream manually, and
+keep in mind that I changed one file (COPYRITE in the top-level
+directory) into a link.
+
 Commentary: What is ATK?
 ------------------------
 
@@ -47,10 +63,11 @@ software.  At the graphical toolkit level, it failed in many ways.  It
 was too limited, and was surpased even by Xaw3D in appearance,
 performance, and configurability.  Maybe part of the issue was its
 initial focus around WM, which I've never used or seen.  Various
-projects tried to modernize the toolkit before it died, but nothing
-ever got finished and is now a bunch of undocumented, incomplete,
-convoluted and pointless code. That is all I have to say about the
-lower-level aspects of AUIS.
+projects (within the distributed AUIS source, at least) tried to
+modernize the toolkit before it died, but nothing ever got finished
+and is now a bunch of undocumented, incomplete, convoluted and
+pointless code. That is all I have to say about the lower-level
+aspects of AUIS, at least in this section.
 
 At the higher level, AUIS represents a promise.  This promise has been
 made many times, by many frameworks.  The promise is that you can
@@ -187,7 +204,7 @@ and serves little purpose other than to provide a demonstration.
 
 In particular, the apt class and all its descendents (e.g. tree,
 suite, org, bush, chart) are full of unimplemented ideas and bugs which
-indicate that even the ipmlemented ideas never worked properly.  The
+indicate that even the implemented ideas never worked properly.  The
 atk/widgets hierarchy is documented only by a half-written design
 document that has more ideas than actual documentation.  The help
 facility seems great, until you find out that most of the help text is
@@ -206,6 +223,23 @@ bit:  the name of the function.  The secondary purpose of that
 indentation was to make the type line up with parameters' types, which
 of course only makes sense with pre-ANSI-style parameters.
 
+The whole idea of insets seems to have been a bust, like pretty much
+all component-based designs.  The only useful insets are the standards
+which any office-type app supports these days: text,
+spreadsheet/table, and simple drawing.  Everything else is more of a
+curiosity than a useful inset (well, page breaks, footnontes, and
+headers are useful, but I question their implementation as an inset).
+Non-inset features are more useful: text styles (although they are
+horribly misused in the existing documentation, esp. wrt. section
+headings) and extensions.  Overall, though, if your goal is a word
+processor with embeddable apps, MS did it better with their office
+products, and I imagine LibreOffice, AbiWord, KOffice, and others do
+it better as well, even if they are annoyingly large monolithic
+programs.  The only other gimick of ez was srctext and its derivatives
+for code editing, and emacs does that better (probably did back then,
+as well).  Sure, they did it later, but that just makes AUIS' failure
+worse, because they had a lead and let it drop.
+
 ATK seems to have stagnated long before it was abandoned.  Very little
 was added in the 90s.  Only the bare minimum of ANSIfication was done
 to support a standard that was introduced in '89, and was available
@@ -221,20 +255,6 @@ for much of its existence affected developer interest.  I'm surprised
 AFS survived its closed (DCE/DFS) phase; as is, I have no doubts it
 would be more popular than it is if it had remained opened, in spite
 of the CMU people saying that the TransArc transition was a success.
-
-Legal Information
------------------
-
-AUIS is copyrighted material; see the COPYRITE files in doc/ for
-details on that.  Any changes I made are not assigned to the Andrew
-Consortium, IBM, or anyone else, but instead are released in the
-public domain.  That is, the product I'm making here is a cumulative
-"diff" file from the last release, rather than a release in and of
-itself.  Unfortunately, SVN flagged some files as binary on initial
-checkin which weren't, so a plain git/SVN diff may not work as
-expected.  Instead, just diff the latest with upstream manually, and
-keep in mind that I changed one file (COPYRITE in the top-level
-directory) into a link.
 
 Building and Installation
 -------------------------
@@ -258,7 +278,8 @@ The following known dependencies currently exist:
   - xditview.  This can be overridden with the PreviewCommand
     preference.  See below for replacing this with gv.
   - GNU make, or at least a make capable of dealing with GNU-style
-    `$(shell ..)`, such as makepp.
+    `$(shell ..)`, such as makepp.  I added this dependency with the
+    generic image library.
   - URW Nimbus fonts, installed in your X font path.  This can be
     overridden by either editing xmkfontd/non-auis.alias before
     installation or $ANDREWDIR/X11fonts/fonts.alias after installation,
@@ -270,6 +291,10 @@ The following known dependencies currently exist:
     enabling play itself, as the old play ran without it.
     See http://www.portaudio.com.  Note that the beeper class now also
     uses pthreads, but that was a prerequisite for portaudio, anyway.
+  - sox (http://sox.sourceforge.net) if you want to use the "alink" inset
+    (but why would you want to?).  I should use either sox or portaudio
+    for sound, but sox's API is a pain and portaudio doesn't support
+    u-law conversion.
 
 I recommend the following preference settings in ~/.preferences:
 
@@ -306,7 +331,7 @@ Incompatibilities
 
 So far, the following incompatibilities have been introduced:
 
- - When bulit for 64-bit systems, IDs stored in files are 64-bit,
+ - When built for 64-bit systems, IDs stored in files are 64-bit,
    which means they may be too large to read in correctly on 32-bit
    systems.  That is, you can read files from 32-bit versions, but
    32-bit versions may have trouble reading new files.  Correcting
@@ -412,17 +437,6 @@ So far, the following incompatibilities have been introduced:
      start-keyboard-macro  =>   im-start-keyboard-macro
 
      stop-keyboard-macro   =>   im-stop-keybaord-macro
-
-  - When I added the generic image reader, I made the makefile somewhat
-    dependent on GNU make.  That is, the make you use must support the
-    `$(shell ...)` function.  When I removed the alternatives to
-    ImageMagick, I removed the dependence the `ifeq` .. `endif`.  In
-    particular, the Single UNIX Spec make does not support these
-    features.  Fix atk/basics/{common,lib}/Imakefile if this is a
-    problem for you.  Adding doxygen support made such a dependency as 
-    well; fix doc/Imakefile if you don't have `$(shell ...)`.  My 
-    implementation of the play class in atk/music also uses this.
-    I may go back one day and switch those back to backticks.
 
   - I have removed many obsolete symbols.  Any external code relying on
     them should study the SVN logs and update to the correct symbol (or
