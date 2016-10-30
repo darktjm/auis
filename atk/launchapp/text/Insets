@@ -114,7 +114,7 @@ Insets, in general, can be combined in arbitrary ways, saved in files, and
 copied/cut/pasted between documents and applications.
 
 \begindata{table,539282952}
-\cols 123 219
+\cols 0 0
 \begindata{link,539283208}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Media

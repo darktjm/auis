@@ -42,7 +42,7 @@ One command you won't find in many text editors is the Embed Inset command
 \italic{inset} by name in the current location in the document.
 
 \begindata{table,538756616}
-\cols 131 205
+\cols 0 0
 \begindata{link,538756488}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Insets

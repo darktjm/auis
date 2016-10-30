@@ -2098,12 +2098,7 @@ void xgraphic::LocalSetClippingRect(struct xgraphic_UpdateBlock  * updateBlk )
 	    XClipBox(updateBlk->updateRegionInUse, XRect);
 	    printf("LocalSetClip: update region bounds %dx%d@%d,%d\n", XRect->width, XRect->height, XRect->x, XRect->y);
 	}
-	/* many objects change appearance outside of the "updateRegionInUse" on resize */
-	/* e.g. borders need to be removed inside, and redrawn in new positions */
-	/* e.g. text which wraps needs to be redrawn to new boundaries */
-	/* for now, just update the whole region instead of just what was exposed */
-	/* for non-resize updates, this is expensive, but I see no immediate easy fix */
-	if (0 && updateBlk->updateRegionInUse) {
+	if (updateBlk->updateRegionInUse) {
 	    /* Intersect it with the update region */
 	    XIntersectRegion((clipRegion)->GetRegionData(),
 			     updateBlk->updateRegionInUse,

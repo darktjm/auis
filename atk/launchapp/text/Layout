@@ -2395,7 +2395,7 @@ $$
 \view{spread,539282824,717,0,0}
 
 \begindata{table,539283336}
-\cols 120 229
+\cols 0 0
 \begindata{link,539283208}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Insets

@@ -108,7 +108,7 @@ end extend
 \enddata{ness,538752008}
 \view{nessview,538752008,693,0,0}
 \begindata{table,538756488}
-\cols 123 215
+\cols 0 0
 \begindata{link,538757000}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Dict

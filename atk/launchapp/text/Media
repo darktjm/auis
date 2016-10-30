@@ -722,7 +722,7 @@ There are some inset types which exist simply to contain embedded objects,
 for the purpose of laying them out in a pleasing arrangement.
 
 \begindata{table,538587288}
-\cols 110 243
+\cols 0 0
 \begindata{link,538587592}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Layout

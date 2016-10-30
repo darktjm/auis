@@ -3,14 +3,13 @@
   - maybe de-gif ez2html and other HTML-related stuff
   - look at raster library's import/export routines (at least xbm & xwd broken)
   - clean up export/import menus (combine into one, since it's so small)
-  - support parameters (other han just quality) for export (needed for
+  - support parameters (other than just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
 - adew crashes a lot just doing the tutorial
-- adew: often clears regions and only redisplays contents after manual
-  refresh (maybe due to my "fix" for lack of resize updates)
-  - resizing in both vertical and horizontal at once only gets vertical resize?
 - adew: no samples for mbuttonv or clicklistV in vallist document anymore
+  - samples are pretty ugly anyway, at current font size.  Probably
+    designed for 75dpi display, as usual.
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
@@ -60,15 +59,11 @@
   - displays entire text red due to header being red
   - probably many more...
 - use qsort to sort in deskey instead of external sort command
-- make bdffont not crash on selecting chars > 128
 - adjusting controls doesn't always set modified flag for a document
 - sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
-- ending search should re-evaluate character in keymap, or something
-  should be done to prevent e.g. cursor keys from inserting the 2nd char
-  of their escape sequence equivalent into the doc if pressed.
 - apparently can't load & execute ness files w/ event handlers from
   within ez.   Calling ness-load in the ness-stmt command-line discards
   the script when the command-line completes.
@@ -83,8 +78,6 @@
   help string.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
-- many 3d link buttons in ATK tour have text overlapping bottom edge
-  probably some screwy interaction between table and button
 - pagedown eventually stops working (e.g. editing 2rtf binary), even
   though scrollbar and cursor still work.  Maybe due to insistence on
   ending at the start of a paragraph (which, in and of itself, is a
@@ -136,6 +129,16 @@
     longer work, but that's to be expected when using blank line to
     put a notice at the bottom of a page.
 - enable mouse scroll wheel
+- ending search should re-evaluate character in keymap, or something
+  should be done to prevent e.g. cursor keys from inserting the 2nd char
+  of their escape sequence into the doc if pressed (e.g. up -> A).
+  - Or, make a way to declare a key combo as one unbreakable key
+  - Or, redo entire keymap for 16-bit keys, and auto-convert old key
+    sequences into new 16-bit keys, and never pass 2 chars for a
+    single key.  16 bits also allows upper bits to be used as mod flags.
+    Then again, just setting the high bit could indicate a longer
+    sequence, unbreakable.
+- pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
 - provide method to override/supplement X key binding list.  Maybe make
   modifiers a canonically ordered prefix list (e.g. Esc-_scm1 for F1,
   and Esc-!scm1 for 1, but the latter would be hard to figure out what
@@ -151,12 +154,6 @@
   [especially useful if this command is ness]
 - add help-type hyperlink or other help button of some sort
   - add support for loading files directly in help, instead of just indexed
-- fix lack of updates when resizing windows
-  - removing X clip at least allows resizing to the most part, but makes
-    overlap updates update the whole window, which is bad.  It also
-    doesn't fully fix the problem.  Esp. vertical updates are still
-    broken, and Arbcon updates are awful (randomly disappearing blocks
-    requiring manual ^L to update).
 - org doesn't mark entire doc as modified when doc inset is modified
 - view fixes:
   - Implement CanView() everywhere, and use it where needed.  It
@@ -207,10 +204,9 @@
     gccmakedep errors that can't be fixed easily:
     overhead/genstatl: (depped before atk/im.H; runapp never compiled here)
     runapp.C:13:16: fatal error: im.H: No such file or directory
-    atk/basics/common: (only if magick not selected for build)
-    magick.C:11:29: fatal error: wand/MagickWand.h: No such file or directory
-    [also atk/basics/common/{devil,magick,freeimage}.C when the dependent
-    packages aren't installed.]
+    [also various other code that depends on installed packages, when
+    the dependent packages not installed, especially if shared dir such
+    as magick or pcontrol]
   - remove externs in c files
   - remove all statics in header files, if possible (gads, help.h is awful)
   - Unfortunately, there is no easy, portable way to avoid exporting
@@ -254,11 +250,16 @@
   - much of it is C++.  It might be a good idea to look for and remove
     Cisms where C++ does it differently (and presumably the same or better)
     (note that unlike some idiots, I don't consider cpp macros to be C-only)
+    However, use of FILE * I/O is too entrenched to remove.
 - find out and possibly remove additional CMU/MIT-specific crap
 - build improvements
   - make it possible to build w/o simultaneous install
     It's possible to do "make Makefiles; make All", but some places depend
       on libs/headers from previous dirs to be installed
+    This basically means that separate variables must store default ANDREWDIR
+      and default installation dir (DESTDIR).  Right now, DESTDIR gets
+      inserted into some code, and that's not good.
+    This also means that DESTDIR must be used as include path and lib dir.
   - make it possible to use -k and -j (-k mostly works now)
   - make top-level Makefile not disappear w/ "make Makefiles"
   - fix corruption of flags (empty flags become -- eventually)
@@ -270,9 +271,6 @@
 - fix UniqueID() and friends:
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
-- pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
-  - make a way to declare a key as one, so that breaking out of a
-    search loop doesn't deposite the rest of the keystroke (e.g. up -> A)
 - install or chuck atkbook examples
   - con: use getstats from atk/console.  Builds OK, but not sure what it does
   - flex: builds OK.  Not sure what it does
@@ -297,6 +295,11 @@ Long-term:
   - maybe add more sophisticated styles (e.g. static pre/post text, alt.
     formatting of numeric contents, etc.  Just like writedatestamp,
     but less intrusive and more flexible (i.e. w/ text flow) than an inset.
+    Right now, the way of handling itemize/enumerate is to run a
+    routine to add/remove them.  It would be much more reliable to have
+    a special style for that.  Similarly, even enumeration of book
+    sections is done programattically, possibly by the print routine
+    itself.
   - unicode support
     - initially, only left-to-right.  Enough to deal with already.
       - don't ban any specific chars, including dir switchers, but don't

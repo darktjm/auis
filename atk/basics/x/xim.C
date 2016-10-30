@@ -3031,7 +3031,8 @@ xim::HandleExposure(Display  *display, XEvent  *event)
 	rwidth=width;rheight=height;
 	width-=point_X(&(this)->GetDrawable()->physicalOrigin);
 	height-=point_Y(&(this)->GetDrawable()->physicalOrigin);
-	if(width!=(this)->GetLogicalWidth() || height!=(this)->GetLogicalHeight()) {	rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width,  height);
+	if(width!=(this)->GetLogicalWidth() || height!=(this)->GetLogicalHeight()) {
+	    rectangle_SetRectSize( &this->GetDrawable()->localBounds, 0, 0, width,  height);
 	    sizechanged=TRUE;
 	    if(this->menubaron && this->menu) mb_RefitMenubar(this->menu);
 	}
@@ -3053,7 +3054,7 @@ xim::HandleExposure(Display  *display, XEvent  *event)
 		printf("xim: clipbox of update region is %d, %d, %d, %d\n", 
 			fakeRect.x, fakeRect.y, fakeRect.width, fakeRect.height);
 	}
-	if (XEqualRegion(windowRgn, curUpdateRgn) 
+	if (sizechanged || XEqualRegion(windowRgn, curUpdateRgn) 
 			||  ((globalUpdateList)->UpdatesPending())) {
 		/* The cumulative update is the same as the window, 
 		   so call it a fullupdate rather than a partial, 
@@ -3308,6 +3309,20 @@ xim::HandleWindowEvent(Display  *display)
 		    mb_HandleConfigure(self->mbi, self->menu, confEvent->width, confEvent->height);
 		}
 		ForceLocUpdate(self);
+	        // no exposure event will be sent if window shrank, so force
+		{
+			XEvent eev;
+			XExposeEvent *xev = &eev.xexpose;
+			eev.xany = event.xany;
+			xev->type = Expose;
+			xev->window = confEvent->window;
+			xev->x = confEvent->x;
+			xev->y = confEvent->y;
+			xev->width = confEvent->width;
+			xev->height = confEvent->height;
+			xev->count = 0;
+			XSendEvent(display, confEvent->window, 0, 0, &eev);
+		}
 		break;
 		/* StructureNotifyMask had to be reinstated to get UnmapNotifyEvents so we 
 		 can tell when a window is not visible.  Thus im_ExposeWindow
