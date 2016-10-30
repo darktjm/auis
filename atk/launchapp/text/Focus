@@ -187,7 +187,7 @@ column-numbers, and the table grid.
 \view{spread,539353096,728,0,0}
 }
 \begindata{table,539282824}
-\cols 116 269
+\cols 0 0
 \begindata{link,539283336}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Insets

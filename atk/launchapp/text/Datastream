@@ -56,7 +56,7 @@ font and color information.  The number 539439496 in the ``begindata'' and
 pairing of begindata/enddata lines.
 
 \begindata{table,539353224}
-\cols 116 269
+\cols 0 0
 \begindata{link,539353096}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Insets

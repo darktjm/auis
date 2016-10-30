@@ -36,7 +36,7 @@ provide the side-by-side layout you see below.  ``Press'' a button (click on
 it with the left mouse button) to see more about a particular topic.
 
 \begindata{table,537456768}
-\cols 130 212
+\cols 0 0
 \begindata{link,537456896}
 Datastream version: 3
 $(ANDREWDIR)/doc/AtkTour/Text

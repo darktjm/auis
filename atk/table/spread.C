@@ -244,11 +244,12 @@ void spread::ComputeSizes() {
             rh=0;
         }
         for (c = t->NumberOfColumns()-1; c >= 0; c--) {
-            if (!(t->col[c].flags&FLAG_DEFAULT_SIZE)) continue; //  width explicitly set
+            boolean col_default = t->col[c].flags&FLAG_DEFAULT_SIZE; //  width explicitly set
             if(t->IsJoinedToAnother(r,c)) continue; // accounted for in the base cell.
             cell = t->GetCell( r, c);
             if (cell->celltype != table_ImbeddedObject) {
-                colInfo[c].computedWidth=99;
+		if(!col_default)
+		    colInfo[c].computedWidth=99;
                 continue; // the standard default size is ok.
             }
             // XXX should add some intelligence about deciding the size of other kinds of cells too.
@@ -261,7 +262,14 @@ void spread::ComputeSizes() {
              if any of the insets in a column report that their size is 'fixed' give the column the maximum of the
              'fixed' width.
              divide any remaining space among columns whose insets indicate that their width is flexible. */
-            if(child) child->DesiredSize(150, rh?rh:16384, rh?view::HeightSet:view::NoSet, &dWidth, &dHeight);
+	    /* tjm - here's my idea instead:
+	     *   - find height @ max width
+	     *   - find min width @ height
+	     *  but that's too complicated, so I'll just use max width+height
+	     *  and assume the inset will give minimum sizes.
+	     *  If you don't like it, set the width/height manually.
+	     */
+            if(child && (!rh || col_default)) child->DesiredSize(col_default ? colInfo[c].computedWidth : 16384, rh?rh:16384, rh?view::HeightSet:col_default?view::NoSet:view::WidthSet, &dWidth, &dHeight);
             else dWidth=dHeight=0;
             dHeight += 2 * spread_CELLMARGIN + spread_SPACING;
             dWidth += 2 * spread_CELLMARGIN + spread_SPACING;
@@ -280,7 +288,7 @@ void spread::ComputeSizes() {
                 rowInfo[r].computedHeight=dHeight;
             }
 
-            if(colInfo[c].computedWidth<dWidth) {
+            if(!col_default && colInfo[c].computedWidth<dWidth) {
                 colInfo[c].computedWidth=dWidth;
             }
         }
