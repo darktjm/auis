@@ -248,7 +248,7 @@ void spread::ComputeSizes() {
             if(t->IsJoinedToAnother(r,c)) continue; // accounted for in the base cell.
             cell = t->GetCell( r, c);
             if (cell->celltype != table_ImbeddedObject) {
-		if(!col_default)
+		if(col_default)
 		    colInfo[c].computedWidth=99;
                 continue; // the standard default size is ok.
             }
