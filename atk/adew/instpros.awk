@@ -73,7 +73,7 @@ BEGIN{
 	    }
 	    if($3 == "writechild")
 		childflag = $2
-	    continue;
+	    next
 	}
 	else  {
 	    initing = 2
@@ -164,10 +164,10 @@ printf "#include <andrewos.h>\n"
 printf "#include <arbiter.H>\n"
 printf "class %s : public arbiter{ \n",dclass
 printf "public:\n"
-printf "virtual ATKregistryEntry *ATKregistry();\n"
+printf "TRACED_CLASS_NODEST(%s);\n",dclass
 printf "/* user code begins here for methods*/\n"
 printf "/* user code ends here for methods */\n"
-printf "    char *ViewName();\n"
+printf "    const char *ViewName();\n"
 printf "    long ReadSup (FILE *file, long id);\n"
 printf "    long WriteSup (FILE *file, long writeid, int level);\n"
 printf "     void ReadObjects() ;\n"
@@ -193,7 +193,7 @@ printf "#include <dataobject.H>\n"
 printf "#include <adew.h>\n"
 printf "/* user code begins here for includes */\n"
 printf "/* user code ends here for includes */\n"
-printf "char *%s::ViewName()\n",dclass
+printf "const char *%s::ViewName()\n",dclass
 printf "{\n"
 printf "    return \"%s\";\n",class
 printf "}\n"
@@ -250,9 +250,8 @@ printf "/* user code begins here for %s */\n","HeaderInfo"
 printf "/* user code ends here for %s */\n","HeaderInfo"
 printf "#include <adew.h>\n"
 printf "#include <arbiterview.H>\n"
-printf "class %s : public arbiterview { \npublic:\n\tATKregistryEntry *ATKregistry();\n",class
-printf "	virtual %s::~%s();\n",class,class
-printf "	%s::%s();\n",class,class
+printf "class %s : public arbiterview { \npublic:\n\tTRACED_CLASS(%s);\n",class,class
+printf "	%s();\n",class
 printf "/* user code begins here for %s */\n","classprocedures"
 printf "/* user code ends here for %s */\n","classprocedures"
 printf "\n\tvoid ObservedChanged( struct observable * observed, long status );\n"
@@ -282,16 +281,18 @@ printf "#include <view.H>\n#include <arbiter.H>\n#include <arbiterview.H>\n#incl
 for(i in typelist){
     printf "#include <%s.H>\n",typelist[i]
 }
-printf "#define DataObject(A) (A->view::dataobject)\n"
-printf "#define Parent(A) (A->view::parent)\n"
+printf "#define DataObject(A) ((A)->GetDataObject())\n"
+printf "#define Parent(A) ((A)->GetParent())\n"
 printf "#define Data(A) ((class %s *)DataObject(A) )\n",dclass
 printf "#define CEL(A) ((struct cel  *)DataObject(A) )\n"
 printf "/* user code begins here for %s */\n","includes"
 printf "/* user code ends here for %s */\n","includes"
-printf "static struct  %s *FindSelf(class view *v)\n",class
-printf "{\n"
-printf " if(v->IsType(\"%s\")) return (class %s *) v;\n",class,class
-printf "else return (class %s *)arbiterview::FindArb(v);\n}\n",class
+if(funcdefined == 1){
+    printf "static struct  %s *FindSelf(class view *v)\n",class
+    printf "{\n"
+    printf " if(v->IsType(\"%s\")) return (class %s *) v;\n",class,class
+    printf "else return (class %s *)arbiterview::FindArb(v);\n}\n",class
+}
 # Should probably make sure it is a 'class' type 
 printf "class view *%s::GetApplicationLayer()\n",class
 printf "{\n"
@@ -330,7 +331,7 @@ printf "}\n"
 # add function definitions
 if(funcdefined == 1){
     for(i in funcs){
-	printf "%s_%s(class view *v,long dat)\n{\n",class,funcs[i]
+	printf "static void %s_%s(class view *v,long dat)\n{\n",class,funcs[i]
 	printf "class %s *self;\nif((self = FindSelf(v)) == NULL) return;\n",class 
 	printf "/* user code begins here for %s_%s */\n",class,funcs[i]
 	printf "/* user code ends here for %s_%s */\n}\n",class,funcs[i]
@@ -344,7 +345,7 @@ printf "if (status == observable::OBJECTDESTROYED) {\n"
 printf "adew_NoteDestroyed(this,observed,this->AdewArray);\n";
 printf "}\n"
 printf "}\n"
-printf "boolean InitializeClass()\n{\n",class
+printf "static boolean InitializeClass()\n{\n",class
 if(funcdefined == 1){
     printf "ATKregistryEntry *viewtype = ATK::LoadClass(\"view\");\n"
       for(i in funcs){

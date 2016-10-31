@@ -67,10 +67,10 @@ static const char Imakebase[] =
 "LIBS =\n"
 "SYSLIBS =\n"
 "DynamicMultiObject(%s,%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n"
-"ATKLibrary(%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n"
 "DependTarget()\n";
 
 static const char shellbase[] =
+"#!/bin/sh\n"
 "if test -r Makefile \n"
 "then \n"
 "echo Using existing Makefile\n"
@@ -230,7 +230,7 @@ static char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
 	    if(cp != NULL){
 		*cp = '\0';
 		strcpy(ending,cp +1);
-		sprintf(c,"%s.%s",c,ending);
+		sprintf(c + strlen(c),".%s",ending);
 	    }
 	}
 	if(s2len == 0){
@@ -589,11 +589,11 @@ int main(int argc, char  *argv[])
 		fprintf(f,Insetbase,bb,bv);
 		strcpy(bv2,bv);
 		strcat(bv2, ".o");
-		fprintf(f,Imakebase,bb,bv, bb, bv2,bb,bb,bv2);
+		fprintf(f,Imakebase,bb,bv, bb, bv2);
 	    }
 	    else  {
 		fprintf(f,Controlbase,bb);
-		fprintf(f,Imakebase,bb,"",bb,"",bb,bb,"");
+		fprintf(f,Imakebase,bb,"",bb,"");
 	    }
 	    fclose(f);
 	}
@@ -614,13 +614,13 @@ int main(int argc, char  *argv[])
 		    fprintf(f," -T\"%s\"",title);
 		}
 		if(iname){
-		     fprintf(f," -I\"%s\" $*\n",cls);
+		     fprintf(f," -I\"%s\" \"$@\"\n",cls);
 		}
 		else {
 		    if(cls){
 			fprintf(f," -C\"%s\" -F\"%s\"",cls,func);
 		    }
-		    fprintf(f," -S\"%s\" $*\n",src);
+		    fprintf(f," -S\"%s\" \"$@\"\n",src);
 		}
 		fclose(f);
 		chmod(sname,0755);

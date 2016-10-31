@@ -6,7 +6,7 @@
 OBJS=arbcon.o arbiter.o arbiterview.o cel.o celview.o lset.o lsetview.o \
 	page.o pagev.o runadewapp.o wincelview.o
 HFILES=arbcon.H arbiter.H arbiterview.H cel.H celview.H lset.H lsetview.H \
-	page.H pagev.H runadewapp.H wincelview.H
+	page.H pagev.H runadewapp.H wincelview.H adew.h
 
 EXTRACLASSES=arbcon arbiterview cel celview lset lsetview \
 	page pagev runadewapp wincelview

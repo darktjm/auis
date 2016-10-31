@@ -213,3 +213,24 @@ void stringV::DrawNewValue( )
     if (this->label != NULL)
 	DrawLabel(this);
 }
+
+view::DSattributes stringV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
+
+{
+    struct FontSummary *fs;
+    int ret = view::WidthLarger|view::HeightLarger;
+
+    if(!this->fontname) // params haven't been read yet; no idea what to return
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    fs = boldfont->FontSummary(GetDrawable());
+    *desiredheight = fs->newlineHeight == 0 ? fs->maxHeight : fs->newlineHeight;
+    *desiredheight += 2 * y + 4; // y is border, 2*2 is padding
+    if(label) {
+	boldfont->StringSize(GetDrawable(), label, &width, &height);
+	*desiredwidth = width + 2 * x + 4; // x is border, 2*2 is padding
+    } else {
+	*desiredwidth = 75;
+	ret |= view::WidthSmaller;
+    }
+    return (view::DSattributes)ret;
+}

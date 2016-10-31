@@ -17,7 +17,7 @@ MkdirTarget(${DESTDIR}/lib/arbiters)
 
 InstallClassFiles($(HFILES))
 
-InstallFiles(vallist helparb piano.txt piano.lst calc.lset calc.tbl, $(INSTINCFLAGS), $(DESTDIR)/lib/arbiters)
+InstallFiles(helparb piano.txt piano.lst calc.lset calc.tbl, $(INSTINCFLAGS), $(DESTDIR)/lib/arbiters)
 
 DependTarget()
 

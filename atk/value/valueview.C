@@ -160,9 +160,10 @@ valueview::valueview()
 view::DSattributes valueview::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
 {
-    *desiredwidth = 75;
-    *desiredheight = 75;
-    return (view::DSattributes)( view::WidthFlexible | view::HeightFlexible) ;
+    // returning 75x75 flexible no matter what is just plain lazy (and wrong)
+    *desiredwidth = this->borderPixels * 2 + 2;
+    *desiredheight = this->borderPixels * 2 + 2;
+    return (view::DSattributes)( view::WidthLarger | view::HeightLarger) ;
 }
 
 void valueview::RequestUpdateFunction(updateq_fptr fp)

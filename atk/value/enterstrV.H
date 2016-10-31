@@ -16,8 +16,9 @@ public:
     class valueview * DoHit(enum view::MouseAction type, long x,long y,long hits)  ;
     void ObservedChanged( class observable * observed, long status );
     void LinkTree(class view *parent);
-   void DrawButtonText(char *text,long len,struct rectangle *rect,struct rectangle*rect2,boolean pushd);
- class view * Hit(enum view::MouseAction type, long x, long y, long numberOfClicks)
+   void DrawButtonText(const char *text,long len,struct rectangle *rect,struct rectangle*rect2,boolean pushd);
+ class view * Hit(enum view::MouseAction type, long x, long y, long numberOfClicks);
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
      ;
 
 

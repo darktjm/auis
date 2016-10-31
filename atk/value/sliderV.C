@@ -583,7 +583,66 @@ class valueview * sliderV::DoHit( enum view::MouseAction  type,long  x,long  y,l
     return this;
 }
 
+// from sbuttonv.C
+#define BUTTONDEPTH 4
+#define MOTIFBUTTONDEPTH 2
+#define TEXTPAD 2
 
+view::DSattributes sliderV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
-
-
+{
+    if(!this->fontname) // params haven't been read yet; no idea what to return
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    int ret = view::WidthLarger|view::HeightLarger;
+    struct FontSummary *fs;
+    char buf[30];
+    long labelwidth, valheight,valwidth,valwidth1,junk;
+    fs = boldfont->FontSummary(GetDrawable());
+    // technically, this is wrong:  neither minval nor maxval is necessarily the widest
+    // close enough for me, though.
+    sprintf(buf,"%ld",maxval);
+    boldfont->StringSize(GetDrawable(), buf,&(valwidth),&(junk));
+    sprintf(buf,"%ld",minval);
+    boldfont->StringSize(GetDrawable(), buf,&(valwidth1),&(junk));
+    if(valwidth1 > valwidth) valwidth = valwidth1;
+    valheight = ( fs->newlineHeight == 0) ? fs->maxHeight : fs->newlineHeight;
+    if(label){
+	(boldfont)->StringSize(GetDrawable(), label,&(labelwidth),&(junk));
+	if(labelwidth > valwidth)
+	    valwidth = labelwidth;
+	valheight *= 2;
+    }
+    valwidth += (x + FUDGE2) * 2;
+    // the minimum depends on style & sbutton parameters
+    // should probably just call sbuttonv::DesiredSize on a properly
+    // configured button, but for now just copy some sbuttonv logic
+    int sliderw = 5, sliderh = 5; // an arbitrary min size
+    if((maxval - minval)/increment + 1 > sliderh)
+	sliderh = (maxval - minval) / increment + 1; // at least 1 pixel per step
+    int pad;
+    if(prefs->style == sbutton_PLAIN)
+	pad = 0;
+    else if(prefs->style == sbutton_BOXEDRECT)
+	pad = TEXTPAD;
+    else {
+	pad = prefs->style == sbutton_MOTIF ? MOTIFBUTTONDEPTH : BUTTONDEPTH;
+	if(prefs->bdepth > 0)
+	    pad = prefs->bdepth;
+    }
+    sliderw += 4 * pad;
+    sliderh += 4 * pad;
+    if(valwidth < sliderw)
+	valwidth = sliderw;
+    if(pass != view::WidthSet) {
+	if(valwidth > 75)
+	    *desiredwidth = valwidth;
+	else {
+	    ret |= view::WidthSmaller;
+	    *desiredwidth = 75;
+	}
+    } else
+	*desiredwidth = MAX(valwidth, sliderw);
+    *desiredheight = valheight + sliderh;
+    
+    return (view::DSattributes)ret ;
+}

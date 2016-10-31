@@ -6,10 +6,18 @@
   - support parameters (other than just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
-- adew crashes a lot just doing the tutorial
-- adew: no samples for mbuttonv or clicklistV in vallist document anymore
-  - samples are pretty ugly anyway, at current font size.  Probably
-    designed for 75dpi display, as usual.
+- adew issues
+  - There should be a way to control inset view sizes better (at least
+    reset either/both direction fixed size so inset can auto-size itself)
+  - String slider/String thumb should have way to statically set text array.
+    Mabye also clicklistV
+  - single-letter buttons don't vertically align text in sbutton mode
+    since they are assumed to be icons and are placed/sized differently.
+  - after setting values, the values are cleared, and to restore, you
+    have to move away and back again.
+  - enterstrV/mentertextV/clicklistV don't allow setting text part's style
+  - should be able to set default size of arbcon popup (i.e., smaller)
+  - sliders behave oddly, not following mouse at all really
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it

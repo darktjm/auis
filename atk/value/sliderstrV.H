@@ -17,6 +17,7 @@ public:
 	TRACED_CLASS_NODEST(sliderstrV);
 
  
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
    const char * GetValueString()  ;
 };
 

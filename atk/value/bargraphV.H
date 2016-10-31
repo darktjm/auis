@@ -15,6 +15,7 @@ public:
 
    void Drawslider(boolean fullupdate,struct rectangle *rr);
    void DrawFromScratch(long x,long y,long width,long height);
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
 
     
 	bargraphV();

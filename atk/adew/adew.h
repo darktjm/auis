@@ -1,9 +1,9 @@
+#ifndef _adew_h_
+#define _adew_h_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-#ifndef adew_ReadShort
 
 typedef void (*adew_cbfptr)(class ATK *, class value *, long r1, long r2);
 struct adew_array {
@@ -56,12 +56,11 @@ for(aa = ARRAY; aa->object != NULL;aa++){\
     }\
 };
 #define adew_InitDataObjects(SELF,ARRAY){ class cel *ccl; class arbiter *aab;int dummy;\
-aab = (class arbiter *)  (SELF)->view::dataobject;\
+aab = (class arbiter *)  (SELF)->GetDataObject();\
 for(ccl = (aab)->GetFirst(); ccl != (class cel *)aab; ccl = (ccl)->GetNextChain()){\
     adew_InitApplicationCel(SELF,ccl,NULL,ARRAY,&dummy);}}
 
 
-#define adew_ReadShort(A,F,CNT) if(CNT-- > 0) fscanf(F,"%d\n",&(A))
 #define adew_ReadLong(A,F,CNT) if(CNT-- > 0) fscanf(F,"%ld\n",&(A))
 #define adew_ReadString(A,F,CNT)  if(CNT-- > 0){int ii; char *c;\
 	 fscanf(F,"#%d\n",&ii);c = (A);\
@@ -82,14 +81,12 @@ for(ccl = (aab)->GetFirst(); ccl != (class cel *)aab; ccl = (ccl)->GetNextChain(
 else adew_DiscardString(F) }
 #define adew_ReadExtraData(F,CNT) { while (CNT-- > 0) adew_ReadJunk(F) }
 
-#define adew_WriteShort(A,F) fprintf(F,"%d\n",(A))
 #define adew_WriteLong(A,F) fprintf(F,"%ld\n",(A))
-#define adew_WriteString(A,F)  fprintf(F,"#%d\n%s\n",strlen(A),(A))
+#define adew_WriteString(A,F)  fprintf(F,"#%d\n%s\n",(int)strlen(A),(A))
 #define adew_WriteFloat(A,F)  fprintf(F,"%f\n",(A))
 #define adew_WriteStringArray(A,F,SIZE) {int inc; for(inc = 0; inc < SIZE; inc++) adew_WriteString((A)[inc],F);}
 #define adew_WriteLongArray(A,F,SIZE) {int inc; for(inc = 0; inc < SIZE; inc++) adew_WriteLong((A)[inc],F);}
 
-#define adew_InitShort(A) (A) = 0
 #define adew_InitLong(A) (A) = 0L
 #define adew_InitString(A) (*(A)) = '\0'
 #define adew_InitFloat(A) (A) = 0.0

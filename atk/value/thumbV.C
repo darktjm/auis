@@ -180,7 +180,7 @@ static void DrawKnurl(class thumbV  * self)
 	rectangle_Width(&self->wheelrec) = maxx -  rectangle_Left(&self->wheelrec) + 3;
 #else /* USELINES */
     char ch;
-    (self)->MoveTo((self->width - self->x)/ 2, (self->height - self->y)/ 2);
+    (self)->MoveTo((self->width - self->x)/ 2, self->wheelrec.top + self->wheelrec.width / 2);
     (self)->SetFont(self->valuefont);
     ch =  (self->rv % 7)  + 'O';
     (self)->DrawText(&ch,1, 0 );
@@ -456,7 +456,45 @@ class valueview * thumbV::DoHit( enum view::MouseAction  type,long  x,long  y,lo
     return this;
 }
 
+view::DSattributes thumbV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
-
-
-
+{
+    if(!this->fontname) // params haven't been read yet; no idea what to return
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    int ret = view::WidthLarger|view::HeightLarger;
+    struct FontSummary *fs;
+    char buf[30];
+    long labelwidth, valheight,valwidth,valwidth1,junk;
+    fs = boldfont->FontSummary(GetDrawable());
+    // technically, this is wrong:  neither minval nor maxval is necessarily the widest
+    // close enough for me, though.
+    sprintf(buf,"%ld",maxval);
+    boldfont->StringSize(GetDrawable(), buf,&(valwidth),&(junk));
+    sprintf(buf,"%ld",minval);
+    boldfont->StringSize(GetDrawable(), buf,&(valwidth1),&(junk));
+    if(valwidth1 > valwidth) valwidth = valwidth1;
+    valheight = ( fs->newlineHeight == 0) ? fs->maxHeight : fs->newlineHeight;
+    if(label){
+	(boldfont)->StringSize(GetDrawable(), label,&(labelwidth),&(junk));
+	if(labelwidth > valwidth)
+	    valwidth = labelwidth;
+	valheight *= 2;
+    }
+    valwidth += (x + FUDGE2) * 2;
+    if(pass != view::WidthSet) {
+	if(valwidth > 75)
+	    *desiredwidth = valwidth;
+	else {
+	    ret |= view::WidthSmaller;
+	    *desiredwidth = 75;
+	}
+    } else {
+	// this is the minimum: values25:'O' extends 16 to left, so 32 centered
+	*desiredwidth = 32 + (x + FUDGE2) * 2;
+	*desiredwidth = MAX(width,MAX(valwidth, *desiredwidth));
+    }
+    // values25:'O' extends 24 down, so 48 centered
+    *desiredheight = valheight + 48 + y + + FUDGE2;
+    
+    return (view::DSattributes)ret ;
+}

@@ -95,8 +95,7 @@ END {
 	printf "/* user code begins here for %s */\n","includes"
 	printf "/* user code ends here for %s */\n","includes"
 	printf "class %s : public observable { \npublic :\n",class
-	printf "	virtual ATKregistryEntry *ATKregistry();\n"
-	printf "	virtual ~%s();\n",class
+	printf "	TRACED_CLASS(%s);\n",class
 	printf "	%s();\n",class
 	printf "/* user code begins here for %s */\n","classprocedures"
 	printf "/* user code ends here for %s */\n","classprocedures"
@@ -144,6 +143,7 @@ END {
 		}
 	printf "static void initself(class %s *self,class view *v)\n{\n",class
 	printf "\tself->v = v;\n"
+	printf "\tv->Reference();\n"
 	for(i in oblist){
 		printf "\tself->%sView = (class %s *)arbiterview::GetNamedView(v,\"%s\");\n",obfunc[i],obview[i],oblist[i]
 		printf "\tself->%s = (class %s *)arbiterview::GetNamedObject(v,\"%s\");\n",obfunc[i],obtype[i],oblist[i]
@@ -158,7 +158,7 @@ END {
 	}
 	print "}"
 	for(i in funcs){
-		printf "void %s_%s(class ATK *av,long dat)\n{\n",class,funcs[i]
+		printf "static void %s_%s(class ATK *av,long dat)\n{\n",class,funcs[i]
 		printf "class view *v=(class view *)av;\nclass %s *self;\nif((self = FindSelf(v)) == NULL) return;\n",class 
 		printf "/* user code begins here for %s_%s */\n",class,funcs[i]
 		printf "/* user code ends here for %s_%s */\n}\n",class,funcs[i]
@@ -179,7 +179,7 @@ END {
 	}
 	printf "}\n"
 	printf "}\n"
-	printf "boolean InitializeClass()\n{\n"
+	printf "static boolean InitializeClass()\n{\n"
 	printf "class ATKregistryEntry *viewtype = ATK::LoadClass(\"view\");\n"
 	printf "first%s = NULL;\n",class
 	for(i in funcs){
@@ -196,6 +196,7 @@ END {
 			printf "\tif(this->%s) this->%s->RemoveCallBackObserver(this);\n",obfunc[i], obfunc[i]
 		}
 	}
+	printf("\tif(this->v) this->v->Destroy();\n");
 	printf "/* user code begins here for %s */\n","FinalizeObject"
 	printf "/* user code ends here for %s */\n","FinalizeObject"
 	print "}"

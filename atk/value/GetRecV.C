@@ -187,7 +187,11 @@ class valueview * GetRecV::DoHit( enum view::MouseAction  type,long  x,long  y,l
     return this;
 }
 
+view::DSattributes GetRecV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
-
-
-
+{
+    // there's no good default.  Just make it 75xY flexible
+    *desiredwidth = 75;
+    *desiredheight = 75 * 22 / 17;
+    return (view::DSattributes)( view::WidthFlexible | view::HeightFlexible) ;
+}
