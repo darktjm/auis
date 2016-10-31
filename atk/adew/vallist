@@ -265,7 +265,7 @@
 
 \enddata{text,539042440}
 \enddata{cel,539040264}
-\view{celview,539040264,11,0,0}
+\view{celview,539040264,11,200,0}
 \begindata{cel,539164168}
 \V 2
 \begindata{value,539171976}

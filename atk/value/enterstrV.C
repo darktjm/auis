@@ -66,7 +66,7 @@ void enterstrV::ObservedChanged(class observable  *changed,long  value)
 	(this)->buttonV::ObservedChanged(changed,value);
     }
 }
-void enterstrV::DrawButtonText(char  *text,long  len,struct rectangle  *rect,struct rectangle  *rect2,boolean  pushd)
+void enterstrV::DrawButtonText(const char  *text,long  len,struct rectangle  *rect,struct rectangle  *rect2,boolean  pushd)
 {
     struct rectangle r,r2;
     class buttonV *ss;
@@ -115,4 +115,16 @@ class view * enterstrV::Hit(enum view::MouseAction  type, long  x , long  y , lo
 	(this->etextviewp)->WantInputFocus(this->etextviewp);
 
     return (this->etextviewp)->Hit( type, (this->etextviewp)->EnclosedXToLocalX( x), (this->etextviewp)->EnclosedYToLocalY( y), numberOfClicks);
+}
+
+view::DSattributes enterstrV::DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)
+{
+    int ret = buttonV::DesiredSize(width, height, pass, dWidth, dheight);
+    if(!fontname || !etextviewp)
+	return ret;
+    long twidth, theight;
+    etextviewp->DesiredSize(width, height, pass, &twidth, &theight);
+    if(twidth > *dWidth)
+	*dWidth = twidth;
+    *dheight += theight;
 }
