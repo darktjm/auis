@@ -318,6 +318,25 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 }
 
 
+view::DSattributes pianoV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
-
-
+{
+    if(!this->fontname)
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    long lwidth = 4; // approx. 75/7 - 6
+    long fheight = 25; // 75 / 3
+    for(int i = 0; i < pianov_NUMLABELS; i++)
+	if(label[i] && *label[i] && *label[i] != ':') {
+	    const char *lend = strchr(label[i], ':');
+	    if(!lend)
+		lend = label[i] + strlen(label[i]);
+	    boldfont->TextSize(GetDrawable(), label[i], (int)(lend - label[i]), &width, &height);
+	    if(width > lwidth)
+		lwidth = width;
+	    if(height > fheight)
+		fheight = height;
+	}
+    *desiredwidth = (lwidth + 4) * 7;
+    *desiredheight = fheight * 3;
+    return (view::DSattributes)( view::WidthLarger | view::HeightLarger) ;
+}

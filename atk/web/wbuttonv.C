@@ -54,8 +54,6 @@ wbuttonv::SetLabel(const char  *label)  {
 wbuttonv::wbuttonv()  {
 	ATKinit;
 
-	(this)->SetFixedCount(0);
-	(this)->SetFixedColumns(0);
 	this->wlabel = NULL;
 	THROWONFAILURE( TRUE);
 }

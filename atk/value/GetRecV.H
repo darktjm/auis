@@ -25,6 +25,7 @@ public:
    void DrawNewValue();
    class valueview  * DoHit(enum view::MouseAction type, long x,long y,long hits)
      ;
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
    void LookupParameters();
 
 

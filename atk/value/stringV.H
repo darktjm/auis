@@ -21,6 +21,7 @@ public:
    void DrawDehighlight();
    void LookupParameters();
    void DrawNewValue();
+   view::DSattributes DesiredSize(long width, long height, enum view::DSpass pass, long *dWidth, long *dheight)  ;
  
   stringV();
 	

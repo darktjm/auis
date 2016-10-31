@@ -19,6 +19,7 @@ public:
    const char * GetValueString()  ;
    class valueview  * DoHit(enum view::MouseAction type, long x,long y,long hits)
      ;
+   view::DSattributes DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight);
 };
 
 /* parameters to spst

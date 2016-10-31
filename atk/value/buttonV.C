@@ -62,9 +62,6 @@ struct buttonV_rl {
 #define FONT "andysans"
 #define FONTTYPE fontdesc_Bold
 #define FONTSIZE 12
-#define BUTTONDEPTH 3
-#define BUTTONPRESSDEPTH 2
-#define TEXTPAD 2
 #define buttonV_STRING_END ':'
 #define buttonV_STRING_ESCAPE '\\'
 
@@ -206,7 +203,7 @@ static int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
 	    }
 	    else {
 		while(*chr != buttonV_STRING_END && *chr != '\0'){
-		    if(*chr == buttonV_STRING_ESCAPE && *(chr + 1) == buttonV_STRING_END){
+		    if(*chr == buttonV_STRING_ESCAPE && *(chr + 1)){
 			chr++;
 		    }
 		    *t++ = *chr++;
@@ -584,3 +581,37 @@ class view * buttonV::Hit(enum view::MouseAction  type, long  x , long  y , long
 	 else
 	     return (class view *) this;
      }
+
+// from sbuttonv.C
+#undef BUTTONDEPTH
+#define BUTTONDEPTH 4
+#define MOTIFBUTTONDEPTH 2
+#define TEXTPAD 2
+#define EXTRATEXTPAD 3
+
+view::DSattributes buttonV::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
+
+{
+    if(!fontname)
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    int vpad = 0, hpad = 0;
+    if(prefs->style != sbutton_PLAIN && prefs->style != sbutton_PLAINBOX) {
+	hpad = vpad = prefs->style == sbutton_MOTIF ? MOTIFBUTTONDEPTH : BUTTONDEPTH;
+	if(prefs->bdepth > 0)
+	    hpad = vpad = prefs->bdepth;
+    }
+    hpad += TEXTPAD + EXTRATEXTPAD;
+    vpad += TEXTPAD;
+    hpad *= 2;
+    vpad *= 2;
+    // I guess all buttons should be same size
+    int nrows = (count + columns - 1) / columns;
+    int cols = vertical ? columns : nrows;
+    if(!vertical)
+	nrows = columns;
+    *desiredwidth = (max + hpad) * cols;
+    struct FontSummary *fs = activefont->FontSummary(GetDrawable());
+    height = ( fs->newlineHeight == 0) ? fs->maxHeight : fs->newlineHeight;
+    *desiredheight = (height + vpad) * nrows;
+    return (view::DSattributes)( view::WidthLarger | view::HeightLarger) ;
+}

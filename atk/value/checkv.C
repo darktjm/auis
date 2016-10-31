@@ -248,7 +248,20 @@ class valueview * checkv::DoHit( enum view::MouseAction  type,long  x,long  y,lo
     return this;
 }
 
+view::DSattributes checkv::DesiredSize(long  width , long  height, enum view::DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
-
-
-
+{
+    if(!this->fontname) // params haven't been read yet; no idea what to return
+	return valueview::DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    *desiredheight = *desiredwidth = (x + FUDGE) * 2 + 10; // 10 is arbitrary minimum
+    if(label) {
+	struct FontSummary *fs = normalfont->FontSummary(GetDrawable());
+	height = ( fs->newlineHeight == 0) ? fs->maxHeight : fs->newlineHeight;
+	height += 4;
+	if(height > *desiredheight)
+	    *desiredheight = *desiredwidth = height;
+	normalfont->StringSize(GetDrawable(), label, &width, &height);
+	*desiredwidth += width + 2;
+    }
+    return (view::DSattributes)( view::WidthLarger | view::HeightLarger) ;
+}
