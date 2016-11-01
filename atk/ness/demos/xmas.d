@@ -139,7 +139,7 @@ extend "bell"   on mouse "any"
 
 		m := WhereItWas()
 
-		raster_negative(currentinset, -1)
+		rasterv_negative(currentinset, -1)
 
 		focus(defaulttext)
 
@@ -216,7 +216,7 @@ extend "bell"   on mouse "any"
 
 		play_notes("T150   G F D C ")
 
-		raster_negative(currentinset, -1)
+		rasterv_negative(currentinset, -1)
 
 	end if
 
