@@ -1333,7 +1333,7 @@ static void ScaleCommand(class rasterview  *self)
 	DEBUG(("Selection: (%ld,%ld,%ld,%ld)\n",
 	       rectangle_Left(&sub), rectangle_Top(&sub),
 	       rectangle_Width(&sub), rectangle_Height(&sub)));
-	DEBUG(("%s: 0x%p\n", (self->Original)->GetTypeName(), self->Original));
+	DEBUG(("%s: %p\n", (self->Original)->GetTypeName(), self->Original));
 
 	(self->Original)->GetScaledSubraster( &sub, NewW, NewH, pix);
     }

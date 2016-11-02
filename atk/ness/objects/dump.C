@@ -84,7 +84,7 @@ printstaddr(FILE  *f, union stackelement  *a, union stackelement  *NSP) {
 	if (a == NULL)
 		fprintf(f, "NULL    ");
 	else if (v < -100  || v > 1000)
-		fprintf(f, "0x%p", a);
+		fprintf(f, "%p", a);
 	else 
 		fprintf (f, "NSP%-+5ld", v);
 }
@@ -97,7 +97,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 	class simpletext *t;
 	long size;
 
-	fprintf(f, "Stack bounds: 0x%p ... 0x%p    NSP: 0x%p\n",
+	fprintf(f, "Stack bounds: %p ... %p    NSP: %p\n",
 		NSLowEnd, NSHiEnd, NSP);
 	fprintf(f, "FramePtr: ");
 	printstaddr(f, (union stackelement *)FramePtr, NSP);
@@ -124,7 +124,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 			size = sizeof(struct dblstkelt);
 			break;
 		    case (ptrHdr):
-			fprintf(f, ":  ptr    0x%p  (%s)\n", 
+			fprintf(f, ":  ptr    %p  (%s)\n", 
 					tsp->p.v, (tsp->p.v)->GetTypeName());
 			size = sizeof(struct ptrstkelt);
 			break;
@@ -144,7 +144,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 				NSP);
 			pos = (m)->GetPos();
 			len = (m)->GetLength();
-			fprintf(f, "  0x%p[%ld,%ld]  ", t, pos, len);
+			fprintf(f, "  %p[%ld,%ld]  ", t, pos, len);
 			if (tsp >= NSP) {
 				fprintf(f, "\"");
 				for (i = 0; i < 20 && i < len; i++)

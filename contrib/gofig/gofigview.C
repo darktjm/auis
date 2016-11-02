@@ -144,8 +144,8 @@ enhancements:
 
 static char  debug = FALSE;      /* This debug switch is toggled with ESC-^D-D */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(%p)\n", Stringize(r), this))
 
 static long const pagew = 612, pageh = 792;	  /* 8.5*11 */
 	/* this paper size is used only as arguments to DesiredPrintSize, so it
@@ -2165,10 +2165,10 @@ gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boo
 	static void 
 printdata(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->GetDataObject();
-	printf("visacc:  %d  currow,col:  %d %d  sel: 0x%p\n",
+	printf("visacc:  %d  currow,col:  %d %d  sel: %p\n",
 		 self->visibleaccnum,	self->curspotrow, self->curspotcol,
 		selectedspot( self ));
-	printf("gofig data object at 0x%p\n", dobj);
+	printf("gofig data object at %p\n", dobj);
 	printf( "board is %dx%d  (printcolwidth: %ld)  edges lrtb:%c%c%c%c\n",
 			dobj->width, dobj->height, dobj->printcolwidth, 
 			dobj->edges&LEFTedge?'|':'.',
@@ -2179,7 +2179,7 @@ printdata(gofigview *self, int code) {
 	struct stone *s0 = &(*dobj)[0];
 	for (i = 0; i < dobj->nstones(); i++) {
 		struct stone *s = &(*dobj)[i];
-		printf( "	0x%p  [%ld]:  %c @ (%d,%d) ", 
+		printf( "	%p  [%ld]:  %c @ (%d,%d) ", 
 				s, s-s0, s->color, s->row, s->col );
 		if (s->note < 0) printf( "%c", -s->note ); 
 		else if (s->note > 0) printf( "%d", s->note );

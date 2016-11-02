@@ -1302,7 +1302,7 @@ LEAVE(nessview::PostMenus);
 
 	void
 nessview::PostKeyState(class keystate  *keystate) {
-DEBUG(("nessview_PostKeyState(0x%p)  self has 0x%p\n", keystate, this->Keystate));
+DEBUG(("nessview_PostKeyState(%p)  self has %p\n", keystate, this->Keystate));
 	if (keystate != this->Keystate)
 		(this->Keystate)->AddBefore( keystate);
 	(this)->scroll::PostKeyState( this->Keystate);

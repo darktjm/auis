@@ -127,7 +127,7 @@ void rasterview::FitToSize(struct rectangle  logicalrect  )
 	DEBUG(("Selection: (%ld,%ld,%ld,%ld)\n",
 	       rectangle_Left(&sub), rectangle_Top(&sub),
 	       rectangle_Width(&sub), rectangle_Height(&sub)));
-	DEBUG(("%s: 0x%p\n", (this->Original)->GetTypeName(), this->Original));
+	DEBUG(("%s: %p\n", (this->Original)->GetTypeName(), this->Original));
 
 	(this->Original)->GetScaledSubraster( &sub, NewW, NewH, pix);
     }
@@ -186,7 +186,7 @@ void rasterview::SetDataObject(class dataobject  *dras)
 {
     class raster *oldras = (class raster *)(this)->GetDataObject();
     class raster *ras=(class raster *)dras;
-    DEBUG(("rasterview__SetDataObject(0x%p, 0x%p) was 0x%p\n", this, ras, oldras));
+    DEBUG(("rasterview__SetDataObject(%p, %p) was %p\n", this, ras, oldras));
     if (oldras == ras) return;	/* this is needed to avoid
 				 Destroy'ing oldras in RemoveObserver */
     (this)->view::SetDataObject( ras);
@@ -207,7 +207,7 @@ void rasterview::ObservedChanged(class observable  *obs, long  status)
     class raster *ras = (class raster *)(this)->GetDataObject();
     class rasterimage *pix;
 
-    DEBUG(("Enter rasterview__ObservedChanged(0x%p, 0x%p, %ld)   ras: 0x%p\n", this, obs, status, ras));
+    DEBUG(("Enter rasterview__ObservedChanged(%p, %p, %ld)   ras: %p\n", this, obs, status, ras));
 
     if (obs == (class observable *)this->toolset) {
 	if (status==observable::OBJECTDESTROYED) {
@@ -1910,7 +1910,7 @@ static void SetPixel(class rasterview  *self, long  x , long  y, boolean  bit)
     class rasterimage *pix;
 
     if ((ras == NULL) || ((pix = (ras)->GetPix()) == NULL)) return;
-    DEBUG(("Set Pixel in 0x%p to %s at (%ld,%ld)\n", pix, ((bit) ? "Black" : "White"), x, y));
+    DEBUG(("Set Pixel in %p to %s at (%ld,%ld)\n", pix, ((bit) ? "Black" : "White"), x, y));
     if (NotFullSize(self))
 	rasterview_SetPixelBehindDisplayBox(self, self->Expansion, x, y, bit);
     else {

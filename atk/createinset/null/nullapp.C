@@ -95,7 +95,7 @@ nullapp::ParseArgs(int  argc, const char  **argv)
 		was set to start debugging */
 
 	if ( ! (this)->GetFork())
-		printf("Args parsed.  dobj @ 0x%p\n", this->dobj);
+		printf("Args parsed.  dobj @ %p\n", this->dobj);
 
 	return TRUE;
 }
@@ -189,7 +189,7 @@ nullapp::Start()
 	(v)->WantInputFocus( v);
 
 	if ( ! (this)->GetFork())
-		printf("Focussed.  nullv @ 0x%p  im @ 0x%p   frame @ 0x%p\n", 
+		printf("Focussed.  nullv @ %p  im @ %p   frame @ %p\n", 
 				v, im, frm);
 
 	return TRUE;

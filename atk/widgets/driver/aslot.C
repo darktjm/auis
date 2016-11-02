@@ -557,7 +557,7 @@ ASlot::DumpSlot(FILE *f) {
 	else if ( ! IsType(ASlot::ptrslotreg))   // neither ptr norATK
 		fprintf(f, "of unknown type\n");
 	else if ( ! IsType(ASlot::atkslotreg))   // is a ptr
-		fprintf(f, "a ptr: 0x%p\n", (void *)*(ASlotPtr *)this);
+		fprintf(f, "a ptr: %p\n", (void *)*(ASlotPtr *)this);
 	else if ( ! (ATK *)*(ASlotATK *)this)
 		fprintf(f, "ATK object: NULL\n");
 	else 
