@@ -2,10 +2,10 @@
 ##         Copyright IBM Corporation 1988,1991 - All Rights Reserved      ##
 ##        For full copyright information see:'andrew/doc/COPYRITE'        ##
 ## ###################################################################### ##
-addfiletype .c ctext
-addfiletype .h ctext
-addfiletype .C cpptext
-addfiletype .H cpptext
+addfiletype .c ctext "template=c"
+addfiletype .h ctext "template=h"
+addfiletype .C cpptext "template=C"
+addfiletype .H cpptext "template=H"
 addfiletype .org org
 addfiletype .eq eq
 addfiletype .fad fad

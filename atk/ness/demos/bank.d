@@ -177,7 +177,7 @@ Your application for a loan of\upbase{
 
 \enddata{text,539391000}
 \enddata{cel,539390680}
-\view{celview,539390680,9,94,23} }dollars has been approved at a rate 
+\view{celview,539390680,9,0,0} }dollars has been approved at a rate 
 of\upbase{ 
 \begindata{cel,539395544}
 \V 2
@@ -203,7 +203,7 @@ of\upbase{
 
 \enddata{text,539395864}
 \enddata{cel,539395544}
-\view{celview,539395544,10,72,25} }with repayment over a period of\upbase{ 
+\view{celview,539395544,10,0,0} }with repayment over a period of\upbase{ 
 \begindata{cel,539397144}
 \V 2
 \begindata{value,539396632}
@@ -228,7 +228,7 @@ of\upbase{
 
 \enddata{text,539458680}
 \enddata{cel,539397144}
-\view{celview,539397144,11,78,24} }months.   Each month you will make a 
+\view{celview,539397144,11,0,0} }months.   Each month you will make a 
 payment of 
 \upbase{ \
 \begindata{cel,539459464}
@@ -255,7 +255,7 @@ payment of
 
 \enddata{text,539459784}
 \enddata{cel,539459464}
-\view{celview,539459464,12,100,27} }and the total repaid to the bank over 
+\view{celview,539459464,12,0,0} }and the total repaid to the bank over 
 the lifetime of the loan will be\upbase{ 
 \begindata{cel,539460968}
 \V 2
@@ -281,7 +281,7 @@ the lifetime of the loan will be\upbase{
 
 \enddata{text,539461176}
 \enddata{cel,539460968}
-\view{celview,539460968,13,132,26}}.
+\view{celview,539460968,13,0,0}}.
 
 
 
@@ -305,7 +305,7 @@ Friendly National Bunk\
 >VIEW< 
 >REF< 
 \enddata{lset,539340360}
-\view{lsetview,539340360,14,479,370}
+\view{lsetview,539340360,14,600,470}
 \leftindent{
 }
 }

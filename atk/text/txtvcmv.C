@@ -433,12 +433,11 @@ static void DoNextScreenCmd(class textview  *self, boolean move_dot)
 {
     int argument = ((self)->GetIM())->Argument();
     int count;
-    text *d = Text(self);
 
     ((self)->GetIM())->ClearArg();
     for (count = 0; count < argument; ++count) {
         int numLines = textview_GetLines(self);
-        long pos;
+        long pos, opos;
         long overlap;
         long viewHeight;
 
@@ -450,16 +449,22 @@ static void DoNextScreenCmd(class textview  *self, boolean move_dot)
         viewHeight = (self)->GetLogicalHeight() - self->by;
         overlap = PageOverlap(viewHeight);
 
-        pos = (self)->GetTopPosition();
+        opos = pos = (self)->GetTopPosition();
         /* get line aligned */
         pos = (self)->MoveBack( pos, 0, textview_MoveByLines, 0, 0);
         pos = (self)->MoveForward( pos, viewHeight - overlap, textview_MoveByPixels, 0, 0);
+	// tjm - force advancement on a line which exceeds a screenful
+	if(pos <= opos)
+	    pos = (self)->MoveForward( opos, viewHeight - overlap, textview_MoveByPixels, 0, 0);
         if (self->scroll == textview_ScrollBackward) {
             self->scroll = textview_MultipleScroll;
         }
 	/* It is rare, but a partial line at the end of text can cause a pos
 	   that is not the beginning of a line after the move. */
-	pos = d->GetBeginningOfLine(pos);	// adjust pos--usually no change
+	/* tjm - very long lines @ end could prevent movement to end */
+	/*       I'd rather have that rare case at end of doc */
+//      text *d = Text(self);
+//	pos = d->GetBeginningOfLine(pos);	// adjust pos--usually no change
         (self)->SetTopOffTop( pos, self->pixelsComingOffTop);
 
         if (move_dot) {

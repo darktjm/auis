@@ -85,8 +85,8 @@ ATK_IMPL("nessmark.H")
 
 static char  debug = FALSE;
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(%p)\n", Stringize(r), this))
 
 
 /* the following booleans are side arguments 

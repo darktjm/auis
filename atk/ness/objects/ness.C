@@ -719,7 +719,7 @@ ness::EstablishViews(class view  *child) {
 					: (class view *)child);
 		(this)->SetArbiter( arbview);
 		if (debug)
-			printf("arbiterview at 0x%p\n", arbview);
+			printf("arbiterview at %p\n", arbview);
 	}
 
 
@@ -730,13 +730,13 @@ ness::EstablishViews(class view  *child) {
 		dt = arbiterview::GetNamedView(arbview, "defaulttext");
 		deftext = (class textview *)ProperPtr(dt, textviewClass);
 		if (dt != NULL)
-			DEBUG(("dt 0x%p   deftext from dt 0x%p\n", dt, deftext));
+			DEBUG(("dt %p   deftext from dt %p\n", dt, deftext));
 		if (deftext == NULL)
 			/* try for a child of the arbview itself. */
 			deftext = (class textview *)ProperPtr((ATK  *)arbview,
 					 textviewClass);
 		if (deftext != NULL)
-			DEBUG(("deftext from arbview 0x%p\n", deftext));
+			DEBUG(("deftext from arbview %p\n", deftext));
 		if (deftext == NULL)
 		    /* still no default text. search upward from arb and then child */
 		    textchild = (class view *)arbview, textsecond = (class view *)child;

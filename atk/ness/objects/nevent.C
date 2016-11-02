@@ -979,7 +979,7 @@ unpostevents(class ness  *ness, class nesssym  *attr, boolean  debug) {
 					(attr)->ToC( ness, buf, sizeof(buf)-1))) 
 				== NULL) {
 		if (debug) {
-			printf("unpostevents could not find \"%s\" in arb at 0x%p\n",
+			printf("unpostevents could not find \"%s\" in arb at %p\n",
 				(attr)->ToC( ness, buf, sizeof(buf)-1),
 				(ness)->GetArbiter());
 		}

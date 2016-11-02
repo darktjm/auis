@@ -63,7 +63,6 @@ realUnary(char  op, unsigned char *iar) {
 	if (NSP->d.hdr != dblHdr) 
 		RunError(": arg is not a real value (uninitialized ?)", iar);
 	switch(op) {
-#if !SY_OS2  /* The EMX GNU math lib is currently very weak.  Skip this stuff. */
 		case 'a':	NSP->d.v = acos(NSP->d.v);   break;
 		case 'c':	NSP->d.v = asin(NSP->d.v);   break;
 		case 'e':	NSP->d.v = atan(NSP->d.v);   break;
@@ -86,59 +85,14 @@ realUnary(char  op, unsigned char *iar) {
 		case 'E':	NSP->d.v = y1(NSP->d.v);   break;
 		case '_': NSP->d.v = -(NSP->d.v);   break;
 
-#if ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV)
 		case 't':	NSP->d.v = lgamma(NSP->d.v);  break;
-#else /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
-		case 't': {
-			/* this approximation is derived from Stirling's
-			approximation to the gamma function as shown in
-			Exercise 6 of Section 1.2.11.2 of Knuth V.1 (2nd ed.)
-			The formula when  x >= a > 0 is
-			    gamma(x+1) = sqrt(2*pi*x) * (x/e)^x * (1+O(1/x)) 
-			I suspect this formula is considerably inaccurate
-			for small values of x.  
-			It does not hold for negative values.		-wjh
-			*/
-			double x = NSP->d.v;
-			double p = x-1;
-			double s = 1 + 1 / (12*p);
-			p *= x-1;
-			s += 1 / (288*p);
-			p *= x-1;
-			s -= 139/(51840*p);
-			p *= x-1;
-			s -= 571 / (248832 * p);
-			NSP->d.v = log(2*M_PI/2) // tjm - wtf?
-				- log(x-1)/2  +  x * log(x-1) + log(s);
-		}	break;
-#endif /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
 
-#if ! SY_U5x && ! SY_AIXx
 		case 'b':	NSP->d.v = acosh(NSP->d.v);   break;
 		case 'd':	NSP->d.v = asinh(NSP->d.v);   break;
 		case 'f':	NSP->d.v = atanh(NSP->d.v);   break;
 		case 'g':	NSP->d.v = cbrt(NSP->d.v);    break;
 		case 'n':	NSP->d.v = expm1(NSP->d.v);   break;
 		case 'w':	NSP->d.v = log1p(NSP->d.v);   break;
-#else /* ! SYSV && ! AIX */
-		case 'b':	/* acosh */
-			NSP->d.v = log(NSP->d.v + sqrt(NSP->d.v*NSP->d.v-1.0));
-			break;
-		case 'd':	/* asinh */
-			NSP->d.v = log(NSP->d.v + sqrt(NSP->d.v*NSP->d.v+1.0));
-			break;
-		case 'f':	/* atanh */
-			NSP->d.v = 
-				((log(1.0)+NSP->d.v)-(log(1.0)-NSP->d.v))/2.0;
-			break;
-		case 'g':	/* cbrt */
-			NSP->d.v = exp(log(NSP->d.v)/3.0);    break;
-		case 'n':	/* expm1 */
-			NSP->d.v = exp(NSP->d.v)-1.0;   break;
-		case 'w':	/* log1p */
-			NSP->d.v = log(1.0+NSP->d.v);   break;
-#endif /* (!SYSV && !AIX) */
-#endif /* OS/2 */
 		default:
 			RunError(":unimplemented operation requested", iar);
 	}
@@ -247,38 +201,21 @@ realOther(char  op, unsigned char *iar) {
 		NSP->l.v = (long)ceil(x);  break;
 
 	/* real to boolean */
-#if ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) && !SY_OS2
 	case 'f':
-		NSP->b.v = (isnan(x) == 1) ? TRUE : FALSE;   break;
+		NSP->b.v = isnan(x) ? TRUE : FALSE;   break;
 
 	case 'g':
-#ifdef IBM032_ENV
-		NSP->b.v = (finite(x) == 1) ? TRUE : FALSE;   break;
-#else /* IBM032_ENV */
-		/* isinf() is defined on SUN.  Let's assume it works for all
-			other than IBM032, VAX, and HPUX */
-		NSP->b.v = (! isinf(x) == 1) ? TRUE : FALSE;   break;
-#endif /* IBM032_ENV */
-
-#else  /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
-	case 'f':
-	case 'g':
-		RunError(":isnan and finite are not available", iar);
-		break;	
-#endif /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
-
+		NSP->b.v = ! isinf(x) ? TRUE : FALSE;   break;
 
 	/* integer to real */
 	case 'j':		/* float(x) */
 		NSP->d.v = l;  break;
 
-#if !SY_OS2
 	/* (integer, real) => real */
 	case 'k':
 		NSP->d.v = jn(l, x);  break;
 	case 'l':
 		NSP->d.v = yn(l, x);  break;
-#endif
 	default:
 		RunError(":unimplemented operation requested", iar);
 	}

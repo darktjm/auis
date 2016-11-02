@@ -734,8 +734,8 @@ static void GenerateLineItems(class textview  *self, class text  *text, class ma
 
 		info->endOfPara = FALSE;
 
-		if (noWrap || (localRubber <= 0 &&
-			       info->rubberSpaces <= 0)) {
+		if (!lastWidth || noWrap ||
+		    (localRubber <= 0 && info->rubberSpaces <= 0)) {
 		    /* Here on word too long to fit on line; */
 		    /* should really push last char to next line */
 

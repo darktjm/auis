@@ -355,7 +355,7 @@ void cpptext::RedoStyles()
 		    break;
 		case '}':
 		    --braces;
-		    if (braces<64 && inClassDefBraces[braces]) {
+		    if (braces && braces<64 && inClassDefBraces[braces]) {
 			/* end brace of member function definition */
 			readyForFName= posn;
 		    }

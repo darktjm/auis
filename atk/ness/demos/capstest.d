@@ -44,7 +44,7 @@ long.  \
 
 \enddata{text,539790728}
 \enddata{cel,539790408}
-\view{celview,539790408,34,76,36}   }capitalizes using mostly Ness 
+\view{celview,539790408,34,0,0}   }capitalizes using mostly Ness 
 primitives
 
 \wayup{\
@@ -74,7 +74,7 @@ primitives
 
 \enddata{text,539792056}
 \enddata{cel,539791704}
-\view{celview,539791704,35,0,31}   }capitalizes via ez proc-table routines
+\view{celview,539791704,35,0,0}   }capitalizes via ez proc-table routines
 
 \wayup{\
 \begindata{cel,539793016}
@@ -103,7 +103,7 @@ primitives
 
 \enddata{text,539793368}
 \enddata{cel,539793016}
-\view{celview,539793016,36,79,30}   }converts all words to lower case
+\view{celview,539793016,36,0,0}   }converts all words to lower case
 
 
 

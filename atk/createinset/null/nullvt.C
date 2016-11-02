@@ -169,7 +169,7 @@ void printdata(class dataobject  *ndobj)
         class null *dobj=(class null *)ndobj;
 	/* $$$ same procedure as in nulltest.c */
 	struct dotlist *d;
-	printf("null data object at 0x%p\n", dobj);
+	printf("null data object at %p\n", dobj);
 	for (d = (dobj)->GetFirstDot();  d != NULL;  d = (dobj)->GetNextDot( d))
 		printf("\t%ld  \t%ld\n", (dobj)->GetDotX( d), (dobj)->GetDotY( d));
 

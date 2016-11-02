@@ -325,7 +325,7 @@ raster::WriteShare(FILE  *file, struct rectangle  *sub)
 			this->options, this->xScale, this->yScale,
 			 0, 0, width, height);	/* subraster is the whole */
 
-	fprintf(file, "share %d 0x%p \n", getpid(), pix);
+	fprintf(file, "share %d %p \n", getpid(), pix);
 
 	fprintf(file, "\\enddata{%s, %d}\n", name, 0);
 }

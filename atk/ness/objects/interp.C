@@ -1401,7 +1401,7 @@ brancher: {
 		case ptrHdr:
 			if (NSP->p.v == NULL)
 				sprintf(buf, "NULL");
-			else  sprintf(buf, "0x%p", NSP->p.v);
+			else  sprintf(buf, "%p", NSP->p.v);
 			break;
 		case funcHdr:
 			if (NSP->c.call == NULL)

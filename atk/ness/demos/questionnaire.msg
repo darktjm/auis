@@ -90,7 +90,7 @@ or RETURN:
 
 \enddata{text,5381120}
 \enddata{cel,5605888}
-\view{celview,5605888,13,357,0}
+\view{celview,5605888,13,400,0}
 
 
 
@@ -178,5 +178,5 @@ After empowering the Ness script, click this button to send your response.
 
 \enddata{text,8559104}
 \enddata{cel,5392384}
-\view{celview,5392384,27,0,43\
+\view{celview,5392384,27,0,0\
 }\enddata{text,5380224}

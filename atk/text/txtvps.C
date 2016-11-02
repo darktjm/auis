@@ -104,7 +104,7 @@ static void DumpStyle(struct textps_style  *ts)
 	printf("  View envrment\n");
     }
     else {
-	printf("  Style envrment, afm 0x%p\n", ts->afm);
+	printf("  Style envrment, afm %p\n", ts->afm);
 	/*printf("  Font |%s|, %d pt\n", ts->fontfamily, ts->fontsize);
 	 printf("  linespacing: %d; paraspacing: %d\n", ts->linespacing, ts->paraspacing);
 	 printf("  Face: %d; flags: %d\n", ts->fontfaces, ts->miscflags);*/
@@ -357,7 +357,7 @@ static void PushStyle(struct textps_slurp  *slurp, void  *pushval, int  pushtype
 
     /* pushtype should now be View, Style, or None */
     tsnew->pushtype = pushtype;
-    /*printf("### pushing; type=%d (sty=0x%p) endpos=%d\n", pushtype, sty, tsnew->endpos);*/
+    /*printf("### pushing; type=%d (sty=%p) endpos=%d\n", pushtype, sty, tsnew->endpos);*/
 
     if (pushtype == textps_pushtype_None) {
 	copy_textps_style(tsnew, ts);

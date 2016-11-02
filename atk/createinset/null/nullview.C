@@ -37,8 +37,8 @@ static char  debug;      /* This debug switch is toggled with ESC-^D-D */
 	/*	$$$ you could provide a method in this module which sets -debug-
 		Then nullvt.c could call it to set this debug from the -d switch */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(%p)\n", Stringize(r), this))
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *\
  *
@@ -439,7 +439,7 @@ nullview::FullUpdate(enum view::UpdateType   type, long   left , long   top , lo
 
 		this->wpattern = (this)->WhitePattern();
 		this->bpattern = (this)->BlackPattern();
-		DEBUG(("Drawable: 0x%p   White: 0x%p   Black: 0x%p\n",
+		DEBUG(("Drawable: %p   White: %p   Black: %p\n",
 			(this)->GetDrawable(), 
 			this->wpattern, this->bpattern));
 	}

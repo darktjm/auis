@@ -18,6 +18,10 @@
   - enterstrV/mentertextV/clicklistV don't allow setting text part's style
   - should be able to set default size of arbcon popup (i.e., smaller)
   - sliders behave oddly, not following mouse at all really
+  - questionnaire.msg's send button requires manual ^L to make send
+    button expand.
+  - adjusting controls doesn't always set modified flag for a document
+  - sometimes just loading a doc with controls sets modified flag for it
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
@@ -67,8 +71,6 @@
   - displays entire text red due to header being red
   - probably many more...
 - use qsort to sort in deskey instead of external sort command
-- adjusting controls doesn't always set modified flag for a document
-- sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
@@ -90,7 +92,6 @@
   though scrollbar and cursor still work.  Maybe due to insistence on
   ending at the start of a paragraph (which, in and of itself, is a
   bad thing that makes page up/down weird and inconsistent)
-- questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar

@@ -240,7 +240,7 @@ function testtextimage()
 
 	checkstring("testimage(text)", "0x", extent(m, second(m)))
 
-	checkboolean("testimage(lt)", True, length(m) < 15)
+	checkboolean("testimage(lt)", True, length(m) < 19) -- was 15; 64-bit is 18
 
 end function
 
@@ -321,7 +321,7 @@ $$
 
 #3enddata{fad,#2}
 
-#3view{fadview,#2,4,0,0}d#3bold{de}f#3
+#3view{fadview,#2,5,0,0}d#3bold{de}f#3
 
 #3enddata{text,#1}
 
