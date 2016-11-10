@@ -4,15 +4,14 @@
 \* ********************************************************************** */
 
 HELP = console.help lacc.help \
-	laccqr.help ermproc.help \
-	inpproc.help lgvproc.help erprintf.help
+	laccqr.help conproc.help erprintf.help
 
 
 NormalHelpRule()
-InstallDocs($(HELP), ${DESTDIR}/help)
+InstallDocs($(HELP), $(DESTDIR)/help)
 InstallHelpAlias(laccqr, lacc-quickref)
 InstallHelpAlias(console, consoles)
-InstallHelpAlias(ermproc, errmonf errmonfproc)
-InstallHelpAlias(inpproc, inputproc)
-InstallHelpAlias(lgvproc, logvproc logview)
+InstallHelpAlias(conproc, ermproc errmonf errmonfproc)
+InstallHelpAlias(conproc, inputproc inpproc consoleproc)
+InstallHelpAlias(conproc, lgvproc logvproc logview)
 InstallHelpAlias(erprintf, errprintf)

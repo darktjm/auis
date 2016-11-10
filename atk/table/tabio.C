@@ -728,8 +728,8 @@ class table * ReadASCII (class table  * T, FILE  *f)
 	    if (n > (T)->NumberOfRows())
 		(T)->ChangeSize ( n, (T)->NumberOfColumns());
             for (r = 0; r < n; r++) {
-                T->row[r].thickness = s[r].thickness;
-                T->row[r].flags&=~FLAG_DEFAULT_SIZE; // explicitly set
+                if((T->row[r].thickness = s[r].thickness) != TABLE_DEFAULT_ROW_THICKNESS)
+                    T->row[r].flags&=~FLAG_DEFAULT_SIZE; // explicitly set
             }
 	}
 	if (s)
@@ -747,8 +747,9 @@ class table * ReadASCII (class table  * T, FILE  *f)
 	    if (n > (T)->NumberOfColumns())
 		(T)->ChangeSize ( (T)->NumberOfRows(), n);
             for (c = 0; c < n; c++) {
-                T->col[c].thickness = s[c].thickness;
-                T->col[c].flags&=~FLAG_DEFAULT_SIZE; // explicitly set
+		// this isn't as safe as with rows, but safe enough.
+                if((T->col[c].thickness = s[c].thickness) != TABLE_DEFAULT_COLUMN_THICKNESS)
+                    T->col[c].flags&=~FLAG_DEFAULT_SIZE; // explicitly set
             }
 	}
 	if (s)

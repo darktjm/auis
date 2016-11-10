@@ -30,12 +30,12 @@ static void m_combine(class spread  * V, char  ch);
 static void m_separate(class spread  * V, char  ch);
 static void m_drawedges(class spread  * V, char  ch);
 static void m_eraseedges(class spread  * V, char  ch);
-static void m_format (class spread  * V, char     ch);
+static void m_format (class spread  * V, long     ch);
 static void m_precision (class spread  * V, char     ch);
 static int objecttest(class spread  *V, const char  *name, const char  *desiredname);
 static void m_imbed (class spread  * V, char     ch);
 static void m_resetheights (class spread  * V, char     ch);
-static void m_lock (class spread  * V, char     ch);
+static void m_lock (class spread  * V, long     ch);
 void DefineMenus (class menulist  *mainmenus, class keymap  * mainmap, class menulist *readonlymenus, class keymap *readonlymap, struct ATKregistryEntry   *classinfo);
 
 
@@ -323,7 +323,7 @@ static void m_eraseedges(class spread  * V, char  ch)
 
 /* process formatting menu hit */
 
-static void m_format (class spread  * V, char     ch)
+static void m_format (class spread  * V, long     ch)
 {
     (MyTable(V))->SetFormat ( ch, &(V->selection));
 }
@@ -400,7 +400,7 @@ static void m_resetheights (class spread  * V, char     ch)
 
 /* lock or unlock cells */
 
-static void m_lock (class spread  * V, char     ch)
+static void m_lock (class spread  * V, long     ch)
 {
     (MyTable(V))->Lock ( ch, &(V->selection));
 }

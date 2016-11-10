@@ -27,7 +27,7 @@ static keymap *mod_Map;
 static menulist *mod_Menus;
 
 ATKdefineRegistry(modtextview, srctextview, modtextview::InitializeClass);
-static void startPreproc(modtextview *self, char key);
+static void startPreproc(modtextview *self, long key);
 
 static struct bind_Description modtextBindings[]={
     {"modtextview-start-preproc","#",'#', NULL,0,0, (proctable_fptr)startPreproc, "Start preprocessor style if pressed at start of line."},
@@ -106,7 +106,7 @@ void modtextview::HandleEndOfLineStyle(long pos)
 	(this)->srctextview::HandleEndOfLineStyle(pos);
 }
 
-static void startPreproc(modtextview *self, char key)
+static void startPreproc(modtextview *self, long key)
 {
     modtext *ct=(modtext *)self->view::GetDataObject();
     long pos, oldpos;
@@ -119,7 +119,8 @@ static void startPreproc(modtextview *self, char key)
     if (ct->preprocessor && (pos==0 || ((ct)->GetChar(pos)=='\n' && !(ct)->Quoted(pos))) && !(ct)->GetStyle(oldpos)) {
 	int count=((self)->GetIM())->Argument();
 	pos= oldpos;
-	while (count--) (ct)->InsertCharacters(pos++,&key,1);
+	char ckey = key;
+	while (count--) (ct)->InsertCharacters(pos++,&ckey,1);
 	(ct)->WrapStyleNow(oldpos,pos-oldpos, ct->srctext::kindStyle[PREPRC], FALSE,TRUE);
 	(self)->SetDotPosition(pos);
 	if ((ct)->IndentingEnabled())

@@ -3,32 +3,86 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Im}
-
-\chapter{
-}
-"im-exit-program", "^X^C", "Quit~99",  "Exit program."
-
-"im-start-keyboard-macro", "^X(", "Start recording input events."
-
-"im-stop-keyboard-macro", "^X)", "Stop recording input events."
-
-"im-play-keyboard-macro", "^Xe", "Play current keyboard macro."
-
-"im-redraw-window", "^L", "Redraw the window."
-
-"im-print-malloc-statistics", "^X^@m", "Print malloc statisticsp to a 
-file."
-
-"im-reset-malloc-statistics", "^X^@r", "Reset malloc statistics."
-
-"im-print-malloc-table", "^X^@t", "Print malloc table to a file."
-
-"im-start-profile", "^X^@p", "Start profiling program."
-
-"im-stop-profile", "^X^@q", "Stop profiling program."
+\chapter{Procedure Table Listing for Im}
 
 
+\bold{im-exit-program}()
+
+\leftindent{Exit program.
+
+Bound to:  \typewriter{^X-^C}; Menu:  Quit~99}
+
+\bold{im-start-keyboard-macro}(object \italic{view})
+
+\leftindent{Start recording input events.  The \italic{view} parameter is 
+only for displaying messages; the effect is global.
+
+Bound to:  \typewriter{^X-(}}
+
+\bold{im-stop-keyboard-macro}(object \italic{view})
+
+\leftindent{Stop recording input events.  The \italic{view} parameter is 
+only for displaying messages; the effect is global.
+
+Bound to:  \typewriter{^X-)}}
+
+\bold{im-play-keyboard-macro}(object \italic{self})
+
+\leftindent{Play current keyboard macro.
+
+Bound to:  \typewriter{^X-e}
+
+\typewriter{^U}-argument can be set to play repeatedly.  Note that 
+unlike Emacs et al., repetitions do not stop at errors.  They only stop 
+on an explicit break (e.g. \typewriter{^G})}
+
+\bold{im-redraw-window}(object \italic{self})
+
+\leftindent{Redraw the window.
+
+Bound to:  \typewriter{^L}}
+
+\bold{im-print-malloc-statistics}(object \italic{view})
+
+\leftindent{Write malloc statistics to a file.  The file's name is fixed 
+(\typewriter{/tmp/mallocstats.}\italic{pid}).  Nothing is written if 
+support not compiled in.  The \italic{view} parameter is for messages; 
+the effect is global.
+
+Bound to:  \typewriter{^X-^@-m}}
+
+\leftindent{im-reset-malloc-statistics}(object \italic{view})
+
+\leftindent{Reset malloc statistics.  The \italic{view} parameter is for 
+messages; the effect is global.
+
+Bound to:  \typewriter{^X-^@-r}}
+
+\bold{im-print-malloc-table}(object \italic{view})
+
+\leftindent{Write malloc table to a file.  The file's name is fixed 
+(\typewriter{/tmp/malloctable.}\italic{pid}\typewriter{.}\italic{seq}).  
+Nothing is written if support not compiled in.  The \italic{view} 
+parameter is for messages; the effect is global.
+
+Bound to:  \typewriter{^X-^@-t}}
+
+\bold{im-start-profile}()
+
+\leftindent{Start profiling program.  Actually, does nothing.
+
+Bound to:  \typewriter{^X-^@-p}}
+
+\bold{im-stop-profile}()
+
+\leftindent{Stop profiling program.  Actually, does nothing.
+
+Bound to:  \typewriter{^X-^@-q}}
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
 
 
 \begindata{bp,537558784}

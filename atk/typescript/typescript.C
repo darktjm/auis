@@ -1515,7 +1515,7 @@ typescript::typescript()
 	struct proctable_Entry *UserMenuProc;
 	char nbuf[512];
 
-	UserMenuProc = proctable::DefineProc("Read-User-Menus", (proctable_fptr)typescript_HandleMenus, &typescript_ATKregistry_ , NULL, "Handle user supplied menus"); 
+	UserMenuProc = proctable::DefineProc("typescript-Read-User-Menus", (proctable_fptr)typescript_HandleMenus, &typescript_ATKregistry_ , NULL, "Handle user supplied menus"); 
 	while(fgets(nbuf, sizeof nbuf, df)) {
 	    int pos = strlen(nbuf) - 1;
 	    if(pos > 0) {

@@ -1,0 +1,142 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for termulator}
+
+
+\bold{tmview-submit}(object \italic{self})
+
+\leftindent{Submits a line of input to the subprocess.
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+\bold{tmview-submit-and-stay}(object \italic{self})
+
+\leftindent{Submits a line of input, but also keeps 
+cursor at this line, and puts it at the top of the screen.
+
+Bound to:  \typewriter{^J}}
+
+\bold{tmview-signal}(object \italic{self}, integer \italic{key})
+
+\leftindent{Send a signal to the subproces.  The signal is as if the 
+given \italic{key} were sent.
+
+Bound to:  \typewriter{^C}, \typewriter{^Z}, \typewriter{^\\}, each 
+with their respective character codes as \italic{key}.}
+
+\bold{tmview-erase-line}(object \italic{self})
+
+\leftindent{Erase current line.
+
+Bound to:  \typewriter{^U}}
+
+\bold{tmview-prev-cmd}(object \italic{self}, integer \italic{where})
+
+\leftindent{Retrieves previous command.  Note that \italic{where} must 
+be 1.
+
+Bound to:  \typewriter{Esc-=}}
+
+\bold{tmview-prev-match-cmd}(object \italic{self}, integer \italic{where})
+
+\leftindent{Retrieves previous matching command.  Note that \italic{where} must 
+be 5.
+
+Bound to:  \typewriter{Esc-[}}
+
+\bold{tmview-next-cmd}(object \italic{self}, integer \italic{where})
+
+\leftindent{Retrieves next command.  Note that \italic{where} must 
+be 2.
+
+Bound to:  \typewriter{Esc--}, \typewriter{Esc-`}}
+
+\bold{tmview-next-match-cmd}(object \italic{self}, integer \italic{where})
+
+\leftindent{Retrieves next matching command.  Note that \italic{where} must 
+be 6.
+
+Bound to:  \typewriter{Esc-]}}
+
+\bold{tmview-move}(object \italic{self})
+
+\leftindent{Move selected text to end.
+
+Bound to:  \typewriter{Esc-+}; Menu:  Move~30}
+
+\bold{tmview-exec}(object \italic{self})
+
+\leftindent{Move, then execute command.
+
+Bound to:  \typewriter{Enter} (\typewriter{Esc-^M}); Menu:  Execute~30}
+
+\bold{tmview-delete-or-eot}(object \italic{self})
+
+\leftindent{Sends EOT at end of line, otherwise deletes 
+next character.
+
+Bound to:  \typewriter{^D}}
+
+\bold{tmview-start-new-process}(object \italic{self})
+
+\leftindent{Starts a new child process.
+
+Bound to:  \typewriter{^X-!}; Menu:  Termulator,Start new process
+
+Use \bold{queueanswer} to answer questions in Ness.  If an old process 
+is running, this asks two yes/no questions.  The last question is the 
+command to run.}
+
+\bold{tmview-beginning-of-line}(object \italic{self})
+
+\leftindent{Beginning of line or input, whichever is 
+closest.
+
+Bound to:  \typewriter{^A}}
+
+\bold{tmview-clear}(object \italic{self})
+
+\leftindent{Clears the text of the tm.
+
+Menu:  Termulator,Clear}
+
+\bold{tmview-exec-str}(object \italic{self}, marker \italic{cmd})
+
+\leftindent{Execute a string.
+
+Menu:  for each entry in the "shell menu" file, if it exsits, the string 
+before the colon is the menu entry, and the \italic{cmd} is the text after 
+the colon.
+
+Note that if the view was initialized without attempting to read a menu 
+file (i.e., not via the \bold{tm} application), this command will not 
+exist.} 
+
+\bold{tmview-self-insert}(object \italic{self}, integer \italic{ch})
+
+\leftindent{If echoing, insert a key (\italic{ch}), otherwise store it.
+
+Bound to:  All printable ASCII (\typewriter{Space} .. \typewriter{~}), 
+with their respective character code as the \italic{ch} parameter}
+
+\bold{tmview-raw-key}(object \italic{self}, integer \italic{ch})
+
+\leftindent{Send a key (\italic{ch}) directly to the subprocess in this view.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{tm}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -116,7 +116,9 @@ The current version of the htmltext package is 1.2
 
 
 
-\leftindent{\helptopic{image}
+\leftindent{\helptopic{htmlproc}
+
+\helptopic{image}
 
 \helptopic{initfiles}
 

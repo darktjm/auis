@@ -191,7 +191,7 @@ enum RasterIOType {
 #endif
 };
 
-static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock);
+static void RasterIOCommand(class rasterview  *self, long  rock);
 static void CopyCommand(class rasterview  *self);
 static void ReplaceCommand (class rasterview  *self);
 boolean MatExtendPossible(class rasterview  *self);
@@ -812,7 +812,7 @@ static const char * const prompts[] = {
 #endif
 };
 
-static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
+static void RasterIOCommand(class rasterview  *self, long  rock)
 {
     class raster *ras = (class raster *)(self)->GetDataObject();
     FILE *f;
@@ -1734,7 +1734,7 @@ boolean rasterview::InitializeClass()
 				 RasterIOCommand,
 				 &rasterview_ATKregistry_ , 0,
 				 "Read file in X Window Dump format");
-    (Keymap)->BindToKey( "\033\022x", proc, 0);
+    (Keymap)->BindToKey( "\033\022x", proc, Inxwd);
     /* ESC - ^R - x*/
     (::Menus)->AddToML( "File,Read X Window Dump~13", proc, (long)Inxwd, menuRead);
 
@@ -1742,7 +1742,7 @@ boolean rasterview::InitializeClass()
 				 RasterIOCommand,
 				 &rasterview_ATKregistry_ , 0,
 				 "Read file in X Bitmap format");
-    (Keymap)->BindToKey( "\033\022b", proc, 0);
+    (Keymap)->BindToKey( "\033\022b", proc, Inxbm);
     /* ESC - ^R - b*/
     (::Menus)->AddToML( "File,Read X Bitmap~14", proc, (long)Inxbm, menuRead);
 

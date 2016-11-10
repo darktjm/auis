@@ -27,7 +27,7 @@ static keymap *cpp_Map;
 static menulist *cpp_Menus;
 
 ATKdefineRegistry(cpptextview, ctextview, cpptextview::InitializeClass);
-static void slash(cpptextview *self, char key);
+static void slash(cpptextview *self, long key);
 
 static struct bind_Description cpptextBindings[]={
     {"cpptextview-slash","/",'/',NULL,0,0,(proctable_fptr)slash,"Insert a slash, possibly an end comment delimiter or the start of a line comment."},
@@ -71,7 +71,7 @@ keystate *cpptextview::PrependKeyState()
 }
 
 /* slash will END an existing comment style if preceded by an asterisk, or start a line comment style if preceded by another slash */
-static void slash(cpptextview *self, char key)
+static void slash(cpptextview *self, long key)
 {
     cpptext *ct=(cpptext *)self->view::GetDataObject();
     int count=((self)->GetIM())->Argument();
@@ -81,7 +81,8 @@ static void slash(cpptextview *self, char key)
     if (IsAutoCutMode() && (self)->GetDotLength()>0)
 	((self)->GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), self, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos= pos= (self)->CollapseDot();
-    while (count--) (ct)->InsertCharacters(pos++, &key, 1);
+    char ckey = key;
+    while (count--) (ct)->InsertCharacters(pos++, &ckey, 1);
     if (oldpos && (ct)->GetChar(oldpos-1)=='*')
 	if ((ct)->GetStyle(oldpos+1)==ct->srctext::comment_style)
 	    /* terminate existing style */

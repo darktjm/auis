@@ -447,7 +447,9 @@ found.
 \leftindent{Move your mouse cursor to one of the following names and click 
 your left mouse button to see the help file for:
 
-\leftindent{\helptopic{ez}
+\leftindent{\helptopic{webproc}
+
+\helptopic{ez}
 
 \helptopic{ez2html}
 

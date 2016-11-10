@@ -1,0 +1,29 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for circlepi}
+
+
+\bold{circpi-set-depth-limit}(object \italic{self}, integer \italic{rock})
+
+\leftindent{Takes the integer \italic{rock} and uses it to set the 
+depth limit on recursion.
+
+Menu:  10 depth limits:  Depth Limit~10,1~1 .. Depth Limit~10,10~10}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{circpi}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

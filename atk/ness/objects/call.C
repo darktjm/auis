@@ -277,11 +277,7 @@ static const struct builtindef  predefinedTable[] = {
 	{"currentinputfocus", "UF", {Tptr}, ness_codeOrange, NULL},
 	{"currentinset", "UI", {Tptr}, ness_codeOrange, NULL},
 	{"currentwindow", "UJ", {Tptr}, ness_codeOrange, NULL},
-#if       ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV)
 	{"realieee", "1" /* TRUE */,  {Tbool}, ness_codeOrange, NULL},
-#else  /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
-	{"realieee", "9" /* FALSE */, {Tbool}, ness_codeOrange, NULL},
-#endif /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */
 
 	{NULL, NULL}
 };
@@ -652,18 +648,9 @@ static struct hack {
 	char procmod[15];
 	char modname[11];
 } ModuleHack [] = {
-	{"bodies", "text822v"},
-	{"folder", "folders"},
 	{"frame", "framecmd"},
-	{"self", "zipedit"},
-	{"self_insert", "spread"},
 	{"wraplook", "stylesheet"},
 
-	{"exit", "im"},   /* obsolete */
-	{"redraw", "im"},   /* obsolete */
-	{"start", "im"},   /* obsolete */
-	{"stop", "im"},   /* obsolete */
-	{"raster", "rasterview"},	/* obsolete */
 	{"rasterv", "rasterview"},
 	{0, 0}
 };

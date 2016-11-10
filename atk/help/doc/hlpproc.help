@@ -1,131 +1,215 @@
 \begindata{text,539034464}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Proclist for Help
+\chapter{Procedure Table Listing for Help}
 
-}
 
-help-add-bookmark                   add a history entry for this file
+\bold{help-add-bookmark}(object \italic{self})
 
-		"Other~10,Make Bookmark~30"
+\leftindent{add a history entry for this file at the current dot location.
 
-help-print                          print current help file
+Bound to:  \typewriter{^X-^B}; Menu:  Other~10,Make Bookmark~30}
 
-		"Print~6,Print This File~22"
+\bold{help-print}(object \italic{self})
 
-help-toggle-panels                  toggle help panels
+\leftindent{print current help file
 
-		"Panels~10,Hide Panels~2" "Panels~10,Show Panels~2"
+Menu:  Print~6,Print This File~22}
 
-help-add-search-dir                 add a directory to the search path
+\bold{help-toggle-panels}(object \italic{self})
 
-		"Other~10,Add Search Directory~20"
+\leftindent{toggle help panels
 
-help-delete-window                  delete this window
+Bound to:  \typewriter{^X-p}; Menu:  Panels~10,Hide Panels~2, 
+Panels~10,Show Panels~2}
 
-		"Delete Window~80"
+\bold{help-add-search-dir}(object \italic{self})
 
-help-toggle-history                 toggle history panel
+\leftindent{add a directory to the search path
 
-		"Panels~10,Hide History~24" "Panels~10,Show History~24"
+Menu:  Other~10,Add Search Directory~20}
 
-help-readonly-key                   fake readonliness
+\bold{help-delete-window}(object \italic{self})
 
-help-changes                        show changes on topic
+\leftindent{delete this window
 
-		"Show Changes~34"
+Bound to:  \typewriter{^X-^D}; Menu:  Delete Window~80}
 
-help-show-tutorial                  show tutorial
+\bold{help-toggle-history}(object \italic{self})
 
-		"Show Tutorial~32"
+\leftindent{toggle history panel
 
-help-comments                       send comments on help
+Bound to:  \typewriter{^X-t}; Menu:  Panels~10,Hide History~24, 
+Panels~10,Show History~24}
 
-		"Send Comment On Help~31"
+\bold{help-readonly-key}(object \italic{self})
 
-help-prev-screen                    go back to previous screen
+\leftindent{fake readonliness
 
-help-toggle-size                    toggle program list size
+Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
+\typewriter{^J}.  Note that \typewriter{Space}, \typewriter{v} and 
+\typewriter{b} are rebound to other procedures by this class.}
 
-		"Panels~10,Shrink Programs List~10" "Panels~10,Expand Programs List~10"
+\bold{help-changes}(object \italic{self})
 
-help-next-screen                    advance to next screen
+\leftindent{show changes on topic
 
-help-copy-region                    Copy region to kill-buffer
+Bound to:  \typewriter{^X-x}; Menu:  Show Changes~34}
 
-		"Copy~2"
+\bold{help-show-tutorial}(object \italic{self})
 
-help-refilter-programs              filter-programs
+\leftindent{show tutorial
 
-		"Other~10,ReFilter Programs Panel~12"
+Menu:  Show Tutorial~32}
 
-help-search                         forward search
+\bold{help-comments}(object \italic{self})
 
-		"Search~4,Forward~12"
+\leftindent{send comments on help
 
-help-printer-setup                  Pop up dialogue box to set printer name and other parameters.
+Bound to:  \typewriter{^X-s}; Menu:  Send Comment On Help~31}
 
-		"Print~6,Printer Setup~12"
+\bold{help-prev-screen}(object \italic{self})
 
-help-search-overviews               search overviews
+\leftindent{go back to previous screen
 
-		"Search~4,Search Overviews~20"
+Bound to:  \typewriter{b}}
 
-help-search-programs                search programs
+\bold{help-toggle-size}(object \italic{self})
 
-		"Search~4,Search Programs~22"
+\leftindent{toggle program list size
 
-help-new-show-help-on-selected      show help on selected region in a new 
-window
+Menu:  Panels~10,Shrink Programs List~10, Panels~10,Expand Programs List~10}
 
-		"Window~12,Show Help on Selected Word~26"
+\bold{help-next-screen}(object \italic{self})
 
-help-show-help-on-selected          show help on selected region
+\leftindent{advance to next screen
 
-		"Show Help on Selected Word~16"
+Bound to:  \typewriter{Space}, \typewriter{v}}
 
-help-new-show-help-on               show help on a prompted keyword in a new 
-window
+\bold{help-copy-region}(object \italic{self})
 
-		"Window~12,Show Help on...~14"
+\leftindent{Copy region to kill-buffer
 
-help-toggle-overviews               toggle overviews panel
+Bound to:  \typewriter{Esc-w}; Menu:  Copy~2}
 
-		"Panels~10,Hide Overviews~20" "Panels~10,Show Overviews~20"
+\bold{help-refilter-programs}(object \italic{self})
 
-help-toggle-programs                toggle programs panel
+\leftindent{filter-programs
 
-		"Panels~10,Hide Programs~22" "Panels~10,Show Programs~22"
+Menu:  Other~10,ReFilter Programs Panel~12}
 
-help-restore-programs               restore programs panel
+\bold{help-search}(object \italic{self})
 
-		"Other~10,Restore Programs Panel~10"
+\leftindent{forward search
 
-help-filter-programs                filter-programs
+Menu:  Search~4,Forward~12}
 
-		"Other~10,Filter Programs Panel~10"
+\bold{help-printer-setup}(object \italic{self})
 
-help-reverse-search                 reverse search
+\leftindent{Pop up dialogue box to set printer name and other parameters.
 
-		"Search~4,Backward~14"
+Menu:  Print~6,Printer Setup~12}
 
-help-show-help-on                   show help on a prompted keyword
+\bold{help-search-overviews}(object \italic{self})
 
-		"Show Help on ...~14"
+\leftindent{search overviews
 
-help-show-more                      show more documentation
+Menu:  Search~4,Search Overviews~20}
 
-		"Show More Documentation~30"
+\bold{help-search-programs}(object \italic{self})
 
-help-search-again                   search again
+\leftindent{search programs
 
-		"Search~4,Search Again~16"
+Menu:  Search~4,Search Programs~22}
 
-help-quit                           quit help
+\bold{help-new-show-help-on-selected}(object \italic{self}, integer \italic{type})
 
-		"Quit~99"
+\leftindent{show help on selected region in a new 
+window.  \italic{type} must be 10.
+
+Menu:  Window~12,Show Help on Selected Word~26}
+
+\bold{help-show-help-on-selected}(object \italic{self}, integer \italic{type})
+
+\leftindent{show help on selected region.  \italic{type} must be 2.
+
+Menu:  Show Help on Selected Word~16}
+
+\bold{help-new-show-help-on}(object \italic{self}, integer \italic{type})
+
+\leftindent{show help on a prompted keyword in a new 
+window.  \italic{type} must be 9.
+
+Bound to:  \typewriter{^X-2}; Menu:  Window~12,Show Help on...~14
+
+Use \bold{queueanswer} to provide term in Ness.}
+
+\bold{help-toggle-overviews}(object \italic{self})
+
+\leftindent{toggle overviews panel
+
+Menu:  Panels~10,Hide Overviews~20, Panels~10,Show Overviews~20}
+
+\bold{help-toggle-programs}(object \italic{self})
+
+\leftindent{toggle programs panel
+
+Bound to:  \typewriter{^X-e}; Menu:  Panels~10,Hide Programs~22, Panels~10,Show Programs~22}
+
+\bold{help-restore-programs}(object \italic{self})
+
+\leftindent{restore programs panel
+
+Menu:  Other~10,Restore Programs Panel~10}
+
+\bold{help-filter-programs}(object \italic{self})
+
+\leftindent{filter-programs
+
+Menu:  Other~10,Filter Programs Panel~10
+
+Use \bold{queueanswer} to provide filter pattern in Ness.}
+
+\bold{help-reverse-search}(object \italic{self})
+
+\leftindent{reverse search
+
+Menu:  Search~4,Backward~14}
+
+\bold{help-show-help-on}(object \italic{self}, integer \italic{type})
+
+\leftindent{show help on a prompted keyword.  \italic{type} must be 1.
+
+Bound to:  \typewriter{Enter} (\typewriter{^M}), \typewriter{^X-^V}; 
+Menu:  Show Help on ...~14
+
+Use \bold{queueanswer} to provide term in Ness.}
+
+\bold{help-show-more}(object \italic{self})
+
+\leftindent{show more documentation
+
+Bound to:  \typewriter{^X-^N}; Menu:  Show More Documentation~30}
+
+\bold{help-search-again}(object \italic{self})
+
+\leftindent{search again
+
+Menu:  Search~4,Search Again~16}
+
+\bold{help-quit}(object \italic{self})
+
+\leftindent{quit help
+
+Bound to:  \typewriter{^X-^C}; Menu:  Quit~99}
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{help}}
+
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

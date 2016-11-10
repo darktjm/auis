@@ -58,7 +58,6 @@ InstallClassFiles($(HFILES))
 DependTarget()
 
 NormalHelpRule()
-InstallDocs(stlproc.help,${DESTDIR}/help)
 InstallHelpAlias(stlproc, sytlesheetproc)
 InstallDocs(buffer.help,${DESTDIR}/help)
 InstallHelpAlias(buffer, ez-buffers buffers)

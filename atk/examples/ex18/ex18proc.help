@@ -1,0 +1,66 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for helloworldview}
+
+
+\bold{helloworldview-center}(object \italic{self})
+
+\leftindent{Center the helloworldview string.
+
+Bound to: \typewriter{^C}; Menu: Hello World,Center}
+
+\bold{helloworldview-invert}(object \italic{self})
+
+\leftindent{Invert the helloworldview string.
+
+Bound to:  \typewriter{Tab}; Menu: Hello World,Invert}
+
+\bold{helloworldview-relocate}(object \italic{self})
+
+\leftindent{Relocate the helloworld string.
+
+Bound to:  \typewriter{^R}; Menu: Hello World,Relocate
+
+Use \bold{queueanswer} to provide coordinates in Ness.}
+
+\bold{helloworldview-read}(object \italic{self})
+
+\leftindent{Read in a new hello world.
+
+Menu: Hello World,Read
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{helloworldview-write}(object \italic{self})
+
+\leftindent{Write out the current hello world to a file.
+
+Menu: Hello World,Write
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{helloworldview-change-obj}(object \italic{self})
+
+\leftindent{Change the object in the square.
+
+Menu: Hello World,Change Object
+
+Use \bold{queueanswer} to provide object name in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{tour}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -3,5 +3,5 @@
 \define{global
 attr:[Justification Centered Point 0]
 attr:[FontFace Bold Int Set]
-attr:[FontFamily AndySans Int 0]
+attr:[FontFamily AndySans Int 0]}
 \enddata{text,268742804}

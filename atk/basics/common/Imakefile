@@ -28,7 +28,7 @@ InstallClassFiles($(HFILES))
 
 InstallDocs(initfls.help improc.help cutbuf.help menus.help fontprob.help, ${DESTDIR}/help)
 
-InstallHelpAlias(initfls, initfiles initfile .atkinit .be2init .ezinit atkinit be2-init be2init ezinit ez-init atk-init)
+InstallHelpAlias(initfls, initfiles initfile .atkinit .be2init .ezinit atkinit be2-init be2init ezinit ez-init atk-init init addmenu addkey addfiletype)
 InstallHelpAlias(improc, improcs)
 InstallHelpAlias(cutbuf, cutbuffer cutbuff)
 InstallHelpAlias(menus, menu menus-tutorial menu-tutorial popup pop-up)

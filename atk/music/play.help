@@ -22,11 +22,92 @@ encoding as is used in Advanced Basic for the IBM PC.
 
 }\leftindent{
 You may utilize play either via C code or a Ness script.  For help with C 
-coding, see /usr/andrew/doc/atk/music/play.doc  and for the proctable entries 
-that can be called from Ness, see /usr/andrew/help/playproc.help.  
+coding, see $ANDREWDIR/doc/PROGRAMMER/play.doc  and for the proctable entries 
+that can be called from Ness, see $ANDREWDIR/help/musproc.help.  For 
+an example, see $ANDREWDIR/lib/ness/demos/happybday.d.}
 
-}\leftindent{
+
+\section{Codes for play_notes}
+
+\leftindent{In the code string, spaces, newlines, tabs, and other undefined 
+characters are ignored.  The letter \italic{x} in each description below is to 
+be replaced by an integer.  (In Advanced Basic, the x value can be of the form 
+"=variable;", but such codes are ignored in this implementation.)
+
+
+O\italic{x}		Choose octave.  (Code is upper-case Oh)
+
+		Each octave starts at C and ascends to B
+
+		Middle C is the first note in O3.
+
+		(0 <= \italic{x} <= 6)    Default 4.
+
+
+<		Change to next lower octave.	
+
+>		Change to next higher octave.
+
+
+C, C#, D, D#, E, F, F#, G, G#, A, A#, B
+
+		Play the named note in the current octave
+
+		with the current volume and duration.
+
+		C# may be written as C+ or D-
+
+		and similarly for E#, F#, G#, and A# .
+
+
+L\italic{x}		The length of subsequent notes is 1/\italic{x}
+
+		(1 <= \italic{x} <= 64)    Default 4.
+
+		L1 is whole note;  L2 half note;  L4  quarter note;
+
+		L8 eighth note; L16, L32, L64  etc.
+
+		Non-traditional durations like L7 are accepted.
+
+
+P\italic{x}		(Pause) rest for length \italic{x}, where \italic{x} is as for 
+L\italic{x.}
+
+
+. 		Dotted note.  When placed immediately after a 
+
+		note, dot multiples its duration by 3/2.
+
+		(multiple dots repeat the multiplication)
+
+
+T\italic{x}		Tempo.  Sets the number of quarter notes in a
+
+		minute.   (32 <= \italic{x} <= 255)    Default 120.
+
+
+N\italic{x}		Note.  Plays the \italic{x}'th note on piano  (0 <= \italic{x} <= 
+84) 
+
+		n=0 is rest.  Notes 1-12 are in octave 0,
+
+		13-24 in octave 1, ...,  73-84 in octave 6.
+
+		Middle C is note 37.
+
+
+V\italic{x}		Set relative Volume for subsequent notes.
+
+		(0 <= \italic{x} <= 9)  Default 3.
+
+
+Mc		Ignored.   (where c is one character)
+
+Xvariable;	Ignored.  
+
 }
+
 \section{Program Author}
 
 \leftindent{

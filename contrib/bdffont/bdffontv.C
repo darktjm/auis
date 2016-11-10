@@ -97,7 +97,6 @@ static void EnsureFocus(class bdffontv  *self);
 static long bdffontv_ComputeZoom(class bdffontv  *self, long  zoomhow);
 static void bdffontv_ZoomCmd(class bdffontv  *self	, long  zoomhow);
 static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock);
-static void bdffontv_ForwardCmd(class bdffontv  *self, long  proc);
 static int AskFor1(class bdffontv  *self, long  *value, const char  *prompt);
 static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, const char  *prompt1 , const char  *prompt2);
 static boolean FindBuffer(class frame  *f,class buffer  *b);
@@ -221,6 +220,18 @@ static void bdffontv_ZoomCmd(class bdffontv  *self	, long  zoomhow)
     (self->chareditV)->SetScale( newzoom);
 } /* bdffontv_ZoomCmd */
 
+static boolean asking = 0;
+static boolean askforstring(view *v, int pri, const char *pr, const char *def, char *buf, int bufsz)
+{
+    int ret;
+
+    asking = TRUE;
+    ret = message::AskForString(v, pri, pr, def, buf, bufsz);
+    asking = FALSE;
+    v->WantInputFocus(v);
+    return ret;
+}
+
 static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
         {
     char msg[128];
@@ -229,7 +240,7 @@ static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
 
     sprintf(msg, "New zoom in/out delta [%ld]: ", self->zoomdelta);
 
-    if (message::AskForString(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
+    if (askforstring(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
     {
 	message::DisplayString(self, 0, "Cancelled.");
 	return;
@@ -255,12 +266,6 @@ static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
     }
 } /* bdffontv_SetZoomDeltaCmd */
 
-static void bdffontv_ForwardCmd(class bdffontv  *self, long  procl)
-{
-    chlist_itemfptr proc=(chlist_itemfptr)procl;
-    (*proc)((long)self, NULL, view::LeftUp, 1, 0, 0);
-} /* bdffontv_ForwardCmd */
-
 #define bdffontv_AskAborted	(0)
 #define bdffontv_AskUnchanged	(1)
 #define bdffontv_AskChanged	(2)
@@ -272,7 +277,7 @@ static int AskFor1(class bdffontv  *self, long  *value, const char  *prompt)
 
     sprintf(msg, "%s [%ld]: ", prompt, *value);
 
-    if (message::AskForString(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
+    if (askforstring(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
     {
 	message::DisplayString(self, 0, "Cancelled.");
 	return (bdffontv_AskAborted);
@@ -378,6 +383,11 @@ static class view *FindViewOfBuffer(class buffer  *b)
   return ((f)->GetView());
 } /* FindViewOfBuffer */
 
+static void bdffontv_HelpCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_HelpCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     class buffer *buf;
@@ -412,6 +422,11 @@ static int bdffontv_FontExtentCmd(class bdffontv  *self, class chlist  *l, enum 
 
     return (0);
 } /* bdffontv_FontExtentCmd */
+
+static void bdffontv_SetFontFaceCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetFontFaceCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
 
 static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
@@ -461,6 +476,11 @@ static int bdffontv_SetFontFaceCmd(class bdffontv  *self, class chlist  *l, enum
     return (0);
 } /* bdffontv_SetFontFaceCmd */
 
+static void bdffontv_SetResolutionCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetResolutionCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
@@ -500,6 +520,11 @@ static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, en
     return (0);
 } /* bdffontv_SetResolutionCmd */
 
+static void bdffontv_SetPointSizeCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetPointSizeCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long pts;
@@ -530,6 +555,11 @@ static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enu
 
     return (0);
 } /* bdffontv_SetPointSizeCmd */
+
+static void bdffontv_SetDefaultDeltaCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetDefaultDeltaCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
 
 static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
@@ -563,6 +593,11 @@ static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, 
     return (0);
 } /* bdffontv_SetDefaultDeltaCmd */
 
+static void bdffontv_SetDefaultOriginCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetDefaultOriginCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
@@ -594,6 +629,11 @@ static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l,
 
     return (0);
 } /* bdffontv_SetDefaultOriginCmd */
+
+static void bdffontv_SetDefaultExtentCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetDefaultExtentCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
 
 static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
@@ -627,6 +667,11 @@ static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l,
     return (0);
 } /* bdffontv_SetDefaultExtentCmd */
 
+static void bdffontv_SetFontNameCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetFontNameCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char localbuffer[512], *bufp, *tail, *oldname;
@@ -637,7 +682,7 @@ static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	oldname = (fontinfo)->GetFontName();
 
-	if (message::AskForString(self, 0,
+	if (askforstring(self, 0,
 				 "New name: ",
 				 oldname,
 				 localbuffer, sizeof(localbuffer) - 1) < 0)
@@ -683,6 +728,11 @@ static int bdffontv_SetFontNameCmd(class bdffontv  *self, class chlist  *l, enum
     return (0);
 } /* bdffontv_SetFontNameCmd */
 
+static void bdffontv_SetFontFamilyCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetFontFamilyCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char localbuffer[512], *bufp, *tail, *oldfamily;
@@ -693,7 +743,7 @@ static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, en
 	fontinfo = (class bdffont *) (self)->GetDataObject();
 	oldfamily = (fontinfo)->GetFontFamily();
 
-	if (message::AskForString(self, 0,
+	if (askforstring(self, 0,
 				 "New font family: ",
 				 oldfamily,
 				 localbuffer, sizeof(localbuffer) - 1) < 0)
@@ -743,6 +793,11 @@ static int bdffontv_SetFontFamilyCmd(class bdffontv  *self, class chlist  *l, en
     return (0);
 } /* bdffontv_SetFontFamilyCmd */
 
+static void bdffontv_SetDeltaCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetDeltaCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
@@ -779,6 +834,11 @@ static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum vi
     return (0);
 } /* bdffontv_SetDeltaCmd */
 
+static void bdffontv_SetOriginCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetOriginCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     long x, y;
@@ -814,6 +874,11 @@ static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum v
 
     return (0);
 } /* bdffontv_SetOriginCmd */
+
+static void bdffontv_SetExtentCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetExtentCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
 
 static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
@@ -853,6 +918,11 @@ static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum v
     return (0);
 } /* bdffontv_SetExtentCmd */
 
+static void bdffontv_SetNameCmdB(class bdffontv  *self, long rock)
+{
+    bdffontv_SetNameCmd(self, NULL, view::LeftUp, 1, 0, 0);
+}
+
 static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum view::MouseAction  action, long  nclicks, int  index, int  rgn)
                         {
     char msg[128];
@@ -864,7 +934,7 @@ static int bdffontv_SetNameCmd(class bdffontv  *self, class chlist  *l, enum vie
 		"New name for character (max. length: 14) [%s]: ",
 		bdffont_GetCharName(&self->modinfo));
 
-	if (message::AskForString(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
+	if (askforstring(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
 	{
 	    message::DisplayString(self, 0, "Cancelled.");
 	}
@@ -935,32 +1005,32 @@ static struct bind_Description bdffontv_Bindings[] =
 	"menu,entry~11", MenuRock, MenuMask,
 	xyzzy_BindingProc, "One line description"}, */
     {"bdffont-set-font-name", NULL, 0,
-	"Font Edit,Set Font Name~29", (long) bdffontv_SetFontNameCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set font name"},
+	"Font Edit,Set Font Name~29", 0, 0,
+	(proctable_fptr)bdffontv_SetFontNameCmdB, "Set font name"},
     {"bdffont-set-font-family", NULL, 0,
-	"Font Edit,Set Font Family~29", (long) bdffontv_SetFontFamilyCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set font family"},
+	"Font Edit,Set Font Family~29", 0, 0,
+	(proctable_fptr)bdffontv_SetFontFamilyCmdB, "Set font family"},
     {"bdffont-set-font-face", NULL, 0,
-	"Font Edit,Set Font Face~29", (long) bdffontv_SetFontFaceCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set font face"},
+	"Font Edit,Set Font Face~29", 0, 0,
+	(proctable_fptr)bdffontv_SetFontFaceCmdB, "Set font face"},
     {"bdffont-set-font-resolution", NULL, 0,
-	"Font Edit,Set Font Resolution~29", (long) bdffontv_SetResolutionCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set font resolution"},
+	"Font Edit,Set Font Resolution~29", 0, 0,
+	(proctable_fptr)bdffontv_SetResolutionCmdB, "Set font resolution"},
     {"bdffont-set-font-size", NULL, 0,
-	"Font Edit,Set Point Size~29", (long) bdffontv_SetPointSizeCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set font point size"},
+	"Font Edit,Set Point Size~29", 0, 0,
+	(proctable_fptr)bdffontv_SetPointSizeCmdB, "Set font point size"},
     {"bdffont-set-default-extent", NULL, 0,
-	"Font Edit,Set Default Extent~29", (long) bdffontv_SetDefaultExtentCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set default character extent"},
+	"Font Edit,Set Default Extent~29", 0, 0,
+	(proctable_fptr)bdffontv_SetDefaultExtentCmdB, "Set default character extent"},
     {"bdffont-set-default-origin", NULL, 0,
-	"Font Edit,Set Default Origin~29", (long) bdffontv_SetDefaultOriginCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set default character origin"},
+	"Font Edit,Set Default Origin~29", 0, 0,
+	(proctable_fptr)bdffontv_SetDefaultOriginCmdB, "Set default character origin"},
     {"bdffont-set-default-delta", NULL, 0,
-	"Font Edit,Set Default Delta~29", (long) bdffontv_SetDefaultDeltaCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set default character delta"},
+	"Font Edit,Set Default Delta~29", 0, 0,
+	(proctable_fptr)bdffontv_SetDefaultDeltaCmdB, "Set default character delta"},
     {"bdffont-help", NULL, 0,
-	"Font Edit,Help~10", (long) bdffontv_HelpCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Display help information"},
+	"Font Edit,Help~10", 0, 0,
+	(proctable_fptr)bdffontv_HelpCmdB, "Display help information"},
 
 	{"bdffont-zoom-in", NULL, bdffontv_ZoomInCmd,
 	"Char Edit,Zoom In~21", bdffontv_ZoomInCmd, 0,
@@ -982,17 +1052,17 @@ static struct bind_Description bdffontv_Bindings[] =
 	(proctable_fptr)bdffontv_SetZoomDeltaCmd, "Set delta for zoom in/out"},
 
     {"bdffont-set-char-extent", NULL, 0,
-	"Char Edit,Set Character Extent~11", (long) bdffontv_SetExtentCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set character extent"},
+	"Char Edit,Set Character Extent~11", 0, 0,
+	(proctable_fptr)bdffontv_SetExtentCmdB, "Set character extent"},
     {"bdffont-set-char-origin", NULL, 0,
-	"Char Edit,Set Character Origin~12", (long) bdffontv_SetOriginCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set character origin"},
+	"Char Edit,Set Character Origin~12", 0, 0,
+	(proctable_fptr)bdffontv_SetOriginCmdB, "Set character origin"},
     {"bdffont-set-char-delta", NULL, 0,
-	"Char Edit,Set Character Delta~13", (long) bdffontv_SetDeltaCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set character delta"},
+	"Char Edit,Set Character Delta~13", 0, 0,
+	(proctable_fptr)bdffontv_SetDeltaCmdB, "Set character delta"},
     {"bdffont-set-char-name", NULL, 0,
-	"Char Edit,Set Character Name~14", (long) bdffontv_SetNameCmd, 0,
-	(proctable_fptr)bdffontv_ForwardCmd, "Set character name"},
+	"Char Edit,Set Character Name~14", 0, 0,
+	(proctable_fptr)bdffontv_SetNameCmdB, "Set character name"},
 
     { 0 }
 };
@@ -1354,12 +1424,12 @@ GetNewFontParameters(class bdffontv  *self, long  time	/* ignored */)
 	char name[1024], *newname;
 
 	fontinfo = (class bdffont *) (self)->GetDataObject();
-	if (message::AskForString(self, 100,
+	if (askforstring(self, 100,
 				 "Name for NEW font: ", "",
 				 name, sizeof(name) - 1) >= 0)
 	{
 	    /* trim trailing white space */
-	    newname = &name[sizeof(name) - 1];
+	    newname = name + strlen(name) - 1;
 	    while ((newname > &name[0]) && isspace(*newname)) {
 		*newname-- = '\0';
 	    }
@@ -1797,13 +1867,6 @@ bdffontv::~bdffontv()
 
 } /* bdffontv__FinalizeObject */
 
-void bdffontv::PostKeyState(class keystate  *keystate)
-        {
-    (this->keys)->Reset();
-    (this->keys)->AddBefore( keystate);
-    (this)->lpair::PostKeyState( this->keys);
-} /* bdffontv__PostKeyState */
-
 void bdffontv::PostMenus(class menulist  *menulist)
         {
     (this->menus)->ClearChain();
@@ -1841,6 +1904,8 @@ void bdffontv::FullUpdate(enum view::UpdateType  type, long  left, long  top, lo
 	void
 bdffontv::ReceiveInputFocus()
 	{
+	this->keys->next = NULL;
+	this->PostKeyState(this->keys);
 	if (this->chareditV)
 		(this->chareditV)->WantInputFocus( this->chareditV);
 }
@@ -1848,7 +1913,7 @@ bdffontv::ReceiveInputFocus()
 	void
 bdffontv::WantInputFocus(class view  *target)
 		{
-	if (this->chareditV) {
+	if (this->chareditV && !asking) {
 		if (target == (class view *)this->chareditV)
 			(this)->lpair::WantInputFocus( target);
 		else (this->chareditV)->WantInputFocus( this->chareditV);

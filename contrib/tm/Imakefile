@@ -24,7 +24,7 @@ InstallFile(tm.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
 DependTarget()
 
 NormalHelpRule()
-InstallDocs(tm.help tmkeys.help, ${DESTDIR}/help)
+InstallDocs(tm.help tmkeys.help tmproc.help, ${DESTDIR}/help)
 InstallHelpAlias(tm, termulator)
 InstallHelpAlias(tmkeys, termulator-keys tm-keys)
 InstallDocs(tm.pr, ${DESTDIR}/lib/prs)

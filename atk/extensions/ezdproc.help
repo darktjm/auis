@@ -1,19 +1,45 @@
 \begindata{text,269081064}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Ezdiff
+\chapter{Procedure Table Listing for Ezdiff}
 
-}
 
-ezdiff-change [for textview]:       Change to other mark
+\bold{ezdiff-change}(object \italic{textview})
 
-ezdiff-current [for textview]:      Get Current Diff
+\leftindent{Change to other mark}
 
-ezdiff-start [for textview]:        Start diff process
+\bold{ezdiff-current}(object \italic{textview})
 
-ezdiff-last [for textview]:          Get Last Diff
+\leftindent{Get Current Diff}
 
-ezdiff-next [for textview]:         Get Next Diff
+\bold{ezdiff-start}(object \italic{textview}, null | 0 | marker \italic{opts})
+
+\leftindent{Start diff process.  If \italic{opts} is given, it is added 
+to the \bold{diff}(1) command options.  Otherwise, then come from 
+the EzdiffOptions preference by default, or are blank.
+
+\typewriter{^U} numeric argment can be set to force prompting for 
+additional command-line arguments; this overrides \italic{opts} and the 
+preference.
+
+Interactive prompting will occur when re-running diff; do not attempt 
+to answer with Ness.}
+
+\bold{ezdiff-last}(object \italic{textview})
+
+\leftindent{Get Last Diff}
+
+\bold{ezdiff-next}(object \italic{textview})
+
+\leftindent{Get Next Diff}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{ezdiff}}
 
 
 \enddata{text,269081064}

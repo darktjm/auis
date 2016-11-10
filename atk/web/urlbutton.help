@@ -109,7 +109,9 @@ or specific menu to avoid the prompt.
 your left mouse button to see the help file for:
 
 
-}\leftindent{\helptopic{linkinset}
+}\leftindent{\helptopic{webproc}
+
+\helptopic{linkinset}
 
 \helptopic{runbutton}
 

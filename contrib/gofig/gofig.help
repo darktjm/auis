@@ -286,53 +286,7 @@ or to bind to a menu item like GoCvt on the Media card write:
 
 }
 
-\section{Proctable entries
-
-}\leftindent{
-The following proctable entries are bound to keys and menu items noted 
-above.  The values in parentheses can be supplied as a single character 
-argument to produce the indicated effect.
-
-
-\bindlist{\bold{gofigview-char-to-note}   }\binddesc{- put letter in 
-selected spot}
-
-\bindlist{\bold{gofigview-copy}  }\binddesc{- copy the go diagram as ASCII 
-to the cut buffer}
-
-\bindlist{\bold{gofigview-do-nothing}  }\binddesc{- does nothing}
-
-\bindlist{\bold{gofigview-move-spot}  }\binddesc{- move selected spot}
-
-\bindlist{\bold{gofigview-print-dobj}  }\binddesc{- print contents of dobj 
-to stdout}
-
-\bindlist{\bold{gofigview-prompt-for-board-layout }}\binddesc{- prompts for 
-size and edges of board}
-
-\bindlist{\bold{gofigview-prompt-for-note}}\binddesc{- prompts for note to 
-put in stone}
-
-\bindlist{\bold{gofigview-prompt-for-print-size }}\binddesc{- prompts for 
-printing size parameter}
-
-\bindlist{\bold{gofigview-put-stone}   }\binddesc{- put stone (B or W) or 
-empty (/) in selected spot}
-
-\bindlist{\bold{gofigview-replace}   }\binddesc{- replaces contents from 
-cut buffer}
-
-\bindlist{\bold{gofigview-set-click-mode} }\binddesc{- set action for 
-clicking on stones (A, B, W, E, or S)}
-
-\bindlist{\bold{gofigview-set-note-mode}}\binddesc{  - chooses note 
-sequence for subsequent stones (a, 0, or -)
-
-\bindlist{\bold{gofig-invert-debug}       }\binddesc{- Toggle the gofigview 
-debug flag}
-
-
-}}\section{ASCII Format}
+\section{ASCII Format}
 
 
 \leftindent{The ASCII format processor assumes that each line begins with a 
@@ -446,7 +400,10 @@ Select (put a box around) one of the italicized names and choose "Get Help
 on Selected Word" from the pop-up menu to see the help file for:
 
 
-\leftindent{\keyword{\italic{\helptopic{text}}}        Standard text
+\leftindent{\keyword{\italic{\helptopic{gofigproc}}}        Bindable 
+procedures
+
+\keyword{\italic{\helptopic{text}}}        Standard text
 
 \keyword{\italic{\helptopic{ez}}}          Text editing
 

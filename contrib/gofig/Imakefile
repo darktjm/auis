@@ -34,6 +34,6 @@ Runapp(gofigvt,$(VTGENSTATLARGS))
 #endif 
 
 NormalHelpRule()
-InstallDocs(gofig.help, $(DESTDIR)/help)
+InstallDocs(gofig.help gofigproc.help, $(DESTDIR)/help)
 InstallHelpAlias(gofig, gofig go goban godiagram gofigure)
 InstallDocs(gofig.pr, $(DESTDIR)/lib/prs)

@@ -1,0 +1,27 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for popupwin}
+
+
+action \bold{popupwin-cancel}(object \italic{self})
+
+\leftindent{Cancels a popup.  Takes no extra parameters and returns no 
+value.
+
+Bound to:  \typewriter{^G}}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

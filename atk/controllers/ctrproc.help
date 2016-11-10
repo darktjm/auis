@@ -1,14 +1,28 @@
 \begindata{text,269095468}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Controllers}
+\chapter{Procedure Table Listing for misc. controllers}
 
 
+\bold{calccon-clear}(object \italic{view})
 
-calccon-clear [for view]            calccon clear
+\leftindent{calccon clear; this is the controller's main button}
 
-helpcon-help [for view]             helpcon help
+\bold{helpcon-help}(object \italic{view})
 
-pcontrol-start [for view]           pcontrol start
+\leftindent{helpcon help; this is the controller's main button}
+
+\bold{pcontrol-start}(object \italic{view})
+
+\leftindent{pcontrol start; this is the controller's main button}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{adew}}
+
 
 \enddata{text,269095468}

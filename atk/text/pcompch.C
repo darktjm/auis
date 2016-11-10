@@ -33,7 +33,7 @@ static void cleanmagic();
 static int TranslateKeySequence(char  *from, char  *to);
 static int parseBackslashed(char  **fromChars);
 static  char ahotoi(char  *ptr,int  base2);
-static  short parsecode(char  *ptr);
+static unsigned char parsecode(char  *ptr);
 static void scanerr(const char  *msg,char  key,struct composites_s  *new_c,long  line);
 static char *scanstring(char  **str);
 static boolean scancomposites(char  *ptr,long  line);
@@ -141,7 +141,7 @@ static  char ahotoi(char  *ptr,int  base2)
 }
 
 /* parsecode: parse a code in decimal,hex, octal or simply set the high bit of an ASCII character. */
-static  short parsecode(char  *ptr)
+static unsigned char parsecode(char  *ptr)
 {
     switch(*ptr) {
 	case '|':
@@ -191,7 +191,7 @@ static char *scanstring(char  **str)
 static boolean scancomposites(char  *ptr,long  line)
 {
     char *end,*ptr2,*style=NULL;
-     short code;
+    unsigned char code;
     struct composites_s *new_c=NULL;
     /* Skip leading spaces */
     while(*ptr==' ' || *ptr =='\t') ptr++;

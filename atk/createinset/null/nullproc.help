@@ -1,0 +1,34 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for null/nullview}
+
+
+\bold{null-clear-rectangle}(object \italic{self})
+
+\leftindent{Clear the rectangle
+
+Bound to: \typewriter{^C}; Menu: Clear~10}
+
+\bold{null-invert-debug}(object \italic{self})
+
+\leftindent{Toggle the nullview debug flag
+
+Bound to: \typewriter{Esc-^D-D}}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{null}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

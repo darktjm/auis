@@ -1,14 +1,29 @@
 \begindata{text,268820936}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Suite
+\chapter{Procedure Table Listing for Suite}
 
-}
 
-suite-set-items:  Set item list (colon separated list)
+\bold{suite-set-items}(object \italic{self}, marker \italic{list})
 
-suiteev-copy:  Copy selected region to cut buffer; menulist "Copy~10"
+\leftindent{Set item list (colon separated \italic{list})}
 
-suitecv-insert-newline:  Insert a newline character "^M"
+\bold{suiteev-copy}(object \italic{self})
+
+\leftindent{Copy selected region to cut buffer
+
+Menu:  Copy~10}
+
+\bold{suitecv-insert-newline}(object \italic{self})
+
+\leftindent{Insert a newline character
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
 
 \enddata{text,268820936}

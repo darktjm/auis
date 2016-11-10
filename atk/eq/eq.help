@@ -573,7 +573,9 @@ Select (highlight) one of the italicized names and choose "Show Help on
 Selected Word" from the pop-up menu to see the help file for:
 
 
-\leftindent{\italic{\helptopic{ez}
+\leftindent{\italic{\helptopic{eqproc}
+
+\helptopic{ez}
 
 \helptopic{insets}
 

@@ -1,0 +1,164 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for bdffont}
+
+
+\bold{bdffont-help}(object \italic{self})
+
+\leftindent{Display help information in a new window.
+
+Menu:  Font Edit,Help~10}
+
+\bold{bdffont-set-char-delta}(object \italic{self})
+
+\leftindent{Set character delta
+
+Menu:  Char Edit,Set Character Delta~13
+
+Use \bold{queueanswer} twice to provide X and Y delta in Ness.}
+
+\bold{bdffont-set-char-extent}(object \italic{self})
+
+\leftindent{Set character extent
+
+Menu:  Char Edit,Set Character Extent~11
+
+Use \bold{queueanswer} twice to provide width and height in Ness.}
+
+\bold{bdffont-set-char-name}(object \italic{self})
+
+\leftindent{Set character name
+
+Menu:  Char Edit,Set Character Name~14
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{bdffont-set-char-origin}(object \italic{self})
+
+\leftindent{Set character origin
+
+Menu:  Char Edit,Set Character Origin~12
+
+Use \bold{queueanswer} twice to provide coordinates in Ness.}
+
+\bold{bdffont-set-default-delta}(object \italic{self})
+
+\leftindent{Set default character delta
+
+Menu:  Font Edit,Set Default Delta~29
+
+Use \bold{queueanswer} twice to provide X and Y delta in Ness.}
+
+\bold{bdffont-set-default-extent}(object \italic{self})
+
+\leftindent{Set default character extent
+
+Menu:  Font Edit,Set Default Extent~29
+
+Use \bold{queueanswer} twice to provide width and height in Ness.}
+
+\bold{bdffont-set-default-origin}(object \italic{self})
+
+\leftindent{Set default character origin
+
+Menu:  Font Edit,Set Default Origin~29
+
+Use \bold{queueanswer} twice to provide coordinates in Ness.}
+
+\bold{bdffont-set-font-face}(object \italic{self})
+
+\leftindent{Set font face.  One of Normal, or combination of (in 
+order) Bold, Italic, Fixed, Shadowed.
+
+Menu:  Font Edit,Set Font Face~29
+
+Use \bold{queueanswer} to provide font face attributes in Ness.}
+
+\bold{bdffont-set-font-family}(object \italic{self})
+
+\leftindent{Set font family
+
+Menu:  Font Edit,Set Font Family~29
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{bdffont-set-font-name}(object \italic{self})
+
+\leftindent{"Set font name" (queueanswer)
+
+Menu:  Font Edit,Set Font Name~29
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{bdffont-set-font-resolution}(object \italic{self})
+
+\leftindent{Set font resolution
+
+Menu:  Font Edit,Set Font Resolution~29
+
+Use \bold{queueanswer} twice to provide X and Y resolution in Ness.}
+
+\bold{bdffont-set-font-size}(object \italic{self})
+
+\leftindent{Set font point size
+
+Menu:  Font Edit,Set Point Size~29
+
+Use \bold{queueanswer} to provide value in Ness.}
+
+\bold{bdffont-set-zoom-delta}(object \italic{self})
+
+\leftindent{Set delta for zoom in/out
+
+Menu:  Char Edit,Set Zoom Delta~26
+
+Use \bold{queueanswer} to provide value in Ness.}
+
+\bold{bdffont-zoom-fit}(object \italic{self})
+
+\leftindent{View at highest zoom that fits
+
+Menu:  Char Edit,Zoom To Fit~24}
+
+\bold{bdffont-zoom-in}(object \italic{self})
+
+\leftindent{Increase zoom factor by delta to max
+
+Menu:  Char Edit,Zoom In~21}
+
+\bold{bdffont-zoom-normal}(object \italic{self})
+
+\leftindent{View at normal zoom
+
+Menu:  Char Edit,Normal Zoom~23}
+
+\bold{bdffont-zoom-out}(object \italic{self})
+
+\leftindent{Decrease zoom factor by delta to min
+
+Menu:  Char Edit,Zoom Out~22}
+
+\bold{bdffont-zoom-previous}(object \italic{self})
+
+\leftindent{View at previous zoom factor
+
+Menu:  Char Edit,Previous Zoom~25}
+
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{bdffont}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

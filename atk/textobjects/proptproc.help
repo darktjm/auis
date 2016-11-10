@@ -1,0 +1,58 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for printopts}
+
+
+\bold{printopts-post-window}(object \italic{view})
+
+\leftindent{Set options for printing of document
+
+Menu in frame:  File~10,Printer Setup~20}
+
+\bold{printopts-cancel}(object \italic{self})
+
+\leftindent{Remove dialog and cancel choices.
+
+Menu:  Cancel~91}
+
+\bold{printopts-done}(object \italic{self})
+
+\leftindent{Remove dialog and accept choices.
+
+Bound to:  \typewriter{X-^D}, \typewriter{^X-^C}; Menu:  Done~90; Quit~99}
+
+\bold{printopts-nop}(object \italic{self})
+
+\leftindent{Do nothing.
+
+Bound to:  \typewriter{Esc-~}}
+
+\bold{printopts-preview}(object \italic{self})
+
+\leftindent{Preview document.
+
+Menu:  Preview}
+
+\bold{printopts-print}(object \italic{self})
+
+\leftindent{Print document.
+
+Menu:  Print}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{ezprint}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

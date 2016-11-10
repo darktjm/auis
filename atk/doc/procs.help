@@ -3,210 +3,322 @@
 \template{help}
 \define{global
 }
-\chapter{Procedure Table Listing
+\chapter{Procedure Table Listing}
+
+
+A procedure table is a list of named procedures and functions for use 
+with initialization files and Ness scripts.  The names are 
+case-insensitive.  Procedures take two arguments: an object argument 
+and an extra argument.  The specification of these arguments depends 
+on how the procedure is being called.  At present, the type of the 
+extra argument is rarely checked, so make sure it is the correct type. 
+Most procedures do not take a second argument, in which case the value 
+provided is ignored.  Some procedures have return values; these are 
+ignored except in Ness, where they may optionally be ignored as well.
+
+See the \bold{addmenu} and \bold{addkey} command descriptions in the 
+\helptopic{initfiles} help topic for how to use these in an 
+initialization file.  The object argument is the object from which the 
+binding was invoked; the class of this object is the 4th argument to 
+the binding command, if provided; if not, it is the class from which 
+the procedure was loaded (generally the first dash-separated word of 
+the command name).  The class may also be a derived class if 
+inheritance is enabled in the binding.  The extra argument is provided 
+by the 7th (last) argument to the binding command, if present.  If 
+not, it is 0.  If the argument starts with a digit, it is converted to 
+and passed as an integer.  Otherwise, it is passed as a string 
+(marker).  Quotes are only needed if the value contains spaces.
+
+See 
+\begindata{link,1239}
+4
+$ANDREWDIR/doc/PROGRAMMER/nessfunc.doc
+0
+0
+V
+\begindata{link,1239}
+Datastream version: 2
+nessfunc.doc
+2
+
+black
+white
+\enddata{link,1239}
+\enddata{link,1239}
+\view{linkview,1239,1,0,0} for details on Ness function invocation.  
+The actual name to use in Ness is the procedure name with all dashes 
+(\typewriter{-}) converted to underscores (\typewriter{_}).  The two 
+arguments must be provided as one would for normal functions.  
+In particular, the object argument is generally supplied using 
+\bold{CurrentInset}.  Interactive procedures can be made 
+non-interactive for Ness use by use of the \bold{QueueAnswer}, 
+\bold{QueueCancellation} and \bold{DoKeys} built-in functions, also 
+described in the above document.
+
+Some named procedures use a newer calling convention called an 
+\italic{action}.  Actions take at least one parameter, the object to 
+act upon, plus any number of additional parameters, positional or 
+named, and may return values as well.  For Ness, the calling 
+convention is followed directly, passing markers for strings.  The 
+first element of the return value array is the return value of the 
+procedure.  For binding, the object is as described for normal 
+procedures.  The arguments are all encoded in the 7th (last) argument 
+to the binding commands, if present.  If it starts with a digit, it is 
+passed as an array with a single, unnamed parameter of type 
+\italic{integer} whose integer value is parsed from the leading 
+digits.  Otherwise, if it is not prefixed by the word list, followed by 
+a colon (\typewriter{list:}), it is passed as an array 
+containing a single, unnamed string parameter of type \italic{cstring}.
+Otherwise, the text after the colon is interpreted as a value array.  
+The format of this array specification is as follows:
+
+\leftindent{\symbola{7}	The entire array must be enclosed in parentheses 
+(\typewriter{(}, \typewriter{)}).  Within the parentheses, whitespace 
+before and after elements is ignored, and between elements it acts as a 
+separator.  An array may contain any number of elements, including 
+zero.
+
+\symbola{7}	Each value may be preceeded by a name, followed by an equals sign 
+(\typewriter{=}), with no intervening whitespace.  Unnamed values are 
+positional, and should appear before the named arguments.  The name 
+must consist of an alphabetic character, followed by anything other 
+than whitespace, equals signs (\typewriter{=}), colons 
+(\typewriter{:}) or close-parentheses (\typewriter{)}).
+
+\symbola{7}	Each value may be followed by an explicit type name, preceeded by a 
+colon (\typewriter{:}), with no intervening whitespace.  Otherwise, the 
+default type name is used based on the element's value.  Type names 
+can be any characters but whitespace and close-parentheses.
 
-}
+\symbola{7}	The value may consist entirely of digits, in which case it is a 
+decimal integer, of type \italic{integer} by default.
 
-\section{Classes with bindable procs for EZ}
+\symbola{7}	The value may consist of a digit, followed by a C-style 
+floating-point literal with at least one dot (\typewriter{.}), in which 
+case it is a floating-point number of type \italic{real} by default.
 
+\symbola{7}	The value may consist of a double-quote (\typewriter{"}), followed by 
+a C-style string with backslash-escapes, followed by a closing 
+double-quote, in which case it is a string of type \italic{cstring} by 
+default.  The supported backslash-escapes are \typewriter{\\b}, 
+\typewriter{\\r}, \typewriter{\\n} and \typewriter{\\t} from C, 
+\typewriter{\\e} for escape, and 1-3 digit octal escapes from C.  All 
+other backslash-escapes simply represent the next character, verbatim, 
+even if it is the double-quote character.  This is the only value type 
+where whitespace is permitted within the value.  Keep in mind, though, 
+that backslashes, spaces and quotes have special meaning within 
+initialization files, as well.  Generally, if spaces are used at all 
+within the value list, the entire extra parameter must be surrounded by 
+quotes, and any quotes within them must be prefixed with a backslash.  
+The same escapes here work in initialization files as well, so it is 
+usually safe to leave them as is, but backslashes themselves and 
+backslash-escaped quotes need an additional backslash in front of each 
+backslash.  In other words, the surrounding quotes are normally 
+represented as \typewriter{\\"}, a literal double-quote is represented as 
+\typewriter{\\\\\\"} and a literal backslash is represented as 
+\typewriter{\\\\\\\\}.
 
-ez
+\symbola{7}	The value may consist of a parenthesis, which must be 
+followed by a complete array specification, including the closing 
+parenthesis.  This is an array value, of type \italic{valueflex} by default.
 
-text/textview
+\symbola{7}	The value may be an alphabetic character, 
+followed by any characters other than whitespace, colon 
+(\typewriter{:}), equal (\typewriter{=}), or closing parentheses 
+(\typewriter{)}).  This is an atom, of type \italic{atom} by default.}
 
-frame
 
-im
+\section{List of all help topics listing bindable procedures:}
 
-extensions
 
+\leftindent{\helptopic{adewproc}
 
-\section{Classes with bindable procs for Typescript
+\helptopic{alinkproc}
 
+\helptopic{awidgetproc}
 
-}typescript
+\helptopic{bdffontproc}
 
-textview
+\helptopic{bshproc}
 
-im
+\helptopic{calproc}
 
-frame/frameview
+\helptopic{circpiproc}
 
+\helptopic{compressproc}
 
-\section{Classes with bindable procs for Messages
+\helptopic{cpcharproc}
 
-}
-messages
+\helptopic{ermproc}
 
-sendmessage
+\helptopic{inpproc}
 
-frame/view
+\helptopic{lgvproc}
 
-im
+\helptopic{chtproc}
 
-textview
+\helptopic{cntproc}
 
+\helptopic{ctrproc}
 
-\section{Classes with bindable procs for Help
+\helptopic{drdproc}
 
-}
-help
+\helptopic{eqproc}
 
-im
+\helptopic{comproc}
 
-frame/frameview
+\helptopic{desproc}
 
-textview
+\helptopic{dsrproc}
 
+\helptopic{ezdproc}
 
-\section{Classes for Raster
+\helptopic{isrproc}
 
-}
-raster/rasterview
+\helptopic{ftrproc}
 
-im
+\helptopic{gsrproc}
 
-frame
+\helptopic{metaxproc}
 
-view
+\helptopic{splproc}
 
-textview
+\helptopic{tgsproc}
 
+\helptopic{ezproc}
 
-\section{Classes for Table
+\helptopic{fadproc}
 
-}
-table
+\helptopic{figproc}
 
-im
+\helptopic{fillerproc}
 
-frame
+\helptopic{frmproc}
 
-textview
+\helptopic{gnuproc}
 
+\helptopic{gofigproc}
 
-\section{Classes for Zip
+\helptopic{hlpproc}
 
-}
-zip
+\helptopic{improc}
 
-im
+\helptopic{imageproc}
 
-frame/frameview
+\helptopic{layoutproc}
 
-textview
+\helptopic{linkproc}
 
+\helptopic{lkzproc}
 
+\helptopic{mttproc}
 
+\helptopic{nessproc}
 
-\section{List of all help files of classes with bindable procedures}
+\helptopic{noteproc}
 
+\helptopic{orgproc}
 
-apt/suite:  steproc.help
+\helptopic{playproc}
 
-bush:  bshproc.help         \
+\helptopic{popupproc}
 
+\helptopic{prefproc}
 
-calc:  calproc.help          \
+\helptopic{proptproc}
 
+\helptopic{psproc}
 
-console/lib/errmonf: ermproc.help	       	\
+\helptopic{rstproc}
 
+\helptopic{rsrproc}
 
-console/lib/input.c:  inpproc.help
+\helptopic{runbuttonproc}
 
-chart/chtproc.help         \
+\helptopic{sbuttonproc}
 
+\helptopic{srctextproc}
 
-controllers:  ctrproc.help  \
+\helptopic{stroffetproc}
 
+\helptopic{stlproc}
 
-ctext:  ctxproc.help         \
+\helptopic{steproc}
 
+\helptopic{tblproc}
 
-extensions/compile:  comproc.help    \
+\helptopic{txtproc}
 
+\helptopic{timeproc}
 
-extensions/deskey:  desproc.help   \
+\helptopic{tmproc}
 
+\helptopic{typproc}
 
-extensions/dsearch:  dsrproc.help  \
+\helptopic{unknownproc}
 
+\helptopic{valproc}
 
-extensions/ezdiff:  ezdproc.help    \
+\helptopic{vutilsproc}
 
+\helptopic{webproc}
 
-extensions/isearch:  isrproc.help    \
+\helptopic{ximproc}
 
+\helptopic{zipproc}}
 
-extensions/filter:  ftrproc.help
 
-extensions/spell:  splproc.help
+\section{Other installed code with procedures}
 
-extensions/tags:  tgsrproc.help
 
-ez:  ezproc.help             \
+null (the skeleton inset copied by \bold{createinset}):  
+\begindata{link,7981154}
+4
+$ANDREWDIR/lib/null/nullproc.help
+0
+0
+V
+\begindata{link,7981154}
+Datastream version: 2
+nullproc.help
+2
 
+black
+white
+\enddata{link,7981154}
+\enddata{link,7981154}
+\view{linkview,7981154,157,0,0}
 
-fad:  fadproc.help           \
 
+ATK examples:  each example with a procedure table has an associated 
+help file in the documentation directory.  The most complete one is 
+example 19:  
+\begindata{link,7981155}
+4
+$ANDREWDIR/examples/doc/ex19proc.help
+0
+0
+V
+\begindata{link,7981155}
+Datastream version: 2
+ex19proc.help
+2
 
-frame:  frmproc.help        \
+black
+white
+\enddata{link,7981155}
+\enddata{link,7981155}
+\view{linkview,7981155,158,0,0}
 
 
-gob:  gobproc.help          \
+\section{Related tools}
 
 
-lookz:  lkzproc.help
+\leftindent{\italic{\helptopic{keybindings}}
 
-lset:  lstproc.help
+\italic{\helptopic{initfiles}}
 
-org:  orgproc.help
-
-preview:  prvproc.help
-
-raster/cmd:  rstproc.help
-
-support/stylesheet:  stlproc.help
-
-supportviews/matte:  mttproc.help
-
-table:  tblproc.help
-
-text/content:  cntproc.help
-
-text/text and textview:  txtproc.help
-
-textaux/content:  cntproc.help
-
-textobjects/dired:  drdproc.help
-
-typescript:  typproc.help
-
-value (etextv, metextv):  valproc.help
-
-zip:  zipproc.help
-
-
-messages:  msgproc.help
-
-
-eq procs are documented in the eq documentation in 
-$ANDREWDIR/doc/atk/eq/eq.doc.
-
-
-play procs are documented in the play documentation in 
-$ANDREWDIR/doc/atk/music/play.doc.
-
-\section{Related tools}  \
-
-
-
-Select (highlight) one of the italicized names and choose "Show Help on 
-Selected Word" from the pop-up menu to see the help file for:
-
-
-\leftindent{\italic{\helptopic{keybindings}}}
+\italic{\helptopic{ness}}}
 
 
 \begindata{bp,540006120}

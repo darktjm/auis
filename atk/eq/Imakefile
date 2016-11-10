@@ -31,7 +31,7 @@ DeclareFont(sym8)
 DependTarget()
 
 NormalHelpRule()
-InstallDocs(eq.help, ${DESTDIR}/help)
+InstallDocs(eq.help eqproc.help, ${DESTDIR}/help)
 InstallHelpAlias(eq, equation equations)
 
 InstallDocs(eq.doc eqv.doc,${DESTDIR}/doc/PROGRAMMER)

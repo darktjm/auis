@@ -1533,7 +1533,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
                         colordefined = TRUE;
                         (this)->GetForegroundColor(&rcolor, &c1, &c2, &c3);
                         if(rcolor != NULL){
-                            if (strcmp(tt->ti_color,rcolor) == 0)
+                            if (tt->ti_color && strcmp(tt->ti_color,rcolor) == 0)
  /* foreground  already set*/
                                 color = tt->ti_color;
                             strncpy(cbuf,rcolor,64);

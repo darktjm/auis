@@ -32,7 +32,7 @@ void AddRows(class spread  * V, int  after , int  count);
 void AddCols(class spread  * V, int  after , int  count);
 static int k_CheckSelection (class spread  * V);
 static int k_ReadFormula (class spread  * V, char  *startstring);
-static void k_enterchar(class spread  * V, char  ch);
+static void k_enterchar(class spread  * V, long  ch);
 static void k_backspace(class spread  * V, char  ch);
 static void k_tab(class spread  * V, char  ch);
 static void k_newline(class spread  * V, char  ch);
@@ -235,7 +235,7 @@ static int k_ReadFormula (class spread  * V, char  *startstring)
     return 1;
 }
 
-static void k_enterchar(class spread  * V, char  ch)
+static void k_enterchar(class spread  * V, long  ch)
 {
     char   *startstring=NULL;
     char *cp=NULL;
@@ -311,7 +311,7 @@ static void k_rightarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk(&chunk, &(V->anchor));
     if (chunk.RightCol < (MyTable(V))->NumberOfColumns() - 1) {
 	if (chunk.TopRow < 0)
@@ -326,7 +326,7 @@ static void k_leftarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk(&chunk, &(V->anchor));
     if (chunk.TopRow < 0)
 	chunk.TopRow = 0;
@@ -341,7 +341,7 @@ static void k_downarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk(&chunk, &(V->anchor));
     if (chunk.BotRow < (MyTable(V))->NumberOfRows() - 1) {
 	if (chunk.LeftCol < 0)
@@ -356,7 +356,7 @@ static void k_uparrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk(&chunk, &(V->anchor));
     if (--chunk.TopRow < 0)
 	chunk.TopRow = 0;
@@ -371,7 +371,7 @@ static void k_home (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk (&chunk, &(V->anchor));
     chunk.LeftCol = chunk.RightCol = 0;
     if (chunk.BotRow < 0)
@@ -383,7 +383,7 @@ static void k_endline (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk (&chunk, &(V->anchor));
     chunk.LeftCol = chunk.RightCol = (MyTable(V))->NumberOfColumns() - 1;
     if (chunk.BotRow < 0)
@@ -395,7 +395,7 @@ static void k_top (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk (&chunk, &(V->anchor));
     chunk.TopRow = chunk.BotRow = 0;
     chunk.LeftCol = chunk.RightCol = 0;
@@ -406,7 +406,7 @@ static void k_bottom (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
-    k_killbuff (V, ch);
+    k_killbuff (V, 0);
     CopyChunk (&chunk, &(V->anchor));
     chunk.TopRow = chunk.BotRow = (MyTable(V))->NumberOfRows() - 1;
     chunk.LeftCol = chunk.RightCol = (MyTable(V))->NumberOfColumns() - 1;

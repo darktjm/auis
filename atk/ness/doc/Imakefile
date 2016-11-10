@@ -6,7 +6,7 @@
 
 DOCFILES = future.doc nessauth.doc nessfunc.doc nesshack.doc nessman.doc \
 		nesstut.doc nessuser.doc rexf.doc
-HELPFILES = ness.help macros.help
+HELPFILES = ness.help nessproc.help macros.help
 
 /* .SUFFIXES: .help .doc .d
  *.d.doc:
@@ -17,4 +17,4 @@ NormalHelpRule()
 
 InstallDocs(${DOCFILES}, $(DESTDIR)/doc/PROGRAMMER)
 InstallDocs(${HELPFILES}, $(DESTDIR)/help)
-InstallHelpAlias(ness, nessrun function  proc script extend)
+InstallHelpAlias(ness, nessrun function  script extend)

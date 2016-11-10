@@ -73,14 +73,17 @@ srctextview
 
 LIBS =
 
-TEMPLATES = C.tpl H.tpl asm.tpl c.tpl def.tpl \
-            h.tpl help.tpl i3.tpl idl.tpl m3.tpl \
-            mod.tpl rawtext.tpl
+TEMPLATES = srctext.tpl C.tpl H.tpl c.tpl h.tpl \
+	    modtext.tpl mod.tpl def.tpl m3.tpl i3.tpl \
+	    asm.tpl perl.tpl pascal.tpl rexx.tpl \
+	    rawtext.tpl lisp.tpl idl.tpl \
+	    i3help.tpl /* this one may end up going away */
 
 HELPFILES = asmtext.help cpptext.help ctext.help dogtags.help \
             ezpretty.help hlptext.help idltext.help ltext.help \
             m3text.help mtext.help perltext.help ptext.help \
-            rawtext.help rexxtext.help srctext.help dogtags.help
+            rawtext.help rexxtext.help srctext.help dogtags.help \
+	    srctextproc.help compressproc.help
 
 NormalObjectRule()
 NormalATKRule()

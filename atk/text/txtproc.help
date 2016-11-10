@@ -3,439 +3,1376 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Text and Textview}
+\chapter{Procedure Table Listing for Text and Textview}
 
 
-(\italic{c} = VI command mode; \italic{i} = VI input mode; 
-\italic{e} = emacs mode (default))
+Procedure listings for extensions and insets pulled in by textview by 
+default are documented here, as well.
 
+The text editor has three major operating modes, and the default 
+key maps and menus differ between those modes.  When the mode is 
+changed, the default key bindings and menus are changed to those of 
+the new mode.  These modes are Emacs mode (the default), VI commmand 
+mode, and VI insert mode.  It is not possible to assign a new binding 
+to any specific mode; user bindings apply to all three.  It is also 
+not possible to query the current mode in Ness.
 
-"textview-self-insert", 	"Insert a character." \italic{i}\italic{e}
 
-"textview-digit",  		"Insert a character." \italic{c}
+\bold{textview-self-insert}(object \italic{self}, integer \italic{ch})
 
-"textview-beginning-of-line", "^A", "Move to beginning of current line.",  
-"Esc-H"\italic{e}\italic{c} "0"\italic{c}
+\leftindent{Insert a character.
 
-"textview-backward-character", "^B" "Move backward one character.", 
-"Esc-D"\italic{e}\italic{c} "^H"\italic{c} "Del"\italic{c}
+Bound in emacs and VI insert mode to:  all printable ISO-Latin-1 
+characters (\typewriter{Space} .. \typewriter{~}, 
+\typewriter{NoBreakSpace} .. \typewriter{ÿ}), \typewriter{Tab}, 
+each with their respective character code as the \italic{ch} parameter
 
-"textview-delete-next-character", "^D", "Delete the next character."
+\typewriter{^U}-argument can be set to repeat insertion.}
 
-"textview-end-of-line", "^E"  "Move to end of the current line.",  
-"Esc-F"\italic{e}\italic{c} "$"\italic{c}
+\bold{textview-digit}(object \italic{self}, integer \italic{ch})
 
-"textview-forward-character",   "^F"  "Move forward one character." 
-"Esc-C"\italic{e}\italic{c} "040"\italic{c} "l"\italic{c} 
-"Tab"\italic{c} " "\italic{c}
+\leftindent{Add to the numeric (\typewriter{^U}) argument.  If not 
+in VI command mode, acts like \bold{textview-self-insert}.
 
-"textview-delete-previous-character", "^H"\italic{e}\italic{i},  "Delete the previous 
-character."  "Del"\italic{e}\italic{i} "X"\italic{c}
+Bound in VI command mode to:  \typewriter{0} .. \typewriter{9}
 
-"textview-insert-newline", "^M",  "Insert a newline character."
+Note that \typewriter{0} is the first digit of an argument is instead 
+redirected to \bold{textview-beginning-of-line}}
 
-"textview-next-line", "^N"\italic{e}\italic{c},  "Move to next line.",   
-"Esc-B"\italic{e}\italic{c} "^J"\italic{c} "j"\italic{c}
+\bold{textview-beginning-of-line}(object \italic{self})
 
-"textview-previous-line", "^P"\italic{e}\italic{c},  "Move to previous line."   
-"Esc-A"\italic{e}\italic{c} "^K"\italic{c} "k"\italic{c}
+\leftindent{Move to beginning of current line.
 
-"textview-indent", "Esc-i"\italic{e}\italic{c},  "Indent current line."
+Bound in Emacs mode to:  \typewriter{^A}, 
+\typewriter{Home} (\typewriter{Esc-H})
 
-"textview-GrabReference", ^Xw"\italic{e}\italic{c},  "Grab the next viewref"
+Bound in VI command mode to:  \typewriter{0}, 
+\typewriter{Home} (\typewriter{Esc-H})
 
-"textview-PlaceReference", "^Xy"\italic{e}\italic{c},  "Create a new viewref"
+Note: VI command mode \typewriter{0} binding conflicts with 
+\bold{textview-digit}; this is resolved within \bold{textview-digit}.} 
 
-"textview-unindent", "Esc-u"\italic{e}\italic{c},  "Un-indent current line."
+\bold{textview-backward-character}(object \italic{self})
 
-"textview-exch", "^X^X"\italic{e}\italic{c},  "Exchange dot and mark."
+\leftindent{Move backward one character.
 
-"textview-select-region", "Esc-^@"\italic{e}\italic{c},  "Select between dot and mark."
+Bound in Emacs mode to:  \typewriter{^B}, 
+\typewriter{Left} (\typewriter{Esc-D})
 
-"textview-copy-region", "Esc-w",  "Copy~11",  "Copy region to kill-buffer."
-  "ys"\italic{c}
+Bound in VI command mode to:  \typewriter{Backspace} (\typewriter{^H}), 
+\typewriter{Del}, \typewriter{Left} (\typewriter{Esc-D})
 
-"textview-mylf", "^J",   "Skip to next line and indent."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-zap-region", "^W",  "Cut~10",  "Remove the text within the 
-selection region and place it in a cutbuffer."
+\bold{textview-delete-next-character}(object \italic{self})
 
-"textview-append-next-cut", "Esc-^W"\italic{e}\italic{c},  "Make next cut command append to 
-the cutbuffer as opposed to making a new buffer."
+\leftindent{Delete the next character.
 
-"textview-yank", "^Y",  "Paste~10", "Yank text back from kill-buffer."  
-"ds"\italic{c}
+Bound in Emacs mode to:  \typewriter{^D}
 
-"textview-insert-file", "^X-Tab",  "File~10,Insert File~10",  "Prompt for a 
-filename and insert that file's contents into the document."  
-":r"\italic{c}
+\typewriter{^U}-argument can be set to repeat deletion.}
 
-"textview-rotate-backward-paste", "Esc-^Y"\italic{e}\italic{c},  "Rotate kill-buffer 
-backwards."
+\bold{textview-end-of-line}(object \italic{self})
 
-"textview-line-to-top", "Esc-!"\italic{e}\italic{c},  "Move current line to top of screen."
+\leftindent{Move to end of the current line.
 
-"textview-rotate-paste", "Esc-y"\italic{e}\italic{c},  "Rotate kill-buffer."  
+Bound in Emacs mode to:  \typewriter{^E}, 
+\typewriter{End} (\typewriter{Esc-F})
 
-"textview-forward-para", "Esc-]",  "Move to the next paragraph."   
-"}"\italic{c}
+Bound in VI command mode to:  \typewriter{$}, 
+\typewriter{End} (\typewriter{Esc-F})}
 
-"textview-backward-para", "Esc-[",  "Move to the previous paragraph."  
-"{"\italic{c}
+\bold{textview-forward-character}(object \italic{self})
 
-"textview-open-line", "^O",  "Insert blank line at current pos."
+\leftindent{Move forward one character.
 
-"textview-plainer", "^X^P"\italic{e}\italic{c}\italic{i},  "Plainer~40",  "Remove innermost 
-environment.",   "Esc-'-Esc-p"\italic{e}\italic{c}\italic{i}
+Bound in Emacs mode to:  \typewriter{^F}, 
+\typewriter{Right} (\typewriter{Esc-C})
 
-"textview-plainest",  "Plainest~41",  "Remove all enclosing styles.",   
-"Esc-'-Esc-P"\italic{e}\italic{c}\italic{i}
+Bound in VI command mode to:  \typewriter{040}, \typewriter{l}, 
+\typewriter{Tab}, \typewriter{Space}, \typewriter{Right} (\typewriter{Esc-C})
 
-"textview-prev-screen", "Esc-v",  "Move forward to previous screen", 
- "Esc-G"\italic{e}\italic{c} "^B"\italic{c}
+\typewriter{^U}-argument can be set to repeat movement.
 
-"textview-next-screen", "^V",  "Move forward to next screen",  
-"Esc-E"\italic{e}\italic{c} "^F"\italic{c}
+Note: VI command mode \typewriter{040} binding conflicts with
+\bold{textview-digit}, and doesn't make much sense (was it supposed to 
+be \typewriter{\\040}, aka \typewriter{Space}?)}
 
-"textview-glitch-down", "^Q",  "Glitch screen down one line.", "Esc-z"
+\bold{textview-delete-previous-character}(object \italic{self})
 
-"textview-glitch-up", "^Z",  "Glitch screen up one line."
+\leftindent{Delete the previous character.
 
-"textview-twiddle-chars", "^T"\italic{e}\italic{c},  "Exchange previous two chars."
+Bound in Emacs and VI insert mode to:  
+\typewriter{Backsapce} (\typewriter{^H}),  \typewriter{Del}
 
-"textview-kill-line", "^K",  "Kill rest of line.",   
-"D"\italic{c} "d$"\italic{c}
+Bound in VI command mode to: \typewriter{X}
 
-"textview-search", "^S", "Search/Spell~1,Forward~10"\italic{e},  "Search forward."
+\typewriter{^U}-argument can be set to repeat deletion.}
 
-"textview-reverse-search", "^R", "Search/Spell~1,Backward~11"\italic{e}, "Search 
-backward."
+\bold{textview-insert-newline}(object \italic{self})
 
-"textview-search-again", "Search/Spell~1,Search Again~12"\italic{e}, "Repeat last 
-search."
+\leftindent{Insert a newline character.
 
-"textview-insert-inset-here", "Esc-Tab"\italic{e}\italic{c},  "Add inset at this location."
+Bound in emacs and VI insert mode to:  
+\typewriter{Enter} (\typewriter{^M})
 
-"textview-what-paragraph", "Esc-N"\italic{e}\italic{c},  "Print current paragraph number."
+\typewriter{^U}-argument can be set to repeat insertion.}
 
-"textview-show-styles", "Esc-s"\italic{e}\italic{c}, "Show styles at dot."  
-"Esc-'-Esc-s"\italic{e}\italic{c}\italic{i}
+\bold{textview-next-line}(object \italic{self})
 
-"textview-goto-paragraph", "Esc-n"\italic{e}\italic{c},  "Go to specific paragraph."
+\leftindent{Move to next line.  In VI modes, this behaves more like 
+moving to the next paragraph.
 
-"textview-query-replace", "Esc-q"\italic{e}\italic{c},  "Search/Spell~1,Query Replace~20", 
- "Query replace."
+Bound in emacs and VI command mode to:   \typewriter{^N}, 
+\typewriter{Down} (\typewriter{Esc-B})
 
-"textview-quote", "^X^Q",  "Uninterpreted insert of any char or octal 
-code."
+Bound in VI command mode to:  \typewriter{^J}, \typewriter{j}
 
-"textview-kill-white-space", "Esc-k"\italic{e}\italic{c},  "Delete spaces and tabs around the 
-current pos."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-ctrl-at", "^@"\italic{e}\italic{c},  "Set a mark."
+\bold{textview-previous-line}(object \italic{self})
 
-"textview-backward-word", "Esc-b",  "Move backward to beginning of word."   
-"b"\italic{c}
+\leftindent{Move to previous line.  In VI modes, this behaves more like 
+moving to the previous paragraph.
 
-"textview-delete-next-word", "Esc-d",  "Delete  the next word.",  
-"dw"\italic{c}
+Bound in Emacs and VI command mode to:  \typewriter{^P}, 
+\typewriter{Up} (\typewriter{Esc-A})
 
-"textview-forward-word", "Esc-f",  "Move forward to end of word."
+Bound in VI command mode to:  \typewriter{^K}, \typewriter{k}
 
-"textview-delete-previous-word", "Esc-h",  "Delete the previous word." 
- "Esc-^H"  "Esc-Del",
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-end-of-text", "Esc->",  "Move to end of text."
+\bold{textview-indent}(object \italic{self})
 
-"textview-beginning-of-text", "Esc-<",  "Move to beginning of text."
+\leftindent{Indent current paragraph by 4 spaces.  Multiples of 8 are 
+turned into tabs.  The cursor is moved to the end of the paragraph.
 
-"textview-toggle-character-case", "^^"\italic{e}\italic{c},  "Toggle the case of the character 
-at the dot."
+Bound in Emacs and VI command mode to:   \typewriter{Esc-i}}
 
-"textview-lowercase-word", "Esc-l"\italic{e}\italic{c},  "Convert word (or region) to lower 
-case."
+\bold{textview-GrabReference}(object \italic{self})
 
-"textview-uppercase-word",  "Convert word (or region) to upper case." 
+\leftindent{Remember the next (from the current cursor position) inset's 
+data in preparation for \bold{textview-PlaceReference}.
 
-"textview-capitalize-word",  "Capitalize word (or all words within a 
-region)."
+Bound in Emacs and VI command mode to:  \typewriter{^X-w}}
 
-"textview-cursor-to-top", "Esc-,"  "Moves cursor to the beggining of the line 
-currently at the top of the screen."  "H"\italic{c}
+\bold{textview-PlaceReference}(object \italic{self})
 
-"textview-cursor-to-bottom", "Esc-.",  "Moves cursor to the beggining of the 
-line currently at the bottom of the screen."  "L"\italic{c}
+\leftindent{Create a new view on the data previously remembered by 
+\bold{textview-GrabReference}.
 
-"textview-cursor-to-center", "Esc-/",  "Moves cursor to the beggining of the 
-line currently at the center of the screen."   "M"\italic{c}
+Bound in Emacs and VI command mode to:  \typewriter{^X-y}
 
-"textview-change-template",  "File~10,Add Template~31",  "Change to named 
-template."
+\typewriter{^U}-argument can be set to anything to select a different 
+view object; otherwise, the same view is used as in the original 
+inset.  If set, this view class name can be set from ness using 
+\bold{queueanswer}.}
 
-"textview-toggle-read-only", "Esc-~"\italic{e}\italic{c},  "Change read only status of text 
-object."
+\bold{textview-unindent}(object \italic{self})
 
-"textview-toggle-expose-styles",  "Expose/hide style information"
+\leftindent{Un-indent current paragraph by 4 spaces.  Tabs are split into 8 
+spaces (or 8 spaces merged to tabs) if needed.  The cursor is moved to 
+the end of the paragraph.
 
-textview-edit-styles",  "Expose style editor"
+Bound in Emacs and VI command mode to:  \typewriter{Esc-u}}
 
-"textview-insert-pagebreak",  "Page~3,Insert Pagebreak~11", "Add page break at 
-this location."
+\bold{textview-exch}(object \italic{self})
 
-"textview-next-page",  "Page~3,Next Page~12",  "Frame text at next page break 
-object"
+\leftindent{Exchange dot and mark.
 
-"textview-last-page",  "Page~3,Previous Page~13",  "Frame text at last page 
-break object"
+Bound in Emacs and VI command mode to:  \typewriter{^X-^X}}
 
-"textview-insert-footnote", "Page~3,Insert Footnote~20",  "Add footnote at 
-this location."
+\bold{textview-select-region}(object \italic{self})
 
-"textview-open-footnotes",  "Page~3,Open Footnotes~22",  "Open all footnotes"
+\leftindent{Select between dot and mark.
 
-"textview-close-footnotes",  "Page~3,Close Footnotes~23",  "Close all 
-footnotes"
+Bound in Emacs and VI command mode to:  \typewriter{Esc-^@}}
 
-"textview-write-footnotes",  "Write all footnotes"
+\bold{textview-copy-region}(object \italic{self})
 
-"textview-extend-backward-line", "Extend the dot one line backward."
+\leftindent{Copy region to kill-buffer.
 
-"textview-extend-backward-screen", "Extend the dot one screen backward."
+Bound in Emacs mode to:  \typewriter{Esc-w}
 
-"textview-extend-backward", "Extend the dot one char backward."
+Bound in VI command mode to:  \typewriter{y-s}
 
-"textview-extend-beginning", "Extend the dot to beginning of text."
+Menu:  Copy~11}
 
-"textview-extend-end", "Extend the dot to end of text."
+\bold{textview-mylf}(object \italic{self})
 
-"textview-extend-forward-line", "Extend the dot one line forward."
+\leftindent{Skip to next line and indent.
 
-"textview-extend-forward-screen", "Extend the dot one screen forward."
+Bound in Emacs mode to:  \typewriter{^J}}
 
-"textview-extend-forward", "Extend the dot one char forward."
+\bold{textview-zap-region}(object \italic{self})
 
-"textview-forward-beginning-of-whitespace-word", "Move forward to beginning of whitespace word."
+\leftindent{Remove the text within the selection region and place it in a 
+cutbuffer.
 
-"textview-kill-next-word", "Kill  the next word, saving it on the kill ring."
+Bound in Emacs mode to:  \typewriter{^W}
 
-"textview-kill-previous-word", "Kill the previous word, saving it on the kill ring."
+Bound in VI command mode to:  \typewriter{d-s}
 
-"textview-MIT-kill-line", "Kill rest of line."
+Menu:  Cut~10}
 
-"textview-my-soft-lf", "Esc-j", "Skip to next line/soft return and indent."
+\bold{textview-append-next-cut}(object \italic{self})
 
-"textview-next-screen-move", "Move forward to next screen moving dot."
+\leftindent{Make next cut command append to the cutbuffer as opposed to 
+making a new buffer.
 
-"textview-prev-screen-move", "Move back to previous screen moving dot."
+Bound in Emacs and VI command mode to:  \typewriter{Esc-^W}}
 
-"textview-noop", "Do absolutely nothing."
+\bold{textview-yank}(object \italic{self})
 
-"textview-insert-soft-newline", "Esc-^M", "Insert a soft newline character."
+\leftindent{Yank text back from kill-buffer.
 
-"textview-toggle-color-styles", "Show/don't show color styles"
+Bound in Emacs mode to:  \typewriter{^Y}
 
-"textview-toggle-editor", "Esc-t", "Switch to vi editor.",
-"Switch to emacs editor." "Esc-t"\italic{c}
+Menu:  Paste~10
 
-"textview-toggle-line-display", "Show/don't show line display"
+\typewriter{^U}-argument can be set to repeat insertion (100 max).}
 
-"textview-balance", "Esc-m", "Balance parentheses, brackets, or braces."   
-"%"\italic{c}
+\bold{textview-insert-file}(object \italic{self})
 
-"textview-down-insert-environment", "Esc-'Esc-B"\italic{e}\italic{c}\italic{i}, 
-"Move down environment that will be used for inserting characters."   
-"Esc-'Esc-d"\italic{e}\italic{c}\italic{i}
+\leftindent{Prompt for a filename and insert that file's contents into the 
+document.
 
-"textview-insert-environment",	"Esc-'Esc-l"\italic{e}\italic{c}\italic{i}, "Prompt for a style to use for inserting characters."
+Bound in Emacs mode to:  \typewriter{^X-Tab}
 
-			  (subscript),	"Esc-'Esc-!"\italic{e}\italic{c}\italic{i}
+Bound in VI command mode to:  \typewriter{:-r}
 
-			     (bigger),	"Esc-'Esc-+"\italic{e}\italic{c}\italic{i}
+Menu:  File~10,Insert File~10
 
-			    (smaller),	"Esc-'Esc--"\italic{e}\italic{c}\italic{i}
+Use \bold{queueanswer} to provide file name in Ness.}
 
-			  (flushleft),	"Esc-'Esc-<"\italic{e}\italic{c}\italic{i}
+\bold{textview-rotate-backward-paste}(object \italic{self})
 
-			     (center),	"Esc-'Esc-="\italic{e}\italic{c}\italic{i}
+\leftindent{Rotate kill-buffer backwards.
 
-			 (flushright),	"Esc-'Esc->"\italic{e}\italic{c}\italic{i}
+Bound in Emacs and VI command mode to:  \typewriter{Esc-^Y}
 
-			 (leftindent),	"Esc-'Esc-Tab"\italic{e}\italic{c}\italic{i}
+\typewriter{^U}-argument can be set to repeat command.  Note, however, 
+that there are only 8 buffers under X; overflow wraps.}
 
-			(superscript),	"Esc-'Esc-^"\italic{e}\italic{c}\italic{i}
+\bold{textview-line-to-top}(object \italic{self})
 
-			  (underline),	"Esc-'Esc-_"\italic{e}\italic{c}\italic{i}
+\leftindent{Move current line to top of screen.
 
-			        (bold),	"Esc-'Esc-b"\italic{e}\italic{c}\italic{i}
+Bound in Emacs and VI command mode to:  \typewriter{Esc-!}}
 
-			      (italic),	"Esc-'Esc-i"\italic{e}\italic{c}\italic{i}
+\bold{textview-rotate-paste}(object \italic{self})
 
-			 (typewriter),	"Esc-'Esc-t"\italic{e}\italic{c}\italic{i}
+\leftindent{Rotate kill-buffer.
 
-"textview-left-insert-environment", "Esc-'Esc-D"\italic{e}\italic{c}\italic{i}, "Move to the left the environment that will be used for inserting characters."
+Bound in Emacs and VI command mode to:  \typewriter{Esc-y}
 
-"textview-right-insert-environment", "Esc-'Esc-C"\italic{e}\italic{c}\italic{i}, "Move to the right the environment that will be used for inserting characters."
+\typewriter{^U}-argument can be set to repeat command.  Note, however, 
+that there are only 8 buffers under X; overflow wraps.}
 
-"textview-show-insert-environment", "Esc-'Esc-?"\italic{e}\italic{c}\italic{i}, "Show the environment that will be used for inserting characters."
+\bold{textview-forward-para}(object \italic{self})
 
-"textview-up-insert-environment", "Esc-'Esc-A"\italic{e}\italic{c}\italic{i}, 
-"Move up environment that will be used for inserting characters."   
-"Esc-'Esc-u"\italic{e}\italic{c}\italic{i}
+\leftindent{Move to the next paragraph.
 
-"textview-backward-whitespace-word", "B"\italic{c}, "Move backward to beginning of word separated by whitespace."
+Bound in Emacs mode to:  \typewriter{Esc-]}
 
-"textview-beginning-of-first-word", "^"\italic{c}, "Move to beginning of first word on current line."
+Bound in VI command mode to:  \typewriter{\}}
 
-"textview-beginning-of-next-line", "+"\italic{c}, "Move to beginning of next line."   
-"^M"\italic{c}
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-beginning-of-previous-line", "-"\italic{c}, "Move to beginning of previous line."
+\bold{textview-backward-para}(object \italic{self})
 
-"textview-change-line", "cc"\italic{c}, "Replace current line."
+\leftindent{Move to the previous paragraph.
 
-"textview-change-rest-of-line", "C"\italic{c}, "Replace rest of current line."   
-"S"\italic{c}
+Bound in Emacs mode to:  \typewriter{Esc-[}
 
-"textview-change-selection", "cs"\italic{c}, "Replace current selection."
+Bound in VI command mode to:  \typewriter{\{}
 
-"textview-change-word", "cw"\italic{c}, "Replace current word."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-delete-backward-word", "db"\italic{c}, "Delete the previous word."
+\bold{textview-open-line}(object \italic{self})
 
-"textview-delete-end-of-whitespace-word", "dE"\italic{c}, "Delete end of word separated by whitespace."
+\leftindent{Insert blank line at current pos.
 
-"textview-delete-end-of-word", "de"\italic{c}, "Delete end of word."
+Bound in Emacs mode to:  \typewriter{^O}
 
-"textview-delete-next-whitespace-word", "dW"\italic{c}, "Delete the next word separated by whitespace."
+\typewriter{^U}-argument can be set to repeat insertion.}
 
-"textview-delete-previous-whitespace-word", "dB"\italic{c}, "Delete the previous word separated by whitespace."
+\bold{textview-plainer}(object \italic{self}, marker \italic{mode})
 
-"textview-down", "\004"\italic{c}, "Move down. "
+\leftindent{Remove innermost environment.  The \italic{mode} argument 
+must be present in bindings and Ness code.  It can be either "new" or 
+"old".  The default bindings use "new", except that \typewriter{^X^P} 
+and the menu item use "old" if the UseStylePlainer preference is set 
+to "No".  \italic{FIXME:  what is the difference?}
 
-"textview-end-of-whitespace-word", "E"\italic{c}, "Move forward to end of word separated by whitespace."
+Bound in all modes to:  \typewriter{^X^P}, \typewriter{Esc-'-Esc-p}
 
-"textview-end-of-word", "e"\italic{c}, "Move forward to end of word."
+Menu:  Plainer~40}
 
-"textview-forward-beginning-of-word", "w"\italic{c}, "Move forward to beginning of word."
+\bold{textview-plainest}(object \italic{self})
 
-"textview-forward-whitespace-word", "W"\italic{c}, "Move forward to beginning of word separated space."
+\leftindent{Remove all enclosing styles.
 
-"textview-go-to", "G"\italic{c}, "Go to line number."   "g"\italic{c}
+Bound in all modes to:  \typewriter{Esc-'-Esc-P}
 
-"textview-input-mode", "a"\italic{c}, "Switch to input mode."   "i"\italic{c}
+Menu:  Plainest~41}
 
-"textview-insert-at-beginning", "I"\italic{c}, "Insert at beginning of current line."
+\bold{textview-prev-screen}(object \italic{self})
 
-"textview-insert-at-end", "A"\italic{c}, "Insert at end of current line."
+\leftindent{Move view backward to previous screen without moving cursor.
 
-"textview-join", "J"\italic{c}, "Join current and next line."
+Bound in Emacs mode to:  \typewriter{Esc-v}, 
+\typewriter{Prior/PageUp} (\typewriter{Esc-G})
 
-"textview-open-line-after", "o"\italic{c}, "Insert a new line after the current line."
+Bound in VI command mode to:  \typewriter{^B}, 
+\typewriter{Prior/PageUp} (\typewriter{Esc-G})
 
-"textview-open-line-before", "O"\italic{c}, "Insert a new line before the current line."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-put-after", "p"\italic{c}, "Put text back from kill-buffer, after current line."
+\bold{textview-next-screen}(object \italic{self})
 
-"textview-put-before", "P"\italic{c}, "Put text back from kill-buffer, before current line."
+\leftindent{Move view forward to next screen without moving cursor.
 
-"textview-replace-char", "r"\italic{c}, "Replace character after cursor."
+Bound in Emacs mode to:  \typewriter{^V}, 
+\typewriter{Next/PageDown} (\typewriter{Esc-E})
 
-"textview-shift-down", "^Y"\italic{c}, "Shift display down one line."
+Bound in VI command mode to:  \typewriter{^F}, 
+\typewriter{Next/PageDown} (\typewriter{Esc-E})
 
-"textview-shift-home", "Shift the view horizontally home."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-shift-left", "Shift the view horizontally left."
+\bold{textview-glitch-down}(object \italic{self})
 
-"textview-shift-right", "Shift the view horizontally right."
+\leftindent{Glitch screen down one line.  In other words, scroll view up 
+one line.
 
-"textview-shift-up", "\005"\italic{c}, "Shift display up one line."
+Bound in Emacs mode to:  \typewriter{^Q}, \typewriter{Esc-z}
 
-"textview-substitute-char", "s"\italic{c}, "Insert over character after cursor."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-toggle-mode", "Esc-Esc"\italic{i}, "Switch to command mode. "   "^E"\italic{i}
+\bold{textview-glitch-up}(object \italic{self})
 
-"textview-up", "\025"\italic{c}, "Move up. "
+\leftindent{Glitch screen up one line.  In other words, scroll view down 
+one line.
 
-"textview-vi-command", ":"\italic{c}, "Execute a vi command via commmand line."
+Bound in Emacs mode to:   \typewriter{^Z}
 
-"textview-vi-delete-line", "dd"\italic{c}, "Delete line."
+\typewriter{^U}-argument can be set to repeat movement.}
 
-"textview-vi-delete-next-character", "x"\italic{c}, "Delete the next character."
+\bold{textview-twiddle-chars}(object \italic{self})
 
-"textview-vi-yank-line", "yy"\italic{c}, "Yank line."   "Y"\italic{c}
+\leftindent{Exchange previous two chars.
 
-"textview-yank-end-of-whitespace-word", "yE"\italic{c}, "Yank end of word separated by whitespace."
+Bound in Emacs and VI command mode to:  \typewriter{^T}}
 
-"textview-yank-end-of-word", "ye"\italic{c}, "Yank end of word."
+\bold{textview-kill-line}(object \italic{self})
 
-"textview-yank-line", "y$"\italic{c}, "Yank rest of line."
+\leftindent{Kill rest of line.
 
-"textview-yank-next-whitespace-word", "yW"\italic{c}, "Yank the next word separated by whitespace."
+Bound in Emacs mode to:  \typewriter{^K}
 
-"textview-yank-next-word", "yw"\italic{c}, "Yank the next word."
+Bound in VI command mode to:  \typewriter{D}, \typewriter{d-$}
 
-"textview-yank-previous-whitespace-word", "yB"\italic{c}, "Yank the previous word separated by whitespace."
+\typewriter{^U}-argument can be set to kill additional lines.}
 
-"textview-yank-previous-word", "yb"\italic{c}, "Yank the previous word."
+\bold{textview-search}(object \italic{self}, null | 0 | marker \italic{pat})
 
+\leftindent{Search forward for simple regular expression.  If the \italic{pat} 
+argument is 0 or null, the pattern is prompted for.  Otherwise, 
+\italic{pat} is the search pattern.
 
-"tindex-print",  		"print index"    
+Bound in Emacs mode to:  \typewriter{^S}
 
-"tindex-write-index-file",	 "write a list of index terms "
+Menu in Emacs mode:  Search/Spell~1,Forward~10
 
-"tindex-read-index-file",	"read a list of index terms "
+\typewriter{^U}-argument can be set to find Nth occurrence.
 
-"tindex-index-italic",	"make the index entries italic" 
+Use the \italic{pat} argument or \bold{queueanswer} to provide the 
+search pattern in Ness.}
 
-"tindex-index-plain",	"make the index entries plain"
+\bold{textview-reverse-search}(object \italic{self}, null | 0 | marker 
+\italic{pat})
 
-"tindex-expose-inv-index",	"Expose the invisible index entries"
+\leftindent{Search backward for simple regular expression.  If the \italic{pat} 
+argument is 0 or null, the pattern is prompted for.  Otherwise, 
+\italic{pat} is the search pattern.
 
-"tindex-hide-inv-index",	"Hide the invisible index entries"
+Bound in Emacs mode to:  \typewriter{^R}
 
-"tindex-index-term",	"index all instances of a term"
+Menu in Emacs mode:  Search/Spell~1,Backward~11
 
-"tindex-preview",	"preview index"
+\typewriter{^U}-argument can be set to find Nth occurrence.
 
+Use the \italic{pat} argument or \bold{queueanswer} to provide the 
+search pattern in Ness.}
 
-"headrtv-newline",  "^J", "Goes to next section of the header/footer."   "^M"
+\bold{textview-search-again}(object \italic{self})
 
+\leftindent{Repeat last search by \bold{textview-search} or 
+\bold{textview-reverse-search}, in same direction.
 
-"bpv-pagenum-clear", "Pagebreak~5,Clear Page Number~11", "Clear the new page number after this page break."
+Menu in Emacs mode:  Search/Spell~1,Search Again~12}
 
-"bpv-pagenum-set", "Pagebreak~5,Set Page Number~10", "Set the new page number after this page break."
-      
+\bold{textview-insert-inset-here}(object \italic{self}, null | 0 | marker 
+\italic{dataobj})
 
-"spell-check-document",  "Search/Spell~1,Check Spelling~30",  "Checks spelling 
-from the caret on."
+\leftindent{Add inset at this location.  The data object name is either the 
+\italic{dataobj} parameter, if not 0 or null, or is prompted for.  If 
+the \typewriter{^U} numeric argument is set to anything, the view name 
+is prompted for as well; otherwise, the default view for the given data 
+object is used.
 
+Bound in Emacs and VI command mode to:  \typewriter{Esc-Tab}
 
-"dynsearch-search-forward", "/"\italic{c}, "Search/Spell~1,Forward~10"\italic{c}, "Search forward for a pattern; uses selection."
+Use the \italic{dataobj} argument or \bold{queueanswer} to provide the 
+data object class in Ness.  Use \bold{queueanswer} with the numeric 
+argument set to set the view class.}
 
-"dynsearch-search-reverse", "?"\italic{c}, "Search/Spell~1,Backward~11"\italic{c}, "Search backwards for a pattern; uses selection."
+\bold{textview-what-paragraph}(object \italic{self})
 
-"dynsearch-search-again-opposite", "N"\italic{c}, "Search again in the opposite direction, using the last search pattern."
+\leftindent{Print current paragraph number.
 
-"dynsearch-search-again", "n"\italic{c}, "Search/Spell~1,Search Again~12"\italic{c}, "Search again in the same direction, using the last search pattern."
+Bound in Emacs and VI command mode to:  \typewriter{Esc-N}}
 
+\bold{textview-show-styles}(object \italic{self})
 
-"contentv-make-window",  "Page~3,Table of Contents~30",  "Make a table of 
-contents window"
+\leftindent{Show styles at dot.
 
+Bound in Emacs and VI command mode to:  \typewriter{Esc-s}
 
-"contentv-delete-window", "Delete Window~89", "destroy the table of content"
+Bound in all modes to:  \typewriter{Esc-'-Esc-s}}
 
-"contentv-destroy", "Quit~99", "destroy the table of content"
+\bold{textview-goto-paragraph}(object \italic{self})
 
-"contentv-enumerate", "Contents~1,Enumerate~1", "Enumerate the heading"
+\leftindent{Go to specific paragraph.  If the \typewriter{^U} numeric 
+argument is set, use that as the target.  Otherwise, prompt for it.
 
-"contentv-denumerate", "Contents~1,Denumerate~2", "Denumerate the heading"
+Bound in Emacs and VI command mode to:  \typewriter{Esc-n}
 
-"contentv-reinit", "Contents~1,Update Contents~20", "reinitialize the headings"
+In Ness, set the target using the numeric argument or 
+\bold{queueanswer}.}
 
-"contentv-preview", "File~10,Preview~21", "Previews document."
+\bold{textview-query-replace}(object \italic{self})
 
-"contentv-print", "File~10,Print~22", "Prints document."
+\leftindent{Query replace.
+
+Bound in Emacs and VI command mode to:  Esc-q
+
+Menu:  Search/Spell~1,Query Replace~20
+
+While it is possible to enter the pattern and replacment, 
+respectively, using \bold{queueanswer}, it is generally not possible to 
+know what keys to press (using \bold{dokeys}) without already knowing 
+the contents.  This should not be used in Ness.}
+
+\bold{textview-quote}(object \italic{self})
+
+\leftindent{Uninterpreted insert of any char (other than 0-7) or 3-digit 
+octal code.
+
+Bound in Emacs mode to:  \typewriter{^X^Q}
+
+\typewriter{^U}-argument can be set to repeat insertion.}
+
+\bold{textview-kill-white-space}(object \italic{self})
+
+\leftindent{Delete spaces and tabs around the current pos.
+
+Bound in Emacs and VI command mode to:  \typewriter{Esc-k}}
+
+\bold{textview-ctrl-at}(object \italic{self})
+
+\leftindent{Set a mark.
+
+Bound in Emacs and VI command mode to:  \typewriter{^@}}
+
+\bold{textview-backward-word}(object \italic{self})
+
+\leftindent{Move backward to beginning of word.
+
+Bound in Emacs mode to:  \typewriter{Esc-b}
+
+Bound in VI command mode to:  \typewriter{b}}
+
+\bold{textview-delete-next-word}(object \italic{self})
+
+\leftindent{Delete the next word.
+
+Bound in Emacs mode to:  \typewriter{Esc-d}
+
+Bound in VI command mode to:  \typewriter{d-w}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-forward-word}(object \italic{self})
+
+\leftindent{Move forward to end of word.
+
+Bound in Emacs mode to:  \typewriter{Esc-f}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-delete-previous-word}(object \italic{self})
+
+\leftindent{Delete the previous word.
+
+Bound in Emacs mode to:  \typewriter{Esc-h}, 
+\typewriter{Esc-Backspace} (\typewriter{Esc-^H}), \typewriter{Esc-Del}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-end-of-text}(object \italic{self})
+
+\leftindent{Move to end of text.
+
+Bound in Emacs mode to:  \typewriter{Esc->}}
+
+\bold{textview-beginning-of-text}(object \italic{self})
+
+\leftindent{Move to beginning of text.
+
+Bound in Emacs mode to:  \typewriter{Esc-<}}
+
+\bold{textview-toggle-character-case}(object \italic{self})
+
+\leftindent{Toggle the case of the character at the dot.
+
+Bound in Emacs and VI command mode to:  \typewriter{^^}}
+
+\bold{textview-lowercase-word}(object \italic{self})
+
+\leftindent{Convert word (or region) to lower case.
+
+Bound in Emacs and VI command mode to:  \typewriter{Esc-l}}
+
+\bold{textview-uppercase-word}(object \italic{self})
+
+\leftindent{Convert word (or region) to upper case.}
+
+\bold{textview-capitalize-word}(object \italic{self})
+
+\leftindent{Capitalize word (or all words within a region).}
+
+\bold{textview-cursor-to-top}(object \italic{self})
+
+\leftindent{Moves cursor to the beggining of the line currently at the top 
+of the screen.
+
+Bound in Emacs mode to:  \typewriter{Esc-,}
+
+Bound in VI command mode to:  \typewriter{H}}
+
+\bold{textview-cursor-to-bottom}(object \italic{self})
+
+\leftindent{Moves cursor to the beggining of the line currently at the
+bottom of the screen.
+
+Bound in Emacs mode to:  \typewriter{Esc-.}
+
+Bound in VI command mode to:  \typewriter{L}}
+
+\bold{textview-cursor-to-center}(object \italic{self})
+
+\leftindent{Moves cursor to the beggining of the line currently at the 
+center of the screen.
+
+Bound in Emacs mode to:  \typewriter{Esc-/}
+
+Bound in VI command mode to:  \typewriter{M}}
+
+\bold{textview-change-template}(object \italic{self})
+
+\leftindent{Change to named template.
+
+Menu:  File~10,Add Template~31
+
+Use \bold{queueanswer} to provide template name in Ness.}
+
+\bold{textview-toggle-read-only}(object \italic{self})
+
+\leftindent{Change read only status of text object.
+
+Bound in Emacs and VI command mode to:  \typewriter{Esc-~}
+
+\typewriter{^U}-argument can be set to 0 to force off and non-0 to 
+force on.}
+
+\bold{textview-toggle-expose-styles}(object \italic{self})
+
+\leftindent{Expose/hide style information.}
+
+\bold{textview-edit-styles}(object \italic{self})
+
+\leftindent{Expose embedded style editor.}
+
+\bold{textview-insert-pagebreak}(object \italic{self})
+
+\leftindent{Add page break at this location.
+
+Menu:  Page~3,Insert Pagebreak~11}
+
+\bold{textview-next-page}(object \italic{self})
+
+\leftindent{Frame text at next page break object
+
+Menu:  Page~3,Next Page~12}
+
+\bold{textview-last-page}(object \italic{self})
+
+\leftindent{Frame text at last page break object
+
+Menu:  Page~3,Previous Page~13}
+
+\bold{textview-insert-footnote}(object \italic{self})
+
+\leftindent{Add footnote at this location.
+
+Menu:  Page~3,Insert Footnote~20}
+
+\bold{textview-open-footnotes}(object \italic{self})
+
+\leftindent{Open all footnotes
+
+Menu:  Page~3,Open Footnotes~22}
+
+\bold{textview-close-footnotes}(object \italic{self})
+
+\leftindent{Close all footnotes
+
+Menu:  Page~3,Close Footnotes~23}
+
+\bold{textview-write-footnotes}(object \italic{self})
+
+\leftindent{Write all footnotes to \typewriter{/tmp/notes}.}
+
+\bold{textview-extend-backward-line}(object \italic{self})
+
+\leftindent{Extend the dot (selection) one line backward.
+
+\typewriter{^U}-argument can be set to add multiple lines.}
+
+\bold{textview-extend-backward-screen}(object \italic{self})
+
+\leftindent{Extend the dot (selection) one screen backward.
+
+\typewriter{^U}-argument can be set to add multiple screens.}
+
+\bold{textview-extend-backward}(object \italic{self})
+
+\leftindent{Extend the dot one char backward.
+
+\typewriter{^U}-argument can be set to add multiple characters.}
+
+\bold{textview-extend-beginning}(object \italic{self})
+
+\leftindent{Extend the dot (selection) to beginning of text.}
+
+\bold{textview-extend-end}(object \italic{self})
+
+\leftindent{Extend the dot (selection) to end of text.}
+
+\bold{textview-extend-forward-line}(object \italic{self})
+
+\leftindent{Extend the dot (selection) one line forward.
+
+\typewriter{^U}-argument can be set to add multiple lines.}
+
+\bold{textview-extend-forward-screen}(object \italic{self})
+
+\leftindent{Extend the dot (selection) one screen forward.
+
+\typewriter{^U}-argument can be set to add multiple screens.}
+
+\bold{textview-extend-forward}(object \italic{self})
+
+\leftindent{Extend the dot (selection) one char forward.
+
+\typewriter{^U}-argument can be set to add multiple characters.}
+
+\bold{textview-forward-beginning-of-whitespace-word}(object
+\italic{self})
+
+\leftindent{Move forward to beginning of whitespace word.}
+
+\bold{textview-kill-next-word}(object \italic{self})
+
+\leftindent{Kill the next word, saving it on the kill ring.
+
+\typewriter{^U}-argument can be set to kill more words.}
+
+\bold{textview-kill-previous-word}(object \italic{self})
+
+\leftindent{Kill the previous word, saving it on the kill ring.
+
+\typewriter{^U}-argument can be set to kill more words.}
+
+\bold{textview-MIT-kill-line}(object \italic{self})
+
+\leftindent{Kill rest of line, appending to last kill if last command was 
+a kill.}
+
+\bold{textview-my-soft-lf}(object \italic{self})
+
+\leftindent{Skip to next line/soft return and indent.
+
+Bound in Emacs mode to:  Esc-j}
+
+\bold{textview-next-screen-move}(object \italic{self})
+
+\leftindent{Move forward to next screen moving dot.}
+
+\bold{textview-prev-screen-move}(object \italic{self})
+
+\leftindent{Move back to previous screen moving dot.}
+
+\bold{textview-noop}(object \italic{self})
+
+\leftindent{Do absolutely nothing.}
+
+\bold{textview-insert-soft-newline}(object \italic{self})
+
+\leftindent{Insert a soft newline character.
+
+Bound in Emacs mode to:  \typewriter{Esc-Enter} (\typewriter{Esc-^M})
+
+\typewriter{^U}-argument can be set to repeat insertion.}
+
+\bold{textview-toggle-color-styles}(object \italic{self})
+
+\leftindent{Show/don't show color styles}
+
+\bold{textview-toggle-editor}(object \italic{self})
+
+\leftindent{Switch to VI editor when in Emacs mode, or to the Emacs editor 
+when in VI mode.
+
+Bound in Emacs and VI command mode to:  \typewriter{Esc-t}
+
+Note that the key binding is disabled (bound to \bold{textview-noop} by 
+default) if the preference AllowKeyToggleToVIMode is not Yes.}
+
+\bold{textview-toggle-line-display}(object \italic{self}, null | 0 | 
+marker \italic{set})
+
+\leftindent{Show/don't show line display.  If \italic{set} is "on", enable, 
+and if "off", disable (no other string values may be used).  Otherwise, 
+if \typewriter{^U} numeric argument is 0, disable, and if anything 
+else explicit, enable.  Otherwise, toggle.}
+
+\bold{textview-balance}(object \italic{self})
+
+\leftindent{Balance parentheses, brackets, or braces.
+
+Bound in Emacs mode to:  \typewriter{Esc-m}
+
+Bound in VI command mode to:  \typewriter{%}}
+
+\bold{textview-down-insert-environment}(object \italic{self})
+
+\leftindent{Move down environment that will be used for inserting characters.
+
+Bound in all modes to:  
+\typewriter{Esc-'-Down} (\typewriter{Esc-'-Esc-B}),
+\typewriter{Esc-'-Esc-d}}
+
+\bold{textview-insert-environment}(object \italic{self}, null | 0 | 
+marker \italic{style})
+
+\leftindent{Prompt for a style to use for inserting characters.  If 
+\italic{style} is not 0 or null, and is not an empty string (""), it 
+is used for the style instead of prompting.
+
+Bound in all modes to:  \typewriter{Esc-'-Esc-l}
+
+Bound with \italic{style} in all modes to:  \typewriter{Esc-'-Esc-!} 
+("subscript")
+, \typewriter{Esc-'-Esc-+} ("bigger") 
+, \typewriter{Esc-'-Esc--} ("smaller") 
+, \typewriter{Esc-'-Esc-<} ("flushleft")
+, \typewriter{Esc-'-Esc-=} ("center")
+, \typewriter{Esc-'-Esc->} ("flushright")
+, \typewriter{Esc-'-Esc-Tab} ("leftindent")
+, \typewriter{Esc-'-Esc-^} ("superscript")
+, \typewriter{Esc-'-Esc-_} ("underline")
+, \typewriter{Esc-'-Esc-b} ("bold")
+, \typewriter{Esc-'-Esc-i} ("italic")
+, \typewriter{Esc-'-Esc-t} ("typewriter")
+
+Use the \italic{style} argument or \bold{queueanswer} to provide the 
+style name in Ness.}
+
+\bold{textview-left-insert-environment}(object \italic{self})
+
+\leftindent{Move to the left the environment that will be used for
+inserting characters.
+
+Bound in all modes to:  \typewriter{Esc-'-Left} (\typewriter{Esc-'-Esc-D})}
+
+\bold{textview-right-insert-environment}(object \italic{self})
+
+\leftindent{Move to the right the environment that will be used for
+inserting characters.
+
+Bound in all modes to:  \typewriter{Esc-'-Right} (\typewriter{Esc-'-Esc-C})}
+
+\bold{textview-show-insert-environment}(object \italic{self})
+
+\leftindent{Show the environment that will be used for inserting characters.
+
+Bound in all modes to:  \typewriter{Esc-'-Esc-?}}
+
+\bold{textview-up-insert-environment}(object \italic{self})
+
+\leftindent{Move up environment that will be used for inserting characters.
+
+Bound in all modes to:  \typewriter{Esc-'-Up} (\typewriter{Esc-'-Esc-A}), 
+\typewriter{Esc-'-Esc-u}}
+
+\bold{textview-backward-whitespace-word}(object \italic{self})
+
+\leftindent{Move backward to beginning of word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{B}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-beginning-of-first-word}(object \italic{self})
+
+\leftindent{Move to beginning of first word on current line.
+
+Bound in VI command mode to:  \typewriter{^}}
+
+\bold{textview-beginning-of-next-line}(object \italic{self})
+
+\leftindent{Move to beginning of next line.
+
+Bound in VI command mode to:  \typewriter{+}, \typewriter{Enter} 
+(\typewriter{^M})
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-beginning-of-previous-line}(object \italic{self})
+
+\leftindent{Move to beginning of previous line.
+
+Bound in VI command mode to:  \typewriter{-}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-change-line}(object \italic{self})
+
+\leftindent{Replace current line.
+
+Bound in VI command mode to:  \typewriter{c-c}}
+
+\bold{textview-change-rest-of-line}(object \italic{self})
+
+\leftindent{Replace rest of current line.
+
+Bound in VI command mode to:  \typewriter{C}, \typewriter{S}}
+
+\bold{textview-change-selection}(object \italic{self})
+
+\leftindent{Replace current selection.
+
+Bound in VI command mode to:  \typewriter{c-s}}
+
+\bold{textview-change-word}(object \italic{self})
+
+\leftindent{Replace current word.
+
+Bound in VI command mode to:  \typewriter{c-w}}
+
+\bold{textview-delete-backward-word}(object \italic{self})
+
+\leftindent{Delete the previous word.
+
+Bound in VI command mode to:  \typewriter{d-b}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-delete-end-of-whitespace-word}(object \italic{self})
+
+\leftindent{Delete end of word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{d-E}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-delete-end-of-word}(object \italic{self})
+
+\leftindent{Delete end of word.
+
+Bound in VI command mode to:  \typewriter{d-e}
+
+\typewriter{^U}-argument can be set to continue deletion to following words.}
+
+\bold{textview-delete-next-whitespace-word}(object \italic{self})
+
+\leftindent{Delete the next word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{d-W}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-delete-previous-whitespace-word}(object \italic{self})
+
+\leftindent{Delete the previous word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{d-B}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-down}(object \italic{self})
+
+\leftindent{Move down.
+
+Bound in VI command mode to:  \typewriter{^D}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-end-of-whitespace-word}(object \italic{self})
+
+\leftindent{Move forward to end of word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{E}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-end-of-word}(object \italic{self})
+
+\leftindent{Move forward to end of word.
+
+Bound in VI command mode to:  \typewriter{e}}
+
+\bold{textview-forward-beginning-of-word}(object \italic{self})
+
+\leftindent{Move forward to beginning of word.
+
+Bound in VI command mode to:  \typewriter{w}}
+
+\bold{textview-forward-whitespace-word}(object \italic{self})
+
+\leftindent{Move forward to beginning of word separated space.
+
+Bound in VI command mode to:  \typewriter{W}
+
+\typewriter{^U}-argument can be set to repeat movement.}
+
+\bold{textview-go-to}(object \italic{self})
+
+\leftindent{Go to line number.
+
+Bound in VI command mode to:  \typewriter{G}, \typewriter{g}
+
+\typewriter{^U}-argument is the line to go to.  If unset, jump to end 
+of file.}
+
+\bold{textview-input-mode}(object \italic{self})
+
+\leftindent{Switch to VI insert mode.
+
+Bound in VI command mode to:  \typewriter{a}, \typewriter{i}}
+
+\bold{textview-insert-at-beginning}(object \italic{self})
+
+\leftindent{Insert at beginning of current line.
+
+Bound in VI command mode to:  \typewriter{I}}
+
+\bold{textview-insert-at-end}(object \italic{self})
+
+\leftindent{Insert at end of current line.
+
+Bound in VI command mode to:  \typewriter{A}}
+
+\bold{textview-join}(object \italic{self})
+
+\leftindent{Join current and next line.
+
+Bound in VI command mode to:  \typewriter{J}
+
+\typewriter{^U}-argument can be set to join more lines.}
+
+\bold{textview-open-line-after}(object \italic{self})
+
+\leftindent{Insert a new line after the current line.
+
+Bound in VI command mode to:  \typewriter{o}}
+
+\bold{textview-open-line-before}(object \italic{self})
+
+\leftindent{Insert a new line before the current line.
+
+Bound in VI command mode to:  \typewriter{O}}
+
+\bold{textview-put-after}(object \italic{self})
+
+\leftindent{Put text back from kill-buffer, after current line.
+
+Bound in VI command mode to:  \typewriter{p}}
+
+\bold{textview-put-before}(object \italic{self})
+
+\leftindent{Put text back from kill-buffer, before current line.
+
+Bound in VI command mode to:  \typewriter{P}}
+
+\bold{textview-replace-char}(object \italic{self})
+
+\leftindent{Replace character after cursor.
+
+Bound in VI command mode to:  \typewriter{r}}
+
+\bold{textview-shift-down}(object \italic{self})
+
+\leftindent{Shift display down one line.
+
+Bound in VI command mode to:  \typewriter{^Y}}
+
+\bold{textview-shift-home}(object \italic{self})
+
+\leftindent{Shift the view horizontally home.}
+
+\bold{textview-shift-left}(object \italic{self})
+
+\leftindent{Shift the view horizontally left.}
+
+\bold{textview-shift-right}(object \italic{self})
+
+\leftindent{Shift the view horizontally right.}
+
+\bold{textview-shift-up}(object \italic{self})
+
+\leftindent{Shift display up one line.
+
+Bound in VI command mode to:  \typewriter{^E}}
+
+\bold{textview-substitute-char}(object \italic{self})
+
+\leftindent{Insert over character after cursor.
+
+Bound in VI command mode to:  \typewriter{s}}
+
+\bold{textview-toggle-mode}(object \italic{self})
+
+\leftindent{Switch to VI command mode."
+
+Bound in VI insert mode to:  \typewriter{Esc-Esc}, \typewriter{^E}}
+
+\bold{textview-up}(object \italic{self})
+
+\leftindent{Move up.
+
+Bound in VI command mode to:  \typewriter{^U}
+
+\typewriter{^U}-argument can be set to repeat movement.  Note that this 
+command's binding overrides the default \typewriter{^U}; 
+\typewriter{^U}-arguments in VI command mode are entered using 
+\bold{textview-digit} (bound to the number keys by default)}
+
+\bold{textview-vi-command}(object \italic{self})
+
+\leftindent{Execute a vi command via commmand line.  This is mostly a 
+dummy function that takes one keypress and provides some helpful 
+errors, and supports only one command:  \typewriter{r} 
+(\bold{textview-insert-file}).
+
+Bound in VI command mode to:  \typewriter{:}}
+
+\bold{textview-vi-delete-line}(object \italic{self})
+
+\leftindent{Delete line.
+
+Bound in VI command mode to:  \typewriter{d-d}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-vi-delete-next-character}(object \italic{self})
+
+\leftindent{Delete the next character.
+
+Bound in VI command mode to:  \typewriter{x}
+
+\typewriter{^U}-argument can be set to repeat deletion.}
+
+\bold{textview-vi-yank-line}(object \italic{self})
+
+\leftindent{Yank line.
+
+Bound in VI command mode to:  \typewriter{y-y}, \typewriter{Y}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-end-of-whitespace-word}(object \italic{self})
+
+\leftindent{Yank end of word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{y-E}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-end-of-word}(object \italic{self})
+
+\leftindent{Yank end of word.
+
+Bound in VI command mode to:  \typewriter{y-e}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-line}(object \italic{self})
+
+\leftindent{Yank rest of line.
+
+Bound in VI command mode to:  \typewriter{y-$}}
+
+\bold{textview-yank-next-whitespace-word}(object \italic{self})
+
+\leftindent{Yank the next word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{y-W}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-next-word}(object \italic{self})
+
+\leftindent{Yank the next word.
+
+Bound in VI command mode to:  \typewriter{y-w}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-previous-whitespace-word}(object \italic{self})
+
+\leftindent{Yank the previous word separated by whitespace.
+
+Bound in VI command mode to:  \typewriter{y-B}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+\bold{textview-yank-previous-word}(object \italic{self})
+
+\leftindent{Yank the previous word.
+
+Bound in VI command mode to:  \typewriter{y-b}
+
+\typewriter{^U}-argument can be set to repeat yank.}
+
+
+\section{tindex}
+
+
+\bold{tindex-print}(object \italic{textview}, integer \italic{psmode})
+
+\leftindent{print index.  If \italic{psmode} is non-0, use PostScript; 
+otherwise, Troff.}
+
+\bold{tindex-write-index-file}(object \italic{textview})
+
+\leftindent{write a list of index terms
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{tindex-read-index-file}(object \italic{textview})
+
+\leftindent{read a list of index terms
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{tindex-index-italic}(object \italic{textview})
+
+\leftindent{make the index entries italic}
+
+\bold{tindex-index-plain}(object \italic{textview})
+
+\leftindent{make the index entries plain}
+
+\bold{tindex-expose-inv-index}(object \italic{textview})
+
+\leftindent{Expose the invisible index entries}
+
+\bold{tindex-hide-inv-index}(object \italic{textview})
+
+\leftindent{Hide the invisible index entries}
+
+\bold{tindex-index-term}(object \italic{textview})
+
+\leftindent{index all instances of a term
+
+Use \bold{queueanswer} to provide term in Ness.}
+
+\bold{tindex-preview}(object \italic{textview}, integer \italic{psmode})
+
+\leftindent{preview index.  If \italic{psmode} is non-0, use PostScript; 
+otherwise, Troff.}
+
+
+\section{headrtv}
+
+
+\bold{headrtv-newline}(object \italic{self})
+
+\leftindent{Goes to next section of the header/footer.
+
+Bound to:  \typewriter{^J}, \typewriter{Enter} (\typewriter{^M})}
+
+
+\section{bpv}
+
+
+\bold{bpv-pagenum-clear}(object \italic{self})
+
+\leftindent{Clear the new page number after this page break.
+
+Menu:  Pagebreak~5,Clear Page Number~11}
+
+\bold{bpv-pagenum-set}(object \italic{self})
+
+\leftindent{Set the new page number after this page break.
+
+Menu:  Pagebreak~5,Set Page Number~10
+
+Use \bold{queueanswer} to provide page number in Ness.}
+
+
+\section{spell}
+
+
+\bold{spell-check-document}(object \italic{textview})
+
+\leftindent{Checks spelling from the caret on.
+
+Menu:  Search/Spell~1,Check Spelling~30
+
+Spell checking is an inherently interactive process; do not use from Ness.}
+
+
+\section{dynsearch}
+
+
+\bold{dynsearch-search-forward}(object \italic{textview})
+
+\leftindent{Search forward for a pattern; uses selection.  If the 
+selection is empty, pattern is prompted for.
+
+Bound in VI command mode to:  \typewriter{/}
+
+Menu in VI command mode:  Search/Spell~1,Forward~10
+
+\typewriter{^U}-argument can be set to find Nth occurrence.
+
+Use \bold{queueanswer} to provide search string in Ness when selection 
+is empty.}
+
+\bold{dynsearch-search-reverse}(object \italic{textview})
+
+\leftindent{Search backwards for a pattern; uses selection.  If the 
+selection is empty, pattern is prompted for.
+
+Bound in VI command mode to:  \typewriter{?}
+
+Menu in VI command mode:  Search/Spell~1,Backward~11
+
+\typewriter{^U}-argument can be set to find Nth occurrence.
+
+Use \bold{queueanswer} to provide search string in Ness when selection 
+is empty.}
+
+\bold{dynsearch-search-again-opposite}(object \italic{textview})
+
+\leftindent{Search again in the opposite direction, using the last search pattern.
+
+Bound in VI command mode to: \typewriter{N}}
+
+\bold{dynsearch-search-again}(object \italic{textview})
+
+\leftindent{Search again in the same direction, using the last search pattern.
+
+Bound in VI command mode to: \typewriter{n}
+
+Menu in VI command mode:  Search/Spell~1,Search Again~12}
+
+
+\section{contentv}
+
+
+\bold{contentv-make-window}(object \italic{textview})
+
+\leftindent{Make a table of contents window
+
+Menu:  Page~3,Table of Contents~30}
+
+
+\bold{contentv-delete-window}(object \italic{self})
+
+\leftindent{destroy the table of content
+
+Menu:  Delete Window~89}
+
+\bold{contentv-destroy}(object \italic{self})
+
+\leftindent{destroy the table of content
+
+Menu:  Quit~99}
+
+\bold{contentv-enumerate}(object \italic{self})
+
+\leftindent{Enumerate the headings.  If there is a selection, just the 
+selection, starting at a given number.  Otherwise, the entire document.
+
+Menu:  Contents~1,Enumerate~1
+
+Use \bold{queueanswer} to provide starting number in Ness.}
+
+\bold{contentv-denumerate}(object \italic{self})
+
+\leftindent{Denumerate the heading
+
+Menu:  Contents~1,Denumerate~2}
+
+\bold{contentv-reinit}(object \italic{self})
+
+\leftindent{reinitialize the headings
+
+Menu:  Contents~1,Update Contents~20}
+
+\bold{contentv-preview}(object \italic{self})
+
+\leftindent{Previews document.
+
+Menu:  File~10,Preview~21}
+
+\bold{contentv-print}(object \italic{self})
+
+\leftindent{Prints document.
+
+Menu:  File~10,Print~22}
+
+
+\section{stylesheet}
+
+
+\bold{stylesheet-wraplook}(object \italic{view}, marker \italic{name})
+
+\leftindent{Add the style \italic{name}.
+
+Menu:  Each named style optionally defines a menu entry;  those which 
+do are added to the textview menus with the defined menu entry to 
+add that style.}
+
+
+\section{Additional topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{text}
+
+\helptopic{search}
+
+\helptopic{query-replace}
+
+\helptopic{vi}}
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

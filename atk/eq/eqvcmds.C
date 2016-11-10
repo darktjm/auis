@@ -51,7 +51,7 @@ void eqview::Changed(enum changed  changed)
  * Self-insert, basically
  */
 
-static void eqview_Default(class eqview  *self, char  c)
+static void eqview_Default(class eqview  *self, long  c)
 {
     static char s[2] = " ";
     long pos, len, added;
@@ -718,11 +718,12 @@ static void eqview_Open(class eqview  *self, char  c)
 }
 #endif /* notdef */
 
-static void eqview_Close(class eqview  *self, char  c)
+static void eqview_Close(class eqview  *self, long  pc)
 {
     class eq *eqptr = Eq(self);
     long pos, len, added, level = 0, i, matched = 0;
     struct formula *f;
+    char c = pc;
 
     pos = (self)->GetDotPosition();
     len = (self)->GetDotLength();
@@ -1351,7 +1352,7 @@ static struct bind_Description eqviewCutBindings[]={
     /* FILE menu card */
 /*    {"eqview-write-out-file", NULL,0,"File,Save As~21",0,0}, */
 
-    {"eqview-read-in-file", NULL,0,"File,Read File~31",0,0},
+/*    {"eqview-read-in-file", NULL,0,"File,Read File~31",0,0}, */
 
     {"eqview-write-c", NULL,0,"File,C~41",0,0},
     {"eqview-write-eqn", NULL,0,"File,EQN~42",0,0},

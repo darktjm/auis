@@ -1,0 +1,38 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for runbutton}
+
+
+\bold{runbutton-set-command}(object \italic{self})
+
+\leftindent{Set the runbutton command to execute.
+
+Menu: RunButton,Set Command~12
+
+Use \bold{queueanswer} to provide command name in Ness.}
+
+\bold{runbutton-set-label}(object \italic{self})
+
+\leftindent{Set the runbutton label.
+
+Menu: RunButton,Set Label~22
+
+Use \bold{queueanswer} to provide label text in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{runbutton}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -1223,7 +1223,7 @@ static struct bind_Description EmbeddedBindings[]={
 	{"gofigview-set-note-mode", 0, 0,
 		"Gofig,Auto 1 2 3 ...~22", '0', 0, 
 		NULL, NULL, NULL},
-	{"gofigview-do-nothing", 0, 0,
+	{"gofigview-set-note-mode", 0, 0,
 		"Gofig,No Auto Notes  <=~24", '-', 0, 
 		NULL, NULL, NULL},
 

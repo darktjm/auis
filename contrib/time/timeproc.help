@@ -1,0 +1,125 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for writestamp, timeoday, clock}
+
+
+\bold{writestamp-set-format}(object \italic{self}, null | 0 | marker \italic{fmt})
+
+\leftindent{Set the writestamp inset's format to \italic{fmt}.  If 
+\italic{fmt} is an empty string, use "%o %A, %Y".  If null or 0, use 
+the default (via the WriteStampDefaultFormat preference or, if no such 
+preference, the same as for an empty string).
+
+Menu:  Various default formats:
+
+\leftindent{Write Stamp/Default~1 (null)
+
+Write Stamp/H:MM AM/PM~10  ("%u:%M %P")
+
+Write Stamp/Month DD YYYY~11  ("%o %A, %Y")}}
+
+
+\bold{timeoday-set-format}(object \italic{self}, null | 0 | marker \italic{fmt})
+
+\leftindent{Set the tomeoday inset's format to \italic{fmt}.  If 
+\italic{fmt} is an empty string, use "%o %A, %Y".  If null or 0, use 
+the default (via the TimeODayDefaultFormat preference or, if no such 
+preference, the same as for an empty string).
+
+Menu:  Various default formats:
+
+\leftindent{Time O'Day/Default~1 (null)
+
+Time O'Day/H:MM AM/PM~10  ("%u:%M %P")
+
+Time O'Day/Month DD YYYY~11  ("%o %A, %Y")}}
+
+
+\bold{clock-set-labels}(object \italic{self}, marker \italic{code})
+
+\leftindent{Set the clock inset's label parameters.  The menu entries 
+use all available \italic{code} parameters; see them for details.
+
+Menu:  Various label parameters:
+
+\leftindent{Clock Labels~11,None~1  ("A")
+
+Clock Labels~11,1  (12)~2  ("B")
+
+Clock Labels~11,4 (12  3  6  9)~3  ("C")
+
+Clock Labels~11,12 (12  1  2 ...)~4  ("D")
+
+Clock Labels~11,Arabic (12)~11  ("1")
+
+Clock Labels~11,Roman (XII)~12  ("2")
+
+Clock Labels~11,English (Twelve)~13  ("3")}}
+
+\bold{clock-set-num-labels}(object \italic{self}, marker \italic{code})
+
+\leftindent{Set the clock inset's shape parameters.  The menu entries 
+use all available \italic{code} parameters; see them for details.
+
+Menu:  Various shape parameters:
+
+\leftindent{Clock Shape~10,Circle~1  ("A")
+
+Clock Shape~10,Square~2  ("B")
+
+Clock Shape~10,No border~11  ("1")
+
+Clock Shape~10,Thin border~12  ("2")
+
+Clock Shape~10,Thick border~13  ("3")}}
+
+\bold{clock-set-seconds}(object \italic{self}, marker \italic{code})
+
+\leftindent{Set the clock inset's seconds hand parameters.  The menu entries 
+use all available \italic{code} parameters; see them for details.
+
+Menu:  Various seconds hand parameters:
+
+\leftindent{Clock Seconds~13,No Second Hand~1  ("A")
+
+Clock Seconds~13,Radial Hand~2  ("B")
+
+Clock Seconds~13,Floating Tick~3  ("C")}}
+
+\bold{clock-set-ticks}(object \italic{self}, marker \italic{code})
+
+\leftindent{Set the clock inset's tick count parameters.  The menu entries 
+use all available \italic{code} parameters; see them for details.
+
+Menu:  Various tick count parameters:
+
+\leftindent{Clock Ticks~12,None~1  ("A")
+
+Clock Ticks~12,1 / 4~2  ("B")
+
+Clock Ticks~12,4 / 12~3  ("C")
+
+Clock Ticks~12,12 / 60~4  ("D")}}
+
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{writestamp}
+
+\helptopic{timeoday}
+
+\helptopic{clock}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

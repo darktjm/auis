@@ -1,47 +1,102 @@
-\begindata{text,538281464}
+\begindata{text,1241}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Proclist for Dired
-
-}
-
-dired-zoom-in", "z",  "Directory Edit,Zoom In~10",  "Edit selected file or 
-switch to selected directory." 
-
-dired-delete", "d",  "Directory Edit,Delete~20",  "Delete selected file(s)."
-
-dired-rename", "r",  "Directory Edit,Rename~30",  "Rename selected file(s).",
-
-dired-refresh", "^M", "Directory Edit,Refresh~40", "Reread current 
-directory."
-
-dired-toggle-select", " ", "Toggle file at cursor." 
-
-dired-down-line", "n",  "Move cursor down (equiv ^N)." 
-
-dired-up-line", "p",  "Move cursor up (equiv ^P)."
-
-dired-regexp-select", "=",  "Directory Edit,Regexp Select~60", "Select files 
-by regular expression."
-
-dired-long-mode-on", "l",  "Directory Edit,Long Format~50", "List files in 
-long format." 
-
-dired-long-mode-off", "s", "Directory Edit,Short Format~50", "List files in 
-normal format (names only)."
-
-dired-dot-files-on", "i", "Directory Edit,Show Invisible~55",  "Display 
-invisible files."
-
-dired-dot-files-off", "h",  "Directory Edit,Hide Invisible~55",  "Do not 
-display invisible files."
+\chapter{Procedure Table Listing for Dired}
 
 
+\bold{dired-zoom-in}(object \italic{self})
 
-\begindata{bp,537558784}
-\enddata{bp,537558784}
-\view{bpv,537558784,158,0,0}
-Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
-\enddata{text,538281464}
+\leftindent{Edit selected file or switch to selected directory.
+
+Bound to:  \typewriter{z}; Menu:  Directory Edit,Zoom In~10}
+
+\bold{dired-delete}(object \italic{self})
+
+\leftindent{Delete selected file(s).
+
+Bound to:  \typewriter{d}; Menu:  Directory Edit,Delete~20
+
+Use \bold{queueanswer} to provide delete confirmation(s) in Ness.}
+
+\bold{dired-rename}(object \italic{self})
+
+\leftindent{Rename selected file(s).
+
+Bound to:  \typewriter{r}; Menu:  Directory Edit,Rename~30
+
+Use \bold{queueanswer} to provide new name(s) in Ness.}
+
+\bold{dired-refresh}(object \italic{self})
+
+\leftindent{Reread current directory.
+
+Bound to:  \typewriter{Enter} (\typewriter{^M}); Menu:  
+Directory Edit,Refresh~40}
+
+\bold{dired-toggle-select}(object \italic{self})
+
+\leftindent{Toggle file at cursor and move to next line.
+
+Bound to:  \typewriter{Space}
+
+\typewriter{^U}-argument can be set to toggle more than one in 
+succession (up to 10k)}
+
+\bold{dired-down-line}(object \italic{self})
+
+\leftindent{Move cursor down (equiv ^N).
+
+Bound to:  \typewriter{n}}
+
+\bold{dired-up-line}(object \italic{self})
+
+\leftindent{Move cursor up (equiv ^P).
+
+Bound to:  \typewriter{p}}
+
+\bold{dired-regexp-select}(object \italic{self})
+
+\leftindent{Select files by regular expression.
+
+Bound to:  \typewriter{=}; Menu:  Directory Edit,Regexp Select~60
+
+Use \bold{queueanswer} to provide regular expression in Ness.}
+
+\bold{dired-long-mode-on}(object \italic{self}, integer \italic{mode})
+
+\leftindent{List files in long format.  \italic{mode} must be 0.
+
+Bound to:  \typewriter{l}; Menu:  Directory Edit,Long Format~50}
+
+\bold{dired-long-mode-off}(object \italic{self}, integer \italic{mode})
+
+\leftindent{List files in normal format (names only).  \italic{mode} must be 1.
+
+Bound to:  \typewriter{s}; Menu: Directory Edit,Short Format~50}
+
+\bold{dired-dot-files-on}(object \italic{self}, integer \italic{mode})
+
+\leftindent{Display invisible files.  \italic{mode} must be 2.
+
+Bound to:  \typewriter{i}; Menu:  Directory Edit,Show Invisible~55}
+
+\bold{dired-dot-files-off}(object \italic{self}, integer \italic{mode})
+
+\leftindent{Do not display invisible files.  \italic{mode} must be 3.
+
+Bound to:  \typewriter{h}; Menu:  Directory Edit,Hide Invisible~55}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

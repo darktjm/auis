@@ -1,22 +1,60 @@
 \begindata{text,6765600}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Proclist for Lookz}
+\chapter{Procedure Table Listing for Lookz}
 
 
-"lookzview-add-style", "Esc-A",  "Add Style", "Add a new style to 
-stylesheet"
+\bold{lookzview-edit-styles}(object \italic{textview})
 
-"lookzview-delete-style", "Esc-D", "Delete Style", "Delete a style from the stylesheet"
+\leftindent{Bring up style editor in a seprate window
 
-"lookzview-edit-styles", textview:"File~10,Edit Styles~30", "Bring up style editor in a seprate window"
+Menu:  File~10,Edit Styles~30}
 
-"lookzview-set-bgcolor", "Set Background~10", "Set stylesheet background color"
 
-"lookzview-set-robgcolor", "Set R/O Background~11", "Set stylesheet readonly background color"
+\bold{lookzview-add-style}(object \italic{self})
 
-"lookzview-update-document", "Esc-U", "Update Document", "Cause document to redisplay itself"
+\leftindent{Add a new style to stylesheet
 
+Bound to:  \typewriter{Esc-A}; Menu:  Add Style
+
+Use \bold{queueanswer} to provide style name in Ness.}
+
+\bold{lookzview-delete-style}(object \italic{self})
+
+\leftindent{Delete a style from the stylesheet
+
+Bound to:  \typewriter{Esc-D}; Menu:  Delete Style
+
+Selecting a style is generally not possible in Ness; do not call this 
+from Ness.}
+
+\bold{lookzview-set-bgcolor}(object \italic{self})
+
+\leftindent{Set stylesheet background color
+
+Menu:  Set Background~10
+
+Use \bold{queueanswer} to provide color in Ness.}
+
+\bold{lookzview-set-robgcolor}(object \italic{self})
+
+\leftindent{Set stylesheet readonly background color
+
+Menu:  Set R/O Background~11
+
+Use \bold{queueanswer} to provide color in Ness.}
+
+\bold{lookzview-update-document}(object \italic{self})
+
+\leftindent{Cause document to redisplay itself
+
+Bound to:  \typewriter{Esc-U}; Menu:  Update Document}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{lookz}}
 \enddata{text,6765600}

@@ -1,0 +1,122 @@
+\begindata{text,538882080}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for console}
+
+
+\bold{console-toggle-var}(object \italic{self}, integer \italic{varno})
+
+\leftindent{\italic{Undocumented; toggle internal variable from console 
+file}
+
+Menu:  \italic{menu is part of internal variable def.}
+
+Note that variable numbers are assigned in order of appearance in 
+configuration files and cannot generally be determined from Ness, or 
+for use in manual bindings.  Also, if there are no internal variables 
+defined in a loaded console, this procedure will not be present.}
+
+\bold{console-read-new-console-file}(object \italic{self}, 
+null | 0 | marker \italic{name})
+
+\leftindent{\italic{Undocumented}; if argument is 0 or null, prompt for 
+a console file name.
+
+Menu:  Display~2, Read New Console File~24 (null)
+
+Menu:  Display~2, Restart \italic{name} (\italic{name} is the current 
+console file)
+
+Menu:  Consoles~5, \italic{name}~\italic{order} (\italic{name} is any 
+console definiton found in path; \italic{order} is order in which they 
+were found, starting at 1)}
+
+\bold{console-quit}(object \italic{self})
+
+\leftindent{Quit
+
+Menu:  Quit~99}
+
+\bold{console-expand-menu}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Display~2, Expand Menu~52}
+
+\bold{console-shrink-menu}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Display~2, Shrink Menu~52}
+
+\bold{console-set-alarm}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Set Alarm~5}
+
+\bold{console-turn-off-alarm}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Turn Off Alarm~5}
+
+\bold{console-write-log-file}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Write Log File~40}
+
+\bold{console-clear-logs}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Clear All Logs~45}
+
+\bold{console-getstats}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Restart Getstats~60}
+
+\bold{console-debug}(object \italic{self})
+
+\leftindent{\italic{Undocumented}
+
+Menu:  Expert Options~90, Turn Off Debugging~90 (when on), 
+Expert Options~90, Turn On Debugging~90 (when off)}
+
+
+\section{logview}
+
+
+\bold{logview-copy-region}(object \italic{self})
+
+\leftindent{Copy text from console log
+
+Menu:  Copy~12}
+
+
+\section{errmonf}
+
+
+\bold{errmonf-toggle-var}(object \italic{console}, marker \italic{var})
+
+\leftindent{\italic{Undocumented; see \bold{console-toggle-var}}
+
+Menu:  \italic{menu is part of internal variable def.}}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{console}}
+
+
+\begindata{bp,537558784}
+\enddata{bp,537558784}
+\view{bpv,537558784,1117,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+\enddata{text,538882080}

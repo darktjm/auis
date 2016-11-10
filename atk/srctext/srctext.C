@@ -122,6 +122,7 @@ static void SetupStyles(srctext *self)
 	self->linecomment_style= new style;
 	(self->comment_style)->Copy(self->linecomment_style);
 	(self->linecomment_style)->SetName("linecomment");
+	(self->linecomment_style)->AddNewFontFace(fontdesc_Italic);
 	(ss)->Add(self->linecomment_style);
     }
     if ((self->function_style= (ss)->Find("function")) == NULL) {

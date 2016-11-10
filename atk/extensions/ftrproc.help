@@ -3,46 +3,75 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Filter
-
-}
-
-filter-sink-region-thru-command-formatted [for textview] Provides the selected 
-region as standard input to the specified command; the command's output is 
-discarded.  ATK datastream is written.
+\chapter{Procedure Table Listing for Filter}
 
 
-filter-sink-region-formatted [for textview] Prompts for a command and provides 
+\bold{filter-sink-region}(object \italic{textview})
+
+\leftindent{Prompts for a command and provides the 
+selected region as standard input to it; the command's output is discarded.
+
+Use \bold{filter-sink-region-thru-command} with Ness.}
+
+\bold{filter-sink-region-thru-command}(object \italic{textview}, 
+marker \italic{command})
+
+\leftindent{Provides the selected region as 
+standard input to the specified \italic{command}; the command's output is 
+discarded.}
+
+\bold{filter-sink-region-formatted}(object \italic{textview})
+
+\leftindent{Prompts for a command and provides 
 the selected region as standard input to it; the command's output is 
 discarded.  ATK datastream is written.
 
+Use \bold{filter-sink-region-thru-command-formatted} with Ness.}
 
-filter-sink-region-thru-command [for textview] Provides the selected region as 
-standard input to the specified command; the command's output is discarded.
+\bold{filter-sink-region-thru-command-formatted}(object \italic{textview}, 
+marker \italic{command})
 
+\leftindent{Provides the selected region as standard input to the specified 
+\italic{command}; the command's output is discarded.  ATK datastream is 
+written.}
 
-filter-sink-region [for textview]   Prompts for a command and provides the 
-selected region as standard input to it; the command's output is discarded.
+\bold{filter-filter-region}(object \italic{textview})
 
+\leftindent{Prompts for a command and executes it with 
+the selection region as standard input, replacing the region with the output 
+of the command.
 
-filter-filter-region-thru-command-formatted [for textview] Executes a command 
-with the selection region as standard input, replacing it with the output of 
-the command.  ATK datastream is read and written.
+Use \bold{filter-filter-region-thru-command} with Ness.}
 
+\bold{filter-filter-region-thru-command}(object \italic{textview}, 
+marker \italic{command})
 
-filter-filter-region-formatted [for textview] Prompts for a command and 
+\leftindent{Executes a \italic{command} with the 
+selection region as standard input, replacing it with the output of the 
+command.}
+
+\bold{filter-filter-region-formatted}(object \italic{textview})
+
+\leftindent{Prompts for a command and 
 executes it with the selection region as standard input, replacing the region 
 with the output of the command. ATK datastream is read and written.
 
+Use \bold{filter-filter-region-thru-command-formatted} with Ness.}
 
-filter-filter-region-thru-command [for textview] Executes a command with the 
-selection region as standard input, replacing it with the output of the 
-command.
+\bold{filter-filter-region-thru-command-formatted}(object \italic{textview}, 
+marker \italic{command})
+
+\leftindent{Executes a \italic{command} 
+with the selection region as standard input, replacing it with the output of 
+the command.  ATK datastream is read and written.}
 
 
-filter-filter-region [for textview] Prompts for a command and executes it with 
-the selection region as standard input, replacing the region with the output 
-of the command.
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{text}}
 
 
 \begindata{bp,537558784}

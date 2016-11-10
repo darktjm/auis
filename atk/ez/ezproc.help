@@ -1,10 +1,23 @@
 \begindata{text,268894668}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Ez
+\chapter{Procedure Table Listing for Ez}
 
-}
 
-ezapp-set-buffer-checkpoint-latency [for frame]:  Set the number of checkpoint 
-intervals to wait before checkpointing the current buffer\
+\bold{ezapp-set-buffer-checkpoint-latency}(object \italic{frame})
+
+\leftindent{Set the number of checkpoint 
+intervals to wait before checkpointing the current buffer
+
+Use \bold{queueanswer} to provide number in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{ez}}
+
+
 \enddata{text,268894668}

@@ -1,0 +1,118 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for compchar}
+
+
+\bold{compchar-acuteaccent-after}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{put a left accent over the next character, or insert \italic{ch} with 
+a left accent if non-blank.}
+
+\bold{compchar-acuteaccent}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{add a left accent to the character to the left 
+of the cursor, or insert \italic{ch} with 
+a left accent if non-blank.}
+
+\bold{compchar-ASCIIToATK}(object \italic{self}, null | 0 | marker \italic{noask})
+
+\leftindent{map local ASCII conventions to ATK ISO 
+characters.  If \italic{noask} is non-empty, non-interactively replace all.
+
+This is interactive if \italic{noask} is unspecified or empty, making this 
+unusable in Ness if not set.}
+
+\bold{compchar-ATKToASCII}(object \italic{self}, null | 0 | marker \italic{noask})
+
+\leftindent{map ATK ISO characters to local ASCII.  
+If \italic{noask} is non-empty, non-interactively replace all.
+
+This is interactive if \italic{noask} is unspecified or empty, making this 
+unusable in Ness if not set.}
+
+\bold{compchar-circumflex-after}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{put a hat over the next character, or insert \italic{ch} with 
+a hat if non-blank.}
+
+\bold{compchar-circumflex}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{add a hat to the character to the left of the 
+cursor, or insert \italic{ch} with a hat if non-blank.}
+
+\bold{compchar-compose2}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{improved compchar-compose.  \italic{FIXME: what is ch for?}  
+
+This is intended to be interactive; use \bold{compchar-compose} in Ness.}
+
+\bold{compchar-compose}(object \italic{self}, null | 0 | marker \italic{comp})
+
+\leftindent{start the composition of a character, or return composition 
+for \italic{comp}.
+
+Use \bold{queueanswer} to provide composition alias in Ness if 
+\italic{comp} not given (but why would you want to do that?).}
+
+\bold{compchar-graveaccent-after}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{put a right accent over the next 
+character, or insert \italic{ch} with  a right accent if non-blank.}
+
+\bold{compchar-graveaccent}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{add a right accent to the character to the left 
+of the cursor, or insert \italic{ch} with 
+a right accent if non-blank.}
+
+\bold{compchar-insert}(object \italic{self}, marker \italic{spec})
+
+\leftindent{inserts an arbitrary character whose code is given by 
+\italic{spec}.  This is either \typewriter{x}, followed by hex
+digits, or \typewriter{o}, followed by octal digits, or \typewriter{d}, 
+followed by decimal digits, or a vertical bar (\typewriter{|}), 
+followed by a letter whose high bit should be set, or just plain 
+decimal digits.}
+
+\bold{compchar-nop}(object \italic{self}, null | 0 | marker \italic{msg})
+
+\leftindent{nop for use with compchar.  If \italic{msg} is non-blank, display 
+it.}
+
+\bold{compchar-tilde-after}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{put a tilde over the next character, or insert \italic{ch} with 
+a tilde if non-blank.}
+
+\bold{compchar-tilde}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{add a tilde to the character to the left of the 
+cursor, or insert \italic{ch} with 
+a tilde if non-blank.}
+
+\bold{compchar-umlaut-after}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{put an umlaut over the next character}
+
+\bold{compchar-umlaut}(object \italic{self}, null | 0 | marker \italic{ch})
+
+\leftindent{add a umlaut to the character to the left of the 
+cursor, or insert \italic{ch} with an umlaut if non-blank.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{cpchar}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

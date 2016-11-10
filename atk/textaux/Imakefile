@@ -18,11 +18,9 @@ InstallFiles($(HFILES), $(INSTINCFLAGS), $(DESTDIR)/include/atk)
 DependTarget()
 
 NormalHelpRule()
-InstallDocs(cpchar.help, ${DESTDIR}/help)
+InstallDocs(cpchar.help cpcharproc.help, ${DESTDIR}/help)
 InstallHelpAlias(cpchar, compchar accent accents)
-InstallDocs(cntproc.help, ${DESTDIR}/help)
 InstallDocs(contents.pr, ${DESTDIR}/lib/prs)
-InstallHelpAlias(cntproc, contentproc contentprocs)
 
 InstallFileToFile(gnu.atkinit, ${INSTINCFLAGS}, ${DESTDIR}/lib/gnu.atkinit)
 InstallFileToFile(special.ezinit, ${INSTINCFLAGS}, ${DESTDIR}/lib/special.ezinit)

@@ -1,64 +1,67 @@
 \begindata{text,538375988}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Proclist for Fad
+\chapter{Procedure Table Listing for Fad}
 
 
-}
-fadview-keys:  Get keyed commands
+\bold{fadview-keys}(object \italic{self}, integer \italic{key})
+
+\leftindent{Get keyed commands.  The default binding's character code for 
+each command is passed in as \italic{key}.  \italic{FIXME: none of these are 
+documented}
+
+Bound to:  \typewriter{R}; Menu:  File,Read Fad~50
+
+Bound to:  \typewriter{f}; Menu:  Icon~5,Next icon~10
+
+Bound to:  \typewriter{u}; Menu:  Icon~5,Previous icon~11
+
+Bound to:  \typewriter{I}; Menu:  Icon~5,Pick new icons~21
+
+Bound to:  \typewriter{N}; Menu:  Mode~2,Line~1
+
+Bound to:  \typewriter{E}; Menu:  Mode~2,Icon~2
+
+Menu:  Mode~2,Label~3 (\italic{key} is 'L')
+
+Bound to:  \typewriter{b}; Menu:  Mode~2,Box~4
+
+Bound to:  \typewriter{B}; Menu:  Mode~2,Action Button~5
+
+Bound to:  \typewriter{d}; Menu:  Misc~7,Delete last item~10
+
+Bound to:  \typewriter{D}; Menu:  Misc~7,Delete current frame~11
+
+Menu:  Misc~7,Set Label Font~30 (\italic{key} is 'F')
+
+Menu:  Misc~7,Set # animation frames~31 (\italic{key} is '#')
+
+Menu:  Misc~7,Set frame delay~32 (\italic{key} is 't')
+
+Bound to:  \typewriter{r}; Menu:  Fad~1,Repeat frame~30
+
+Bound to:  \typewriter{p}; Menu:  Fad~1,Pick frame~22
+
+Bound to:  \typewriter{n}; Menu:  Fad~1,Next frame~20
+
+Bound to:  \typewriter{l}; Menu:  Fad~1,Previous frame~21
+
+Bound to:  \typewriter{a}; Menu:  Fad~1,Animate~5 (\italic{key} may also be 'H')
+
+Menu:  Fad~1,Animate portion~6 (\italic{key} is 'A')
+
+Bound to:  \typewriter{m} \italic{stop animation?}
+
+Bound to:  \typewriter{P} \italic{play?}}
 
 
+\section{Related Topics}
 
-Menu functions: (and key parameter, and key equivalents, unless in parentheses)
 
+\leftindent{\helptopic{procs}
 
-R "File,Read Fad~50"
+\helptopic{fad}}
 
-f "Icon~5,Next icon~10"
-
-u "Icon~5,Previous icon~11"
-
-I "Icon~5,Pick new icons~21"
-
-N "Mode~2,Line~1"
-
-E "Mode~2,Icon~2"
-
-(L) "Mode~2,Label~3"
-
-b "Mode~2,Box~4"
-
-B "Mode~2,Action Button~5"
-
-d "Misc~7,Delete last item~10"
-
-D "Misc~7,Delete current frame~11"
-
-(F) "Misc~7,Set Label Font~30"
-
-(#) "Misc~7,Set # animation frames~31"
-
-(t) "Misc~7,Set frame delay~32"
-
-r "Fad~1,Repeat frame~30"
-
-(p) "Fad~1,Pick frame~22"
-
-n "Fad~1,Next frame~20"
-
-l "Fad~1,Previous frame~21"
-
-a "Fad~1,Animate~5"
-
-(A) "Fad~1,Animate portion~6"
-
-m ?
-
-P ?
-
-(H) is an alias for a
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

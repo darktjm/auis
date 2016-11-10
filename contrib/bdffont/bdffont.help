@@ -164,7 +164,9 @@ Select (highlight) one of the italicized names and choose "Show Help on
 Selected Word" to see the help document for:
 
 \leftindent{\italic{
-}}\leftindent{\italic{\helptopic{fonts}
+}}\leftindent{\italic{\helptopic{bdffontproc}
+
+\helptopic{fonts}
 
 \helptopic{raster}
 

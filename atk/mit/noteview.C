@@ -44,9 +44,7 @@ Close(class noteview  *v,long  l)
     (v)->Close();
 }
 /* static void
-copen(v,l)
-struct noteview *v;
-long l;
+copen(struct noteview *v, long l)
 {
     noteview_Open(v);
 } */

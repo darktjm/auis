@@ -1,3 +1,83 @@
+- proclist docs:
+  - add specific styles for parts of doc:
+    - "proclistentry" -> hanging indent
+    - "procentry" -> bold
+    - "procparm" -> italic
+    - "proctype" -> normal (for "action" and parameter types)
+    - "prockey" -> typewriter (for keys)
+    - "procmenu" -> normal (or sans?) (for menu names)
+    - "procmenuwhere" -> normal (or italic/small?) for ~ part of menu names
+  - maybe style the menu entries somewhat.  Maybe move ness notes to 1st
+    line, so bindings/menus are the only thing that follow doc line.
+  - document that which is not documented.
+    - add/correct doc strings as needed
+  - ensure a link from main to proc where posssible (some done; missed some)
+  - check proctable's type field, and ensure 1st parameter is correct
+    everywhere.  maybe reformat as: object[type] self (invalid in
+    ness, but type is actually retained/checked in ness).  Then again,
+    maybe just explain in procs that object parameters are given as
+    the expected object type (e.g. textview), and do it that way.
+  - document the fact that ness only supports real, integer, cstring,
+    and ATK object for type checking.  All else is "unk".
+    Also document Ness->C type conversion.  In particular, it only
+    supports integer (int+bool), pointer (object), string (marker).
+  - document the fact that for old-style proctables, ness just assumes
+    that at least first call is correct, and type checks against that.
+    That's sort of documented, but it should be in procs as well.
+  - document fact that some proctable entries can return values, but
+    ness only understands integer if not action
+  - document fact that ness only understands 1 return value, and
+    bindings ignore all return values.
+- style editor is garbage (probably mostly due to non-75dpi display):
+  - always starts up looking like crap until ^L
+  - moving the window around, or resizing, or looking at it funny will
+    cause it to look like crap again, requiring another ^L
+  - Tab stop editor's text is way too big (setting measurement to cm or
+    pt causes overlap).
+  - Margin/indent doesn't move indent with margin as documented.
+  - Margin/tabstop leaves artifacts while moving.
+  - Can't scroll style list at upper-right if too many styles
+  - setting bg colors is impermanent
+    - setting both robgcolor and bgcolor causes read-only text to have
+      bgcolor on actual text, but robgcolor where there is no text.
+    - robgcolor should be a preference as well, not just a style setting
+    - addfiletype template not applied on read-only files
+  - style.doc talks a lot about parameters and functions, but not at
+    all about what the styles actually *mean*.  Lookz tries a little
+    harder to describe what they do, but is still pretty crappy, and is
+    somewhat obsolete, and missing a lot, and oriented towards UI rather
+    than API.  I'll probably have to scour the text display and
+    PS/Troff conversion to figure it out, which takes forever and tells
+    tells me nothing of what the designers actually intended. <sigh>
+- ness doesn't support "real" type fully on proctable action calls.
+- unkonwn requires manual ^L after inserting raw data
+- dired-regexp-select doesn't seem to work (selects weird stuff)
+- macro recording does not deal with "argument" (c-u)
+  - only way to give argument in ness is dokeys("^Uddd")?
+  - no way to retrieve argument?
+  - argument arbitrarily limited to 64K
+- xwipe.d no longer works.  Does nothing on backspace, and crashes on esc-^W
+- bdffont font face dialog is restricted to within window, and may be
+  chopped off with no way to scroll.  Other choice dialogs may have
+  similar issue.
+- build or chuck wsactions.C butactions.C colorv.C colormapv.C colormap.C
+- build all tests and run them
+- text doesn't have overstrike mode, apparently.  Only srctext.
+- all that effort to get table sizing to work properly seems to have done
+  almost nothing.  Even after more fixes, text insets do not auto-size
+  properly.  See e.g. xkeys.help.  And, really, choosing 99 is a stupid
+  default.  It should size all text and have a default number width
+  (in characters, not pixels!) and expand that if the actual width is
+  larger.
+- vertical scrolling around table insets is broken.  See xkeys.help:
+  - inset size is assumed to be very small, so at top & bottom big
+    scrollbar handle, even though most space is in middle.
+  - bottom "arrow" button does nothing to scroll within table itself,
+    but top "arrow" button works fine.
+  - nonetheless, moving by clicking in trough is accurate.
+- compchar-compose2 doesn't show styled chars w/ style, so using it with
+  the symbol/symbola aliases is worthless.
+- maybe audit lib/compchars/comps
 - finish image rewrite:
   - maybe replace Gifify with SnapshotToFile for generic image output
   - maybe de-gif ez2html and other HTML-related stuff
@@ -7,6 +87,8 @@
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
 - adew issues
+  - "Show Cels" (show cel names) crashes.
+  - cutting a page using arbcon crashes.
   - There should be a way to control inset view sizes better (at least
     reset either/both direction fixed size so inset can auto-size itself)
   - String slider/String thumb should have way to statically set text array.
@@ -26,7 +108,12 @@
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
       depends on don't exist any more.
+- generate procs' help topic listing dynamically, such as during help
+  index install.
+- remove "-thru-command" variants of filter and have the regular
+  versions not prompt if non-NULL, non-empty arg present.
 - fix issues in zip (or chuck in favor of figure):
+  - some zip key bindings overlap: Esc-z-i, Esc-z-o, Esc-b (ltv)
   - schedapp should go away in favor of using ez on sched doc
   - schedv Clear button stays stuck down after clearing.
   - ltapp should go away in favor of storing background in output file
@@ -104,6 +191,13 @@
     from ezprint.
 - sometimes, bush's ^X^C action is to quit without confirmation
   (maybe has to do with bush not setting change flag correctly as well)
+- chart doesn't set the file name when loading, which it needs for
+  some of its quirky non-ATK routines.  chartapp did that, but I deleted it
+- chart: proper printing. 
+  Right now, its PS-only (which is OK, I guess), but it can't be
+  scaled or altered in any way, and it can only be "printed" via its own
+  Print procedure, which bypasses ATK's printing and does a terrible job.
+- chart: drop custom quit & save in favor of standards
 - hyperlink: don't update label if label isn't default (or at least
   allow undo of label change)
 - printing doesn't really work right:
@@ -153,11 +247,15 @@
   and Esc-!scm1 for 1, but the latter would be hard to figure out what
   modifiers matter and which not, whereas we assume modifiers always
   matter in the former).
+- put undocumented init file stuff into initfls.help.  Also, add init alias.
+  Also, move or copy how to pass arguments to actions from procs.help.
 - implement addbutton init command properly (or remove)
   - current implementation just saves the commands in an unused list
     - need to check that it is unused in AMS as well, but probably is
-  - Need to figure out what this command should do.  I suppose similar
-    to the ness "on mouse" hook.  Need to find out when it's executed.
+  - Need to figure out what this command should do.  ness "on mouse" hook
+    only works on celviews, so I'd need to make a hook at a lower level,
+    like either view itself, or better yet, callers of Hit() in the
+    first place.
   - Need to at least provide a way to swap buttons w/o resorting to xmodmap.
 - implement call-like command, to execute a command on document load
   [especially useful if this command is ness]
@@ -298,79 +396,133 @@
     created dynamically.  Maybe using a buffer list for string storage
     would be more worthwhile.
 - search for tjm comments and see if there are any TODOs there
+
 Long-term:
-  - add code snippet inset (or maybe just "style") for literate programming
-  - make LaTeX a possible output format (and the default)
-  - maybe add more sophisticated styles (e.g. static pre/post text, alt.
-    formatting of numeric contents, etc.  Just like writedatestamp,
-    but less intrusive and more flexible (i.e. w/ text flow) than an inset.
+
+- style improvements:
+  - support line style & color for drawn styles (underline, overbar,
+    strikethrough, dottedbox, changebar)
+  - support alternating line bg colors (aka printout style)
+  - support partial style override (i.e., use old + new flags)
+    - need Noop to clear existing Set/Clear for flags; need to also see
+      how tab stops work.  All other settings just override completely, anyway.
+    - maybe make lookz understand this
+  - implement even/odd margins, margin notes, multicolumn, and other TeX
+    styles.
+  - implement counter styles
+    - need to think more about scopes
+    - need to allow a default format for references:
+      d = decimal, iI = roman, aA = alpha, 'xyz' = x, y, z, x, ..,
+      'xyz'+ = x, y, z, xx, xy, xz, ...; "one:two:three" = one two three ..,
+      $procname[(...)]$ -> procname(style, ctr, ctrval[, ...])
+      allow delims/ws around such as (d) or i. or ($blah$)
+      - proc: returns string or text object (for styled text, which is
+        processed recursively).
+    - need to add a current default display style for the counter
+      e.g. chapter sets it to %{chapter}, section to
+      %{chapter}%{section}, etc.
+    - reference targets need to remember all active counters and their
+      current value, style, default display style, etc.
+    - reference displays default style, or can override with %-format.
+    - maybe make lookz understand this as well
+  - implement fully dynamic styling (maybe Function was for that?)
+    beforetext, aftertext (maybe with %{countername[:style]})
+    modfunc = procname[(...)] -> procname(stylename, text[, ...])
+    - like a mini-inset such as writestamp, but less intrusive (e.g. 
+      text may wrap, no "delete inset?", no separate menus, etc.
+    - maybe a regex to limit what gets passed in; rest of text takes
+      style of last char returned.  Thus you could have a "description"
+      style that actually bolds the first word (or styled region, if word
+      is styled), and otherwise just passes back "hanging indent" style.
+    - maybe make lookz understand this as well
+      - lookz really needs a "preview text" field
     Right now, the way of handling itemize/enumerate is to run a
     routine to add/remove them.  It would be much more reliable to have
     a special style for that.  Similarly, even enumeration of book
-    sections is done programattically, possibly by the print routine
-    itself.
-  - unicode support
-    - initially, only left-to-right.  Enough to deal with already.
-      - don't ban any specific chars, including dir switchers, but don't
-        necesarily render properly, either.
-    - note that conveniently enough, 0xff (ATK view marker) is illegal in utf-8
-    - XLoadQueryFont -> XCreateFontSet (comma-separated list of fonts);
-      XFontStruct -> XFontSet; XDrawString -> XmbDrawString or
-      Xutf8DrawString if defined(X_HAVE_UTF8_STRING);
-      XTextWidth -> XmbTextExtents/Xutf8TextExtents
-    - UTF-8 input should be normalized, and written out normalized.  No
-      illegal or unnormalized UTF-8 should ever be supported, except
-      on input.  Illegal is obvious, but normalization is to make string
-      comparisons and searching sane.
-    - provide Unicode-style sorting and degenerate comparisons
-    - could just use BOM as an indicator that the text is UTF-8. Bumping
-      the text inset version seems obvious, but text is in a lot more
-      places than that.  *All* text should support UTF-8.  If an entire
-      string is passed, it can be analyzed for encoding rather than
-      requiring the BOM.
-    - modify pipescript and datacat and other plain ASCII readers to
-      auto-detect formats:
-        - 7-bit ASCII
-	- 8-bit UTF-8
-	- Other 8-bit (assume iso-8859-1 and auto-convert to UTF-8)
-      and always write unicode if 8-bit?  Or use cmd-line + pref to select
-      Or use $LANG + cmd-line to select on input/output
-    - map standard supplied fonts (esp. symbol and symbola) to UTF-8
-  - internationalization support (probably just GNU gettext)
-    currently menus can be replaced, but messages & the like cannot
-  - truetype font support using Xft
-    XFontWidth -> XftTextExtents8
-    Xutf8TextExtents/XmbTextExtents -> XftTextExtentsUtf8
-    XDrawString -> XftDrawString8
-    Xutf8DrawString/XmbDrawString -> XftDrawStringUtf8(?)
-  - undo
-  - freedesktop.org integration
-  - move from included bison to standard bison
-  - look at removed mail-related stuff to see if anything useful got deleted
-    (e.g. ez2ascii claims descendence from messages)
-  - look at auis-6.3.1 to see if anything useful got dropped in 8.0
-    - rdemo service: probably not worth looking at
-    - class system: don't want to touch it
-    - overhead/conv: ancient and useless
-    - contrib/parsec: maybe
-    - atk/music: only because it's referenced by other docs & demos
-    - no patience to check big common dirs for missing individuals
-  - see if there is an atk repository in /afs/andrew.cmu.edu/ with more
-    recent changes to 8.x
-  - maybe give the sourceforge atk project another chance and try
-    harder to see if there is anything worth salvaging
-    - jdm (Journeyman's Development Manager)? undoumented crap
-    - mrtools? undocumented crap
-    - AIX-specific "ToolChat" support? whatever.
-    - Yet Another Crappy Build System - ugh, forget it
-    - REXX and perl code within ez?  Not worth it.  If I replace ness
-      with anything, it'll be lua.
-    - given the renaming and moving shit around, it's hard to tell if
-      they actually fixed any bugs, and probably more effort to refind
-      and refix the bugs than to try to figure out what changed.
-  - maybe reformat into a slightly less ugly coding style.  I fixed a
-    few bugs due to bad if/else indentation, and I hate the indentation
-    style used in general.  However, unless I can find a tool to do this
-    without too much aggravation (GNU indent ain't it), this will wait.
-  - make entire beast literate (yeah, right - way too much effort)
-  - unicode-bidir support
+    sections is done manually, possibly by the print routine itself.
+- improved regexes:
+  - simple way to specify case sensitivity
+  - full bre format: ranges (\{..\}), backrefs (\n)?
+    - requires resumable regex, like mine.
+  - extended regex format (toggle flag?): ? + | () {} [::] [==] [..]
+    - requires resumable regex, like mine.
+  - special indicators for styles ("has", "starts", "ends")
+    e.g. .(*=bold)* gets text with "bold" style.
+         (*<bold) starts a bold style region; (*>bold) ends it.
+	 global style means "no styling at all"
+    mabye e.g. .(*=[bold])* gets bolded text (regardless of style)
+    - maybe make search dialog understand this as well.
+- fix compile to take regexes for error message scanning
+- add code snippet inset (or maybe just "style") for literate programming
+- make LaTeX a possible output format (and the default)
+- maybe make eq actually useful.  Probably not worth it, though.
+- unicode support
+  - initially, only left-to-right.  Enough to deal with already.
+  - don't ban any specific chars, including dir switchers, but don't
+      necesarily render properly, either.
+  - note that conveniently enough, 0xff (ATK view marker) is illegal in utf-8
+  - XLoadQueryFont -> XCreateFontSet (comma-separated list of fonts);
+    XFontStruct -> XFontSet; XDrawString -> XmbDrawString or
+    Xutf8DrawString if defined(X_HAVE_UTF8_STRING);
+    XTextWidth -> XmbTextExtents/Xutf8TextExtents
+  - UTF-8 input should be normalized, and written out normalized.  No
+    illegal or unnormalized UTF-8 should ever be supported, except
+    on input.  Illegal is obvious, but normalization is to make string
+    comparisons and searching sane.
+  - provide Unicode-style sorting and degenerate comparisons
+  - could just use BOM as an indicator that the text is UTF-8. Bumping
+    the text inset version seems obvious, but text is in a lot more
+    places than that.  *All* text should support UTF-8.  If an entire
+    string is passed, it can be analyzed for encoding rather than
+    requiring the BOM.
+  - modify pipescript and datacat and other plain ASCII readers to
+    auto-detect formats:
+      - 7-bit ASCII
+      - 8-bit UTF-8
+      - Other 8-bit (assume iso-8859-1 and auto-convert to UTF-8)
+    and always write unicode if 8-bit?  Or use cmd-line + pref to select
+    Or use $LANG + cmd-line to select on input/output
+  - map standard supplied fonts (esp. symbol and symbola) to UTF-8
+- internationalization support (probably just GNU gettext)
+  currently menus can be replaced, but messages & the like cannot
+- truetype font support using Xft
+  XFontWidth -> XftTextExtents8
+  Xutf8TextExtents/XmbTextExtents -> XftTextExtentsUtf8
+  XDrawString -> XftDrawString8
+  Xutf8DrawString/XmbDrawString -> XftDrawStringUtf8(?)
+- undo
+- freedesktop.org integration
+- move from included bison to standard bison
+- look at removed mail-related stuff to see if anything useful got deleted
+  (e.g. ez2ascii claims descendence from messages)
+ - look at auis-6.3.1 to see if anything useful got dropped in 8.0
+  - rdemo service: probably not worth looking at
+  - class system: don't want to touch it
+  - overhead/conv: ancient and useless
+  - contrib/parsec: maybe
+  - atk/music: only because it's referenced by other docs & demos
+  - no patience to check big common dirs for missing individuals
+- see if there is an atk repository in /afs/andrew.cmu.edu/ with more
+  recent changes to 8.x
+- maybe give the sourceforge atk project another chance and try
+  harder to see if there is anything worth salvaging
+  - jdm (Journeyman's Development Manager)? undoumented crap
+  - mrtools? undocumented crap
+  - AIX-specific "ToolChat" support? whatever.
+  - Yet Another Crappy Build System - ugh, forget it
+  - REXX and perl code within ez?  Not worth it.  If I replace ness
+    with anything, it'll be lua.
+  - given the renaming and moving shit around, it's hard to tell if
+    they actually fixed any bugs, and probably more effort to refind
+    and refix the bugs than to try to figure out what changed.
+- maybe reformat into a slightly less ugly coding style.  I fixed a
+  few bugs due to bad if/else indentation, and I hate the indentation
+  style used in general.  However, unless I can find a tool to do this
+  without too much aggravation (GNU indent ain't it), this will wait.
+- maybe make some of the ATK "todo" crap from papers (may have been 
+  actually implemented, but not released; typical academic paper BS):
+  - drag & drop protocol?  conf1992/Inglett
+  - joint (multiuser) editing? conf.1992/Kedem
+  - "smart" styles? conf.1993/Inglett (may be overkill)
+- make entire beast literate (yeah, right - way too much effort)
+- unicode-bidir support

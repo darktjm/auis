@@ -1,0 +1,286 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for htmltext}
+
+
+\bold{htmltextview-add-item}(object \italic{self}, integer \italic{ch})
+
+\leftindent{adds another list item to the current list.  Do not set 
+\italic{ch} to 13.
+
+Bound to:  \typewriter{Tab}; Menu:  List~6,Add list item~20
+
+\typewriter{^U} numeric argument can be set to repeat insertion.}
+
+\bold{htmltextview-add-link}(object \italic{self})
+
+\leftindent{Make an anchor that points to the URL 
+specified from a prompt.
+
+Menu:  Region~4,Add Link (prompt)~80
+
+Use \bold{queueanswer} to provide URL in Ness.}
+
+\bold{htmltextview-add-target}(object \italic{self})
+
+\leftindent{Gives the highlighted region a name that can 
+be targeted by an anchor with a href=#name.
+
+Menu:  Region~4,Target for Link (prompt)~81
+
+Use \bold{queueanswer} to provide anchor name in Ness.}
+
+\bold{htmltextview-expose-hidden}(object \italic{self}, integer \italic{show})
+
+\leftindent{Exposes insets containing raw HTML+ 
+markup.  \italic{show} must be non-0.
+
+Menu:  Page~9,Expose HTML+ insets~41}
+
+\bold{htmltextview-hide-hidden}(object \italic{self}, integer \italic{show})
+
+\leftindent{Hides insets containing raw HTML+ markup.  \italic{show} 
+must be 0.
+
+Menu:  Page~9,Hide HTML+ insets~42}
+
+\bold{htmltextview-insert-image-here}(object \italic{self}, null | 0 | marker \italic{name})
+
+\leftindent{Prompts for URL or pathname of image 
+and imbeds it at cursor position. (string parameter supersedes prompt)
+
+Menu:  Media,Image...~2
+
+Use \italic{name} or \bold{queueanswer} to provide image path in Ness}
+
+\bold{htmltextview-make-list}(object \italic{self}, integer \italic{type})
+
+\leftindent{makes a list of the selected region.  Type is unordered (0), 
+ordered (1) or definition (2).
+
+Bound to:  \typewriter{Esc-'-Esc-u}; Menu:  List~6,Unordered List~10 
+(\italic{type} 0)
+
+Bound to:  \typewriter{Esc-'-Esc-u}; Menu:  List~6,Ordered List~10 
+(\italic{type} 1)
+
+Bound to:  \typewriter{Esc-'-Esc-d}; Menu:  List~6,Definition List~10 
+(\italic{type} 2)}
+
+\bold{htmltextview-newline-add-item}(object \italic{self})
+
+\leftindent{adds a blank line (with another item 
+if used inside a list).
+
+Bound to:  \typewriter{^J}
+
+\typewriter{^U} numeric argument can be set to repeat insertion.}
+
+\bold{htmltextview-renumber-list}(object \italic{self})
+
+\leftindent{Replaces and reorders all the numbers in 
+an ordered list.
+
+Bound to:  \typewriter{Esc-'Esc-r}; Menu:  List~6,Renumber List~30}
+
+\bold{htmltextview-show-attributes}(object \italic{self})
+
+\leftindent{Display and edit attributes of style at 
+cursor position.
+
+Bound to:  \typewriter{Esc-a}; Menu:  Region~4,Edit Attributes~95
+
+This is an inherently interactive process; do not attempt from Ness.}
+
+\bold{htmltextview-show-raw}(object \italic{self})
+
+\leftindent{Display file as raw HTML+ markup.
+
+Menu:  File~10,Show Raw HTML+~80}
+
+
+\section{hiddenview}
+
+
+\bold{hiddenview-show-normal}(object \italic{self})
+
+\leftindent{Return to WYSIWYG HTML+ view.
+
+Menu:  File~10,Show Normal HTML+~80}
+
+
+\section{weblink}
+
+
+\bold{weblink-ReplaceText}(object \italic{textview})
+
+\leftindent{replace text in selection with links}
+
+\bold{weblink-RequestURL}(object \italic{textview})
+
+\leftindent{Prompt for a URL to display
+
+Use \bold{queueanswer} to provide URL in Ness.}
+
+\bold{weblink-WarpToURL}(object \italic{view})
+
+\leftindent{Display selected URL document}
+
+\bold{weblinkview-set-urllink}(object \italic{self}, null | 0 | marker \italic{url})
+
+\leftindent{Prompts for user to set target url of the 
+link button, unless set with \italic{url}.
+
+Menu:  Link~1,Set URL~11
+
+Use \italic{url} or \bold{queueanswer} to set URL in Ness.}
+
+
+\section{webview}
+
+
+\bold{webview-Add-Current-to-Hotlist}(object \italic{self})
+
+\leftindent{Add Current to Hotlist
+
+Menu:  Web Navigate~5, Add Current to Hotlist~12
+
+Use \bold{queueanswer} to set name in Ness.}
+
+\bold{webview-Annotate}(object \italic{self})
+
+\leftindent{Annotate
+
+Menu:  Web Annotate~6, Annotate~1}
+
+\bold{webview-Back}(object \italic{self})
+
+\leftindent{Back
+
+Menu:  Web Navigate~5, Back~1}
+
+\bold{webview-Clone Window}(object \italic{self})
+
+\leftindent{Clone Window 
+
+Menu:  Web File~4, Clone Window~8}
+
+\bold{webview-Delete-Annotation}(object \italic{self})
+
+\leftindent{Delete annotation
+
+Menu:  Web Annotate~5, Delete Annotation~3}
+
+\bold{webview-Edit-Annotation}(object \italic{self})
+
+\leftindent{Edit Annotation
+
+Menu:  Web Annotate~6, Edit Annotation~2}
+
+\bold{webview-Forward}(object \italic{self})
+
+\leftindent{Forward
+
+Menu:  Web Navigate~5, Forward~2}
+
+\bold{webview-History}(object \italic{self})
+
+\leftindent{History
+
+Menu:  Web Navigate~5, History~10}
+
+\bold{webview-Home}(object \italic{self})
+
+\leftindent{Home
+
+Menu:  Web Navigate~5, Home~3}
+
+\bold{webview-Hotlist}(object \italic{self})
+
+\leftindent{Hotlist
+
+Menu:  Web Navigate~5, Hotlist~11}
+
+\bold{webview-Internet-Resources-Meta-Index}(object \italic{self})
+
+\leftindent{Internet Resources Meta Index
+
+Menu:  Web Navigate~5, Internet Resources Meta Index~14}
+
+\bold{webview-Internet-Starting-Points~13}(object \italic{self})
+
+\leftindent{Internet Starting Points
+
+Menu:  Web Navigate~5, Internet Starting Points~13}
+
+\bold{webview-open-local}(object \italic{self})
+
+\leftindent{Use the HTML inset to visit a local file
+
+Menu:  Web File~4, Open File~2
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{webview-open-URL}(object \italic{self})
+
+\leftindent{prompt for a URL 
+
+Menu:  Web File~4, Open URL~1
+
+Use \bold{queueanswer} to provide URL in Ness.}
+
+\bold{webview-Reload-Current}(object \italic{self})
+
+\leftindent{Reload Current
+
+Menu:  Web File~4, Reload Current~3}
+
+\bold{webview-Save-As}(object \italic{self})
+
+\leftindent{Writes current document to file 
+
+Menu:  Web File~4, Save As~5
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{webview-View-Src}(object \italic{self})
+
+\leftindent{View Src 
+
+Menu:  Web File~4, View Src~7}
+
+
+\section{urlbutton}
+
+
+\bold{urlbutton-set-label}(object \italic{self})
+
+\leftindent{Set the label.
+
+Menu:  UrlButton,Set Label~22}
+
+\bold{urlbutton-set-url}(object \italic{self})
+
+\leftindent{Set the URL.
+
+Menu:  UrlButton,Set URL~12}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{htmltext}
+
+\helptopic{urlbutton}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

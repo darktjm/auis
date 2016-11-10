@@ -1,0 +1,53 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for stroffet}
+
+
+\bold{stroffetview-closeallstroffets}(object \italic{view})
+
+\leftindent{close Stroffet Views}
+
+\bold{stroffetview-insertstroffet}(object \italic{textview})
+
+\leftindent{Insert Stroffet Object}
+
+\bold{stroffetview-openallstroffets}(object \italic{view})
+
+\leftindent{open Stroffet Views}
+
+
+\bold{stroffetview-closeall}(object \italic{self})
+
+\leftindent{close all the stroffets
+
+Menu:  stroffets,close all~12}
+
+\bold{stroffetview-close}(object \italic{self})
+
+\leftindent{close the stroffet
+
+Menu:  stroffets,close~2}
+
+\bold{stroffetview-openall}(object \italic{self})
+
+\leftindent{open all the stroffets
+
+Menu:  stroffets,open all~11}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{stroffet}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

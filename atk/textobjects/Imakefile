@@ -22,7 +22,7 @@ InstallProgram(recover, ${DESTDIR}/bin)
 DependTarget()
 
 NormalHelpRule()
-InstallDocs(unknown.help drdproc.help,  ${DESTDIR}/help)
+InstallDocs(unknown.help drdproc.help proptproc.help unknownproc.help panelproc.help,  ${DESTDIR}/help)
 InstallHelpAlias(unknown, recover)
 InstallHelpAlias(drdproc, diredproc diredprocs)
 InstallDocs(panel.doc,${DESTDIR}/doc/PROGRAMMER)

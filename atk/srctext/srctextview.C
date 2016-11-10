@@ -42,14 +42,14 @@ static cursor *waitCursor;
 
 ATKdefineRegistry(srctextview, textview, srctextview::InitializeClass);
 static void redo(srctextview *self);
-static void selfinsert(srctextview *self, char key);
-static void selfinsertreindent(srctextview *self, char key);
+static void selfinsert(srctextview *self, long key);
+static void selfinsertreindent(srctextview *self, long key);
 static void reindent(srctextview *self, long key);
 static void reformat(srctextview *self, long key);
 static void retrn(srctextview *self, long key);
 static void reindretrn(srctextview *self, long key);
 static void newline(srctextview *self, long key);
-static void paren(srctextview *self, char key);
+static void paren(srctextview *self, long key);
 static void forceupperon(srctextview *self, long rock);
 static void forceupperoff(srctextview *self, long rock);
 static void compressfunc(srctextview *self, long key);
@@ -57,11 +57,11 @@ static void compressAll(srctextview *self, long key);
 static void renameIdent(srctextview *self, long key);
 static void insertComment(srctextview *self, long key);
 static void insertLineComment(srctextview *self, long key);
-static void startComment(srctextview *self, char key);
-static void endComment(srctextview *self, char key);
-static void startLineComment(srctextview *self, char key);
-static void styleLabel(srctextview *self, char key);
-static void styleString(srctextview *self, char key);
+static void startComment(srctextview *self, long key);
+static void endComment(srctextview *self, long key);
+static void startLineComment(srctextview *self, long key);
+static void styleLabel(srctextview *self, long key);
+static void styleString(srctextview *self, long key);
 static void nextLongLine(srctextview *self, long key);
 static void checkLineLengths(srctextview *self, char *rock);
 static void toggleOverstrike(srctextview *self, long key); /*RSK91overstrike*/
@@ -214,7 +214,7 @@ void srctextview::PrepareInsertion(boolean insertingNewLine)
     return;
 }
 
-static void selfinsert(srctextview *self, char key)
+static void selfinsert(srctextview *self, long key)
 {
     self->SelfInsert(key);
 }
@@ -238,7 +238,7 @@ void srctextview::SelfInsert(char key /* must be char for "&" to work. */)
     (ct)->NotifyObservers(0);
 }
 
-static void selfinsertreindent(srctextview *self, char key)
+static void selfinsertreindent(srctextview *self, long key)
 {
     self->SelfInsertReindent(key);
 }
@@ -515,7 +515,7 @@ void srctextview::MatchParens(char key)
 	}
 }
 
-static void paren(srctextview *self, char key)
+static void paren(srctextview *self, long key)
 {
     (self)->Paren(key);
 }
@@ -1137,7 +1137,7 @@ void srctextview::InsertLineComment()
     (ct)->NotifyObservers(0);
 }
 
-static void startComment(srctextview *self, char key /* must be char for "&" to work. */)
+static void startComment(srctextview *self, long key /* must be char for "&" to work. */)
 {
     (self)->StartComment(key);
 }
@@ -1161,7 +1161,7 @@ void srctextview::StartComment(char key /* must be char for "&" to work. */)
     (ct)->NotifyObservers(0);
 }
 
-static void endComment(srctextview *self, char key /* must be char for "&" to work. */)
+static void endComment(srctextview *self, long key /* must be char for "&" to work. */)
 {
     (self)->EndComment(key);
 }
@@ -1209,7 +1209,7 @@ void srctextview::EndComment(char key /* must be char for "&" to work. */)
     (ct)->NotifyObservers(0); 
 }
 
-static void startLineComment(srctextview *self, char key /* must be char for "&" to work. */)
+static void startLineComment(srctextview *self, long key /* must be char for "&" to work. */)
 {
     (self)->StartLineComment(key);
 }
@@ -1233,7 +1233,7 @@ void srctextview::StartLineComment(char key /* must be char for "&" to work. */)
     (ct)->NotifyObservers(0);
 }
 
-static void styleLabel(srctextview *self, char key /* must be char for "&" to work. */)
+static void styleLabel(srctextview *self, long key /* must be char for "&" to work. */)
 {
     (self)->StyleLabel(key);
 }
@@ -1258,7 +1258,7 @@ void srctextview::StyleLabel(char key)
 	SelfInsert(key);
 }
 
-static void styleString(srctextview *self, char key)
+static void styleString(srctextview *self, long key)
 {
     (self)->StyleString(key);
 }

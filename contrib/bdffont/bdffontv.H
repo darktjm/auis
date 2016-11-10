@@ -26,7 +26,6 @@ public:
 	bdffontv();
 	
     
-	 void PostKeyState(class keystate *k);
 	 void PostMenus(class menulist *m);
 	 void SetDataObject(class dataobject *dataobject);
 	 void FullUpdate(enum view::UpdateType type, long left, long top, long width, long right);

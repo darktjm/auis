@@ -438,6 +438,11 @@ So far, the following incompatibilities have been introduced:
 
      stop-keyboard-macro   =>   im-stop-keybaord-macro
 
+  - I have quallified all unqualified proc names with their resepctive
+    class.  The unqualified ones were all basically internal-use-only
+    anyway, so you can probably figure it out for yourself if you find
+    one missing.
+
   - I have removed many obsolete symbols.  Any external code relying on
     them should study the SVN logs and update to the correct symbol (or
     remove the usage of that symbol) as needed.  I will not list these
@@ -464,6 +469,25 @@ So far, the following incompatibilities have been introduced:
     text you want to parse.  This is to fix a bug where all current
     usages are in text buffers without termination, even though the
     routines assumed zero termination.
+
+  - I have made templates' styles inheritable (i.e., using a template
+    which itself uses a template will include styles from both).  This
+    may enable previously undefined styles in some documents (not likely).
+    I also merged many of the styles with default, and use the default
+    instead of minor tweaks that didn't seem to be meaningful.
+    This includes:
+
+    - indent in help didn't have a right margin; now it does (from default)
+    - help's chapter is centered, unlike default.  I kept that.
+    - I removed formattingnote from help (obsolete anyway, and
+      likely just "formatnote" misspelled)
+    - I removed hlp, as help should be sufficient.
+    - be2guide's chapter, section and subsection headings were 2 points larger.
+      I think the sizes as is are big enough.
+    - be2guide's example, programexample and typewriter didn't have
+      TabsCharacters set.
+    - be2guide's programexample has different margins and font size, so
+      I let it override (but added flags from default).
 
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:

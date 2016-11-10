@@ -38,11 +38,11 @@ static void showRaw(htmltextview *self, long rock);
 static void showNormal(hiddenview *self, long rock);
 static void showComments(htmltextview *self, long viewcomments);
 static void fixList(htmltextview *self, long rock);
-static void makeList(htmltextview *self, enum ListType listtype);
+static void makeList(htmltextview *self, long listtype);
 static void addItem(htmltextview *self, long rock);
 static void newlineAddItem(htmltextview *self, long rock);
-static void setTargetLink(frame *frame, long param);
 #if 0
+static void setTargetLink(frame *frame, long param);
 static void setSourceLink(htmltextview *self, long param);
 #endif
 static void addLink(htmltextview *self, long rock);
@@ -65,7 +65,7 @@ static struct bind_Description htmltextBindings[]={
     {"htmltextview-set-target", NULL,0, 
 	"Region~4,..Set Target~86",0,0/*readonly buffers OK too*/, 
 	(proctable_fptr)setTargetLink, 
-	"Invoke in the same ez session (any HTML+ buffer) after htmltextview-set-source was invoked; this notifies the pending autolink of its desired target, which can then be styled as a hyperlink."}, 
+	"Invoke in the same ez session (any HTML+ buffer) after htmltextview-autolink was invoked; this notifies the pending autolink of its desired target, which can then be styled as a hyperlink."}, 
 	/*XXX- incomplete.  We need a way to associate URLs 
 	(not just AFS pathnames) with buffers somehow, 
 	before this is of any use. */
@@ -336,7 +336,7 @@ static int doproc(htmltextview *self, const char *procname, long parm)
 }
 
 /* makeList makes the selected region into a list.  If there is no selected region, the current insertion style is set */
-void makeList(htmltextview *self, enum ListType listtype)
+void makeList(htmltextview *self, long listtype)
 {
     htmltext *ht= (htmltext*) (self)->GetDataObject();
     long pos= (self)->GetDotPosition(); /* position of cursor */
@@ -415,11 +415,11 @@ void makeList(htmltextview *self, enum ListType listtype)
 
     if (length>0) {
 	/* add dingbat to every line in selected region */
-	insert_dingbats(env, ht, pos, &length, 0, listtype);
+	insert_dingbats(env, ht, pos, &length, 0, (ListType)listtype);
     } else {
 	/* add one dingbat for new list */
 	htmlenv *dingbat_env;
-	dingbat_env= (ht)->AddDingbat(pos, listtype, env);
+	dingbat_env= (ht)->AddDingbat(pos, (ListType)listtype, env);
 	pos= (dingbat_env)->Eval() + (dingbat_env)->GetLength();
 	(ht)->DeleteCharacters(pos, 1); /* delete junk we inserted for wrapping */
 	(self)->SetDotPosition(pos);
@@ -428,7 +428,7 @@ void makeList(htmltextview *self, enum ListType listtype)
 
     /* set environment flags back */
     if (temp_env) (temp_env)->SetStyle(SibBeginFlag, SibEndFlag);
-    (ht)->RenumberList(pos, listtype, env);
+    (ht)->RenumberList(pos, (ListType)listtype, env);
     /* (I think) just in case we changed some old ordered-list dingbats into nested unordered bullets, we need to renumber the parent ordered list */
     temp_env= first_list_env(self, pos, &Sibltype, env);
     if (temp_env) (ht)->RenumberList((temp_env)->Eval(), Sibltype, temp_env);
@@ -552,6 +552,7 @@ void newlineAddItem(htmltextview *self, long rock)
     }
 }
 
+#if 0
 static char *skipwhitespace(const char *s)
 {
     while (*s && isspace(*s)) ++s;
@@ -665,7 +666,6 @@ void setTargetLink(frame *frame, long param)
     sourcemark= NULL;
 }
 
-#if 0
 /* sets the link from an anchor to destination */
 void setSourceLink(htmltextview *self, long param)
 {
@@ -970,9 +970,11 @@ boolean htmltextview::InitializeClass()  {
                    &htmltextview_ATKregistry_);
     bind::BindList(addltextBindings, html_Map, html_Menus,ATK::LoadClass("textview"));
 
+#if 0
     proctable::DefineProc("htmltextview-set-target", 
 		(proctable_fptr)setTargetLink, ATK::LoadClass("frame"), NULL, 
 		"Execute this proc from the frame of the the buffer for the target file of a link.  To be called after htmltextview-set-source.");
+#endif
 
     proc= proctable::DefineProc("hiddenview-show-normal", 
 		(proctable_fptr)showNormal, ATK::LoadClass("hiddenview"), 

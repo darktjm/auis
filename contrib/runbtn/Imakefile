@@ -18,4 +18,4 @@ OptionalATKLibrary(runbtn, $(OBJS), $(LIBS), ,)
 InstallOptionalATKLibrary(runbtn, $(DESTDIR)/lib/atk)
 
 InstallClassFiles($(HFILES))
-InstallDocs(runbutton.help,${DESTDIR}/help)
+InstallDocs(runbutton.help runbuttonproc.help,${DESTDIR}/help)

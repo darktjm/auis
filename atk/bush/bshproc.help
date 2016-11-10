@@ -1,34 +1,83 @@
 \begindata{text,268849924}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Bush}
+\chapter{Procedure Table Listing for Bush}
 
 
+\bold{bushv-exit}(object \italic{self})
 
-bushv-exit:  Exit.  If any file is modified ask for confirmation. 
-("^X^C"; "Quit~99") 
+\leftindent{Exit.  If any file is modified ask for confirmation.
 
-bushv-DEBUG:  Toggle bush debug flag
+Bond to:  \typewriter{^X-^C}; Menu:  Quit~99
 
-bushv-switch:  Switch to a new directory.
+Do not try to confirm within Ness.}
 
-bushv-destroy:  Destroy the current directory/files.
+\bold{bushv-DEBUG}(object \italic{self})
 
-bushv-entries-page-down:  Scroll entries list down.  ("Esc-E", "^V"; 
-"Entries~10,Page Down~10")
+\leftindent{Toggle bush debug flag}
 
-bushv-entries-page-up:  Scroll entries list up.  ("Esc-G", "Esc-v"; 
-"Entries~10,Page Up~20")
+\bold{bushv-switch}(object \italic{self})
 
-bushv-pop:  Pop up a level.
+\leftindent{Switch to a new directory.
 
-bushv-rescan:  Rescan the current directory.
+Use \bold{queueanswer} to provide directory name in Ness.}
 
-bushv-save-file:  Saves buffer into its current file.  ("^X^S"; 
-"Save~20")
+\bold{bushv-destroy}(object \italic{self})
 
-bushv-set-printer:  Set the default printer.  ("File~10,Set Printer~20")
+\leftindent{Destroy the current directory/files.
 
-bushv-write-file  Prompt for a file to save.  ("^X^W", 
-"File~10,Save As~1")
+Do not try to confirm within Ness.}
+
+\bold{bushv-entries-page-down}(object \italic{self})
+
+\leftindent{Scroll entries list down.
+
+Bound to:  \typewriter{Next/PageDn} (\typewriter{Esc-E}), \typewriter{^V}; 
+Menu:  Entries~10,Page Down~10}
+
+\bold{bushv-entries-page-up}(object \italic{self})
+
+\leftindent{Scroll entries list up.
+
+Bound to:  \typewriter{Prior/PageUp} (\typewriter{Esc-G}), \typewriter{Esc-v}; 
+Menu:  Entries~10,Page Up~20}
+
+\bold{bushv-pop}(object \italic{self})
+
+\leftindent{Pop up a level.}
+
+\bold{bushv-rescan}(object \italic{self})
+
+\leftindent{Rescan the current directory.}
+
+\bold{bushv-save-file}(object \italic{self})
+
+\leftindent{Saves buffer into its current file.
+
+Bound to:  \typewriter{^X-^S}; Menu:  Save~20}
+
+\bold{bushv-set-printer}(object \italic{self})
+
+\leftindent{Set the default printer.
+
+Menu:  File~10,Set Printer~20
+
+Note: this is obsoleted by the printer setup dialog; use it instead.}
+
+\bold{bushv-write-file}(object \italic{self})
+
+\leftindent{Prompt for a file to save.
+
+Bound to:  \typewriter{^X-^W}; Menu:  File~10,Save As~1
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{bush}}
+
 \enddata{text,268849924}

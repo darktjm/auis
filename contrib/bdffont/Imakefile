@@ -22,7 +22,7 @@ DynamicMultiObject(bdffont,bdffontv,bdffont.o bdffontv.o,$(LIBS),,)
 InstallDynamicObject(bdffont,bdffontv,$(FULLATKDLIBDIR))
 
 InstallClassFiles($(IHFILES))
-InstallDocs($(BDFHELP).help, $(DESTDIR)/help)
+InstallDocs($(BDFHELP).help $(BDFHELP)proc.help, $(DESTDIR)/help)
 InstallHelpAlias($(BDFHELP), $(BDFHELPALIASES))
 InstallLink(runapp, ${DESTDIR}/bin/bdffont)
 

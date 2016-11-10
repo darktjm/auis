@@ -1,0 +1,57 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for prefed}
+
+
+\bold{prefsv-sort}(object \italic{self}, marker \italic{how})
+
+\leftindent{Sorts the preferences. (Valid \italic{how} arguments are: Name, 
+Group, App, Order)
+
+Menu:  Sort,By application ("App"); Sort,By group ("Group"); Sort~20,By name 
+("Name"); Sort~20,By order ("Order")}
+
+
+\bold{pvaltv-update}(object \italic{self})
+
+\leftindent{sets the preference value from the text in the entry buffer.
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+
+\bold{pvaltvf-complete}(object \italic{self})
+
+\leftindent{Attempts to complete the filename before the cursor.
+
+Bound to:  \typewriter{Space}}
+
+\bold{pvaltvf-help}(object \italic{self})
+
+\leftindent{Provides a list of possible completions in the choices list.
+
+Bound to:  \typewriter{?}}
+
+
+\bold{pvaltvc-update}(object \italic{self})
+
+\leftindent{sets the preference value from the text in the entry buffer.
+
+Bound to:  \typewriter{Space}}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{prefed}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}
