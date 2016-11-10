@@ -1,0 +1,136 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for gofig}
+
+
+\bold{gofigview-char-to-note}(object \italic{self}, integer \italic{ch})
+
+\leftindent{put letter in selected spot.  Letters replace the note; 
+digits replace non-digits and extend digits; Backspace and Delete 
+delete letter or rightmost digit if present, and the stone if no note 
+present.
+
+Bound to:  \typewriter{a} .. \typewriter{l}, \typewriter{0} .. 
+\typewriter{9}, \typewriter{^}, \typewriter{+}, \typewriter{%}, 
+\typewriter{@}, \typewriter{#}, \typewriter{-}, 
+\typewriter{Backspace} (\typewriter{^H}), \typewriter{Delete}, 
+each with their respective character codes as \italic{ch}.}
+
+\bold{gofigview-copy}
+
+\leftindent{copy the go diagram as ASCII to the cut buffer
+
+Bound to:  \typewriter{^W}, \typewriter{Esc-w}; Menu:  Copy ~2}
+
+\bold{gofigview-do-nothing}()
+
+\leftindent{does nothing}
+
+\bold{gofigview-move-spot}(object \italic{self}, integer \italic{where})
+
+\leftindent{move selected spot; 'A' = up, 'B' = down, 'C' = right, 
+'D' = left.
+
+Bound to:
+
+\leftindent{'A':  \typewriter{Up} (\typewriter{Esc-A}), \typewriter{^P}, 
+\typewriter{m}
+
+'B':  \typewriter{Down} (\typewriter{Esc-B}), \typewriter{^N}, 
+\typewriter{n}
+
+'C':  \typewriter{Right} (\typewriter{Esc-C}), \typewriter{^B}, 
+\typewriter{.}
+
+'D':  \typewriter{Left} (\typewriter{Esc-D}), \typewriter{^F}, 
+\typewriter{,}}}
+
+\bold{gofigview-print-dobj}(object \italic{self})
+
+\leftindent{print contents of dobj to stdout
+
+Bound to:  \typewriter{D}}
+
+\bold{gofigview-prompt-for-board-layout}(object \italic{self})
+
+\leftindent{prompts for size and edges of board
+
+Bound to:  \typewriter{L}; Menu:  Gofig,Board layout~40
+
+Use \bold{queueanswer} to provide layout string in Ness.}
+
+\bold{gofigview-prompt-for-note}(object \italic{self})
+
+\leftindent{prompts for note to put in stone
+
+Bound to:  \typewriter{N}; Menu:  Gofig,Enter Note~30
+
+Use \bold{queueanswer} to provide text in Ness.}
+
+\bold{gofigview-prompt-for-print-size}(object \italic{self})
+
+\leftindent{prompts for printing size parameter
+
+Bound to:  \typewriter{P}; Menu:  Gofig,Printed size~42
+
+Use \bold{queueanswer} to provide print size in Ness.}
+
+\bold{gofigview-put-stone}(object \italic{self}, integer \italic{stone})
+
+\leftindent{put \italic{stone} ('B' or 'W') or empty ('/') in selected spot
+
+Bound to:  various:  \typewriter{o} ('W'), \typewriter{x} ('B'), 
+\typewriter{Space} ('/')}
+
+\bold{gofigview-replace}(object \italic{self})
+
+\leftindent{replaces contents from cut buffer
+
+Bound to:  \typewriter{^Y}, \typewriter{Esc-y}; Menu:  Replace~4}
+
+\bold{gofigview-set-click-mode}(object \italic{self}, marker \italic{mode})
+
+\leftindent{set action for clicking on stones ('A', 'B', 'W', 'E', or 'S')
+
+Bound to:  \typewriter{O} ('W'), \typewriter{A} ('A'), \typewriter{X} ('B'), 
+\typewriter{E} ('E'), \typewriter{S} ('S')
+
+Menu:  One for each mode; has " <=" appended to menu entry name for 
+currently selected mode.  Gofig,White~12 ('W'), Gofig,Black-White ('A'), 
+Gofig,Black ('B'), Gofig,Empty ('E'), Gofig,Select ('S')}
+
+\bold{gofigview-set-note-mode}(object \italic{self}, integer \italic{seq})
+
+\leftindent{chooses note sequence for subsequent stones ('a', '0', or '-')
+
+Menu:  Gofig,Auto a b c ...~20 ('a'); Gofig,Auto 1 2 3 ...~22 ('0');
+Gofig,No Auto Notes~24 ('-'); selected entry has "  <=" appended.}
+
+\bold{gofig-invert-debug}(object \italic{self})
+
+\leftindent{Toggle the gofigview debug flag
+
+Bound to:  \typewriter{Esc-^D-D}}
+
+
+\bold{gofig-convert}(object \italic{textview})
+
+\leftindent{convert selected text to a gofig object}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{gofig}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

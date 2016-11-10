@@ -1,18 +1,42 @@
 \begindata{text,268959464}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Compile}
+\chapter{Procedure Table Listing for Compile}
 
 
+\bold{compile-build}(object \italic{textview})
 
-compile-build [for textview]:  Start a compilation.
+\leftindent{Start a compilation.  If it was previously paused, it is 
+immediately resumed.  Otherwise, if one is already running, you are 
+prompted to kill it.  All buffers are saved before starting.
 
-compile-next-error [for textview]:  Step forward through compilation errors.
+Set \typewriter{^U} numeric argument to prompt for command instead of 
+using same command (or preference if first time).
 
-compile-previous-error [for textview]:  Step backward through compilation 
-errors.
+Use \bold{queueanswer} to answer kill query and/or set command from Ness if 
+necessary.}
 
-compile-kill-build [for textview]: Terminate a compilation.
+\bold{compile-next-error}(object \italic{textview})
+
+\leftindent{Step forward through compilation errors.}
+
+\bold{compile-previous-error}(object \italic{textview})
+
+\leftindent{Step backward through compilation errors.}
+
+\bold{compile-kill-build}(object \italic{textview})
+
+\leftindent{Terminate a compilation.
+
+Set \typewriter{^U} numeric argument to pause instead of kill.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{compile}}
 
 
 \enddata{text,268959464}

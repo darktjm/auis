@@ -3,44 +3,97 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Org
-
-}
-
-orgv-Add		"Add Node~20"		"Add Node"
-
-orgv-Delete	"Delete Node~21"		"Delete Node
-
-orgv-Rename	"Rename Node~22"		"Rename Node"
-
-orgv-Plode	"Explode Nodes~30"	"Plode Tree"
-
-orgv-Plode	"Implode Nodes~30"	"Plode Tree
-
-orgv-Description	"Expose Description~31"	"Description"
-
-orgv-Description	"Hide Description~31	"Description"
-
-orgv-Palette	"Expose Palette~40"	"Palette-toggle"
-
-orgv-Palette	"Hide Palette~40"		"Palette-toggle"
-
-orgv-DEBUG	"DEBUG~98"		"Debug-toggle"
-
-org-Arrangement	"Styling~10,Vertical Layout~10"	"Arrangement" 
-
-org-Arrangement	"Styling~10,Horizontal Layout~10"	"Arrangement"
-
-org-Fold		"Styling~10,Fold Nodes~73"		"Fold"
-
-org-Fold		"Styling~10,UnFold Nodes~73"	"Fold"
-
-orgv-Border	"Styling~10,Node Border~20"		"Change Node Border" 
-
-orgv-Connector	"Styling~10,Node Connector~21"	"Change Node Connector"
+\chapter{Procedure Table Listing for Org}
 
 
+\bold{orgv-Add}(object \italic{self})
 
+\leftindent{Add Node
+
+Menu:  Add Node~20
+
+It is generally not possible to select an insertion point from Ness.  
+Do not use from Ness.}
+
+\bold{orgv-Delete}(object \italic{self})
+
+\leftindent{Delete current Node.
+
+Delete Node~21
+
+It is generally not possible to select a node from Ness.  Do not use 
+from Ness.}
+
+\bold{orgv-Rename}(object \italic{self})
+
+\leftindent{Rename current Node
+
+Menu:  Rename Node~22
+
+It is generally not possible to select a node from Ness.  Do not use 
+from Ness.}
+
+\bold{orgv-Plode}(object \italic{self})
+
+\leftindent{Plode Tree
+
+Menu:  Explode Nodes~30 when imploded; Implode Nodes~30 when exploded.}
+
+\bold{orgv-Description}(object \italic{self})
+
+\leftindent{Hide/Show Description
+
+Menu:  Expose Description~31 when hidden; Hide Description~31 when exposed.}
+
+\bold{orgv-Palette}(object \italic{self})
+
+\leftindent{Palette-toggle
+
+Menu:  Expose Palette~40 when hidden; Hide Palette~40 when shown.}
+
+\bold{orgv-DEBUG}(object \italic{self})
+
+\leftindent{Debug-toggle
+
+Menu:  DEBUG~98}
+
+\bold{org-Arrangement}(object \italic{self})
+
+\leftindent{Toggle Vertical/Horizontal Arrangement
+
+Menu:  Styling~10,Vertical Layout~10 when horizontal; Styling~10,Horizontal 
+Layout~10 when vertical.}
+
+\bold{org-Fold}(object \italic{self})
+
+\leftindent{Toggle Fold
+
+Menu:  Styling~10,Fold Nodes~73 when unfolded; Styling~10,UnFold Nodes~73 
+when folded.}
+
+\bold{orgv-Border}(object \italic{self})
+
+\leftindent{Change Node Border for all nodes.
+
+Menu:  Styling~10,Node Border~20
+
+Use \bold{queueanswer} to provide type in Ness.}
+
+\bold{orgv-Connector}(object \italic{self})
+
+\leftindent{Change Node Connector for tree.
+
+Menu:  Styling~10,Node Connector~21
+
+Use \bold{queueanswer} to provide type in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{org}}
 
 
 \begindata{bp,537558784}

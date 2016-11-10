@@ -1,11 +1,22 @@
 \begindata{text,269713664}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Matte
+\chapter{Procedure Table Listing for Matte}
 
-}
-Allow-resizing  "Allow view to resize"
 
-Allow-drawing  "Draw the view's border"
+\bold{matte-Allow-resizing}
+
+\leftindent{Allow view to resize}
+
+\bold{matte-Allow-drawing}
+
+\leftindent{Draw the view's border}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
+
 
 \enddata{text,269713664}

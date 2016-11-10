@@ -1,20 +1,53 @@
 \begindata{text,269141872}
 \textdsversion{12}
 \template{help}
-\chapter{Proclist for Tags
+\chapter{Procedure Table Listing for Tags}
 
-}
 
-tags-open [for textview]            Goto the tag whose name is passed on the command line.
+\bold{tags-open}(object \italic{textview}, marker \italic{tag})
 
-tags-load-tag-file [for textview]   Load a tag file from the current directory
+\leftindent{Goto the \italic{tag} whose name is passed in.  This will 
+not enter recursive editing mode.}
 
-tags-find-tag [for textview]        Goto the tag whose name is at the dot.
+\bold{tags-load-tag-file}(object \italic{textview})
 
-tags-goto-tag [for textview]        Goto a given tag.
+\leftindent{Load a tag file from the current directory
 
-tags-rebuild-tags [for textview]   Regenerate the tag file with ctags
+Use \bold{queueanswer} to provide file name in Ness.}
 
+\bold{tags-find-tag}(object \italic{textview})
+
+\leftindent{Goto the tag whose name is at the dot.
+
+The \typewriter{^U} numeric argument can be set to disable recursive 
+editing mode.}
+
+\bold{tags-goto-tag}(object \italic{textview})
+
+\leftindent{Goto a given tag.
+
+The \typewriter{^U} numeric argument can be set to disable recursive 
+editing mode.
+
+Use or \bold{queueanswer} to provide tag name in Ness, or use 
+\bold{tags-open}.}
+
+\bold{tags-rebuild-tags}(object \italic{textview})
+
+\leftindent{Regenerate the tag file with ctags
+
+The \typewriter{^U} numeric argument can be set to prompt for the 
+command used to do this.
+
+Use \bold{queueanswer} to provide the command if necessary.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{tags}}
 
 
 \enddata{text,269141872}

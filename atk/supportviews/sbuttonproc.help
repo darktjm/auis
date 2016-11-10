@@ -1,0 +1,174 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for sbutton}
+
+
+\bold{sbuttonv-add-button}(object \italic{self})
+
+\leftindent{Prompts for user to name a new button.
+
+Menu:  SButton~20,Add Button~30
+
+Use \bold{queueanswer} to provide label text in Ness.}
+
+\bold{sbuttonv-delete-group}(object \italic{self}, marker \italic{group})
+
+\leftindent{Deletes the \italic{group} specified.
+
+Menu:   for each group, 
+\italic{GroupName}~\italic{groupno+22},Delete Group~35}
+
+\bold{sbuttonv-delete}(object \italic{self})
+
+\leftindent{Deletes the selected button.
+
+Menu:  SButton~20,Delete button~31
+
+It is not generally possible to select a button in Ness; do not call 
+this from Ness.}
+
+\bold{sbuttonv-new-group}(object \italic{self})
+
+\leftindent{Creates a new button group.
+
+Menu:  SButton~20,New group~95
+
+Use \bold{queueanswer} to provide group name in Ness.}
+
+\bold{sbuttonv-rename-group}(object \italic{self}, marker \italic{group})
+
+\leftindent{Renames the specified \italic{group}.
+
+Menu:   for each group, 
+\italic{GroupName}~\italic{groupno+22},Rename Group~30}
+
+\bold{sbuttonv-set-button-group}(object \italic{self}, null | 0 | marker \italic{group})
+
+\leftindent{Choose which group the button will take its appearance from.
+
+Menu:  SButton~20,Set Button Group~11 (default); also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Button Group~11
+
+It is not generally possible to select a button in Ness; do not call 
+this from Ness.}
+
+\bold{sbuttonv-set-colors}(object \italic{self}, null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the foreground and 
+background color of the SButton.  This modifies the 
+colors of \italic{group}, or the default if not specified.
+
+Menu:  SButton~20,Set Colors~24 (default); also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Colors~24
+
+Use \bold{queueanswer} twice to provide colors in Ness.}
+
+\bold{sbuttonv-set-columns}(object \italic{self})
+
+\leftindent{Sets the number of columns to be used for 
+buttons. Enough rows will be used to ensure that all buttons are visible.
+
+Menu:  SButton~20,Set Columns~72
+
+Use \bold{queueanswer} to provide number in Ness.}
+
+\bold{sbuttonv-set-depth}(object \italic{self}, null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the depth of the SButton.  This modifies the 
+depth of \italic{group}, or the default if not specified.
+
+Menu:  SButton~20,Set Depth~27 (default); also, for each group,
+\italic{GroupName}~\italic{groupno+22},Set Depth~27
+
+Use \bold{queueanswer} to provide depth in Ness.}
+
+\bold{sbuttonv-set-font}(object \italic{self}, null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the font of the sbutton.  This modifies the 
+font of \italic{group}, or the default if not specified.
+
+Menu:  SButton~20,Set Font~22 (default); also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Button Font~22
+
+Use \bold{queueanswer} to provide font name in Ness.}
+
+\bold{sbuttonv-set-label-color}(object \italic{self}, null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the foreground and 
+background color of the SButton's label.  This modifies the 
+colors of \italic{group}, or the default if not specified.
+
+Menu:  SButton~20,Set Label Colors~26" also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Label Colors~26
+
+Use \bold{queueanswer} twice to provide colors in Ness.}
+
+\bold{sbuttonv-set-label}(object \italic{self})
+
+\leftindent{Prompts for user to set the text string of the sbutton.
+
+Menu:  SButton~20,Set Label~10
+
+While it is possible to set the label text with \bold{queueanswer}, it is 
+not generally possible to select a button in Ness; do not call 
+this from Ness.}
+
+\bold{sbuttonv-set-rows}(object \italic{self})
+
+\leftindent{Sets the number of rows to be used for buttons. 
+Enough columns will be used to ensure that all buttons are visible.
+
+Menu:  SButton~20,Set Rows~71
+
+Use \bold{queueanswer} to provide number in Ness.}
+
+\bold{sbuttonv-set-shadow-colors}(object \italic{self}, (null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the top, bottom 
+and middle shadow colors of the SButton.  This modifies the 
+colors of \italic{group}, or the default if not specified.
+
+Menu:  SButton~20,Set Shadow Colors~25" also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Shadow Colors~25
+
+Use \bold{queueanswer} thrice to provide colors in Ness.}
+
+\bold{sbuttonv-set-style}(object \italic{self}, (null | 0 | marker \italic{group})
+
+\leftindent{Prompts for user to set the appearance of the 
+SButton.  The choices are Plain Text, Boxed Text, Three Dimensional, 
+Simple Boxed Text and OSF/MOTIF.
+
+Menu:  SButton~20,Set Style~23"; also, for each group, 
+\italic{GroupName}~\italic{groupno+22},Set Style~23
+
+Use \bold{queueanswer} thrice to provide selection in Ness.}
+
+\bold{sbuttonv-set-trigger}(object \italic{self})
+
+\leftindent{Prompts for user to set the text string of the 
+sbutton.
+
+Menu:  SButton~20,Set Trigger~11
+
+While it is possible to set the trigger name with \bold{queueanswer}, it is 
+not generally possible to select a button in Ness; do not call 
+this from Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{sbutton}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -80,7 +80,7 @@ InstallClassFiles($(HFILES))
 InstallRunappAPP(figure)
 
 NormalHelpRule()
-InstallDocs(figure.help, $(DESTDIR)/help)
+InstallDocs(figure.help figproc.help, $(DESTDIR)/help)
 InstallDocs(figure.pr, ${DESTDIR}/lib/prs)
 InstallDocs(figattr.doc figobj.doc figure.doc figv.doc, ${DESTDIR}/doc/PROGRAMMER)
 

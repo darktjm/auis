@@ -30,8 +30,8 @@ static class menulist *m3_Menus;
 ATKdefineRegistry(m3textview, modtextview, m3textview::InitializeClass);
 static void interface(m3textview *self, long key);
 static void module(m3textview *self, long key);
-static void asterisk(m3textview *self, char key);
-static void m3pragma(m3textview *self, char key);
+static void asterisk(m3textview *self, long key);
+static void m3pragma(m3textview *self, long key);
 
 static struct bind_Description m3textBindings[]={
     {"m3textview-asterisk","*",'*', NULL,0, 0, (proctable_fptr)asterisk,""},
@@ -145,7 +145,7 @@ static void module(m3textview *self, long key)
 }
 
 /* identical to mtext's asterisk() with the exception of pragma-checking */
-static void asterisk(m3textview *self, char key /* must be char for "&" to work. */)
+static void asterisk(m3textview *self, long key /* must be char for "&" to work. */)
 {
     m3text *ct=(m3text *)self->view::GetDataObject();
     int count=((self)->GetIM())->Argument();
@@ -156,7 +156,8 @@ static void asterisk(m3textview *self, char key /* must be char for "&" to work.
     if (IsAutoCutMode() && (self)->GetDotLength()>0)
 	((self)->GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), self, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos= pos= (self)->CollapseDot();
-    while (count--) (ct)->InsertCharacters(pos++,&key,1);
+    char ckey = key;
+    while (count--) (ct)->InsertCharacters(pos++,&ckey,1);
     if (oldpos && !(ct)->GetStyle(oldpos-1) && !(ct)->InString(oldpos)) {
 	if((ct)->GetChar(oldpos-1)=='(')
 	    (ct)->WrapStyleNow(oldpos-1,pos-oldpos+1, ct->srctext::comment_style, FALSE,TRUE);
@@ -168,7 +169,7 @@ static void asterisk(m3textview *self, char key /* must be char for "&" to work.
 }
 
 /* m3pragma should be functionally equivalent to paren function in modtextv.c */
-static void m3pragma(m3textview *self, char key /* must be char for "&" to work. */)
+static void m3pragma(m3textview *self, long key /* must be char for "&" to work. */)
 {
     m3text *ct=(m3text *)self->view::GetDataObject();
     long oldpos=(self)->GetDotPosition();

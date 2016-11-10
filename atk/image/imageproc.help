@@ -1,0 +1,132 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for image}
+
+
+\bold{imagev-export-any}(object \italic{self}, integer \italic{type})
+
+\leftindent{Write out an image; format is determined by name.  
+\italic{type} must be 1.
+
+Menu:  Export~40, By Name~17
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-export-cmuwm}(object \italic{self}, integer \italic{type})
+
+\leftindent{Write out a cmuwm image.  \italic{type} must be 0.
+
+Menu:  Export~40, ATK Raster~16
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-export-postscript}(object \italic{self})
+
+\leftindent{Write out a Postscript file.
+
+Menu:  Export~40, Postscript~12
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-image-read}(object \italic{self})
+
+\leftindent{Read in a new image file.
+
+MenU:  Image~20, Read~10
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-image-write}(object \italic{self})
+
+\leftindent{"Save image to file.
+
+Menu:  Image~20, Write~11
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-import-any}(object \italic{self})
+
+\leftindent{Import an image.
+
+Menu:  Import~30, Almost Any~12
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-import-cmuwm}(object \italic{self})
+
+\leftindent{Import a cmuwm image.
+
+Menu:  Import~30, ATK Raster~18
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{imagev-pan-to-origin}(object \italic{self})
+
+\leftindent{Pan to (0,0).
+
+Bound to:  \typewriter{Esc-o}; Menu:  Image~20, Pan to Origin~30}
+
+\bold{imagev-set-save-format}(object \italic{self})
+
+\leftindent{Set the save format to be used by image. Can 
+be png, gif or jpeg.
+
+Menu:  Image~20, Set Save Format~60
+
+Use \bold{queueanswer} to provide format (all upper-case) in Ness.}
+
+\bold{imagev-set-save-quality}(object \italic{self})
+
+\leftindent{Set the quality level for the JPEG compressor [5-95].
+
+Menu:  Image~20, Set Save Quality~50
+
+Use \bold{queueanswer} to provide setting in Ness.}
+
+\bold{imagev-show-fixed}(object \italic{self})
+
+\leftindent{Show image with fixed cmap.
+
+Menu:  Image~20, Show fixed~42}
+
+\bold{imagev-show-true}(object \italic{self})
+
+\leftindent{Show image with private cmap.
+
+Menu:  Image~20, Show true~40}
+
+\bold{imagev-zoom-in}(object \italic{self}, integer \italic{how})
+
+\leftindent{Change scale of view.  \italic{how} must be greater than 0.
+
+Bound to:  \typewriter{Esc-Z}; Menu:  Image~20, Zoom In~20}
+
+\bold{imagev-zoom-normal}(object \italic{self}, integer \italic{how})
+
+\leftindent{Change scale of view.  \italic{how} must be 0.
+
+Bound to:  \typewriter{Esc-n}; Menu:  Image~20, Normal Size~24}
+
+\bold{imagev-zoom-out}(object \italic{self}, integer \italic{how})
+
+\leftindent{Change scale of view.  \italic{how} must be less than 0.
+
+Bound to:  \typewriter{Esc-z}; Menu:  Image~20, Zoom Out~22}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{image}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

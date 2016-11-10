@@ -65,7 +65,7 @@ InstallClassFiles($(HFILES))
 InstallLink(runapp, $(DESTDIR)/bin/prefed)
 
 InstallDocs(writing-pr.doc, ${DESTDIR}/doc/PROGRAMMER)
-InstallDocs(prefed.help, ${DESTDIR}/help)
+InstallDocs(prefed.help prefproc.help, ${DESTDIR}/help)
 InstallHelpAlias(prefed, preferences-editor pref-ed prefs-ed edit-preferences edit-prefs)
 InstallDocs(prefed.pr, ${DESTDIR}/lib/prs)
 InstallMultiple(prefhelp.tpl prefs.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)

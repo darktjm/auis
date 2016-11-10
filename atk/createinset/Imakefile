@@ -17,3 +17,4 @@ InstallFileToFile(null/nullapp.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullapp.C
 InstallFileToFile(null/nullapp.H, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullapp.H)
 InstallFileToFile(null/nullvt.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullvt.C)
 InstallFileToFile(null/null.help, $(INSTINCFLAGS), $(DESTDIR)/lib/null/null.help)
+InstallFileToFile(null/nullproc.help, $(INSTINCFLAGS), $(DESTDIR)/lib/null/nullproc.help)

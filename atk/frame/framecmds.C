@@ -1867,7 +1867,7 @@ framecmd_SetProgramName(char  *name)
 	returns prior state
 */
 	static boolean
-framecmd_SetCommands(class frame  *self, boolean  enable)
+framecmd_SetCommands(class frame  *self, long  enable)
 		{
 	boolean wasenabled = (self)->GetCommandEnable();
 	(self)->SetCommandEnable( enable);

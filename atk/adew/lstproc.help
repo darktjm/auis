@@ -1,62 +1,232 @@
 \begindata{text,538382016}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Proclist for Lset/Adew
+\chapter{Procedure Table Listing for Lset/Adew}
 
-}
+\bold{arbcon-create}(object \italic{view})
 
-arbcon-create [for view]            Create an Arbcon
+\leftindent{Create an Arbcon and pop it up in a new window if one does 
+not already exist.}
 
-arbcon-copycon [for view]           arbcon copycon
+\bold{arbcon-copycon}(object \italic{view})
 
-
-cel-set-invisible                   Make cel invisible
-
-cel-set-visible                     Make cel visible
+\leftindent{arbcon copycon \italic{FIXME:  Wow, what informative 
+documentation!  I think this is supposed to copy an arbiter-managed 
+view to a new window, including all insets.}}
 
 
-lsetview-Insert-Object	Set the object of a child view
-
-lsetview-Destroy-Object	Destroy the child view;  "Esc-d"
-
-lsetview-Insert-value	Set the value of a child view
-
-lsetview-Insert-application	Set the application of a child view; "lset,Set 
-application~32"
-
-lsetview-Insert-Cel		Set the Cel of a child view; "lset,Set Cel~30"
-
-lsetview-Paste		Fill lset with contents of cut buffer; "lset,Paste~36"
-
-lsetview-Unsplit		Unsplits parent lset; "lset,Unsplit Lset~40"
-
-lsetview-Read-File		Read a file into a child view; "lset,Insert 
-File~35"
-
-lsetview-Split-Horz		Split the lpair Horizontally; "lset,Split 
-Horizontal~11"
-
-lsetview-Split-Vert		Split the lpair Vertically; "lset,Split 
-Vertically~10"
+The following are not available until after an arbcon has been created 
+(i.e., just loading the class does not make them available):
 
 
-"lset,Set Object~31"
+\bold{arbcon-add-object}(object \italic{self})
 
-"lset,Set value~34"
+\leftindent{prompt for a new object view pair to add to the list
+
+Menu:  Arbcon~0,Add Object~22
+
+Use \bold{queueanswer} to provide object view pair name in Ness.}
+
+\bold{arbcon-add-valueview-list}(object \italic{self})
+
+\leftindent{Bring up window of valueviews
+
+Menu:  Arbcon~0,Init Value Window~23}
+
+\bold{arbcon-chdir}(object \italic{self})
+
+\leftindent{Change Directory
+
+Menu:  ADEW~1,Change Directory~1
+
+Use \bold{queueanswer} to provide directory name in Ness.}
+
+\bold{arbcon-copy-cel}(object \italic{self})
+
+\leftindent{Copy the current cel
+
+Menu:  Arbcon~0,Copy Cel~3
+
+This requires a selected cel.  It is not generally possible to select a 
+cel within Ness, so do not call this from Ness.}
+
+\bold{arbcon-copy-link}(object \italic{self})
+
+\leftindent{Copy link to current cel
+
+Menu:  Arbcon~0,Copy Link~2
+
+This requires a selected cel.  It is not generally possible to select a 
+cel within Ness, so do not call this from Ness.}
+
+\bold{arbcon-creatcon}(object \italic{self})
+
+\leftindent{Create Controller
+
+Menu:  ADEW~1,Create Controller~1}
+
+\bold{arbcon-cut-cel}(object \italic{self})
+
+\leftindent{Cut the current cel
+
+Menu:  Arbcon~0,Cut Cel~10
+
+This requires a selected cel.  It is not generally possible to select a 
+cel within Ness, so do not call this from Ness.}
+
+\bold{arbcon-new-window}(object \italic{self})
+
+\leftindent{prompt for a file for a new window
+
+Menu:  Arbcon~0,New Window~20
+
+Use \bold{queueanswer} to provide new file name in Ness.}
+
+\bold{arbcon-show-cels}(object \italic{self})
+
+\leftindent{Show cel names
+
+Menu:  Arbcon~0,Show Cels~21}
 
 
-pagev-next-page                     Changes the page to look at the next 
-object;  "^X^N"; "page~95,Next Page~90"
+\section{celview}
 
-pagev-paste                         	Pastes a switchee from the cut-buffer; 
- "^X5"; "page~95,Paste~80"
 
-pagev-SetCurrentView                Takes a string argument and calls 
-page_SetNowPlayingByName
+\bold{celview-Init-Child}(object \italic{self})
 
-pagev-switch-object                 Switches to a given object.
+\leftindent{Initialize Child
+
+celview,Init Child}
+
+\bold{celview-InsertFile}(object \italic{self})
+
+\leftindent{\italic{Not documented}
+
+Menu:  celview,Insert File" "Read Child}
+
+\bold{celview-Paste}(object \italic{self})
+
+\leftindent{\italic{Not documented}
+
+Menu:  celview,Paste" "Paste Child}
+
+\bold{celview-set-invisible}(object \italic{self})
+
+\leftindent{Make celview invisible}
+
+\bold{celview-set-visible}(object \italic{self})
+
+\leftindent{Make celview visible}
+
+
+\section{cel}
+
+
+\bold{cel-set-invisible}(object \italic{self})
+
+\leftindent{Make cel invisible}
+
+\bold{cel-set-visible}(object \italic{self})
+
+\leftindent{Make cel visible}
+
+
+\section{lsetview}
+
+
+\bold{lsetview-Insert-Object}(object \italic{self})
+
+\leftindent{Set the object of a child view}
+
+\bold{lsetview-Destroy-Object}(object \italic{self})
+
+\leftindent{Destroy the child view
+
+Bound to:  \typewriter{Esc-d}}
+
+\bold{lsetview-Insert-value}(object \italic{self})
+
+\leftindent{Set the value of a child view}
+
+\bold{lsetview-Insert-application}(object \italic{self})
+
+\leftindent{Set the application of a child view
+
+Menu:  lset,Set application~32}
+
+\bold{lsetview-Insert-Cel}(object \italic{self})
+
+\leftindent{Set the Cel of a child view
+
+Menu:  lset,Set Cel~30}
+
+\bold{lsetview-Paste}(object \italic{self})
+
+\leftindent{Fill lset with contents of cut buffer
+
+lset,Paste~36}
+
+\bold{lsetview-Unsplit}(object \italic{self})
+
+\leftindent{Unsplits parent lset
+
+Menu:  lset,Unsplit Lset~40}
+
+\bold{lsetview-Read-File}(object \italic{self})
+
+\leftindent{Read a file into a child view
+
+Menu: lset,Insert File~35}
+
+\bold{lsetview-Split-Horz}(object \italic{self})
+
+\leftindent{Split the lpair Horizontally
+
+Menu:  lset,Split Horizontal~11}
+
+\bold{lsetview-Split-Vert}(object \italic{self})
+
+\leftindent{Split the lpair Vertically
+
+Menu:  lset,Split Vertically~10}
+
+
+\section{page}
+
+
+\bold{pagev-next-page}(object \italic{self})
+
+\leftindent{Changes the page to look at the next object
+
+Bound to:  \typewriter{^X-^N}; Menu:  page~95,Next Page~90}
+
+\bold{pagev-paste}(object \italic{self})
+
+\leftindent{Pastes a switchee from the cut-buffer into a new page
+
+Bound to:  \typewriter{^X-5}; Menu:  page~95,Paste~80}
+
+\bold{pagev-SetCurrentView}(object \italic{self}, marker \italic{name})
+
+\leftindent{Switches to a page whose top-level cel has given 
+\italic{name}.}
+
+\bold{pagev-switch-object}(object \italic{self}, object \italic{swin})
+
+\leftindent{Switches to a given object, \italic{swin}.  It is 
+generally not possible to create the necesary object for \italic{swin} 
+within Ness; this is just used to generate direct switch menu entries 
+as pages are added.  Do not call from Ness; use 
+\bold{pagev-SetCurrentView} instead.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{adew}}
+
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

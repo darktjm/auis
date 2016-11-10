@@ -1,0 +1,60 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for gnucompat}
+
+
+\bold{gnucompat-add-default-tpl}(object \italic{textview})
+
+\leftindent{Enable basic styles by adding the template named default}
+
+\bold{gnucompat-denumerate}(object \italic{textview})
+
+\leftindent{Delete number from the begining of each 
+paragraph in the region}
+
+\bold{gnucompat-enumerate}(object \italic{textview})
+
+\leftindent{Put number in sequence at the begining of each 
+paragraph in the region}
+
+\bold{gnucompat-fill-para}(object \italic{textview})
+
+\leftindent{Fill Paragraph.}
+
+\bold{gnucompat-insert-bullets}(object \italic{textview})
+
+\leftindent{Put a bullet at the begining of each 
+paragraph in the region}
+
+\bold{gnucompat-insert-inset-no-nl}(object \italic{textview}, null | 0 | marker \italic{name})
+
+\leftindent{Insert a named inset without newlines around it
+
+Use \italic{name} or \bold{queueanswer} to provide inset name in Ness.}
+
+\bold{gnucompat-insert-inset}(object \italic{textview}, null | 0 | marker \italic{name})
+
+\leftindent{Insert a named inset here
+
+Use \italic{name} or \bold{queueanswer} to provide inset name in Ness.}
+
+\bold{gnucompat-remove-bullets}(object \italic{textview})
+
+\leftindent{Remove bullets from the begining of each 
+paragraph in the region}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

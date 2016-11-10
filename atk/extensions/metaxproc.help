@@ -1,0 +1,48 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for metax}
+
+
+\bold{metax}(object \italic{view}, \italic{argument})
+
+\leftindent{Executes a proctable function by name.  The 
+\italic{argument} (or 0, if not present) is passed on to the 
+procedure.  Note that action-style procedures' arguments are 
+interpreted as for binding, as described in the \helptopic{procs} overview.  
+The type of the action's argument is assumed to be an integer if in the 
+range of 0 to 255, and a string otherwise.
+
+
+This is pointless in Ness; just call the procedure directly.  
+However, there may be some advantage to the support of parsing the 
+string format of an action's arguments, in which case the argument 
+string can be passed as \italic{argument}, and the procedure 
+name can be passed using \bold{queueanswer}.}
+
+\bold{metax-with-arg}(object \italic{view})
+
+\leftindent{Executes a function by name, prompting for an argument.  
+Note that action-style procedures' arguments are interpreted as 
+for binding, as described in the \helptopic{procs} overview.  The type 
+of the action's argument is assumed to be an integer if in the range of 
+0 to 255, and a string otherwise.
+
+This is pointless in Ness; just call the procedure directly.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{metax}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

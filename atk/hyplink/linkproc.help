@@ -1,0 +1,84 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for link}
+
+
+\bold{linkview-autolink}(object \italic{self})
+
+\leftindent{Starts the autolink process.  Waits for 
+\bold{linkview-set-target} to be invoked, which tells this link what file to link 
+to.
+
+Menu:  Link~1,Start Autolink~1}
+
+\bold{linkview-insert-link}(object \italic{textview})
+
+\leftindent{Insert a link object in the current document.}
+
+\bold{linkview-set-link}(object \italic{self})
+
+\leftindent{Prompts user for target filename of the link button.
+
+Menu:  Link~1,Link to File~11
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{linkview-set-rel-link}(object \italic{self})
+
+\leftindent{Prompts user for a relative filename to link 
+to.
+
+Menu:  Link~1,Link to Relative File~12
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{linkview-set-target}(object \italic{view})
+
+\leftindent{Execute this proc from the frame of the the 
+buffer for the target file of a link.  To be called after 
+\bold{linkview-autolink}.}
+
+\bold{linkview-set-url-link}(object \italic{self})
+
+\leftindent{Prompts user for a URL link value.
+
+Menu:  Link~1,Link to URL~14
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{linkview-set-var-link}(object \italic{self})
+
+\leftindent{Prompts user for an uninterpreted link value 
+(may have $\{...\}).
+
+Menu:  Link~1,Link to $\{...\}/...~13
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+
+\bold{plinkview-set-tag}(object \italic{self})
+
+\leftindent{Prompts for user to set search tag of the link 
+button.
+
+Menu:  Link~1,Set Tag~15
+
+Use \bold{queueanswer} to provide tag name in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{linkinset}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

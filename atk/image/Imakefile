@@ -12,7 +12,7 @@ LIBS = $(UTILLIB)
 
 SYSLIBS = -L$(XLIBDIR) -lX11 $(DYNMATHLIB)
 
-HELPDOCS = image.help
+HELPDOCS = image.help imageproc.help
 DependTarget()
 
 NormalObjectRule()

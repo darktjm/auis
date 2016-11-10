@@ -3,125 +3,291 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Table
-
-}
-table-self_insert	 "Enter character"
-
-table-begin-row, "^A" "Beginning of row"
-
-table-left, "^B" "Left one column"
-
-table-end-row, "^E" "End of row"
-
-table-right, "^F" "Right one column"
-
-table-down, "^N"  "Down one row"
-
-table-up, "^P"  "Up one row"
-
-table-top, "Esc-<"  "Top"
-
-table-bottom, "Esc->"   "Bottom"
-
-table-backspace"  "Backspace"
-
-table-tab, "Tab" "Tab"
-
-table-newline, "^J"  "New line"
-
-table-return, "^M"  "Carriage return"
-
-table-DELchar, "Delete"  "DEL"
-
-table-erase, "^U"  "Erase"
-
-table-toggle-readonly, "Esc-~", "Toggle the read-only status of the table."
-
-table-toggle-debug, "Esc-Esc", "Toggle Debug"
+\chapter{Procedure Table Listing for Table}
 
 
-table-up, "Esc-A"  "Up"
+\bold{table-self-insert}(object \italic{self}, integer \italic{ch})
 
-table-down, "Esc-B"  "Down"
+\leftindent{Enter character \italic{ch}
 
-table-right, "Esc-C"  "Right"
+Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
+with their respective character codes as \italic{ch}.
 
-table-left, "Esc-D"  "Left"
+Note that in Ness, when entering \typewriter{$} or \typewriter{\{}, the 
+remainder of the text must be inserted using \bold{queueanser}.}
 
-table-end-row, "Esc-J"  "End"
+\bold{table-begin-row}(object \italic{self})
 
-table-begin-row, "Esc-H"  "home"
+\leftindent{Beginning of row
+
+Bound to:  \typewriter{^A}, \typewriter{Home} (\typewriter{Esc-H})}
+
+\bold{table-left}(object \italic{self})
+
+\leftindent{Left one column
+
+Bound to:  \typewriter{^B}, \typewriter{Left} (\typewriter{Esc-D})}
+
+\bold{table-end-row}(object \italic{self})
+
+\leftindent{End of row
+
+Bound to:  \typewriter{^E}, \typewriter{End} (\typewriter{Esc-J})}
+
+\bold{table-right}(object \italic{self})
+
+\leftindent{Right one column
+
+Bound to:  \typewriter{^F}, \typewriter{Right} (\typewriter{Esc-C})}
+
+\bold{table-down}(object \italic{self})
+
+\leftindent{Down one row
+
+Bound to:  \typewriter{^N}, \typewriter{Down} (\typewriter{Esc-B})}
+
+\bold{table-up}(object \italic{self})
+
+\leftindent{Up one row
+
+Bound to:  \typewriter{^P}, \typewriter{Up} (\typewriter{Esc-A})}
+
+\bold{table-top}(object \italic{self})
+
+\leftindent{Top
+
+Bound to:  \typewriter{Esc-<}}
+
+\bold{table-bottom}(object \italic{self})
+
+\leftindent{Bottom
+
+Bound to:  \typewriter{Esc->}}
+
+\bold{table-backspace}(object \italic{self})
+
+\leftindent{Backspace
+
+Bound to:  \typewriter{Backspace} (\typewriter{^H})}
+
+\bold{table-tab}(object \italic{self})
+
+\leftindent{Tab
+
+Bound to:  \typewriter{Tab}}
+
+\bold{table-newline}(object \italic{self})
+
+\leftindent{New line
+
+Bound to:  \typewriter{^J}}
+
+\bold{table-return}(object \italic{self})
+
+\leftindent{Carriage return
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+\bold{table-DELchar}(object \italic{self})
+
+\leftindent{Delete
+
+Bound to:  \typewriter{Delete}}
+
+\bold{table-erase}(object \italic{self})
+
+\leftindent{Erase
+
+Bound to:  \typewriter{^U}}
+
+\bold{table-toggle-readonly}(object \italic{self})
+
+\leftindent{Toggle the read-only status of the table.
+
+Bound to:  \typewriter{Esc-~}}
+
+\bold{table-toggle-debug}(object \italic{self})
+
+\leftindent{Toggle Debug
+
+Bound to:  \typewriter{Esc-Esc}}
+
+\bold{table-cut}(object \italic{self})
+
+\leftindent{Save and erase cells
+
+Bound to:  \typewriter{^W}; Menu:  Cut~10}
+
+\bold{table-copy}(object \italic{self})
+
+\leftindent{Copy cells to cutbuffer
+
+Bound to:  \typewriter{Esc-w}; Menu:  Copy~11}
+
+\bold{table-paste}(object \italic{self})
+
+\leftindent{Copy cutbuffer to cells
+
+Bound to:  \typewriter{^Y}; Menu: Paste~12}
+
+\bold{table-write}(object \italic{self})
+
+\leftindent{Write table file
+
+Bound to:  \typewriter{/-f-w}; Menu:  Write table~80
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{table-read}(object \italic{self})
+
+\leftindent{Read table file
+
+Bound to:  \typewriter{/-f-r}; Menu:  Read table~81
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{table-writeTroff}(object \italic{self})
+
+\leftindent{Write .trf file
+
+Menu:  Write Troff~82
+
+Use \bold{queueanswer} to provide name in Ness.}
+
+\bold{table-rename}(object \italic{self})
+
+\leftindent{Rename table
+
+Menu:  Rename~84
+
+Use \bold{queueanswer} to provide name (and possibly removal 
+confirmation) in Ness.}
+
+\bold{table-combine}(object \italic{self})
+
+\leftindent{Combine several cells into one
+
+Bound to:  \typewriter{/-r-c}; Menu:  Cells~1,Combine~10}
+
+\bold{table-separate}(object \italic{self})
+
+\leftindent{Separate combined cells
+
+Bound to:  \typewriter{/-r-s}; Menu:  Cells~1,Separate~11}
+
+\bold{table-drawedges}(object \italic{self})
+
+\leftindent{Draw box around cells
+
+Bound to:  \typewriter{/-r-b-d}; Menu:  Cells~1,Draw box~20}
+
+\bold{table-eraseedges}(object \italic{self})
+
+\leftindent{Erase box around cells
+
+Bound to:  \tyepwriter{/-r-b-e}; Menu:  Cells~1,Erase box~21}
+
+\bold{table-lock}(object \italic{self}, integer \italic{lock})
+
+\leftindent{Protect cells against modification (\italic{lock} must be 
+TRUE)
+
+Bound to:  \typewriter{/-r-l}; Menu:  Cells~1,Lock~30}
+
+\bold{table-unlock}(object \italic{self}, integer \italic{lock})
+
+\leftindent{Allow cells to be modified (\italic{lock} must be 
+FALSE)
+
+Bound to:  \typewriter{/-r-u}; Menu:  Cells~1,Unlock~31}
+
+\bold{table-imbed}(object \italic{self})
+
+\leftindent{Place BE2 object in cell
+
+Bound to:  \typewriter{Esc-Tab}; Menu:  Cells~1,Imbed~40}
+
+\bold{table-reset-height}(object \italic{self})
+
+\leftindent{Comput row heights automatically
+
+Menu:  Cells~1,Reset Heights~41}
+
+\bold{table-general-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{general number format (\italic{fmt} must be 'G')
+
+Bound to:  \typewriter{/-r-f-g}; Menu:  Number Format~2,general~10}
+
+\bold{table-currency-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Dollar sign before number (\italic{fmt} must be '$')
+
+Bound to:  \typewriter{/-r-f-c}; Menu:  Number Format~2,Dollar~11}
+
+\bold{table-percent-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Multiply by 100 and display % (\italic{fmt} must be '%')
+
+Bound to:  \typewriter{/-r-f-p}; Menu:  Number Format~2,Percent~12}
+
+\bold{table-exponential-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Exponential format (not implemented) (\italic{fmt} must be 'E')
+
+Bound to:  \typewriter{/-r-f-e}; Menu:  Number Format~2,Exp~13}
+
+\bold{table-fixed-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Always display decimal places (\italic{fmt} must be 'F')
+
+Bound to:  \typewriter{/-r-f-f}; Menu:  Number Format~2,Fixed~14}
+
+\bold{table-hbar-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Display as horizontal bar (\italic{fmt} must be 'H')
+
+Bound to:  \typewriter{/-r-f-h}; Menu:  Number Format~2,H-Bar~15}
+
+\bold{table-vbar-format}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Display as vertical bar (\italic{fmt} must be 'V')
+
+Bound to:  \typewriter{/-r-f-v}; Menu:  Number Format~2,V-Bar~16}
+
+\bold{table-precision}(object \italic{self})
+
+\leftindent{Set number of decimal places
+
+Bound to:  \typewriter{/-r-p}; Menu:  Number Format~2,Precision~20
+
+Use \bold{queueanswer} to provide value in Ness.}
+
+\bold{table-day-month-year}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Display day,  month, and year (\italic{fmt} must be 'Q')
+
+Bound to:  \typewriter{/-r-f-d-a}; Menu:  Date Format~3,19 Jun 1970~10}
+
+\bold{table-month-year}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Display month and year  (\italic{fmt} must be 'R')
+
+Bound to:  \typewriter{/-r-f-d-b}; Menu:  Date Format~3,Jun 1970~11}
+
+\bold{table-day-month}(object \italic{self}, integer \italic{fmt})
+
+\leftindent{Display day and month (\italic{fmt} must be 'S')
+
+Bound to:  \typewriter{/-r-f-d-c}; Menu:  Date Format~3,19 Jun~12}
 
 
-menu:
+\section{Related Topics}
 
 
-table-cut, "^W",  "Cut~10",  "Save and erase cells"
+\leftindent{\helptopic{procs}
 
-table-copy, "Esc-w",  "Copy~11",  "Copy cells to cutbuffer"
-
-table-paste, "^Y",  "Paste~12",   "Copy cutbuffer to cells"
-
-table-write, "/fw",  "Write table~80"   "Write table file"
-
-table-read, "/fr",  "Read table~81",  "Read table file"
-
-table-writeTroff,  "Write Troff~82",   "Write .trf file"
-
-table-rename,  "Rename~84",  "Rename table"
-
-table-combine, "/rc", "Cells~1,Combine~10",  "Combine several cells into one"
-
-table-separate, "/rs",  "Cells~1,Separate~11", "Separate combined cells"
-
-table-drawedges, "/rbd",  "Cells~1,Draw box~20" "Draw box around cells"
-
-table-eraseedges, "/rbe",  "Cells~1,Erase box~21"  "Erase box around cells"
-
-table-lock, "/rl",  "Cells~1,Lock~30",  "Protect cells against modification"
-
-table-unlock, "/ru", "Cells~1,Unlock~31", "Allow cells to be modified"
-
-table-imbed, "Esc-Tab",  "Cells~1,Imbed~40"  "Place BE2 object in cell"
-
-table-reset-height,  "Cells~1,Reset Heights~41"  "Comput row heights 
-automatically"
-
-table-general-format, "/rfg", "Number Format~2,general~10", "general number 
-format"
-
-table-currency-format, "/rfc",  "Number Format~2,Dollar~11",  "Dollar sign 
-before number"
-
-table-percent-format, "/rfp", "Number Format~2,Percent~12", "Multiply by 100 
-and display %"
-
-table-exponential-format, "/rfe",  "Number Format~2,Exp~13"  "Exponential 
-format (not implemented)"
-
-table-fixed-format, "/rff",  "Number Format~2,Fixed~14", "Always display 
-decimal places"
-
-table-hbar-format, "/rfh",  "Number Format~2,H-Bar~15", "Display as horizontal 
-bar"
-
-table-vbar-format, "/rfv", "Number Format~2,V-Bar~16",  "Display as vertical 
-bar"
-
-table-precision, "/rp"  "Number Format~2,Precision~20"  "Set number of decimal 
-places"
-
-table-day-month-year, "/rfda",  "Date Format~3,19 Jun 1970~10", "Display day, 
- month, and year"
-
-table-month-year, "/rfdb", "Date Format~3,Jun 1970~11",  "Display month and 
-year"\},
-
-table-day-month, "/rfdc",  "Date Format~3,19 Jun~12",  "Display day and 
-month"\},
-
-
+\helptopic{table}}
 
 
 \begindata{bp,537558784}

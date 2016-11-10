@@ -16,7 +16,7 @@ HTML_HFILES = \
 	htmlenv.H attlist.H hidden.H hiddenview.H \
 	hr.H hrv.H ez2htmlapp.H htmlform.H htmlimagev.H htablev.H
 HELPFILES = \
-	htmltext.help ez2html.help urlbutton.help 
+	htmltext.help ez2html.help urlbutton.help webproc.help
 
 #ifdef WWW_ENV
 WEBOBJS =\
@@ -58,6 +58,7 @@ InstallShScript(mkurlbutton.sh, ${DESTDIR}/bin/mkurlbutton)
 InstallDocs($(HELPFILES),${DESTDIR}/help)
 InstallHelpAlias(urlbutton, mkurlbutton url)
 InstallHelpAlias(htmltext, html)
+InstallHelpAlias(webproc, htmltextproc urlbuttonproc hiddenproc)
 InstallLink(runapp,${DESTDIR}/bin/ez2html)
 #ifdef WWW_ENV
 InstallLink(runapp,${DESTDIR}/bin/web)

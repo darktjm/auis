@@ -3,51 +3,86 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Chart}
+\chapter{Procedure Table Listing for Chart}
 
 
+\bold{chartv-Save}(object \italic{self})
 
-chartv-Save:  Save Database; menulist "Save~50"
+\leftindent{Save Database.  If a name was not assigned yet, one is 
+prompted for.
 
-chartv-Add:  Add Item; "Add~60"
+Menu:  Save~50
 
-chartv-Delete:  Delete Item; "Delete~61"
+Use \bold{queueanswer} to set name in Ness if not assigned yet.}
 
-chartv-Print:  Print Database; "Print~63"
+\bold{chartv-Add}(object \italic{self})
 
-chartv-Palette:  Palette-toggle; "Expose Palette~70"; menu hidden by default
+\leftindent{Add Item(s).  Prompts will continue until blank name given or 
+canceled.
 
-chartv-Palette:   Palette-toggle; "Hide Palette~70"; menu exposed by default
+Menu:  Add~60
 
-chartv-DEBUG:  Debug-toggle;  "DEBUG~80"
+Use \bold{queueanswer} to enter name and then value pairs with Ness.}
 
-chartv-Quit:  Quit; "Quit~99"
+\bold{chartv-Delete}(object \italic{self})
+
+\leftindent{Delete current item.
+
+Menu:  Delete~61
+
+Selection of current item is required for this to work, which is not 
+generally possible from Ness.  Do not use this from Ness.}
+
+\bold{chartv-Print}(object \italic{self})
+
+\leftindent{Print Database.  If this actually results in a printed page 
+for you, it's a miracle.  Try looking at \typewriter{/tmp/chart_print.PS}.
+
+Menu:  Print~63}
+
+\bold{chartv-Palette}(object \italic{self})
+
+\leftindent{Toggle presence of palette.
+
+Menu:  Expose Palette~70 (when not present); Hide Palette~70" (when 
+present)}
+
+\bold{chartv-DEBUG}(object \italic{self})
+
+\leftindent{Debug-toggle
+
+Menu:  DEBUG~80}
+
+\bold{chartv-Quit}(object \italic{self})
+
+\leftindent{Quit (bypasses ATK/ez Quit).
+
+Menu:  Quit~99}
+
+\bold{chartv-ReChart}(object \italic{self}, marker \italic{type})
+
+\leftindent{Change chart type.  The \italic{type} argument is required, and is 
+one of those given below.
+
+Menu:  ReChart~10,Histogram~1 ("Histogram"); ReChart~10,Pie~2 ("Pie"); 
+ReChart~10,Dot~3 ("Dot"); ReChart~10,Line~4 ("Line")}
+
+\bold{chartv-Sort}(object \italic{self}, integer \italic{type})
+
+\leftindent{Change sort order.  The \italic{type} parameters supported are 
+given after the menu entries.  The default is Position Ascend (260).
+
+Menu:  Sort~20,Label Ascend~10 (258); Sort~20,Label Descend~11 
+(514); Sort~20,Value Ascend~20 (257); Sort~20,Value Descend~21 (513); 
+Sort~20,Position Ascend~30 (260); Sort~20,Position Descend~31 (516)}
+
+\section{Related Topics}
 
 
-chartv-ReChart:  
+\leftindent{\helptopic{procs}
 
-ReChart To Histogram; "ReChart~10,Histogram~1"
+\helptopic{chart}}
 
-ReChart To Pie;  "ReChart~10,Pie~2"
-
-ReChart To Dot;  "ReChart~10,Dot~3",
-
-ReChart To Line;  "ReChart~10,Line~4"
-
-
-chartv-Sort:
-
-"Sort~20,Label Ascend~10"
-
-"Sort~20,Label Descend~11"
-
-"Sort~20,Value Ascend~20"
-
-"Sort~20,Value Descend~21"
-
-"Sort~20,Position Ascend~30"
-
-"Sort~20,Position Descend~31"
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

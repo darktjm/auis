@@ -31,8 +31,8 @@ static keymap *M_Map;
 static menulist *M_Menus;
 
 ATKdefineRegistry(ptextview, srctextview, ptextview::InitializeClass);
-static void braceslash(ptextview *self, char key);
-static void asterisk(ptextview *self, char key);
+static void braceslash(ptextview *self, long key);
+static void asterisk(ptextview *self, long key);
 
 static struct bind_Description ptextBindings[]={
     {"ptextview-brace","}",'}', NULL,0, 0, (proctable_fptr)braceslash,""},
@@ -117,7 +117,7 @@ void ptextview::Paren(char key /* must be char for "&" to work. */)
     (pt)->NotifyObservers(0);
 }
 
-static void braceslash(ptextview *self, char key /* must be char for "&" to work. */)
+static void braceslash(ptextview *self, long key /* must be char for "&" to work. */)
 {
     ptext *pt = (ptext *)(self)->GetDataObject();
     int count = ((self)->GetIM())->Argument(), pos, oldpos;
@@ -125,7 +125,8 @@ static void braceslash(ptextview *self, char key /* must be char for "&" to work
     if (IsAutoCutMode() && (self)->GetDotLength()>0)
 	((self)->GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), self, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos = pos = (self)->CollapseDot();
-    while (count--) (pt)->InsertCharacters(pos++,&key,1);
+    char ckey = key;
+    while (count--) (pt)->InsertCharacters(pos++,&ckey,1);
     if (key == '}') 
 	if((pt)->GetStyle(oldpos) == pt->srctext::comment_style)
 	    ((pt->text::rootEnvironment)->GetEnclosing(oldpos))->SetStyle(FALSE, FALSE);
@@ -171,7 +172,7 @@ static void braceslash(ptextview *self, char key /* must be char for "&" to work
     (pt)->NotifyObservers(0);
 }
 
-static void asterisk(ptextview *self, char key /* must be char for "&" to work. */)
+static void asterisk(ptextview *self, long key /* must be char for "&" to work. */)
 {
     ptext *pt = (ptext *)(self)->GetDataObject();
     int count = ((self)->GetIM())->Argument(), oldpos, pos = (self)->GetDotPosition();
@@ -180,7 +181,8 @@ static void asterisk(ptextview *self, char key /* must be char for "&" to work. 
 	((self)->GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), self, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos=pos = (self)->CollapseDot();
 
-    while (count--) (pt)->InsertCharacters(pos++,&key,1);
+    char ckey = key;
+    while (count--) (pt)->InsertCharacters(pos++,&ckey,1);
 
     if (key == '{')
 	(pt)->WrapStyle(oldpos, pos-oldpos, pt->srctext::comment_style, FALSE, TRUE);

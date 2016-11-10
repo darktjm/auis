@@ -18,5 +18,5 @@ DynamicMultiObject(stroffet,$(EXTRACLASSES),$(OBJS),$(LIBS), $(DYNMATHLIB),)
 InstallDynamicObject(stroffet,$(EXTRACLASSES), $(FULLATKDLIBDIR))
 
 NormalHelpRule()
-InstallDocs(stroffet.help, ${DESTDIR}/help)
+InstallDocs(stroffet.help stroffetproc.help, ${DESTDIR}/help)
 InstallHelpAlias(stroffet, troff-inset)

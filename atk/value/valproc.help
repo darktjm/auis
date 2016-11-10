@@ -1,20 +1,41 @@
 \begindata{text,538528536}
 \textdsversion{12}
 \template{help}
-\define{global
-}
-\chapter{Listprocs for Value (etextv, mtextv)
-
-}
-
-"etextview-return-cmd" 	"Handle enter key"	"^M"
-
-"etextview-cancel-cmd"	"Handle ^G"	 "^G"
-
-"etextview-clear-cmd"	"Handle ^U"	 "^U"
+\chapter{Listprocs for Value (etextv, mtextv)}
 
 
-"metextview-return-cmd"	"Handle menter key"	"^M"
+\bold{etextview-return-cmd}(object \italic{self})
+
+\leftindent{Handle enter key
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+\bold{etextview-cancel-cmd}(object \italic{self})
+
+\leftindent{Handle cancel
+
+Bound to:  \typewriter{^G}}
+
+\bold{etextview-clear-cmd}(object \italic{self})
+
+\leftindent{Handle clear
+
+Bound to:  \typewriter{^U}}
+
+
+\bold{metextview-return-cmd}(object \italic{self})
+
+\leftindent{Handle menter key
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{adew}}
 
 
 \begindata{bp,537558784}

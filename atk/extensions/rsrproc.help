@@ -1,0 +1,44 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for recsearch}
+
+
+\bold{recsearch-begin-at-top}(object \italic{im}, null | 0 | marker \italic{pat})
+
+\leftindent{Begin recursive search at top (IM) level.
+
+Use \italic{pat} or \bold{queueanswer} to specify pattern in Ness.}
+
+\bold{recsearch-begin}(object \italic{im}, null | 0 | marker \italic{pat})
+
+\leftindent{Begin recursive search.
+
+Use \italic{pat} or \bold{queueanswer} to specify pattern in Ness.}
+
+\bold{recsearch-replace}(object \italic{im}, null | 0 | marker \italic{rpl})
+
+\leftindent{Replace target of recsearch with a string.
+
+Use \italic{rpl} or \bold{queueanswer} to specify replacement string in Ness.}
+
+\bold{recsearch-resume}(object \italic{im})
+
+\leftindent{Resume recursive search.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{search}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

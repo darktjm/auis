@@ -109,7 +109,7 @@ struct cell {
 
 #define GENERALFORMAT 'G'
 #define CURRENCYFORMAT '$'
-#define PERCENTFORMAT '\045'	/* class preprocessor mangles the real thing */
+#define PERCENTFORMAT '%'
 #define EXPFORMAT 'E'
 #define FIXEDFORMAT 'F'
 #define HORIZONTALBARFORMAT 'H'

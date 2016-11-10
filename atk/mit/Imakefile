@@ -22,9 +22,10 @@ InstallShScript(ez2ps, $(DESTDIR)/bin)
 
 NormalHelpRule()
 
-InstallDocs(psinset.help, ${DESTDIR}/help)
-InstallDocs(note.help, ${DESTDIR}/help)
+InstallDocs(psinset.help psproc.help, ${DESTDIR}/help)
+InstallDocs(note.help noteproc.help, ${DESTDIR}/help)
 InstallDocs(ez2ascii.help ez2ps.help, $(DESTDIR)/help)
+InstallDocs(gnuproc.help vutilsproc.help, $(DESTDIR)/help)
 InstallHelpAlias(ez2ps, ez-postscript ez-ps)
 InstallHelpAlias(psinset, ps-inset postscript postscript-inset)
 InstallHelpAlias(note, note-inset footnote-inset)

@@ -24,7 +24,7 @@ MkdirTarget($(DESTDIR)/doc $(DESTDIR)/doc/PROGRAMMER)
 
 InstallDocs($(LINKDOCS), $(LINKDIR))
 InstallDocs(link.intro, ${DESTDIR}/help)
-InstallDocs(linkins.help, $(DESTDIR)/help)
+InstallDocs(linkins.help linkproc.help pushbuttonproc.help, $(DESTDIR)/help)
 InstallHelpAlias(linkins, $(LINKHELPALIASES))
 InstallDocs(pshbttn.help, $(DESTDIR)/help)
 InstallHelpAlias(pshbttn, pushbutton trigger)

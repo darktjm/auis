@@ -1,0 +1,61 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for compress}
+
+
+\bold{compressv-compress-lines}(object \italic{textview}, marker \italic{range})
+
+\leftindent{Compresses lines in the specified range (or 
+selected region) into a box; will prompt if none specified.  The format 
+for \italic{range} is two decimal numbers with any other character(s) 
+between.  \italic{range} takes precedence, then selected region, then 
+prompted answer.
+
+Use \bold{queueanswer} to provide range in Ness, if necessary, but 
+better to just pass in \italic{range} or set region.}
+
+\bold{compressv-compress-region}(object \italic{textview})
+
+\leftindent{Blindly compresses the selected region, 
+doesn't know how to combine compresses or grab entire lines, but useful if 
+you WANT to nest compresses.}
+
+\bold{compressv-decompress-all}(object \italic{textview})
+
+\leftindent{Expand all compressed regions in document 
+to normal size.
+
+Bound to:  \typewriter{Esc-Q}
+
+Menu in srctextview:  Source Text,Decompress all~25}
+
+\bold{compressv-decompress-lines}(object \italic{textview}, marker \italic{range})
+
+\leftindent{Takes any lines within the specified 
+range (or selected region) out of the box they were in.  The format 
+for \italic{range} is two decimal numbers with any other character(s) 
+between.  \italic{range} takes precedence, then selected region, then 
+prompted answer.
+
+Use \bold{queueanswer} to provide range in Ness, if necessary, but 
+better to just pass in \italic{range} or set region.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{compress}
+
+\helptopic{srctext}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -113,6 +113,7 @@
 static const char * const filelist[] = {
         "%s/Imakefile",
 	"%s/%s.help",
+	"%s/%sproc.help",
 /* 	"%s/%sst.C",		- no idea what this was -wjh */
 	"%s/%s.H",
 	"%s/%s.C",

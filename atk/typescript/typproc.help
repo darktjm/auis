@@ -3,103 +3,257 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Typescript and Fcomp
-
-}
-
-"textview-search"	 	"Search forward"	"Search~20,Forward~10"
-
-"textview-reverse-search"	"Search Backward"		"Search~20,Backward~11"  
-
-"typescript-Save-As" 	 "Prompt for file name to save"	"File~30,Save As~10"
-
-"typescript-Print"	 	"Print typescript"	"File~30,Print~21"
-
-"typescript-Preview"	"Preview typescript"	"File~30,Preview~22"
-
-"typescript-SetPrinter" 	"Set Printer"	"File~30,Set Printer~20"
-
-"typescript-yank"		"Yank text back from kill-buffer."	"^Y"	"Paste~11"
-
-"typescript-rotate-backward-paste" "Rotate kill-buffer backwards. 
- "Esc-^Y"
-
-"typescript-rotate-paste"	 "Rotate kill-buffer."		"Esc-y"	"Replace~13"
-
-"typescript-Grab-Last-Cmd"	 "Grab Last Command	 "Esc-="
-
-"typescript-Grab-Current-Cmd"	 "Grab Current Command"	"Esc-+" 	"Move~30"
-
-"typescript-Execute-Current-Cmd" "Execute Current Command"	"Esc-^M"	
-"Execute~31"
-
-"typescript-Grab-Next-Cmd"`"Grab Next Command"	"Esc-`"
-
-"typescript-interupt-command"	 "Handle ^C	 "^C" "Delete" /* bind DEL too! */
-
-"typescript-beginning-of-line"	"Move to line beginning"	 "^A"
-
-"typescript-end-of-line"	"Move to line end"	"^E"
-
-"typescript-EOT-command"	"Handle ^D"	 "^D"
-
-"typescript-return-cmd"	 "Handle enter key"	 "^M"
-
-"typescript-return-and-position"	"Handle enter key and place command at top of 
-the screen"	"^J"
-
-"typescript-ZAP-command"	"Handles ^U line clearing"	 "^U"
-
-"typescript-Stop-cmd"	"Handle ^Z Stop cmd"	"^Z"
-
-"typescript-unbound"	"Does nothing."	"Esc-~"
-
-"typescript-zap-region"	"Cut region to kill-buffer."	"^W"	"Cut~11"
-
-"typescript-copy-region"	"Copy region to kill-buffer."	"Esc-w"	"Copy~12"
-
-"typescript-QUIT-command"	"Handles quit cmd"	"^\\"
-
-"typescript-No-Echo-Cmd"	"Turn Off Echoing"	 "^X^L"
-
-"typescript-delete-previous-character"	"Delete the previous character."	"^H"	
-"Delete" 
-
-"Typescript-self-insert"	"Insert a character."
-
-"typescript-Clear"		 "Clear Typescript"		"Clear~51"
-
-"typescript-Clear-Text" "Clear the text of the typescript"
-
-"Typescript-digit" "Insert a character." "0" .. "9"
-
-"typescript-drag-cwd" "Drag out current working directory."
-
-"typescript-reset-tty" "Reset the tty (stty sane)"  "Esc-r"
-
-"Typescript-self-insert" "Insert a character."
+\chapter{Procedure Table Listing for Typescript and Fcomp}
 
 
+\bold{typescript-Save-As}(object \italic{self})
 
-fcomp:
+\leftindent{Prompt for file name to save
+
+Menu:  File~30,Save As~10
+
+Use \bold{queueanswer} to provide file name in Ness.}
+
+\bold{typescript-Print}(object \italic{self})
+
+\leftindent{Print typescript
+
+Menu:  "File~30,Print~21}
+
+\bold{typescript-Preview}(object \italic{self})
+
+\leftindent{Preview typescript
+
+Menu:  File~30,Preview~22}
+
+\bold{typescript-SetPrinter}(object \italic{self})
+
+\leftindent{Set Printer
+
+File~30,Set Printer~20
+
+Use \bold{queueanswer} to provide printer name in Ness.}
+
+\bold{typescript-yank}(object \italic{self})
+
+\leftindent{Yank text back from kill-buffer.
+
+Bound to:  \typewriter{^Y}; Menu:  Paste~11}
+
+\bold{typescript-rotate-backward-paste}(object \italic{self})
+
+\leftindent{Rotate kill-buffer backwards.
+
+Bound to:  \typewriter{Esc-^Y}}
+
+\bold{typescript-rotate-paste}(object \italic{self})
+
+\leftindent{Rotate kill-buffer.
+
+Bound to:  \typewriter{Esc-y}; Menu:  Replace~13}
+
+\bold{typescript-Grab-Last-Cmd}(object \italic{self})
+
+\leftindent{Grab Last Command \italic{FIXME: what does that mean?}
+
+Bound to:  \typewriter{Esc-=}}
+
+\bold{typescript-Grab-Current-Cmd}(object \italic{self})
+
+\leftindent{Grab Current Command \italic{FIXME: what does that mean?}
+
+Bound to:  \typewriter{Esc-+}; Menu:  Move~30}
+
+\bold{typescript-Execute-Current-Cmd}(object \italic{self})
+
+\leftindent{Execute Current Command
+
+Bound to:  \typewriter{Esc-Enter} (\typewriter{Esc-^M}); Menu:  
+Execute~31}
+
+\bold{typescript-Grab-Next-Cmd}(object \italic{self})
+
+\leftindent{Grab Next Command \italic{FIXME: what does that mean?}
+
+Bound to:  \typewriter{Esc-`}}
+
+\bold{typescript-interupt-command}(object \italic{self})
+
+\leftindent{Handle ^C
+
+Bound to:  \typewriter{^C}, \typewriter{Delete}}
+
+\bold{typescript-beginning-of-line}(object \italic{self})
+
+\leftindent{Move to line beginning
+
+Bound to:  \typewriter{^A}}
+
+\bold{typescript-end-of-line}(object \italic{self})
+
+\leftindent{Move to line end
+
+Bound to:  \typewriter{^E}}
+
+\bold{typescript-EOT-command}(object \italic{self})
+
+\leftindent{Handle ^D
+
+Bound to:  \typewriter{^D}}
+
+\bold{typescript-return-cmd}(object \italic{self})
+
+\leftindent{Handle enter key
+
+Bound to:  \typewriter{Enter} (\typewriter{^M})}
+
+\bold{typescript-return-and-position}(object \italic{self})
+
+\leftindent{Handle enter key and place command at top of the screen
+
+Bound to:  \typewriter{^J}}
+
+\bold{typescript-ZAP-command}(object \italic{self})
+
+\leftindent{Handles ^U line clearing
+
+Bound to:  \typewriter{^U}}
+
+\bold{typescript-Stop-cmd}(object \italic{self})
+
+\leftindent{Handle ^Z Stop cmd
+
+Bound to:  \typewriter{^Z}}
+
+\bold{typescript-unbound}(object \italic{self})
+
+\leftindent{Does nothing.
+
+Bound to:  \typewriter{Esc-~}}
+
+\bold{typescript-zap-region}(object \italic{self})
+
+\leftindent{Cut region to kill-buffer.
+
+Bound to:  \typewriter{^W}; Menu:  Cut~11}
+
+\bold{typescript-copy-region}(object \italic{self})
+
+\leftindent{Copy region to kill-buffer.
+
+Bound to:  \typewriter{Esc-w}; Menu:  Copy~12}
+
+\bold{typescript-QUIT-command}(object \italic{self})
+
+\leftindent{Handles quit cmd
+
+Bound to:  \typewriter{^\\}}
+
+\bold{typescript-No-Echo-Cmd}(object \italic{self})
+
+\leftindent{Turn Off Echoing
+
+Bound to:  \typewriter{^X^L}}
+
+\bold{typescript-delete-previous-character}(object \italic{self})
+
+\leftindent{Delete the previous character.
+
+Bound to:  \typewriter{Backspace} (\typewriter{^H}), \typewriter{Delete}}
+
+\bold{typescript-self-insert}(object \italic{self}, integer \italic{ch})
+
+\leftindent{Insert a character.
+
+Bound to:  all printable ASCII except digits (\typewriter{Space} .. 
+\typewriter{/}, \typewriter{:} .. \typewriter{~}), with their 
+respective character codes as \italic{ch}}
+
+\bold{typescript-Clear}(object \italic{self})
+
+\leftindent{Clear Typescript
+
+Menu:  Clear~51}
+
+\bold{typescript-Clear-Text}(object \italic{self})
+
+\leftindent{Clear the text of the typescript}
+
+\bold{typescript-digit}(object \italic{self}, integer \italic{ch})
+
+\leftindent{Insert a character.
+
+Bound to:  \typewriter{0} .. \typewriter{9}, with their respective 
+character codes as \italic{ch}}
+
+\bold{typescript-drag-cwd}(object \italic{self})
+
+\leftindent{Drag out current working directory.}
+
+\bold{typescript-reset-tty}(object \italic{self})
+
+\leftindent{Reset the tty (stty sane)
+
+Bound to:  \typewriter{Esc-r}}
+
+\bold{typescript-Read-User-Menus}(object \italic{self}, marker \italic{cmd})
+
+\leftindent{Handle user supplied menus by self-inserting \italic{cmd}.
+
+Menu:  for each entry in the "shell menu" file, if it exsits, the string 
+before the colon is the menu entry, and the \italic{cmd} is the text after 
+the colon.
+
+Note that if the view was initialized without a menu file (i.e., not 
+with the \bold{typescript} command or the menu file does not exist), this 
+command will not exist.} 
 
 
-"fcomp-complete-filename"  		"Filename completion (typescript)"
+In addition, the following are inserted into the menus from their 
+respective classes:
 
-"fcomp-possible-completions"		"Display possible filename completions 
-(typescript)"
+Search~20,Forward~10 -- \bold{textview-search}
 
-"fcomp-complete-command-backward"	"Complete partial command - searching 
-backwards (typescript)"
+Search~20,Backward~11 -- \bold{textview-reverse-search}
 
-"fcomp-complete-command-foreward"	"Complete partial command - searching 
-forewards (typescript)"
+File~30,Printer Setup~20 -- \bold{printopt-post-window}
 
-"fcomp-complete-token-backward"	"Complete partial token - searching backwards 
-(typescript)"
 
-"fcomp-complete-token-foreward"	 	"Complete partial token - searching 
-forewards (typescript)"
+\section{fcomp}
+
+
+\bold{fcomp-complete-filename}(object \italic{self})
+
+\leftindent{Filename completion (typescript)}
+
+\bold{fcomp-possible-completions}(object \italic{self})
+
+\leftindent{Display possible filename completions (typescript)}
+
+\bold{fcomp-complete-command-backward}(object \italic{self})
+
+\leftindent{Complete partial command - searching backwards (typescript)}
+
+\bold{fcomp-complete-command-foreward}(object \italic{self})
+
+\leftindent{Complete partial command - searching forewards (typescript)}
+
+\bold{fcomp-complete-token-backward}(object \italic{self})
+
+\leftindent{Complete partial token - searching backwards (typescript)}
+
+\bold{fcomp-complete-token-foreward}(object \italic{self})
+
+\leftindent{Complete partial token - searching forewards (typescript)}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{typescript}}
+
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

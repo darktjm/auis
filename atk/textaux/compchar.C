@@ -472,7 +472,7 @@ struct YARock{
 /* keywork: used by handle key to determine what the possible matches for the current composition are. */
 static  char keywork(char  key,struct composites_s  *c,struct YARock  *rock)
 {
-    char buf[6];
+    char buf[7];
     if(strncmp((char *) c->exts,(char *) rock->exts,strlen((char *) rock->exts))) return 0;
     if(!strcmp((char *) c->exts,(char *) rock->exts)) {
 	rock->c=c;
@@ -725,7 +725,9 @@ boolean compchar::InitializeClass()
 	return FALSE;
     }
     
-    (fixed)->AddNewFontFace(fontdesc_Fixed);
+//    tjm - FIXME:  it would be more effective (and prettier) to set better tab stops.
+//                  but that will have to wait until "em"s are implemented.
+//    (fixed)->AddNewFontFace(fontdesc_Fixed);
     (fixed)->SetFontFamily("andytype");
     
     (boldulined)->AddNewFontFace(fontdesc_Bold);

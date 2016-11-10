@@ -1,5 +1,5 @@
 NormalHelpRule()
-InstallDocs(htmlview.help,$(DESTDIR)/help)
+InstallDocs(htmlview.help htmlproc.help,$(DESTDIR)/help)
 #ifdef HTML_STANDALONE_ENV
 InstallDocs(htmlview.html,../standalone/auis-html/help)
 #endif

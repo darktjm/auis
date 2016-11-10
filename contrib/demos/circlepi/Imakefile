@@ -18,5 +18,5 @@ InstallDynamicObject(circlepi,circlepiview,$(FULLATKDLIBDIR))
 OptionalATKLibrary(circlepi, $(OBJS), $(LIBS),,)
 InstallOptionalATKLibrary(circlepi, $(DESTDIR)/lib/atk)
 
-InstallDocs(circpi.help, $(DESTDIR)/help)
+InstallDocs(circpi.help circpiproc.help, $(DESTDIR)/help)
 InstallClassFiles($(IHFILES))

@@ -100,8 +100,8 @@ enum image_fileType {
   any_imageType				/* File type supported by devil */
 };
 
-static void Import_Cmd( class imagev  *self, enum image_fileType  type );
-static void Export_Cmd( class imagev  *self, enum image_fileType  type );
+static void Import_Cmd( class imagev  *self, long  type );
+static void Export_Cmd( class imagev  *self, long  type );
 
 static struct bind_Description imagevBindings[] = {
 
@@ -675,7 +675,7 @@ image_Export( class image  *image, const char  *filename, enum image_fileType  t
 }
 
 static void
-Import_Cmd( class imagev  *self, enum image_fileType  type )
+Import_Cmd( class imagev  *self, long type )
 {
     class image *image = self->orig;
     char filename[MAXPATHLEN + 1];
@@ -687,7 +687,7 @@ Import_Cmd( class imagev  *self, enum image_fileType  type )
     if(completion::GetFilename(self, "Import image file: ", filename, filename, sizeof(filename), FALSE, FALSE) == -1)
 	return;
     POSTWAITCURSOR(self);
-    if((newimage = image_Import(filename, type))) { /* OK */
+    if((newimage = image_Import(filename, (enum image_fileType)type))) { /* OK */
 	boolean havecmap= self->havePrivateCmap;
 	if(havecmap) {
 	    (self)->WantColormap( self , NULL);
@@ -718,7 +718,7 @@ Import_Cmd( class imagev  *self, enum image_fileType  type )
 }
 
 static void
-Export_Cmd( class imagev  *self, enum image_fileType  type )
+Export_Cmd( class imagev  *self, long type )
 {
     class image *image = self->orig;
     char filename[MAXPATHLEN + 1];
@@ -730,7 +730,7 @@ Export_Cmd( class imagev  *self, enum image_fileType  type )
     if(completion::GetFilename(self, "Export image file: ", filename, filename, sizeof(filename), FALSE, FALSE) == -1)
 	return;
     POSTWAITCURSOR(self);
-    if((result = image_Export(image, filename, type)) != 0) /* Error */
+    if((result = image_Export(image, filename, (enum image_fileType)type)) != 0) /* Error */
         sprintf(message, "Could not export image file '%.*s'", MAXPATHLEN, filename);
     else sprintf(message, "Wrote image to file '%.*s'", MAXPATHLEN, filename);
     RETRACTWAITCURSOR(self);

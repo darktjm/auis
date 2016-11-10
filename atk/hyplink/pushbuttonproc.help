@@ -1,0 +1,54 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for pushbutton}
+
+
+\bold{pushbuttonview-set-label-text}(object \italic{self})
+
+\leftindent{Prompts for user to set the text string of the pushbutton.
+
+Menu:  Pushbutton~1,Set Label~11
+
+Use \bold{queueanswer} to provide label text in Ness.}
+
+\bold{pushbuttonview-set-font}(object \italic{self})
+
+\leftindent{Prompts for user to set the font of the pushbutton.
+
+Menu:  Pushbutton~1,Set Font~12
+
+Use \bold{queueanswer} to provide font name in Ness.}
+
+\bold{pushbuttonview-set-style}(object \italic{self})
+
+\leftindent{Prompts for user to set the appearance of the pushbutton.
+
+Menu:  Pushbutton~1,Set Style~13
+
+Use \bold{queueanswer} to provide style name in Ness.}
+
+\bold{pushbuttonview-set-color}(object \italic{self})
+
+\leftindent{Prompts for user to set the foreground and background color of the pushbutton.
+
+Menu:  Pushbutton~1,Set Color~14
+
+Use \bold{queueanswer} twice to provide foreground and background colors in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{linkinset}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -63,4 +63,3 @@ FunctionIndex:
 InstallFile(FunctionIndex,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 CleanTarget(FunctionIndex)
 #endif /* FUNCTION_INDEX_ENV */
-

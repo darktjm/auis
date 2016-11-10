@@ -1,8 +1,6 @@
 \begindata{text,538382016}
 \textdsversion{12}
 \template{help}
-\define{global
-}
 \chapter{Searching for characters or words in files\section{
 
 }}
@@ -200,8 +198,8 @@ selected in "s\bold{\italic{mall}}" and "\italic{\bold{ma}}p".
 
 }}
 \leftindent{\description{Square brackets ( [ ] ) surrounding a non-empty 
-string define a "character class."  \formattingnote{ For example, the 
-character class \bold{\italic{[abc]}} finds any }occurrence of 
+string define a "character class."  For example, the 
+character class \bold{\italic{[abc]}} finds any occurrence of 
 \italic{\bold{a}},\bold{\italic{ b}}, or \bold{\italic{c}}.  The order of 
 individual elements in a character class does not matter, so 
 \bold{\italic{[bca]}} works the same as \bold{\italic{[abc]}}.   You can also 

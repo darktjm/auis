@@ -15,6 +15,7 @@
 #define StateInit		0
 #define StateSawSlash		1
 #define StateSawKeyword		2
+#define StateSawTemplate        3
 
 struct templatelist  {
     class stylesheet *sSheet;
@@ -126,8 +127,21 @@ TryPath(char *filename, const char *path, const char *tplnm, const char *ext) {
 	return fopen(filename, "r");
 }
 
+static boolean override_style(class style *self, long data)
+{
+    class stylesheet *other = (class stylesheet *)data;
+    const char *name = self->GetName();
+    class style *old;
+
+    if((old = other->Find(name)))
+	other->Delete(old);
+    other->Add(self);
+    return FALSE;
+}
+
 /* This routine parses the contents of a template file */
-long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
+static long text_ReadTemplate(class text *self, const char  *templateName, boolean  inserttemplatetext,
+			      class stylesheet *add_to = NULL)
             {
     FILE *fileptr;
     int c, statecode, i;
@@ -138,12 +152,15 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
     boolean overrideTemplate = TRUE;
 
     if ((tlPtr = text_FindTemplateByName(templateName)) != NULL && (templateptr = tlPtr->sSheet) != NULL)   {
-	if  (inserttemplatetext && tlPtr->hasText && ! this->pendingReadOnly)
+	if  (inserttemplatetext && tlPtr->hasText && ! self->pendingReadOnly)
 	    overrideTemplate = FALSE;
 	else  {
 	    /* probably should stat file here to see if it's changed */
-	    text_OverrideStyles(this->styleSheet, templateptr);
-	    SetGlobalStyleInText(this);
+	    if(add_to)
+		templateptr->EnumerateStyles(override_style, (long)add_to);
+	    else
+		text_OverrideStyles(self->styleSheet, templateptr);
+	    SetGlobalStyleInText(self);
 	    return 0;
 	}
     }
@@ -208,33 +225,33 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
 	tlPtr->hasText = TRUE;
     }
 
-    if (inserttemplatetext && ! this->pendingReadOnly) {
+    if (inserttemplatetext && ! self->pendingReadOnly) {
 	long objectID;
 	char *tempTemplateName;
 
 	(void) filetype::Lookup(fileptr, filename, &objectID, NULL);
-	tempTemplateName = this->templateName;
-	this->templateName = NULL;
-	(this)->Read( fileptr, objectID);	/* only for new files */
-	this->templateName = tempTemplateName;
-	tlPtr->hasText = ((this)->GetLength() != 0);
+	tempTemplateName = self->templateName;
+	self->templateName = NULL;
+	(self)->Read( fileptr, objectID);	/* only for new files */
+	self->templateName = tempTemplateName;
+	tlPtr->hasText = ((self)->GetLength() != 0);
 	fclose(fileptr);
 	if (overrideTemplate)  {
 	    long i;
 	    class style **styles;
 
-	    (this->styleSheet)->SetTemplateName( templateptr->templateName);
-	    text_OverrideStyles(templateptr, this->styleSheet);
+	    (self->styleSheet)->SetTemplateName( templateptr->templateName);
+	    text_OverrideStyles(templateptr, self->styleSheet);
 	    for (i = 0, styles = templateptr->styles; i < templateptr->nstyles; i++, styles++) {
 		(*styles)->template_c = 1;
 	    }
-	    for (i = 0, styles = this->styleSheet->styles; i < this->styleSheet->nstyles; i++, styles++) {
+	    for (i = 0, styles = self->styleSheet->styles; i < self->styleSheet->nstyles; i++, styles++) {
 		(*styles)->template_c = 1;
 	    }
 	}
 	else
-	    text_OverrideStyles(this->styleSheet, templateptr);
-	SetGlobalStyleInText(this);
+	    text_OverrideStyles(self->styleSheet, templateptr);
+	SetGlobalStyleInText(self);
 	return 0;
     }
     i = 0;
@@ -287,8 +304,7 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
 			statecode = StateInit;
 		    }
 		    else if (strcmp(string, "template") == 0) {
-			fprintf(stderr, "Recursive templates disallowed - ignoring.\n");
-			statecode = StateInit;
+			statecode = StateSawTemplate;
 		    }
 		    else if (strcmp(string, "global") == 0) {
 			/* handle global attributes here */
@@ -300,11 +316,32 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
 		}
 		else string[i++] = c;
 		break;
+	    case StateSawTemplate:
+	        if (c == '}') {
+		    static int recurse = 0;
+		    string[i] = '\0'; i = 0;
+		    if(++recurse > 10) // more than enough
+			fprintf(stderr, "Recursive templates disallowed - ignoring.\n");
+		    else
+			::text_ReadTemplate(self, string, FALSE, templateptr);
+		    --recurse;
+		    statecode = StateInit;
+		}
+	        else string[i++] = c;
+		break;
 	}
     }
     fclose(fileptr);
-    text_OverrideStyles(this->styleSheet, templateptr);
-    SetGlobalStyleInText(this);
+    if(add_to)
+        templateptr->EnumerateStyles(override_style, (long)add_to);
+    else {
+	text_OverrideStyles(self->styleSheet, templateptr);
+	SetGlobalStyleInText(self);
+    }
     return 0;
 }
 
+long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
+{
+    return ::text_ReadTemplate(this, templateName, inserttemplatetext);
+}

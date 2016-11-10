@@ -722,7 +722,7 @@ class keymap *textview_InitViCommandModeKeyMap(struct ATKregistryEntry   *classI
     adjustBindings(textviewViCommandModeBindings);
     bind::BindList(textviewViCommandModeBindings, newKeymap, NULL, classInfo);
 
-    dig=proctable::DefineProc("textview-digit", (proctable_fptr) textview_DigitCmd, classInfo, NULL, "Insert a character.");
+    dig=proctable::DefineProc("textview-digit", (proctable_fptr) textview_DigitCmd, classInfo, NULL, "Add to the numeric argument.");
 
     str[0] = ' ';
     str[1] = '\0';

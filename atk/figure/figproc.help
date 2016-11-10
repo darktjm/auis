@@ -1,0 +1,319 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for figure}
+
+
+Note that it is generally not possible to select, place, move, or 
+adjust figure objects using Ness.
+
+
+\bold{figview-abort-object}(object \italic{self})
+
+\leftindent{abort object being created.
+
+Bound to:  \typewriter{^G}}
+
+\bold{figview-copy-selected-inset}(object \italic{self})
+
+\leftindent{Put dataobject of selected inset in cut buffer.
+
+Menu:  Copy Inset Contents~3}
+
+\bold{figview-copy-selection}(object \italic{self})
+
+\leftindent{Put selected objects in cut buffer.
+
+Bound to:  \typewriter{Esc-w}; Menu:  Copy~2}
+
+\bold{figview-focus-down}(object \italic{self})
+
+\leftindent{move focus down to subgroup.
+
+Bound to:  \typewriter{Down} (\typewriter{Esc-B})}
+
+\bold{figview-focus-left}(object \italic{self})
+
+\leftindent{move focus left to sibling group.
+
+Bound to:  \typewriter{Left} (\typewriter{Esc-D})}
+
+\bold{figview-focus-right}(object \italic{self})
+
+\leftindent{move focus left to sibling group.
+
+Bound to:  \typewriter{Right} (\typewriter{Esc-C})}
+
+\bold{figview-focus-up}(object \italic{self})
+
+\leftindent{move focus up to parent group.
+
+Bound to:  \typewriter{Up} (\typewriter{Esc-A})}
+
+\bold{figview-pan-to-origin}(object \italic{self})
+
+\leftindent{Pan to (0,0).
+
+Menu:  Figure~5,Pan to Origin~19}
+
+\bold{figview-read-zip-file}(object \italic{self})
+
+\leftindent{Read a zip datastream into the figure.
+
+Use \bold{queueanswer} twice to provide file name and scale in Ness.}
+
+\bold{figview-rotate-yank-selection}(object \italic{self})
+
+\leftindent{Paste an object from the cut buffer 
+and rotate the buffer.
+
+Bound to:  \typewriter{Esc-y}}
+
+\bold{figview-set-expert-mode}(object \italic{self}, integer \italic{mode})
+
+\leftindent{Turns on expert mode for self and toolset.  \italic{mode} 
+is 0 to disable, and non-zero to enable.
+
+Menu:  Figure~5,Expert Mode~40 (\italic{mode} is 1)}
+
+\bold{figview-set-print-landscape}(object \italic{self}, integer \italic{on})
+
+\leftindent{Set landscape or portrait printing.  \italic{on} is 1 for 
+lasndscape, 0 for portrait.
+
+Menu:  File,Portrait Printing~25 (\italic{on} is 1); 
+File,Landscape Printing~25 (\italic{on} is 0)}
+
+\bold{figview-set-print-scale}(object \italic{self})
+
+\leftindent{Set print scale.
+
+Bound to:  \typewriter{Esc-P}; Menu:  File,Set Print Scale~24
+
+Use \bold{queueanswer} twice to provide X and Y scale in Ness.}
+
+\bold{figview-show-print-area}(object \italic{self}, integer italic{mode})
+
+\leftindent{Show page boundaries. \italic{mode} is 0 for off, 1 for 
+on, and 2 for recalculate (i.e., reshow if shown).
+
+Menu:  File,Show Print Area~26 (\italic{mode} is 1); 
+File,Hide Print Area~26 (\italic{mode} is 0)}
+
+\bold{figview-toggle-debug}(object \italic{self})
+
+\leftindent{Turn debugging on or off.}
+
+\bold{figview-toggle-readonly}(object \italic{self})
+
+\leftindent{Turn read-only flag on or off.}
+
+\bold{figview-toolset-create}(object \italic{self})
+
+\leftindent{Creates toolset window.
+
+Menu:  Figure~5,Toolset~30}
+
+\bold{figview-toolset-destroy}(object \italic{self})
+
+\leftindent{Deletes toolset window.
+
+Menu:  Figure~5,Remove Toolset~31}
+
+\bold{figview-unselect}(object \italic{self})
+
+\leftindent{Select nothing.
+
+Menu:  Unselect~11}
+
+\bold{figview-yank-selection}(object \italic{self})
+
+\leftindent{Paste an object from the cut buffer.
+
+Bound to:  \typewriter{^Y}; Menu:  Paste~4}
+
+\bold{figview-zap-selection}(object \italic{self})
+
+\leftindent{Remove selected objects and put them in cut buffer.
+
+Bound to:  \typewriter{^W}; Menu:  Cut~1}
+
+\bold{figview-zoom}(object \italic{self}, integer \italic{how})
+
+\leftindent{Change scale of view.  \italic{how} is less than zero for 
+out, greater than zero for in, and zero for normal size.
+
+Bound to:  \typewriter{Esc-Z} Menu:  Figure~5,Zoom In~10 (\italic{how} is 1)
+
+Bound to:  \typewriter{Esc-z}; Menu:  Figure~5,Zoom Out~11 (\italic{how} is -1)
+
+Menu:  Figure~5,Normal Size~12 (\italic{how} is 0)}
+
+
+\section{phlumphview}
+
+
+\italic{FIXME:  what the hell is a phlumph?}
+
+
+\bold{phlumph-close}(object \italic{self}, integer \italic{nodest})
+
+\leftindent{Close window containing page layouts.  \italic{nodest} must 
+be 0.
+
+Menu:  Phlumph~5,Close~11}
+
+\bold{phlumph-delete-page}(object \italic{self})
+
+\leftindent{Insert new page before the current one.
+
+Bound to:  \typewriter{^X-d}; Menu:  Phlumph~6,Delete This Page~12}
+
+\bold{phlumph-insert-page}(object \italic{self}, integer \italic{where})
+
+\leftindent{Insert new page before the current one (non-zero \italic{where}) 
+or at the end (zero \italic{where}).
+
+Bound to:  \typewriter{^X-a}; Menu:  Phlumph~6,Add Page~10 
+(\italic{where} is 0)
+
+Bound to:  \typewriter{^X-i}; Menu:  Phlumph~6,Insert Page Here~11 
+(\italic{where} is 1)}
+
+\bold{phlumph-next-page}(object \italic{self})
+
+\leftindent{Go to next page of page list.
+
+Bound to:  \typewriter{^X-^N}; Menu:  Phlumph~6,Next Page~21}
+
+\bold{phlumph-open}(object \italic{self})
+
+\leftindent{Open window containing page layouts.
+
+Menu:  Phlumph~5,Open~10}
+
+\bold{phlumph-previous-page}(object \italic{self})
+
+\leftindent{Go to previous page of page list.
+
+Bound to:  \typewriter{^X-^P}; Menu:  Phlumph~6,Previous Page~20}
+
+\bold{phlumph-set-repeat}(object \italic{self}, integer \italic{clear})
+
+\leftindent{\italic{Undocumented}  If \italic{clear} is 0, prompt for 
+a new repeat value.  Otherwise, clear repeat value.
+
+Menu:  Phlumph~6,Set Page Repeat~30 (\italic{clear} is 0)
+
+Menu:  Phlumph~6,Clear Page Repeat~31 (\italic{clear} is 1)
+
+Use \bold{queueanswer} provide repeat count in Ness if \italic{clear} is 0.}
+
+\bold{phlumph-toolset-suicide}(object \italic{self})
+
+\leftindent{Deletes this window.
+
+Bound to:  \typewriter{^X-^D}, \typewriter{^X-^C}; Menu:  Quit~99}
+
+
+\section{figotext}
+
+
+\bold{figotext-complete-entry}(object \italic{self})
+
+\leftindent{Finish entering text into this object.
+
+Bound to:  \typewriter{Esc-Enter} (\typewriter{Esc-^M})}
+
+\bold{figotext-delete-char}(object \italic{self})
+
+\leftindent{Delete a character from this object.
+
+Bound to:  \typewriter{Backspace} (\typewriter{^H}), \typewriter{Delete}}
+
+\bold{figotext-insert-char}(object \italic{self}, integer \italic{ch})
+
+\leftindent{Insert a character (\italic{ch}) into this object.
+
+Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~})}
+
+\bold{figotext-kill-line}(object \italic{self})
+
+\leftindent{Delete chars starting at dot.
+
+Bound to:  \typewriter{^K}}
+
+\bold{figotext-move-dot}(object \italic{self}, integer \italic{direction})
+
+\leftindent{Move the dot in this object.  \italic{direction} is 0 for 
+left, 1 for right, 2 for beginning, 3 for end, 4 for up, and 5 for down.
+
+Bound to:  \typewriter{^B}, \typewriter{Left} (\typewriter{Esc-D}) (\italic{direction} is 0)
+
+Bound to:  \typewriter{^F}, \typewriter{Right} (\typewriter{Esc-C}) (\italic{direction} is 1)
+
+Bound to:  \typewriter{^A} (\italic{direction} is 2)
+
+Bound to:  \typewriter{^E} (\italic{direction} is 3)
+
+Bound to:  \typewriter{^P}, \typewriter{Up} (\typewriter{Esc-A}) (\italic{direction} is 4)
+
+Bound to:  \typewriter{^N}, \typewriter{Down} (\typewriter{Esc-B}) (\italic{direction} is 5)}
+
+\bold{figotext-twiddle-chars}(object \italic{self})
+
+\leftindent{Move the dot in this object.
+
+Bound to:  \typewriter{^T}}
+
+
+\section{figtool}
+
+
+\bold{figtoolv-abort-object}(object \italic{self})
+
+\leftindent{Abort the object being built in the figview.
+
+Menu:  Cancel Object~11}
+
+\bold{figtoolv-apply-to-selection}(object \italic{self})
+
+\leftindent{Apply attributes to selected objects.
+
+Menu:  Apply to Selection~33}
+
+\bold{figtoolv-toggle-closed}(object \italic{self})
+
+\leftindent{Open or close selected polylines and splines.
+
+Menu:  Close / Open~32}
+
+\bold{figtoolv-toggle-smooth}(object \italic{self})
+
+\leftindent{Turn selected polylines into splines and 
+back.
+
+Menu:  Smooth / Unsmooth~31}
+
+\bold{figtoolv-toolset-destroy}(object \italic{self})
+
+\leftindent{Deletes toolset window.
+
+Bound to:  \typewriter{^X-^D}, \typewriter{^X-^C}; Menu:  Delete Window~89}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{figure}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

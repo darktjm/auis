@@ -1,0 +1,148 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for layout}
+
+
+\bold{layout-author}(object \italic{self})
+
+\leftindent{Enter authoring mode
+
+Menu:  Enter Authoring~60
+
+Note that in general, it is not possible to select or create objects from 
+Ness.  Do not use this or any other authoring mode functions from Ness.}
+
+\bold{layout-background}(object \italic{self})
+
+\leftindent{Expand current selection and move to back
+
+Bound to:  \typewriter{Esc-b}; Menu:  Authoring~1,Background~31
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-coarse-granularity}(object \italic{self}, integer \italic{amount})
+
+\leftindent{Coarse (18 pixel) granularity of object 
+placement.  The 18 comes from setting \italic{amount} to 18.
+
+Menu:  Authoring~1,Coarse granularity~52}
+
+\bold{layout-create-0}(object \italic{self}, integer \italic{type})
+
+\leftindent{Do not fill in newly created data objects.  \italic{type} 
+must be 0.
+
+Menu:  Authoring~1,Null on create~40}
+
+\bold{layout-create-filler}(object \italic{self}, integer \italic{type})
+
+\leftindent{Use filler for newly created data objects.  \italic{type} 
+must be 1.
+
+Menu:  Authoring~1,Filler on create~41}
+
+\bold{layout-create-paste}(object \italic{self}, integer \italic{type})
+
+\leftindent{Paste into newly created data objects.  \italic{type} 
+must be 2.
+
+Menu:  Authoring~1,Paste on create~42}
+
+\bold{layout-destroy-object}(object \italic{self})
+
+\leftindent{Destroy current selection
+
+Bound to:  \typewriter{^D}; Menu:  Authoring~1,Cut object~22
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-fine-granularity}(object \italic{self}, integer \italic{amount})
+
+\leftindent{Fine (1 pixel) granularity of object 
+placement.  The 1 comes from setting \italic{amount} to 0 (or 1).
+
+Menu:  Authoring~1,Fine granularity~50}
+
+\bold{layout-imbed-object}(object \italic{self})
+
+\leftindent{Prompt for object and place in current selection
+
+Bound to:  \typewriter{Esc-Tab}; Menu:  Authoring~1,Imbed object~21
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-make-fixed}(object \italic{self})
+
+\leftindent{Component varies only in authoring mode
+
+Bound to:  \typewriter{Esc-f}; Menu:  Authoring~1,Make fixed~35
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-make-variable}(object \italic{self})
+
+\leftindent{Allow component to vary
+
+Bound to:  \typewriter{Esc-v}; Menu:  Authoring~1,Make variable~35
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-medium-granularity}(object \italic{self}, integer \italic{amount})
+
+\leftindent{Medium (6 pixel) granularity of object 
+placement.  The 6 comes from setting \italic{amount} to 6.
+
+Menu:  Authoring~1,Medium granularity~51}
+
+\bold{layout-move-to-back}(object \italic{self})
+
+\leftindent{Move current selection to back
+
+Bound to:  \typewriter{Esc-d}; Menu:  Authoring~1,Move to back~30
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-paste-object}(object \italic{self})
+
+\leftindent{Paste into current selection
+
+Bound to:  \typewriter{^Y}; Menu:  Authoring~1,Paste object~20
+
+Note that in general, it is not possible to select objects from Ness.  
+Do not use this from Ness.}
+
+\bold{layout-run}(object \italic{self})
+
+\leftindent{Enter execution mode
+
+Bound to:  \typewriter{Esc-x}; Menu:  Exit Authoring~60}
+
+\bold{layout-toggle-debug}(object \italic{self})
+
+\leftindent{Toggle Debug
+
+Bound to:  \typewriter{Esc-Esc}}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{layout}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

@@ -224,21 +224,21 @@ struct strTbl ModeNames[] = {
 		{"Left-right", (long)style_LeftThenRightJustified},
 		{NULL, 0L},
 };
-/* map flag names to and from flag codes*/
+/* map flag names to and from flag codes (* = not supported) */
 static const
 struct strTbl FlagNames[] = {
 		{"Underline", style_Underline},
 		{"Hidden", style_Hidden},
-		{"Read Only", style_ReadOnly},
+		{"*Read Only", style_ReadOnly},
 		{"Format Note", style_PassThru},
-		{"Icon", style_Icon},
+		{"*Icon", style_Icon},
 		{"Continue Indent", style_ContinueIndent},
-		{"Hinge", style_Hinge},
-		{"New Page", style_NewPage},
+		{"*Hinge", style_Hinge},
+		{"*New Page", style_NewPage},
 		{"Change Bar", style_ChangeBar},
 		{"Over Bar", style_OverBar},
 		{"No Wrap", style_NoWrap},
-		{"No Fill", style_NoFill},
+		{"*No Fill", style_NoFill},
 		{"Keep Prior NL", style_KeepPriorNL},
 		{"Keep Next NL", style_KeepNextNL},
 		{"Tab by spaces", style_TabsCharacters},
@@ -248,19 +248,19 @@ struct strTbl FlagNames[] = {
 		{"Include End", style_IncludeEnd},
 		{NULL, 0L},
 };
-/* map face names to and from face codes*/
+/* map face names to and from face codes (* = not really supported) */
 static const
 struct strTbl FaceNames[] = {
 		{"Bold", fontdesc_Bold},
 		{"Italic", fontdesc_Italic},
-		{"Shadow", fontdesc_Shadow},
+		{"*Shadow", fontdesc_Shadow},
 		{"Fixed width", fontdesc_Fixed},
-		{"Outline", fontdesc_Outline},
-		{"Thin", fontdesc_Thin},
-		{"Black", fontdesc_Black},
-		{"Medium", fontdesc_Medium},
-		{"Heavy", fontdesc_Heavy},
-		{"Condense", fontdesc_Condense},
+		{"*Outline", fontdesc_Outline},
+		{"*Thin", fontdesc_Thin},
+		{"*Black", fontdesc_Black},
+		{"*Medium", fontdesc_Medium},
+		{"*Heavy", fontdesc_Heavy},
+		{"*Condense", fontdesc_Condense},
 		{NULL, 0L},
 };
 

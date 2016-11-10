@@ -1,0 +1,29 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for filler}
+
+
+\bold{fillerview-set-data-object-by-name}(object \italic{self}, marker \italic{name})
+
+\leftindent{Insert named inset.  If \italic{name} is Ask, prompt for a 
+name.
+
+Use \italic{name} or "Ask" + \bold{queueanswer} to provide inset name in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}
+
+\helptopic{filler}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

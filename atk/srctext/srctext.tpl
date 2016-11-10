@@ -2,16 +2,17 @@
 \textdsversion{12}
 \define{comment
 attr:[FontFace Italic Int Set]}
-\define{cmmnt2NL
+\define{linecomment
 attr:[FontFace Italic Int Set]}
-\define{keyword
-attr:[FontFace Bold Int Set]}
-\define{class
-attr:[FontFace Bold Int Set]
-attr:[FontSize PreviousFontSize Point 2]}
 \define{function
 attr:[FontFace Bold Int Set]
 attr:[FontSize PreviousFontSize Point 2]}
+\define{label
+attr:[FontFace Bold Int Set]
+attr:[FontFace Italic Int Set]
+}
+\define{string
+}
 \define{userdef
 attr:[FontFace Bold Int Set]}
 \define{global

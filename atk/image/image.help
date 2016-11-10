@@ -298,8 +298,10 @@ indicate the input focus.
 Select (highlight) one of the italicized names and choose "Show Help on 
 Selected Word" from the pop-up menu to see the help file for:
 
-\leftindent{\helptopic{
-}}\leftindent{\helptopic{raster}
+
+\leftindent{\helptopic{raster}
+
+\helptopic{imageproc}
 
 \helptopic{ppm2atkimage}
 

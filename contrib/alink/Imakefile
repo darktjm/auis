@@ -17,5 +17,5 @@ DynamicMultiObject(alink,alinkview,$(OBJS),$(LIBS),,)
 InstallDynamicObject(alink,alinkview,$(FULLATKDLIBDIR))
 
 InstallClassFiles($(IHFILES))
-InstallDocs(alink.help, ${DESTDIR}/help)
+InstallDocs(alink.help alinkproc.help, ${DESTDIR}/help)
 InstallDocs(alink.pr, ${DESTDIR}/lib/prs)

@@ -168,8 +168,9 @@ on Selected Word" from the pop-up menu to see the help file for:
 
 \helptopic{ctext}
 
-\helptopic{diff}          \
+\helptopic{diff}
 
+\helptopic{ezdproc}
 
 \helptopic{initfiles}}}
 

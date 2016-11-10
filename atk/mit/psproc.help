@@ -1,0 +1,43 @@
+\begindata{text,1241}
+\textdsversion{12}
+\template{help}
+\chapter{Procedure Table Listing for ps}
+
+
+\bold{psview-autobound}(object \italic{textview})
+
+\leftindent{Suck out the bounding box information and use it to 
+set our bounds
+
+Menu:  PostScript,Scan for bounds~20}
+
+\bold{psview-set-inch-size}(object \italic{textview})
+
+\leftindent{Set print size in inches
+
+Menu:  PostScript,Set Inch Size~10
+
+Use \bold{queueanswer} twice to provide height and width in Ness.}
+
+\bold{psview-set-point-size}(object \italic{textview})
+
+\leftindent{Set print size in points
+
+Menu:  PostScript,Set Point Size~11
+
+Use \bold{queueanswer} twice to provide height and width in Ness.}
+
+
+\section{Related Topics}
+
+
+\leftindent{\helptopic{procs}}
+
+
+\begindata{bp,1242}
+Version 2
+n 0
+\enddata{bp,1242}
+\view{bpv,1242,1,0,0}
+Copyright Carnegie Mellon University and IBM.  All rights reserved. \
+\enddata{text,1241}

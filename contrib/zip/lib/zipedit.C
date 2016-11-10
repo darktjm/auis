@@ -187,7 +187,7 @@ static void Darken_Background_Command( class zipedit	      *self );
 static void Select_Background_Command( class zipedit	      *self );
 static void Unselect_Background_Command( class zipedit	      *self );
 static void Build_Menu();
-static void Accept_Character( class zipedit	      *self, char			       c );
+static void Accept_Character( class zipedit	      *self, long			       c );
 static void Pending_Delete( class zipedit	     *self, zip_type_pane	      pane );
 extern NO_DLL_EXPORT void zipedit_Expose_Selection_Menu( class zipedit	    *self );
 extern NO_DLL_EXPORT void zipedit_Hide_Selection_Menu( class zipedit	    *self );
@@ -1151,7 +1151,7 @@ void Build_Menu()
   }
 
 static void
-Accept_Character( class zipedit	      *self, char			       c )
+Accept_Character( class zipedit	      *self, long			       c )
       {
   IN(Accept_Character);
   DEBUGct(C,c);

@@ -99,7 +99,7 @@ static void drawButton(class frame  * self,struct rectangle  *rect,const char  *
 static int CalculateLineHeight(class frame  *self);
 static void handleNewData(class frame  *self);
 static void SetTitle(class frame  *self);
-static void ConsiderReturning(class frame  *self, int  Choice);
+static void ConsiderReturning(class frame  *self, long  Choice);
 static boolean InRectangle(struct rectangle  *r, long  x , long  y);
 static void drawshadow(class frame  *self,struct rectangle  *r);
 static void DoUpdate(class frame  *self);
@@ -110,7 +110,7 @@ static void PurifyString(char  *s);
 static boolean RestoreBits(class frame  *self);
 static void CannotRestoreBits(class frame  *self);
 static void ComputeSize(class frame  *self);
-static void GotKey(class frame  *self, char  c);
+static void GotKey(class frame  *self, long  pc);
 static void ConfirmDefaultAnswer(class frame  *self);
 static void Cancel(class frame  *self);
 static void retractCursors(class frame  *self);
@@ -922,7 +922,7 @@ static void SetTitle(class frame  *self)
 
 /* The following is code to support the dialog box */
 
-static void ConsiderReturning(class frame  *self, int  Choice)
+static void ConsiderReturning(class frame  *self, long  Choice)
 {
     if (self->StackPos != frame_GlobalStackCount) {
 	(self->messageLine)->DisplayString( 0, "Please answer the other dialog box first.");
@@ -1447,10 +1447,10 @@ ComputeSize(class frame  *self)
 }
 
 
-static void GotKey(class frame  *self, char  c)
+static void GotKey(class frame  *self, long  pc)
 {
     int curpt, startpt=self->DefaultWildestAnswer;
-    char c1;
+    char c = pc, c1;
 
     if (startpt <= 0 || startpt > self->NumAnswerChoices) {
 	startpt = 1;

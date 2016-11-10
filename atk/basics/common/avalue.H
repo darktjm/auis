@@ -124,7 +124,7 @@ class avalue {
      *   \param name The name.  If NULL, use avalue::none.
      *   \param type The type.  If NULL, use avalue::real. */
     void Set(const char *str, const atom *name=NULL, const atom *type=NULL);
-    /**< Set integer value, with given name and type.
+    /**< Set string value, with given name and type.
      *   \param str The value.  Its lifetime must match the avalue lifetime.
      *   \param name The name.  If NULL, use avalue::none.
      *   \param type The type.  If NULL, use avalue::cstring. */

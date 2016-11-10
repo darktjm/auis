@@ -225,7 +225,9 @@ are not performed unintentionally.
 your left mouse button to see the help file for:
 
 
-}\leftindent{\helptopic{linkinset}
+}\leftindent{\helptopic{runbuttonproc}
+
+\helptopic{linkinset}
 
 \helptopic{insets}
 

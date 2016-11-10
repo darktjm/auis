@@ -1,14 +1,6 @@
-\begindata{text,6765600}
+\begindata{text,1235}
 \textdsversion{12}
 \template{help}
-\define{string
-}
-\define{comment
-}
-\define{preproc
-}
-\define{keyword
-}
 \chapter{X Key Equivalencies
 
 }
@@ -18,128 +10,98 @@ shift, control, or meta.  The second-to-last character in that sequence
 indicates which modifier was pressed (s for shift, c for control, m for 
 meta and n for no modifiers).
 
+\begindata{table,1236}
+\cols 200 99 99 99 99
+\begindata{text,1248}
+\textdsversion{12}
+\template{default}
+\bold{X\^{ }Keysym} \
+\enddata{text,1248}
+	\begindata{text,1249}
+\textdsversion{12}
+\template{default}
+\bold{Normal} \
+\enddata{text,1249}
+	\begindata{text,1250}
+\textdsversion{12}
+\template{default}
+\bold{Shifted} \
+\enddata{text,1250}
+	\begindata{text,1251}
+\textdsversion{12}
+\template{default}
+\bold{Control} \
+\enddata{text,1251}
+	\begindata{text,1252}
+\textdsversion{12}
+\template{default}
+\bold{Meta} \
+\enddata{text,1252}
 
-    XK_Home	\string{Esc-H	\string{Esc-_sL	\string{Esc-_cL	\string{Esc-_mL}}}}
-
-    XK_Left	\string{Esc-D	\string{Esc-_sM	\string{Esc-_cM	\string{Esc-_mM}}}}
-
-    XK_Up		\string{Esc-A	\string{Esc-_sN	\string{Esc-_cN	\string{Esc-_mN}}}}
-
-    XK_Right	\string{Esc-C	\string{Esc-_sO	\string{Esc-_cO	\string{Esc-_mO}}}}
-
-    XK_Down	\string{Esc-B	\string{Esc-_sP	\string{Esc-_cP	\string{Esc-_mP}}}}
-
-    XK_Prior	\string{Esc-G	\string{Esc-_sQ	\string{Esc-_cQ	\string{Esc-_mQ}}}}
-
-    XK_Next	\string{Esc-E	\string{Esc-_sR	\string{Esc-_cR	\string{Esc-_mR}}}}
-
-    XK_End	\string{Esc-F	\string{Esc-_sS	\string{Esc-_cS	\string{Esc-_mS}}}}
-
-    XK_Begin	\string{^A		\string{Esc-_sT	\string{Esc-_cT	\string{Esc-_mT}}}}
-
-    XK_Insert	\string{Esc-^\\	\string{Esc-_sU	\string{Esc-_cU	
-\string{Esc-_mU}}}}
-
-    XK_Execute	\string{Esc-_nV	Esc-_sV	\string{Esc-_cV	
-\string{Esc-_mV\string{
-
-    XK_Delete			Esc-_sW	\string{Esc-_cW	\string{Esc-_mW}}}}}}
-
-    XK_Print	\string{Esc-_nX	\string{Esc-_sX	\string{Esc-_cX	\string{Esc-_mX
-}}}}
-    XK_Cancel	\string{Esc-_nY	\string{Esc-_sY	\string{Esc-_cY	
-\string{Esc-_mY}}}}
-
-    XK_Pause	\string{Esc-_nZ	\string{Esc-_sZ	\string{Esc-_cZ	\string{Esc-_mZ
-}}}}
-    XK_F1		\string{Esc-S	\string{Esc-_s1	\string{Esc-_c1	\string{Esc-_m1}}}}
-
-    XK_F2		\string{Esc-T	\string{Esc-_s2	\string{Esc-_c2	\string{Esc-_m2}}}}
-
-    XK_F3		\string{Esc-U	\string{Esc-_s3	\string{Esc-_c3	\string{Esc-_m3}}}}
-
-    XK_F4		\string{Esc-V	\string{Esc-_s4	\string{Esc-_c4	\string{Esc-_m4}}}}
-
-    XK_F5		\string{Esc-W	\string{Esc-_s5	\string{Esc-_c5	\string{Esc-_m5}}}}
-
-    XK_F6		\string{Esc-P	\string{Esc-_s6	\string{Esc-_c6	\string{Esc-_m6}}}}
-
-    XK_F7		\string{Esc-Q	\string{Esc-_s7	\string{Esc-_c7	\string{Esc-_m7}}}}
-
-    XK_F8		\string{Esc-R	\string{Esc-_s8	\string{Esc-_c8	\string{Esc-_m8}}}}
-
-    XK_F9		\string{Esc-Y	\string{Esc-_s9	\string{Esc-_c9	\string{Esc-_m9}}}}
-
-    XK_F10	\string{Esc-<	\string{Esc-_sA	\string{Esc-_cA	\string{Esc-_mA}}}}
-
-    XK_F11	\string{Esc-[}		\string{Esc-_sB	\string{Esc-_cB	\string{Esc-_mB}}}
-
-    XK_F12	\string{Esc-,}		\string{Esc-_sC	\string{Esc-_cC	\string{Esc-_mC}}}
-
-
-    XK_L1		\string{Esc-E}
-
-    XK_L2		\string{Esc-F}
-
-    XK_L3		\string{Esc-G}
-
-    XK_L4		\string{Esc-H}
-
-    XK_L5		\string{Esc-I}	 \
-
-
-    XK_L6		\string{Esc-J}	 \
-
-
-    XK_L7		\string{Esc-K}
-
-    XK_L8		\string{Esc-L}
-
-    XK_L9		\string{Esc-M}
-
-    XK_L10	\string{Esc-N}
-
-    XK_R1		\string{Esc-O}
-
-    XK_R2		\string{Esc-X}
-
-    XK_R3		\string{Esc-Z}
-
-    XK_R4		\string{Esc--}
-
-    XK_R5		\string{Esc-=}
-
-    XK_R6		\string{Esc-+}
-
-    XK_R7		\string{Esc-/}	\
-
-
-    XK_R8		\string{Esc-A}
-
-    XK_R9		\string{Esc-*}
-
-    XK_R10	\string{Esc-D}
-
-    XK_R11	\string{Esc-&}
-
-    XK_R12	\string{Esc-C}
-
-    XK_R13	\string{Esc-:}
-
-    XK_R14	\string{Esc-B}
-
-    XK_R15	\string{Esc-;}
-
+'XK_Home	'Esc-H	'Esc-_sL	'Esc-_cL	'Esc-_mL
+'XK_Left	'Esc-D	'Esc-_sM	'Esc-_cM	'Esc-_mM
+'XK_Up	'Esc-A	'Esc-_sN	'Esc-_cN	'Esc-_mN
+'XK_Right	'Esc-C	'Esc-_sO	'Esc-_cO	'Esc-_mO
+'XK_Down	'Esc-B	'Esc-_sP	'Esc-_cP	'Esc-_mP
+'XK_Prior	'Esc-G	'Esc-_sQ	'Esc-_cQ	'Esc-_mQ
+'XK_Next	'Esc-E	'Esc-_sR	'Esc-_cR	'Esc-_mR
+'XK_End	'Esc-F	'Esc-_sS	'Esc-_cS	'Esc-_mS
+'XK_Begin	'^A	'Esc-_sT	'Esc-_cT	'Esc-_mT
+'XK_Insert	'Esc-^\\	'Esc-_sU	'Esc-_cU	'Esc-_mU
+'XK_Execute	'Esc-_nV	'Esc-_sV	'Esc-_cV	'Esc-_mV
+'XK_Delete	 	'Esc-_sW	'Esc-_cW	'Esc-_mW
+'XK_Print	'Esc-_nX	'Esc-_sX	'Esc-_cX	'Esc-_mX
+'XK_Cancel	'Esc-_nY	'Esc-_sY	'Esc-_cY	'Esc-_mY
+'XK_Pause	'Esc-_nZ	'Esc-_sZ	'Esc-_cZ	'Esc-_mZ
+'XK_F1	'Esc-S	'Esc-_s1	'Esc-_c1	'Esc-_m1
+'XK_F2	'Esc-T	'Esc-_s2	'Esc-_c2	'Esc-_m2
+'XK_F3	'Esc-U	'Esc-_s3	'Esc-_c3	'Esc-_m3
+'XK_F4	'Esc-V	'Esc-_s4	'Esc-_c4	'Esc-_m4
+'XK_F5	'Esc-W	'Esc-_s5	'Esc-_c5	'Esc-_m5
+'XK_F6	'Esc-P	'Esc-_s6	'Esc-_c6	'Esc-_m6
+'XK_F7	'Esc-Q	'Esc-_s7	'Esc-_c7	'Esc-_m7
+'XK_F8	'Esc-R	'Esc-_s8	'Esc-_c8	'Esc-_m8
+'XK_F9	'Esc-Y	'Esc-_s9	'Esc-_c9	'Esc-_m9
+'XK_F10	Esc-<	'Esc-_sA	'Esc-_cA	'Esc-_mA
+'XK_F11	'Esc-[	'Esc-_sB	'Esc-_cB	'Esc-_mB
+'XK_F12	'Esc-,	'Esc-_sC	'Esc-_cC	'Esc-_mC
+'XK_L1	'Esc-E
+'XK_L2	'Esc-F
+'XK_L3	'Esc-G
+'XK_L4	'Esc-H
+'XK_L5	'Esc-I
+'XK_L6	'Esc-J
+'XK_L7	'Esc-K
+'XK_L8	'Esc-L
+'XK_L9	'Esc-M
+'XK_L10	'Esc-N
+'XK_R1	'Esc-O
+'XK_R2	'Esc-X
+'XK_R3	'Esc-Z
+'XK_R4	'Esc--
+'XK_R5	'Esc-=
+'XK_R6	'Esc-+
+'XK_R7	'Esc-/
+'XK_R8	'Esc-A
+'XK_R9	'Esc-*
+'XK_R10	'Esc-D
+'XK_R11	'Esc-&
+'XK_R12	'Esc-C
+'XK_R13	'Esc-:
+'XK_R14	'Esc-B
+'XK_R15	'Esc-;
+\enddata{table,1236}
+\view{spread,1236,0,0,0}
 
 There is no mechanism at present to add more mappings or change existing 
-mappings, other than standard X key mapping routines.  Keep in mind 
-that the OS or window manager may intercept special keys, as with any 
-key bindings.  When in doubt about a key, it is generally safe to 
-insert it into a buffer using ^Q to see what it maps to.
+mappings, other than standard X key mapping routines.  Keep in mind that 
+the OS or window manager may intercept special keys, as with any key 
+bindings.  When in doubt about a key, it is generally safe to insert it 
+into a buffer using ^Q to see what it maps to.
 
-One common pair of modifiers that may screw up the mapping is the caps
-lock and num lock keys.  If the preference NumAndCapsLockHack is set,
-all of the above key mappings will be independent of whether or not
-those two modifiers are active.
+One common pair of modifiers that may screw up the mapping is the caps lock 
+and num lock keys.  If the preference NumAndCapsLockHack is set, all of the 
+above key mappings will be independent of whether or not those two 
+modifiers are active.
 
-\enddata{text,6765600}
+\enddata{text,1235}

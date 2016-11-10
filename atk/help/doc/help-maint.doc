@@ -1,27 +1,6 @@
 \begindata{text,539411208}
 \textdsversion{12}
 \template{default}
-\define{global
-}
-\define{footnote
-
-attr:[Flags OverBar Int Set]
-attr:[FontSize PreviousFontSize Point -2]}
-\define{programexample
-menu:[Region~4,ProgramExample~13]
-attr:[LeftMargin LeftMargin Inch 32768]
-attr:[Justification LeftJustified Point 0]
-attr:[Flags NoFill Int Set]
-attr:[Flags KeepPriorNL Int Set]
-attr:[Flags KeepNextNL Int Set]
-attr:[FontFace FixedFace Int Set]
-attr:[FontFamily AndyType Int 0]}
-\define{formattingnote
-menu:[Region,FormattingNote]
-attr:[Flags PassThru Int Set]
-attr:[Flags NoFill Int Set]
-attr:[Flags KeepPriorNL Int Set]
-attr:[Flags KeepNextNL Int Set]}
 \chapter{1	Maintainer's Guide to the Andrew Help System}
 
 

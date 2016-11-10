@@ -253,7 +253,7 @@ int AnotherError(class consoleClass  *self, const char  *errstring, boolean  Add
 	(self)->WantUpdate( self);
         if (IntrnlVars[0].turnon) {
             sprintf(ErrTxt, "%s", IntrnlVars[0].turnoff);
-	    menuProc = proctable::DefineProc("TV", (proctable_fptr)TogVar, ATK::LoadClass("consoleClass"), NULL, "dummy.");
+	    menuProc = proctable::DefineProc("errmonf-toggle-var", (proctable_fptr)TogVar, ATK::LoadClass("consoleClass"), NULL, "dummy.");
             (self->userMenulist)->AddToML( ErrTxt, menuProc, 0, 0);
             (self->userMenulist)->DeleteFromML( IntrnlVars[0].turnon);
 	}

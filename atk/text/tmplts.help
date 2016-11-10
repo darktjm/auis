@@ -142,8 +142,7 @@ available as under the original template.  \
 \leftindent{The following list describes the important features of many of 
 the templates available in EZ.  You can access many of them by putting the 
 proper extensions on your filenames (because of the mappings in 
-th\formattingnote{\formattingnote{\formattingnote{\formattingnote{\
-\formattingnote{e global.ez}}}}}init file), and the others by using the 
+the global.ezinit file), and the others by using the 
 \bold{Add Template} menu option.  Remember, too, that you can add more 
 mappings to templates in your own .ezinit file; see the 
  \italic{\helptopic{initfiles}}  help document for instructions. \

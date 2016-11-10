@@ -248,7 +248,9 @@ void spread::ComputeSizes() {
             if(t->IsJoinedToAnother(r,c)) continue; // accounted for in the base cell.
             cell = t->GetCell( r, c);
             if (cell->celltype != table_ImbeddedObject) {
-		if(col_default)
+		// FIXME: this should find the width of the text contents.
+		// just forcing manual resizing is lame.
+		if(col_default && colInfo[c].computedWidth < 99)
 		    colInfo[c].computedWidth=99;
                 continue; // the standard default size is ok.
             }
@@ -269,8 +271,9 @@ void spread::ComputeSizes() {
 	     *  and assume the inset will give minimum sizes.
 	     *  If you don't like it, set the width/height manually.
 	     */
-            if(child && (!rh || col_default)) child->DesiredSize(col_default ? colInfo[c].computedWidth : 16384, rh?rh:16384, rh?view::HeightSet:col_default?view::NoSet:view::WidthSet, &dWidth, &dHeight);
-            else dWidth=dHeight=0;
+            if(child && (!rh || col_default)) {
+		child->DesiredSize(col_default ? 16384 : colInfo[c].computedWidth, rh?rh:16384, rh?view::HeightSet:col_default?view::NoSet:view::WidthSet, &dWidth, &dHeight);
+	    } else dWidth=dHeight=0;
             dHeight += 2 * spread_CELLMARGIN + spread_SPACING;
             dWidth += 2 * spread_CELLMARGIN + spread_SPACING;
 
