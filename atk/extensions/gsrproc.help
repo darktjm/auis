@@ -6,13 +6,15 @@
 
 \bold{gsearch-forward}(object \italic{textview})
 
-\leftindent{Incremental GNU-Emacs style search forward.
+\leftindent{Incremental GNU-Emacs style search forward.  If the search 
+fails, interactive macro execution is aborted.
 
 This is inherently interactive; do not use from Ness.}
 
 \bold{gsearch-backward}(object \italic{textview})
 
-\leftindent{Incremental GNU-Emacs style search backward.
+\leftindent{Incremental GNU-Emacs style search backward.  If the
+search fails, interactive macro execution is aborted.
 
 This is inherently interactive; do not use from Ness.}
 

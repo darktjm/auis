@@ -122,6 +122,7 @@ static const struct builtindef builtintable[] = {
 	{"isreadonly", "UR", {Tbool, Tstr, Tend}, ness_codeOrange, NULL},
 	{"telluser", "UT", {Tvoid, Tstr, Tend}, ness_codeOrange, NULL},
 	{"askuser", "UU", {Tstr, Tstr, Tstr, Tend}, ness_codeOrange, NULL},
+	{"getnumericargument", "UV", {Tlong, Tend}, ness_codeOrange, NULL},
 
 	{"currentselection", "Ss", {Tstr, Tunk, Tend}, ness_codeOrange, NULL},
 	{"currentmark", "Sm", {Tstr, Tunk, Tend}, ness_codeOrange, NULL},
@@ -1252,7 +1253,7 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	proctable::Call(call->where.pe, v, arg, &retval);
 
 	/* 5.  free allocated values */
-	if(nargs>0 && lasttype == seqHdr)
+	if(nargs>0 && !checkFirstArg && lasttype == seqHdr)
 		free((char *)v);
 	if(nargs>1) for (n = nargs-2; n >= 0; n--) 
 		if (malloced[n]) 

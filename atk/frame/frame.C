@@ -1795,8 +1795,10 @@ int frame::AskForStringCompleted(int  priority, const char  *prompt , const char
 
 	TidyUp(this);
 
+#if 0 // tjm - why is this here?  the above ask call already does this
 	if(i>=0) im::RecordAnswer(bufout);
 	else im::RecordCancellation();
+#endif
 	
 
 	(this)->ReturnFocus();

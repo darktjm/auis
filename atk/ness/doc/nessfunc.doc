@@ -965,6 +965,11 @@ takes input from the message line until a question is cancelled (for
 example org's add node operation.)
 
 
+\italic{GetNumericArgument}() - Obtains user numeric argument (provided 
+by ^U).  If no argument provided, -1 is returned.  This also clears the 
+current argument.
+
+
 \indexi{im_ForceUpdate()}\italic{im_ForceUpdate}() - an update cycle is 
 initiated so all changes are made visible on the screen.  This function has 
 the same name as one defined in ATK, but is actually implemented directly 

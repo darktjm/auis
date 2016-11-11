@@ -329,6 +329,7 @@ eventTbl[] = {
 	{'R', "evIsR/O"},
 	{'T', "evTell"},
 	{'U', "evAsk"},
+	{'V', "arg"},
 	{'\0', "*Unknown Event Code*"}
 };
 static const struct srchtblelt 
