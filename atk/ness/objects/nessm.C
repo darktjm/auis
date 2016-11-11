@@ -95,7 +95,7 @@ static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *pr
 	(n)->AlwaysInsertCharacters( pos+strlen(opstring), "\"", 1);
 	(n)->AlwaysInsertCharacters( pos, "\"", 1);
     } else {
-	sprintf(buf, "\"%ld\"", rock);
+	sprintf(buf, "%ld", rock);
 	(n)->AlwaysReplaceCharacters( pos, 1, buf, strlen(buf));
     }
     return 0;
@@ -108,7 +108,10 @@ static void DumpActions(struct action  *a) {
 	printf("a:%p\n",a);
 	switch(a->type) {
 	    case im_KeyboardEvent:
-		printf("key:'%c'\n",(int)a->v.key);
+		if(a->v.key >= 32)
+			printf("key:'%c'\n",(int)a->v.key);
+		else
+			printf("key:'^%c'\n",(int)a->v.key + 64);
 		break;
 	    case im_ProcEvent:
 		printf("proc %s\n",proctable::GetName(a->v.proc.procTableEntry));
@@ -328,9 +331,10 @@ static void DoConv(class view  *self, long  rock) {
 	struct action *nlook=NULL;
 	switch(look->type) {
 	    case im_KeyboardEvent:
-		nlook=QueueAnswers(n, look, m);
+		/* non-proc keyboard event is almost always ^U */
 		pos=InsertKey(n, m, pos, look->v.key);
-		look=nlook;
+		lasttype=im_KeyboardEvent;
+		look=look->next;
 		break;
 	    case im_MenuEvent:
 		lasttype=look->type;

@@ -20,7 +20,9 @@ This procedure cannot be bound.}
 
 \leftindent{See the source code for the next error
 
-Bound to:  \typewriter{Esc-^N}; Menu:  Ness~10,Next Danger~10}
+Bound to:  \typewriter{Esc-^N}; Menu:  Ness~10,Next Danger~10
+
+\typewriter{^U} numeric argument can be set to find previous error, instead.}
 
 \bold{nessview-show-origin}(object \italic{self})
 
@@ -44,7 +46,12 @@ Bound to:  \typewriter{Esc-^N-C}; Menu:  Ness~10,Empower-compile~22}
 
 \leftindent{Compile Ness and execute function main()
 
-Bound to:  \typewriter{^X-^E}; Menu:  Ness~10,Do main()~24}
+Bound to:  \typewriter{^X-^E}; Menu:  Ness~10,Do main()~24
+
+\typewriter{^U} numeric argument can be set to prompt for different 
+function to execute.
+
+If prompting, use \bold{queueanswer} to provide name in Ness.}
 
 \bold{nessview-author-mode}(object \italic{self}, integer \italic{mode})
 

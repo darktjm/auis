@@ -62,8 +62,33 @@ struct environmentelement {
 	access them via envptr and envBegin.
 	Any function using these variables must save and restore them.
 */
-static struct environmentelement *envBegin = NULL;
+static struct environmentelement *envBegin = NULL, *envEnd = NULL;
 static struct environmentelement *envptr = NULL;
+
+static void mkEnvStack()
+{
+    envBegin = (struct environmentelement *)malloc(MAXENVSTACK * sizeof(*envBegin));
+    if(!envBegin) {
+	perror("env stack");
+	exit(1);
+    }
+    envptr = envBegin;
+    envEnd = &envBegin[MAXENVSTACK];
+}
+
+static void growEnvStack()
+{
+    if(++envptr == envEnd) {
+	unsigned long len = (envEnd - envBegin) * 2;
+	envBegin = (struct environmentelement *)realloc(envBegin, len * sizeof(*envBegin));
+	if(!envBegin) {
+	    perror("env stack");
+	    exit(1);
+	}
+	envptr = &envBegin[len/2];
+	envEnd = &envBegin[len];
+    }
+}
 
 static long HighBitStart = -1;
 
@@ -775,7 +800,7 @@ long text::HandleKeyWord(long  pos, char  *keyword, FILE  *file)
     }
 
     newenv = (envptr->environment)->InsertStyle( pos - envptr->pos, stylep, TRUE);
-    envptr++;
+    growEnvStack();
     envptr->environment = newenv;
     envptr->pos = pos;
 
@@ -1116,14 +1141,13 @@ long text::Write(FILE  *file, long  writeID, int  level)
 
 long text::ReadSubString(long  pos, FILE  *file, boolean  quoteCharacters)
 {
-    struct environmentelement environmentStack[MAXENVSTACK];
     struct environmentelement *lastEnvBegin = envBegin;
+    struct environmentelement *lastEnvEnd = envEnd;
     struct environmentelement *lastEnvptr = envptr;
     class environment *rootenv;
     long len;
 
-    envptr = environmentStack;
-    envBegin = environmentStack;
+    mkEnvStack();
 
     rootenv = (class environment *)(this->rootEnvironment)->GetEnclosing( pos);
     envptr->environment = rootenv;
@@ -1131,17 +1155,19 @@ long text::ReadSubString(long  pos, FILE  *file, boolean  quoteCharacters)
     HighBitStart = -1 ; 
 
     len = (this)->simpletext::ReadSubString( pos, file, quoteCharacters);
-    if (envptr != environmentStack)  {
+    if (envptr != envBegin)  {
         fprintf(stderr, "All environments not closed. - Closing them by default\n");
 
-        while (envptr != environmentStack)  {
+        while (envptr != envBegin)  {
             (envptr->environment)->SetLength( pos + len - envptr->pos);
             envptr--;
         }
     }
 
+    free(envBegin);
     envBegin = lastEnvBegin;
     envptr = lastEnvptr;
+    envEnd = lastEnvEnd;
 
     return len;
 }
@@ -1406,7 +1432,7 @@ static void WrapStyle(class text  *self,class environment  *curenv,long  pos)
             (self->styleSheet)->Add( stylep); 
         }
 	newenv = (envptr->environment)->InsertStyle( pos - envptr->pos, stylep, TRUE);
-	envptr++;
+	growEnvStack();
 	envptr->environment = newenv;
 	envptr->pos = pos;
     }
@@ -1418,7 +1444,7 @@ static void WrapStyle(class text  *self,class environment  *curenv,long  pos)
         newviewref->desh = curenv->data.viewref->desh;
         (newviewref)->AddObserver(self);
         newenv = (envptr->environment)->InsertView( pos - envptr->pos, newviewref, TRUE);
-	envptr++;
+	growEnvStack();
 	envptr->environment = newenv;
 	envptr->pos = pos;
     }
@@ -1459,9 +1485,9 @@ void text::AlwaysCopyTextExactly(long  pos,class simpletext  *ssrctext,long  src
     long i,j;
     long elen;
     static struct ATKregistryEntry  *SimpleText = NULL;		/* -wjh */
-    struct environmentelement environmentStack[MAXENVSTACK];
     struct environmentelement *lastEnvBegin = envBegin;
     struct environmentelement *lastEnvptr = envptr;
+    struct environmentelement *lastEnvEnd = envEnd;
     class text *srctext=NULL;
     
     if (SimpleText == NULL) 			/* -wjh */
@@ -1494,8 +1520,7 @@ void text::AlwaysCopyTextExactly(long  pos,class simpletext  *ssrctext,long  src
     /* the environmentStack is a stack of open environments in 
 	the destination
     */
-    envptr = environmentStack;
-    envBegin = environmentStack;
+    mkEnvStack();
 
     /*  The first entry in the stack is for the environment surrounding
 	the destination point.
@@ -1566,14 +1591,16 @@ void text::AlwaysCopyTextExactly(long  pos,class simpletext  *ssrctext,long  src
 
     /* Set length on the remaining environments in the stack */
 
-    if (envptr != environmentStack)  {
-        while (envptr != environmentStack)  {
+    if (envptr != envBegin)  {
+        while (envptr != envBegin)  {
             (envptr->environment)->SetLength( pos + len - envptr->pos);
             envptr--;
         }
     }
+    free(envBegin);
     envBegin = lastEnvBegin;
     envptr = lastEnvptr;
+    envEnd = lastEnvEnd;
 }
 
 void text::AlwaysCopyText(long  pos,class simpletext  *src,long  srcpos,long  len)
@@ -1591,8 +1618,8 @@ void text::AlwaysCopyText(long  pos,class simpletext  *src,long  srcpos,long  le
     long elen;
     long envpos;
     static struct ATKregistryEntry  *SimpleText = NULL;		/* -wjh */
-    struct environmentelement environmentStack[MAXENVSTACK];
     struct environmentelement *lastEnvBegin = envBegin;
+    struct environmentelement *lastEnvEnd = envEnd;
     struct environmentelement *lastEnvptr = envptr;
 
     if (SimpleText == NULL) 			/* -wjh */
@@ -1615,8 +1642,7 @@ void text::AlwaysCopyText(long  pos,class simpletext  *src,long  srcpos,long  le
     if ((srctext)->ATKregistry() == SimpleText)		/* -wjh */
 	return;					/* -wjh */
 
-    envptr = environmentStack;
-    envBegin = environmentStack;
+    mkEnvStack();
 
     dstrootenv = (class environment *)(this->rootEnvironment)->GetEnclosing( pos);
     envptr->environment = dstrootenv;
@@ -1681,14 +1707,15 @@ void text::AlwaysCopyText(long  pos,class simpletext  *src,long  srcpos,long  le
 
     /* Set length on the remaining environments in the stack */
 
-    if (envptr != environmentStack)  {
-        while (envptr != environmentStack)  {
+    if (envptr != envBegin)  {
+        while (envptr != envBegin)  {
             (envptr->environment)->SetLength( pos + len - envptr->pos);
             envptr--;
         }
     }
     envBegin = lastEnvBegin;
     envptr = lastEnvptr;
+    envEnd = lastEnvEnd;
 }
 
 void text::SetEnvironmentStyle(class environment  *envptr, class style  *styleptr)

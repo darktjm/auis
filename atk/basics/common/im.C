@@ -167,7 +167,6 @@ xim_sigAlrm();
 static void InteractionEventWork(struct im_InteractionEvent  *interactionEvent);
 static void FreeInteractionEvents(class im  *self);
 static void RedrawWindow(class im  *self, long  key);
-void im__PlayActions(class im  *self, struct action  *a);
 static void StartKeyboardMacro(class im  *self, long  key);
 // static void EditRecording();
 // static void DumpActions(struct action  *a);
@@ -2720,29 +2719,6 @@ void im::SetMacro(struct action  *NewRecord)
     Record=NewRecord;
 }
 
-/* Place all the actions in the list starting at a at the front of the queue and interact until they are gone. */
-void im__PlayActions(class im  *self, struct action  *a)
-{
-    /* REMOVE THIS BEFORE FINAL CHECK-IN */
-   /* struct action *newa, *last=NULL, *first=NULL;
-    struct action *head=InQ;
-    while(a) {
-	newa=cloneAction(a);
-	if(newa==NULL) return;
-	newa->im=self;
-	if(first==NULL) first=newa;
-	if(last) last->next=newa;
-	last=newa;
-	a=a->next;
-    }
-    if(first && last) {
-	last->next=head;
-	InQ=first;
-	while(InQ!=head && im_Interact(FALSE));
-    }
-    */
-}    
-
 static void StartKeyboardMacro(class im  *self, long  key)
         {
     if (playingRecord) 
@@ -3845,13 +3821,20 @@ char *im::GetAnswer()
 	freeQelt(pendingAnswerFree);
 	pendingAnswerFree=NULL;
     }
-   /* We want playing keyboard macros to be just like
-     before.
-    if(playingRecord && InQ->type==im_MacroEvent) {
+
+   /* We want playing keyboard macros to be just like before. */
+   /* tjm - do we?  now it crashes.  how was it before? */
+#if 1 /* best to just break away and process answers w/o crash */
+    if(playingRecord && InQ && InQ->type==im_MacroEvent) {
 	struct action *a, *b;
+	int depth = 0;
 	a = InQ->v.macro.nextaction;
 	while(a) {
-	    if(a->type==im_AnswerEvent || a->type==im_ResumeEvent) break;
+	    if(a->type==im_AnswerEvent || (a->type==im_ResumeEvent && !depth)) break;
+	    if(a->type == im_ResumeEvent)
+		--depth;
+	    else if(a->type == im_SuspendEvent)
+		++depth;
 	    a=a->next;
 	}
 	if(a) {
@@ -3865,7 +3848,8 @@ char *im::GetAnswer()
 		return a->v.answer;
 	    }
 	}
-    } */
+    }
+#endif
     if(AnswerQueue!=NULL) {
 	pendingAnswerFree=AnswerQueue;
 	AnswerQueue=AnswerQueue->next;

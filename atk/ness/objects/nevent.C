@@ -587,6 +587,13 @@ neventInfo(unsigned char op, unsigned char *iar, class ness  *ness) {
 		free(defaultstring);
 		ness->ToldUser = FALSE;
 	}	goto stackString;
+	case 'V':	{	/* GetNumericArgument */
+		im *im = im::GetLastUsed();
+		v = im && im->ArgProvided() ? im->Argument() : -1;
+		/* it's not actually possible to clear the "provided" flag */
+		/* at least not directly */
+		if(im) im->ClearArg();
+	}	goto stackLong;
 
 
 	stackBool:

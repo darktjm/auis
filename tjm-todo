@@ -28,6 +28,8 @@
     ness only understands integer if not action
   - document fact that ness only understands 1 return value, and
     bindings ignore all return values.
+  - generate procs' help topic listing dynamically, such as during help
+    index install.
 - style editor is garbage (probably mostly due to non-75dpi display):
   - always starts up looking like crap until ^L
   - moving the window around, or resizing, or looking at it funny will
@@ -49,14 +51,14 @@
     than API.  I'll probably have to scour the text display and
     PS/Troff conversion to figure it out, which takes forever and tells
     tells me nothing of what the designers actually intended. <sigh>
+  - lookz really needs a "preview text" field
 - ness doesn't support "real" type fully on proctable action calls.
 - unkonwn requires manual ^L after inserting raw data
 - dired-regexp-select doesn't seem to work (selects weird stuff)
-- macro recording does not deal with "argument" (c-u)
-  - only way to give argument in ness is dokeys("^Uddd")?
-  - no way to retrieve argument?
-  - argument arbitrarily limited to 64K
-- xwipe.d no longer works.  Does nothing on backspace, and crashes on esc-^W
+  - works perfenctly in some dirs, and badly in others.  Not sure why.
+- only way to give argument in ness is dokeys("^Uddd")
+- argument arbitrarily limited to 64K via keyboard, but unlimited in ProvideArg
+  - no negative arguments, except via ProvideArg
 - bdffont font face dialog is restricted to within window, and may be
   chopped off with no way to scroll.  Other choice dialogs may have
   similar issue.
@@ -108,8 +110,6 @@
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
       depends on don't exist any more.
-- generate procs' help topic listing dynamically, such as during help
-  index install.
 - remove "-thru-command" variants of filter and have the regular
   versions not prompt if non-NULL, non-empty arg present.
 - fix issues in zip (or chuck in favor of figure):
@@ -158,6 +158,8 @@
   - displays entire text red due to header being red
   - probably many more...
 - use qsort to sort in deskey instead of external sort command
+  - likewise with sort command?  (it is so screwy it's not worth it)
+  - also audit all uses of system/popen/topen/qopen and maybe eliminate
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
@@ -175,10 +177,9 @@
   help string.
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
-- pagedown eventually stops working (e.g. editing 2rtf binary), even
-  though scrollbar and cursor still work.  Maybe due to insistence on
-  ending at the start of a paragraph (which, in and of itself, is a
-  bad thing that makes page up/down weird and inconsistent)
+- pageup/pagedown insist on placing cursor at beginning of paragraph.  I
+  fixed it so it can move past paragraphs that are larger than 1
+  screen, but this behavior is still weird.
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar
@@ -189,6 +190,13 @@
     just cuts off if too big.  Rotating is even worse: nodes are cut off
     even though they fit.  Also, it's troff only, and can't be printed
     from ezprint.
+- way too many mouse-only activities; almost everything should instead
+  be scriptable.  Then again, maybe it's to encourage use of C rather
+  than Ness, which is a good thing, I guess.
+  - most egregious is inability to exit current inset w/o clicking.
+    - and, for that matter, resizing insets and table columns/rows, or
+      moving separators such as lpair's
+  - bdffont, raster, zip, figure, layout, lset, etc.
 - sometimes, bush's ^X^C action is to quit without confirmation
   (maybe has to do with bush not setting change flag correctly as well)
 - chart doesn't set the file name when loading, which it needs for
@@ -204,7 +212,7 @@
   - on auis.doc:
     - TOC looks OK in roff, but in ps it is not so hot:
       - unenumerated (-E does nothing in ps output)
-      - arabic rather than lower-case roman page numbers
+      - arabic rather than lower-case roman page numbers for TOC itself
       - no vertical space between chapters.
     - roff sometimes has missing spaces at style boundaries, causing
       words to run together.
@@ -229,8 +237,8 @@
     way on paper.  At the very least, the line breaking algorithm used
     for full justification is pretty awful compared to troff or TeX.
     Plus of course all of the troff tweaks in existing documents no
-    longer work, but that's to be expected when using blank line to
-    put a notice at the bottom of a page.
+    longer work, but that's to be expected when using blank lines to
+    put a notice at the bottom of a page (rather than special spacer).
 - enable mouse scroll wheel
 - ending search should re-evaluate character in keymap, or something
   should be done to prevent e.g. cursor keys from inserting the 2nd char
@@ -247,7 +255,7 @@
   and Esc-!scm1 for 1, but the latter would be hard to figure out what
   modifiers matter and which not, whereas we assume modifiers always
   matter in the former).
-- put undocumented init file stuff into initfls.help.  Also, add init alias.
+- put undocumented init file stuff into initfls.help.
   Also, move or copy how to pass arguments to actions from procs.help.
 - implement addbutton init command properly (or remove)
   - current implementation just saves the commands in an unused list
@@ -255,11 +263,19 @@
   - Need to figure out what this command should do.  ness "on mouse" hook
     only works on celviews, so I'd need to make a hook at a lower level,
     like either view itself, or better yet, callers of Hit() in the
-    first place.
+    first place.  Then again, it might be safer to use some sort of
+    wrapper view like celview but without arbiter integration.
   - Need to at least provide a way to swap buttons w/o resorting to xmodmap.
+    That sounds like a job for xgraphic/xim, though.
 - implement call-like command, to execute a command on document load
-  [especially useful if this command is ness]
+  [especially useful if this command is ness].  Might be best to add as
+  one of those parameter arguments in the addfiletype, so it's even file
+  specific.
+- add emacs-like parameters-within-comments to srctext
 - add help-type hyperlink or other help button of some sort
+  - maybe just add support for helptopic style's active nature to textview
+    - in that case, add more generic "hit action" support to styles,
+      passing hit text pos and style (env) boundaries and name.
   - add support for loading files directly in help, instead of just indexed
 - org doesn't mark entire doc as modified when doc inset is modified
 - view fixes:
@@ -268,8 +284,7 @@
   - Check all arguments to named procs for same reason.  Best method would
     be to convert all proc table entries that take 2nd arg or whose 1st
     arg is not given an explicit type to check to action-style procs.
-    This forces them to check their argument types, at least from ness.
-    It does nothing for key and menu callbacks, as far as I can tell.
+    This forces them to check their argument types.
     - also fail rather than crash on NULL 1st arg.
     - maybe even covert others as well, and remove the ability to
       produce non-action procs, or adjust DefineProc() to create an
@@ -353,7 +368,7 @@
     access via proc and Linux-specific libc calls.  Also, update
     porting documents to get rid of obsolete assumptions, like <=14-char
     file names.  Also, update installation instructions as needed.
-  - remove all uses of this-> in class methods
+  - remove all unecessary uses of this-> in class methods
   - much of it is C++.  It might be a good idea to look for and remove
     Cisms where C++ does it differently (and presumably the same or better)
     (note that unlike some idiots, I don't consider cpp macros to be C-only)
@@ -389,17 +404,19 @@
 - maybe try converting doxy latex output to ez (rtf is hopeless, and
   like the rest of the www, html is javascript-laden bloated mess)
 - maybe incorporate app.doc into application.H as well.
-- change atom class to be pointer, and no longer force explicit pointer usage
-  also removes issue of possible accidental deletion
+- change atom class to be pointer, and no longer force explicit pointer usage.
+  Also removes issue of possible accidental deletion (but private detructor
+  would do the same)
 - add atom::InternStatic which does not strdup (for static lifetime strings)
   - probably doesn't buy enough to be worthwhile, since most atoms are
     created dynamically.  Maybe using a buffer list for string storage
     would be more worthwhile.
 - search for tjm comments and see if there are any TODOs there
 
-Long-term:
+Long-term (as if any of the above weren't long term as well):
 
 - style improvements:
+  - have insets inherit style from surroundings without hackery
   - support line style & color for drawn styles (underline, overbar,
     strikethrough, dottedbox, changebar)
   - support alternating line bg colors (aka printout style)
@@ -426,20 +443,98 @@ Long-term:
     - reference displays default style, or can override with %-format.
     - maybe make lookz understand this as well
   - implement fully dynamic styling (maybe Function was for that?)
-    beforetext, aftertext (maybe with %{countername[:style]})
-    modfunc = procname[(...)] -> procname(stylename, text[, ...])
-    - like a mini-inset such as writestamp, but less intrusive (e.g. 
-      text may wrap, no "delete inset?", no separate menus, etc.
-    - maybe a regex to limit what gets passed in; rest of text takes
-      style of last char returned.  Thus you could have a "description"
-      style that actually bolds the first word (or styled region, if word
-      is styled), and otherwise just passes back "hanging indent" style.
-    - maybe make lookz understand this as well
-      - lookz really needs a "preview text" field
     Right now, the way of handling itemize/enumerate is to run a
     routine to add/remove them.  It would be much more reliable to have
     a special style for that.  Similarly, even enumeration of book
     sections is done manually, possibly by the print routine itself.
+    - beforetext, aftertext (maybe with %{countername[:style]})
+      for simple, no-coding-required common uses
+    - modfunc = procname[(...)] -> procname(stylename, text[, ...])
+      - proc is an action, so it can be Ness or C
+      - extra args can be part of modfunc spec ('blah(extra args)') or extra
+        style parameter ('modparms')
+      - return type is either text or string.  For text styles are
+	processed recursively.
+      - when to call?  maybe once for each styled char, once at style
+        start, and once at style end.
+      - fixed parms:
+        - renderer (interactive/graphic, printing/ps, printing/troff, etc)
+	- "marker": text obj ref + pos + len
+	- "environment", so beginning and end can be found easily
+      - could make beforetext/aftertext supplied procs rather than special
+        but handling copy/paste and some other issues might be easier if
+	flags could be given as to what the style might do (e.g. add text
+	at start, at end, in middle; remove text at start/end/middle; etc)
+      - could specify more than one modfunc, to be applied in given order
+      - issues with text replacement as a "style".  Currently only "show
+        styles" does fake text, and does not really solve these entirely:
+        - how to handle search?  maybe just make that a caveat of
+	  using them for now (kind of how hidden works, for example)?  maybe
+	  create artifical gaps at each active style boundary, and handle
+	  active styles by styling into a buffer and handing that to search?
+	  if "potential mod" flags used, as given above, this is much easier.
+	- how to handle cursor movement?  treat as if solid block including
+	  first following or preceding char, depending on where rendered?
+	- how to handle copy/paste?  Maybe ignore problem for internal
+	  copy/paste, but when exporting non-stream, render into a buffer
+	  and hand that over?  What about streams that would look different
+	  if styled for the selection rather than the whole (e.g. prefixed
+	  text that doesn't include 1st char)?
+	  if "potential mod" flags used, as given above, this is much easier.
+    - like a mini-inset such as writestamp, but less intrusive (e.g. 
+      text may wrap, no "delete inset?", no separate menus, inherits 
+      styles from surroundings, etc.
+    - maybe make lookz understand this as well
+    - maybe implement Inglett's "stylecontroller" class (why isn't that
+      distributed with ATK?  Why do I have to reimplement from scratch?)
+      It is more of an active content changer than a style.  For example,
+      Upper style would display text as upper-case, but stylecon actually
+      converts stored text to upper-case, instead.  Also, itemize/enumerate
+      still actively changes text, but now it's handled "automatically".
+      Combined with the lack of undo, this makes switching styles destructive.
+      The main advantage is laziness: very little existing code needs to
+      change.  It also neatly solves some hard problems with "fake text"
+      mentioned above.  Also, stylecon acts at the text editing stage,
+      whereas my proposal acts in the same place as styles do:  the rendering
+      stage.  There are advantages/disadvantages to either approach.
+      - object created every time a piece of text is styled with this style:
+        - text = text object
+	- environment = specific application of the style
+	- style = style object (really just environment->data.style)
+      - NewEnvironment() called right after creation, when text
+        and environment fields are valid.  Default relays to TextInserted.
+      - TextChanged(reason, pos, len) - main callback.  If text actually
+        inserted in own region, it may be called again (recursively).
+	Default is to clip pos,len to actual styled region (and does nothing
+	if nothing actually happened in styled region) and avoids recursion
+	by ignoring if already in progress.  It then dispatches to one of
+	the routines below.  Normally not overridden. [what are reasons?]
+	Default, unless specified, for below actions is to do nothing.
+	Called from inner-most env to outer-most.  I'm guessing left-to-right.
+	I'm guessing original pos,len and env walk location saved (as a
+	mark, so its locations move around a bit, and new one started
+	recursively if any TextChanged() changes text.
+        - TextDeleted(pos, len) - after deletion
+        - TextInserted(mark text) - after insertion other than by paste or file
+        - PreDeleted(mark text) - before deletion
+	- TextRead(mark new) - after insertion while reading from file
+	  (also pasting, since apparently that's how pasting works);
+	  default is to defer to TextInserted.
+	- TextReadFile() - entire text has just been read from file
+	- TextReplaced(mark text) - ?? default defers to TextInserted.
+	  [what does replaced mean?  like overwrite mode?]
+      - some "future work" notes:
+        - 1 & 2 (lookz support, multiple per style) apply to mine as well
+        - 3 & 6 (view integration, different behavior on print/view) is part
+	  of why it's better to do it at the renderer.
+	  6 in particular is made very difficult by the desctructive nature
+	- 4 (parameters):  My "action" approach already provides per-style
+	  parameters.  Per-env seems overly complex and probably not worth it.
+	- 7 seems unnecessary.  Why would it care what the current
+	  surrounding style is?  Only the renderer should care.
+	- 8 is an implementation detail.
+	- 9 (Ness) could be done by adding an action that is called by default
+	  for each change type
 - improved regexes:
   - simple way to specify case sensitivity
   - full bre format: ranges (\{..\}), backrefs (\n)?
@@ -483,6 +578,8 @@ Long-term:
     and always write unicode if 8-bit?  Or use cmd-line + pref to select
     Or use $LANG + cmd-line to select on input/output
   - map standard supplied fonts (esp. symbol and symbola) to UTF-8
+  - unicode-bidir support maybe later, as it would require more extensive
+    changes to renderer and cursor movement
 - internationalization support (probably just GNU gettext)
   currently menus can be replaced, but messages & the like cannot
 - truetype font support using Xft
@@ -522,7 +619,7 @@ Long-term:
 - maybe make some of the ATK "todo" crap from papers (may have been 
   actually implemented, but not released; typical academic paper BS):
   - drag & drop protocol?  conf1992/Inglett
+    need to look at actual protocls in use today, and ignore Inglett.
   - joint (multiuser) editing? conf.1992/Kedem
-  - "smart" styles? conf.1993/Inglett (may be overkill)
+  - "smart" styles? conf.1993/Inglett (see above)
 - make entire beast literate (yeah, right - way too much effort)
-- unicode-bidir support

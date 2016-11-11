@@ -12957,7 +12957,7 @@ class avalueflex_base [dup - OFLEX]
 
 \section{libbasics.so}
 
-The follosing should be dealt with somehow:
+The following should be dealt with somehow:
 
 class avalueflex_base [dup - OFLEX] - defined here
 
@@ -12980,8 +12980,6 @@ T imageToXImage(xgraphic*, image*, unsigned int, unsigned int)
 T TryConversion(resourceTree_s*, atom*, long*)
 
 T PostResourceAt(resourceTree_s*, atomlist*, long, atom*)
-
-T im__PlayActions(im*, action*)
 
 T CompareFileNames(char**, char**)
 

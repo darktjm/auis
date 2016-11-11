@@ -10,7 +10,15 @@ extend "view:%"
 
 \indent{on % "%"
 
-\indent{%}
+\indent{integer arg := GetNumericArgument()
+
+while arg = -1 or arg > 0 do
+
+\indent{%
+
+arg := arg - 1}
+
+end while}
 
 end %
 
