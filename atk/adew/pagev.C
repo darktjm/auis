@@ -431,7 +431,7 @@ static void AddSwitcheeFromFile(class pagev  *self)
 #endif
 static void PasteSwitchee(class pagev  *self)
 {
-    char FileName[150], ViewName[150], Label[150], *ObjName;
+    char ViewName[150], Label[150], *ObjName;
     class dataobject *d;
     FILE *fp;
     long ID;
@@ -443,7 +443,7 @@ static void PasteSwitchee(class pagev  *self)
 	message::DisplayString(self, 10, "Could not open file.");
 	return;
     }
-    ObjName = filetype::Lookup(fp, FileName, &ID, NULL);
+    ObjName = filetype::Lookup(fp, NULL, &ID, NULL);
     d = (class dataobject *) ATK::NewObject(ObjName);
     if (!d) {
 	((self)->GetIM())->CloseFromCutBuffer( fp);
@@ -547,6 +547,12 @@ void pagev::ObservedChanged(class observable  *changed, long  value)
 		    last->next = swtmp->next;
 		if (this->NowPlaying == swtmp) {
 		    this->NowPlaying = NULL;
+		    // tjm - FIXME: why is this necessary?  deleting the view
+		    //       should somehow take care of this:
+		    //       without WantInputFocus, next focus crashes
+		    //       without (this), key bindings from last cut
+		    //         inset remain in effect until next focus
+		    this->WantInputFocus(this);
 		}
 		((class page *) (this)->GetDataObject())->DeleteObject(swtmp->switchee->d);
 		free(swtmp);

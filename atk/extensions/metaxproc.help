@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for metax}
 
 
-\bold{metax}(object \italic{view}, \italic{argument})
+\bold{metax}(object \italic{view}, null | 0 | marker \italic{argument})
 
 \leftindent{Executes a proctable function by name.  The 
 \italic{argument} (or 0, if not present) is passed on to the 
@@ -12,7 +12,6 @@ procedure.  Note that action-style procedures' arguments are
 interpreted as for binding, as described in the \helptopic{procs} overview.  
 The type of the action's argument is assumed to be an integer if in the 
 range of 0 to 255, and a string otherwise.
-
 
 This is pointless in Ness; just call the procedure directly.  
 However, there may be some advantage to the support of parsing the 

@@ -55,207 +55,6 @@ expected.  Instead, just diff the latest with upstream manually, and
 keep in mind that I changed one file (COPYRITE in the top-level
 directory) into a link.
 
-Commentary: What is ATK?
-------------------------
-
-ATK is both a graphical toolkit and a higher level collection of
-software.  At the graphical toolkit level, it failed in many ways.  It
-was too limited, and was surpased even by Xaw3D in appearance,
-performance, and configurability.  Maybe part of the issue was its
-initial focus around WM, which I've never used or seen.  Various
-projects (within the distributed AUIS source, at least) tried to
-modernize the toolkit before it died, but nothing ever got finished
-and is now a bunch of undocumented, incomplete, convoluted and
-pointless code. That is all I have to say about the lower-level
-aspects of AUIS, at least in this section.
-
-At the higher level, AUIS represents a promise.  This promise has been
-made many times, by many frameworks.  The promise is that you can
-develop independent components which easily interact with each other
-in an editor or viewer.  This means that the interaction mechanism is
-well-developed and easy to both use and implement.  It also means that
-components exist for many common applications, providing both a
-complete baseline from which to develop and a large number of useful
-examples.
-
-Independence can mean different things.  At the highest level, it
-could mean programs running on sepearate machines.  This requires
-communication of the API over a network, and dealing with unreliable,
-extremely slow response times and other network failures, as well as
-the possibility that remote applications may fail unexpectedly or not
-even be started yet.  It could just mean programs running on the same
-machine, with the same problems but slightly faster and slightly
-easier to deal with misbehaving component applications.  At the lowest
-level, it could be components that are statically or dynamically
-linked into the application, giving little to no overhead in
-communication and making the possibility of independent failure less
-likely, but generally leaving things which require separate
-applications, such as privilege separation, more difficult.
-
-There are many ways in which components must interact.  For visual
-interaction, the component must present itself properly within its
-context.  The context may be that of an entire application window for
-editing or viewing the component, or as an embedded element for
-viewing (or printing), or as an embedded element for editing.  It
-should be able to deal with changes which alter its appearance, and
-communicate those changes to its context.  For example, many elements
-appear different depending on whether or not they have keyboard focus.
-
-For UI interaction, the common elements of the user interface must be
-easily adjustable by the embedded component.  Key bindings in the
-enclosing environment must be respected, but they must also be
-alterable by the component itself, at least while it is in focus.
-Similarly, other UI elements, such as menus, button bars, and mouse
-behavior must be alterable by the component when it is in focus via
-simple APIs.  Naturally, consistent methods for assiging focus must
-exist as well.  It should not be unusual to change the overall UI (not
-just the embedded component's appearance) depending on wheter or not a
-component has focus, or is the entire application window.
-
-For long-term storage interaction, a component must be able to
-serialize its persistent data in a manner compatible with its
-enclosing component(s), if applicable.  This means that the system
-must provide a consistent stream format that is easily implemented by
-any compoenents.  The format must uniquely identify the component
-which created it, and also must be consistently skippable and storable
-in a dummy component if the originating component is not available.
-
-AUIS delivers on some of these, but not all, and not as well as it
-could have.  AUIS defines a simple API and stream format.  AUIS
-provides no inter-application communication, but instead provides high
-performance dynamic linking (and static linking, as well, although
-there is no difference in performance either way).  AUIS provides a
-large number of components from which to build applications or to use
-as base code for additional components.  Really, its main failure is
-that its users and developers lost interest, making it a dead system.
-Some of the missing features, such as better color support, better
-support for high-resolution displays, undo support, button bars,
-Unicode, and other more modern elements would have come with time,
-anyway, if it had not died when it did.  Other things, such as IPC,
-would probably never have taken off, given that lack of a need.
-
-Is there anyone else out there trying to fulfill this promise?  I
-don't know.  I would probably have to put a lot more effort into
-researching alternatives to give a correct answer.  The following is
-mostly uninformed, but probably accurate.  Others may have done it
-better in the mean time, but most modern efforts are towards providing
-large, monolithic libraries and applications that do not even come
-close to representing the above promise.  MicroSoft COM seems to be
-the closest to deliver on this, but as with anything MicroSoft
-creates, it's tied to Windows, and is useless anywhere else.
-
-CORBA makes claims, but delivers nothing but a consistent IPC
-specification.  It claims to allow tighter linkage, but leaves all the
-details to the implementors (none of which do this, to my knowledge).
-It provides no hints at a consistent API for embedding.  It could be
-used as a basis for something which fulfills the promise. GNOME tried
-to do this with Bonobo, but failed by providing almost no components
-and failing to acquire developer or user interest; GNOME 3 has dropped
-this entirely in favor of DBus, which will never have tight
-integration.  Like most attempts using IPC, it simply ended up with
-large, bloated applications with numerous IPC entry points, rather
-than separate, smaller components.  This includes DCOP/KParts,
-COM/DCOM, UNO, and probably most others as well.  ATK at least tried
-to keep that sort of a thing to a minimum, at first, but with time I
-expect ATK would've gone the same route.  Most of these do not even
-attempt to support tight integration, and providing many small
-components without tight integration would bring performance to a
-crawl, anyway.  Not that it matters with multi-GHz CPUs and so much
-memory that nobody bats an eye at multi-gigabyte requirements for
-most modern applications.  In comparison, the entire stripped AUIS is
-less than 51MB (much of which is documents), and debugging only adds
-35MB.
-
-Commentary: How is ATK?
------------------------
-
-Significant technical effort went into some aspects of ATK.  For
-example, ATK predates X, so it has "window system independence".  This
-sounds great, until you realize that like all projects, the
-independece is loose at best, and deteriorated as time passed.  It
-would be very difficult to port ATK as it is now to something other
-than X.  Even porting it back to WM, the system it was originally
-designed for, would be unreasonably difficult.  The design of the
-interfaces seemed good at the time, but some were obviously in the
-process of being replaced by "something better" at the time AUIS was
-abandoned, so even the ATK authors realized their limitations.  Some
-interfaces were meant for future expansion that never happened, while
-missing out on things that actually did happen.  Some are just silly,
-such as those requiring text to select options when plain integers
-would do.  Color and sound, which are big missing features (with only
-basic color support, and sound that I could outdo on my 1981 VIC-20),
-are mostly missing due to the workstation market at the time of
-development:  no workstation support meant no ATK support.
-
-Regardless of how much effort went into the design, the implementation
-was often sloppy and full of bugs, both potential and actual.  A large
-proportion of the code was also undocumented or misdocumented (either
-for users or for maintainers); as with much code even today, 90% or
-more of the code comments were copyright notices, and 5% were change
-logs that really belong in a source code control system.  There were
-many skeleton documents, and quite a few incomplete or missing
-documents. The code has quite a bit of "maybe I'll implement this some
-day" type of garbage that makes maintenance harder.  Such notes belong
-in undistributed code or TODO lists.  What little documentation exists
-is often duplicated in several places (with maybe one or two places
-conflicting, due to different update rates), making maintenance that
-much harder.  Quite a bit of code is apparently a work in progress,
-and serves little purpose other than to provide a demonstration.
-
-In particular, the apt class and all its descendents (e.g. tree,
-suite, org, bush, chart) are full of unimplemented ideas and bugs which
-indicate that even the implemented ideas never worked properly.  The
-atk/widgets hierarchy is documented only by a half-written design
-document that has more ideas than actual documentation.  The help
-facility seems great, until you find out that most of the help text is
-incomplete and inaccurate.  The initiative to document all proctable
-entries produced user-unfriendly, poorly documented skeletons at best.
-The zip component is an undocumented WIP that was apparently abandoned
-in '89, long before the rest.  Its replacement, figure, is not much
-better (and worse in some cases).
-
-The indentation scheme adopted by some of the code (but not all; some
-just indents willy-nilly or not at all, making it hard to figure out
-the intent for ambiguous if-else, for example) was pre-ANSI.  Having
-the type indented above the function declaration just plain looks
-ugly, even if the intent was to make it easier to see the important
-bit:  the name of the function.  The secondary purpose of that
-indentation was to make the type line up with parameters' types, which
-of course only makes sense with pre-ANSI-style parameters.
-
-The whole idea of insets seems to have been a bust, like pretty much
-all component-based designs.  The only useful insets are the standards
-which any office-type app supports these days: text,
-spreadsheet/table, and simple drawing.  Everything else is more of a
-curiosity than a useful inset (well, page breaks, footnontes, and
-headers are useful, but I question their implementation as an inset).
-Non-inset features are more useful: text styles (although they are
-horribly misused in the existing documentation, esp. wrt. section
-headings) and extensions.  Overall, though, if your goal is a word
-processor with embeddable apps, MS did it better with their office
-products, and I imagine LibreOffice, AbiWord, KOffice, and others do
-it better as well, even if they are annoyingly large monolithic
-programs.  The only other gimick of ez was srctext and its derivatives
-for code editing, and emacs does that better (probably did back then,
-as well).  Sure, they did it later, but that just makes AUIS' failure
-worse, because they had a lead and let it drop.
-
-ATK seems to have stagnated long before it was abandoned.  Very little
-was added in the 90s.  Only the bare minimum of ANSIfication was done
-to support a standard that was introduced in '89, and was available
-long before that (I was writing ANSI-style code in '88, for example).
-The only thing that prompted this ANSIfication was that it was needed
-to support C++.  I guess that's what happens when you close the source
-and run out of funding at the same time.  The work I've done here
-could never have happened at the time when only binary releases were
-done.  Saying that joining the Andrew Consortium is free does not make
-things any more open.  The complete lack of other AFS maintenance
-projects in the intervening years shows how much the lack of openness
-for much of its existence affected developer interest.  I'm surprised
-AFS survived its closed (DCE/DFS) phase; as is, I have no doubts it
-would be more popular than it is if it had remained opened, in spite
-of the CMU people saying that the TransArc transition was a success.
-
 Building and Installation
 -------------------------
 
@@ -666,6 +465,12 @@ So far, what I've done is:
     assumptions still exist, and require manual location and
     removal.
 
+  - Made significant progress in constification.   Most of that was
+    string constant misuse found by warnings, but I also looked for
+    explicit casts and removed (or documented) those.  Also made most
+    static structures I encountered constant, but there are many more
+    to do.  This also shook out a number of bugs in the code.
+
   - Started on documentation, now in a plain ez text file instead
     of org (org seemed nifty, but it can't print and you can't
     assign styles to node labels and the app is in general not
@@ -674,14 +479,16 @@ So far, what I've done is:
     latex document.  Also started a doxygen document, with some things
     actually documented.   I'm not happy with the formatting or
     contents (excessive in most places), but I'll continue investing
-    in it.
+    in it.  Also, now I provide at least "proctable" documentation for
+    all bindable actions/procedures in consistently named and formatted
+    help files.
 
   - Fixed org so that it actually almost works.  I don't think org
     was production-ready even in '97.  It still has some usability
     issues and general code ugliness.
 
   - Fixed bugs in bush as well, and made it usable as a dired
-    replacement.
+    replacement.  It's still probably better to just use dired.
 
   - Removed all uses of csh.  Some systems don't even install csh
     any more.  Even tcsh is far superceded by zsh and other
@@ -703,3 +510,238 @@ So far, what I've done is:
     and replaced with a generic external library (originally DevIL,
     FreeImage, or ImageMagick, but they all suck and only ImageMagick
     supports GIF properly, so I dropped the other two).
+
+  - Made templates (aka "style sheets") able to inherit from others,
+    reducing the clutter and duplication and making overrides easier.
+
+  - Implemented working device-independent sound code.  This implements
+    fake speaker beeps (play) and fake Sun audio (alink).
+
+  - Made printing do something almost useful on modern Linux.
+  
+  - Ported getstats to modern Linux, which makes console sort of work.
+
+  - Made typescript and tm/tm19 work on modern Linux (imperfectly).
+    Documented specific hacks to make it work better with modern
+    interactive shells.
+
+  - Fixed many bugs, just while doing the above.  For example:
+    - Fixed many valgrind hits.  I guess it's nice having a GHz+ CPU to
+      run something like valgrind on.
+    - Killed illegal direct deletion of reference-counted objects
+    - Support larger fonts in several places.  Having a high display res
+      makes fonts larger by default.  GUI should adapt to user preferences
+      such as font face and font size better, in general.  One change was
+      to make the default font aliases point to scalable fonts (URW), rather
+      than bitmap fonts that look ugly when scaled.
+    - Fixed many bugs in adew, making it almost work now.  At least
+      you can now get through the tutorial without crashing.
+    - Resizes did not cause a proper redraw
+    - Macro recording did not support popup dialogs such as file names
+    - Ness versions of macros now support ^U arguments, both in the
+      macro itself and applied to the Ness code
+    - Suite had color and input focus issues, among others
+    - Fixed several infinite loops in text rendering loop when stuff didn't fit
+    - Even fixed bugs in low-level, fundamental data structures such as [o]flex
+    - deskey now prints something with modern sort commands.
+
+Commentary: What is ATK?
+------------------------
+
+ATK is both a graphical toolkit and a higher level collection of
+software.  At the graphical toolkit level, it failed in many ways.  It
+was too limited, and was surpased even by Xaw3D in appearance,
+performance, and configurability.  Maybe part of the issue was its
+initial focus around WM, which I've never used or seen.  Various
+projects (within the distributed AUIS source, at least) tried to
+modernize the toolkit before it died, but nothing ever got finished
+and is now a bunch of undocumented, incomplete, convoluted and
+pointless code. That is all I have to say about the lower-level
+aspects of AUIS, at least in this section.
+
+At the higher level, AUIS represents a promise.  This promise has been
+made many times, by many frameworks.  The promise is that you can
+develop independent components which easily interact with each other
+in an editor or viewer.  This means that the interaction mechanism is
+well-developed and easy to both use and implement.  It also means that
+components exist for many common applications, providing both a
+complete baseline from which to develop and a large number of useful
+examples.
+
+Independence can mean different things.  At the highest level, it
+could mean programs running on sepearate machines.  This requires
+communication of the API over a network, and dealing with unreliable,
+extremely slow response times and other network failures, as well as
+the possibility that remote applications may fail unexpectedly or not
+even be started yet.  It could just mean programs running on the same
+machine, with the same problems but slightly faster and slightly
+easier to deal with misbehaving component applications.  At the lowest
+level, it could be components that are statically or dynamically
+linked into the application, giving little to no overhead in
+communication and making the possibility of independent failure less
+likely, but generally leaving things which require separate
+applications, such as privilege separation, more difficult.
+
+There are many ways in which components must interact.  For visual
+interaction, the component must present itself properly within its
+context.  The context may be that of an entire application window for
+editing or viewing the component, or as an embedded element for
+viewing (or printing), or as an embedded element for editing.  It
+should be able to deal with changes which alter its appearance, and
+communicate those changes to its context.  For example, many elements
+appear different depending on whether or not they have keyboard focus.
+
+For UI interaction, the common elements of the user interface must be
+easily adjustable by the embedded component.  Key bindings in the
+enclosing environment must be respected, but they must also be
+alterable by the component itself, at least while it is in focus.
+Similarly, other UI elements, such as menus, button bars, and mouse
+behavior must be alterable by the component when it is in focus via
+simple APIs.  Naturally, consistent methods for assiging focus must
+exist as well.  It should not be unusual to change the overall UI (not
+just the embedded component's appearance) depending on wheter or not a
+component has focus, or is the entire application window.
+
+For long-term storage interaction, a component must be able to
+serialize its persistent data in a manner compatible with its
+enclosing component(s), if applicable.  This means that the system
+must provide a consistent stream format that is easily implemented by
+any compoenents.  The format must uniquely identify the component
+which created it, and also must be consistently skippable and storable
+in a dummy component if the originating component is not available.
+
+AUIS delivers on some of these, but not all, and not as well as it
+could have.  AUIS defines a simple API and stream format.  AUIS
+provides no inter-application communication, but instead provides high
+performance dynamic linking (and static linking, as well, although
+there is no difference in performance either way).  AUIS provides a
+large number of components from which to build applications or to use
+as base code for additional components.  Really, its main failure is
+that its users and developers lost interest, making it a dead system.
+Some of the missing features, such as better color support, better
+support for high-resolution displays, undo support, button bars,
+Unicode, and other more modern elements would have come with time,
+anyway, if it had not died when it did.  Other things, such as IPC,
+would probably never have taken off, given that lack of a need.
+
+Is there anyone else out there trying to fulfill this promise?  I
+don't know.  I would probably have to put a lot more effort into
+researching alternatives to give a correct answer.  The following is
+mostly uninformed, but probably accurate.  Others may have done it
+better in the mean time, but most modern efforts are towards providing
+large, monolithic libraries and applications that do not even come
+close to representing the above promise.  MicroSoft COM seems to be
+the closest to deliver on this, but as with anything MicroSoft
+creates, it's tied to Windows, and is useless anywhere else.
+
+CORBA makes claims, but delivers nothing but a consistent IPC
+specification.  It claims to allow tighter linkage, but leaves all the
+details to the implementors (none of which do this, to my knowledge).
+It provides no hints at a consistent API for embedding.  It could be
+used as a basis for something which fulfills the promise. GNOME tried
+to do this with Bonobo, but failed by providing almost no components
+and failing to acquire developer or user interest; GNOME 3 has dropped
+this entirely in favor of DBus, which will never have tight
+integration.  Like most attempts using IPC, it simply ended up with
+large, bloated applications with numerous IPC entry points, rather
+than separate, smaller components.  This includes DCOP/KParts,
+COM/DCOM, UNO, and probably most others as well.  ATK at least tried
+to keep that sort of a thing to a minimum, at first, but with time I
+expect ATK would've gone the same route.  Most of these do not even
+attempt to support tight integration, and providing many small
+components without tight integration would bring performance to a
+crawl, anyway.  Not that it matters with multi-GHz CPUs and so much
+memory that nobody bats an eye at multi-gigabyte requirements for
+most modern applications.  In comparison, the entire stripped AUIS is
+less than 51MB (much of which is documents), and debugging only adds
+35MB.
+
+Commentary: How is ATK?
+-----------------------
+
+Significant technical effort went into some aspects of ATK.  For
+example, ATK predates X, so it has "window system independence".  This
+sounds great, until you realize that like all projects, the
+independece is loose at best, and deteriorated as time passed.  It
+would be very difficult to port ATK as it is now to something other
+than X.  Even porting it back to WM, the system it was originally
+designed for, would be unreasonably difficult.  The design of the
+interfaces seemed good at the time, but some were obviously in the
+process of being replaced by "something better" at the time AUIS was
+abandoned, so even the ATK authors realized their limitations.  Some
+interfaces were meant for future expansion that never happened, while
+missing out on things that actually did happen.  Some are just silly,
+such as those requiring text to select options when plain integers
+would do.  Color and sound, which are big missing features (with only
+basic color support, and sound that I could outdo on my 1981 VIC-20),
+are mostly missing due to the workstation market at the time of
+development:  no workstation support meant no ATK support.
+
+Regardless of how much effort went into the design, the implementation
+was often sloppy and full of bugs, both potential and actual.  A large
+proportion of the code was also undocumented or misdocumented (either
+for users or for maintainers); as with much code even today, 90% or
+more of the code comments were copyright notices, and 5% were change
+logs that really belong in a source code control system.  There were
+many skeleton documents, and quite a few incomplete or missing
+documents. The code has quite a bit of "maybe I'll implement this some
+day" type of garbage that makes maintenance harder.  Such notes belong
+in undistributed code or TODO lists.  What little documentation exists
+is often duplicated in several places (with maybe one or two places
+conflicting, due to different update rates), making maintenance that
+much harder.  Quite a bit of code is apparently a work in progress,
+and serves little purpose other than to provide a demonstration.
+
+In particular, the apt class and all its descendents (e.g. tree,
+suite, org, bush, chart) are full of unimplemented ideas and bugs which
+indicate that even the implemented ideas never worked properly.  The
+atk/widgets hierarchy is documented only by a half-written design
+document that has more ideas than actual documentation.  The help
+facility seems great, until you find out that most of the help text is
+incomplete and inaccurate.  The initiative to document all proctable
+entries produced user-unfriendly, poorly documented skeletons at best.
+The zip component is an undocumented WIP that was apparently abandoned
+in '89, long before the rest.  Its replacement, figure, is not much
+better (and worse in some cases).
+
+The indentation scheme adopted by some of the code (but not all; some
+just indents willy-nilly or not at all, making it hard to figure out
+the intent for ambiguous if-else, for example) was pre-ANSI.  Having
+the type indented above the function declaration just plain looks
+ugly, even if the intent was to make it easier to see the important
+bit:  the name of the function.  The secondary purpose of that
+indentation was to make the type line up with parameters' types, which
+of course only makes sense with pre-ANSI-style parameters.
+
+The whole idea of insets seems to have been a bust, like pretty much
+all component-based designs.  The only useful insets are the standards
+which any office-type app supports these days: text,
+spreadsheet/table, and simple drawing.  Everything else is more of a
+curiosity than a useful inset (well, page breaks, footnontes, and
+headers are useful, but I question their implementation as an inset).
+Non-inset features are more useful: text styles (although they are
+horribly misused in the existing documentation, esp. wrt. section
+headings) and extensions.  Overall, though, if your goal is a word
+processor with embeddable apps, MS did it better with their office
+products, and I imagine LibreOffice, AbiWord, KOffice, and others do
+it better as well, even if they are annoyingly large monolithic
+programs.  The only other gimick of ez was srctext and its derivatives
+for code editing, and emacs does that better (probably did back then,
+as well).  Sure, they did it later, but that just makes AUIS' failure
+worse, because they had a lead and let it drop.
+
+ATK seems to have stagnated long before it was abandoned.  Very little
+was added in the 90s.  Only the bare minimum of ANSIfication was done
+to support a standard that was introduced in '89, and was available
+long before that (I was writing ANSI-style code in '88, for example).
+The only thing that prompted this ANSIfication was that it was needed
+to support C++.  I guess that's what happens when you close the source
+and run out of funding at the same time.  The work I've done here
+could never have happened at the time when only binary releases were
+done.  Saying that joining the Andrew Consortium is free does not make
+things any more open.  The complete lack of other AFS maintenance
+projects in the intervening years shows how much the lack of openness
+for much of its existence affected developer interest.  I'm surprised
+AFS survived its closed (DCE/DFS) phase; as is, I have no doubts it
+would be more popular than it is if it had remained opened, in spite
+of the CMU people saying that the TransArc transition was a success.

@@ -176,6 +176,8 @@ void matte::WantInputFocus(class view *requestor)
 void matte::ReceiveInputFocus()
     {
     if(this->child) (this->child)->ReceiveInputFocus();
+    else view::ReceiveInputFocus();
+	
     (this)->WantUpdate(this);
 }
 

@@ -293,10 +293,8 @@ chartv::ReceiveInputFocus( )
   
   InputFocus = true;
   if ( Keystate )
-    {
     Keystate->next = NULL;
-    (this)->PostKeyState(  Keystate );
-    }
+  (this)->PostKeyState(  Keystate );
   if ( Menu )
     {
     (Menu)->SetMask(  menu_default | 
@@ -304,8 +302,8 @@ chartv::ReceiveInputFocus( )
 	((Application) ? menu_application : 0) );
     if(PaletteExposed) 
 	((class view *)Palette)->PostMenus(  Menu );
-    (this)->PostMenus(  Menu );
     }
+  (this)->PostMenus(  Menu );
   (this)->SetTransferMode(  graphic::BLACK );
   (this)->DrawRectSize(  Left, Top, Width-1, Height-1 );
   OUT(chartv_ReceiveInputFocus);

@@ -52,7 +52,6 @@
     PS/Troff conversion to figure it out, which takes forever and tells
     tells me nothing of what the designers actually intended. <sigh>
   - lookz really needs a "preview text" field
-- ness doesn't support "real" type fully on proctable action calls.
 - unkonwn requires manual ^L after inserting raw data
 - dired-regexp-select doesn't seem to work (selects weird stuff)
   - works perfenctly in some dirs, and badly in others.  Not sure why.
@@ -88,9 +87,20 @@
   - support parameters (other than just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
+- there should be a way to do avalue/avalueflex types better in Ness
+  - can't do "real" args or return type on proctable action calls (callCfunc).
+  - can't do "named" arguments
+  - can't even really call InterpretString() to do that work, except via metax
+  - can't deal with returned avalue array from actions (only 1st ret val)
+    - could return as an InterpretString()-style value, I guess,
+      except that it could only support known types
+    - could support multiple return values:  x, y := f(x); if less
+      returned y becomes "unset" (but there is no "is unset" test)
 - adew issues
-  - "Show Cels" (show cel names) crashes.
-  - cutting a page using arbcon crashes.
+  - sliders behave oddly, not following mouse at all really
+  - questionnaire.msg's send button requires manual ^L to make send
+    button expand.
+  - sometimes just loading a doc with controls sets modified flag for it
   - There should be a way to control inset view sizes better (at least
     reset either/both direction fixed size so inset can auto-size itself)
   - String slider/String thumb should have way to statically set text array.
@@ -101,11 +111,7 @@
     have to move away and back again.
   - enterstrV/mentertextV/clicklistV don't allow setting text part's style
   - should be able to set default size of arbcon popup (i.e., smaller)
-  - sliders behave oddly, not following mouse at all really
-  - questionnaire.msg's send button requires manual ^L to make send
-    button expand.
   - adjusting controls doesn't always set modified flag for a document
-  - sometimes just loading a doc with controls sets modified flag for it
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
@@ -250,6 +256,7 @@
     Then again, just setting the high bit could indicate a longer
     sequence, unbreakable.
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
+  [actually, it's just impossible to enter/exit an inset via keyboard afaict]
 - provide method to override/supplement X key binding list.  Maybe make
   modifiers a canonically ordered prefix list (e.g. Esc-_scm1 for F1,
   and Esc-!scm1 for 1, but the latter would be hard to figure out what

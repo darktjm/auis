@@ -261,6 +261,7 @@ calcv::ReceiveInputFocus( )
   InputFocus = true;
   Keystate->next = NULL;
   (this)->PostKeyState(  Keystate );
+  PostMenus(NULL);
   PendingOutline = true;
   (this)->WantUpdate(  this );
   OUT(calcv_ReceiveInputFocus);
