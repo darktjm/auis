@@ -1325,13 +1325,14 @@ BuildImage(class lookzview   *self)
 	(emptylabelview)->SetDataObject((class dataobject *) emptylabel);
 
 	/* build image 
-		there are ten apparent rectangles arranged like this:
+		there are 15 apparent rectangles arranged like this:
 	
 	icon		MENUCARD		MENUNAME
 
 	FONT  	ENABLE	DISABLE	JUSTIFI-	BASE-
 				CATION		LINE
-	FONTSIZE		 		COLOR
+
+	FONTSIZE		 COLOR		TABFILL
 
 	LINE SPACING			PARAGRAPH SPACING
 		
@@ -1345,7 +1346,7 @@ BuildImage(class lookzview   *self)
 		R[0]	(icon, MENUCARD, MENUNAME)
 		R[1]	(FONT, ENABLE, DISABLE)
 		R[2]	(JUSTIFICATION, BASELINE)
-		R[3]	(FONTSIZE, COLOR)
+		R[3]	(FONTSIZE, COLOR, TABFILL)
 		R[4]	(MARGIN/PARA RULER)
 		R[5]	(VERTICAL SPACING)
 		R[6]	(TABRULER)
@@ -1690,10 +1691,8 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 	}
 
 	if ((this)->GetVisibility()) {
-		if (type != view::PartialRedraw 
-			/* && type != view::LastPartialRedraw */) {
+		if (type == view::FullRedraw)
 			(this->image)->InsertView( this, &r);
-		}
 		/* Now that we are here, the strtbl's have been instantiated,
 		   so we can set their font's to something reasonable! */
 		/* This should only be done once... */

@@ -1,5 +1,6 @@
 \begindata{text, 1}
 \textdsversion{12}
+\template{default}
 \define{programexample
 menu:[Region~4,ProgramExample~13]
 attr:[Flags KeepPriorNL Int Set]

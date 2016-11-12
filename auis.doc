@@ -27816,7 +27816,109 @@ bits 2668 7 7
 76 |
 e6 |
 \enddata{raster, 2668}
-\view{rasterview,2668,1395,0,0}
+\view{rasterview,2668,1395,0,0} \\241 - 
+\begindata{raster,1245}
+2 0 68266 68266 0 0 9 12
+bits 1245 9 12
+fcg |
+fcg |
+ccg |
+84g |
+04g |
+04g |
+2480 |
+15g |
+0ag |
+0eg |
+04g |
+04g |
+\enddata{raster, 1245}
+\view{rasterview,1245,1,0,0} \\242 - 
+\begindata{raster,1246}
+2 0 68266 68266 0 0 9 12
+bits 1246 9 12
+1f80 |
+1f80 |
+1980 |
+1080 |
+10g |
+10g |
+92g |
+54g |
+28g |
+38g |
+10g |
+10g |
+\enddata{raster, 1246}
+\view{rasterview,1246,2,0,0} \\243 - 
+\begindata{raster,1247}
+2 0 68266 68266 0 0 9 12
+bits 1247 9 12
+c980 |
+G80 |
+c980 |
+49g |
+08g |
+08g |
+49g |
+2ag |
+14g |
+1cg |
+08g |
+08g |
+\enddata{raster, 1247}
+\view{rasterview,1247,3,0,0} \\244 - 
+\begindata{raster,1248}
+2 0 68266 68266 0 0 9 12
+bits 1248 9 12
+49g |
+49g |
+6bg |
+22g |
+36g |
+1cg |
+49g |
+2ag |
+14g |
+1cg |
+08g |
+08g |
+\enddata{raster, 1248}
+\view{rasterview,1248,4,0,0} \\245 - 
+\begindata{raster,1249}
+2 0 68266 68266 0 0 9 12
+bits 1249 9 12
+1cg |
+3eg |
+1cg |
+08g |
+08g |
+08g |
+49g |
+2ag |
+14g |
+1cg |
+08g |
+08g |
+\enddata{raster, 1249}
+\view{rasterview,1249,5,0,0} \\246 - 
+\begindata{raster,1250}
+2 0 68266 68266 0 0 9 12
+bits 1250 9 12
+1cg |
+36g |
+22g |
+06g |
+0cg |
+08g |
+49g |
+2ag |
+14g |
+1cg |
+08g |
+08g |
+\enddata{raster, 1250}
+\view{rasterview,1250,6,0,0}
 
 
 
@@ -27851,6 +27953,7 @@ b6d4a0 |
 He0 |
 \enddata{raster, 2669}
 \view{rasterview,2669,1396,0,0})
+
 
 
 \section{indice12.pcf}

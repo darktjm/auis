@@ -28,11 +28,12 @@ ATK_IMPL("tabrulerview.H")
 #define	CancelString	"Cancel"
 
       
-
+// tjm - FIXME:  none of these account for possibility of scaled fonts
+//       then again, icon12 is sort of a fixed font, unless I replace it.
 #define ICONHEIGHT 14	/*C*//* height of area where icons move */
 #define PARKWIDTH  19	/*C*//* width of icon parking areas */
 #define PARKSPACE  24   /* spacing of icon parking areas */
-#define tabrulerHEIGHT 22 /*C*//* bottom line = topline + tabrulerHEIGHT */
+#define tabrulerHEIGHT (8+GetTextHeight(self)) /*C*//* bottom line = topline + tabrulerHEIGHT */
 
 static class fontdesc *TextFont, *IconFont;
 
@@ -90,9 +91,19 @@ CheckWindow(class tabrulerview  *self, const char  *where)
 boolean
 tabrulerview::InitializeClass()
 {
-    TextFont = fontdesc::Create("andysans", fontdesc_Bold, 12);
+    TextFont = fontdesc::Create("andysans", fontdesc_Bold, 10);
     IconFont = fontdesc::Create("icon", fontdesc_Plain, 12);
     return TRUE;
+}
+
+static int GetTextHeight(class tabrulerview *self)
+{
+    static int txtheight = 0;
+    if(!txtheight) {
+	struct FontSummary *fs = TextFont->FontSummary(self->GetDrawable());
+	txtheight = fs->newlineHeight == 0 ? fs->maxHeight : fs->newlineHeight;
+    }
+    return txtheight;
 }
 
 tabrulerview::tabrulerview()
@@ -628,7 +639,7 @@ view::DSattributes
 tabrulerview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 			   long  *desiredWidth, long  *desiredHeight ) 
 {
-    *desiredHeight = 80;
+    *desiredHeight = 80 - 28 + 2*GetTextHeight(this);
     *desiredWidth = 700;
     return view::Fixed;
 }

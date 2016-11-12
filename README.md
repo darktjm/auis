@@ -536,7 +536,7 @@ So far, what I've done is:
       than bitmap fonts that look ugly when scaled.
     - Fixed many bugs in adew, making it almost work now.  At least
       you can now get through the tutorial without crashing.
-    - Resizes did not cause a proper redraw
+    - Window resizes did not cause a proper redraw
     - Macro recording did not support popup dialogs such as file names
     - Ness versions of macros now support ^U arguments, both in the
       macro itself and applied to the Ness code
