@@ -17,14 +17,14 @@ ATK_IMPL("clicklistV.H")
 
 
 ATKdefineRegistryNoInit(clicklistV, stringV);
-static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
+static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,int  type);
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size);
 #endif /* USEGETCOUNT */
 static void SetArray(class clicklistV  *self,const char  * const *str,long  size);
 
 
-static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
+static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view::MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,int  type)
 {   /* deal with clicks */
     class value *val;
     if(type == cltextview_PREPROCESS){

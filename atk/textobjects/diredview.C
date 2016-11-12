@@ -447,8 +447,9 @@ static void ptproc_RegexpSelect(class diredview  *self, long  rock)
         pos = pat.MatchPattern(dired, pos);
         if (pos < 0 || (res = (dired)->Locate( pos)) == NULL)
             break;
-        if (stat(GetFullName(self, res), &stbuf) >= 0 &&
-          (stbuf.st_mode & S_IFMT) != S_IFDIR)
+	/* tjm - why disallow directories?  space doesn't */
+        if (stat(GetFullName(self, res), &stbuf) >= 0 /* &&
+          (stbuf.st_mode & S_IFMT) != S_IFDIR */)
             (dired)->Mark( res);
         while (++pos < (dired)->GetLength())
             if ((dired)->GetChar( pos) == '\n')

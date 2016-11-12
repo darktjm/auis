@@ -30,32 +30,40 @@
     bindings ignore all return values.
   - generate procs' help topic listing dynamically, such as during help
     index install.
-- style editor is garbage (probably mostly due to non-75dpi display):
-  - always starts up looking like crap until ^L
-  - moving the window around, or resizing, or looking at it funny will
-    cause it to look like crap again, requiring another ^L
-  - Tab stop editor's text is way too big (setting measurement to cm or
-    pt causes overlap).
-  - Margin/indent doesn't move indent with margin as documented.
-  - Margin/tabstop leaves artifacts while moving.
-  - Can't scroll style list at upper-right if too many styles
+- style editor issues:
+  - lprruler/tabruler issues:
+    - Font sizes are assumed in pixels.  Everything overlaps.
+      - vertical overlap easy enough to fix
+      - horizontal overlap much harder.  >1 digit for cm, >2 digit for
+	pts will overlap horizontally; ruler break also overlaps.  Need
+	to scale out gfx somehow.
+    - Margin/indent doesn't move indent with margin unless unparked
+    - Not possible to see location of out-of-range icons (left-clicking parks
+      them; right-clicking ignored)  Maybe right-click should just show
+      current location.
+  - if a region is too full for selections, it just gets chopped off with no
+    means to scroll.  Probably best to have an overall pan/scroll region
+    that gets enabled if too big, and advertise correct minimum size
+    assuming that will force enlargement.  Maybe not.
   - setting bg colors is impermanent
     - setting both robgcolor and bgcolor causes read-only text to have
       bgcolor on actual text, but robgcolor where there is no text.
     - robgcolor should be a preference as well, not just a style setting
-    - addfiletype template not applied on read-only files
-  - style.doc talks a lot about parameters and functions, but not at
-    all about what the styles actually *mean*.  Lookz tries a little
-    harder to describe what they do, but is still pretty crappy, and is
-    somewhat obsolete, and missing a lot, and oriented towards UI rather
-    than API.  I'll probably have to scour the text display and
-    PS/Troff conversion to figure it out, which takes forever and tells
-    tells me nothing of what the designers actually intended. <sigh>
-  - lookz really needs a "preview text" field
-- ness doesn't support "real" type fully on proctable action calls.
-- unkonwn requires manual ^L after inserting raw data
-- dired-regexp-select doesn't seem to work (selects weird stuff)
-  - works perfenctly in some dirs, and badly in others.  Not sure why.
+  - style issues:
+    - addfiletype template not applied on read-only files, anyway
+    - style.doc talks a lot about parameters and functions, but not at
+      all about what the styles actually *mean*.  Lookz tries a little
+      harder to describe what they do, but is still pretty crappy, and is
+      somewhat obsolete, and missing a lot, and oriented towards UI rather
+      than API.  I'll probably have to scour the text display and
+      PS/Troff conversion to figure it out, which takes forever and tells
+      tells me nothing of what the designers actually intended. <sigh>
+  - lookz really needs a "preview text" field, but some styles (even w/o
+    adding active stlyes) may be too complex to show adequately.
+- layout options suck:
+  - lpair only supports absolute and % positioning, not "to fit"
+  - suite might do a better job, but I doubt it.
+- unknown requires manual ^L after inserting raw data
 - only way to give argument in ness is dokeys("^Uddd")
 - argument arbitrarily limited to 64K via keyboard, but unlimited in ProvideArg
   - no negative arguments, except via ProvideArg
@@ -88,9 +96,20 @@
   - support parameters (other than just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
+- there should be a way to do avalue/avalueflex types better in Ness
+  - can't do "real" args or return type on proctable action calls (callCfunc).
+  - can't do "named" arguments
+  - can't even really call InterpretString() to do that work, except via metax
+  - can't deal with returned avalue array from actions (only 1st ret val)
+    - could return as an InterpretString()-style value, I guess,
+      except that it could only support known types
+    - could support multiple return values:  x, y := f(x); if less
+      returned y becomes "unset" (but there is no "is unset" test)
 - adew issues
-  - "Show Cels" (show cel names) crashes.
-  - cutting a page using arbcon crashes.
+  - sliders behave oddly, not following mouse at all really
+  - questionnaire.msg's send button requires manual ^L to make send
+    button expand.
+  - sometimes just loading a doc with controls sets modified flag for it
   - There should be a way to control inset view sizes better (at least
     reset either/both direction fixed size so inset can auto-size itself)
   - String slider/String thumb should have way to statically set text array.
@@ -101,11 +120,7 @@
     have to move away and back again.
   - enterstrV/mentertextV/clicklistV don't allow setting text part's style
   - should be able to set default size of arbcon popup (i.e., smaller)
-  - sliders behave oddly, not following mouse at all really
-  - questionnaire.msg's send button requires manual ^L to make send
-    button expand.
   - adjusting controls doesn't always set modified flag for a document
-  - sometimes just loading a doc with controls sets modified flag for it
 - fix issues found doing load on all objects:
   - webcon spins if awww dies, and app can't exit any more
     - awww dies consistently, probably because the remote sites it
@@ -250,6 +265,7 @@
     Then again, just setting the high bit could indicate a longer
     sequence, unbreakable.
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
+  [actually, it's just impossible to enter/exit an inset via keyboard afaict]
 - provide method to override/supplement X key binding list.  Maybe make
   modifiers a canonically ordered prefix list (e.g. Esc-_scm1 for F1,
   and Esc-!scm1 for 1, but the latter would be hard to figure out what
@@ -537,7 +553,8 @@ Long-term (as if any of the above weren't long term as well):
 	  for each change type
 - improved regexes:
   - simple way to specify case sensitivity
-  - full bre format: ranges (\{..\}), backrefs (\n)?
+  - full bre format: ^ $ ranges (\{..\}), backrefs (\n)?
+    - right now, you can emulate ^ and $ in some places w/ ^Q^J
     - requires resumable regex, like mine.
   - extended regex format (toggle flag?): ? + | () {} [::] [==] [..]
     - requires resumable regex, like mine.

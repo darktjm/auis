@@ -466,6 +466,7 @@ iconview::ReceiveInputFocus()
 	while (parent && !ATK::IsTypeByName ((parent)->GetTypeName(), "textview"))
 	    parent = parent->GetParent();
 	if (parent) (parent)->WantInputFocus( parent);
+	else view::ReceiveInputFocus();
     }
 }
     

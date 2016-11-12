@@ -162,12 +162,12 @@ long x;}
 
 
 \leftindent{\bold{Class procedure description.}\italic{lpair_Create } creates 
-an instance of an lpair.  The \\italic\{x \} parameter determines the type of 
-lpair created.  If \\italic\{x\} is negative, then the lpair is created as a 
-split (proportional) pair, with the absolute value of \\italic\{x\} setting 
-the percentage of the rectangle allocated to the lower view.  If \\italic\{x\} 
+an instance of an lpair.  The \italic{x} parameter determines the type of 
+lpair created.  If \italic{x} is negative, then the lpair is created as a 
+split (proportional) pair, with the absolute value of \italic{x} setting 
+the percentage of the rectangle allocated to the lower view.  If \italic{x} 
 is positive it will be a fixed pair, with the lower view being allocated 
-\\italic\{x\} pixels in the rectangle. The lpair is always a vertical pair 
+\italic{x} pixels in the rectangle. The lpair is always a vertical pair 
 with a movable boundary. 
 
 

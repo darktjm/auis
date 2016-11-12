@@ -56,7 +56,7 @@ static struct keystate  *class_keystate;
 #define GAP 10		/*C*//* width of gap between rulers */
 #define ICONHEIGHT 14	/*C*//* height of area where icons move */
 #define PARKWIDTH  19	/*C*//* width of icon parking area */
-#define RULERHEIGHT 22 /*C*//* bottom line = topline + RULERHEIGHT */
+#define RULERHEIGHT (8+GetTextHeight(self)) /*C*//* bottom line = topline + RULERHEIGHT */
 
 static class fontdesc *TextFont, *IconFont;
 
@@ -118,9 +118,19 @@ CheckWindow(class lprrulerview  *self, const char  *where)
 boolean
 lprrulerview::InitializeClass()
 	{
-	TextFont = fontdesc::Create("andysans", fontdesc_Bold, 12);
+	TextFont = fontdesc::Create("andysans", fontdesc_Bold, 10);
 	IconFont = fontdesc::Create("icon", fontdesc_Plain, 12);
 	return TRUE;
+}
+
+static int GetTextHeight(class lprrulerview *self)
+{
+    static int txtheight = 0;
+    if(!txtheight) {
+	struct FontSummary *fs = TextFont->FontSummary(self->GetDrawable());
+	txtheight = fs->newlineHeight == 0 ? fs->maxHeight : fs->newlineHeight;
+    }
+    return txtheight;
 }
 
 lprrulerview::lprrulerview()
@@ -681,7 +691,7 @@ view::DSattributes
 lprrulerview::DesiredSize( long  width, long  height, enum view::DSpass  pass, 
 				long  *desiredWidth, long  *desiredHeight ) 
 						{
-	*desiredHeight = 80;
+	*desiredHeight = 80 - 14 + GetTextHeight(this);
 	*desiredWidth = 700;
 	return view::Fixed;
 }

@@ -65,6 +65,16 @@ static short FreeSlot( class cltextview  * self )
   return j;
 }
 
+// If an observer kills me, delay until Hit() complete.
+class view *cltextview::Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks)
+{
+    Reference(); // in case an observer decides to delete me
+    class view *ret = textview::Hit(action, x, y, numberOfClicks);
+    Destroy(); // OK, observer can delete me now.
+    return ret;
+}
+
+
 void cltextview::GetClickPosition(long  position, long  numberOfClicks, enum view::MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
                                     {
 	int i;

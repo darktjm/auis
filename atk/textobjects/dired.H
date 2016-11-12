@@ -24,6 +24,7 @@ typedef void *(*dired_efptr)(char *name, long rock);
 struct fileinfo {
     char *fileName, *dispName;
     long pos, len;              /* Where in text */
+    int type, islink;
     class environment *env;    /* NULL if not marked */
 };
 

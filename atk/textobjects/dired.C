@@ -72,15 +72,27 @@ static void LongModeLine(char  *dname , char  *fname , char  *buf)
     }
 }
 
+#include <limits.h>
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
 static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFiles)
 {
     class list *listp;
     DIR *dirp;
     struct dirent *dp;
+    static char fname[PATH_MAX];
+    int dirlen;
+    struct stat st;
 
     if ((dirp = opendir(dname)) == NULL)
         return NULL;
 
+    dirlen = strlen(dname);
+    memcpy(fname, dname, dirlen);
+    if(!dirlen || fname[dirlen - 1] != '/')
+	fname[dirlen++] = '/';
     listp = new list;
 
     while ((dp = readdir(dirp)) != NULL) {
@@ -94,6 +106,17 @@ static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFil
 
         fi->fileName = strdup(dp->d_name);
 
+	strcpy(fname + dirlen, dp->d_name);
+	fi->islink = FALSE;
+	if(!lstat(fname, &st))
+	    fi->islink = (st.st_mode & S_IFMT) == S_IFLNK;
+	if(stat(fname, &st))
+	    fi->type = fi->islink ? S_IFLNK : -1;
+	else
+	    fi->type = st.st_mode & S_IFMT;
+	   
+	// the original author(s) had no sense of efficiency or stack limits
+	// but I'll leave this broken for now
         if (longMode) {
             char buf[256];
             LongModeLine(dname, fi->fileName, buf);
@@ -133,9 +156,39 @@ static void DestroyList(class list  *list)
  * ListIntoText clears the text, then inserts one line for each file.
  * The starting position for each file's text (and the length) is
  * updated in each list entry. A carriage return is inserted after
- * each entry.  Styles are not wrapped around the highlighted
- * (env != NULL) entries.
+ * each entry.  Highlight styles are not wrapped around the highlighted
+ * (env != NULL) entries, but regular styles are.
  */
+
+static void StyleByType(class dired *self, struct fileinfo *fi)
+{
+    const char *stname;
+    switch(fi->type) {
+      case S_IFREG: stname = "dir_file"; break;
+      case S_IFDIR: stname = "dir_dir"; break;
+      case S_IFLNK: stname = "dir_badlink"; break;
+      case S_IFIFO: case S_IFSOCK: stname = "dir_fifo"; break;
+      case S_IFCHR: case S_IFBLK: stname = "dir_dev"; break;
+      default:  stname = "dir_unknown"; break;
+    }
+    style *style = self->styleSheet->Find(stname);
+    if(!style) {
+	style = new class style;
+	style->SetName(stname);
+	self->styleSheet->Add(style);
+    }
+    self->rootEnvironment->WrapStyle(fi->pos, fi->len, style);
+
+    if(fi->islink) {
+	style = self->styleSheet->Find("dir_link");
+	if(!style) {
+	    style = new class style;
+	    style->SetName("dir_link");
+	    self->styleSheet->Add(style);
+	}
+	self->rootEnvironment->WrapStyle(fi->pos, fi->len, style);
+    }
+}
 
 static int InsTextProc(struct fileinfo  *fi, class dired  *dired)
 {
@@ -144,6 +197,7 @@ static int InsTextProc(struct fileinfo  *fi, class dired  *dired)
 
     (dired)->InsertCharacters( fi->pos, fi->dispName, fi->len);
     (dired)->InsertCharacters( fi->pos + fi->len, "\n", 1);
+    StyleByType(dired, fi);
 
     return TRUE;
 }
@@ -337,8 +391,7 @@ static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *st
     if (fi->env != NULL) {
         if (fi->env->data.style == style)
              return;
-        (self->rootEnvironment)->Remove(
-          fi->pos, fi->len, environment_Style, TRUE);
+	fi->env->Delete();
         (self)->RegionModified( fi->pos, fi->len);
         (self)->NotifyObservers( 0);
     }
@@ -346,9 +399,7 @@ static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *st
     fi->env = NULL;
 
     if (style != NULL) {
-        fi->env = (self->rootEnvironment)->InsertStyle(
-          fi->pos, style, TRUE);
-        (fi->env)->SetLength( fi->len);
+	fi->env = self->rootEnvironment->WrapStyle(fi->pos, fi->len, style);
         (self)->RegionModified( fi->pos, fi->len);
         (self)->NotifyObservers( 0);
     }

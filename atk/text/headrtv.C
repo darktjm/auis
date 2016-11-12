@@ -611,7 +611,7 @@ void headrtv::PostKeyState(class keystate  *keystate)
     
 void headrtv::ReceiveInputFocus()
 {
-    
+    view::ReceiveInputFocus();
     if(!this->open) {
 	this->open=TRUE;
 	(this)->WantNewSize(this);

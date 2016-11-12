@@ -18,6 +18,7 @@
 class cltextview : public  textview  {
 public:
 	TRACED_CLASS(cltextview);
+       class view *Hit(enum view::MouseAction  action, long  x, long  y, long  numberOfClicks);
        void GetClickPosition(long position, long numberOfClicks, enum view::MouseAction action, long startLeft, long startRight, long *leftPos, long *rightPos);
        void FullUpdate(enum view::UpdateType type, long left, long top, long width, long height);
 

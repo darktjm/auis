@@ -1906,6 +1906,7 @@ bdffontv::ReceiveInputFocus()
 	{
 	this->keys->next = NULL;
 	this->PostKeyState(this->keys);
+	PostMenus(NULL);
 	if (this->chareditV)
 		(this->chareditV)->WantInputFocus( this->chareditV);
 }

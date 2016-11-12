@@ -263,6 +263,7 @@ void celview::ReceiveInputFocus()
     {
     if(this->truechild) (this->truechild)->WantInputFocus(this->truechild);
     else {
+	this->PostKeyState(NULL);
 	(this)->PostMenus(NULL);
 	this->HasFocus = TRUE;
     }
@@ -1358,6 +1359,7 @@ void celview::PushOverlay(class view  *view,struct rectangle  *rect,long  flags)
     this->olist = ov;
     this->mode = celview_DoFull;
     (view)->AddObserver(this); 
+    view->LinkTree(this);
     (this)->WantUpdate(this);
 }
 class view *celview::PopOverlay(class view  *view)

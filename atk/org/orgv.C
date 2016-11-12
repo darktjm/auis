@@ -431,11 +431,10 @@ orgv::ReceiveInputFocus( )
   class orgv *self=this;
   IN(orgv_ReceiveInputFocus);
   InputFocus = true;
-  if ( Keystate ) {
+  if ( Keystate )
     Keystate->next = NULL;
-    (this)->PostKeyState(  Keystate );
-  }
-  if ( Menu ) {
+  (this)->PostKeyState(  Keystate );
+  if ( Menu )
     (Menu)->SetMask(  (Menu )->GetMask( ) | menu_default |
 	(((debug) ? menu_debug : 0) |
 	 ((Exploded) ? menu_exploded : menu_imploded) |
@@ -443,8 +442,7 @@ orgv::ReceiveInputFocus( )
 	 ((Fold) ? menu_folded : menu_unfolded) |
 	 ((PaletteExposed) ? menu_palette_exposed : menu_palette_hidden) |
 	 ((HorizontalArrangement) ? menu_horizontal : menu_vertical) ) );
-    (this)->PostMenus(  Menu );
-  }
+  (this)->PostMenus(  Menu );
   (this)->WantUpdate(  this );
   OUT(orgv_ReceiveInputFocus);
 }

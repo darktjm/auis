@@ -469,11 +469,10 @@ void dialogv::ReceiveInputFocus()
 {
     if(this->rider) (this->rider)->ReceiveInputFocus();
     else {
-	if(this->extrakeys) {
+	if(this->extrakeys)
 	    this->extrakeys->next = NULL;
-	    (this)->PostKeyState( this->extrakeys);
-	}
-	if(this->extramenus) (this)->PostMenus( this->extramenus);
+	(this)->PostKeyState( this->extrakeys);
+	(this)->PostMenus( this->extramenus);
     }
 }
 
