@@ -1,90 +1,62 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Dired}
 
 
-\bold{dired-zoom-in}(object \italic{self})
+\proclistentry{\procname{dired-zoom-in}(\proctype{object} \procparm{self})\
+Edit selected file or switch to selected directory.\
+Bound to:  \prockey{z}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Zoom In}\procmenuwhere{~10}}
 
-\leftindent{Edit selected file or switch to selected directory.
+\proclistentry{\procname{dired-delete}(\proctype{object} \procparm{self})\
+Delete selected file(s).\
+Bound to:  \prockey{d}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Delete}\procmenuwhere{~20}\
+Use \procname{QueueAnswer} to provide delete confirmation(s) in Ness.}
 
-Bound to:  \typewriter{z}; Menu:  Directory Edit,Zoom In~10}
+\proclistentry{\procname{dired-rename}(\proctype{object} \procparm{self})\
+Rename selected file(s).\
+Bound to:  \prockey{r}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Rename}\procmenuwhere{~30}\
+Use \procname{QueueAnswer} to provide new name(s) in Ness.}
 
-\bold{dired-delete}(object \italic{self})
+\proclistentry{\procname{dired-refresh}(\proctype{object} \procparm{self})\
+Reread current directory.\
+Bound to:  \prockey{Enter} (\prockey{^M}); Menu:  \procmenu{
+Directory Edit}\procmenuwhere{,}\procmenu{Refresh}\procmenuwhere{~40}}
 
-\leftindent{Delete selected file(s).
-
-Bound to:  \typewriter{d}; Menu:  Directory Edit,Delete~20
-
-Use \bold{queueanswer} to provide delete confirmation(s) in Ness.}
-
-\bold{dired-rename}(object \italic{self})
-
-\leftindent{Rename selected file(s).
-
-Bound to:  \typewriter{r}; Menu:  Directory Edit,Rename~30
-
-Use \bold{queueanswer} to provide new name(s) in Ness.}
-
-\bold{dired-refresh}(object \italic{self})
-
-\leftindent{Reread current directory.
-
-Bound to:  \typewriter{Enter} (\typewriter{^M}); Menu:  
-Directory Edit,Refresh~40}
-
-\bold{dired-toggle-select}(object \italic{self})
-
-\leftindent{Toggle file at cursor and move to next line.
-
-Bound to:  \typewriter{Space}
-
-\typewriter{^U}-argument can be set to toggle more than one in 
+\proclistentry{\procname{dired-toggle-select}(\proctype{object} \procparm{self})\
+Toggle file at cursor and move to next line.\
+Bound to:  \prockey{Space}\
+\prockey{^U}-argument can be set to toggle more than one in 
 succession (up to 10k)}
 
-\bold{dired-down-line}(object \italic{self})
+\proclistentry{\procname{dired-down-line}(\proctype{object} \procparm{self})\
+Move cursor down (equiv ^N).\
+Bound to:  \prockey{n}}
 
-\leftindent{Move cursor down (equiv ^N).
+\proclistentry{\procname{dired-up-line}(\proctype{object} \procparm{self})\
+Move cursor up (equiv ^P).\
+Bound to:  \prockey{p}}
 
-Bound to:  \typewriter{n}}
+\proclistentry{\procname{dired-regexp-select}(\proctype{object} \procparm{self})\
+Select files by regular expression.\
+Bound to:  \prockey{=}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Regexp Select}\procmenuwhere{~60}\
+Use \procname{QueueAnswer} to provide regular expression in Ness.}
 
-\bold{dired-up-line}(object \italic{self})
+\proclistentry{\procname{dired-long-mode-on}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+List files in long format.  \procparm{mode} must be 0.\
+Bound to:  \prockey{l}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Long Format}\procmenuwhere{~50}}
 
-\leftindent{Move cursor up (equiv ^P).
+\proclistentry{\procname{dired-long-mode-off}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+List files in normal format (names only).  \procparm{mode} must be 1.\
+Bound to:  \prockey{s}; Menu: \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Short Format}\procmenuwhere{~50}}
 
-Bound to:  \typewriter{p}}
+\proclistentry{\procname{dired-dot-files-on}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+Display invisible files.  \procparm{mode} must be 2.\
+Bound to:  \prockey{i}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Show Invisible}\procmenuwhere{~55}}
 
-\bold{dired-regexp-select}(object \italic{self})
-
-\leftindent{Select files by regular expression.
-
-Bound to:  \typewriter{=}; Menu:  Directory Edit,Regexp Select~60
-
-Use \bold{queueanswer} to provide regular expression in Ness.}
-
-\bold{dired-long-mode-on}(object \italic{self}, integer \italic{mode})
-
-\leftindent{List files in long format.  \italic{mode} must be 0.
-
-Bound to:  \typewriter{l}; Menu:  Directory Edit,Long Format~50}
-
-\bold{dired-long-mode-off}(object \italic{self}, integer \italic{mode})
-
-\leftindent{List files in normal format (names only).  \italic{mode} must be 1.
-
-Bound to:  \typewriter{s}; Menu: Directory Edit,Short Format~50}
-
-\bold{dired-dot-files-on}(object \italic{self}, integer \italic{mode})
-
-\leftindent{Display invisible files.  \italic{mode} must be 2.
-
-Bound to:  \typewriter{i}; Menu:  Directory Edit,Show Invisible~55}
-
-\bold{dired-dot-files-off}(object \italic{self}, integer \italic{mode})
-
-\leftindent{Do not display invisible files.  \italic{mode} must be 3.
-
-Bound to:  \typewriter{h}; Menu:  Directory Edit,Hide Invisible~55}
+\proclistentry{\procname{dired-dot-files-off}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+Do not display invisible files.  \procparm{mode} must be 3.\
+Bound to:  \prockey{h}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Hide Invisible}\procmenuwhere{~55}}
 
 
 \section{Related Topics}

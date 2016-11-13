@@ -1,19 +1,15 @@
 \begindata{text,269101544}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for incsearch}
 
 
-\bold{incsearch-forward}(object \italic{textview}, integer \italic{key})
-
-\leftindent{Search forward incrementally.  \italic{key} must be 'S'.
-
+\proclistentry{\procname{incsearch-forward}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{key})\
+Search forward incrementally.  \procparm{key} must be 'S'.\
 This is inherently interactive; do not use from Ness.}
 
-\bold{incsearch-backward}(object \italic{textview}, integer \italic{key})
-
-\leftindent{Search backward incrementally.  \italic{key} must not be 'S'.
-
+\proclistentry{\procname{incsearch-backward}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{key})\
+Search backward incrementally.  \procparm{key} must not be 'S'.\
 This is inherently interactive; do not use from Ness.}
 
 \section{Related Topics}

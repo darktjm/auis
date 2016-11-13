@@ -1,112 +1,109 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Calc}
 
 
-\bold{calcv-stroke}(object \italic{self}, integer \italic{area})
-
-\leftindent{Type Digit or Operator.
-
-Bound to: many, with different \italic{area} argument (0 .. 16):
-
+\proclistentry{\procname{calcv-stroke}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{area})\
+Type Digit or Operator.\
+Bound to: many, with different \procparm{area} argument (0 .. 16):\
 \begindata{table,1320}
  	^+0	^+1	^+2
 	-	-	-
 0	| \begindata{text,1321}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{7\
+\template{prochelp}
+\center{\prockey{7\
 }}\enddata{text,1321}
 	| \begindata{text,1322}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{8\
+\template{prochelp}
+\center{\prockey{8\
 }}\enddata{text,1322}
 	| \begindata{text,1323}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{9\
+\template{prochelp}
+\center{\prockey{9\
 }}\enddata{text,1323}
 	| 
 	-	-	-
 3	| \begindata{text,1324}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{4\
+\template{prochelp}
+\center{\prockey{4\
 }}\enddata{text,1324}
 	| \begindata{text,1325}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{5\
+\template{prochelp}
+\center{\prockey{5\
 }}\enddata{text,1325}
 	| \begindata{text,1326}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{6\
+\template{prochelp}
+\center{\prockey{6\
 }}\enddata{text,1326}
 	| 
 	-	-	-
 6	| \begindata{text,1327}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{1\
+\template{prochelp}
+\center{\prockey{1\
 }}\enddata{text,1327}
 	| \begindata{text,1328}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{2\
+\template{prochelp}
+\center{\prockey{2\
 }}\enddata{text,1328}
 	| \begindata{text,1329}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{3\
+\template{prochelp}
+\center{\prockey{3\
 }}\enddata{text,1329}
 	| 
 	-	-	-
 9	| \begindata{text,1330}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{0\
+\template{prochelp}
+\center{\prockey{0\
 }}\enddata{text,1330}
 	| \begindata{text,1331}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{.\
+\template{prochelp}
+\center{\prockey{.\
 }}\enddata{text,1331}
 	| \begindata{text,1332}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{=} \typewriter{\\r} \typewriter{\\n\
+\template{prochelp}
+\center{\prockey{=}  \prockey{Enter}(\prockey{^M}) \prockey{^J\
 }}\enddata{text,1332}
 	| 
 	-	-	-
 12	| \begindata{text,1333}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{+\
+\template{prochelp}
+\center{\prockey{+\
 }}\enddata{text,1333}
 	| \begindata{text,1334}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{-\
+\template{prochelp}
+\center{\prockey{-\
 }}\enddata{text,1334}
 	| \begindata{text,1335}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{X} \typewriter{x} \typewriter{*\
+\template{prochelp}
+\center{\prockey{X} \prockey{x} \prockey{*\
 }}\enddata{text,1335}
 	| 
 	-	-	-
 15	| \begindata{text,1336}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{/\
+\template{prochelp}
+\center{\prockey{/\
 }}\enddata{text,1336}
 	| \begindata{text,1337}
 \textdsversion{12}
-\template{default}
-\center{\typewriter{A-C} \typewriter{a-c} \typewriter{Space\
+\template{prochelp}
+\center{\prockey{A-C} \prockey{a-c}\prockey{Space\
 }}\enddata{text,1337}
 	|  	| 
 	-	-	-

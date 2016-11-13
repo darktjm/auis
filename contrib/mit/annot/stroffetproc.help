@@ -1,39 +1,30 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for stroffet}
 
 
-\bold{stroffetview-closeallstroffets}(object \italic{view})
+\proclistentry{\procname{stroffetview-closeallstroffets}(\proctype{object} \procparm{view})\
+close Stroffet Views}
 
-\leftindent{close Stroffet Views}
+\proclistentry{\procname{stroffetview-insertstroffet}(\proctype{object} \procparm{textview})\
+Insert Stroffet Object}
 
-\bold{stroffetview-insertstroffet}(object \italic{textview})
-
-\leftindent{Insert Stroffet Object}
-
-\bold{stroffetview-openallstroffets}(object \italic{view})
-
-\leftindent{open Stroffet Views}
+\proclistentry{\procname{stroffetview-openallstroffets}(\proctype{object} \procparm{view})\
+open Stroffet Views}
 
 
-\bold{stroffetview-closeall}(object \italic{self})
+\proclistentry{\procname{stroffetview-closeall}(\proctype{object} \procparm{self})\
+close all the stroffets\
+Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{close all}\procmenuwhere{~12}}
 
-\leftindent{close all the stroffets
+\proclistentry{\procname{stroffetview-close}(\proctype{object} \procparm{self})\
+close the stroffet\
+Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{close}\procmenuwhere{~2}}
 
-Menu:  stroffets,close all~12}
-
-\bold{stroffetview-close}(object \italic{self})
-
-\leftindent{close the stroffet
-
-Menu:  stroffets,close~2}
-
-\bold{stroffetview-openall}(object \italic{self})
-
-\leftindent{open all the stroffets
-
-Menu:  stroffets,open all~11}
+\proclistentry{\procname{stroffetview-openall}(\proctype{object} \procparm{self})\
+open all the stroffets\
+Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{open all}\procmenuwhere{~11}}
 
 
 \section{Related Topics}

@@ -1,14 +1,6 @@
 - proclist docs:
-  - add specific styles for parts of doc:
-    - "proclistentry" -> hanging indent
-    - "procentry" -> bold
-    - "procparm" -> italic
-    - "proctype" -> normal (for "action" and parameter types)
-    - "prockey" -> typewriter (for keys)
-    - "procmenu" -> normal (or sans?) (for menu names)
-    - "procmenuwhere" -> normal (or italic/small?) for ~ part of menu names
-  - maybe style the menu entries somewhat.  Maybe move ness notes to 1st
-    line, so bindings/menus are the only thing that follow doc line.
+  - Maybe move ness notes to 1st line, so bindings/menus are the only thing
+    that follow doc line.
   - document that which is not documented.
     - add/correct doc strings as needed
   - ensure a link from main to proc where posssible (some done; missed some)

@@ -1,13 +1,12 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for xim}
 
 
 
-\bold{xim-activate-menubar}(object \italic{self})
-
-\leftindent{Activates the menubar in preparation for key traversal 
+\proclistentry{\procname{xim-activate-menubar}(\proctype{object} \procparm{self})\
+Activates the menubar in preparation for key traversal 
 with the arrow keys.}
 
 

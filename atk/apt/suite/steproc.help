@@ -1,24 +1,19 @@
 \begindata{text,268820936}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Suite}
 
 
-\bold{suite-set-items}(object \italic{self}, marker \italic{list})
+\proclistentry{\procname{suite-set-items}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{list})\
+Set item list (colon separated \procparm{list})}
 
-\leftindent{Set item list (colon separated \italic{list})}
+\proclistentry{\procname{suiteev-copy}(\proctype{object} \procparm{self})\
+Copy selected region to cut buffer\
+Menu:  \procmenu{Copy}\procmenuwhere{~10}}
 
-\bold{suiteev-copy}(object \italic{self})
-
-\leftindent{Copy selected region to cut buffer
-
-Menu:  Copy~10}
-
-\bold{suitecv-insert-newline}(object \italic{self})
-
-\leftindent{Insert a newline character
-
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{suitecv-insert-newline}(\proctype{object} \procparm{self})\
+Insert a newline character\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
 
 \section{Related Topics}

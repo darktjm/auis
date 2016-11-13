@@ -1,149 +1,98 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for bdffont}
 
 
-\bold{bdffont-help}(object \italic{self})
-
-\leftindent{Display help information in a new window.
-
-Menu:  Font Edit,Help~10}
-
-\bold{bdffont-set-char-delta}(object \italic{self})
-
-\leftindent{Set character delta
-
-Menu:  Char Edit,Set Character Delta~13
-
-Use \bold{queueanswer} twice to provide X and Y delta in Ness.}
-
-\bold{bdffont-set-char-extent}(object \italic{self})
-
-\leftindent{Set character extent
-
-Menu:  Char Edit,Set Character Extent~11
-
-Use \bold{queueanswer} twice to provide width and height in Ness.}
-
-\bold{bdffont-set-char-name}(object \italic{self})
-
-\leftindent{Set character name
-
-Menu:  Char Edit,Set Character Name~14
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{bdffont-set-char-origin}(object \italic{self})
-
-\leftindent{Set character origin
-
-Menu:  Char Edit,Set Character Origin~12
-
-Use \bold{queueanswer} twice to provide coordinates in Ness.}
-
-\bold{bdffont-set-default-delta}(object \italic{self})
-
-\leftindent{Set default character delta
-
-Menu:  Font Edit,Set Default Delta~29
-
-Use \bold{queueanswer} twice to provide X and Y delta in Ness.}
-
-\bold{bdffont-set-default-extent}(object \italic{self})
-
-\leftindent{Set default character extent
-
-Menu:  Font Edit,Set Default Extent~29
-
-Use \bold{queueanswer} twice to provide width and height in Ness.}
-
-\bold{bdffont-set-default-origin}(object \italic{self})
-
-\leftindent{Set default character origin
-
-Menu:  Font Edit,Set Default Origin~29
-
-Use \bold{queueanswer} twice to provide coordinates in Ness.}
-
-\bold{bdffont-set-font-face}(object \italic{self})
-
-\leftindent{Set font face.  One of Normal, or combination of (in 
-order) Bold, Italic, Fixed, Shadowed.
-
-Menu:  Font Edit,Set Font Face~29
-
-Use \bold{queueanswer} to provide font face attributes in Ness.}
-
-\bold{bdffont-set-font-family}(object \italic{self})
-
-\leftindent{Set font family
-
-Menu:  Font Edit,Set Font Family~29
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{bdffont-set-font-name}(object \italic{self})
-
-\leftindent{"Set font name" (queueanswer)
-
-Menu:  Font Edit,Set Font Name~29
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{bdffont-set-font-resolution}(object \italic{self})
-
-\leftindent{Set font resolution
-
-Menu:  Font Edit,Set Font Resolution~29
-
-Use \bold{queueanswer} twice to provide X and Y resolution in Ness.}
-
-\bold{bdffont-set-font-size}(object \italic{self})
-
-\leftindent{Set font point size
-
-Menu:  Font Edit,Set Point Size~29
-
-Use \bold{queueanswer} to provide value in Ness.}
-
-\bold{bdffont-set-zoom-delta}(object \italic{self})
-
-\leftindent{Set delta for zoom in/out
-
-Menu:  Char Edit,Set Zoom Delta~26
-
-Use \bold{queueanswer} to provide value in Ness.}
-
-\bold{bdffont-zoom-fit}(object \italic{self})
-
-\leftindent{View at highest zoom that fits
-
-Menu:  Char Edit,Zoom To Fit~24}
-
-\bold{bdffont-zoom-in}(object \italic{self})
-
-\leftindent{Increase zoom factor by delta to max
-
-Menu:  Char Edit,Zoom In~21}
-
-\bold{bdffont-zoom-normal}(object \italic{self})
-
-\leftindent{View at normal zoom
-
-Menu:  Char Edit,Normal Zoom~23}
-
-\bold{bdffont-zoom-out}(object \italic{self})
-
-\leftindent{Decrease zoom factor by delta to min
-
-Menu:  Char Edit,Zoom Out~22}
-
-\bold{bdffont-zoom-previous}(object \italic{self})
-
-\leftindent{View at previous zoom factor
-
-Menu:  Char Edit,Previous Zoom~25}
+\proclistentry{\procname{bdffont-help}(\proctype{object} \procparm{self})\
+Display help information in a new window.\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Help}\procmenuwhere{~10}}
+
+\proclistentry{\procname{bdffont-set-char-delta}(\proctype{object} \procparm{self})\
+Set character delta\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Set Character Delta}\procmenuwhere{~13}\
+Use \procname{QueueAnswer} twice to provide X and Y delta in Ness.}
+
+\proclistentry{\procname{bdffont-set-char-extent}(\proctype{object} \procparm{self})\
+Set character extent\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Set Character Extent}\procmenuwhere{~11}\
+Use \procname{QueueAnswer} twice to provide width and height in Ness.}
+
+\proclistentry{\procname{bdffont-set-char-name}(\proctype{object} \procparm{self})\
+Set character name\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Set Character Name}\procmenuwhere{~14}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{bdffont-set-char-origin}(\proctype{object} \procparm{self})\
+Set character origin\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Set Character Origin}\procmenuwhere{~12}\
+Use \procname{QueueAnswer} twice to provide coordinates in Ness.}
+
+\proclistentry{\procname{bdffont-set-default-delta}(\proctype{object} \procparm{self})\
+Set default character delta\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Default Delta}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} twice to provide X and Y delta in Ness.}
+
+\proclistentry{\procname{bdffont-set-default-extent}(\proctype{object} \procparm{self})\
+Set default character extent\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Default Extent}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} twice to provide width and height in Ness.}
+
+\proclistentry{\procname{bdffont-set-default-origin}(\proctype{object} \procparm{self})\
+Set default character origin\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Default Origin}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} twice to provide coordinates in Ness.}
+
+\proclistentry{\procname{bdffont-set-font-face}(\proctype{object} \procparm{self})\
+Set font face.  One of Normal, or combination of (in 
+order) Bold, Italic, Fixed, Shadowed.\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Font Face}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} to provide font face attributes in Ness.}
+
+\proclistentry{\procname{bdffont-set-font-family}(\proctype{object} \procparm{self})\
+Set font family\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Font Family}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{bdffont-set-font-name}(\proctype{object} \procparm{self})\
+"Set font name" (queueanswer)\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Font Name}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{bdffont-set-font-resolution}(\proctype{object} \procparm{self})\
+Set font resolution\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Font Resolution}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} twice to provide X and Y resolution in Ness.}
+
+\proclistentry{\procname{bdffont-set-font-size}(\proctype{object} \procparm{self})\
+Set font point size\
+Menu:  \procmenu{Font Edit}\procmenuwhere{,}\procmenu{Set Point Size}\procmenuwhere{~29}\
+Use \procname{QueueAnswer} to provide value in Ness.}
+
+\proclistentry{\procname{bdffont-set-zoom-delta}(\proctype{object} \procparm{self})\
+Set delta for zoom in/out\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Set Zoom Delta}\procmenuwhere{~26}\
+Use \procname{QueueAnswer} to provide value in Ness.}
+
+\proclistentry{\procname{bdffont-zoom-fit}(\proctype{object} \procparm{self})\
+View at highest zoom that fits\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Zoom To Fit}\procmenuwhere{~24}}
+
+\proclistentry{\procname{bdffont-zoom-in}(\proctype{object} \procparm{self})\
+Increase zoom factor by delta to max\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Zoom In}\procmenuwhere{~21}}
+
+\proclistentry{\procname{bdffont-zoom-normal}(\proctype{object} \procparm{self})\
+View at normal zoom\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Normal Zoom}\procmenuwhere{~23}}
+
+\proclistentry{\procname{bdffont-zoom-out}(\proctype{object} \procparm{self})\
+Decrease zoom factor by delta to min\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Zoom Out}\procmenuwhere{~22}}
+
+\proclistentry{\procname{bdffont-zoom-previous}(\proctype{object} \procparm{self})\
+View at previous zoom factor\
+Menu:  \procmenu{Char Edit}\procmenuwhere{,}\procmenu{Previous Zoom}\procmenuwhere{~25}}
 
 
 

@@ -1,47 +1,37 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for gnucompat}
 
 
-\bold{gnucompat-add-default-tpl}(object \italic{textview})
+\proclistentry{\procname{gnucompat-add-default-tpl}(\proctype{object} \procparm{textview})\
+Enable basic styles by adding the template named default}
 
-\leftindent{Enable basic styles by adding the template named default}
-
-\bold{gnucompat-denumerate}(object \italic{textview})
-
-\leftindent{Delete number from the begining of each 
+\proclistentry{\procname{gnucompat-denumerate}(\proctype{object} \procparm{textview})\
+Delete number from the begining of each 
 paragraph in the region}
 
-\bold{gnucompat-enumerate}(object \italic{textview})
-
-\leftindent{Put number in sequence at the begining of each 
+\proclistentry{\procname{gnucompat-enumerate}(\proctype{object} \procparm{textview})\
+Put number in sequence at the begining of each 
 paragraph in the region}
 
-\bold{gnucompat-fill-para}(object \italic{textview})
+\proclistentry{\procname{gnucompat-fill-para}(\proctype{object} \procparm{textview})\
+Fill Paragraph.}
 
-\leftindent{Fill Paragraph.}
-
-\bold{gnucompat-insert-bullets}(object \italic{textview})
-
-\leftindent{Put a bullet at the begining of each 
+\proclistentry{\procname{gnucompat-insert-bullets}(\proctype{object} \procparm{textview})\
+Put a bullet at the begining of each 
 paragraph in the region}
 
-\bold{gnucompat-insert-inset-no-nl}(object \italic{textview}, null | 0 | marker \italic{name})
+\proclistentry{\procname{gnucompat-insert-inset-no-nl}(\proctype{object} \procparm{textview}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Insert a named inset without newlines around it\
+Use \procparm{name} or \procname{QueueAnswer} to provide inset name in Ness.}
 
-\leftindent{Insert a named inset without newlines around it
+\proclistentry{\procname{gnucompat-insert-inset}(\proctype{object} \procparm{textview}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Insert a named inset here\
+Use \procparm{name} or \procname{QueueAnswer} to provide inset name in Ness.}
 
-Use \italic{name} or \bold{queueanswer} to provide inset name in Ness.}
-
-\bold{gnucompat-insert-inset}(object \italic{textview}, null | 0 | marker \italic{name})
-
-\leftindent{Insert a named inset here
-
-Use \italic{name} or \bold{queueanswer} to provide inset name in Ness.}
-
-\bold{gnucompat-remove-bullets}(object \italic{textview})
-
-\leftindent{Remove bullets from the begining of each 
+\proclistentry{\procname{gnucompat-remove-bullets}(\proctype{object} \procparm{textview})\
+Remove bullets from the begining of each 
 paragraph in the region}
 
 

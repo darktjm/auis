@@ -1,339 +1,238 @@
 \begindata{text,539034464}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Frame, Frameview}
 
 
-\bold{frame-cancel}(object \italic{self})
+\proclistentry{\procname{frame-cancel}(\proctype{object} \procparm{self})\
+Try to cancel dialog box\
+Bound in dialogs to:  \prockey{^G}}
 
-\leftindent{Try to cancel dialog box
+\proclistentry{\procname{frame-confirm}(\proctype{object} \procparm{self})\
+Select the default answer in a dialog\
+Bound in dialogs to:  \prockey{Enter} (\prockey{^M})}
 
-Bound in dialogs to:  \typewriter{^G}}
-
-\bold{frame-confirm}(object \italic{self})
-
-\leftindent{Select the default answer in a dialog
-
-Bound in dialogs to:  \typewriter{Enter} (\typewriter{^M})}
-
-\bold{frame-consider-coming}(object \italic{self}, integer \italic{choice})
-
-\leftindent{Consider selecting a dialog answer.  The \italic{choice} 
+\proclistentry{\procname{frame-consider-coming}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{choice})\
+Consider selecting a dialog answer.  The \procparm{choice} 
 parameter is the chosen entry number.  For dialogs with the four 
 buttons and a text entry or message, 1 is Accept, 2 is Cancel, 3 is 
-Complete, and 4 is Help.
-
-Menu: for multiple-choice dialogs, each choice gets a menu entry bound 
+Complete, and 4 is Help.\
+Menu:  for multiple-choice dialogs, each choice gets a menu entry bound 
 to this with its respective choice number while the dialog is displayed.}
 
-\bold{frame-got-key}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{frame-got-key}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Change the default dialog answer, if \procparm{ch} begins an option 
+text.\
+Bound in dialogs to:  all ASCII alphanumeric (\prockey{A} .. \prockey{Z}, \prockey{0} .. \prockey{9})}
 
-\leftindent{Change the default dialog answer, if \italic{ch} begins an option 
-text.
-
-Bound in dialogs to:  \typewriter{A} .. \typewriter{Z}, \typewriter{0} .. \typewriter{9}}
-
-\bold{frame-single-line-message}(object \italic{self})
-
-\leftindent{Reset the message line to one line.
-
+\proclistentry{\procname{frame-single-line-message}(\proctype{object} \procparm{self})\
+Reset the message line to one line.\
 \italic{FIXME:  should this even be here?  What about frameview-minimize?}}
 
 
-\bold{frameview-complete}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{frameview-complete}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Attempt to complete a user response in the message line.  
+If completion is not available, the previous binding of \procparm{ch} is 
+executed, instead.\
+Bound in message line to:  \prockey{Space}}
 
-\leftindent{Attempt to complete a user response in the message line.  
-If completion is not available, the previous binding of \italic{ch} is 
-executed, instead.
-
-Bound in message line to:  \typewriter{Space}}
-
-\bold{frameview-help}(object \italic{self})
-
-\leftindent{Provide help on current question in the message line.  If 
+\proclistentry{\procname{frameview-help}(\proctype{object} \procparm{self})\
+Provide help on current question in the message line.  If 
 completions are enabled, this help is a list of possible completions.  
-Otherwise, the previous binding of \typewriter{?} is used.
+Otherwise, the previous binding of \prockey{?} is used.\
+Bound in message line to:  \prockey{?}}
 
-Bound in message line to:  \typewriter{?}}
+\proclistentry{\procname{frameview-kill}(\proctype{object} \procparm{self})\
+Kill to beginning of the message line response.\
+Bound in message line to:  \prockey{^U}}
 
-\bold{frameview-kill}(object \italic{self})
+\proclistentry{\procname{frameview-minimize}(\proctype{object} \procparm{self})\
+Reset the message line to the size needed for a single line.\
+Bound in message line to:  \prockey{^X-1}}
 
-\leftindent{Kill to beginning of the message line response.
+\proclistentry{\procname{frameview-punt}(\proctype{object} \procparm{self})\
+^G (cancel, unless mandatory response) in message line.\
+Bound in message line to:  \prockey{^C}, \prockey{^G}, \prockey{^X-^C}}
 
-Bound in message line to:  \typewriter{^U}}
-
-\bold{frameview-minimize}(object \italic{self})
-
-\leftindent{Reset the message line to the size needed for a single line.
-
-Bound in message line to:  \typewriter{^X-1}}
-
-\bold{frameview-punt}(object \italic{self})
-
-\leftindent{^G (cancel, unless mandatory response) in message line.
-
-Bound in message line to:  \typewriter{^C}, \typewriter{^G}, \typewriter{^X-^C}}
-
-\bold{frameview-return}(object \italic{self})
-
-\leftindent{<CR> in message line.
-
-Bound in message line to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{frameview-return}(\proctype{object} \procparm{self})\
+<CR> in message line.\
+Bound in message line to:  \prockey{Enter} (\prockey{^M})}
 
 
-\bold{frame-recursive-visit-file}(object \italic{self})
+\proclistentry{\procname{frame-recursive-visit-file}(\proctype{object} \procparm{self})\
+Visit file saving current buffer state.\
+Bound to:  \prockey{^X-^T}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\leftindent{Visit file saving current buffer state.
+\proclistentry{\procname{frame-recursive-edit}(\proctype{object} \procparm{self})\
+Enter a recursive edit.}
 
-Bound to:  \typewriter{^X-^T}
+\proclistentry{\procname{frame-exit-recursive-edit}(\proctype{object} \procparm{self})\
+Exit a recursive edit.  Entered 
+using either \procname{frame-recursive-edit} or \procname{frame-recursive-visit-file}\
+Bound to:  \prockey{^C}}
 
-Use \bold{queueanswer} to provide file name in Ness.}
+\proclistentry{\procname{frame-delete-window}(\proctype{object} \procparm{self})\
+Delete the window in which command is executed.\
+Bound to:  \prockey{^X-^D}; Menu:  \procmenu{Delete WIndow}\procmenuwhere{~89}}
 
-\bold{frame-recursive-edit}(object \italic{self})
-
-\leftindent{Enter a recursive edit.}
-
-\bold{frame-exit-recursive-edit}(object \italic{self})
-
-\leftindent{Exit a recursive edit.  Entered 
-using either \bold{frame-recursive-edit} or \bold{frame-recursive-visit-file}
-
-Bound to:  \typewriter{^C}}
-
-\bold{frame-delete-window}(object \italic{self})
-
-\leftindent{Delete the window in which command is executed.
-
-Bound to:  \typewriter{^X-^D}; Menu:  Delete WIndow~89}
-
-\bold{frame-exit}(object \italic{self})
-
-\leftindent{Exit editor if no buffers are modified, otherwise ask for 
-confirmation first.
-
-Bound to:  \typewriter{^X-^C}; Menu:  Quit~99
-
+\proclistentry{\procname{frame-exit}(\proctype{object} \procparm{self})\
+Exit editor if no buffers are modified, otherwise ask for 
+confirmation first.\
+Bound to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}\
 Don't attempt to answer confirmation via Ness.}
 
-marker \bold{frame-current-directory}(object \italic{self})
+\proclistentry{\proctype{marker} \procname{frame-current-directory}(\proctype{object} \procparm{self})\
+Show current working directory.  Also returns as a string.\
+Bound to:  \prockey{Esc-p}}
 
-\leftindent{Show current working directory.  Also returns as a string.
+\proclistentry{\proctype{boolean} \procname{frame-change-directory}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} 
+\procparm{dir})\
+Change current working directory.  If not provided as an 
+argument, it is prompted for.  Returns TRUE for success.\
+Bound to:  \prockey{Esc-c}\
+Use \procparm{dir} or \procname{QueueAnswer} to provide directory in Ness.}
 
-Bound to:  \typewriter{Esc-p}}
+\proclistentry{\procname{frame-new-window}(\proctype{object} \procparm{self})\
+Creates a new window.\
+Bound to:  \prockey{^X-2}}
 
-boolean \bold{frame-change-directory}(object \italic{self}, null | 0 | marker 
-\italic{dir})
+\proclistentry{\procname{frame-delete-buffer}(\proctype{object} \procparm{self})\
+Prompts for a buffer to delete.\
+Bound to:  \prockey{^X-k}\
+Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-\leftindent{Change current working directory.  If not provided as an 
-argument, it is prompted for.  Returns TRUE for success.
+\proclistentry{\procname{frame-old-buffer}(\proctype{object} \procparm{self})\
+Visits an already existing buffer.  Will not accept answer 
+if buffer does not exist.\
+Bound to:  \prockey{^X-^O}\
+Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-Bound to:  \typewriter{Esc-c}
+\proclistentry{\procname{frame-visit-buffer}(\proctype{object} \procparm{self})\
+Changes to an arbitrarily named buffer.\
+Bound to:  \prockey{^X-b}\
+Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-Use \italic{dir} or \bold{queueanswer} to provide directory in Ness.}
+\proclistentry{\procname{frame-list-buffers}(\proctype{object} \procparm{self})\
+Lists current buffers.  Does not delete listing when done 
+viewing; can be switched back into.\
+Bound to:  \prockey{^X-^B}\
+Use \procname{QueueAnswer} to cancel view in Ness.}
 
-\bold{frame-new-window}(object \italic{self})
-
-\leftindent{Creates a new window.
-
-Bound to:  \typewriter{^X-2}}
-
-\bold{frame-delete-buffer}(object \italic{self})
-
-\leftindent{Prompts for a buffer to delete.
-
-Bound to:  \typewriter{^X-k}
-
-Use \bold{queueanswer} to provide buffer name in Ness.}
-
-\bold{frame-old-buffer}(object \italic{self})
-
-\leftindent{Visits an already existing buffer.  Will not accept answer 
-if buffer does not exist.
-
-Bound to:  \typewriter{^X-^O}
-
-Use \bold{queueanswer} to provide buffer name in Ness.}
-
-\bold{frame-visit-buffer}(object \italic{self})
-
-\leftindent{Changes to an arbitrarily named buffer.
-
-Bound to:  \typewriter{^X-b}
-
-Use \bold{queueanswer} to provide buffer name in Ness.}
-
-\bold{frame-list-buffers}(object \italic{self})
-
-\leftindent{Lists current buffers.  Does not delete listing when done 
-viewing; can be switched back into.
-
-Bound to:  \typewriter{^X-^B}
-
-Use \bold{queueanswer} to cancel view in Ness.}
-
-integer \bold{frame-visit-file}(object \italic{self}, null | 0 | marker \italic{fname})
-
-\leftindent{Prompts for a file to visit, unless \italic{fname} is 
+\proclistentry{\proctype{integer} \procname{frame-visit-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
+Prompts for a file to visit, unless \procparm{fname} is 
 present, in which case that file is visited.  Returns 0 or greater for 
-success.
+success.\
+Bound to:  \prockey{^X-^V}\
+Use \procparm{fname} or \procname{QueueAnswer} to provide name in Ness.}
 
-Bound to:  \typewriter{^X-^V}
-
-Use \italic{fname} or \bold{queueanswer} to provide name in Ness.}
-
-integer \bold{frame-visit-file-new-window}(object \italic{self})
-
-\leftindent{Prompts for a file to visit, unless \italic{fname} is 
+\proclistentry{\proctype{integer} \procname{frame-visit-file-new-window}(\proctype{object} \procparm{self})\
+Prompts for a file to visit, unless \procparm{fname} is 
 present, in which case that file is visited.  A new window is created for the 
 resulting buffer.  Returns 0 or greater for success.}
 
-\bold{frame-switch-file}(object \italic{self}, null | 0 | marker \italic{fname})
+\proclistentry{\procname{frame-switch-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
+Switches to editing another buffer.\
+Bound to:  \prockey{^X-^R}; Menu:  \procmenu{Switch File}\procmenuwhere{~30}\
+Use \procparm{fname} or \procname{QueueAnswer} to provide name in Ness.}
 
-\leftindent{Switches to editing another buffer.
+\proclistentry{\procname{frame-read-file}(\proctype{object} \procparm{self})\
+Reads a file into the current buffer.\
+Use \procname{QueueAnswer} to provide name in Ness.}
 
-Bound to:  \typewriter{^X-^R}; Menu:  Switch File~30
+\proclistentry{\procname{frame-save-file}(\proctype{object} \procparm{self})\
+Saves buffer into its current file.\
+Bound to:  \prockey{^X-^S}; Menu:  \procmenu{Save}\procmenuwhere{~20}}
 
-Use \italic{fname} or \bold{queueanswer} to provide name in Ness.}
+\proclistentry{\procname{frame-write-file}(\proctype{object} \procparm{self})\
+Prompts for a file to save the current buffer in.\
+Bound to:  \prockey{^X-^W}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save As}\procmenuwhere{~1}\
+Use \procname{QueueAnswer} to provide name in Ness.}
 
-\bold{frame-read-file}(object \italic{self})
+\proclistentry{\procname{frame-save-all-files}(\proctype{object} \procparm{self})\
+Saves all modified files.\
+Bound to:  \prockey{^X-^M}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save All}\procmenuwhere{~2}}
 
-\leftindent{Reads a file into the current buffer.
+\proclistentry{\procname{frame-set-printer}(\proctype{object} \procparm{self})\
+Set the printer for the print command to spool to.  Note 
+that this command is obsoleted by the print option dialog.\
+Use \procname{QueueAnswer} to provide name in Ness.}
 
-Use \bold{queueanswer} to provide name in Ness.}
+\proclistentry{\procname{frame-preview}(\proctype{object} \procparm{self})\
+Previews document.\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Preview}\procmenuwhere{~21}}
 
-\bold{frame-save-file}(object \italic{self})
-
-\leftindent{Saves buffer into its current file.
-
-Bound to:  \typewriter{^X-^S}; Menu:  Save~20}
-
-\bold{frame-write-file}(object \italic{self})
-
-\leftindent{Prompts for a file to save the current buffer in.
-
-Bound to:  \typewriter{^X-^W}; Menu:  File~10,Save As~1
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{frame-save-all-files}(object \italic{self})
-
-\leftindent{Saves all modified files.
-
-Bound to:  \typewriter{^X-^M}; Menu:  File~10,Save All~2}
-
-\bold{frame-set-printer}(object \italic{self})
-
-\leftindent{Set the printer for the print command to spool to.  Note 
-that this command is obsoleted by the print option dialog.
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{frame-preview}(object \italic{self})
-
-\leftindent{Previews document.
-
-Menu:  File~10,Preview~21}
-
-\bold{frame-print}(object \italic{self})
-
-\leftindent{Prints document.
-
+\proclistentry{\procname{frame-print}(\proctype{object} \procparm{self})\
+Prints document.\
 File~10,Print~22}
 
-\bold{frame-previous-window}(object \italic{self})
+\proclistentry{\procname{frame-previous-window}(\proctype{object} \procparm{self})\
+Moves the window manager input focus to the "previous" window.}
 
-\leftindent{Moves the window manager input focus to the "previous" window.}
+\proclistentry{\procname{frame-next-window}(\proctype{object} \procparm{self})\
+Moves the window manager input focus to the "next" window.}
 
-\bold{frame-next-window}(object \italic{self})
+\proclistentry{\procname{frame-set-buffer-modified}(\proctype{object} \procparm{self})\
+Sets buffer to be unmodified.}
 
-\leftindent{Moves the window manager input focus to the "next" window.}
+\proclistentry{\procname{frame-hide-window}(\proctype{object} \procparm{self})\
+Hides (iconifies) the window this command is executed in.}
 
-\bold{frame-set-buffer-modified}(object \italic{self})
+\proclistentry{\procname{frame-expose-window}(\proctype{object} \procparm{self})\
+Exposes the window this command is executed in.}
 
-\leftindent{Sets buffer to be unmodified.}
-
-\bold{frame-hide-window}(object \italic{self})
-
-\leftindent{Hides (iconifies) the window this command is executed in.}
-
-\bold{frame-expose-window}(object \italic{self})
-
-\leftindent{Exposes the window this command is executed in.}
-
-\bold{frame-single-window}(object \italic{self})
-
-\leftindent{Hides all windows and maybe makes the current window take 
+\proclistentry{\procname{frame-single-window}(\proctype{object} \procparm{self})\
+Hides all windows and maybe makes the current window take 
 up freed space.}
 
-\bold{frame-delete-this-buffer}(object \italic{self})
-
-\leftindent{Deletes buffer in current window without prompting for 
-name.  If modified, you will still be prompted for confirmation.
-
+\proclistentry{\procname{frame-delete-this-buffer}(\proctype{object} \procparm{self})\
+Deletes buffer in current window without prompting for 
+name.  If modified, you will still be prompted for confirmation.\
 Don't try to answer the confirmation dialog in Ness.}
 
-\bold{frame-drop-buffer}(object \italic{self})
+\proclistentry{\procname{frame-drop-buffer}(\proctype{object} \procparm{self})\
+Drop out the current buffer for drag & drop.}
 
-\leftindent{Drop out the current buffer for drag & drop.}
+\proclistentry{\procname{frame-visit-file-uninterpreted}(\proctype{object} \procparm{self})\
+Prompts for a file to visit uninterpreted.\
+Bound to:  \prockey{^X-Esc-v}\
+Use \procname{QueueAnswer} to provide name in Ness.}
 
-\bold{frame-visit-file-uninterpreted}(object \italic{self})
+\proclistentry{\procname{frame-write-plainest-file}(\proctype{object} \procparm{self})\
+Prompts for a file to save the current buffer into with 
+styles removed.\
+Bound to:  \prockey{^X-Esc-w}\
+Use \procname{QueueAnswer} to provide name in Ness.}
 
-\leftindent{Prompts for a file to visit uninterpreted.
-
-Bound to:  \typewriter{^X-Esc-v}
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{frame-write-plainest-file}(object \italic{self})
-
-\leftindent{Prompts for a file to save the current buffer into with 
-styles removed.
-
-Bound to:  \typewriter{^X-Esc-w}
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-void \bold{framecmds-interact}(object \italic{self})
-
-\leftindent{Ness-callable: interact with user.  Enters keyboard main 
-loop.
-
+\proclistentry{\proctype{void} \procname{framecmds-interact}(\proctype{object} \procparm{self})\
+Ness-callable: interact with user.  Enters keyboard main 
+loop.\
 Should not be bound.}
 
-object \bold{framecmds-open-file}(marker \italic{name})
-
-\leftindent{Ness-callable: create a window and edit a file in it.  
-arg: filename.  Returns frame.
-
+\proclistentry{\proctype{object} \procname{framecmds-open-file}(\proctype{marker} \procparm{name})\
+Ness-callable: create a window and edit a file in it.  
+arg: filename.  Returns frame.\
 Cannot be bound.}
 
-object \bold{framecmds-open-view}(object \italic{observable})
-
-\leftindent{Ness-callable: create a window and display the view in it.  
+\proclistentry{\proctype{object} \procname{framecmds-open-view}(\proctype{object} \procparm{observable})\
+Ness-callable: create a window and display the view in it.  
 args: object (dataobject or view from which dataobject is taken).  Returns 
-frame.
-
+frame.\
 Cannot be bound.}
 
-boolean \bold{framecmds-set-command-enable}(object \italic{self}, integer \italic{enable})
-
-\leftindent{Ness-callable: enable/disable frame command bindings.  args:
-frame, enable.  Returns prior state.
-
+\proclistentry{\proctype{boolean} \procname{framecmds-set-command-enable}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{enable})\
+Ness-callable: enable/disable frame command bindings.  args:
+frame, enable.  Returns prior state.\
 Not intended to be bound.}
 
-void \bold{framecmds-set-program-name}(marker \italic{name})
-
-\leftindent{Ness-callable: set program name (for preferences).  args:  name
-
+\proclistentry{\proctype{void} \procname{framecmds-set-program-name}(\proctype{marker} \procparm{name})\
+Ness-callable: set program name (for preferences).  args:  name\
 Cannot be bound.}
 
-void \bold{framecmds-set-window-title}(object \italic{self}, marker \italic{name})
-
-\leftindent{Ness-callable: set window title.  args: frame, title
-
+\proclistentry{\proctype{void} \procname{framecmds-set-window-title}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
+Ness-callable: set window title.  args: frame, title\
 Not intended to be bound.}
 
 \section{Related Topics}

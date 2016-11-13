@@ -1,150 +1,105 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Ness}
 
 
-\bold{ness-dostmt}(object \italic{view})
-
-\leftindent{Read a Ness statement seqeunce from the message line and 
+\proclistentry{\procname{ness-dostmt}(\proctype{object} \procparm{view})\
+Read a Ness statement seqeunce from the message line and 
 execute it.  Since the Ness is destroyed after completion, this cannot 
 be used to add or change event handlers.}
 
-\bold{ness-load}(marker \italic{filename})
-
-\leftindent{Read, compile, and post procs from a Ness program file
-
+\proclistentry{\procname{ness-load}(\proctype{marker} \procparm{filename})\
+Read, compile, and post procs from a Ness program file\
 This procedure cannot be bound.}
 
-\bold{nessview-next-error}(object \italic{textview})
+\proclistentry{\procname{nessview-next-error}(\proctype{object} \procparm{textview})\
+See the source code for the next error\
+Bound to:  \prockey{Esc-^N}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Next Danger}\procmenuwhere{~10}\
+\prockey{^U} numeric argument can be set to find previous error, instead.}
 
-\leftindent{See the source code for the next error
+\proclistentry{\procname{nessview-show-origin}(\proctype{object} \procparm{self})\
+Show the author and date of last change\
+Bound to:  \prockey{^X-^N-O}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Origin}\procmenuwhere{~12}}
 
-Bound to:  \typewriter{Esc-^N}; Menu:  Ness~10,Next Danger~10
+\proclistentry{\procname{nessview-scan-for-danger}(\proctype{object} \procparm{self})\
+Check for any statements that might be harmful\
+Bound to:  \prockey{^X-^N-S}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Scan for danger}\procmenuwhere{~15}}
 
-\typewriter{^U} numeric argument can be set to find previous error, instead.}
+\proclistentry{\procname{nessview-compile}(\proctype{object} \procparm{self})\
+Compile the text in this view\
+Bound to:  \prockey{Esc-^N-C}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Empower-compile}\procmenuwhere{~22}}
 
-\bold{nessview-show-origin}(object \italic{self})
+\proclistentry{\procname{nessview-execute}(\proctype{object} \procparm{self})\
+Compile Ness and execute function main()\
+Bound to:  \prockey{^X-^E}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Do main()}\procmenuwhere{~24}\
+\prockey{^U} numeric argument can be set to prompt for different 
+function to execute.\
+If prompting, use \procname{QueueAnswer} to provide name in Ness.}
 
-\leftindent{Show the author and date of last change
+\proclistentry{\procname{nessview-author-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+Change to be an author; remove warning text;  make read-write.  
+\procparm{mode} must be 0.  It can be -1, however, to toggle instead.\
+Bound to:  \prockey{Esc-~}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Author mode}\procmenuwhere{~32}\
+Use \procname{QueueAnswer} to answer confirmation in Ness.}
 
-Bound to:  \typewriter{^X-^N-O}; Menu:  Ness~10,Show Origin~12}
+\proclistentry{\procname{nessview-user-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+Reinsert the warning text and be readonly.  
+\procparm{mode} must be 1.  It can be -1, however, to toggle instead.\
+Bound to:  \prockey{Esc-~}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Add warning}\procmenuwhere{~32}}
 
-\bold{nessview-scan-for-danger}(object \italic{self})
+\proclistentry{\procname{nessview-append-to-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Append the current buffer to a Ness file.\
+Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to File}\procmenuwhere{~40}\
+Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-\leftindent{Check for any statements that might be harmful
+\proclistentry{\procname{nessview-visit-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Visit an existing Ness script.\
+Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~50}\
+Menu in frame:  \procmenu{Ness}\procmenuwhere{~99}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~41}\
+Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-Bound to:  \typewriter{^X-^N-S}; Menu:  Ness~10,Scan for danger~15}
-
-\bold{nessview-compile}(object \italic{self})
-
-\leftindent{Compile the text in this view
-
-Bound to:  \typewriter{Esc-^N-C}; Menu:  Ness~10,Empower-compile~22}
-
-\bold{nessview-execute}(object \italic{self})
-
-\leftindent{Compile Ness and execute function main()
-
-Bound to:  \typewriter{^X-^E}; Menu:  Ness~10,Do main()~24
-
-\typewriter{^U} numeric argument can be set to prompt for different 
-function to execute.
-
-If prompting, use \bold{queueanswer} to provide name in Ness.}
-
-\bold{nessview-author-mode}(object \italic{self}, integer \italic{mode})
-
-\leftindent{Change to be an author; remove warning text;  make read-write.  
-\italic{mode} must be 0.  It can be -1, however, to toggle instead.
-
-Bound to:  \typewriter{Esc-~}; Menu:  Ness~10,Author mode~32
-
-Use \bold{queueanswer} to answer confirmation in Ness.}
-
-\bold{nessview-user-mode}(object \italic{self}, integer \italic{mode})
-
-\leftindent{Reinsert the warning text and be readonly.  
-\italic{mode} must be 1.  It can be -1, however, to toggle instead.
-
-Bound to:  \typewriter{Esc-~}; Menu:  Ness~10,Add warning~32}
-
-\bold{nessview-append-to-file}(object \italic{self}, null | 0 | marker \italic{name})
-
-\leftindent{Append the current buffer to a Ness file.
-
-Menu:  Ness,Append to File~40
-
-Use \italic{name} or \bold{queueanswer} to provide file name.}
-
-\bold{nessview-visit-script}(object \italic{self}, null | 0 | marker \italic{name})
-
-\leftindent{Visit an existing Ness script.
-
-Menu:  Ness,Visit Script~50
-
-Menu in frame:  Ness~99,Visit Script~41
-
-Use \italic{name} or \bold{queueanswer} to provide file name.}
-
-\bold{nessview-invert-debug}()
-
-\leftindent{Toggle the nessview debug flag
-
-Bound to:  \typewriter{Esc-^D-D}}
+\proclistentry{\procname{nessview-invert-debug}()\
+Toggle the nessview debug flag\
+Bound to:  \prockey{Esc-^D-D}}
 
 
 \section{nessm}
 
 
-\bold{nessm-make-macro}(object \italic{view})
+\proclistentry{\procname{nessm-make-macro}(\proctype{object} \procparm{view})\
+Converts a keyboard macro to ness code.\
+Menu in frame:  \procmenu{Ness}\procmenuwhere{~99}\procmenuwhere{,}\procmenu{Make Macro}\procmenuwhere{~1}\
+Use \procname{QueueAnswer} to choose action and maybe provide binding in Ness.}
 
-\leftindent{Converts a keyboard macro to ness code.
+\proclistentry{\procname{nessmv-append-to-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Append the current buffer to a Ness file.\
+Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to File}\procmenuwhere{~40}\
+Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-Menu in frame:  Ness~99,Make Macro~1
+\proclistentry{\procname{nessmv-append-to-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Append the current buffer to a Ness script.\
+Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to Script}\procmenuwhere{~45}\
+Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-Use \bold{queueanswer} to choose action and maybe provide binding in Ness.}
-
-\bold{nessmv-append-to-file}(object \italic{self}, null | 0 | marker \italic{name})
-
-\leftindent{Append the current buffer to a Ness file.
-
-Menu:  Ness,Append to File~40
-
-Use \italic{name} or \bold{queueanswer} to provide file name.}
-
-\bold{nessmv-append-to-script}(object \italic{self}, null | 0 | marker \italic{name})
-
-\leftindent{Append the current buffer to a Ness script.
-
-Menu:  Ness,Append to Script~45
-
-Use \italic{name} or \bold{queueanswer} to provide file name.}
-
-\bold{nessmv-visit-script}(object \italic{self}, null | 0 | marker \italic{name})
-
-\leftindent{Visit an existing Ness script.
-
-Menu:  Ness,Visit Script~50
-
-Use \italic{name} or \bold{queueanswer} to provide file name.}
+\proclistentry{\procname{nessmv-visit-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+Visit an existing Ness script.\
+Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~50}\
+Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
 
 \section{Generated}
 
 
-\bold{\italic{object}-NessKeysEvent}(object \italic{self})
+\proclistentry{\procname{\italic{object}-NessKeysEvent}(\proctype{object} \procparm{self})\
+Call Ness for a keys event; generated by on key event handlers.}
 
-\leftindent{Call Ness for a keys event; generated by on key event handlers.}
+\proclistentry{\procname{\italic{object}-NessMenuEvent}(\proctype{object} \procparm{self})\
+Call Ness for a menu event; generated by on menu handlers.}
 
-\bold{\italic{object}-NessMenuEvent}(object \italic{self})
-
-\leftindent{Call Ness for a menu event; generated by on menu handlers.}
-
-action \bold{ness-proctable-hook}(object \italic{self}, marker \italic{name})
-
-\leftindent{Attempts to locate the named function and place 
-it in the proctable.  Only the first part of --separated \italic{name} is 
+\proclistentry{\proctype{action} \procname{ness-proctable-hook}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
+Attempts to locate the named function and place 
+it in the proctable.  Only the first part of --separated \procparm{name} is 
 used; if that is the name of a ness library, compile and mark library as used.}
 
 

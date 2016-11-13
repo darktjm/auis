@@ -1,16 +1,14 @@
 \begindata{text,269713664}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Matte}
 
 
-\bold{matte-Allow-resizing}
+\proclistentry{\procname{matte-Allow-resizing}(\proctype{object} \procparm{self})\
+Allow view to resize}
 
-\leftindent{Allow view to resize}
-
-\bold{matte-Allow-drawing}
-
-\leftindent{Draw the view's border}
+\proclistentry{\procname{matte-Allow-drawing}(\proctype{object} \procparm{self})\
+Draw the view's border}
 
 
 \section{Related Topics}

@@ -1,21 +1,17 @@
 \begindata{text,268700816}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Gsearch}
 
 
-\bold{gsearch-forward}(object \italic{textview})
-
-\leftindent{Incremental GNU-Emacs style search forward.  If the search 
-fails, interactive macro execution is aborted.
-
+\proclistentry{\procname{gsearch-forward}(\proctype{object} \procparm{textview})\
+Incremental GNU-Emacs style search forward.  If the search 
+fails, interactive macro execution is aborted.\
 This is inherently interactive; do not use from Ness.}
 
-\bold{gsearch-backward}(object \italic{textview})
-
-\leftindent{Incremental GNU-Emacs style search backward.  If the
-search fails, interactive macro execution is aborted.
-
+\proclistentry{\procname{gsearch-backward}(\proctype{object} \procparm{textview})\
+Incremental GNU-Emacs style search backward.  If the
+search fails, interactive macro execution is aborted.\
 This is inherently interactive; do not use from Ness.}
 
 

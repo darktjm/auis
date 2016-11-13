@@ -1,40 +1,28 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for pushbutton}
 
 
-\bold{pushbuttonview-set-label-text}(object \italic{self})
+\proclistentry{\procname{pushbuttonview-set-label-text}(\proctype{object} \procparm{self})\
+Prompts for user to set the text string of the pushbutton.\
+Menu:  \procmenu{Pushbutton}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set Label}\procmenuwhere{~11}\
+Use \procname{QueueAnswer} to provide label text in Ness.}
 
-\leftindent{Prompts for user to set the text string of the pushbutton.
+\proclistentry{\procname{pushbuttonview-set-font}(\proctype{object} \procparm{self})\
+Prompts for user to set the font of the pushbutton.\
+Menu:  \procmenu{Pushbutton}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set Font}\procmenuwhere{~12}\
+Use \procname{QueueAnswer} to provide font name in Ness.}
 
-Menu:  Pushbutton~1,Set Label~11
+\proclistentry{\procname{pushbuttonview-set-style}(\proctype{object} \procparm{self})\
+Prompts for user to set the appearance of the pushbutton.\
+Menu:  \procmenu{Pushbutton}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set Style}\procmenuwhere{~13}\
+Use \procname{QueueAnswer} to provide style name in Ness.}
 
-Use \bold{queueanswer} to provide label text in Ness.}
-
-\bold{pushbuttonview-set-font}(object \italic{self})
-
-\leftindent{Prompts for user to set the font of the pushbutton.
-
-Menu:  Pushbutton~1,Set Font~12
-
-Use \bold{queueanswer} to provide font name in Ness.}
-
-\bold{pushbuttonview-set-style}(object \italic{self})
-
-\leftindent{Prompts for user to set the appearance of the pushbutton.
-
-Menu:  Pushbutton~1,Set Style~13
-
-Use \bold{queueanswer} to provide style name in Ness.}
-
-\bold{pushbuttonview-set-color}(object \italic{self})
-
-\leftindent{Prompts for user to set the foreground and background color of the pushbutton.
-
-Menu:  Pushbutton~1,Set Color~14
-
-Use \bold{queueanswer} twice to provide foreground and background colors in Ness.}
+\proclistentry{\procname{pushbuttonview-set-color}(\proctype{object} \procparm{self})\
+Prompts for user to set the foreground and background color of the pushbutton.\
+Menu:  \procmenu{Pushbutton}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set Color}\procmenuwhere{~14}\
+Use \procname{QueueAnswer} twice to provide foreground and background colors in Ness.}
 
 
 \section{Related Topics}

@@ -1,128 +1,93 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for termulator}
 
 
-\bold{tmview-submit}(object \italic{self})
+\proclistentry{\procname{tmview-submit}(\proctype{object} \procparm{self})\
+Submits a line of input to the subprocess.\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\leftindent{Submits a line of input to the subprocess.
+\proclistentry{\procname{tmview-submit-and-stay}(\proctype{object} \procparm{self})\
+Submits a line of input, but also keeps 
+cursor at this line, and puts it at the top of the screen.\
+Bound to:  \prockey{^J}}
 
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{tmview-signal}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{key})\
+Send a signal to the subproces.  The signal is as if the 
+given \procparm{key} were sent.\
+Bound to:  \prockey{^C}, \prockey{^Z}, \prockey{^\\}, each 
+with their respective character codes as \procparm{key}.}
 
-\bold{tmview-submit-and-stay}(object \italic{self})
+\proclistentry{\procname{tmview-erase-line}(\proctype{object} \procparm{self})\
+Erase current line.\
+Bound to:  \prockey{^U}}
 
-\leftindent{Submits a line of input, but also keeps 
-cursor at this line, and puts it at the top of the screen.
+\proclistentry{\procname{tmview-prev-cmd}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+Retrieves previous command.  Note that \procparm{where} must 
+be 1.\
+Bound to:  \prockey{Esc-=}}
 
-Bound to:  \typewriter{^J}}
+\proclistentry{\procname{tmview-prev-match-cmd}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+Retrieves previous matching command.  Note that \procparm{where} must 
+be 5.\
+Bound to:  \prockey{Esc-[}}
 
-\bold{tmview-signal}(object \italic{self}, integer \italic{key})
+\proclistentry{\procname{tmview-next-cmd}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+Retrieves next command.  Note that \procparm{where} must 
+be 2.\
+Bound to:  \prockey{Esc--}, \prockey{Esc-`}}
 
-\leftindent{Send a signal to the subproces.  The signal is as if the 
-given \italic{key} were sent.
+\proclistentry{\procname{tmview-next-match-cmd}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+Retrieves next matching command.  Note that \procparm{where} must 
+be 6.\
+Bound to:  \prockey{Esc-]}}
 
-Bound to:  \typewriter{^C}, \typewriter{^Z}, \typewriter{^\\}, each 
-with their respective character codes as \italic{key}.}
+\proclistentry{\procname{tmview-move}(\proctype{object} \procparm{self})\
+Move selected text to end.\
+Bound to:  \prockey{Esc-+}; Menu:  \procmenu{Move}\procmenuwhere{~30}}
 
-\bold{tmview-erase-line}(object \italic{self})
+\proclistentry{\procname{tmview-exec}(\proctype{object} \procparm{self})\
+Move, then execute command.\
+Bound to:  \prockey{Enter} (\prockey{Esc-^M}); Menu:  \procmenu{Execute}\procmenuwhere{~30}}
 
-\leftindent{Erase current line.
+\proclistentry{\procname{tmview-delete-or-eot}(\proctype{object} \procparm{self})\
+Sends EOT at end of line, otherwise deletes 
+next character.\
+Bound to:  \prockey{^D}}
 
-Bound to:  \typewriter{^U}}
-
-\bold{tmview-prev-cmd}(object \italic{self}, integer \italic{where})
-
-\leftindent{Retrieves previous command.  Note that \italic{where} must 
-be 1.
-
-Bound to:  \typewriter{Esc-=}}
-
-\bold{tmview-prev-match-cmd}(object \italic{self}, integer \italic{where})
-
-\leftindent{Retrieves previous matching command.  Note that \italic{where} must 
-be 5.
-
-Bound to:  \typewriter{Esc-[}}
-
-\bold{tmview-next-cmd}(object \italic{self}, integer \italic{where})
-
-\leftindent{Retrieves next command.  Note that \italic{where} must 
-be 2.
-
-Bound to:  \typewriter{Esc--}, \typewriter{Esc-`}}
-
-\bold{tmview-next-match-cmd}(object \italic{self}, integer \italic{where})
-
-\leftindent{Retrieves next matching command.  Note that \italic{where} must 
-be 6.
-
-Bound to:  \typewriter{Esc-]}}
-
-\bold{tmview-move}(object \italic{self})
-
-\leftindent{Move selected text to end.
-
-Bound to:  \typewriter{Esc-+}; Menu:  Move~30}
-
-\bold{tmview-exec}(object \italic{self})
-
-\leftindent{Move, then execute command.
-
-Bound to:  \typewriter{Enter} (\typewriter{Esc-^M}); Menu:  Execute~30}
-
-\bold{tmview-delete-or-eot}(object \italic{self})
-
-\leftindent{Sends EOT at end of line, otherwise deletes 
-next character.
-
-Bound to:  \typewriter{^D}}
-
-\bold{tmview-start-new-process}(object \italic{self})
-
-\leftindent{Starts a new child process.
-
-Bound to:  \typewriter{^X-!}; Menu:  Termulator,Start new process
-
-Use \bold{queueanswer} to answer questions in Ness.  If an old process 
+\proclistentry{\procname{tmview-start-new-process}(\proctype{object} \procparm{self})\
+Starts a new child process.\
+Bound to:  \prockey{^X-!}; Menu:  \procmenu{Termulator}\procmenuwhere{,}\procmenu{Start new process}\
+Use \procname{QueueAnswer} to answer questions in Ness.  If an old process 
 is running, this asks two yes/no questions.  The last question is the 
 command to run.}
 
-\bold{tmview-beginning-of-line}(object \italic{self})
+\proclistentry{\procname{tmview-beginning-of-line}(\proctype{object} \procparm{self})\
+Beginning of line or input, whichever is 
+closest.\
+Bound to:  \prockey{^A}}
 
-\leftindent{Beginning of line or input, whichever is 
-closest.
+\proclistentry{\procname{tmview-clear}(\proctype{object} \procparm{self})\
+Clears the text of the tm.\
+Menu:  \procmenu{Termulator}\procmenuwhere{,}\procmenu{Clear}}
 
-Bound to:  \typewriter{^A}}
-
-\bold{tmview-clear}(object \italic{self})
-
-\leftindent{Clears the text of the tm.
-
-Menu:  Termulator,Clear}
-
-\bold{tmview-exec-str}(object \italic{self}, marker \italic{cmd})
-
-\leftindent{Execute a string.
-
-Menu:  for each entry in the "shell menu" file, if it exsits, the string 
-before the colon is the menu entry, and the \italic{cmd} is the text after 
-the colon.
-
+\proclistentry{\procname{tmview-exec-str}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{cmd})\
+Execute a string.\
+Menu:  For each entry in the "shell menu" file, if it exsits, the string 
+before the colon is the menu entry, and the \procparm{cmd} is the text after 
+the colon.\
 Note that if the view was initialized without attempting to read a menu 
 file (i.e., not via the \bold{tm} application), this command will not 
-exist.} 
+exist.}
 
-\bold{tmview-self-insert}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{tmview-self-insert}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+If echoing, insert a key (\procparm{ch}), otherwise store it.\
+Bound to:  All printable ASCII (\prockey{Space} .. \prockey{~}), 
+with their respective character code as the \procparm{ch} parameter}
 
-\leftindent{If echoing, insert a key (\italic{ch}), otherwise store it.
-
-Bound to:  All printable ASCII (\typewriter{Space} .. \typewriter{~}), 
-with their respective character code as the \italic{ch} parameter}
-
-\bold{tmview-raw-key}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Send a key (\italic{ch}) directly to the subprocess in this view.}
+\proclistentry{\procname{tmview-raw-key}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Send a key (\procparm{ch}) directly to the subprocess in this view.}
 
 
 \section{Related Topics}

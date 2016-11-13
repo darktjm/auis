@@ -1,30 +1,23 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for recsearch}
 
 
-\bold{recsearch-begin-at-top}(object \italic{im}, null | 0 | marker \italic{pat})
+\proclistentry{\procname{recsearch-begin-at-top}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
+Begin recursive search at top (IM) level.\
+Use \procparm{pat} or \procname{QueueAnswer} to specify pattern in Ness.}
 
-\leftindent{Begin recursive search at top (IM) level.
+\proclistentry{\procname{recsearch-begin}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
+Begin recursive search.\
+Use \procparm{pat} or \procname{QueueAnswer} to specify pattern in Ness.}
 
-Use \italic{pat} or \bold{queueanswer} to specify pattern in Ness.}
+\proclistentry{\procname{recsearch-replace}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{rpl})\
+Replace target of recsearch with a string.\
+Use \procparm{rpl} or \procname{QueueAnswer} to specify replacement string in Ness.}
 
-\bold{recsearch-begin}(object \italic{im}, null | 0 | marker \italic{pat})
-
-\leftindent{Begin recursive search.
-
-Use \italic{pat} or \bold{queueanswer} to specify pattern in Ness.}
-
-\bold{recsearch-replace}(object \italic{im}, null | 0 | marker \italic{rpl})
-
-\leftindent{Replace target of recsearch with a string.
-
-Use \italic{rpl} or \bold{queueanswer} to specify replacement string in Ness.}
-
-\bold{recsearch-resume}(object \italic{im})
-
-\leftindent{Resume recursive search.}
+\proclistentry{\procname{recsearch-resume}(\proctype{object} \procparm{im})\
+Resume recursive search.}
 
 
 \section{Related Topics}

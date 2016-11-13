@@ -1,20 +1,17 @@
 \begindata{text,269095468}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for misc. controllers}
 
 
-\bold{calccon-clear}(object \italic{view})
+\proclistentry{\procname{calccon-clear}(\proctype{object} \procparm{view})\
+calccon clear; this is the controller's main button}
 
-\leftindent{calccon clear; this is the controller's main button}
+\proclistentry{\procname{helpcon-help}(\proctype{object} \procparm{view})\
+helpcon help; this is the controller's main button}
 
-\bold{helpcon-help}(object \italic{view})
-
-\leftindent{helpcon help; this is the controller's main button}
-
-\bold{pcontrol-start}(object \italic{view})
-
-\leftindent{pcontrol start; this is the controller's main button}
+\proclistentry{\procname{pcontrol-start}(\proctype{object} \procparm{view})\
+pcontrol start; this is the controller's main button}
 
 
 \section{Related Topics}

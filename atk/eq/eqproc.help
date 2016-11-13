@@ -1,192 +1,132 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for eq}
 
 
-\bold{eqview-above-script}(object \italic{self})
+\proclistentry{\procname{eqview-above-script}(\proctype{object} \procparm{self})\
+Insert an abovescript.\
+Bound to:  \prockey{!}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Above}\procmenuwhere{~41}}
 
-\leftindent{Insert an abovescript.
+\proclistentry{\procname{eqview-below-script}(\proctype{object} \procparm{self})\
+Insert a belowscript.\
+Bound to:  \prockey{#}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Below}\procmenuwhere{~42}}
 
-Bound to:  \typewriter{!}; Menu:  Formulae,Above~41}
+\proclistentry{\procname{eqview-carriage-return}(\proctype{object} \procparm{self})\
+Handle carriage returns.\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\bold{eqview-below-script}(object \italic{self})
+\proclistentry{\procname{eqview-close-brace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a close brace.  \procparm{ch} must be '\}'.\
+Bound to:  \prockey{\}}}
 
-\leftindent{Insert a belowscript.
+\proclistentry{\procname{eqview-close-bracket}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a close bracket.  \procparm{ch} must be ']'.\
+Bound to:  \prockey{]}}
 
-Bound to:  \typewriter{#}; Menu:  Formulae,Below~42}
+\proclistentry{\procname{eqview-close-paren}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a close paren.  \procparm{ch} must be ')'.\
+Bound to:  \prockey{)}}
 
-\bold{eqview-carriage-return}(object \italic{self})
+\proclistentry{\procname{eqview-copy}(\proctype{object} \procparm{self})\
+Copy\
+Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~11} (if region selected)}
 
-\leftindent{Handle carriage returns.
+\proclistentry{\procname{eqview-cut}(\proctype{object} \procparm{self})\
+Cut\
+Bound to:  \prockey{^W}; Menu:  \procmenu{Cut}\procmenuwhere{~10} (if region selected)}
 
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{eqview-default}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a character.\
+Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~}), 
+with their respective character code as \procparm{ch}.}
 
-\bold{eqview-close-brace}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{eqview-delete-backward}(\proctype{object} \procparm{self})\
+Delete backward from cursor.\
+Bound to:  \prockey{Backspace} (\prockey{^H}), \prockey{Delete}}
 
-\leftindent{Insert a close brace.  \italic{ch} must be '\}'.
+\proclistentry{\procname{eqview-delete-forward}(\proctype{object} \procparm{self})\
+Delete forward from cursor.\
+Bound to:  \prockey{^D}}
 
-Bound to:  \typewriter{\}}}
-
-\bold{eqview-close-bracket}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert a close bracket.  \italic{ch} must be ']'.
-
-Bound to:  \typewriter{]}}
-
-\bold{eqview-close-paren}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert a close paren.  \italic{ch} must be ')'.
-
-Bound to:  \typewriter{)}}
-
-\bold{eqview-copy}(object \italic{self})
-
-\leftindent{Copy
-
-Bound to:  \typewriter{Esc-w}; Menu:  Copy~11 (if region selected)}
-
-\bold{eqview-cut}(object \italic{self})
-
-\leftindent{Cut
-
-Bound to:  \typewriter{^W}; Menu:  Cut~10 (if region selected)}
-
-\bold{eqview-default}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert a character.
-
-Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
-with their respective character code as \italic{ch}.}
-
-\bold{eqview-delete-backward}(object \italic{self})
-
-\leftindent{Delete backward from cursor.
-
-Bound to:  \typewriter{Backspace} (\typewriter{^H}), \typewriter{Delete}}
-
-\bold{eqview-delete-forward}(object \italic{self})
-
-\leftindent{Delete forward from cursor.
-
-Bound to:  \typewriter{^D}}
-
-\bold{eqview-dump-and-write}(object \italic{self})
-
-\leftindent{Dump equation and write it to tmp.  The ATK stream is 
+\proclistentry{\procname{eqview-dump-and-write}(\proctype{object} \procparm{self})\
+Dump equation and write it to tmp.  The ATK stream is 
 written to \typewriter{new.eq} in the current directory, and the dump to 
-\typewriter{/tmp/eq}.
+\typewriter{/tmp/eq}.\
+Bound to:  \prockey{^X-^X}}
 
-Bound to:  \typewriter{^X-^X}}
+\proclistentry{\procname{eqview-fraction}(\proctype{object} \procparm{self})\
+Insert a fraction.\
+Bound to:  \prockey{/}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Fraction}\procmenuwhere{~21}}
 
-\bold{eqview-fraction}(object \italic{self})
+\proclistentry{\procname{eqview-left-brace}(\proctype{object} \procparm{self})\
+Insert a left brace.\
+Bound to:  \prockey{\{}}
 
-\leftindent{Insert a fraction.
+\proclistentry{\procname{eqview-move-backward}(\proctype{object} \procparm{self})\
+Move backward.\
+Bound to:  \prockey{^B}}
 
-Bound to:  \typewriter{/}; Menu:  Formulae,Fraction~21}
+\proclistentry{\procname{eqview-move-down}(\proctype{object} \procparm{self})\
+Move down\
+Bound to:  \prockey{^N}}
 
-\bold{eqview-left-brace}(object \italic{self})
+\proclistentry{\procname{eqview-move-forward}(\proctype{object} \procparm{self})\
+Move forward.\
+Bound to:  \prockey{^F}}
 
-\leftindent{Insert a left brace.
+\proclistentry{\procname{eqview-move-to-beginning}(\proctype{object} \procparm{self})\
+Move to the beginning.\
+Bound to:  \prockey{^A}}
 
-Bound to:  \typewriter{\{}}
+\proclistentry{\procname{eqview-move-to-end}(\proctype{object} \procparm{self})\
+Move to the end.\
+Bound to:  \prockey{^E}}
 
-\bold{eqview-move-backward}(object \italic{self})
+\proclistentry{\procname{eqview-move-up}(\proctype{object} \procparm{self})\
+Move up.\
+Bound to:  \prockey{^P}}
 
-\leftindent{Move backward.
+\proclistentry{\procname{eqview-paste}(\proctype{object} \procparm{self})\
+Paste\
+Bound to:  \prockey{^Y}; Menu:  \procmenu{Paste}\procmenuwhere{~10}}
 
-Bound to:  \typewriter{^B}}
+\proclistentry{\procname{eqview-prime}(\proctype{object} \procparm{self})\
+Insert a prime.\
+Bound to:  \prockey{'}}
 
-\bold{eqview-move-down}(object \italic{self})
+\proclistentry{\procname{eqview-root}(\proctype{object} \procparm{self})\
+Insert a root.\
+Bound to:  \prockey{^R}, \prockey{Esc-r-o-o-t-^J}; Menu:  \procmenu{
+Formulae}\procmenuwhere{,}\procmenu{Root}\procmenuwhere{~11}}
 
-\leftindent{Move down
+\proclistentry{\procname{eqview-special}(\proctype{object} \procparm{self})\
+Special symbol (dialog).\
+Bound to:  \prockey{Esc-a}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Insert Symbol...}\procmenuwhere{~51}}
 
-Bound to:  \typewriter{^N}}
+\proclistentry{\procname{eqview-subscript}(\proctype{object} \procparm{self})\
+Insert a subscript.\
+Bound to:  \prockey{_}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Subscript}\procmenuwhere{~32}}
 
-\bold{eqview-move-forward}(object \italic{self})
+\proclistentry{\procname{eqview-superscript}(\proctype{object} \procparm{self})\
+Insert a superscript.\
+Bound to:  \prockey{^}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Superscript}\procmenuwhere{~31}}
 
-\leftindent{Move forward.
+\proclistentry{\procname{eqview-write-c}(\proctype{object} \procparm{self})\
+Write equation in C format.  Output is to standard out.\
+Bound to:  \prockey{^Z-c}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{C}\procmenuwhere{~41}}
 
-Bound to:  \typewriter{^F}}
+\proclistentry{\procname{eqview-write-dvi}(\proctype{object} \procparm{self})\
+Write equation in DVI format.  Output is to standard out.\
+Bound to:  \prockey{^Z-d}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{DVI}\procmenuwhere{~44}}
 
-\bold{eqview-move-to-beginning}(object \italic{self})
+\proclistentry{\procname{eqview-write-eqn}(\proctype{object} \procparm{self})\
+Write equation in EQN format.  Output is to standard out.\
+Bound to:  \prockey{^Z-e}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{EQN}\procmenuwhere{~42}}
 
-\leftindent{Move to the beginning.
-
-Bound to:  \typewriter{^A}}
-
-\bold{eqview-move-to-end}(object \italic{self})
-
-\leftindent{Move to the end.
-
-Bound to:  \typewriter{^E}}
-
-\bold{eqview-move-up}(object \italic{self})
-
-\leftindent{Move up.
-
-Bound to:  \typewriter{^P}}
-
-\bold{eqview-paste}(object \italic{self})
-
-\leftindent{Paste
-
-Bound to:  \typewriter{^Y}; Menu:  Paste~10}
-
-\bold{eqview-prime}(object \italic{self})
-
-\leftindent{Insert a prime.
-
-Bound to:  \typewriter{'}}
-
-\bold{eqview-root}(object \italic{self})
-
-\leftindent{Insert a root.
-
-Bound to:  \typewriter{^R}, \typewriter{Esc-r-o-o-t-^J}; Menu:  
-Formulae,Root~11}
-
-\bold{eqview-special}(object \italic{self})
-
-\leftindent{Special symbol (dialog).
-
-Bound to:  \typewriter{Esc-a}; Menu:  Formulae,Insert Symbol...~51}
-
-\bold{eqview-subscript}(object \italic{self})
-
-\leftindent{Insert a subscript.
-
-Bound to:  \typewriter{_}; Menu:  Formulae,Subscript~32}
-
-\bold{eqview-superscript}(object \italic{self})
-
-\leftindent{Insert a superscript.
-
-Bound to:  \typewriter{^}; Menu:  Formulae,Superscript~31}
-
-\bold{eqview-write-c}(object \italic{self})
-
-\leftindent{Write equation in C format.  Output is to standard out.
-
-Bound to:  \typewriter{^Z-c}; Menu:  File,C~41}
-
-\bold{eqview-write-dvi}(object \italic{self})
-
-\leftindent{Write equation in DVI format.  Output is to standard out.
-
-Bound to:  \typewriter{^Z-d}; Menu:  File,DVI~44}
-
-\bold{eqview-write-eqn}(object \italic{self})
-
-\leftindent{Write equation in EQN format.  Output is to standard out.
-
-Bound to:  \typewriter{^Z-e}; Menu:  File,EQN~42}
-
-\bold{eqview-write-troff}(object \italic{self})
-
-\leftindent{Write equation in troff format.  Output is to standard out.
-
-Bound to:  \typewriter{^Z-t}; Menu:  File,TROFF~43}
+\proclistentry{\procname{eqview-write-troff}(\proctype{object} \procparm{self})\
+Write equation in troff format.  Output is to standard out.\
+Bound to:  \prockey{^Z-t}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{TROFF}\procmenuwhere{~43}}
 
 
 \section{Related Topics}

@@ -1,24 +1,18 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for runbutton}
 
 
-\bold{runbutton-set-command}(object \italic{self})
+\proclistentry{\procname{runbutton-set-command}(\proctype{object} \procparm{self})\
+Set the runbutton command to execute.\
+Menu: \procmenu{RunButton}\procmenuwhere{,}\procmenu{Set Command}\procmenuwhere{~12}\
+Use \procname{QueueAnswer} to provide command name in Ness.}
 
-\leftindent{Set the runbutton command to execute.
-
-Menu: RunButton,Set Command~12
-
-Use \bold{queueanswer} to provide command name in Ness.}
-
-\bold{runbutton-set-label}(object \italic{self})
-
-\leftindent{Set the runbutton label.
-
-Menu: RunButton,Set Label~22
-
-Use \bold{queueanswer} to provide label text in Ness.}
+\proclistentry{\procname{runbutton-set-label}(\proctype{object} \procparm{self})\
+Set the runbutton label.\
+Menu: \procmenu{RunButton}\procmenuwhere{,}\procmenu{Set Label}\procmenuwhere{~22}\
+Use \procname{QueueAnswer} to provide label text in Ness.}
 
 
 \section{Related Topics}

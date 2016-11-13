@@ -1,28 +1,21 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for helloworldview}
 
 
-\bold{helloworldview-center}(object \italic{self})
+\proclistentry{\procname{helloworldview-center}(\proctype{object} \procparm{self})\
+Center the helloworldview string.\
+Bound to: \prockey{^C}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Center}}
 
-\leftindent{Center the helloworldview string.
+\proclistentry{\procname{helloworldview-invert}(\proctype{object} \procparm{self})\
+Invert the helloworldview string.\
+Bound to:  \prockey{Tab}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Invert}}
 
-Bound to: \typewriter{^C}; Menu: Hello World,Center}
-
-\bold{helloworldview-invert}(object \italic{self})
-
-\leftindent{Invert the helloworldview string.
-
-Bound to:  \typewriter{Tab}; Menu: Hello World,Invert}
-
-\bold{helloworldview-relocate}(object \italic{self})
-
-\leftindent{Relocate the helloworld string.
-
-Bound to:  \typewriter{^R}; Menu: Hello World,Relocate
-
-Use \bold{queueanswer} to provide coordinates in Ness.}
+\proclistentry{\procname{helloworldview-relocate}(\proctype{object} \procparm{self})\
+Relocate the helloworld string.\
+Bound to:  \prockey{^R}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Relocate}\
+Use \procname{QueueAnswer} to provide coordinates in Ness.}
 
 
 \section{Related Topics}

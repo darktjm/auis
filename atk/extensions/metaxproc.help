@@ -1,32 +1,28 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for metax}
 
 
-\bold{metax}(object \italic{view}, null | 0 | marker \italic{argument})
-
-\leftindent{Executes a proctable function by name.  The 
-\italic{argument} (or 0, if not present) is passed on to the 
+\proclistentry{\procname{metax}(\proctype{object} \procparm{view}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{argument})\
+Executes a proctable function by name.  The 
+\procparm{argument} (or 0, if not present) is passed on to the 
 procedure.  Note that action-style procedures' arguments are 
 interpreted as for binding, as described in the \helptopic{procs} overview.  
 The type of the action's argument is assumed to be an integer if in the 
-range of 0 to 255, and a string otherwise.
-
+range of 0 to 255, and a string otherwise.\
 This is pointless in Ness; just call the procedure directly.  
 However, there may be some advantage to the support of parsing the 
 string format of an action's arguments, in which case the argument 
-string can be passed as \italic{argument}, and the procedure 
-name can be passed using \bold{queueanswer}.}
+string can be passed as \procparm{argument}, and the procedure 
+name can be passed using \procname{QueueAnswer}.}
 
-\bold{metax-with-arg}(object \italic{view})
-
-\leftindent{Executes a function by name, prompting for an argument.  
+\proclistentry{\procname{metax-with-arg}(\proctype{object} \procparm{view})\
+Executes a function by name, prompting for an argument.  
 Note that action-style procedures' arguments are interpreted as 
 for binding, as described in the \helptopic{procs} overview.  The type 
 of the action's argument is assumed to be an integer if in the range of 
-0 to 255, and a string otherwise.
-
+0 to 255, and a string otherwise.\
 This is pointless in Ness; just call the procedure directly.}
 
 

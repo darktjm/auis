@@ -1,6 +1,6 @@
 \begindata{text,538334184}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Text and Textview}
@@ -18,1344 +18,918 @@ to any specific mode; user bindings apply to all three.  It is also
 not possible to query the current mode in Ness.
 
 
-\bold{textview-self-insert}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert a character.
-
+\proclistentry{\procname{textview-self-insert}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a character.\
 Bound in emacs and VI insert mode to:  all printable ISO-Latin-1 
-characters (\typewriter{Space} .. \typewriter{~}, 
-\typewriter{NoBreakSpace} .. \typewriter{ÿ}), \typewriter{Tab}, 
-each with their respective character code as the \italic{ch} parameter
+characters (\prockey{Space} .. \prockey{~}, 
+\prockey{NoBreakSpace} .. \prockey{ÿ}), \prockey{Tab}, 
+each with their respective character code as the \procparm{ch} parameter\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{textview-digit}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Add to the numeric (\prockey{^U}) argument.  If not 
+in VI command mode, acts like \procname{textview-self-insert}.\
+Bound in VI command mode to:  \prockey{0} .. \prockey{9}\
+Note that \prockey{0} is the first digit of an argument is instead 
+redirected to \procname{textview-beginning-of-line}}
 
-\bold{textview-digit}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{textview-beginning-of-line}(\proctype{object} \procparm{self})\
+Move to beginning of current line.\
+Bound in Emacs mode to:  \prockey{^A}, 
+\prockey{Home} (\prockey{Esc-H})\
+Bound in VI command mode to:  \prockey{0}, 
+\prockey{Home} (\prockey{Esc-H})\
+Note: VI command mode \prockey{0} binding conflicts with 
+\procname{textview-digit}; this is resolved within \procname{textview-digit}.} 
 
-\leftindent{Add to the numeric (\typewriter{^U}) argument.  If not 
-in VI command mode, acts like \bold{textview-self-insert}.
+\proclistentry{\procname{textview-backward-character}(\proctype{object} \procparm{self})\
+Move backward one character.\
+Bound in Emacs mode to:  \prockey{^B}, 
+\prockey{Left} (\prockey{Esc-D})\
+Bound in VI command mode to:  \prockey{Backspace} (\prockey{^H}), 
+\prockey{Del}, \prockey{Left} (\prockey{Esc-D})\
+\prockey{^U}-argument can be set to repeat movement.}
 
-Bound in VI command mode to:  \typewriter{0} .. \typewriter{9}
+\proclistentry{\procname{textview-delete-next-character}(\proctype{object} \procparm{self})\
+Delete the next character.\
+Bound in Emacs mode to:  \prockey{^D}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-Note that \typewriter{0} is the first digit of an argument is instead 
-redirected to \bold{textview-beginning-of-line}}
+\proclistentry{\procname{textview-end-of-line}(\proctype{object} \procparm{self})\
+Move to end of the current line.\
+Bound in Emacs mode to:  \prockey{^E}, 
+\prockey{End} (\prockey{Esc-F})\
+Bound in VI command mode to:  \prockey{$}, 
+\prockey{End} (\prockey{Esc-F})}
 
-\bold{textview-beginning-of-line}(object \italic{self})
+\proclistentry{\procname{textview-forward-character}(\proctype{object} \procparm{self})\
+Move forward one character.\
+Bound in Emacs mode to:  \prockey{^F}, 
+\prockey{Right} (\prockey{Esc-C})\
+Bound in VI command mode to:  \prockey{040}, \prockey{l}, 
+\prockey{Tab}, \prockey{Space}, \prockey{Right} (\prockey{Esc-C})\
+\prockey{^U}-argument can be set to repeat movement.\
+Note: VI command mode \prockey{040} binding conflicts with
+\procname{textview-digit}, and doesn't make much sense (was it supposed to 
+be \prockey{\\040}, aka \prockey{Space}?)}
 
-\leftindent{Move to beginning of current line.
-
-Bound in Emacs mode to:  \typewriter{^A}, 
-\typewriter{Home} (\typewriter{Esc-H})
-
-Bound in VI command mode to:  \typewriter{0}, 
-\typewriter{Home} (\typewriter{Esc-H})
-
-Note: VI command mode \typewriter{0} binding conflicts with 
-\bold{textview-digit}; this is resolved within \bold{textview-digit}.} 
-
-\bold{textview-backward-character}(object \italic{self})
-
-\leftindent{Move backward one character.
-
-Bound in Emacs mode to:  \typewriter{^B}, 
-\typewriter{Left} (\typewriter{Esc-D})
-
-Bound in VI command mode to:  \typewriter{Backspace} (\typewriter{^H}), 
-\typewriter{Del}, \typewriter{Left} (\typewriter{Esc-D})
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-delete-next-character}(object \italic{self})
-
-\leftindent{Delete the next character.
-
-Bound in Emacs mode to:  \typewriter{^D}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-end-of-line}(object \italic{self})
-
-\leftindent{Move to end of the current line.
-
-Bound in Emacs mode to:  \typewriter{^E}, 
-\typewriter{End} (\typewriter{Esc-F})
-
-Bound in VI command mode to:  \typewriter{$}, 
-\typewriter{End} (\typewriter{Esc-F})}
-
-\bold{textview-forward-character}(object \italic{self})
-
-\leftindent{Move forward one character.
-
-Bound in Emacs mode to:  \typewriter{^F}, 
-\typewriter{Right} (\typewriter{Esc-C})
-
-Bound in VI command mode to:  \typewriter{040}, \typewriter{l}, 
-\typewriter{Tab}, \typewriter{Space}, \typewriter{Right} (\typewriter{Esc-C})
-
-\typewriter{^U}-argument can be set to repeat movement.
-
-Note: VI command mode \typewriter{040} binding conflicts with
-\bold{textview-digit}, and doesn't make much sense (was it supposed to 
-be \typewriter{\\040}, aka \typewriter{Space}?)}
-
-\bold{textview-delete-previous-character}(object \italic{self})
-
-\leftindent{Delete the previous character.
-
+\proclistentry{\procname{textview-delete-previous-character}(\proctype{object} \procparm{self})\
+Delete the previous character.\
 Bound in Emacs and VI insert mode to:  
-\typewriter{Backsapce} (\typewriter{^H}),  \typewriter{Del}
+\prockey{Backsapce} (\prockey{^H}),  \prockey{Del}\
+Bound in VI command mode to: \prockey{X}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-Bound in VI command mode to: \typewriter{X}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-insert-newline}(object \italic{self})
-
-\leftindent{Insert a newline character.
-
+\proclistentry{\procname{textview-insert-newline}(\proctype{object} \procparm{self})\
+Insert a newline character.\
 Bound in emacs and VI insert mode to:  
-\typewriter{Enter} (\typewriter{^M})
+\prockey{Enter} (\prockey{^M})\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{textview-next-line}(\proctype{object} \procparm{self})\
+Move to next line.  In VI modes, this behaves more like 
+moving to the next paragraph.\
+Bound in emacs and VI command mode to:   \prockey{^N}, 
+\prockey{Down} (\prockey{Esc-B})\
+Bound in VI command mode to:  \prockey{^J}, \prockey{j}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-\bold{textview-next-line}(object \italic{self})
+\proclistentry{\procname{textview-previous-line}(\proctype{object} \procparm{self})\
+Move to previous line.  In VI modes, this behaves more like 
+moving to the previous paragraph.\
+Bound in Emacs and VI command mode to:  \prockey{^P}, 
+\prockey{Up} (\prockey{Esc-A})\
+Bound in VI command mode to:  \prockey{^K}, \prockey{k}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-\leftindent{Move to next line.  In VI modes, this behaves more like 
-moving to the next paragraph.
+\proclistentry{\procname{textview-indent}(\proctype{object} \procparm{self})\
+Indent current paragraph by 4 spaces.  Multiples of 8 are 
+turned into tabs.  The cursor is moved to the end of the paragraph.\
+Bound in Emacs and VI command mode to:   \prockey{Esc-i}}
 
-Bound in emacs and VI command mode to:   \typewriter{^N}, 
-\typewriter{Down} (\typewriter{Esc-B})
+\proclistentry{\procname{textview-GrabReference}(\proctype{object} \procparm{self})\
+Remember the next (from the current cursor position) inset's 
+data in preparation for \procname{textview-PlaceReference}.\
+Bound in Emacs and VI command mode to:  \prockey{^X-w}}
 
-Bound in VI command mode to:  \typewriter{^J}, \typewriter{j}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-previous-line}(object \italic{self})
-
-\leftindent{Move to previous line.  In VI modes, this behaves more like 
-moving to the previous paragraph.
-
-Bound in Emacs and VI command mode to:  \typewriter{^P}, 
-\typewriter{Up} (\typewriter{Esc-A})
-
-Bound in VI command mode to:  \typewriter{^K}, \typewriter{k}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-indent}(object \italic{self})
-
-\leftindent{Indent current paragraph by 4 spaces.  Multiples of 8 are 
-turned into tabs.  The cursor is moved to the end of the paragraph.
-
-Bound in Emacs and VI command mode to:   \typewriter{Esc-i}}
-
-\bold{textview-GrabReference}(object \italic{self})
-
-\leftindent{Remember the next (from the current cursor position) inset's 
-data in preparation for \bold{textview-PlaceReference}.
-
-Bound in Emacs and VI command mode to:  \typewriter{^X-w}}
-
-\bold{textview-PlaceReference}(object \italic{self})
-
-\leftindent{Create a new view on the data previously remembered by 
-\bold{textview-GrabReference}.
-
-Bound in Emacs and VI command mode to:  \typewriter{^X-y}
-
-\typewriter{^U}-argument can be set to anything to select a different 
+\proclistentry{\procname{textview-PlaceReference}(\proctype{object} \procparm{self})\
+Create a new view on the data previously remembered by 
+\procname{textview-GrabReference}.\
+Bound in Emacs and VI command mode to:  \prockey{^X-y}\
+\prockey{^U}-argument can be set to anything to select a different 
 view object; otherwise, the same view is used as in the original 
 inset.  If set, this view class name can be set from ness using 
-\bold{queueanswer}.}
+\procname{QueueAnswer}.}
 
-\bold{textview-unindent}(object \italic{self})
-
-\leftindent{Un-indent current paragraph by 4 spaces.  Tabs are split into 8 
+\proclistentry{\procname{textview-unindent}(\proctype{object} \procparm{self})\
+Un-indent current paragraph by 4 spaces.  Tabs are split into 8 
 spaces (or 8 spaces merged to tabs) if needed.  The cursor is moved to 
-the end of the paragraph.
+the end of the paragraph.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-u}}
 
-Bound in Emacs and VI command mode to:  \typewriter{Esc-u}}
+\proclistentry{\procname{textview-exch}(\proctype{object} \procparm{self})\
+Exchange dot and mark.\
+Bound in Emacs and VI command mode to:  \prockey{^X-^X}}
 
-\bold{textview-exch}(object \italic{self})
+\proclistentry{\procname{textview-select-region}(\proctype{object} \procparm{self})\
+Select between dot and mark.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-^@}}
 
-\leftindent{Exchange dot and mark.
+\proclistentry{\procname{textview-copy-region}(\proctype{object} \procparm{self})\
+Copy region to kill-buffer.\
+Bound in Emacs mode to:  \prockey{Esc-w}\
+Bound in VI command mode to:  \prockey{y-s}\
+Menu:  \procmenu{Copy}\procmenuwhere{~11}}
 
-Bound in Emacs and VI command mode to:  \typewriter{^X-^X}}
+\proclistentry{\procname{textview-mylf}(\proctype{object} \procparm{self})\
+Skip to next line and indent.\
+Bound in Emacs mode to:  \prockey{^J}}
 
-\bold{textview-select-region}(object \italic{self})
+\proclistentry{\procname{textview-zap-region}(\proctype{object} \procparm{self})\
+Remove the text within the selection region and place it in a 
+cutbuffer.\
+Bound in Emacs mode to:  \prockey{^W}\
+Bound in VI command mode to:  \prockey{d-s}\
+Menu:  \procmenu{Cut}\procmenuwhere{~10}}
 
-\leftindent{Select between dot and mark.
+\proclistentry{\procname{textview-append-next-cut}(\proctype{object} \procparm{self})\
+Make next cut command append to the cutbuffer as opposed to 
+making a new buffer.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-^W}}
 
-Bound in Emacs and VI command mode to:  \typewriter{Esc-^@}}
+\proclistentry{\procname{textview-yank}(\proctype{object} \procparm{self})\
+Yank text back from kill-buffer.\
+Bound in Emacs mode to:  \prockey{^Y}\
+Menu:  \procmenu{Paste}\procmenuwhere{~10}\
+\prockey{^U}-argument can be set to repeat insertion (100 max).}
 
-\bold{textview-copy-region}(object \italic{self})
+\proclistentry{\procname{textview-insert-file}(\proctype{object} \procparm{self})\
+Prompt for a filename and insert that file's contents into the 
+document.\
+Bound in Emacs mode to:  \prockey{^X-Tab}\
+Bound in VI command mode to:  \prockey{:-r}\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenu{}\menuwhere{,}\procmenu{Insert File}\procmenuwhere{~10}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\leftindent{Copy region to kill-buffer.
-
-Bound in Emacs mode to:  \typewriter{Esc-w}
-
-Bound in VI command mode to:  \typewriter{y-s}
-
-Menu:  Copy~11}
-
-\bold{textview-mylf}(object \italic{self})
-
-\leftindent{Skip to next line and indent.
-
-Bound in Emacs mode to:  \typewriter{^J}}
-
-\bold{textview-zap-region}(object \italic{self})
-
-\leftindent{Remove the text within the selection region and place it in a 
-cutbuffer.
-
-Bound in Emacs mode to:  \typewriter{^W}
-
-Bound in VI command mode to:  \typewriter{d-s}
-
-Menu:  Cut~10}
-
-\bold{textview-append-next-cut}(object \italic{self})
-
-\leftindent{Make next cut command append to the cutbuffer as opposed to 
-making a new buffer.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-^W}}
-
-\bold{textview-yank}(object \italic{self})
-
-\leftindent{Yank text back from kill-buffer.
-
-Bound in Emacs mode to:  \typewriter{^Y}
-
-Menu:  Paste~10
-
-\typewriter{^U}-argument can be set to repeat insertion (100 max).}
-
-\bold{textview-insert-file}(object \italic{self})
-
-\leftindent{Prompt for a filename and insert that file's contents into the 
-document.
-
-Bound in Emacs mode to:  \typewriter{^X-Tab}
-
-Bound in VI command mode to:  \typewriter{:-r}
-
-Menu:  File~10,Insert File~10
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{textview-rotate-backward-paste}(object \italic{self})
-
-\leftindent{Rotate kill-buffer backwards.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-^Y}
-
-\typewriter{^U}-argument can be set to repeat command.  Note, however, 
+\proclistentry{\procname{textview-rotate-backward-paste}(\proctype{object} \procparm{self})\
+Rotate kill-buffer backwards.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-^Y}\
+\prockey{^U}-argument can be set to repeat command.  Note, however, 
 that there are only 8 buffers under X; overflow wraps.}
 
-\bold{textview-line-to-top}(object \italic{self})
+\proclistentry{\procname{textview-line-to-top}(\proctype{object} \procparm{self})\
+Move current line to top of screen.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-!}}
 
-\leftindent{Move current line to top of screen.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-!}}
-
-\bold{textview-rotate-paste}(object \italic{self})
-
-\leftindent{Rotate kill-buffer.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-y}
-
-\typewriter{^U}-argument can be set to repeat command.  Note, however, 
+\proclistentry{\procname{textview-rotate-paste}(\proctype{object} \procparm{self})\
+Rotate kill-buffer.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-y}\
+\prockey{^U}-argument can be set to repeat command.  Note, however, 
 that there are only 8 buffers under X; overflow wraps.}
 
-\bold{textview-forward-para}(object \italic{self})
+\proclistentry{\procname{textview-forward-para}(\proctype{object} \procparm{self})\
+Move to the next paragraph.\
+Bound in Emacs mode to:  \prockey{Esc-]}\
+Bound in VI command mode to:  \prockey{\}}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-\leftindent{Move to the next paragraph.
+\proclistentry{\procname{textview-backward-para}(\proctype{object} \procparm{self})\
+Move to the previous paragraph.\
+Bound in Emacs mode to:  \prockey{Esc-[}\
+Bound in VI command mode to:  \prockey{\{}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-Bound in Emacs mode to:  \typewriter{Esc-]}
+\proclistentry{\procname{textview-open-line}(\proctype{object} \procparm{self})\
+Insert blank line at current pos.\
+Bound in Emacs mode to:  \prockey{^O}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-Bound in VI command mode to:  \typewriter{\}}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-backward-para}(object \italic{self})
-
-\leftindent{Move to the previous paragraph.
-
-Bound in Emacs mode to:  \typewriter{Esc-[}
-
-Bound in VI command mode to:  \typewriter{\{}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-open-line}(object \italic{self})
-
-\leftindent{Insert blank line at current pos.
-
-Bound in Emacs mode to:  \typewriter{^O}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{textview-plainer}(object \italic{self}, marker \italic{mode})
-
-\leftindent{Remove innermost environment.  The \italic{mode} argument 
+\proclistentry{\procname{textview-plainer}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{mode})\
+Remove innermost environment.  The \procparm{mode} argument 
 must be present in bindings and Ness code.  It can be either "new" or 
-"old".  The default bindings use "new", except that \typewriter{^X^P} 
+"old".  The default bindings use "new", except that \prockey{^X^P} 
 and the menu item use "old" if the UseStylePlainer preference is set 
-to "No".  \italic{FIXME:  what is the difference?}
+to "No".  \italic{FIXME:  what is the difference?}\
+Bound in all modes to:  \prockey{^X^P}, \prockey{Esc-'-Esc-p}\
+Menu:  \procmenu{Plainer}\procmenuwhere{~40}}
 
-Bound in all modes to:  \typewriter{^X^P}, \typewriter{Esc-'-Esc-p}
+\proclistentry{\procname{textview-plainest}(\proctype{object} \procparm{self})\
+Remove all enclosing styles.\
+Bound in all modes to:  \prockey{Esc-'-Esc-P}\
+Menu:  \procmenu{Plainest}\procmenuwhere{~41}}
 
-Menu:  Plainer~40}
+\proclistentry{\procname{textview-prev-screen}(\proctype{object} \procparm{self})\
+Move view backward to previous screen without moving cursor.\
+Bound in Emacs mode to:  \prockey{Esc-v}, 
+\prockey{Prior/PageUp} (\prockey{Esc-G})\
+Bound in VI command mode to:  \prockey{^B}, 
+\prockey{Prior/PageUp} (\prockey{Esc-G})\
+\prockey{^U}-argument can be set to repeat movement.}
 
-\bold{textview-plainest}(object \italic{self})
+\proclistentry{\procname{textview-next-screen}(\proctype{object} \procparm{self})\
+Move view forward to next screen without moving cursor.\
+Bound in Emacs mode to:  \prockey{^V}, 
+\prockey{Next/PageDown} (\prockey{Esc-E})\
+Bound in VI command mode to:  \prockey{^F}, 
+\prockey{Next/PageDown} (\prockey{Esc-E})\
+\prockey{^U}-argument can be set to repeat movement.}
 
-\leftindent{Remove all enclosing styles.
+\proclistentry{\procname{textview-glitch-down}(\proctype{object} \procparm{self})\
+Glitch screen down one line.  In other words, scroll view up 
+one line.\
+Bound in Emacs mode to:  \prockey{^Q}, \prockey{Esc-z}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-Bound in all modes to:  \typewriter{Esc-'-Esc-P}
+\proclistentry{\procname{textview-glitch-up}(\proctype{object} \procparm{self})\
+Glitch screen up one line.  In other words, scroll view down 
+one line.\
+Bound in Emacs mode to:   \prockey{^Z}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-Menu:  Plainest~41}
+\proclistentry{\procname{textview-twiddle-chars}(\proctype{object} \procparm{self})\
+Exchange previous two chars.\
+Bound in Emacs and VI command mode to:  \prockey{^T}}
 
-\bold{textview-prev-screen}(object \italic{self})
+\proclistentry{\procname{textview-kill-line}(\proctype{object} \procparm{self})\
+Kill rest of line.\
+Bound in Emacs mode to:  \prockey{^K}\
+Bound in VI command mode to:  \prockey{D}, \prockey{d-$}\
+\prockey{^U}-argument can be set to kill additional lines.}
 
-\leftindent{Move view backward to previous screen without moving cursor.
-
-Bound in Emacs mode to:  \typewriter{Esc-v}, 
-\typewriter{Prior/PageUp} (\typewriter{Esc-G})
-
-Bound in VI command mode to:  \typewriter{^B}, 
-\typewriter{Prior/PageUp} (\typewriter{Esc-G})
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-next-screen}(object \italic{self})
-
-\leftindent{Move view forward to next screen without moving cursor.
-
-Bound in Emacs mode to:  \typewriter{^V}, 
-\typewriter{Next/PageDown} (\typewriter{Esc-E})
-
-Bound in VI command mode to:  \typewriter{^F}, 
-\typewriter{Next/PageDown} (\typewriter{Esc-E})
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-glitch-down}(object \italic{self})
-
-\leftindent{Glitch screen down one line.  In other words, scroll view up 
-one line.
-
-Bound in Emacs mode to:  \typewriter{^Q}, \typewriter{Esc-z}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-glitch-up}(object \italic{self})
-
-\leftindent{Glitch screen up one line.  In other words, scroll view down 
-one line.
-
-Bound in Emacs mode to:   \typewriter{^Z}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-twiddle-chars}(object \italic{self})
-
-\leftindent{Exchange previous two chars.
-
-Bound in Emacs and VI command mode to:  \typewriter{^T}}
-
-\bold{textview-kill-line}(object \italic{self})
-
-\leftindent{Kill rest of line.
-
-Bound in Emacs mode to:  \typewriter{^K}
-
-Bound in VI command mode to:  \typewriter{D}, \typewriter{d-$}
-
-\typewriter{^U}-argument can be set to kill additional lines.}
-
-\bold{textview-search}(object \italic{self}, null | 0 | marker \italic{pat})
-
-\leftindent{Search forward for simple regular expression.  If the \italic{pat} 
+\proclistentry{\procname{textview-search}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
+Search forward for simple regular expression.  If the \procparm{pat} 
 argument is 0 or null, the pattern is prompted for.  Otherwise, 
-\italic{pat} is the search pattern.
-
-Bound in Emacs mode to:  \typewriter{^S}
-
-Menu in Emacs mode:  Search/Spell~1,Forward~10
-
-\typewriter{^U}-argument can be set to find Nth occurrence.
-
-Use the \italic{pat} argument or \bold{queueanswer} to provide the 
+\procparm{pat} is the search pattern.\
+Bound in Emacs mode to:  \prockey{^S}\
+Menu in Emacs mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Forward}\procmenuwhere{~10}\
+\prockey{^U}-argument can be set to find Nth occurrence.\
+Use the \procparm{pat} argument or \procname{QueueAnswer} to provide the 
 search pattern in Ness.}
 
-\bold{textview-reverse-search}(object \italic{self}, null | 0 | marker 
-\italic{pat})
-
-\leftindent{Search backward for simple regular expression.  If the \italic{pat} 
+\proclistentry{\procname{textview-reverse-search}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} 
+\procparm{pat})\
+Search backward for simple regular expression.  If the \procparm{pat} 
 argument is 0 or null, the pattern is prompted for.  Otherwise, 
-\italic{pat} is the search pattern.
-
-Bound in Emacs mode to:  \typewriter{^R}
-
-Menu in Emacs mode:  Search/Spell~1,Backward~11
-
-\typewriter{^U}-argument can be set to find Nth occurrence.
-
-Use the \italic{pat} argument or \bold{queueanswer} to provide the 
+\procparm{pat} is the search pattern.\
+Bound in Emacs mode to:  \prockey{^R}\
+Menu in Emacs mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Backward}\procmenuwhere{~11}\
+\prockey{^U}-argument can be set to find Nth occurrence.\
+Use the \procparm{pat} argument or \procname{QueueAnswer} to provide the 
 search pattern in Ness.}
 
-\bold{textview-search-again}(object \italic{self})
+\proclistentry{\procname{textview-search-again}(\proctype{object} \procparm{self})\
+Repeat last search by \procname{textview-search} or 
+\procname{textview-reverse-search}, in same direction.\
+Menu in Emacs mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Search Again}\procmenuwhere{~12}}
 
-\leftindent{Repeat last search by \bold{textview-search} or 
-\bold{textview-reverse-search}, in same direction.
-
-Menu in Emacs mode:  Search/Spell~1,Search Again~12}
-
-\bold{textview-insert-inset-here}(object \italic{self}, null | 0 | marker 
-\italic{dataobj})
-
-\leftindent{Add inset at this location.  The data object name is either the 
-\italic{dataobj} parameter, if not 0 or null, or is prompted for.  If 
-the \typewriter{^U} numeric argument is set to anything, the view name 
+\proclistentry{\procname{textview-insert-inset-here}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} 
+\procparm{dataobj})\
+Add inset at this location.  The data object name is either the 
+\procparm{dataobj} parameter, if not 0 or null, or is prompted for.  If 
+the \prockey{^U} numeric argument is set to anything, the view name 
 is prompted for as well; otherwise, the default view for the given data 
-object is used.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-Tab}
-
-Use the \italic{dataobj} argument or \bold{queueanswer} to provide the 
-data object class in Ness.  Use \bold{queueanswer} with the numeric 
+object is used.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-Tab}\
+Use the \procparm{dataobj} argument or \procname{QueueAnswer} to provide the 
+data object class in Ness.  Use \procname{QueueAnswer} with the numeric 
 argument set to set the view class.}
 
-\bold{textview-what-paragraph}(object \italic{self})
+\proclistentry{\procname{textview-what-paragraph}(\proctype{object} \procparm{self})\
+Print current paragraph number.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-N}}
 
-\leftindent{Print current paragraph number.
+\proclistentry{\procname{textview-show-styles}(\proctype{object} \procparm{self})\
+Show styles at dot.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-s}\
+Bound in all modes to:  \prockey{Esc-'-Esc-s}}
 
-Bound in Emacs and VI command mode to:  \typewriter{Esc-N}}
-
-\bold{textview-show-styles}(object \italic{self})
-
-\leftindent{Show styles at dot.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-s}
-
-Bound in all modes to:  \typewriter{Esc-'-Esc-s}}
-
-\bold{textview-goto-paragraph}(object \italic{self})
-
-\leftindent{Go to specific paragraph.  If the \typewriter{^U} numeric 
-argument is set, use that as the target.  Otherwise, prompt for it.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-n}
-
+\proclistentry{\procname{textview-goto-paragraph}(\proctype{object} \procparm{self})\
+Go to specific paragraph.  If the \prockey{^U} numeric 
+argument is set, use that as the target.  Otherwise, prompt for it.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-n}\
 In Ness, set the target using the numeric argument or 
-\bold{queueanswer}.}
+\procname{QueueAnswer}.}
 
-\bold{textview-query-replace}(object \italic{self})
-
-\leftindent{Query replace.
-
-Bound in Emacs and VI command mode to:  Esc-q
-
-Menu:  Search/Spell~1,Query Replace~20
-
+\proclistentry{\procname{textview-query-replace}(\proctype{object} \procparm{self})\
+Query replace.\
+Bound in Emacs and VI command mode to:  Esc-q\
+Menu:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Query Replace}\procmenuwhere{~20}\
 While it is possible to enter the pattern and replacment, 
-respectively, using \bold{queueanswer}, it is generally not possible to 
-know what keys to press (using \bold{dokeys}) without already knowing 
+respectively, using \procname{QueueAnswer}, it is generally not possible to 
+know what keys to press (using \procname{DoKeys}) without already knowing 
 the contents.  This should not be used in Ness.}
 
-\bold{textview-quote}(object \italic{self})
+\proclistentry{\procname{textview-quote}(\proctype{object} \procparm{self})\
+Uninterpreted insert of any char (other than 0-7) or 3-digit 
+octal code.\
+Bound in Emacs mode to:  \prockey{^X^Q}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{Uninterpreted insert of any char (other than 0-7) or 3-digit 
-octal code.
+\proclistentry{\procname{textview-kill-white-space}(\proctype{object} \procparm{self})\
+Delete spaces and tabs around the current pos.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-k}}
 
-Bound in Emacs mode to:  \typewriter{^X^Q}
+\proclistentry{\procname{textview-ctrl-at}(\proctype{object} \procparm{self})\
+Set a mark.\
+Bound in Emacs and VI command mode to:  \prockey{^@}}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{textview-backward-word}(\proctype{object} \procparm{self})\
+Move backward to beginning of word.\
+Bound in Emacs mode to:  \prockey{Esc-b}\
+Bound in VI command mode to:  \prockey{b}}
 
-\bold{textview-kill-white-space}(object \italic{self})
+\proclistentry{\procname{textview-delete-next-word}(\proctype{object} \procparm{self})\
+Delete the next word.\
+Bound in Emacs mode to:  \prockey{Esc-d}\
+Bound in VI command mode to:  \prockey{d-w}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-\leftindent{Delete spaces and tabs around the current pos.
+\proclistentry{\procname{textview-forward-word}(\proctype{object} \procparm{self})\
+Move forward to end of word.\
+Bound in Emacs mode to:  \prockey{Esc-f}\
+\prockey{^U}-argument can be set to repeat movement.}
 
-Bound in Emacs and VI command mode to:  \typewriter{Esc-k}}
+\proclistentry{\procname{textview-delete-previous-word}(\proctype{object} \procparm{self})\
+Delete the previous word.\
+Bound in Emacs mode to:  \prockey{Esc-h}, 
+\prockey{Esc-Backspace} (\prockey{Esc-^H}), \prockey{Esc-Del}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-\bold{textview-ctrl-at}(object \italic{self})
+\proclistentry{\procname{textview-end-of-text}(\proctype{object} \procparm{self})\
+Move to end of text.\
+Bound in Emacs mode to:  \prockey{Esc->}}
 
-\leftindent{Set a mark.
+\proclistentry{\procname{textview-beginning-of-text}(\proctype{object} \procparm{self})\
+Move to beginning of text.\
+Bound in Emacs mode to:  \prockey{Esc-<}}
 
-Bound in Emacs and VI command mode to:  \typewriter{^@}}
+\proclistentry{\procname{textview-toggle-character-case}(\proctype{object} \procparm{self})\
+Toggle the case of the character at the dot.\
+Bound in Emacs and VI command mode to:  \prockey{^^}}
 
-\bold{textview-backward-word}(object \italic{self})
+\proclistentry{\procname{textview-lowercase-word}(\proctype{object} \procparm{self})\
+Convert word (or region) to lower case.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-l}}
 
-\leftindent{Move backward to beginning of word.
+\proclistentry{\procname{textview-uppercase-word}(\proctype{object} \procparm{self})\
+Convert word (or region) to upper case.}
 
-Bound in Emacs mode to:  \typewriter{Esc-b}
+\proclistentry{\procname{textview-capitalize-word}(\proctype{object} \procparm{self})\
+Capitalize word (or all words within a region).}
 
-Bound in VI command mode to:  \typewriter{b}}
+\proclistentry{\procname{textview-cursor-to-top}(\proctype{object} \procparm{self})\
+Moves cursor to the beggining of the line currently at the top 
+of the screen.\
+Bound in Emacs mode to:  \prockey{Esc-,}\
+Bound in VI command mode to:  \prockey{H}}
 
-\bold{textview-delete-next-word}(object \italic{self})
+\proclistentry{\procname{textview-cursor-to-bottom}(\proctype{object} \procparm{self})\
+Moves cursor to the beggining of the line currently at the
+bottom of the screen.\
+Bound in Emacs mode to:  \prockey{Esc-.}\
+Bound in VI command mode to:  \prockey{L}}
 
-\leftindent{Delete the next word.
+\proclistentry{\procname{textview-cursor-to-center}(\proctype{object} \procparm{self})\
+Moves cursor to the beggining of the line currently at the 
+center of the screen.\
+Bound in Emacs mode to:  \prockey{Esc-/}\
+Bound in VI command mode to:  \prockey{M}}
 
-Bound in Emacs mode to:  \typewriter{Esc-d}
+\proclistentry{\procname{textview-change-template}(\proctype{object} \procparm{self})\
+Change to named template.\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenu{}\menuwhere{,}\procmenu{Add Template}\procmenuwhere{~31}\
+Use \procname{QueueAnswer} to provide template name in Ness.}
 
-Bound in VI command mode to:  \typewriter{d-w}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-forward-word}(object \italic{self})
-
-\leftindent{Move forward to end of word.
-
-Bound in Emacs mode to:  \typewriter{Esc-f}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-delete-previous-word}(object \italic{self})
-
-\leftindent{Delete the previous word.
-
-Bound in Emacs mode to:  \typewriter{Esc-h}, 
-\typewriter{Esc-Backspace} (\typewriter{Esc-^H}), \typewriter{Esc-Del}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-end-of-text}(object \italic{self})
-
-\leftindent{Move to end of text.
-
-Bound in Emacs mode to:  \typewriter{Esc->}}
-
-\bold{textview-beginning-of-text}(object \italic{self})
-
-\leftindent{Move to beginning of text.
-
-Bound in Emacs mode to:  \typewriter{Esc-<}}
-
-\bold{textview-toggle-character-case}(object \italic{self})
-
-\leftindent{Toggle the case of the character at the dot.
-
-Bound in Emacs and VI command mode to:  \typewriter{^^}}
-
-\bold{textview-lowercase-word}(object \italic{self})
-
-\leftindent{Convert word (or region) to lower case.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-l}}
-
-\bold{textview-uppercase-word}(object \italic{self})
-
-\leftindent{Convert word (or region) to upper case.}
-
-\bold{textview-capitalize-word}(object \italic{self})
-
-\leftindent{Capitalize word (or all words within a region).}
-
-\bold{textview-cursor-to-top}(object \italic{self})
-
-\leftindent{Moves cursor to the beggining of the line currently at the top 
-of the screen.
-
-Bound in Emacs mode to:  \typewriter{Esc-,}
-
-Bound in VI command mode to:  \typewriter{H}}
-
-\bold{textview-cursor-to-bottom}(object \italic{self})
-
-\leftindent{Moves cursor to the beggining of the line currently at the
-bottom of the screen.
-
-Bound in Emacs mode to:  \typewriter{Esc-.}
-
-Bound in VI command mode to:  \typewriter{L}}
-
-\bold{textview-cursor-to-center}(object \italic{self})
-
-\leftindent{Moves cursor to the beggining of the line currently at the 
-center of the screen.
-
-Bound in Emacs mode to:  \typewriter{Esc-/}
-
-Bound in VI command mode to:  \typewriter{M}}
-
-\bold{textview-change-template}(object \italic{self})
-
-\leftindent{Change to named template.
-
-Menu:  File~10,Add Template~31
-
-Use \bold{queueanswer} to provide template name in Ness.}
-
-\bold{textview-toggle-read-only}(object \italic{self})
-
-\leftindent{Change read only status of text object.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-~}
-
-\typewriter{^U}-argument can be set to 0 to force off and non-0 to 
+\proclistentry{\procname{textview-toggle-read-only}(\proctype{object} \procparm{self})\
+Change read only status of text object.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-~}\
+\prockey{^U}-argument can be set to 0 to force off and non-0 to 
 force on.}
 
-\bold{textview-toggle-expose-styles}(object \italic{self})
+\proclistentry{\procname{textview-toggle-expose-styles}(\proctype{object} \procparm{self})\
+Expose/hide style information.}
 
-\leftindent{Expose/hide style information.}
+\proclistentry{\procname{textview-edit-styles}(\proctype{object} \procparm{self})\
+Expose embedded style editor.}
 
-\bold{textview-edit-styles}(object \italic{self})
+\proclistentry{\procname{textview-insert-pagebreak}(\proctype{object} \procparm{self})\
+Add page break at this location.\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Insert Pagebreak}\procmenuwhere{~11}}
 
-\leftindent{Expose embedded style editor.}
+\proclistentry{\procname{textview-next-page}(\proctype{object} \procparm{self})\
+Frame text at next page break object\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Next Page}\procmenuwhere{~12}}
 
-\bold{textview-insert-pagebreak}(object \italic{self})
+\proclistentry{\procname{textview-last-page}(\proctype{object} \procparm{self})\
+Frame text at last page break object\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Previous Page}\procmenuwhere{~13}}
 
-\leftindent{Add page break at this location.
+\proclistentry{\procname{textview-insert-footnote}(\proctype{object} \procparm{self})\
+Add footnote at this location.\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Insert Footnote}\procmenuwhere{~20}}
 
-Menu:  Page~3,Insert Pagebreak~11}
+\proclistentry{\procname{textview-open-footnotes}(\proctype{object} \procparm{self})\
+Open all footnotes\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Open Footnotes}\procmenuwhere{~22}}
 
-\bold{textview-next-page}(object \italic{self})
+\proclistentry{\procname{textview-close-footnotes}(\proctype{object} \procparm{self})\
+Close all footnotes\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Close Footnotes}\procmenuwhere{~23}}
 
-\leftindent{Frame text at next page break object
+\proclistentry{\procname{textview-write-footnotes}(\proctype{object} \procparm{self})\
+Write all footnotes to \typewriter{/tmp/notes}.}
 
-Menu:  Page~3,Next Page~12}
+\proclistentry{\procname{textview-extend-backward-line}(\proctype{object} \procparm{self})\
+Extend the dot (selection) one line backward.\
+\prockey{^U}-argument can be set to add multiple lines.}
 
-\bold{textview-last-page}(object \italic{self})
+\proclistentry{\procname{textview-extend-backward-screen}(\proctype{object} \procparm{self})\
+Extend the dot (selection) one screen backward.\
+\prockey{^U}-argument can be set to add multiple screens.}
 
-\leftindent{Frame text at last page break object
+\proclistentry{\procname{textview-extend-backward}(\proctype{object} \procparm{self})\
+Extend the dot one char backward.\
+\prockey{^U}-argument can be set to add multiple characters.}
 
-Menu:  Page~3,Previous Page~13}
+\proclistentry{\procname{textview-extend-beginning}(\proctype{object} \procparm{self})\
+Extend the dot (selection) to beginning of text.}
 
-\bold{textview-insert-footnote}(object \italic{self})
+\proclistentry{\procname{textview-extend-end}(\proctype{object} \procparm{self})\
+Extend the dot (selection) to end of text.}
 
-\leftindent{Add footnote at this location.
+\proclistentry{\procname{textview-extend-forward-line}(\proctype{object} \procparm{self})\
+Extend the dot (selection) one line forward.\
+\prockey{^U}-argument can be set to add multiple lines.}
 
-Menu:  Page~3,Insert Footnote~20}
+\proclistentry{\procname{textview-extend-forward-screen}(\proctype{object} \procparm{self})\
+Extend the dot (selection) one screen forward.\
+\prockey{^U}-argument can be set to add multiple screens.}
 
-\bold{textview-open-footnotes}(object \italic{self})
+\proclistentry{\procname{textview-extend-forward}(\proctype{object} \procparm{self})\
+Extend the dot (selection) one char forward.\
+\prockey{^U}-argument can be set to add multiple characters.}
 
-\leftindent{Open all footnotes
+\proclistentry{\procname{textview-forward-beginning-of-whitespace-word}(\proctype{object}
+\procparm{self})\
+Move forward to beginning of whitespace word.}
 
-Menu:  Page~3,Open Footnotes~22}
+\proclistentry{\procname{textview-kill-next-word}(\proctype{object} \procparm{self})\
+Kill the next word, saving it on the kill ring.\
+\prockey{^U}-argument can be set to kill more words.}
 
-\bold{textview-close-footnotes}(object \italic{self})
+\proclistentry{\procname{textview-kill-previous-word}(\proctype{object} \procparm{self})\
+Kill the previous word, saving it on the kill ring.\
+\prockey{^U}-argument can be set to kill more words.}
 
-\leftindent{Close all footnotes
-
-Menu:  Page~3,Close Footnotes~23}
-
-\bold{textview-write-footnotes}(object \italic{self})
-
-\leftindent{Write all footnotes to \typewriter{/tmp/notes}.}
-
-\bold{textview-extend-backward-line}(object \italic{self})
-
-\leftindent{Extend the dot (selection) one line backward.
-
-\typewriter{^U}-argument can be set to add multiple lines.}
-
-\bold{textview-extend-backward-screen}(object \italic{self})
-
-\leftindent{Extend the dot (selection) one screen backward.
-
-\typewriter{^U}-argument can be set to add multiple screens.}
-
-\bold{textview-extend-backward}(object \italic{self})
-
-\leftindent{Extend the dot one char backward.
-
-\typewriter{^U}-argument can be set to add multiple characters.}
-
-\bold{textview-extend-beginning}(object \italic{self})
-
-\leftindent{Extend the dot (selection) to beginning of text.}
-
-\bold{textview-extend-end}(object \italic{self})
-
-\leftindent{Extend the dot (selection) to end of text.}
-
-\bold{textview-extend-forward-line}(object \italic{self})
-
-\leftindent{Extend the dot (selection) one line forward.
-
-\typewriter{^U}-argument can be set to add multiple lines.}
-
-\bold{textview-extend-forward-screen}(object \italic{self})
-
-\leftindent{Extend the dot (selection) one screen forward.
-
-\typewriter{^U}-argument can be set to add multiple screens.}
-
-\bold{textview-extend-forward}(object \italic{self})
-
-\leftindent{Extend the dot (selection) one char forward.
-
-\typewriter{^U}-argument can be set to add multiple characters.}
-
-\bold{textview-forward-beginning-of-whitespace-word}(object
-\italic{self})
-
-\leftindent{Move forward to beginning of whitespace word.}
-
-\bold{textview-kill-next-word}(object \italic{self})
-
-\leftindent{Kill the next word, saving it on the kill ring.
-
-\typewriter{^U}-argument can be set to kill more words.}
-
-\bold{textview-kill-previous-word}(object \italic{self})
-
-\leftindent{Kill the previous word, saving it on the kill ring.
-
-\typewriter{^U}-argument can be set to kill more words.}
-
-\bold{textview-MIT-kill-line}(object \italic{self})
-
-\leftindent{Kill rest of line, appending to last kill if last command was 
+\proclistentry{\procname{textview-MIT-kill-line}(\proctype{object} \procparm{self})\
+Kill rest of line, appending to last kill if last command was 
 a kill.}
 
-\bold{textview-my-soft-lf}(object \italic{self})
-
-\leftindent{Skip to next line/soft return and indent.
-
+\proclistentry{\procname{textview-my-soft-lf}(\proctype{object} \procparm{self})\
+Skip to next line/soft return and indent.\
 Bound in Emacs mode to:  Esc-j}
 
-\bold{textview-next-screen-move}(object \italic{self})
+\proclistentry{\procname{textview-next-screen-move}(\proctype{object} \procparm{self})\
+Move forward to next screen moving dot.}
 
-\leftindent{Move forward to next screen moving dot.}
+\proclistentry{\procname{textview-prev-screen-move}(\proctype{object} \procparm{self})\
+Move back to previous screen moving dot.}
 
-\bold{textview-prev-screen-move}(object \italic{self})
+\proclistentry{\procname{textview-noop}(\proctype{object} \procparm{self})\
+Do absolutely nothing.}
 
-\leftindent{Move back to previous screen moving dot.}
+\proclistentry{\procname{textview-insert-soft-newline}(\proctype{object} \procparm{self})\
+Insert a soft newline character.\
+Bound in Emacs mode to:  \prockey{Esc-Enter} (\prockey{Esc-^M})\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\bold{textview-noop}(object \italic{self})
+\proclistentry{\procname{textview-toggle-color-styles}(\proctype{object} \procparm{self})\
+Show/don't show color styles}
 
-\leftindent{Do absolutely nothing.}
-
-\bold{textview-insert-soft-newline}(object \italic{self})
-
-\leftindent{Insert a soft newline character.
-
-Bound in Emacs mode to:  \typewriter{Esc-Enter} (\typewriter{Esc-^M})
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{textview-toggle-color-styles}(object \italic{self})
-
-\leftindent{Show/don't show color styles}
-
-\bold{textview-toggle-editor}(object \italic{self})
-
-\leftindent{Switch to VI editor when in Emacs mode, or to the Emacs editor 
-when in VI mode.
-
-Bound in Emacs and VI command mode to:  \typewriter{Esc-t}
-
-Note that the key binding is disabled (bound to \bold{textview-noop} by 
+\proclistentry{\procname{textview-toggle-editor}(\proctype{object} \procparm{self})\
+Switch to VI editor when in Emacs mode, or to the Emacs editor 
+when in VI mode.\
+Bound in Emacs and VI command mode to:  \prockey{Esc-t}\
+Note that the key binding is disabled (bound to \procname{textview-noop} by 
 default) if the preference AllowKeyToggleToVIMode is not Yes.}
 
-\bold{textview-toggle-line-display}(object \italic{self}, null | 0 | 
-marker \italic{set})
-
-\leftindent{Show/don't show line display.  If \italic{set} is "on", enable, 
+\proclistentry{\procname{textview-toggle-line-display}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | 
+\proctype{marker} \procparm{set})\
+Show/don't show line display.  If \procparm{set} is "on", enable, 
 and if "off", disable (no other string values may be used).  Otherwise, 
-if \typewriter{^U} numeric argument is 0, disable, and if anything 
+if \prockey{^U} numeric argument is 0, disable, and if anything 
 else explicit, enable.  Otherwise, toggle.}
 
-\bold{textview-balance}(object \italic{self})
+\proclistentry{\procname{textview-balance}(\proctype{object} \procparm{self})\
+Balance parentheses, brackets, or braces.\
+Bound in Emacs mode to:  \prockey{Esc-m}\
+Bound in VI command mode to:  \prockey{%}}
 
-\leftindent{Balance parentheses, brackets, or braces.
-
-Bound in Emacs mode to:  \typewriter{Esc-m}
-
-Bound in VI command mode to:  \typewriter{%}}
-
-\bold{textview-down-insert-environment}(object \italic{self})
-
-\leftindent{Move down environment that will be used for inserting characters.
-
+\proclistentry{\procname{textview-down-insert-environment}(\proctype{object} \procparm{self})\
+Move down environment that will be used for inserting characters.\
 Bound in all modes to:  
-\typewriter{Esc-'-Down} (\typewriter{Esc-'-Esc-B}),
-\typewriter{Esc-'-Esc-d}}
+\prockey{Esc-'-Down} (\prockey{Esc-'-Esc-B}),
+\prockey{Esc-'-Esc-d}}
 
-\bold{textview-insert-environment}(object \italic{self}, null | 0 | 
-marker \italic{style})
-
-\leftindent{Prompt for a style to use for inserting characters.  If 
-\italic{style} is not 0 or null, and is not an empty string (""), it 
-is used for the style instead of prompting.
-
-Bound in all modes to:  \typewriter{Esc-'-Esc-l}
-
-Bound with \italic{style} in all modes to:  \typewriter{Esc-'-Esc-!} 
+\proclistentry{\procname{textview-insert-environment}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | 
+\proctype{marker} \procparm{style})\
+Prompt for a style to use for inserting characters.  If 
+\procparm{style} is not 0 or null, and is not an empty string (""), it 
+is used for the style instead of prompting.\
+Bound in all modes to:  \prockey{Esc-'-Esc-l}\
+Bound with \procparm{style} in all modes to:  \prockey{Esc-'-Esc-!} 
 ("subscript")
-, \typewriter{Esc-'-Esc-+} ("bigger") 
-, \typewriter{Esc-'-Esc--} ("smaller") 
-, \typewriter{Esc-'-Esc-<} ("flushleft")
-, \typewriter{Esc-'-Esc-=} ("center")
-, \typewriter{Esc-'-Esc->} ("flushright")
-, \typewriter{Esc-'-Esc-Tab} ("leftindent")
-, \typewriter{Esc-'-Esc-^} ("superscript")
-, \typewriter{Esc-'-Esc-_} ("underline")
-, \typewriter{Esc-'-Esc-b} ("bold")
-, \typewriter{Esc-'-Esc-i} ("italic")
-, \typewriter{Esc-'-Esc-t} ("typewriter")
-
-Use the \italic{style} argument or \bold{queueanswer} to provide the 
+, \prockey{Esc-'-Esc-+} ("bigger") 
+, \prockey{Esc-'-Esc--} ("smaller") 
+, \prockey{Esc-'-Esc-<} ("flushleft")
+, \prockey{Esc-'-Esc-=} ("center")
+, \prockey{Esc-'-Esc->} ("flushright")
+, \prockey{Esc-'-Esc-Tab} ("leftindent")
+, \prockey{Esc-'-Esc-^} ("superscript")
+, \prockey{Esc-'-Esc-_} ("underline")
+, \prockey{Esc-'-Esc-b} ("bold")
+, \prockey{Esc-'-Esc-i} ("italic")
+, \prockey{Esc-'-Esc-t} ("typewriter")\
+Use the \procparm{style} argument or \procname{QueueAnswer} to provide the 
 style name in Ness.}
 
-\bold{textview-left-insert-environment}(object \italic{self})
-
-\leftindent{Move to the left the environment that will be used for
-inserting characters.
-
-Bound in all modes to:  \typewriter{Esc-'-Left} (\typewriter{Esc-'-Esc-D})}
-
-\bold{textview-right-insert-environment}(object \italic{self})
-
-\leftindent{Move to the right the environment that will be used for
-inserting characters.
-
-Bound in all modes to:  \typewriter{Esc-'-Right} (\typewriter{Esc-'-Esc-C})}
-
-\bold{textview-show-insert-environment}(object \italic{self})
-
-\leftindent{Show the environment that will be used for inserting characters.
-
-Bound in all modes to:  \typewriter{Esc-'-Esc-?}}
-
-\bold{textview-up-insert-environment}(object \italic{self})
-
-\leftindent{Move up environment that will be used for inserting characters.
-
-Bound in all modes to:  \typewriter{Esc-'-Up} (\typewriter{Esc-'-Esc-A}), 
-\typewriter{Esc-'-Esc-u}}
-
-\bold{textview-backward-whitespace-word}(object \italic{self})
-
-\leftindent{Move backward to beginning of word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{B}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-beginning-of-first-word}(object \italic{self})
-
-\leftindent{Move to beginning of first word on current line.
-
-Bound in VI command mode to:  \typewriter{^}}
-
-\bold{textview-beginning-of-next-line}(object \italic{self})
-
-\leftindent{Move to beginning of next line.
-
-Bound in VI command mode to:  \typewriter{+}, \typewriter{Enter} 
-(\typewriter{^M})
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-beginning-of-previous-line}(object \italic{self})
-
-\leftindent{Move to beginning of previous line.
-
-Bound in VI command mode to:  \typewriter{-}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-change-line}(object \italic{self})
-
-\leftindent{Replace current line.
-
-Bound in VI command mode to:  \typewriter{c-c}}
-
-\bold{textview-change-rest-of-line}(object \italic{self})
-
-\leftindent{Replace rest of current line.
-
-Bound in VI command mode to:  \typewriter{C}, \typewriter{S}}
-
-\bold{textview-change-selection}(object \italic{self})
-
-\leftindent{Replace current selection.
-
-Bound in VI command mode to:  \typewriter{c-s}}
-
-\bold{textview-change-word}(object \italic{self})
-
-\leftindent{Replace current word.
-
-Bound in VI command mode to:  \typewriter{c-w}}
-
-\bold{textview-delete-backward-word}(object \italic{self})
-
-\leftindent{Delete the previous word.
-
-Bound in VI command mode to:  \typewriter{d-b}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-delete-end-of-whitespace-word}(object \italic{self})
-
-\leftindent{Delete end of word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{d-E}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-delete-end-of-word}(object \italic{self})
-
-\leftindent{Delete end of word.
-
-Bound in VI command mode to:  \typewriter{d-e}
-
-\typewriter{^U}-argument can be set to continue deletion to following words.}
-
-\bold{textview-delete-next-whitespace-word}(object \italic{self})
-
-\leftindent{Delete the next word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{d-W}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-delete-previous-whitespace-word}(object \italic{self})
-
-\leftindent{Delete the previous word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{d-B}
-
-\typewriter{^U}-argument can be set to repeat deletion.}
-
-\bold{textview-down}(object \italic{self})
-
-\leftindent{Move down.
-
-Bound in VI command mode to:  \typewriter{^D}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-end-of-whitespace-word}(object \italic{self})
-
-\leftindent{Move forward to end of word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{E}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-end-of-word}(object \italic{self})
-
-\leftindent{Move forward to end of word.
-
-Bound in VI command mode to:  \typewriter{e}}
-
-\bold{textview-forward-beginning-of-word}(object \italic{self})
-
-\leftindent{Move forward to beginning of word.
-
-Bound in VI command mode to:  \typewriter{w}}
-
-\bold{textview-forward-whitespace-word}(object \italic{self})
-
-\leftindent{Move forward to beginning of word separated space.
-
-Bound in VI command mode to:  \typewriter{W}
-
-\typewriter{^U}-argument can be set to repeat movement.}
-
-\bold{textview-go-to}(object \italic{self})
-
-\leftindent{Go to line number.
-
-Bound in VI command mode to:  \typewriter{G}, \typewriter{g}
-
-\typewriter{^U}-argument is the line to go to.  If unset, jump to end 
+\proclistentry{\procname{textview-left-insert-environment}(\proctype{object} \procparm{self})\
+Move to the left the environment that will be used for
+inserting characters.\
+Bound in all modes to:  \prockey{Esc-'-Left} (\prockey{Esc-'-Esc-D})}
+
+\proclistentry{\procname{textview-right-insert-environment}(\proctype{object} \procparm{self})\
+Move to the right the environment that will be used for
+inserting characters.\
+Bound in all modes to:  \prockey{Esc-'-Right} (\prockey{Esc-'-Esc-C})}
+
+\proclistentry{\procname{textview-show-insert-environment}(\proctype{object} \procparm{self})\
+Show the environment that will be used for inserting characters.\
+Bound in all modes to:  \prockey{Esc-'-Esc-?}}
+
+\proclistentry{\procname{textview-up-insert-environment}(\proctype{object} \procparm{self})\
+Move up environment that will be used for inserting characters.\
+Bound in all modes to:  \prockey{Esc-'-Up} (\prockey{Esc-'-Esc-A}), 
+\prockey{Esc-'-Esc-u}}
+
+\proclistentry{\procname{textview-backward-whitespace-word}(\proctype{object} \procparm{self})\
+Move backward to beginning of word separated by whitespace.\
+Bound in VI command mode to:  \prockey{B}\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-beginning-of-first-word}(\proctype{object} \procparm{self})\
+Move to beginning of first word on current line.\
+Bound in VI command mode to:  \prockey{^}}
+
+\proclistentry{\procname{textview-beginning-of-next-line}(\proctype{object} \procparm{self})\
+Move to beginning of next line.\
+Bound in VI command mode to:  \prockey{+}, \prockey{Enter} 
+(\prockey{^M})\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-beginning-of-previous-line}(\proctype{object} \procparm{self})\
+Move to beginning of previous line.\
+Bound in VI command mode to:  \prockey{-}\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-change-line}(\proctype{object} \procparm{self})\
+Replace current line.\
+Bound in VI command mode to:  \prockey{c-c}}
+
+\proclistentry{\procname{textview-change-rest-of-line}(\proctype{object} \procparm{self})\
+Replace rest of current line.\
+Bound in VI command mode to:  \prockey{C}, \prockey{S}}
+
+\proclistentry{\procname{textview-change-selection}(\proctype{object} \procparm{self})\
+Replace current selection.\
+Bound in VI command mode to:  \prockey{c-s}}
+
+\proclistentry{\procname{textview-change-word}(\proctype{object} \procparm{self})\
+Replace current word.\
+Bound in VI command mode to:  \prockey{c-w}}
+
+\proclistentry{\procname{textview-delete-backward-word}(\proctype{object} \procparm{self})\
+Delete the previous word.\
+Bound in VI command mode to:  \prockey{d-b}\
+\prockey{^U}-argument can be set to repeat deletion.}
+
+\proclistentry{\procname{textview-delete-end-of-whitespace-word}(\proctype{object} \procparm{self})\
+Delete end of word separated by whitespace.\
+Bound in VI command mode to:  \prockey{d-E}\
+\prockey{^U}-argument can be set to repeat deletion.}
+
+\proclistentry{\procname{textview-delete-end-of-word}(\proctype{object} \procparm{self})\
+Delete end of word.\
+Bound in VI command mode to:  \prockey{d-e}\
+\prockey{^U}-argument can be set to continue deletion to following words.}
+
+\proclistentry{\procname{textview-delete-next-whitespace-word}(\proctype{object} \procparm{self})\
+Delete the next word separated by whitespace.\
+Bound in VI command mode to:  \prockey{d-W}\
+\prockey{^U}-argument can be set to repeat deletion.}
+
+\proclistentry{\procname{textview-delete-previous-whitespace-word}(\proctype{object} \procparm{self})\
+Delete the previous word separated by whitespace.\
+Bound in VI command mode to:  \prockey{d-B}\
+\prockey{^U}-argument can be set to repeat deletion.}
+
+\proclistentry{\procname{textview-down}(\proctype{object} \procparm{self})\
+Move down.\
+Bound in VI command mode to:  \prockey{^D}\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-end-of-whitespace-word}(\proctype{object} \procparm{self})\
+Move forward to end of word separated by whitespace.\
+Bound in VI command mode to:  \prockey{E}\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-end-of-word}(\proctype{object} \procparm{self})\
+Move forward to end of word.\
+Bound in VI command mode to:  \prockey{e}}
+
+\proclistentry{\procname{textview-forward-beginning-of-word}(\proctype{object} \procparm{self})\
+Move forward to beginning of word.\
+Bound in VI command mode to:  \prockey{w}}
+
+\proclistentry{\procname{textview-forward-whitespace-word}(\proctype{object} \procparm{self})\
+Move forward to beginning of word separated space.\
+Bound in VI command mode to:  \prockey{W}\
+\prockey{^U}-argument can be set to repeat movement.}
+
+\proclistentry{\procname{textview-go-to}(\proctype{object} \procparm{self})\
+Go to line number.\
+Bound in VI command mode to:  \prockey{G}, \prockey{g}\
+\prockey{^U}-argument is the line to go to.  If unset, jump to end 
 of file.}
 
-\bold{textview-input-mode}(object \italic{self})
+\proclistentry{\procname{textview-input-mode}(\proctype{object} \procparm{self})\
+Switch to VI insert mode.\
+Bound in VI command mode to:  \prockey{a}, \prockey{i}}
 
-\leftindent{Switch to VI insert mode.
+\proclistentry{\procname{textview-insert-at-beginning}(\proctype{object} \procparm{self})\
+Insert at beginning of current line.\
+Bound in VI command mode to:  \prockey{I}}
 
-Bound in VI command mode to:  \typewriter{a}, \typewriter{i}}
+\proclistentry{\procname{textview-insert-at-end}(\proctype{object} \procparm{self})\
+Insert at end of current line.\
+Bound in VI command mode to:  \prockey{A}}
 
-\bold{textview-insert-at-beginning}(object \italic{self})
+\proclistentry{\procname{textview-join}(\proctype{object} \procparm{self})\
+Join current and next line.\
+Bound in VI command mode to:  \prockey{J}\
+\prockey{^U}-argument can be set to join more lines.}
 
-\leftindent{Insert at beginning of current line.
+\proclistentry{\procname{textview-open-line-after}(\proctype{object} \procparm{self})\
+Insert a new line after the current line.\
+Bound in VI command mode to:  \prockey{o}}
 
-Bound in VI command mode to:  \typewriter{I}}
+\proclistentry{\procname{textview-open-line-before}(\proctype{object} \procparm{self})\
+Insert a new line before the current line.\
+Bound in VI command mode to:  \prockey{O}}
 
-\bold{textview-insert-at-end}(object \italic{self})
+\proclistentry{\procname{textview-put-after}(\proctype{object} \procparm{self})\
+Put text back from kill-buffer, after current line.\
+Bound in VI command mode to:  \prockey{p}}
 
-\leftindent{Insert at end of current line.
+\proclistentry{\procname{textview-put-before}(\proctype{object} \procparm{self})\
+Put text back from kill-buffer, before current line.\
+Bound in VI command mode to:  \prockey{P}}
 
-Bound in VI command mode to:  \typewriter{A}}
+\proclistentry{\procname{textview-replace-char}(\proctype{object} \procparm{self})\
+Replace character after cursor.\
+Bound in VI command mode to:  \prockey{r}}
 
-\bold{textview-join}(object \italic{self})
+\proclistentry{\procname{textview-shift-down}(\proctype{object} \procparm{self})\
+Shift display down one line.\
+Bound in VI command mode to:  \prockey{^Y}}
 
-\leftindent{Join current and next line.
+\proclistentry{\procname{textview-shift-home}(\proctype{object} \procparm{self})\
+Shift the view horizontally home.}
 
-Bound in VI command mode to:  \typewriter{J}
+\proclistentry{\procname{textview-shift-left}(\proctype{object} \procparm{self})\
+Shift the view horizontally left.}
 
-\typewriter{^U}-argument can be set to join more lines.}
+\proclistentry{\procname{textview-shift-right}(\proctype{object} \procparm{self})\
+Shift the view horizontally right.}
 
-\bold{textview-open-line-after}(object \italic{self})
+\proclistentry{\procname{textview-shift-up}(\proctype{object} \procparm{self})\
+Shift display up one line.\
+Bound in VI command mode to:  \prockey{^E}}
 
-\leftindent{Insert a new line after the current line.
+\proclistentry{\procname{textview-substitute-char}(\proctype{object} \procparm{self})\
+Insert over character after cursor.\
+Bound in VI command mode to:  \prockey{s}}
 
-Bound in VI command mode to:  \typewriter{o}}
+\proclistentry{\procname{textview-toggle-mode}(\proctype{object} \procparm{self})\
+Switch to VI command mode."\
+Bound in VI insert mode to:  \prockey{Esc-Esc}, \prockey{^E}}
 
-\bold{textview-open-line-before}(object \italic{self})
+\proclistentry{\procname{textview-up}(\proctype{object} \procparm{self})\
+Move up.\
+Bound in VI command mode to:  \prockey{^U}\
+\prockey{^U}-argument can be set to repeat movement.  Note that this 
+command's binding overrides the default \prockey{^U}; 
+\prockey{^U}-arguments in VI command mode are entered using 
+\procname{textview-digit} (bound to the number keys by default)}
 
-\leftindent{Insert a new line before the current line.
-
-Bound in VI command mode to:  \typewriter{O}}
-
-\bold{textview-put-after}(object \italic{self})
-
-\leftindent{Put text back from kill-buffer, after current line.
-
-Bound in VI command mode to:  \typewriter{p}}
-
-\bold{textview-put-before}(object \italic{self})
-
-\leftindent{Put text back from kill-buffer, before current line.
-
-Bound in VI command mode to:  \typewriter{P}}
-
-\bold{textview-replace-char}(object \italic{self})
-
-\leftindent{Replace character after cursor.
-
-Bound in VI command mode to:  \typewriter{r}}
-
-\bold{textview-shift-down}(object \italic{self})
-
-\leftindent{Shift display down one line.
-
-Bound in VI command mode to:  \typewriter{^Y}}
-
-\bold{textview-shift-home}(object \italic{self})
-
-\leftindent{Shift the view horizontally home.}
-
-\bold{textview-shift-left}(object \italic{self})
-
-\leftindent{Shift the view horizontally left.}
-
-\bold{textview-shift-right}(object \italic{self})
-
-\leftindent{Shift the view horizontally right.}
-
-\bold{textview-shift-up}(object \italic{self})
-
-\leftindent{Shift display up one line.
-
-Bound in VI command mode to:  \typewriter{^E}}
-
-\bold{textview-substitute-char}(object \italic{self})
-
-\leftindent{Insert over character after cursor.
-
-Bound in VI command mode to:  \typewriter{s}}
-
-\bold{textview-toggle-mode}(object \italic{self})
-
-\leftindent{Switch to VI command mode."
-
-Bound in VI insert mode to:  \typewriter{Esc-Esc}, \typewriter{^E}}
-
-\bold{textview-up}(object \italic{self})
-
-\leftindent{Move up.
-
-Bound in VI command mode to:  \typewriter{^U}
-
-\typewriter{^U}-argument can be set to repeat movement.  Note that this 
-command's binding overrides the default \typewriter{^U}; 
-\typewriter{^U}-arguments in VI command mode are entered using 
-\bold{textview-digit} (bound to the number keys by default)}
-
-\bold{textview-vi-command}(object \italic{self})
-
-\leftindent{Execute a vi command via commmand line.  This is mostly a 
+\proclistentry{\procname{textview-vi-command}(\proctype{object} \procparm{self})\
+Execute a vi command via commmand line.  This is mostly a 
 dummy function that takes one keypress and provides some helpful 
-errors, and supports only one command:  \typewriter{r} 
-(\bold{textview-insert-file}).
+errors, and supports only one command:  \prockey{r} 
+(\procname{textview-insert-file}).\
+Bound in VI command mode to:  \prockey{:}}
 
-Bound in VI command mode to:  \typewriter{:}}
+\proclistentry{\procname{textview-vi-delete-line}(\proctype{object} \procparm{self})\
+Delete line.\
+Bound in VI command mode to:  \prockey{d-d}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-\bold{textview-vi-delete-line}(object \italic{self})
+\proclistentry{\procname{textview-vi-delete-next-character}(\proctype{object} \procparm{self})\
+Delete the next character.\
+Bound in VI command mode to:  \prockey{x}\
+\prockey{^U}-argument can be set to repeat deletion.}
 
-\leftindent{Delete line.
+\proclistentry{\procname{textview-vi-yank-line}(\proctype{object} \procparm{self})\
+Yank line.\
+Bound in VI command mode to:  \prockey{y-y}, \prockey{Y}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-Bound in VI command mode to:  \typewriter{d-d}
+\proclistentry{\procname{textview-yank-end-of-whitespace-word}(\proctype{object} \procparm{self})\
+Yank end of word separated by whitespace.\
+Bound in VI command mode to:  \prockey{y-E}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-\typewriter{^U}-argument can be set to repeat deletion.}
+\proclistentry{\procname{textview-yank-end-of-word}(\proctype{object} \procparm{self})\
+Yank end of word.\
+Bound in VI command mode to:  \prockey{y-e}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-\bold{textview-vi-delete-next-character}(object \italic{self})
+\proclistentry{\procname{textview-yank-line}(\proctype{object} \procparm{self})\
+Yank rest of line.\
+Bound in VI command mode to:  \prockey{y-$}}
 
-\leftindent{Delete the next character.
+\proclistentry{\procname{textview-yank-next-whitespace-word}(\proctype{object} \procparm{self})\
+Yank the next word separated by whitespace.\
+Bound in VI command mode to:  \prockey{y-W}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-Bound in VI command mode to:  \typewriter{x}
+\proclistentry{\procname{textview-yank-next-word}(\proctype{object} \procparm{self})\
+Yank the next word.\
+Bound in VI command mode to:  \prockey{y-w}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-\typewriter{^U}-argument can be set to repeat deletion.}
+\proclistentry{\procname{textview-yank-previous-whitespace-word}(\proctype{object} \procparm{self})\
+Yank the previous word separated by whitespace.\
+Bound in VI command mode to:  \prockey{y-B}\
+\prockey{^U}-argument can be set to repeat yank.}
 
-\bold{textview-vi-yank-line}(object \italic{self})
-
-\leftindent{Yank line.
-
-Bound in VI command mode to:  \typewriter{y-y}, \typewriter{Y}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-end-of-whitespace-word}(object \italic{self})
-
-\leftindent{Yank end of word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{y-E}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-end-of-word}(object \italic{self})
-
-\leftindent{Yank end of word.
-
-Bound in VI command mode to:  \typewriter{y-e}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-line}(object \italic{self})
-
-\leftindent{Yank rest of line.
-
-Bound in VI command mode to:  \typewriter{y-$}}
-
-\bold{textview-yank-next-whitespace-word}(object \italic{self})
-
-\leftindent{Yank the next word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{y-W}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-next-word}(object \italic{self})
-
-\leftindent{Yank the next word.
-
-Bound in VI command mode to:  \typewriter{y-w}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-previous-whitespace-word}(object \italic{self})
-
-\leftindent{Yank the previous word separated by whitespace.
-
-Bound in VI command mode to:  \typewriter{y-B}
-
-\typewriter{^U}-argument can be set to repeat yank.}
-
-\bold{textview-yank-previous-word}(object \italic{self})
-
-\leftindent{Yank the previous word.
-
-Bound in VI command mode to:  \typewriter{y-b}
-
-\typewriter{^U}-argument can be set to repeat yank.}
+\proclistentry{\procname{textview-yank-previous-word}(\proctype{object} \procparm{self})\
+Yank the previous word.\
+Bound in VI command mode to:  \prockey{y-b}\
+\prockey{^U}-argument can be set to repeat yank.}
 
 
 \section{tindex}
 
 
-\bold{tindex-print}(object \italic{textview}, integer \italic{psmode})
-
-\leftindent{print index.  If \italic{psmode} is non-0, use PostScript; 
+\proclistentry{\procname{tindex-print}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{psmode})\
+print index.  If \procparm{psmode} is non-0, use PostScript; 
 otherwise, Troff.}
 
-\bold{tindex-write-index-file}(object \italic{textview})
+\proclistentry{\procname{tindex-write-index-file}(\proctype{object} \procparm{textview})\
+write a list of index terms\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\leftindent{write a list of index terms
+\proclistentry{\procname{tindex-read-index-file}(\proctype{object} \procparm{textview})\
+read a list of index terms\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
-Use \bold{queueanswer} to provide file name in Ness.}
+\proclistentry{\procname{tindex-index-italic}(\proctype{object} \procparm{textview})\
+make the index entries italic}
 
-\bold{tindex-read-index-file}(object \italic{textview})
+\proclistentry{\procname{tindex-index-plain}(\proctype{object} \procparm{textview})\
+make the index entries plain}
 
-\leftindent{read a list of index terms
+\proclistentry{\procname{tindex-expose-inv-index}(\proctype{object} \procparm{textview})\
+Expose the invisible index entries}
 
-Use \bold{queueanswer} to provide file name in Ness.}
+\proclistentry{\procname{tindex-hide-inv-index}(\proctype{object} \procparm{textview})\
+Hide the invisible index entries}
 
-\bold{tindex-index-italic}(object \italic{textview})
+\proclistentry{\procname{tindex-index-term}(\proctype{object} \procparm{textview})\
+index all instances of a term\
+Use \procname{QueueAnswer} to provide term in Ness.}
 
-\leftindent{make the index entries italic}
-
-\bold{tindex-index-plain}(object \italic{textview})
-
-\leftindent{make the index entries plain}
-
-\bold{tindex-expose-inv-index}(object \italic{textview})
-
-\leftindent{Expose the invisible index entries}
-
-\bold{tindex-hide-inv-index}(object \italic{textview})
-
-\leftindent{Hide the invisible index entries}
-
-\bold{tindex-index-term}(object \italic{textview})
-
-\leftindent{index all instances of a term
-
-Use \bold{queueanswer} to provide term in Ness.}
-
-\bold{tindex-preview}(object \italic{textview}, integer \italic{psmode})
-
-\leftindent{preview index.  If \italic{psmode} is non-0, use PostScript; 
+\proclistentry{\procname{tindex-preview}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{psmode})\
+preview index.  If \procparm{psmode} is non-0, use PostScript; 
 otherwise, Troff.}
 
 
 \section{headrtv}
 
 
-\bold{headrtv-newline}(object \italic{self})
-
-\leftindent{Goes to next section of the header/footer.
-
-Bound to:  \typewriter{^J}, \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{headrtv-newline}(\proctype{object} \procparm{self})\
+Goes to next section of the header/footer.\
+Bound to:  \prockey{^J}, \prockey{Enter} (\prockey{^M})}
 
 
 \section{bpv}
 
 
-\bold{bpv-pagenum-clear}(object \italic{self})
+\proclistentry{\procname{bpv-pagenum-clear}(\proctype{object} \procparm{self})\
+Clear the new page number after this page break.\
+Menu:  \procmenu{Pagebreak}\procmenuwhere{~5}\procmenu{}\menuwhere{,}\procmenu{Clear Page Number}\procmenuwhere{~11}}
 
-\leftindent{Clear the new page number after this page break.
-
-Menu:  Pagebreak~5,Clear Page Number~11}
-
-\bold{bpv-pagenum-set}(object \italic{self})
-
-\leftindent{Set the new page number after this page break.
-
-Menu:  Pagebreak~5,Set Page Number~10
-
-Use \bold{queueanswer} to provide page number in Ness.}
+\proclistentry{\procname{bpv-pagenum-set}(\proctype{object} \procparm{self})\
+Set the new page number after this page break.\
+Menu:  \procmenu{Pagebreak}\procmenuwhere{~5}\procmenu{}\menuwhere{,}\procmenu{Set Page Number}\procmenuwhere{~10}\
+Use \procname{QueueAnswer} to provide page number in Ness.}
 
 
 \section{spell}
 
 
-\bold{spell-check-document}(object \italic{textview})
-
-\leftindent{Checks spelling from the caret on.
-
-Menu:  Search/Spell~1,Check Spelling~30
-
+\proclistentry{\procname{spell-check-document}(\proctype{object} \procparm{textview})\
+Checks spelling from the caret on.\
+Menu:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Check Spelling}\procmenuwhere{~30}\
 Spell checking is an inherently interactive process; do not use from Ness.}
 
 
 \section{dynsearch}
 
 
-\bold{dynsearch-search-forward}(object \italic{textview})
-
-\leftindent{Search forward for a pattern; uses selection.  If the 
-selection is empty, pattern is prompted for.
-
-Bound in VI command mode to:  \typewriter{/}
-
-Menu in VI command mode:  Search/Spell~1,Forward~10
-
-\typewriter{^U}-argument can be set to find Nth occurrence.
-
-Use \bold{queueanswer} to provide search string in Ness when selection 
+\proclistentry{\procname{dynsearch-search-forward}(\proctype{object} \procparm{textview})\
+Search forward for a pattern; uses selection.  If the 
+selection is empty, pattern is prompted for.\
+Bound in VI command mode to:  \prockey{/}\
+Menu in VI command mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Forward}\procmenuwhere{~10}\
+\prockey{^U}-argument can be set to find Nth occurrence.\
+Use \procname{QueueAnswer} to provide search string in Ness when selection 
 is empty.}
 
-\bold{dynsearch-search-reverse}(object \italic{textview})
-
-\leftindent{Search backwards for a pattern; uses selection.  If the 
-selection is empty, pattern is prompted for.
-
-Bound in VI command mode to:  \typewriter{?}
-
-Menu in VI command mode:  Search/Spell~1,Backward~11
-
-\typewriter{^U}-argument can be set to find Nth occurrence.
-
-Use \bold{queueanswer} to provide search string in Ness when selection 
+\proclistentry{\procname{dynsearch-search-reverse}(\proctype{object} \procparm{textview})\
+Search backwards for a pattern; uses selection.  If the 
+selection is empty, pattern is prompted for.\
+Bound in VI command mode to:  \prockey{?}\
+Menu in VI command mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Backward}\procmenuwhere{~11}\
+\prockey{^U}-argument can be set to find Nth occurrence.\
+Use \procname{QueueAnswer} to provide search string in Ness when selection 
 is empty.}
 
-\bold{dynsearch-search-again-opposite}(object \italic{textview})
+\proclistentry{\procname{dynsearch-search-again-opposite}(\proctype{object} \procparm{textview})\
+Search again in the opposite direction, using the last search pattern.\
+Bound in VI command mode to: \prockey{N}}
 
-\leftindent{Search again in the opposite direction, using the last search pattern.
-
-Bound in VI command mode to: \typewriter{N}}
-
-\bold{dynsearch-search-again}(object \italic{textview})
-
-\leftindent{Search again in the same direction, using the last search pattern.
-
-Bound in VI command mode to: \typewriter{n}
-
-Menu in VI command mode:  Search/Spell~1,Search Again~12}
+\proclistentry{\procname{dynsearch-search-again}(\proctype{object} \procparm{textview})\
+Search again in the same direction, using the last search pattern.\
+Bound in VI command mode to: \prockey{n}\
+Menu in VI command mode:  \procmenu{Search/Spell}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Search Again}\procmenuwhere{~12}}
 
 
 \section{contentv}
 
 
-\bold{contentv-make-window}(object \italic{textview})
-
-\leftindent{Make a table of contents window
-
-Menu:  Page~3,Table of Contents~30}
+\proclistentry{\procname{contentv-make-window}(\proctype{object} \procparm{textview})\
+Make a table of contents window\
+Menu:  \procmenu{Page}\procmenuwhere{~3}\procmenu{}\menuwhere{,}\procmenu{Table of Contents}\procmenuwhere{~30}}
 
 
-\bold{contentv-delete-window}(object \italic{self})
+\proclistentry{\procname{contentv-delete-window}(\proctype{object} \procparm{self})\
+destroy the table of content\
+Menu:  \procmenu{Delete Window}\procmenuwhere{~89}}
 
-\leftindent{destroy the table of content
+\proclistentry{\procname{contentv-destroy}(\proctype{object} \procparm{self})\
+destroy the table of content\
+Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-Menu:  Delete Window~89}
+\proclistentry{\procname{contentv-enumerate}(\proctype{object} \procparm{self})\
+Enumerate the headings.  If there is a selection, just the 
+selection, starting at a given number.  Otherwise, the entire document.\
+Menu:  \procmenu{Contents}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Enumerate}\procmenuwhere{~1}\
+Use \procname{QueueAnswer} to provide starting number in Ness.}
 
-\bold{contentv-destroy}(object \italic{self})
+\proclistentry{\procname{contentv-denumerate}(\proctype{object} \procparm{self})\
+Denumerate the heading\
+Menu:  \procmenu{Contents}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Denumerate}\procmenuwhere{~2}}
 
-\leftindent{destroy the table of content
+\proclistentry{\procname{contentv-reinit}(\proctype{object} \procparm{self})\
+reinitialize the headings\
+Menu:  \procmenu{Contents}\procmenuwhere{~1}\procmenu{}\menuwhere{,}\procmenu{Update Contents}\procmenuwhere{~20}}
 
-Menu:  Quit~99}
+\proclistentry{\procname{contentv-preview}(\proctype{object} \procparm{self})\
+Previews document.\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenu{}\menuwhere{,}\procmenu{Preview}\procmenuwhere{~21}}
 
-\bold{contentv-enumerate}(object \italic{self})
-
-\leftindent{Enumerate the headings.  If there is a selection, just the 
-selection, starting at a given number.  Otherwise, the entire document.
-
-Menu:  Contents~1,Enumerate~1
-
-Use \bold{queueanswer} to provide starting number in Ness.}
-
-\bold{contentv-denumerate}(object \italic{self})
-
-\leftindent{Denumerate the heading
-
-Menu:  Contents~1,Denumerate~2}
-
-\bold{contentv-reinit}(object \italic{self})
-
-\leftindent{reinitialize the headings
-
-Menu:  Contents~1,Update Contents~20}
-
-\bold{contentv-preview}(object \italic{self})
-
-\leftindent{Previews document.
-
-Menu:  File~10,Preview~21}
-
-\bold{contentv-print}(object \italic{self})
-
-\leftindent{Prints document.
-
-Menu:  File~10,Print~22}
+\proclistentry{\procname{contentv-print}(\proctype{object} \procparm{self})\
+Prints document.\
+Menu:  \procmenu{File}\procmenuwhere{~10}\menuwhere{,}\procmenu{Print}\procmenuwhere{~22}}
 
 
 \section{stylesheet}
 
 
-\bold{stylesheet-wraplook}(object \italic{view}, marker \italic{name})
-
-\leftindent{Add the style \italic{name}.
-
+\proclistentry{\procname{stylesheet-wraplook}(\proctype{object} \procparm{view}, \proctype{marker} \procparm{name})\
+Add the style \procparm{name}.\
 Menu:  Each named style optionally defines a menu entry;  those which 
 do are added to the textview menus with the defined menu entry to 
 add that style.}

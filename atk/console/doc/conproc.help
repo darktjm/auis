@@ -1,109 +1,80 @@
 \begindata{text,538882080}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for console}
 
 
-\bold{console-toggle-var}(object \italic{self}, integer \italic{varno})
-
-\leftindent{\italic{Undocumented; toggle internal variable from console 
-file}
-
-Menu:  \italic{menu is part of internal variable def.}
-
+\proclistentry{\procname{console-toggle-var}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{varno})\
+\italic{Undocumented; toggle internal variable from console 
+file}\
+Menu:  \italic{menu is part of internal variable def.}\
 Note that variable numbers are assigned in order of appearance in 
 configuration files and cannot generally be determined from Ness, or 
 for use in manual bindings.  Also, if there are no internal variables 
 defined in a loaded console, this procedure will not be present.}
 
-\bold{console-read-new-console-file}(object \italic{self}, 
-null | 0 | marker \italic{name})
-
-\leftindent{\italic{Undocumented}; if argument is 0 or null, prompt for 
-a console file name.
-
-Menu:  Display~2, Read New Console File~24 (null)
-
-Menu:  Display~2, Restart \italic{name} (\italic{name} is the current 
-console file)
-
-Menu:  Consoles~5, \italic{name}~\italic{order} (\italic{name} is any 
+\proclistentry{\procname{console-read-new-console-file}(\proctype{object} \procparm{self}, 
+\proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
+\italic{Undocumented}; if argument is 0 or null, prompt for 
+a console file name.\
+Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Read New Console File}\procmenuwhere{~24} (null)\
+Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Restart \italic{name}} (\italic{name} is the current 
+console file)\
+Menu:  \procmenu{Consoles}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ \italic{name}}\procmenuwhere{~\italic{order}} (\italic{name} is any 
 console definiton found in path; \italic{order} is order in which they 
 were found, starting at 1)}
 
-\bold{console-quit}(object \italic{self})
+\proclistentry{\procname{console-quit}(\proctype{object} \procparm{self})\
+Quit\
+Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-\leftindent{Quit
+\proclistentry{\procname{console-expand-menu}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Expand Menu}\procmenuwhere{~52}}
 
-Menu:  Quit~99}
+\proclistentry{\procname{console-shrink-menu}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Shrink Menu}\procmenuwhere{~52}}
 
-\bold{console-expand-menu}(object \italic{self})
+\proclistentry{\procname{console-set-alarm}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Set Alarm}\procmenuwhere{~5}}
 
-\leftindent{\italic{Undocumented}
+\proclistentry{\procname{console-turn-off-alarm}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Turn Off Alarm}\procmenuwhere{~5}}
 
-Menu:  Display~2, Expand Menu~52}
+\proclistentry{\procname{console-write-log-file}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Write Log File}\procmenuwhere{~40}}
 
-\bold{console-shrink-menu}(object \italic{self})
+\proclistentry{\procname{console-clear-logs}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Clear All Logs}\procmenuwhere{~45}}
 
-\leftindent{\italic{Undocumented}
+\proclistentry{\procname{console-getstats}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Restart Getstats}\procmenuwhere{~60}}
 
-Menu:  Display~2, Shrink Menu~52}
-
-\bold{console-set-alarm}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Set Alarm~5}
-
-\bold{console-turn-off-alarm}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Turn Off Alarm~5}
-
-\bold{console-write-log-file}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Write Log File~40}
-
-\bold{console-clear-logs}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Clear All Logs~45}
-
-\bold{console-getstats}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Restart Getstats~60}
-
-\bold{console-debug}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Menu:  Expert Options~90, Turn Off Debugging~90 (when on), 
-Expert Options~90, Turn On Debugging~90 (when off)}
+\proclistentry{\procname{console-debug}(\proctype{object} \procparm{self})\
+\italic{Undocumented}\
+Menu:  \procmenu{Expert Options}\procmenuwhere{~90}\procmenuwhere{,}\procmenu{ Turn Off Debugging}\procmenuwhere{~90} (when on), 
+\procmenu{Expert Options}\procmenuwhere{~90}\procmenuwhere{,}\procmenu{ Turn On Debugging}\procmenuwhere{~90} (when off)}
 
 
 \section{logview}
 
 
-\bold{logview-copy-region}(object \italic{self})
-
-\leftindent{Copy text from console log
-
-Menu:  Copy~12}
+\proclistentry{\procname{logview-copy-region}(\proctype{object} \procparm{self})\
+Copy text from console log\
+Menu:  \procmenu{Copy}\procmenuwhere{~12}}
 
 
 \section{errmonf}
 
 
-\bold{errmonf-toggle-var}(object \italic{console}, marker \italic{var})
-
-\leftindent{\italic{Undocumented; see \bold{console-toggle-var}}
-
+\proclistentry{\procname{errmonf-toggle-var}(\proctype{object} \procparm{console}, \proctype{marker} \procparm{var})\
+\italic{Undocumented; see \procname{console-toggle-var}}\
 Menu:  \italic{menu is part of internal variable def.}}
 
 

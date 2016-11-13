@@ -1,376 +1,265 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for srctextview}
 
 
-\bold{srctextview-balance}(object \italic{self})
+\proclistentry{\procname{srctextview-balance}(\proctype{object} \procparm{self})\
+Balance parentheses, brackets, or braces.\
+Bound to:  \prockey{Esc-m}}
 
-\leftindent{Balance parentheses, brackets, or braces.
-
-Bound to:  \typewriter{Esc-m}}
-
-\bold{srctextview-check-line-lengths}(object \italic{self})
-
-\leftindent{Display a warning box if any lines 
+\proclistentry{\procname{srctextview-check-line-lengths}(\proctype{object} \procparm{self})\
+Display a warning box if any lines 
 exceed max-length.}
 
-\bold{srctextview-compress-all}(object \italic{self})
+\proclistentry{\procname{srctextview-compress-all}(\proctype{object} \procparm{self})\
+Compress all lines indented (as far or) 
+farther than the current line.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Compress all indents}\procmenuwhere{~21}}
 
-\leftindent{Compress all lines indented (as far or) 
-farther than the current line.
+\proclistentry{\procname{srctextview-compress}(\proctype{object} \procparm{self})\
+Compress a region of text for viewing general 
+outline.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Compress region}\procmenuwhere{~20}}
 
-Menu:  Source Text,Compress all indents~21}
-
-\bold{srctextview-compress}(object \italic{self})
-
-\leftindent{Compress a region of text for viewing general 
-outline.
-
-Menu:  Source Text,Compress region~20}
-
-\bold{srctextview-copyright-scramble}(object \italic{self})
-
-\leftindent{Scrambles or descrambles code. Used 
+\proclistentry{\procname{srctextview-copyright-scramble}(\proctype{object} \procparm{self})\
+Scrambles or descrambles code. Used 
 to defeat 'copyright-key' protection.}
 
-\bold{srctextview-end-comment}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{srctextview-end-comment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch}, and then end a comment style if \procparm{ch} 
+is part of a comment delimiter.\
+Bound in asmtext and ctext and rexxtext to:  \prockey{/}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{Insert \italic{ch}, and then end a comment style if \italic{ch} 
-is part of a comment delimiter.
+\proclistentry{\procname{srctextview-goto-column}(\proctype{object} \procparm{self})\
+Prompt for a column number and move the 
+cursor there, appending whitespace to if needed.\
+Use \procname{QueueAnswer} to provide column number in Ness.}
 
-Bound in asmtext and ctext and rexxtext to:  \typewriter{/}
+\proclistentry{\procname{srctextview-insert-comment}(\proctype{object} \procparm{self})\
+Inserts a comment at the end of the line.\
+Bound to:  \prockey{Esc-1}}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{srctextview-insert-linecomment}(\proctype{object} \procparm{self})\
+Inserts a comment-to-end-of-line.\
+Bound to:  \prockey{Esc-2}}
 
-\bold{srctextview-goto-column}(object \italic{self})
+\proclistentry{\procname{srctextview-newline}(\proctype{object} \procparm{self})\
+Insert a newline and indent properly.\
+Bound to:  \prockey{^J}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{Prompt for a column number and move the 
-cursor there, appending whitespace to if needed.
+\proclistentry{\procname{srctextview-next-long-line}(\proctype{object} \procparm{self})\
+Find the next line exceeding max-length 
+and highlight the offending characters.\
+Bound to:  \prockey{Esc-^T}}
 
-Use \bold{queueanswer} to provide column number in Ness.}
+\proclistentry{\procname{srctextview-overstrike-mode-off}(\proctype{object} \procparm{self})\
+Turn overstrike mode off.}
 
-\bold{srctextview-insert-comment}(object \italic{self})
+\proclistentry{\procname{srctextview-overstrike-mode-on}(\proctype{object} \procparm{self})\
+Turn overstrike mode on.}
 
-\leftindent{Inserts a comment at the end of the line.
+\proclistentry{\procname{srctextview-paren}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{end})\
+Insert a paren (\procparm{end}), with balancing.  The start is 
+assumed from \procparm{end}.  Only supports the bindings below.\
+Bound to:  \prockey{)}, \prockey{]} \prockey{\}}, with their 
+respective character codes as \procparm{end}.}
 
-Bound to:  \typewriter{Esc-1}}
+\proclistentry{\procname{srctextview-redo-styles}(\proctype{object} \procparm{self})\
+Wrap styles around comments, functions, keywords, etc in 
+the source code.\
+Bound to:  \prockey{Esc-r}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Redo styles}\procmenuwhere{~10}}
 
-\bold{srctextview-insert-linecomment}(object \italic{self})
+\proclistentry{\procname{srctextview-reformat}(\proctype{object} \procparm{self})\
+Indent line or region and reflow comments.\
+Bound to:  \prockey{Esc-^R}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Format line/region}\procmenuwhere{~12}}
 
-\leftindent{Inserts a comment-to-end-of-line.
+\proclistentry{\procname{srctextview-reindent-return}(\proctype{object} \procparm{self})\
+Indent current line properly and insert a newline.\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-Bound to:  \typewriter{Esc-2}}
+\proclistentry{\procname{srctextview-reindent}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch} and indent the current line or selected region.\
+Bound to:  \prockey{Tab}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Indent line/region}\procmenuwhere{~11}; 
+both with tab as \procparm{ch}.\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\bold{srctextview-newline}(object \italic{self})
+\proclistentry{\procname{srctextview-rename-identifier}(\proctype{object} \procparm{self})\
+Rename identifier in selection region.\
+Bound to:  \prockey{Esc-Q}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Rename Identifier}\procmenuwhere{~80}\
+Use \procname{QueueAnswer} to provide original and then new name in Ness.}
 
-\leftindent{Insert a newline and indent properly.
+\proclistentry{\procname{srctextview-return}(\proctype{object} \procparm{self})\
+Insert a newline.\
+Bound to:  \prockey{Return} (\prockey{^M})\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-Bound to:  \typewriter{^J}
+\proclistentry{\procname{srctextview-self-insert-reindent}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch}, check for preceding keyword, and reindent this line.\
+Bound in ctext to:  \prockey{\{}\
+Bound in modtext to:  \prockey{|}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{srctextview-self-insert}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch} and check for a preceding keyword.\
+Bound to:  \prockey{Space}, \prockey{(}, \prockey{[}, 
+\prockey{\{}, \prockey{.}, \prockey{,}, \prockey{;}, each 
+with their respective character code as \procparm{ch}.\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\bold{srctextview-next-long-line}(object \italic{self})
+\proclistentry{\procname1{srctextview-start-comment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Inserts \procparm{ch}, and then begins comment style if part 
+of a comment delimiter.\
+Bound in asmtext and ctext and rexxtext to:  \prockey{*}}
 
-\leftindent{Find the next line exceeding max-length 
-and highlight the offending characters.
-
-Bound to:  \typewriter{Esc-^T}}
-
-\bold{srctextview-overstrike-mode-off}(object \italic{self})
-
-\leftindent{Turn overstrike mode off.}
-
-\bold{srctextview-overstrike-mode-on}(object \italic{self})
-
-\leftindent{Turn overstrike mode on.}
-
-\bold{srctextview-paren}(object \italic{self}, integer \italic{end})
-
-\leftindent{Insert a paren (\italic{end}), with balancing.  The start is 
-assumed from \italic{end}.  Only supports the bindings below.
-
-Bound to:  \typewriter{)}, \typewriter{]} \typewriter{\}}, with their 
-respective character codes as \italic{end}.}
-
-\bold{srctextview-redo-styles}(object \italic{self})
-
-\leftindent{Wrap styles around comments, functions, keywords, etc in 
-the source code.
-
-Bound to:  \typewriter{Esc-r}; Menu:  Source Text,Redo styles~10}
-
-\bold{srctextview-reformat}(object \italic{self})
-
-\leftindent{Indent line or region and reflow comments.
-
-Bound to:  \typewriter{Esc-^R}; Menu:  Source Text,Format line/region~12}
-
-\bold{srctextview-reindent-return}(object \italic{self})
-
-\leftindent{Indent current line properly and insert a newline.
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-reindent}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert \italic{ch} and indent the current line or selected region.
-
-Bound to:  \typewriter{Tab}; Menu:  Source Text,Indent line/region~11; 
-both with tab as \italic{ch}.
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-rename-identifier}(object \italic{self})
-
-\leftindent{Rename identifier in selection region.
-
-Bound to:  \typewriter{Esc-Q}; Menu:  Source Text,Rename Identifier~80
-
-Use \bold{queueanswer} to provide original and then new name in Ness.}
-
-\bold{srctextview-return}(object \italic{self})
-
-\leftindent{Insert a newline.
-
-Bound to:  \typewriter{Return} (\typewriter{^M})
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-self-insert-reindent}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert \italic{ch}, check for preceding keyword, and reindent this line.
-
-Bound in ctext to:  \typewriter{\{}
-
-Bound in modtext to:  \typewriter{|}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-self-insert}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert \italic{ch} and check for a preceding keyword.
-
-Bound to:  \typewriter{Space}, \typewriter{(}, \typewriter{[}, 
-\typewriter{\{}, \typewriter{.}, \typewriter{,}, \typewriter{;}, each 
-with their respective character code as \italic{ch}.
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-start-comment}(object \italic{self}, \italic{ch})
-
-\leftindent{Inserts \italic{ch}, and then begins comment style if part 
-of a comment delimiter.
-
-Bound in asmtext and ctext and rexxtext to:  \typewriter{*}}
-
-\bold{srctextview-start-linecomment}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Inserts \italic{ch}, and then begins a comment to end of line.
-
+\proclistentry{\procname{srctextview-start-linecomment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Inserts \procparm{ch}, and then begins a comment to end of line.\
 Bound in asmtext to:  any characters added using the 
-\italic{bang-comment} parameter.
+\italic{bang-comment} parameter.\
+Bound in ltext to:  \prockey{;}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-Bound in ltext to:  \typewriter{;}
+\proclistentry{\procname{srctextview-style-label}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Inserts \procparm{ch}, and then puts a style on labels.\
+Bound in ctext and rexxtext to:  \prockey{:}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{srctextview-style-string}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Inserts \procparm{ch}, and then then starts or ends a string style.\
+Bound in ltext and ctext and modtext and rexxtext to:  \prockey{"}\
+Bound in ctext and modtext and rexxtext to:  \prockey{'}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\bold{srctextview-style-label}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{srctextview-toggle-overstrike-mode}(\proctype{object} \procparm{self})\
+Turn overstrike mode on or off.\
+Bound to:  \prockey{Insert} (\prockey{Esc-^\\})}
 
-\leftindent{Inserts \italic{ch}, and then puts a style on labels.
-
-Bound in ctext and rexxtext to:  \typewriter{:}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-style-string}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Inserts \italic{ch}, and then then starts or ends a string style.
-
-Bound in ltext and ctext and modtext and rexxtext to:  \typewriter{"}
-
-Bound in ctext and modtext and rexxtext to:  \typewriter{'}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{srctextview-toggle-overstrike-mode}(object \italic{self})
-
-\leftindent{Turn overstrike mode on or off.
-
-Bound to:  \typewriter{Insert} (\typewriter{Esc-^\\})}
-
-\bold{srctextview-what-column}(object \italic{self})
-
-\leftindent{Display in the message window what column 
+\proclistentry{\procname{srctextview-what-column}(\proctype{object} \procparm{self})\
+Display in the message window what column 
 the cursor is in.}
 
-\bold{srctextview-force-upper-off}(object \italic{self})
+\proclistentry{\procname{srctextview-force-upper-off}(\proctype{object} \procparm{self})\
+Turn off auto upper casing of keywords.  This procedure is 
+only present if auto-upper-casing is on (not even at class load).\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Force Upper Off}\procmenuwhere{~90}}
 
-\leftindent{Turn off auto upper casing of keywords.  This procedure is 
-only present if auto-upper-casing is on (not even at class load).
-
-Menu:  Source Text,Force Upper Off~90}
-
-\bold{srctextview-force-upper-on}(object \italic{self})
-
-\leftindent{Turn on auto upper casing of keywords.  This procedure is 
-only present if auto-upper-casing is off (not even at class load).
-
-Menu:  Source Text,Force Upper On~90}
+\proclistentry{\procname{srctextview-force-upper-on}(\proctype{object} \procparm{self})\
+Turn on auto upper casing of keywords.  This procedure is 
+only present if auto-upper-casing is off (not even at class load).\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Force Upper On}\procmenuwhere{~90}}
 
 
-\bold{rawtextview-toggle-overstrike-mode}(object \italic{self})
-
-\leftindent{Turn overstrike mode on or off.
-
-Bound to:  \typewriter{Insert} (\typewriter{Esc-^\\})}
+\proclistentry{\procname{rawtextview-toggle-overstrike-mode}(\proctype{object} \procparm{self})\
+Turn overstrike mode on or off.\
+Bound to:  \prockey{Insert} (\prockey{Esc-^\\})}
 
 
 Note that the following views inherit srctextview's default bindings, unless 
 overridden.
 
 
-\bold{m3textview-asterisk}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{m3textview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented}\
+Bound to:  \prockey{*}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{\italic{Not documented}
+\proclistentry{\procname{m3textview-display-interface}(\proctype{object} \procparm{self})\
+Find the interface where selected 
+identifier is declared.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Interface}\procmenuwhere{~30}}
 
-Bound to:  \typewriter{*}
+\proclistentry{\procname{m3textview-display-module}(\proctype{object} \procparm{self})\
+Find the module where selected procedure's 
+code lies.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Module}\procmenuwhere{~31}}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{m3textview-display-interface}(object \italic{self})
-
-\leftindent{Find the interface where selected 
-identifier is declared.
-
-Menu:  Source Text,Display Interface~30}
-
-\bold{m3textview-display-module}(object \italic{self})
-
-\leftindent{Find the module where selected procedure's 
-code lies.
-
-Menu:  Source Text,Display Module~31}
-
-\bold{m3textview-pragma}(object \italic{self}, integer \italic{ch})
-
-\leftindent{\italic{Not documented}
-
-Bound to:  \typewriter{>}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{m3textview-pragma}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented}\
+Bound to:  \prockey{>}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
 Note that m3text inherits modtext's dfeault bindings.
 
 
-\bold{cpptextview-slash}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert a slash (\italic{ch}), possibly an end comment delimiter 
-or the start of a line comment.
-
-Bound to:  \typewriter{/}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{cpptextview-slash}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert a slash (\procparm{ch}), possibly an end comment delimiter 
+or the start of a line comment.\
+Bound to:  \prockey{/}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
 Note that cpptext inherits ctext's default bindings.
 
 
-\bold{mtextview-asterisk}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{mtextview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert, and if preceded by an open-paren, start a comment.\
+Bound to:  \prockey{*}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{Insert, and if preceded by an open-paren, start a comment.
+\proclistentry{\procname{mtextview-display-definition}(\proctype{object} \procparm{self})\
+Find the definition module where 
+selected identifier is declared.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Definition}\procmenuwhere{~30}}
 
-Bound to:  \typewriter{*}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{mtextview-display-definition}(object \italic{self})
-
-\leftindent{Find the definition module where 
-selected identifier is declared.
-
-Menu:  Source Text,Display Definition~30}
-
-\bold{mtextview-display-implementation}(object \italic{self})
-
-\leftindent{Find the implementation module 
-where selected procedure's code lies.
-
-Menu:  Source Text,Display Implementation~31}
+\proclistentry{\procname{mtextview-display-implementation}(\proctype{object} \procparm{self})\
+Find the implementation module 
+where selected procedure's code lies.\
+Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Implementation}\procmenuwhere{~31}}
 
 
 Note that mtext inherits modtext's default bindings.
 
 
-\bold{ptextview-asterisk}(object \italic{self}, integer \italic{ch})
+\proclistentry{\procname{ptextview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented, integer \procparm{ch}}\
+Bound to:  \prockey{*}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\leftindent{\italic{Not documented, integer \italic{ch}}
+\proclistentry{\procname{ptextview-brace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented}\
+Bound to:  \prockey{\}}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-Bound to:  \typewriter{*}
+\proclistentry{\procname{ptextview-slash}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented}\
+Bound to:  \prockey{/}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{ptextview-brace}(object \italic{self}, integer \italic{ch})
-
-\leftindent{\italic{Not documented}
-
-Bound to:  \typewriter{\}}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{ptextview-slash}(object \italic{self}, integer \italic{ch})
-
-\leftindent{\italic{Not documented}
-
-Bound to:  \typewriter{/}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
-
-\bold{ptextview-startbrace}(object \italic{self}, integer \italic{ch})
-
-\leftindent{\italic{Not documented}
-
-Bound to:  \typewriter{\{}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{ptextview-startbrace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\italic{Not documented}\
+Bound to:  \prockey{\{}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
-\bold{ctextview-start-preproc}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert \italic{ch} and start preprocessor style if pressed at start 
-of line.
-
-Bound to:  \typewriter{#}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{ctextview-start-preproc}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch} and start preprocessor style if pressed at start 
+of line.\
+Bound to:  \prockey{#}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
-\bold{modtextview-start-preproc}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Insert \italic{ch} and start preprocessor style if pressed at 
-start of line.
-
-Bound to:  \typewriter{#}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{modtextview-start-preproc}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Insert \procparm{ch} and start preprocessor style if pressed at 
+start of line.\
+Bound to:  \prockey{#}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
-\bold{perltextview-string-delimiter}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Inserts \italic{ch} and begins and ends strings with special 
-characters for delimiters
-
-Bound to:  \typewriter{!}, \typewriter{#}, \typewriter{:}, \typewriter{>}, 
-\typewriter{<}, \typewriter{$}, \typewriter{%}, \typewriter{&}, 
-\typewriter{*}, \typewriter{+}, \typewriter{-}, \typewriter{/}, 
-\typewriter{=}, \typewriter{?}, \typewriter{@}, \typewriter{\\}, 
-\typewriter{^}, \typewriter{_}, \typewriter{|}, \typewriter{~}, 
-\typewriter{(}, \typewriter{,}, \typewriter{.}, \typewriter{;}, 
-\typewriter{[}, \typewriter{\{}, \typewriter{"}, \typewriter{'}, 
-\typewriter{`}, \typewriter{)}, \typewriter{]}, \typewriter{\}}
-
-\typewriter{^U}-argument can be set to repeat insertion.}
+\proclistentry{\procname{perltextview-string-delimiter}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+Inserts \procparm{ch} and begins and ends strings with special 
+characters for delimiters\
+Bound to:  \prockey{!}, \prockey{#}, \prockey{:}, \prockey{>}, 
+\prockey{<}, \prockey{$}, \prockey{%}, \prockey{&}, 
+\prockey{*}, \prockey{+}, \prockey{-}, \prockey{/}, 
+\prockey{=}, \prockey{?}, \prockey{@}, \prockey{\\}, 
+\prockey{^}, \prockey{_}, \prockey{|}, \prockey{~}, 
+\prockey{(}, \prockey{,}, \prockey{.}, \prockey{;}, 
+\prockey{[}, \prockey{\{}, \prockey{"}, \prockey{'}, 
+\prockey{`}, \prockey{)}, \prockey{]}, \prockey{\}}\
+\prockey{^U}-argument can be set to repeat insertion.}
 
 
 \section{Related Topics}

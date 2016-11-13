@@ -1,15 +1,13 @@
 \begindata{text,268894668}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Ez}
 
 
-\bold{ezapp-set-buffer-checkpoint-latency}(object \italic{frame})
-
-\leftindent{Set the number of checkpoint 
-intervals to wait before checkpointing the current buffer
-
-Use \bold{queueanswer} to provide number in Ness.}
+\proclistentry{\procname{ezapp-set-buffer-checkpoint-latency}(\proctype{object} \procparm{frame})\
+Set the number of checkpoint 
+intervals to wait before checkpointing the current buffer\
+Use \procname{QueueAnswer} to provide number in Ness.}
 
 
 \section{Related Topics}

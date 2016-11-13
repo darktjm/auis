@@ -1,52 +1,41 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for html}
 
 
-\bold{htmlview-add-hrule}(object \italic{self})
+\proclistentry{\procname{htmlview-add-hrule}(\proctype{object} \procparm{self})\
+Add a horizontal rule}
 
-\leftindent{Add a horizontal rule}
+\proclistentry{\procname{htmlview-add-image}(\proctype{object} \procparm{self})\
+Add an image}
 
-\bold{htmlview-add-image}(object \italic{self})
+\proclistentry{\procname{htmlview-add-random}(\proctype{object} \procparm{self})\
+Add a random entity to a region of text}
 
-\leftindent{Add an image}
+\proclistentry{\procname{htmlview-edit-attributes}(\proctype{object} \procparm{self})\
+Edit the attributes of tag at point}
 
-\bold{htmlview-add-random}(object \italic{self})
+\proclistentry{\procname{htmlview-make-list}(\proctype{object} \procparm{self})\
+Make a region into a list}
 
-\leftindent{Add a random entity to a region of text}
+\proclistentry{\procname{htmlview-modify-list}(\proctype{object} \procparm{self})\
+Modify an attribute of a list}
 
-\bold{htmlview-edit-attributes}(object \italic{self})
+\proclistentry{\procname{htmlview-set-img-src}(\proctype{object} \procparm{self})\
+Set the source of an image}
 
-\leftindent{Edit the attributes of tag at point}
+\proclistentry{\procname{htmlview-set-indexable}(\proctype{object} \procparm{self})\
+Set flag specifying if document is searchable.}
 
-\bold{htmlview-make-list}(object \italic{self})
+\proclistentry{\procname{htmlview-set-link}(\proctype{object} \procparm{self})\
+Turn a region into an active anchor}
 
-\leftindent{Make a region into a list}
+\proclistentry{\procname{htmlview-set-title}(\proctype{object} \procparm{self})\
+Set title of document.}
 
-\bold{htmlview-modify-list}(object \italic{self})
-
-\leftindent{Modify an attribute of a list}
-
-\bold{htmlview-set-img-src}(object \italic{self})
-
-\leftindent{Set the source of an image}
-
-\bold{htmlview-set-indexable}(object \italic{self})
-
-\leftindent{Set flag specifying if document is searchable.}
-
-\bold{htmlview-set-link}(object \italic{self})
-
-\leftindent{Turn a region into an active anchor}
-
-\bold{htmlview-set-title}(object \italic{self})
-
-\leftindent{Set title of document.}
-
-\bold{htmlview-unlistify}(object \italic{self})
-
-\leftindent{Remove all listyness about point or region}
+\proclistentry{\procname{htmlview-unlistify}(\proctype{object} \procparm{self})\
+Remove all listyness about point or region}
 
 
 \section{Related Topics}
