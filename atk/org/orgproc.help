@@ -6,56 +6,56 @@
 \chapter{Procedure Table Listing for Org}
 
 
-\proclistentry{\procname{orgv-Add}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Add}(\proctype{orgv} \procparm{obj})\
 Add Node\
 Menu:  \procmenu{Add Node}\procmenuwhere{~20}\
 It is generally not possible to select an insertion point from Ness.  
 Do not use from Ness.}
 
-\proclistentry{\procname{orgv-Delete}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Delete}(\proctype{orgv} \procparm{obj})\
 Delete current Node.\
 Delete Node~21\
 It is generally not possible to select a node from Ness.  Do not use 
 from Ness.}
 
-\proclistentry{\procname{orgv-Rename}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Rename}(\proctype{orgv} \procparm{obj})\
 Rename current Node\
 Menu:  \procmenu{Rename Node}\procmenuwhere{~22}\
 It is generally not possible to select a node from Ness.  Do not use 
 from Ness.}
 
-\proclistentry{\procname{orgv-Plode}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Plode}(\proctype{orgv} \procparm{obj})\
 Plode Tree\
 Menu:  \procmenu{Explode Nodes}\procmenuwhere{~30} when imploded; \procmenu{Implode Nodes}\procmenuwhere{~30} when exploded.}
 
-\proclistentry{\procname{orgv-Description}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Description}(\proctype{orgv} \procparm{obj})\
 Hide/Show Description\
 Menu:  \procmenu{Expose Description}\procmenuwhere{~31} when hidden; \procmenu{Hide Description}\procmenuwhere{~31} when exposed.}
 
-\proclistentry{\procname{orgv-Palette}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Palette}(\proctype{orgv} \procparm{obj})\
 Palette-toggle\
 Menu:  \procmenu{Expose Palette}\procmenuwhere{~40} when hidden; \procmenu{Hide Palette}\procmenuwhere{~40} when shown.}
 
-\proclistentry{\procname{orgv-DEBUG}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-DEBUG}(\proctype{orgv} \procparm{obj})\
 Debug-toggle\
 Menu:  \procmenu{DEBUG}\procmenuwhere{~98}}
 
-\proclistentry{\procname{org-Arrangement}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{org-Arrangement}(\proctype{orgv} \procparm{obj})\
 Toggle Vertical/Horizontal Arrangement\
 Menu:  \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Vertical Layout}\procmenuwhere{~10} when horizontal; \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Horizontal 
 Layout}\procmenuwhere{~10} when vertical.}
 
-\proclistentry{\procname{org-Fold}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{org-Fold}(\proctype{orgv} \procparm{obj})\
 Toggle Fold\
 Menu:  \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Fold Nodes}\procmenuwhere{~73} when unfolded; \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{UnFold Nodes}\procmenuwhere{~73} 
 when folded.}
 
-\proclistentry{\procname{orgv-Border}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Border}(\proctype{orgv} \procparm{obj})\
 Change Node Border for all nodes.\
 Menu:  \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Node Border}\procmenuwhere{~20}\
 Use \procname{QueueAnswer} to provide type in Ness.}
 
-\proclistentry{\procname{orgv-Connector}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{orgv-Connector}(\proctype{orgv} \procparm{obj})\
 Change Node Connector for tree.\
 Menu:  \procmenu{Styling}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Node Connector}\procmenuwhere{~21}\
 Use \procname{QueueAnswer} to provide type in Ness.}

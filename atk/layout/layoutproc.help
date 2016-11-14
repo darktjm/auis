@@ -4,89 +4,89 @@
 \chapter{Procedure Table Listing for layout}
 
 
-\proclistentry{\procname{layout-author}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-author}(\proctype{layoutview} \procparm{obj})\
 Enter authoring mode\
 Menu:  \procmenu{Enter Authoring}\procmenuwhere{~60}\
 Note that in general, it is not possible to select or create objects from 
 Ness.  Do not use this or any other authoring mode functions from Ness.}
 
-\proclistentry{\procname{layout-background}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-background}(\proctype{layoutview} \procparm{obj})\
 Expand current selection and move to back\
 Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Background}\procmenuwhere{~31}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-coarse-granularity}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{amount})\
+\proclistentry{\procname{layout-coarse-granularity}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{amount})\
 Coarse (18 pixel) granularity of object 
 placement.  The 18 comes from setting \procparm{amount} to 18.\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Coarse granularity}\procmenuwhere{~52}}
 
-\proclistentry{\procname{layout-create-0}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{layout-create-0}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{type})\
 Do not fill in newly created data objects.  \procparm{type} 
 must be 0.\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Null on create}\procmenuwhere{~40}}
 
-\proclistentry{\procname{layout-create-filler}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{layout-create-filler}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{type})\
 Use filler for newly created data objects.  \procparm{type} 
 must be 1.\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Filler on create}\procmenuwhere{~41}}
 
-\proclistentry{\procname{layout-create-paste}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{layout-create-paste}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{type})\
 Paste into newly created data objects.  \procparm{type} 
 must be 2.\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Paste on create}\procmenuwhere{~42}}
 
-\proclistentry{\procname{layout-destroy-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-destroy-object}(\proctype{layoutview} \procparm{obj})\
 Destroy current selection\
 Bound to:  \prockey{^D}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Cut object}\procmenuwhere{~22}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-fine-granularity}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{amount})\
+\proclistentry{\procname{layout-fine-granularity}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{amount})\
 Fine (1 pixel) granularity of object 
 placement.  The 1 comes from setting \procparm{amount} to 0 (or 1).\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Fine granularity}\procmenuwhere{~50}}
 
-\proclistentry{\procname{layout-imbed-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-imbed-object}(\proctype{layoutview} \procparm{obj})\
 Prompt for object and place in current selection\
 Bound to:  \prockey{Esc-Tab}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Imbed object}\procmenuwhere{~21}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-make-fixed}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-make-fixed}(\proctype{layoutview} \procparm{obj})\
 Component varies only in authoring mode\
 Bound to:  \prockey{Esc-f}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Make fixed}\procmenuwhere{~35}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-make-variable}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-make-variable}(\proctype{layoutview} \procparm{obj})\
 Allow component to vary\
 Bound to:  \prockey{Esc-v}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Make variable}\procmenuwhere{~35}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-medium-granularity}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{amount})\
+\proclistentry{\procname{layout-medium-granularity}(\proctype{layoutview} \procparm{obj}, \proctype{integer} \procparm{amount})\
 Medium (6 pixel) granularity of object 
 placement.  The 6 comes from setting \procparm{amount} to 6.\
 Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Medium granularity}\procmenuwhere{~51}}
 
-\proclistentry{\procname{layout-move-to-back}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-move-to-back}(\proctype{layoutview} \procparm{obj})\
 Move current selection to back\
 Bound to:  \prockey{Esc-d}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Move to back}\procmenuwhere{~30}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-paste-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-paste-object}(\proctype{layoutview} \procparm{obj})\
 Paste into current selection\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Authoring}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Paste object}\procmenuwhere{~20}\
 Note that in general, it is not possible to select objects from Ness.  
 Do not use this from Ness.}
 
-\proclistentry{\procname{layout-run}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-run}(\proctype{layoutview} \procparm{obj})\
 Enter execution mode\
 Bound to:  \prockey{Esc-x}; Menu:  \procmenu{Exit Authoring}\procmenuwhere{~60}}
 
-\proclistentry{\procname{layout-toggle-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{layout-toggle-debug}(\proctype{layoutview} \procparm{obj})\
 Toggle Debug\
 Bound to:  \prockey{Esc-Esc}}
 

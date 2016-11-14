@@ -4,22 +4,22 @@
 \chapter{Procedure Table Listing for unknown}
 
 
-\proclistentry{\procname{unknownv-display-raw}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{unknownv-display-raw}(\proctype{unknownv} \procparm{obj})\
 Displays the raw data for an unavailable inset.\
 Menu:  \procmenu{Unknown}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Display Raw Data}\procmenuwhere{~31}}
 
-\proclistentry{\procname{unknownv-help}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{unknownv-help}(\proctype{unknownv} \procparm{obj})\
 Displays the help file for the unknown inset in a new window.\
 Menu:  \procmenu{Unknown}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Help}\procmenuwhere{~1}}
 
-\proclistentry{\procname{unknownv-recover}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{unknownv-recover}(\proctype{unknownv} \procparm{obj})\
 Attempts to recover the original form of a document 
 with unknown insets in it.\
 Menu:  \procmenu{Unknown}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Attempt Recovery}\procmenuwhere{~20}\
 This is an interactive process; do not use from Ness.  Insetead, run 
 \bold{recover} directly.}
 
-\proclistentry{\procname{unknownv-save-raw}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{unknownv-save-raw}(\proctype{unknownv} \procparm{obj})\
 Saves the raw data for an unavailable inset.\
 Menu:  \procmenu{Unknown}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Save Raw Data}\procmenuwhere{~30}\
 Use \procname{QueueAnswer} to provide file name in Ness.}

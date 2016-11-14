@@ -4,25 +4,25 @@
 \chapter{Procedure Table Listing for stroffet}
 
 
-\proclistentry{\procname{stroffetview-closeallstroffets}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{stroffetview-closeallstroffets}(\proctype{view} \procparm{obj})\
 close Stroffet Views}
 
-\proclistentry{\procname{stroffetview-insertstroffet}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{stroffetview-insertstroffet}(\proctype{textview} \procparm{obj})\
 Insert Stroffet Object}
 
-\proclistentry{\procname{stroffetview-openallstroffets}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{stroffetview-openallstroffets}(\proctype{view} \procparm{obj})\
 open Stroffet Views}
 
 
-\proclistentry{\procname{stroffetview-closeall}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{stroffetview-closeall}(\proctype{stroffetview} \procparm{obj})\
 close all the stroffets\
 Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{close all}\procmenuwhere{~12}}
 
-\proclistentry{\procname{stroffetview-close}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{stroffetview-close}(\proctype{stroffetview} \procparm{obj})\
 close the stroffet\
 Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{close}\procmenuwhere{~2}}
 
-\proclistentry{\procname{stroffetview-openall}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{stroffetview-openall}(\proctype{stroffetview} \procparm{obj})\
 open all the stroffets\
 Menu:  \procmenu{stroffets}\procmenuwhere{,}\procmenu{open all}\procmenuwhere{~11}}
 

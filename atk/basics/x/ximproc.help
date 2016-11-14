@@ -5,7 +5,7 @@
 
 
 
-\proclistentry{\procname{xim-activate-menubar}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{xim-activate-menubar}(\proctype{xim} \procparm{obj})\
 Activates the menubar in preparation for key traversal 
 with the arrow keys.}
 

@@ -14,7 +14,7 @@ menu:[Proclist,Proc parm name]
 attr:[FontFace Italic Int Set]}
 \define{proctype
 menu:[Proclist,Proc parm/return type]
-}
+attr:[FontFamily AndySans Int 0]}
 \define{prockey
 menu:[Proclist,Key binding]
 attr:[Flags DottedBox Int Set]

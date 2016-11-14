@@ -4,31 +4,31 @@
 \chapter{Procedure Table Listing for alink}
 
 
-\proclistentry{\procname{alinkview-insert-alink}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{alinkview-insert-alink}(\proctype{textview} \procparm{obj})\
 Insert audio link.\
 Menu:  \procmenu{Inset}\procmenuwhere{~33}\procmenuwhere{,}\procmenu{Insert Audio}\procmenuwhere{~20}}
 
-\proclistentry{\procname{alinkview-insert-record}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{alinkview-insert-record}(\proctype{textview} \procparm{obj})\
 Insert audio link and record.\
 Menu:  \procmenu{Inset}\procmenuwhere{~33}\procmenuwhere{,}\procmenu{Record Audio}\procmenuwhere{~21}\
 It is generally not possible to time the cancel event required to stop 
 recording properly with Ness; this procedure should not be called in 
 Ness.}
 
-\proclistentry{\procname{alinkview-play-audio}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{alinkview-play-audio}(\proctype{alinkview} \procparm{obj})\
 Plays the audio segment.\
 Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Play Audio}\procmenuwhere{~1}\
 This is the default action of the button.  It is generally not possible 
 to cancel playback within Ness.}
 
-\proclistentry{\procname{alinkview-record-audio}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{alinkview-record-audio}(\proctype{alinkview} \procparm{obj})\
 Records the audio segment.\
 Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Change recording}\procmenuwhere{~11}\
 It is generally not possible to time the cancel event required to stop 
 recording properly with Ness; this procedure should not be called in 
 Ness.}
 
-\proclistentry{\procname{alinkview-set-label-text}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{alinkview-set-label-text}(\proctype{alinkview} \procparm{obj})\
 Prompts for user to set the text string of the link button.\
 Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Change Label}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide label text in Ness.}

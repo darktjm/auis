@@ -3,18 +3,18 @@
 \template{prochelp}
 \define{global
 }
-\chapter{Procedure Table Listing for Frame, Frameview}
+\chapter{Procedure Table Listing for Frame}
 
 
-\proclistentry{\procname{frame-cancel}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-cancel}(\proctype{frame} \procparm{obj})\
 Try to cancel dialog box\
 Bound in dialogs to:  \prockey{^G}}
 
-\proclistentry{\procname{frame-confirm}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-confirm}(\proctype{frame} \procparm{obj})\
 Select the default answer in a dialog\
 Bound in dialogs to:  \prockey{Enter} (\prockey{^M})}
 
-\proclistentry{\procname{frame-consider-coming}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{choice})\
+\proclistentry{\procname{frame-consider-coming}(\proctype{frame} \procparm{obj}, \proctype{integer} \procparm{choice})\
 Consider selecting a dialog answer.  The \procparm{choice} 
 parameter is the chosen entry number.  For dialogs with the four 
 buttons and a text entry or message, 1 is Accept, 2 is Cancel, 3 is 
@@ -22,218 +22,222 @@ Complete, and 4 is Help.\
 Menu:  for multiple-choice dialogs, each choice gets a menu entry bound 
 to this with its respective choice number while the dialog is displayed.}
 
-\proclistentry{\procname{frame-got-key}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{frame-got-key}(\proctype{frame} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Change the default dialog answer, if \procparm{ch} begins an option 
 text.\
 Bound in dialogs to:  all ASCII alphanumeric (\prockey{A} .. \prockey{Z}, \prockey{0} .. \prockey{9})}
 
-\proclistentry{\procname{frame-single-line-message}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-single-line-message}(\proctype{frame} \procparm{obj})\
 Reset the message line to one line.\
 \italic{FIXME:  should this even be here?  What about frameview-minimize?}}
 
 
-\proclistentry{\procname{frameview-complete}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
-Attempt to complete a user response in the message line.  
-If completion is not available, the previous binding of \procparm{ch} is 
-executed, instead.\
-Bound in message line to:  \prockey{Space}}
-
-\proclistentry{\procname{frameview-help}(\proctype{object} \procparm{self})\
-Provide help on current question in the message line.  If 
-completions are enabled, this help is a list of possible completions.  
-Otherwise, the previous binding of \prockey{?} is used.\
-Bound in message line to:  \prockey{?}}
-
-\proclistentry{\procname{frameview-kill}(\proctype{object} \procparm{self})\
-Kill to beginning of the message line response.\
-Bound in message line to:  \prockey{^U}}
-
-\proclistentry{\procname{frameview-minimize}(\proctype{object} \procparm{self})\
-Reset the message line to the size needed for a single line.\
-Bound in message line to:  \prockey{^X-1}}
-
-\proclistentry{\procname{frameview-punt}(\proctype{object} \procparm{self})\
-^G (cancel, unless mandatory response) in message line.\
-Bound in message line to:  \prockey{^C}, \prockey{^G}, \prockey{^X-^C}}
-
-\proclistentry{\procname{frameview-return}(\proctype{object} \procparm{self})\
-<CR> in message line.\
-Bound in message line to:  \prockey{Enter} (\prockey{^M})}
-
-
-\proclistentry{\procname{frame-recursive-visit-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-recursive-visit-file}(\proctype{frame} \procparm{obj})\
 Visit file saving current buffer state.\
 Bound to:  \prockey{^X-^T}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{frame-recursive-edit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-recursive-edit}(\proctype{frame} \procparm{obj})\
 Enter a recursive edit.}
 
-\proclistentry{\procname{frame-exit-recursive-edit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-exit-recursive-edit}(\proctype{frame} \procparm{obj})\
 Exit a recursive edit.  Entered 
 using either \procname{frame-recursive-edit} or \procname{frame-recursive-visit-file}\
 Bound to:  \prockey{^C}}
 
-\proclistentry{\procname{frame-delete-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-delete-window}(\proctype{frame} \procparm{obj})\
 Delete the window in which command is executed.\
 Bound to:  \prockey{^X-^D}; Menu:  \procmenu{Delete WIndow}\procmenuwhere{~89}}
 
-\proclistentry{\procname{frame-exit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-exit}(\proctype{frame} \procparm{obj})\
 Exit editor if no buffers are modified, otherwise ask for 
 confirmation first.\
 Bound to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}\
 Don't attempt to answer confirmation via Ness.}
 
-\proclistentry{\proctype{marker} \procname{frame-current-directory}(\proctype{object} \procparm{self})\
+\proclistentry{\proctype{marker} \procname{frame-current-directory}(\proctype{frame} \procparm{obj})\
 Show current working directory.  Also returns as a string.\
 Bound to:  \prockey{Esc-p}}
 
-\proclistentry{\proctype{boolean} \procname{frame-change-directory}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} 
+\proclistentry{\proctype{boolean} \procname{frame-change-directory}(\proctype{frame} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} 
 \procparm{dir})\
 Change current working directory.  If not provided as an 
 argument, it is prompted for.  Returns TRUE for success.\
 Bound to:  \prockey{Esc-c}\
 Use \procparm{dir} or \procname{QueueAnswer} to provide directory in Ness.}
 
-\proclistentry{\procname{frame-new-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-new-window}(\proctype{frame} \procparm{obj})\
 Creates a new window.\
 Bound to:  \prockey{^X-2}}
 
-\proclistentry{\procname{frame-delete-buffer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-delete-buffer}(\proctype{frame} \procparm{obj})\
 Prompts for a buffer to delete.\
 Bound to:  \prockey{^X-k}\
 Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-\proclistentry{\procname{frame-old-buffer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-old-buffer}(\proctype{frame} \procparm{obj})\
 Visits an already existing buffer.  Will not accept answer 
 if buffer does not exist.\
 Bound to:  \prockey{^X-^O}\
 Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-\proclistentry{\procname{frame-visit-buffer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-visit-buffer}(\proctype{frame} \procparm{obj})\
 Changes to an arbitrarily named buffer.\
 Bound to:  \prockey{^X-b}\
 Use \procname{QueueAnswer} to provide buffer name in Ness.}
 
-\proclistentry{\procname{frame-list-buffers}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-list-buffers}(\proctype{frame} \procparm{obj})\
 Lists current buffers.  Does not delete listing when done 
 viewing; can be switched back into.\
 Bound to:  \prockey{^X-^B}\
 Use \procname{QueueAnswer} to cancel view in Ness.}
 
-\proclistentry{\proctype{integer} \procname{frame-visit-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
+\proclistentry{\proctype{integer} \procname{frame-visit-file}(\proctype{frame} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
 Prompts for a file to visit, unless \procparm{fname} is 
 present, in which case that file is visited.  Returns 0 or greater for 
 success.\
 Bound to:  \prockey{^X-^V}\
 Use \procparm{fname} or \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\proctype{integer} \procname{frame-visit-file-new-window}(\proctype{object} \procparm{self})\
+\proclistentry{\proctype{integer} \procname{frame-visit-file-new-window}(\proctype{frame} \procparm{obj})\
 Prompts for a file to visit, unless \procparm{fname} is 
 present, in which case that file is visited.  A new window is created for the 
 resulting buffer.  Returns 0 or greater for success.}
 
-\proclistentry{\procname{frame-switch-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
+\proclistentry{\procname{frame-switch-file}(\proctype{frame} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
 Switches to editing another buffer.\
 Bound to:  \prockey{^X-^R}; Menu:  \procmenu{Switch File}\procmenuwhere{~30}\
 Use \procparm{fname} or \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{frame-read-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-read-file}(\proctype{frame} \procparm{obj})\
 Reads a file into the current buffer.\
 Use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{frame-save-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-save-file}(\proctype{frame} \procparm{obj})\
 Saves buffer into its current file.\
 Bound to:  \prockey{^X-^S}; Menu:  \procmenu{Save}\procmenuwhere{~20}}
 
-\proclistentry{\procname{frame-write-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-write-file}(\proctype{frame} \procparm{obj})\
 Prompts for a file to save the current buffer in.\
 Bound to:  \prockey{^X-^W}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save As}\procmenuwhere{~1}\
 Use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{frame-save-all-files}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-save-all-files}(\proctype{frame} \procparm{obj})\
 Saves all modified files.\
 Bound to:  \prockey{^X-^M}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save All}\procmenuwhere{~2}}
 
-\proclistentry{\procname{frame-set-printer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-set-printer}(\proctype{frame} \procparm{obj})\
 Set the printer for the print command to spool to.  Note 
 that this command is obsoleted by the print option dialog.\
 Use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{frame-preview}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-preview}(\proctype{frame} \procparm{obj})\
 Previews document.\
 Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Preview}\procmenuwhere{~21}}
 
-\proclistentry{\procname{frame-print}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-print}(\proctype{frame} \procparm{obj})\
 Prints document.\
 File~10,Print~22}
 
-\proclistentry{\procname{frame-previous-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-previous-window}(\proctype{frame} \procparm{obj})\
 Moves the window manager input focus to the "previous" window.}
 
-\proclistentry{\procname{frame-next-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-next-window}(\proctype{frame} \procparm{obj})\
 Moves the window manager input focus to the "next" window.}
 
-\proclistentry{\procname{frame-set-buffer-modified}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-set-buffer-modified}(\proctype{frame} \procparm{obj})\
 Sets buffer to be unmodified.}
 
-\proclistentry{\procname{frame-hide-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-hide-window}(\proctype{frame} \procparm{obj})\
 Hides (iconifies) the window this command is executed in.}
 
-\proclistentry{\procname{frame-expose-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-expose-window}(\proctype{frame} \procparm{obj})\
 Exposes the window this command is executed in.}
 
-\proclistentry{\procname{frame-single-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-single-window}(\proctype{frame} \procparm{obj})\
 Hides all windows and maybe makes the current window take 
 up freed space.}
 
-\proclistentry{\procname{frame-delete-this-buffer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-delete-this-buffer}(\proctype{frame} \procparm{obj})\
 Deletes buffer in current window without prompting for 
 name.  If modified, you will still be prompted for confirmation.\
 Don't try to answer the confirmation dialog in Ness.}
 
-\proclistentry{\procname{frame-drop-buffer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-drop-buffer}(\proctype{frame} \procparm{obj})\
 Drop out the current buffer for drag & drop.}
 
-\proclistentry{\procname{frame-visit-file-uninterpreted}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-visit-file-uninterpreted}(\proctype{frame} \procparm{obj})\
 Prompts for a file to visit uninterpreted.\
 Bound to:  \prockey{^X-Esc-v}\
 Use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{frame-write-plainest-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{frame-write-plainest-file}(\proctype{frame} \procparm{obj})\
 Prompts for a file to save the current buffer into with 
 styles removed.\
 Bound to:  \prockey{^X-Esc-w}\
 Use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\proctype{void} \procname{framecmds-interact}(\proctype{object} \procparm{self})\
+
+\proclistentry{\proctype{boolean} \procname{framecmds-set-command-enable}(\proctype{frame} \procparm{obj}, \proctype{integer} \procparm{enable})\
+Ness-callable: enable/disable frame command bindings.  args:
+frame, enable.  Returns prior state.\
+Not intended to be bound.}
+
+\proclistentry{\proctype{void} \procname{framecmds-set-window-title}(\proctype{frame} \procparm{obj}, \proctype{marker} \procparm{name})\
+Ness-callable: set window title.  args: frame, title\
+Not intended to be bound.}
+
+
+\proclistentry{\proctype{void} \procname{framecmds-interact}(\proctype{object} \procparm{obj})\
 Ness-callable: interact with user.  Enters keyboard main 
-loop.\
+loop.  The \italic{obj} argument is ignored.\
 Should not be bound.}
 
-\proclistentry{\proctype{object} \procname{framecmds-open-file}(\proctype{marker} \procparm{name})\
+\proclistentry{\proctype{frame} \procname{framecmds-open-file}(\proctype{marker} \procparm{name})\
 Ness-callable: create a window and edit a file in it.  
 arg: filename.  Returns frame.\
 Cannot be bound.}
 
-\proclistentry{\proctype{object} \procname{framecmds-open-view}(\proctype{object} \procparm{observable})\
+\proclistentry{\proctype{frame} \procname{framecmds-open-view}(\proctype{object} \procparm{obj})\
 Ness-callable: create a window and display the view in it.  
-args: object (dataobject or view from which dataobject is taken).  Returns 
-frame.\
+args: \procparm{obj} (dataobject or view from which dataobject is taken).  Returns 
+frame.  Note that \procparm{obj}'s type is assumed to at least be an 
+ATK object without checking.\
 Cannot be bound.}
-
-\proclistentry{\proctype{boolean} \procname{framecmds-set-command-enable}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{enable})\
-Ness-callable: enable/disable frame command bindings.  args:
-frame, enable.  Returns prior state.\
-Not intended to be bound.}
 
 \proclistentry{\proctype{void} \procname{framecmds-set-program-name}(\proctype{marker} \procparm{name})\
 Ness-callable: set program name (for preferences).  args:  name\
 Cannot be bound.}
 
-\proclistentry{\proctype{void} \procname{framecmds-set-window-title}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
-Ness-callable: set window title.  args: frame, title\
-Not intended to be bound.}
+
+\proclistentry{\procname{frameview-complete}(\proctype{frameview} \procparm{obj}, \proctype{integer} \procparm{ch})\
+Attempt to complete a user response in the message line.  
+If completion is not available, the previous binding of \procparm{ch} is 
+executed, instead.\
+Bound in message line to:  \prockey{Space}}
+
+\proclistentry{\procname{frameview-help}(\proctype{frameview} \procparm{obj})\
+Provide help on current question in the message line.  If 
+completions are enabled, this help is a list of possible completions.  
+Otherwise, the previous binding of \prockey{?} is used.\
+Bound in message line to:  \prockey{?}}
+
+\proclistentry{\procname{frameview-kill}(\proctype{frameview} \procparm{obj})\
+Kill to beginning of the message line response.\
+Bound in message line to:  \prockey{^U}}
+
+\proclistentry{\procname{frameview-minimize}(\proctype{frameview} \procparm{obj})\
+Reset the message line to the size needed for a single line.\
+Bound in message line to:  \prockey{^X-1}}
+
+\proclistentry{\procname{frameview-punt}(\proctype{frameview} \procparm{obj})\
+^G (cancel, unless mandatory response) in message line.\
+Bound in message line to:  \prockey{^C}, \prockey{^G}, \prockey{^X-^C}}
+
+\proclistentry{\procname{frameview-return}(\proctype{frameview} \procparm{obj})\
+<CR> in message line.\
+Bound in message line to:  \prockey{Enter} (\prockey{^M})}
+
 
 \section{Related Topics}
 

@@ -1,157 +1,157 @@
 \begindata{text,1241}
 \textdsversion{12}
 \template{prochelp}
-\chapter{Procedure Table Listing for srctextview}
+\chapter{Procedure Table Listing for srctext}
 
 
-\proclistentry{\procname{srctextview-balance}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-balance}(\proctype{srctextview} \procparm{obj})\
 Balance parentheses, brackets, or braces.\
 Bound to:  \prockey{Esc-m}}
 
-\proclistentry{\procname{srctextview-check-line-lengths}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-check-line-lengths}(\proctype{srctextview} \procparm{obj})\
 Display a warning box if any lines 
 exceed max-length.}
 
-\proclistentry{\procname{srctextview-compress-all}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-compress-all}(\proctype{srctextview} \procparm{obj})\
 Compress all lines indented (as far or) 
 farther than the current line.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Compress all indents}\procmenuwhere{~21}}
 
-\proclistentry{\procname{srctextview-compress}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-compress}(\proctype{srctextview} \procparm{obj})\
 Compress a region of text for viewing general 
 outline.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Compress region}\procmenuwhere{~20}}
 
-\proclistentry{\procname{srctextview-copyright-scramble}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-copyright-scramble}(\proctype{srctextview} \procparm{obj})\
 Scrambles or descrambles code. Used 
 to defeat 'copyright-key' protection.}
 
-\proclistentry{\procname{srctextview-end-comment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-end-comment}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch}, and then end a comment style if \procparm{ch} 
 is part of a comment delimiter.\
 Bound in asmtext and ctext and rexxtext to:  \prockey{/}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-goto-column}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-goto-column}(\proctype{srctextview} \procparm{obj})\
 Prompt for a column number and move the 
 cursor there, appending whitespace to if needed.\
 Use \procname{QueueAnswer} to provide column number in Ness.}
 
-\proclistentry{\procname{srctextview-insert-comment}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-insert-comment}(\proctype{srctextview} \procparm{obj})\
 Inserts a comment at the end of the line.\
 Bound to:  \prockey{Esc-1}}
 
-\proclistentry{\procname{srctextview-insert-linecomment}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-insert-linecomment}(\proctype{srctextview} \procparm{obj})\
 Inserts a comment-to-end-of-line.\
 Bound to:  \prockey{Esc-2}}
 
-\proclistentry{\procname{srctextview-newline}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-newline}(\proctype{srctextview} \procparm{obj})\
 Insert a newline and indent properly.\
 Bound to:  \prockey{^J}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-next-long-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-next-long-line}(\proctype{srctextview} \procparm{obj})\
 Find the next line exceeding max-length 
 and highlight the offending characters.\
 Bound to:  \prockey{Esc-^T}}
 
-\proclistentry{\procname{srctextview-overstrike-mode-off}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-overstrike-mode-off}(\proctype{srctextview} \procparm{obj})\
 Turn overstrike mode off.}
 
-\proclistentry{\procname{srctextview-overstrike-mode-on}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-overstrike-mode-on}(\proctype{srctextview} \procparm{obj})\
 Turn overstrike mode on.}
 
-\proclistentry{\procname{srctextview-paren}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{end})\
+\proclistentry{\procname{srctextview-paren}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{end})\
 Insert a paren (\procparm{end}), with balancing.  The start is 
 assumed from \procparm{end}.  Only supports the bindings below.\
 Bound to:  \prockey{)}, \prockey{]} \prockey{\}}, with their 
 respective character codes as \procparm{end}.}
 
-\proclistentry{\procname{srctextview-redo-styles}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-redo-styles}(\proctype{srctextview} \procparm{obj})\
 Wrap styles around comments, functions, keywords, etc in 
 the source code.\
 Bound to:  \prockey{Esc-r}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Redo styles}\procmenuwhere{~10}}
 
-\proclistentry{\procname{srctextview-reformat}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-reformat}(\proctype{srctextview} \procparm{obj})\
 Indent line or region and reflow comments.\
 Bound to:  \prockey{Esc-^R}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Format line/region}\procmenuwhere{~12}}
 
-\proclistentry{\procname{srctextview-reindent-return}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-reindent-return}(\proctype{srctextview} \procparm{obj})\
 Indent current line properly and insert a newline.\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-reindent}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-reindent}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch} and indent the current line or selected region.\
 Bound to:  \prockey{Tab}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Indent line/region}\procmenuwhere{~11}; 
 both with tab as \procparm{ch}.\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-rename-identifier}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-rename-identifier}(\proctype{srctextview} \procparm{obj})\
 Rename identifier in selection region.\
 Bound to:  \prockey{Esc-Q}; Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Rename Identifier}\procmenuwhere{~80}\
 Use \procname{QueueAnswer} to provide original and then new name in Ness.}
 
-\proclistentry{\procname{srctextview-return}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-return}(\proctype{srctextview} \procparm{obj})\
 Insert a newline.\
 Bound to:  \prockey{Return} (\prockey{^M})\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-self-insert-reindent}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-self-insert-reindent}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch}, check for preceding keyword, and reindent this line.\
 Bound in ctext to:  \prockey{\{}\
 Bound in modtext to:  \prockey{|}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-self-insert}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-self-insert}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch} and check for a preceding keyword.\
 Bound to:  \prockey{Space}, \prockey{(}, \prockey{[}, 
 \prockey{\{}, \prockey{.}, \prockey{,}, \prockey{;}, each 
 with their respective character code as \procparm{ch}.\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname1{srctextview-start-comment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-start-comment}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Inserts \procparm{ch}, and then begins comment style if part 
 of a comment delimiter.\
 Bound in asmtext and ctext and rexxtext to:  \prockey{*}}
 
-\proclistentry{\procname{srctextview-start-linecomment}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-start-linecomment}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Inserts \procparm{ch}, and then begins a comment to end of line.\
 Bound in asmtext to:  any characters added using the 
 \italic{bang-comment} parameter.\
 Bound in ltext to:  \prockey{;}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-style-label}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-style-label}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Inserts \procparm{ch}, and then puts a style on labels.\
 Bound in ctext and rexxtext to:  \prockey{:}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-style-string}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{srctextview-style-string}(\proctype{srctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Inserts \procparm{ch}, and then then starts or ends a string style.\
 Bound in ltext and ctext and modtext and rexxtext to:  \prockey{"}\
 Bound in ctext and modtext and rexxtext to:  \prockey{'}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{srctextview-toggle-overstrike-mode}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-toggle-overstrike-mode}(\proctype{srctextview} \procparm{obj})\
 Turn overstrike mode on or off.\
 Bound to:  \prockey{Insert} (\prockey{Esc-^\\})}
 
-\proclistentry{\procname{srctextview-what-column}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-what-column}(\proctype{srctextview} \procparm{obj})\
 Display in the message window what column 
 the cursor is in.}
 
-\proclistentry{\procname{srctextview-force-upper-off}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-force-upper-off}(\proctype{srctextview} \procparm{obj})\
 Turn off auto upper casing of keywords.  This procedure is 
 only present if auto-upper-casing is on (not even at class load).\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Force Upper Off}\procmenuwhere{~90}}
 
-\proclistentry{\procname{srctextview-force-upper-on}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{srctextview-force-upper-on}(\proctype{srctextview} \procparm{obj})\
 Turn on auto upper casing of keywords.  This procedure is 
 only present if auto-upper-casing is off (not even at class load).\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Force Upper On}\procmenuwhere{~90}}
 
 
-\proclistentry{\procname{rawtextview-toggle-overstrike-mode}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rawtextview-toggle-overstrike-mode}(\proctype{srctextview} \procparm{obj})\
 Turn overstrike mode on or off.\
 Bound to:  \prockey{Insert} (\prockey{Esc-^\\})}
 
@@ -160,22 +160,22 @@ Note that the following views inherit srctextview's default bindings, unless
 overridden.
 
 
-\proclistentry{\procname{m3textview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{m3textview-asterisk}(\proctype{m3textview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented}\
 Bound to:  \prockey{*}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{m3textview-display-interface}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{m3textview-display-interface}(\proctype{m3textview} \procparm{obj})\
 Find the interface where selected 
 identifier is declared.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Interface}\procmenuwhere{~30}}
 
-\proclistentry{\procname{m3textview-display-module}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{m3textview-display-module}(\proctype{m3textview} \procparm{obj})\
 Find the module where selected procedure's 
 code lies.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Module}\procmenuwhere{~31}}
 
-\proclistentry{\procname{m3textview-pragma}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{m3textview-pragma}(\proctype{m3textview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented}\
 Bound to:  \prockey{>}\
 \prockey{^U}-argument can be set to repeat insertion.}
@@ -184,7 +184,7 @@ Bound to:  \prockey{>}\
 Note that m3text inherits modtext's dfeault bindings.
 
 
-\proclistentry{\procname{cpptextview-slash}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{cpptextview-slash}(\proctype{cpptextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a slash (\procparm{ch}), possibly an end comment delimiter 
 or the start of a line comment.\
 Bound to:  \prockey{/}\
@@ -194,17 +194,17 @@ Bound to:  \prockey{/}\
 Note that cpptext inherits ctext's default bindings.
 
 
-\proclistentry{\procname{mtextview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{mtextview-asterisk}(\proctype{mtextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert, and if preceded by an open-paren, start a comment.\
 Bound to:  \prockey{*}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{mtextview-display-definition}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{mtextview-display-definition}(\proctype{mtextview} \procparm{obj})\
 Find the definition module where 
 selected identifier is declared.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Definition}\procmenuwhere{~30}}
 
-\proclistentry{\procname{mtextview-display-implementation}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{mtextview-display-implementation}(\proctype{mtextview} \procparm{obj})\
 Find the implementation module 
 where selected procedure's code lies.\
 Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Implementation}\procmenuwhere{~31}}
@@ -213,42 +213,42 @@ Menu:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Display Implementation}\
 Note that mtext inherits modtext's default bindings.
 
 
-\proclistentry{\procname{ptextview-asterisk}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{ptextview-asterisk}(\proctype{ptextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented, integer \procparm{ch}}\
 Bound to:  \prockey{*}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{ptextview-brace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{ptextview-brace}(\proctype{ptextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented}\
 Bound to:  \prockey{\}}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{ptextview-slash}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{ptextview-slash}(\proctype{ptextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented}\
 Bound to:  \prockey{/}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
-\proclistentry{\procname{ptextview-startbrace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{ptextview-startbrace}(\proctype{ptextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 \italic{Not documented}\
 Bound to:  \prockey{\{}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
 
-\proclistentry{\procname{ctextview-start-preproc}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{ctextview-start-preproc}(\proctype{ctextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch} and start preprocessor style if pressed at start 
 of line.\
 Bound to:  \prockey{#}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
 
-\proclistentry{\procname{modtextview-start-preproc}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{modtextview-start-preproc}(\proctype{modtextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert \procparm{ch} and start preprocessor style if pressed at 
 start of line.\
 Bound to:  \prockey{#}\
 \prockey{^U}-argument can be set to repeat insertion.}
 
 
-\proclistentry{\procname{perltextview-string-delimiter}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{perltextview-string-delimiter}(\proctype{perltextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Inserts \procparm{ch} and begins and ends strings with special 
 characters for delimiters\
 Bound to:  \prockey{!}, \prockey{#}, \prockey{:}, \prockey{>}, 

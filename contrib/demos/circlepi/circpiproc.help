@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for circlepi}
 
 
-\proclistentry{\procname{circpi-set-depth-limit}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{rock})\
+\proclistentry{\procname{circpi-set-depth-limit}(\proctype{circlepiview} \procparm{obj}, \proctype{integer} \procparm{rock})\
 Takes the integer \procparm{rock} and uses it to set the 
 depth limit on recursion.\
 Menu:  10 depth limits:  \procmenu{Depth Limit}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{1}\procmenuwhere{~1} .. \procmenu{Depth Limit}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{10}\procmenuwhere{~10}}

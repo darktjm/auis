@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for panel}
 
 
-\proclistentry{\procname{panel-key-dispatch}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{key})\
+\proclistentry{\procname{panel-key-dispatch}(\proctype{panel} \procparm{obj}, \proctype{integer} \procparm{key})\
 Dispatch assigned keys.  The class which uses the panel 
 can set any.  By default, the assigned keys are for going to the 
 next item (\prockey{^N}, \prockey{N}, \prockey{n}, \prockey{F}, 

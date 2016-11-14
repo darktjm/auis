@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for Ness}
 
 
-\proclistentry{\procname{ness-dostmt}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{ness-dostmt}(\proctype{view} \procparm{obj})\
 Read a Ness statement seqeunce from the message line and 
 execute it.  Since the Ness is destroyed after completion, this cannot 
 be used to add or change event handlers.}
@@ -13,76 +13,85 @@ be used to add or change event handlers.}
 Read, compile, and post procs from a Ness program file\
 This procedure cannot be bound.}
 
-\proclistentry{\procname{nessview-next-error}(\proctype{object} \procparm{textview})\
+\proclistentry{\proctype{action} \procname{ness-proctable-hook}(\proctype{object} \procparm{obj}, \proctype{marker} \procparm{name})\
+Attempts to locate the named function and place 
+it in the proctable.  This does not function as advertised, and is 
+likely either deprecated or an aborted enhancement.  Only the 
+first part of --separated \procparm{name} is used; if that is the name 
+of a ness library, compile and mark library as used.  No Ness functions 
+are placed in the proctable.  Returns nothing, and ignores 
+\procparm{obj} completely.}
+
+\proclistentry{\procname{nessview-next-error}(\proctype{nessview} \procparm{obj})\
 See the source code for the next error\
 Bound to:  \prockey{Esc-^N}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Next Danger}\procmenuwhere{~10}\
 \prockey{^U} numeric argument can be set to find previous error, instead.}
 
-\proclistentry{\procname{nessview-show-origin}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{nessview-show-origin}(\proctype{nessview} \procparm{obj})\
 Show the author and date of last change\
 Bound to:  \prockey{^X-^N-O}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Origin}\procmenuwhere{~12}}
 
-\proclistentry{\procname{nessview-scan-for-danger}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{nessview-scan-for-danger}(\proctype{nessview} \procparm{obj})\
 Check for any statements that might be harmful\
 Bound to:  \prockey{^X-^N-S}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Scan for danger}\procmenuwhere{~15}}
 
-\proclistentry{\procname{nessview-compile}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{nessview-compile}(\proctype{nessview} \procparm{obj})\
 Compile the text in this view\
 Bound to:  \prockey{Esc-^N-C}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Empower-compile}\procmenuwhere{~22}}
 
-\proclistentry{\procname{nessview-execute}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{nessview-execute}(\proctype{nessview} \procparm{obj})\
 Compile Ness and execute function main()\
 Bound to:  \prockey{^X-^E}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Do main()}\procmenuwhere{~24}\
 \prockey{^U} numeric argument can be set to prompt for different 
 function to execute.\
 If prompting, use \procname{QueueAnswer} to provide name in Ness.}
 
-\proclistentry{\procname{nessview-author-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{nessview-author-mode}(\proctype{nessview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Change to be an author; remove warning text;  make read-write.  
 \procparm{mode} must be 0.  It can be -1, however, to toggle instead.\
 Bound to:  \prockey{Esc-~}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Author mode}\procmenuwhere{~32}\
 Use \procname{QueueAnswer} to answer confirmation in Ness.}
 
-\proclistentry{\procname{nessview-user-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{nessview-user-mode}(\proctype{nessview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Reinsert the warning text and be readonly.  
 \procparm{mode} must be 1.  It can be -1, however, to toggle instead.\
 Bound to:  \prockey{Esc-~}; Menu:  \procmenu{Ness}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Add warning}\procmenuwhere{~32}}
 
-\proclistentry{\procname{nessview-append-to-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{nessview-append-to-file}(\proctype{nessview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Append the current buffer to a Ness file.\
 Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to File}\procmenuwhere{~40}\
 Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-\proclistentry{\procname{nessview-visit-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{nessview-visit-script}(\proctype{nessview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Visit an existing Ness script.\
 Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~50}\
 Menu in frame:  \procmenu{Ness}\procmenuwhere{~99}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~41}\
 Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-\proclistentry{\procname{nessview-invert-debug}()\
-Toggle the nessview debug flag\
+\proclistentry{\procname{nessview-invert-debug}(\proctype{nessview} \procparm{obj})\
+Toggle the nessview debug flag.  Global; \procparm{obj} is ignored.\
 Bound to:  \prockey{Esc-^D-D}}
 
 
 \section{nessm}
 
 
-\proclistentry{\procname{nessm-make-macro}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{nessm-make-macro}(\proctype{view} \procparm{obj})\
 Converts a keyboard macro to ness code.\
 Menu in frame:  \procmenu{Ness}\procmenuwhere{~99}\procmenuwhere{,}\procmenu{Make Macro}\procmenuwhere{~1}\
 Use \procname{QueueAnswer} to choose action and maybe provide binding in Ness.}
 
-\proclistentry{\procname{nessmv-append-to-file}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{nessmv-append-to-file}(\proctype{nessmv} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Append the current buffer to a Ness file.\
 Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to File}\procmenuwhere{~40}\
 Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-\proclistentry{\procname{nessmv-append-to-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{nessmv-append-to-script}(\proctype{nessmv} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Append the current buffer to a Ness script.\
 Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Append to Script}\procmenuwhere{~45}\
 Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 
-\proclistentry{\procname{nessmv-visit-script}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{nessmv-visit-script}(\proctype{nessmv} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Visit an existing Ness script.\
 Menu:  \procmenu{Ness}\procmenuwhere{,}\procmenu{Visit Script}\procmenuwhere{~50}\
 Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
@@ -91,16 +100,17 @@ Use \procparm{name} or \procname{QueueAnswer} to provide file name.}
 \section{Generated}
 
 
-\proclistentry{\procname{\italic{object}-NessKeysEvent}(\proctype{object} \procparm{self})\
-Call Ness for a keys event; generated by on key event handlers.}
+\proclistentry{\procname{\italic{objecttype}-NessKeysEvent}(\proctype{\italic{objecttype}} \procparm{obj}, \proctype{object} \procparm{event})\
+Call Ness for a keys event; generated by on key event handlers.  Every 
+base type with handlers gets exactly one such procedure.  It is not 
+possible to generate the \italic{event} structure outside of C code; 
+do not bind or call this from Ness.}
 
-\proclistentry{\procname{\italic{object}-NessMenuEvent}(\proctype{object} \procparm{self})\
-Call Ness for a menu event; generated by on menu handlers.}
-
-\proclistentry{\proctype{action} \procname{ness-proctable-hook}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
-Attempts to locate the named function and place 
-it in the proctable.  Only the first part of --separated \procparm{name} is 
-used; if that is the name of a ness library, compile and mark library as used.}
+\proclistentry{\procname{\italic{objecttype}-NessMenuEvent}(\proctype{\italic{objecttype}} \procparm{obj}, \proctype{object} \procparm{event})\
+Call Ness for a menu event; generated by on menu handlers.  Every 
+base type with handlers gets exactly one such procedure.  It is not 
+possible to generate the \italic{event} structure outside of C code; 
+do not bind or call this from Ness.}
 
 
 \section{Related Topics}

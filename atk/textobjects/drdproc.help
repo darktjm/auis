@@ -4,57 +4,57 @@
 \chapter{Procedure Table Listing for Dired}
 
 
-\proclistentry{\procname{dired-zoom-in}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-zoom-in}(\proctype{diredview} \procparm{obj})\
 Edit selected file or switch to selected directory.\
 Bound to:  \prockey{z}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Zoom In}\procmenuwhere{~10}}
 
-\proclistentry{\procname{dired-delete}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-delete}(\proctype{diredview} \procparm{obj})\
 Delete selected file(s).\
 Bound to:  \prockey{d}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Delete}\procmenuwhere{~20}\
 Use \procname{QueueAnswer} to provide delete confirmation(s) in Ness.}
 
-\proclistentry{\procname{dired-rename}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-rename}(\proctype{diredview} \procparm{obj})\
 Rename selected file(s).\
 Bound to:  \prockey{r}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Rename}\procmenuwhere{~30}\
 Use \procname{QueueAnswer} to provide new name(s) in Ness.}
 
-\proclistentry{\procname{dired-refresh}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-refresh}(\proctype{diredview} \procparm{obj})\
 Reread current directory.\
 Bound to:  \prockey{Enter} (\prockey{^M}); Menu:  \procmenu{
 Directory Edit}\procmenuwhere{,}\procmenu{Refresh}\procmenuwhere{~40}}
 
-\proclistentry{\procname{dired-toggle-select}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-toggle-select}(\proctype{diredview} \procparm{obj})\
 Toggle file at cursor and move to next line.\
 Bound to:  \prockey{Space}\
 \prockey{^U}-argument can be set to toggle more than one in 
 succession (up to 10k)}
 
-\proclistentry{\procname{dired-down-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-down-line}(\proctype{diredview} \procparm{obj})\
 Move cursor down (equiv ^N).\
 Bound to:  \prockey{n}}
 
-\proclistentry{\procname{dired-up-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-up-line}(\proctype{diredview} \procparm{obj})\
 Move cursor up (equiv ^P).\
 Bound to:  \prockey{p}}
 
-\proclistentry{\procname{dired-regexp-select}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{dired-regexp-select}(\proctype{diredview} \procparm{obj})\
 Select files by regular expression.\
 Bound to:  \prockey{=}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Regexp Select}\procmenuwhere{~60}\
 Use \procname{QueueAnswer} to provide regular expression in Ness.}
 
-\proclistentry{\procname{dired-long-mode-on}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{dired-long-mode-on}(\proctype{diredview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 List files in long format.  \procparm{mode} must be 0.\
 Bound to:  \prockey{l}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Long Format}\procmenuwhere{~50}}
 
-\proclistentry{\procname{dired-long-mode-off}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{dired-long-mode-off}(\proctype{diredview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 List files in normal format (names only).  \procparm{mode} must be 1.\
 Bound to:  \prockey{s}; Menu: \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Short Format}\procmenuwhere{~50}}
 
-\proclistentry{\procname{dired-dot-files-on}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{dired-dot-files-on}(\proctype{diredview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Display invisible files.  \procparm{mode} must be 2.\
 Bound to:  \prockey{i}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Show Invisible}\procmenuwhere{~55}}
 
-\proclistentry{\procname{dired-dot-files-off}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{dired-dot-files-off}(\proctype{diredview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Do not display invisible files.  \procparm{mode} must be 3.\
 Bound to:  \prockey{h}; Menu:  \procmenu{Directory Edit}\procmenuwhere{,}\procmenu{Hide Invisible}\procmenuwhere{~55}}
 

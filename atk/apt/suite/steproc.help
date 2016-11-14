@@ -4,14 +4,14 @@
 \chapter{Procedure Table Listing for Suite}
 
 
-\proclistentry{\procname{suite-set-items}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{list})\
+\proclistentry{\procname{suite-set-items}(\proctype{suite} \procparm{obj}, \proctype{marker} \procparm{list})\
 Set item list (colon separated \procparm{list})}
 
-\proclistentry{\procname{suiteev-copy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{suiteev-copy}(\proctype{suiteev} \procparm{obj})\
 Copy selected region to cut buffer\
 Menu:  \procmenu{Copy}\procmenuwhere{~10}}
 
-\proclistentry{\procname{suitecv-insert-newline}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{suitecv-insert-newline}(\proctype{suitecv} \procparm{obj})\
 Insert a newline character\
 Bound to:  \prockey{Enter} (\prockey{^M})}
 

@@ -4,25 +4,25 @@
 \chapter{Procedure Table Listing for note}
 
 
-\proclistentry{\procname{noteview-closeallnotes}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{noteview-closeallnotes}(\proctype{view} \procparm{obj})\
 close Note Views}
 
-\proclistentry{\procname{noteview-insertnote}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{noteview-insertnote}(\proctype{textview} \procparm{obj})\
 Insert Note Object}
 
-\proclistentry{\procname{noteview-openallnotes}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{noteview-openallnotes}(\proctype{view} \procparm{obj})\
 open Note Views}
 
 
-\proclistentry{\procname{noteview-closeall}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{noteview-closeall}(\proctype{noteview} \procparm{obj})\
 close all the notes\
 Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{close all}\procmenuwhere{~12}}
 
-\proclistentry{\procname{noteview-close}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{noteview-close}(\proctype{noteview} \procparm{obj})\
 close the note\
 Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{close}\procmenuwhere{~2}}
 
-\proclistentry{\procname{noteview-openall}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{noteview-openall}(\proctype{noteview} \procparm{obj})\
 open all the notes\
 Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{open all}\procmenuwhere{~11}}
 

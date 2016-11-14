@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for vutils}
 
 
-\proclistentry{\procname{vutils-fork-help}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{vutils-fork-help}(\proctype{view} \procparm{obj})\
 Call Andrew help in a new process.}
 
 

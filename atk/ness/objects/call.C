@@ -2087,20 +2087,21 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 				found = TRUE;
 				break;
 			}
-		if ( ! found) {
+		if ( ! found)
 			// append to list of libs used by current ness
 			libuseList = libusenode_Create(libnode, libuseList);
+	}
+
+	if (libnode->status != OK)  {
+		callCompLib(libnode);
+		if(libnode->status == OK)
 			// initialize it.  It would be better to defer
 			// this until a function from the library is
 			// called, but I don't feel like implementing that
 			// at this time
 			// Actually, this may crash, for all I know - tjm
 			callInitSubTree(libnode->ness);
-		}
 	}
-
-	if (libnode->status != OK) 
-		callCompLib(libnode);
 	/* note: no 'else' here.  we test the outcome of this
 	 		or an earlier compile */
 	if (libnode->status != OK) {

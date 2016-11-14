@@ -4,10 +4,10 @@
 \chapter{Procedure Table Listing for Matte}
 
 
-\proclistentry{\procname{matte-Allow-resizing}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{matte-Allow-resizing}(\proctype{matte} \procparm{obj})\
 Allow view to resize}
 
-\proclistentry{\procname{matte-Allow-drawing}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{matte-Allow-drawing}(\proctype{matte} \procparm{obj})\
 Draw the view's border}
 
 

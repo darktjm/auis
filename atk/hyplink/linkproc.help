@@ -4,44 +4,44 @@
 \chapter{Procedure Table Listing for link}
 
 
-\proclistentry{\procname{linkview-autolink}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{linkview-autolink}(\proctype{linkview} \procparm{obj})\
 Starts the autolink process.  Waits for 
 \procname{linkview-set-target} to be invoked, which tells this link what file to link 
 to.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Start Autolink}\procmenuwhere{~1}}
 
-\proclistentry{\procname{linkview-insert-link}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{linkview-insert-link}(\proctype{textview} \procparm{obj})\
 Insert a link object in the current document.}
 
-\proclistentry{\procname{linkview-set-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{linkview-set-link}(\proctype{linkview} \procparm{obj})\
 Prompts user for target filename of the link button.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Link to File}\procmenuwhere{~11}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{linkview-set-rel-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{linkview-set-rel-link}(\proctype{linkview} \procparm{obj})\
 Prompts user for a relative filename to link 
 to.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Link to Relative File}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{linkview-set-target}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{linkview-set-target}(\proctype{frame} \procparm{obj})\
 Execute this proc from the frame of the the 
 buffer for the target file of a link.  To be called after 
 \procname{linkview-autolink}.}
 
-\proclistentry{\procname{linkview-set-url-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{linkview-set-url-link}(\proctype{linkview} \procparm{obj})\
 Prompts user for a URL link value.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Link to URL}\procmenuwhere{~14}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{linkview-set-var-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{linkview-set-var-link}(\proctype{linkview} \procparm{obj})\
 Prompts user for an uninterpreted link value 
 (may have $\{...\}).\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Link to $\{...\}/...}\procmenuwhere{~13}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
 
-\proclistentry{\procname{plinkview-set-tag}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{plinkview-set-tag}(\proctype{plinkview} \procparm{obj})\
 Prompts for user to set search tag of the link 
 button.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set Tag}\procmenuwhere{~15}\

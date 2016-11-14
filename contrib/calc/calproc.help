@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for Calc}
 
 
-\proclistentry{\procname{calcv-stroke}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{area})\
+\proclistentry{\procname{calcv-stroke}(\proctype{calcv} \procparm{obj}, \proctype{integer} \procparm{area})\
 Type Digit or Operator.\
 Bound to: many, with different \procparm{area} argument (0 .. 16):\
 \begindata{table,1320}

@@ -8,96 +8,96 @@ Note that it is generally not possible to select, place, move, or
 adjust figure objects using Ness.
 
 
-\proclistentry{\procname{figview-abort-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-abort-object}(\proctype{figview} \procparm{obj})\
 abort object being created.\
 Bound to:  \prockey{^G}}
 
-\proclistentry{\procname{figview-copy-selected-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-copy-selected-inset}(\proctype{figview} \procparm{obj})\
 Put dataobject of selected inset in cut buffer.\
 Menu:  \procmenu{Copy Inset Contents}\procmenuwhere{~3}}
 
-\proclistentry{\procname{figview-copy-selection}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-copy-selection}(\proctype{figview} \procparm{obj})\
 Put selected objects in cut buffer.\
 Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~2}}
 
-\proclistentry{\procname{figview-focus-down}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-focus-down}(\proctype{figview} \procparm{obj})\
 move focus down to subgroup.\
 Bound to:  \prockey{Down} (\prockey{Esc-B})}
 
-\proclistentry{\procname{figview-focus-left}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-focus-left}(\proctype{figview} \procparm{obj})\
 move focus left to sibling group.\
 Bound to:  \prockey{Left} (\prockey{Esc-D})}
 
-\proclistentry{\procname{figview-focus-right}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-focus-right}(\proctype{figview} \procparm{obj})\
 move focus left to sibling group.\
 Bound to:  \prockey{Right} (\prockey{Esc-C})}
 
-\proclistentry{\procname{figview-focus-up}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-focus-up}(\proctype{figview} \procparm{obj})\
 move focus up to parent group.\
 Bound to:  \prockey{Up} (\prockey{Esc-A})}
 
-\proclistentry{\procname{figview-pan-to-origin}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-pan-to-origin}(\proctype{figview} \procparm{obj})\
 Pan to (0,0).\
 Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Pan to Origin}\procmenuwhere{~19}}
 
-\proclistentry{\procname{figview-read-zip-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-read-zip-file}(\proctype{figview} \procparm{obj})\
 Read a zip datastream into the figure.\
 Use \procname{QueueAnswer} twice to provide file name and scale in Ness.}
 
-\proclistentry{\procname{figview-rotate-yank-selection}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-rotate-yank-selection}(\proctype{figview} \procparm{obj})\
 Paste an object from the cut buffer 
 and rotate the buffer.\
 Bound to:  \prockey{Esc-y}}
 
-\proclistentry{\procname{figview-set-expert-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{figview-set-expert-mode}(\proctype{figview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Turns on expert mode for self and toolset.  \procparm{mode} 
 is 0 to disable, and non-zero to enable.\
 Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Expert Mode}\procmenuwhere{~40} (\procparm{mode} is 1)}
 
-\proclistentry{\procname{figview-set-print-landscape}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{on})\
+\proclistentry{\procname{figview-set-print-landscape}(\proctype{figview} \procparm{obj}, \proctype{integer} \procparm{on})\
 Set landscape or portrait printing.  \procparm{on} is 1 for 
 lasndscape, 0 for portrait.\
 Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Portrait Printing}\procmenuwhere{~25} (\procparm{on} is 1); 
 \procmenu{File}\procmenuwhere{,}\procmenu{Landscape Printing}\procmenuwhere{~25} (\procparm{on} is 0)}
 
-\proclistentry{\procname{figview-set-print-scale}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-set-print-scale}(\proctype{figview} \procparm{obj})\
 Set print scale.\
 Bound to:  \prockey{Esc-P}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Set Print Scale}\procmenuwhere{~24}\
 Use \procname{QueueAnswer} twice to provide X and Y scale in Ness.}
 
-\proclistentry{\procname{figview-show-print-area}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{mode})\
+\proclistentry{\procname{figview-show-print-area}(\proctype{figview} \procparm{obj}, \proctype{integer} \procparm{mode})\
 Show page boundaries. \procparm{mode} is 0 for off, 1 for 
 on, and 2 for recalculate (i.e., reshow if shown).\
 Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Show Print Area}\procmenuwhere{~26} (\procparm{mode} is 1); 
 \procmenu{File}\procmenuwhere{,}\procmenu{Hide Print Area}\procmenuwhere{~26} (\procparm{mode} is 0)}
 
-\proclistentry{\procname{figview-toggle-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-toggle-debug}(\proctype{figview} \procparm{obj})\
 Turn debugging on or off.}
 
-\proclistentry{\procname{figview-toggle-readonly}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-toggle-readonly}(\proctype{figview} \procparm{obj})\
 Turn read-only flag on or off.}
 
-\proclistentry{\procname{figview-toolset-create}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-toolset-create}(\proctype{figview} \procparm{obj})\
 Creates toolset window.\
 Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Toolset}\procmenuwhere{~30}}
 
-\proclistentry{\procname{figview-toolset-destroy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-toolset-destroy}(\proctype{figview} \procparm{obj})\
 Deletes toolset window.\
 Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Remove Toolset}\procmenuwhere{~31}}
 
-\proclistentry{\procname{figview-unselect}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-unselect}(\proctype{figview} \procparm{obj})\
 Select nothing.\
 Menu:  \procmenu{Unselect}\procmenuwhere{~11}}
 
-\proclistentry{\procname{figview-yank-selection}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-yank-selection}(\proctype{figview} \procparm{obj})\
 Paste an object from the cut buffer.\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Paste}\procmenuwhere{~4}}
 
-\proclistentry{\procname{figview-zap-selection}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figview-zap-selection}(\proctype{figview} \procparm{obj})\
 Remove selected objects and put them in cut buffer.\
 Bound to:  \prockey{^W}; Menu:  \procmenu{Cut}\procmenuwhere{~1}}
 
-\proclistentry{\procname{figview-zoom}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{how})\
+\proclistentry{\procname{figview-zoom}(\proctype{figview} \procparm{obj}, \proctype{integer} \procparm{how})\
 Change scale of view.  \procparm{how} is less than zero for 
 out, greater than zero for in, and zero for normal size.\
 Bound to:  \prockey{Esc-Z} Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Zoom In}\procmenuwhere{~10} (\procparm{how} is 1)\
@@ -111,16 +111,16 @@ Menu:  \procmenu{Figure}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Normal Size
 \italic{FIXME:  what the hell is a phlumph?}
 
 
-\proclistentry{\procname{phlumph-close}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{nodest})\
+\proclistentry{\procname{phlumph-close}(\proctype{phlumphview} \procparm{obj}, \proctype{integer} \procparm{nodest})\
 Close window containing page layouts.  \procparm{nodest} must 
 be 0.\
 Menu:  \procmenu{Phlumph}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Close}\procmenuwhere{~11}}
 
-\proclistentry{\procname{phlumph-delete-page}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{phlumph-delete-page}(\proctype{phlumphview} \procparm{obj})\
 Insert new page before the current one.\
 Bound to:  \prockey{^X-d}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Delete This Page}\procmenuwhere{~12}}
 
-\proclistentry{\procname{phlumph-insert-page}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+\proclistentry{\procname{phlumph-insert-page}(\proctype{phlumphview} \procparm{obj}, \proctype{integer} \procparm{where})\
 Insert new page before the current one (non-zero \procparm{where}) 
 or at the end (zero \procparm{where}).\
 Bound to:  \prockey{^X-a}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Add Page}\procmenuwhere{~10} 
@@ -128,26 +128,26 @@ Bound to:  \prockey{^X-a}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuw
 Bound to:  \prockey{^X-i}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Insert Page Here}\procmenuwhere{~11} 
 (\procparm{where} is 1)}
 
-\proclistentry{\procname{phlumph-next-page}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{phlumph-next-page}(\proctype{phlumphview} \procparm{obj})\
 Go to next page of page list.\
 Bound to:  \prockey{^X-^N}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Next Page}\procmenuwhere{~21}}
 
-\proclistentry{\procname{phlumph-open}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{phlumph-open}(\proctype{phlumphview} \procparm{obj})\
 Open window containing page layouts.\
 Menu:  \procmenu{Phlumph}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Open}\procmenuwhere{~10}}
 
-\proclistentry{\procname{phlumph-previous-page}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{phlumph-previous-page}(\proctype{phlumphview} \procparm{obj})\
 Go to previous page of page list.\
 Bound to:  \prockey{^X-^P}; Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Previous Page}\procmenuwhere{~20}}
 
-\proclistentry{\procname{phlumph-set-repeat}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{clear})\
+\proclistentry{\procname{phlumph-set-repeat}(\proctype{phlumphview} \procparm{obj}, \proctype{integer} \procparm{clear})\
 \italic{Undocumented}  If \procparm{clear} is 0, prompt for 
 a new repeat value.  Otherwise, clear repeat value.\
 Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Set Page Repeat}\procmenuwhere{~30} (\procparm{clear} is 0)\
 Menu:  \procmenu{Phlumph}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Clear Page Repeat}\procmenuwhere{~31} (\procparm{clear} is 1)\
 Use \procname{QueueAnswer} to provide repeat count in Ness if \procparm{clear} is 0.}
 
-\proclistentry{\procname{phlumph-toolset-suicide}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{phlumph-toolset-suicide}(\proctype{phlumphview} \procparm{obj})\
 Deletes this window.\
 Bound to:  \prockey{^X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
@@ -155,23 +155,23 @@ Bound to:  \prockey{^X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwher
 \section{figotext}
 
 
-\proclistentry{\procname{figotext-complete-entry}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figotext-complete-entry}(\proctype{figotext} \procparm{obj})\
 Finish entering text into this object.\
 Bound to:  \prockey{Esc-Enter} (\prockey{Esc-^M})}
 
-\proclistentry{\procname{figotext-delete-char}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figotext-delete-char}(\proctype{figotext} \procparm{obj})\
 Delete a character from this object.\
 Bound to:  \prockey{Backspace} (\prockey{^H}), \prockey{Delete}}
 
-\proclistentry{\procname{figotext-insert-char}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{figotext-insert-char}(\proctype{figotext} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a character (\procparm{ch}) into this object.\
 Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~})}
 
-\proclistentry{\procname{figotext-kill-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figotext-kill-line}(\proctype{figotext} \procparm{obj})\
 Delete chars starting at dot.\
 Bound to:  \prockey{^K}}
 
-\proclistentry{\procname{figotext-move-dot}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{direction})\
+\proclistentry{\procname{figotext-move-dot}(\proctype{figotext} \procparm{obj}, \proctype{integer} \procparm{direction})\
 Move the dot in this object.  \procparm{direction} is 0 for 
 left, 1 for right, 2 for beginning, 3 for end, 4 for up, and 5 for down.\
 Bound to:  \prockey{^B}, \prockey{Left} (\prockey{Esc-D}) (\procparm{direction} is 0)\
@@ -181,7 +181,7 @@ Bound to:  \prockey{^E} (\procparm{direction} is 3)\
 Bound to:  \prockey{^P}, \prockey{Up} (\prockey{Esc-A}) (\procparm{direction} is 4)\
 Bound to:  \prockey{^N}, \prockey{Down} (\prockey{Esc-B}) (\procparm{direction} is 5)}
 
-\proclistentry{\procname{figotext-twiddle-chars}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figotext-twiddle-chars}(\proctype{figotext} \procparm{obj})\
 Move the dot in this object.\
 Bound to:  \prockey{^T}}
 
@@ -189,24 +189,24 @@ Bound to:  \prockey{^T}}
 \section{figtool}
 
 
-\proclistentry{\procname{figtoolv-abort-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figtoolv-abort-object}(\proctype{figtoolview} \procparm{obj})\
 Abort the object being built in the figview.\
 Menu:  \procmenu{Cancel Object}\procmenuwhere{~11}}
 
-\proclistentry{\procname{figtoolv-apply-to-selection}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figtoolv-apply-to-selection}(\proctype{figtoolview} \procparm{obj})\
 Apply attributes to selected objects.\
 Menu:  \procmenu{Apply to Selection}\procmenuwhere{~33}}
 
-\proclistentry{\procname{figtoolv-toggle-closed}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figtoolv-toggle-closed}(\proctype{figtoolview} \procparm{obj})\
 Open or close selected polylines and splines.\
 Menu:  \procmenu{Close / Open}\procmenuwhere{~32}}
 
-\proclistentry{\procname{figtoolv-toggle-smooth}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figtoolv-toggle-smooth}(\proctype{figtoolview} \procparm{obj})\
 Turn selected polylines into splines and 
 back.\
 Menu:  \procmenu{Smooth / Unsmooth}\procmenuwhere{~31}}
 
-\proclistentry{\procname{figtoolv-toolset-destroy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{figtoolv-toolset-destroy}(\proctype{figtoolview} \procparm{obj})\
 Deletes toolset window.\
 Bound to:  \prockey{^X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Delete Window}\procmenuwhere{~89}}
 

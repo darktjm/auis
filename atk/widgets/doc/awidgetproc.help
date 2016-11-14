@@ -4,17 +4,17 @@
 \chapter{Procedure Table Listing for widgets}
 
 
-\proclistentry{\procname{AWidgetView-invert-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{AWidgetView-invert-debug}(\proctype{AWidgetView} \procparm{obj})\
 Toggle the AWidgetView debug flag\
 Bound to:  \prockey{Esc-^DW}}
 
 
-\proclistentry{\proctype{action} \procname{atext-activate}(\proctype{object} \procparm{self})\
+\proclistentry{\proctype{action} \procname{atext-activate}(\proctype{ATextv} \procparm{obj})\
 Invokes the widget's activate callback.  There is no return 
 value.}
 
-\proclistentry{\proctype{action} \procname{atext-hit}(\proctype{object} \procparm{self}, \proctype{object} \procparm{AOption}, \proctype{
-object} \procparm{AOptionv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{atext-hit}(\proctype{ATextv} \procparm{obj}, \proctype{AOption} \procparm{dobj}, \proctype{
+AOptionv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Passes a mouse hit to the text.  All arguments are 
@@ -22,60 +22,60 @@ unnamed (positional).  The return value is optional; if present, it is
 the view which processed the hit.  \italic{FIXME: document more.}}
 
 
-\proclistentry{\proctype{action} \procname{abutton-activate}(\proctype{object} \procparm{self}, \proctype{object} \procparm{Abutton}, \proctype{
-object} \procparm{Abuttonv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{abutton-activate}(\proctype{AButtonv} \procparm{obj}, \proctype{AButton} \procparm{dobj}, \proctype{
+AButtonv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Disarms the button, then executes the activate callback.  All arguments are 
 unnamed (positional).  The return value is optional; if present, it is 
 the view which processed the hit.  \italic{FIXME: document more.}}
 
-\proclistentry{\proctype{action} \procname{abutton-arm}(\proctype{object} \procparm{self}, \proctype{object} \procparm{Abutton}, \proctype{
-object} \procparm{Abuttonv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{abutton-arm}(\proctype{AButtonv} \procparm{obj}, \proctype{AButton} \procparm{dobj}, \proctype{
+Abuttonv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Arms or disarms the button, according to the mouse position.  All arguments are 
 unnamed (positional).  The return value is optional; if present, it is 
 the view which processed the hit.  \italic{FIXME: document more.}}
 
-\proclistentry{\proctype{action} \procname{abutton-disarm}(\proctype{object} \procparm{self}, \proctype{object} \procparm{Abutton}, \proctype{
-object} \procparm{Abuttonv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{abutton-disarm}(\proctype{AButtonv} \procparm{obj}, \proctype{AButton} \procparm{dobj}, \proctype{
+AButtonv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Disarms the button.  All arguments are 
 unnamed (positional).  The return value is optional; if present, it is 
 the view which processed the hit.  \italic{FIXME: document more.}}
 
-\proclistentry{\proctype{action} \procname{abutton-radiotoggle}(\proctype{object} \procparm{self}, \proctype{object} \procparm{Abutton}, \proctype{
-object} \procparm{Abuttonv})\
+\proclistentry{\proctype{action} \procname{abutton-radiotoggle}(\proctype{AButtonv} \procparm{obj}, \proctype{AButton} \procparm{dobj}, \proctype{
+Abuttonv} \procparm{vobj})\
 Toggles the 'set' state of the button, ensures 
 only one of the radio group buttons is 'set' at any one time.  All arguments are 
 unnamed (positional).  There is no return value.  \italic{FIXME: document more.}}
 
-\proclistentry{\proctype{action} \procname{abutton-toggle}(\proctype{object} \procparm{self}, \proctype{object} \procparm{Abutton}, \proctype{
-object} \procparm{Abuttonv})\
+\proclistentry{\proctype{action} \procname{abutton-toggle}(\proctype{AButtonv} \procparm{obj}, \proctype{AButton} \procparm{dobj}, \proctype{
+Abuttonv} \procparm{vobj})\
 Toggles the 'set' state of the button.  All arguments are 
 unnamed (positional).  There is no return value.  \italic{FIXME: document more.}}
 
 
-\proclistentry{\proctype{action} \procname{alist-text-hit}(\proctype{object} \procparm{self}, \proctype{object} \procparm{AList}, \proctype{
-object} \procparm{AListv}, \proctype{integer} \procparm{action}, \proctype{integer} \procparm{pos}, \proctype{
+\proclistentry{\proctype{action} \procname{alist-text-hit}(\proctype{AListv} \procparm{obj}, \proctype{AList} \procparm{dobj}, \proctype{
+Alistv} \procparm{vobj}, \proctype{integer} \procparm{action}, \proctype{integer} \procparm{pos}, \proctype{
 integer} \procparm{number_clicks})\
 Called for every mouse hit.  All arguments are 
 unnamed (positional).  The return value is optional; if present, it is 
 non-0 to propagate the hit event.  \italic{FIXME: document more.}}
 
 
-\proclistentry{\proctype{action} \procname{aoption-button-hit}(\proctype{object} \procparm{self}, \proctype{object} \procparm{AOption}, \proctype{
-object} \procparm{AOptionv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{aoption-button-hit}(\proctype{AOptionMenuv} \procparm{obj}, \proctype{AOption} \procparm{dobj}, \proctype{
+AOptionv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Pops up the option list.  All arguments are 
 unnamed (positional).  The return value is optional; if present, it is 
 the view which processed the hit.  \italic{FIXME: document more.}}
 
-\proclistentry{\proctype{action} \procname{aoption-card-hit}(\proctype{object} \procparm{self}, \proctype{object} \procparm{AOption}, \proctype{
-object} \procparm{AOptionv}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
+\proclistentry{\proctype{action} \procname{aoption-card-hit}(\proctype{AOptionCardv} \procparm{obj}, \proctype{AOption} \procparm{dobj}, \proctype{
+AOptionv} \procparm{vobj}, \proctype{integer} \procparm{x}, \proctype{integer} \procparm{y}, \proctype{
 integer} \procparm{within}, \proctype{integer} \procparm{action}, \proctype{integer} 
 \procparm{num_clicks})\
 Pops up the option list.  All arguments are 

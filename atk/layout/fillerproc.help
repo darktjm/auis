@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for filler}
 
 
-\proclistentry{\procname{fillerview-set-data-object-by-name}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
+\proclistentry{\procname{fillerview-set-data-object-by-name}(\proctype{fillerview} \procparm{obj}, \proctype{marker} \procparm{name})\
 Insert named inset.  If \procparm{name} is Ask, prompt for a 
 name.\
 Use \procparm{name} or "Ask" + \procname{QueueAnswer} to provide inset name in Ness.}

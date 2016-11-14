@@ -4,127 +4,127 @@
 \chapter{Procedure Table Listing for eq}
 
 
-\proclistentry{\procname{eqview-above-script}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-above-script}(\proctype{eqview} \procparm{obj})\
 Insert an abovescript.\
 Bound to:  \prockey{!}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Above}\procmenuwhere{~41}}
 
-\proclistentry{\procname{eqview-below-script}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-below-script}(\proctype{eqview} \procparm{obj})\
 Insert a belowscript.\
 Bound to:  \prockey{#}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Below}\procmenuwhere{~42}}
 
-\proclistentry{\procname{eqview-carriage-return}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-carriage-return}(\proctype{eqview} \procparm{obj})\
 Handle carriage returns.\
 Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\proclistentry{\procname{eqview-close-brace}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{eqview-close-brace}(\proctype{eqview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a close brace.  \procparm{ch} must be '\}'.\
 Bound to:  \prockey{\}}}
 
-\proclistentry{\procname{eqview-close-bracket}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{eqview-close-bracket}(\proctype{eqview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a close bracket.  \procparm{ch} must be ']'.\
 Bound to:  \prockey{]}}
 
-\proclistentry{\procname{eqview-close-paren}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{eqview-close-paren}(\proctype{eqview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a close paren.  \procparm{ch} must be ')'.\
 Bound to:  \prockey{)}}
 
-\proclistentry{\procname{eqview-copy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-copy}(\proctype{eqview} \procparm{obj})\
 Copy\
 Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~11} (if region selected)}
 
-\proclistentry{\procname{eqview-cut}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-cut}(\proctype{eqview} \procparm{obj})\
 Cut\
 Bound to:  \prockey{^W}; Menu:  \procmenu{Cut}\procmenuwhere{~10} (if region selected)}
 
-\proclistentry{\procname{eqview-default}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{eqview-default}(\proctype{eqview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a character.\
 Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~}), 
 with their respective character code as \procparm{ch}.}
 
-\proclistentry{\procname{eqview-delete-backward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-delete-backward}(\proctype{eqview} \procparm{obj})\
 Delete backward from cursor.\
 Bound to:  \prockey{Backspace} (\prockey{^H}), \prockey{Delete}}
 
-\proclistentry{\procname{eqview-delete-forward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-delete-forward}(\proctype{eqview} \procparm{obj})\
 Delete forward from cursor.\
 Bound to:  \prockey{^D}}
 
-\proclistentry{\procname{eqview-dump-and-write}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-dump-and-write}(\proctype{eqview} \procparm{obj})\
 Dump equation and write it to tmp.  The ATK stream is 
 written to \typewriter{new.eq} in the current directory, and the dump to 
 \typewriter{/tmp/eq}.\
 Bound to:  \prockey{^X-^X}}
 
-\proclistentry{\procname{eqview-fraction}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-fraction}(\proctype{eqview} \procparm{obj})\
 Insert a fraction.\
 Bound to:  \prockey{/}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Fraction}\procmenuwhere{~21}}
 
-\proclistentry{\procname{eqview-left-brace}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-left-brace}(\proctype{eqview} \procparm{obj})\
 Insert a left brace.\
 Bound to:  \prockey{\{}}
 
-\proclistentry{\procname{eqview-move-backward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-backward}(\proctype{eqview} \procparm{obj})\
 Move backward.\
 Bound to:  \prockey{^B}}
 
-\proclistentry{\procname{eqview-move-down}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-down}(\proctype{eqview} \procparm{obj})\
 Move down\
 Bound to:  \prockey{^N}}
 
-\proclistentry{\procname{eqview-move-forward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-forward}(\proctype{eqview} \procparm{obj})\
 Move forward.\
 Bound to:  \prockey{^F}}
 
-\proclistentry{\procname{eqview-move-to-beginning}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-to-beginning}(\proctype{eqview} \procparm{obj})\
 Move to the beginning.\
 Bound to:  \prockey{^A}}
 
-\proclistentry{\procname{eqview-move-to-end}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-to-end}(\proctype{eqview} \procparm{obj})\
 Move to the end.\
 Bound to:  \prockey{^E}}
 
-\proclistentry{\procname{eqview-move-up}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-move-up}(\proctype{eqview} \procparm{obj})\
 Move up.\
 Bound to:  \prockey{^P}}
 
-\proclistentry{\procname{eqview-paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-paste}(\proctype{eqview} \procparm{obj})\
 Paste\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Paste}\procmenuwhere{~10}}
 
-\proclistentry{\procname{eqview-prime}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-prime}(\proctype{eqview} \procparm{obj})\
 Insert a prime.\
 Bound to:  \prockey{'}}
 
-\proclistentry{\procname{eqview-root}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-root}(\proctype{eqview} \procparm{obj})\
 Insert a root.\
 Bound to:  \prockey{^R}, \prockey{Esc-r-o-o-t-^J}; Menu:  \procmenu{
 Formulae}\procmenuwhere{,}\procmenu{Root}\procmenuwhere{~11}}
 
-\proclistentry{\procname{eqview-special}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-special}(\proctype{eqview} \procparm{obj})\
 Special symbol (dialog).\
 Bound to:  \prockey{Esc-a}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Insert Symbol...}\procmenuwhere{~51}}
 
-\proclistentry{\procname{eqview-subscript}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-subscript}(\proctype{eqview} \procparm{obj})\
 Insert a subscript.\
 Bound to:  \prockey{_}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Subscript}\procmenuwhere{~32}}
 
-\proclistentry{\procname{eqview-superscript}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-superscript}(\proctype{eqview} \procparm{obj})\
 Insert a superscript.\
 Bound to:  \prockey{^}; Menu:  \procmenu{Formulae}\procmenuwhere{,}\procmenu{Superscript}\procmenuwhere{~31}}
 
-\proclistentry{\procname{eqview-write-c}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-write-c}(\proctype{eqview} \procparm{obj})\
 Write equation in C format.  Output is to standard out.\
 Bound to:  \prockey{^Z-c}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{C}\procmenuwhere{~41}}
 
-\proclistentry{\procname{eqview-write-dvi}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-write-dvi}(\proctype{eqview} \procparm{obj})\
 Write equation in DVI format.  Output is to standard out.\
 Bound to:  \prockey{^Z-d}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{DVI}\procmenuwhere{~44}}
 
-\proclistentry{\procname{eqview-write-eqn}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-write-eqn}(\proctype{eqview} \procparm{obj})\
 Write equation in EQN format.  Output is to standard out.\
 Bound to:  \prockey{^Z-e}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{EQN}\procmenuwhere{~42}}
 
-\proclistentry{\procname{eqview-write-troff}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{eqview-write-troff}(\proctype{eqview} \procparm{obj})\
 Write equation in troff format.  Output is to standard out.\
 Bound to:  \prockey{^Z-t}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{TROFF}\procmenuwhere{~43}}
 

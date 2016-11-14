@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for compress}
 
 
-\proclistentry{\procname{compressv-compress-lines}(\proctype{object} \procparm{textview}, \proctype{marker} \procparm{range})\
+\proclistentry{\procname{compressv-compress-lines}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{range})\
 Compresses lines in the specified range (or 
 selected region) into a box; will prompt if none specified.  The format 
 for \procparm{range} is two decimal numbers with any other character(s) 
@@ -13,18 +13,18 @@ prompted answer.\
 Use \procname{QueueAnswer} to provide range in Ness, if necessary, but 
 better to just pass in \procparm{range} or set region.}
 
-\proclistentry{\procname{compressv-compress-region}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compressv-compress-region}(\proctype{textview} \procparm{obj})\
 Blindly compresses the selected region, 
 doesn't know how to combine compresses or grab entire lines, but useful if 
 you WANT to nest compresses.}
 
-\proclistentry{\procname{compressv-decompress-all}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compressv-decompress-all}(\proctype{textview} \procparm{obj})\
 Expand all compressed regions in document 
 to normal size.\
 Bound to:  \prockey{Esc-Q}\
 Menu in srctextview:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Decompress all}\procmenuwhere{~25}}
 
-\proclistentry{\procname{compressv-decompress-lines}(\proctype{object} \procparm{textview}, \proctype{marker} \procparm{range})\
+\proclistentry{\procname{compressv-decompress-lines}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{range})\
 Takes any lines within the specified 
 range (or selected region) out of the box they were in.  The format 
 for \procparm{range} is two decimal numbers with any other character(s) 

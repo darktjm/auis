@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for Compile}
 
 
-\proclistentry{\procname{compile-build}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compile-build}(\proctype{textview} \procparm{obj})\
 Start a compilation.  If it was previously paused, it is 
 immediately resumed.  Otherwise, if one is already running, you are 
 prompted to kill it.  All buffers are saved before starting.\
@@ -13,13 +13,13 @@ using same command (or preference if first time).\
 Use \procname{QueueAnswer} to answer kill query and/or set command from Ness if 
 necessary.}
 
-\proclistentry{\procname{compile-next-error}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compile-next-error}(\proctype{textview} \procparm{obj})\
 Step forward through compilation errors.}
 
-\proclistentry{\procname{compile-previous-error}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compile-previous-error}(\proctype{textview} \procparm{obj})\
 Step backward through compilation errors.}
 
-\proclistentry{\procname{compile-kill-build}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{compile-kill-build}(\proctype{textview} \procparm{obj})\
 Terminate a compilation.\
 Set \prockey{^U} numeric argument to pause instead of kill.}
 

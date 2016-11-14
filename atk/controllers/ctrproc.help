@@ -4,14 +4,18 @@
 \chapter{Procedure Table Listing for misc. controllers}
 
 
-\proclistentry{\procname{calccon-clear}(\proctype{object} \procparm{view})\
-calccon clear; this is the controller's main button}
+Note that the \procparm{obj} parameter must be a view containing the 
+controller element for the controller.
 
-\proclistentry{\procname{helpcon-help}(\proctype{object} \procparm{view})\
-helpcon help; this is the controller's main button}
 
-\proclistentry{\procname{pcontrol-start}(\proctype{object} \procparm{view})\
-pcontrol start; this is the controller's main button}
+\proclistentry{\procname{calccon-clear}(\proctype{view} \procparm{obj})\
+calccon's clear button; this is the controller's main button}
+
+\proclistentry{\procname{helpcon-help}(\proctype{view} \procparm{obj})\
+helpcon's help button; this is the controller's main button}
+
+\proclistentry{\procname{pcontrol-start}(\proctype{view} \procparm{obj})\
+pcontrol's start button; this is the controller's main button}
 
 
 \section{Related Topics}

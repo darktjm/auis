@@ -4,74 +4,74 @@
 \chapter{Procedure Table Listing for image}
 
 
-\proclistentry{\procname{imagev-export-any}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{imagev-export-any}(\proctype{imagev} \procparm{obj}, \proctype{integer} \procparm{type})\
 Write out an image; format is determined by name.  
 \procparm{type} must be 1.\
 Menu:  \procmenu{Export}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{ By Name}\procmenuwhere{~17}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-export-cmuwm}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{imagev-export-cmuwm}(\proctype{imagev} \procparm{obj}, \proctype{integer} \procparm{type})\
 Write out a cmuwm image.  \procparm{type} must be 0.\
 Menu:  \procmenu{Export}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{ ATK Raster}\procmenuwhere{~16}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-export-postscript}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-export-postscript}(\proctype{imagev} \procparm{obj})\
 Write out a Postscript file.\
 Menu:  \procmenu{Export}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{ Postscript}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-image-read}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-image-read}(\proctype{imagev} \procparm{obj})\
 Read in a new image file.\
 MenU:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Read}\procmenuwhere{~10}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-image-write}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-image-write}(\proctype{imagev} \procparm{obj})\
 "Save image to file.\
 Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Write}\procmenuwhere{~11}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-import-any}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-import-any}(\proctype{imagev} \procparm{obj})\
 Import an image.\
 Menu:  \procmenu{Import}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{ Almost Any}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-import-cmuwm}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-import-cmuwm}(\proctype{imagev} \procparm{obj})\
 Import a cmuwm image.\
 Menu:  \procmenu{Import}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{ ATK Raster}\procmenuwhere{~18}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{imagev-pan-to-origin}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-pan-to-origin}(\proctype{imagev} \procparm{obj})\
 Pan to (0,0).\
 Bound to:  \prockey{Esc-o}; Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Pan to Origin}\procmenuwhere{~30}}
 
-\proclistentry{\procname{imagev-set-save-format}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-set-save-format}(\proctype{imagev} \procparm{obj})\
 Set the save format to be used by image. Can 
 be png, gif or jpeg.\
 Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Set Save Format}\procmenuwhere{~60}\
 Use \procname{QueueAnswer} to provide format (all upper-case) in Ness.}
 
-\proclistentry{\procname{imagev-set-save-quality}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-set-save-quality}(\proctype{imagev} \procparm{obj})\
 Set the quality level for the JPEG compressor [5-95].\
 Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Set Save Quality}\procmenuwhere{~50}\
 Use \procname{QueueAnswer} to provide setting in Ness.}
 
-\proclistentry{\procname{imagev-show-fixed}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-show-fixed}(\proctype{imagev} \procparm{obj})\
 Show image with fixed cmap.\
 Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Show fixed}\procmenuwhere{~42}}
 
-\proclistentry{\procname{imagev-show-true}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{imagev-show-true}(\proctype{imagev} \procparm{obj})\
 Show image with private cmap.\
 Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Show true}\procmenuwhere{~40}}
 
-\proclistentry{\procname{imagev-zoom-in}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{how})\
+\proclistentry{\procname{imagev-zoom-in}(\proctype{imagev} \procparm{obj}, \proctype{integer} \procparm{how})\
 Change scale of view.  \procparm{how} must be greater than 0.\
 Bound to:  \prockey{Esc-Z}; Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Zoom In}\procmenuwhere{~20}}
 
-\proclistentry{\procname{imagev-zoom-normal}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{how})\
+\proclistentry{\procname{imagev-zoom-normal}(\proctype{imagev} \procparm{obj}, \proctype{integer} \procparm{how})\
 Change scale of view.  \procparm{how} must be 0.\
 Bound to:  \prockey{Esc-n}; Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Normal Size}\procmenuwhere{~24}}
 
-\proclistentry{\procname{imagev-zoom-out}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{how})\
+\proclistentry{\procname{imagev-zoom-out}(\proctype{imagev} \procparm{obj}, \proctype{integer} \procparm{how})\
 Change scale of view.  \procparm{how} must be less than 0.\
 Bound to:  \prockey{Esc-z}; Menu:  \procmenu{Image}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{ Zoom Out}\procmenuwhere{~22}}
 

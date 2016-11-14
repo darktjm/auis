@@ -6,48 +6,48 @@
 \chapter{Procedure Table Listing for Filter}
 
 
-\proclistentry{\procname{filter-sink-region}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{filter-sink-region}(\proctype{textview} \procparm{obj})\
 Prompts for a command and provides the 
 selected region as standard input to it; the command's output is discarded.\
 Use \procname{filter-sink-region-thru-command} with Ness.}
 
-\proclistentry{\procname{filter-sink-region-thru-command}(\proctype{object} \procparm{textview}, \proctype{
+\proclistentry{\procname{filter-sink-region-thru-command}(\proctype{textview} \procparm{obj}, \proctype{
 marker} \procparm{command})\
 Provides the selected region as 
 standard input to the specified \procparm{command}; the command's output is 
 discarded.}
 
-\proclistentry{\procname{filter-sink-region-formatted}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{filter-sink-region-formatted}(\proctype{textview} \procparm{obj})\
 Prompts for a command and provides 
 the selected region as standard input to it; the command's output is 
 discarded.  ATK datastream is written.\
 Use \procname{filter-sink-region-thru-command-formatted} with Ness.}
 
-\proclistentry{\procname{filter-sink-region-thru-command-formatted}(\proctype{object} \procparm{textview}, \proctype{
+\proclistentry{\procname{filter-sink-region-thru-command-formatted}(\proctype{textview} \procparm{obj}, \proctype{
 marker} \procparm{command})\
 Provides the selected region as standard input to the specified 
 \procparm{command}; the command's output is discarded.  ATK datastream is 
 written.}
 
-\proclistentry{\procname{filter-filter-region}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{filter-filter-region}(\proctype{textview} \procparm{obj})\
 Prompts for a command and executes it with 
 the selection region as standard input, replacing the region with the output 
 of the command.\
 Use \procname{filter-filter-region-thru-command} with Ness.}
 
-\proclistentry{\procname{filter-filter-region-thru-command}(\proctype{object} \procparm{textview}, \proctype{
+\proclistentry{\procname{filter-filter-region-thru-command}(\proctype{textview} \procparm{obj}, \proctype{
 marker} \procparm{command})\
 Executes a \procparm{command} with the 
 selection region as standard input, replacing it with the output of the 
 command.}
 
-\proclistentry{\procname{filter-filter-region-formatted}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{filter-filter-region-formatted}(\proctype{textview} \procparm{obj})\
 Prompts for a command and 
 executes it with the selection region as standard input, replacing the region 
 with the output of the command. ATK datastream is read and written.\
 Use \procname{filter-filter-region-thru-command-formatted} with Ness.}
 
-\proclistentry{\procname{filter-filter-region-thru-command-formatted}(\proctype{object} \procparm{textview}, \proctype{
+\proclistentry{\procname{filter-filter-region-thru-command-formatted}(\proctype{textview} \procparm{obj}, \proctype{
 marker} \procparm{command})\
 Executes a \procparm{command} 
 with the selection region as standard input, replacing it with the output of 

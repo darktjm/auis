@@ -4,27 +4,27 @@
 \chapter{Procedure Table Listing for printopts}
 
 
-\proclistentry{\procname{printopts-post-window}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{printopts-post-window}(\proctype{frame} \procparm{obj})\
 Set options for printing of document\
 Menu in frame:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Printer Setup}\procmenuwhere{~20}}
 
-\proclistentry{\procname{printopts-cancel}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{printopts-cancel}(\proctype{printopts} \procparm{obj})\
 Remove dialog and cancel choices.\
 Menu:  \procmenu{Cancel}\procmenuwhere{~91}}
 
-\proclistentry{\procname{printopts-done}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{printopts-done}(\proctype{printopts} \procparm{obj})\
 Remove dialog and accept choices.\
 Bound to:  \prockey{X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Done}\procmenuwhere{~90}; \procmenu{Quit}\procmenuwhere{~99}}
 
-\proclistentry{\procname{printopts-nop}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{printopts-nop}(\proctype{printopts} \procparm{obj})\
 Do nothing.\
 Bound to:  \prockey{Esc-~}}
 
-\proclistentry{\procname{printopts-preview}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{printopts-preview}(\proctype{printopts} \procparm{obj})\
 Preview document.\
 Menu:  \procmenu{Preview}}
 
-\proclistentry{\procname{printopts-print}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{printopts-print}(\proctype{printopts} \procparm{obj})\
 Print document.\
 Menu:  \procmenu{Print}}
 

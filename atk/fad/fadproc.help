@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for Fad}
 
 
-\proclistentry{\procname{fadview-keys}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{key})\
+\proclistentry{\procname{fadview-keys}(\proctype{fadview} \procparm{obj}, \proctype{integer} \procparm{key})\
 Get keyed commands.  The default binding's character code for 
 each command is passed in as \procparm{key}.  \italic{FIXME: none of these are 
 documented}\

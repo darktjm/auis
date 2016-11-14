@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for Ez}
 
 
-\proclistentry{\procname{ezapp-set-buffer-checkpoint-latency}(\proctype{object} \procparm{frame})\
+\proclistentry{\procname{ezapp-set-buffer-checkpoint-latency}(\proctype{frame} \procparm{obj})\
 Set the number of checkpoint 
 intervals to wait before checkpointing the current buffer\
 Use \procname{QueueAnswer} to provide number in Ness.}

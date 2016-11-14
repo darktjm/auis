@@ -4,41 +4,41 @@
 \chapter{Procedure Table Listing for htmltext}
 
 
-\proclistentry{\procname{htmltextview-add-item}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{htmltextview-add-item}(\proctype{htmltextview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 adds another list item to the current list.  Do not set 
 \procparm{ch} to 13.\
 Bound to:  \prockey{Tab}; Menu:  \procmenu{List}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Add list item}\procmenuwhere{~20}\
 \prockey{^U} numeric argument can be set to repeat insertion.}
 
-\proclistentry{\procname{htmltextview-add-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-add-link}(\proctype{htmltextview} \procparm{obj})\
 Make an anchor that points to the URL 
 specified from a prompt.\
 Menu:  \procmenu{Region}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Add Link (prompt)}\procmenuwhere{~80}\
 Use \procname{QueueAnswer} to provide URL in Ness.}
 
-\proclistentry{\procname{htmltextview-add-target}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-add-target}(\proctype{htmltextview} \procparm{obj})\
 Gives the highlighted region a name that can 
 be targeted by an anchor with a href=#name.\
 Menu:  \procmenu{Region}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Target for Link (prompt)}\procmenuwhere{~81}\
 Use \procname{QueueAnswer} to provide anchor name in Ness.}
 
-\proclistentry{\procname{htmltextview-expose-hidden}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{show})\
+\proclistentry{\procname{htmltextview-expose-hidden}(\proctype{htmltextview} \procparm{obj}, \proctype{integer} \procparm{show})\
 Exposes insets containing raw HTML+ 
 markup.  \procparm{show} must be non-0.\
 Menu:  \procmenu{Page}\procmenuwhere{~9}\procmenuwhere{,}\procmenu{Expose HTML+ insets}\procmenuwhere{~41}}
 
-\proclistentry{\procname{htmltextview-hide-hidden}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{show})\
+\proclistentry{\procname{htmltextview-hide-hidden}(\proctype{htmltextview} \procparm{obj}, \proctype{integer} \procparm{show})\
 Hides insets containing raw HTML+ markup.  \procparm{show} 
 must be 0.\
 Menu:  \procmenu{Page}\procmenuwhere{~9}\procmenuwhere{,}\procmenu{Hide HTML+ insets}\procmenuwhere{~42}}
 
-\proclistentry{\procname{htmltextview-insert-image-here}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{htmltextview-insert-image-here}(\proctype{htmltextview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Prompts for URL or pathname of image 
 and imbeds it at cursor position. (string parameter supersedes prompt)\
 Menu:  \procmenu{Media}\procmenuwhere{,}\procmenu{Image...}\procmenuwhere{~2}\
 Use \procparm{name} or \procname{QueueAnswer} to provide image path in Ness}
 
-\proclistentry{\procname{htmltextview-make-list}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{type})\
+\proclistentry{\procname{htmltextview-make-list}(\proctype{htmltextview} \procparm{obj}, \proctype{integer} \procparm{type})\
 makes a list of the selected region.  Type is unordered (0), 
 ordered (1) or definition (2).\
 Bound to:  \prockey{Esc-'-Esc-u}; Menu:  \procmenu{List}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Unordered List}\procmenuwhere{~10} 
@@ -48,32 +48,41 @@ Bound to:  \prockey{Esc-'-Esc-u}; Menu:  \procmenu{List}\procmenuwhere{~6}\procm
 Bound to:  \prockey{Esc-'-Esc-d}; Menu:  \procmenu{List}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Definition List}\procmenuwhere{~10} 
 (\procparm{type} 2)}
 
-\proclistentry{\procname{htmltextview-newline-add-item}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-newline-add-item}(\proctype{htmltextview} \procparm{obj})\
 adds a blank line (with another item 
 if used inside a list).\
 Bound to:  \prockey{^J}\
 \prockey{^U} numeric argument can be set to repeat insertion.}
 
-\proclistentry{\procname{htmltextview-renumber-list}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-renumber-list}(\proctype{htmltextview} \procparm{obj})\
 Replaces and reorders all the numbers in 
 an ordered list.\
 Bound to:  \prockey{Esc-'Esc-r}; Menu:  \procmenu{List}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Renumber List}\procmenuwhere{~30}}
 
-\proclistentry{\procname{htmltextview-show-attributes}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-show-attributes}(\proctype{htmltextview} \procparm{obj})\
 Display and edit attributes of style at 
 cursor position.\
 Bound to:  \prockey{Esc-a}; Menu:  \procmenu{Region}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Edit Attributes}\procmenuwhere{~95}\
 This is an inherently interactive process; do not attempt from Ness.}
 
-\proclistentry{\procname{htmltextview-show-raw}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmltextview-show-raw}(\proctype{htmltextview} \procparm{obj})\
 Display file as raw HTML+ markup.\
 Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Raw HTML+}\procmenuwhere{~80}}
+
+
+Also adds htmltextview menu bindings for \procname{textview-insert-inset-here}:
+
+\leftindent{\procmenu{Page}\procmenuwhere{~9}\procmenuwhere{,}\procmenu{Insert Horiz Rule}\procmenuwhere{~5}  ("hr")
+
+\procmenu{Page}\procmenuwhere{~9}\procmenuwhere{,}\procmenu{Inset raw HTML+}\procmenuwhere{~40} ("hidden")
+
+\procmenu{Media}\procmenuwhere{,}\procmenu{Table}\procmenuwhere{~7} ("table")}
 
 
 \section{hiddenview}
 
 
-\proclistentry{\procname{hiddenview-show-normal}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{hiddenview-show-normal}(\proctype{hiddenview} \procparm{obj})\
 Return to WYSIWYG HTML+ view.\
 Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Normal HTML+}\procmenuwhere{~80}}
 
@@ -81,17 +90,18 @@ Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Normal 
 \section{weblink}
 
 
-\proclistentry{\procname{weblink-ReplaceText}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{weblink-ReplaceText}(\proctype{textview} \procparm{obj})\
 replace text in selection with links}
 
-\proclistentry{\procname{weblink-RequestURL}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{weblink-RequestURL}(\proctype{view} \procparm{obj})\
 Prompt for a URL to display\
 Use \procname{QueueAnswer} to provide URL in Ness.}
 
-\proclistentry{\procname{weblink-WarpToURL}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{weblink-WarpToURL}(\proctype{textview} \procparm{obj})\
 Display selected URL document}
 
-\proclistentry{\procname{weblinkview-set-urllink}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{url})\
+
+\proclistentry{\procname{weblinkview-set-urllink}(\proctype{weblinkview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{url})\
 Prompts for user to set target url of the 
 link button, unless set with \procparm{url}.\
 Menu:  \procmenu{Link}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Set URL}\procmenuwhere{~11}\
@@ -101,75 +111,75 @@ Use \procparm{url} or \procname{QueueAnswer} to set URL in Ness.}
 \section{webview}
 
 
-\proclistentry{\procname{webview-Add-Current-to-Hotlist}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Add-Current-to-Hotlist}(\proctype{webview} \procparm{obj})\
 Add Current to Hotlist\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Add Current to Hotlist}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to set name in Ness.}
 
-\proclistentry{\procname{webview-Annotate}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Annotate}(\proctype{webview} \procparm{obj})\
 Annotate\
 Menu:  \procmenu{Web Annotate}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{ Annotate}\procmenuwhere{~1}}
 
-\proclistentry{\procname{webview-Back}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Back}(\proctype{webview} \procparm{obj})\
 Back\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Back}\procmenuwhere{~1}}
 
-\proclistentry{\procname{webview-Clone Window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Clone Window}(\proctype{webview} \procparm{obj})\
 Clone Window \
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ Clone Window}\procmenuwhere{~8}}
 
-\proclistentry{\procname{webview-Delete-Annotation}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Delete-Annotation}(\proctype{webview} \procparm{obj})\
 Delete annotation\
 Menu:  \procmenu{Web Annotate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Delete Annotation}\procmenuwhere{~3}}
 
-\proclistentry{\procname{webview-Edit-Annotation}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Edit-Annotation}(\proctype{webview} \procparm{obj})\
 Edit Annotation\
 Menu:  \procmenu{Web Annotate}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{ Edit Annotation}\procmenuwhere{~2}}
 
-\proclistentry{\procname{webview-Forward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Forward}(\proctype{webview} \procparm{obj})\
 Forward\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Forward}\procmenuwhere{~2}}
 
-\proclistentry{\procname{webview-History}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-History}(\proctype{webview} \procparm{obj})\
 History\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ History}\procmenuwhere{~10}}
 
-\proclistentry{\procname{webview-Home}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Home}(\proctype{webview} \procparm{obj})\
 Home\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Home}\procmenuwhere{~3}}
 
-\proclistentry{\procname{webview-Hotlist}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Hotlist}(\proctype{webview} \procparm{obj})\
 Hotlist\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Hotlist}\procmenuwhere{~11}}
 
-\proclistentry{\procname{webview-Internet-Resources-Meta-Index}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Internet-Resources-Meta-Index}(\proctype{webview} \procparm{obj})\
 Internet Resources Meta Index\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Internet Resources Meta Index}\procmenuwhere{~14}}
 
-\proclistentry{\procname{webview-Internet-Starting-Points~13}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Internet-Starting-Points~13}(\proctype{webview} \procparm{obj})\
 Internet Starting Points\
 Menu:  \procmenu{Web Navigate}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ Internet Starting Points}\procmenuwhere{~13}}
 
-\proclistentry{\procname{webview-open-local}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-open-local}(\proctype{webview} \procparm{obj})\
 Use the HTML inset to visit a local file\
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ Open File}\procmenuwhere{~2}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{webview-open-URL}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-open-URL}(\proctype{webview} \procparm{obj})\
 prompt for a URL \
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ Open URL}\procmenuwhere{~1}\
 Use \procname{QueueAnswer} to provide URL in Ness.}
 
-\proclistentry{\procname{webview-Reload-Current}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Reload-Current}(\proctype{webview} \procparm{obj})\
 Reload Current\
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ Reload Current}\procmenuwhere{~3}}
 
-\proclistentry{\procname{webview-Save-As}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-Save-As}(\proctype{webview} \procparm{obj})\
 Writes current document to file \
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ Save As}\procmenuwhere{~5}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{webview-View-Src}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{webview-View-Src}(\proctype{webview} \procparm{obj})\
 View Src \
 Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ View Src}\procmenuwhere{~7}}
 
@@ -177,11 +187,11 @@ Menu:  \procmenu{Web File}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{ View Src
 \section{urlbutton}
 
 
-\proclistentry{\procname{urlbutton-set-label}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{urlbutton-set-label}(\proctype{urlbuttonview} \procparm{obj})\
 Set the label.\
 Menu:  \procmenu{UrlButton}\procmenuwhere{,}\procmenu{Set Label}\procmenuwhere{~22}}
 
-\proclistentry{\procname{urlbutton-set-url}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{urlbutton-set-url}(\proctype{urlbuttonview} \procparm{obj})\
 Set the URL.\
 Menu:  \procmenu{UrlButton}\procmenuwhere{,}\procmenu{Set URL}\procmenuwhere{~12}}
 

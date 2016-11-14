@@ -4,19 +4,19 @@
 \chapter{Procedure Table Listing for recsearch}
 
 
-\proclistentry{\procname{recsearch-begin-at-top}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
+\proclistentry{\procname{recsearch-begin-at-top}(\proctype{im} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
 Begin recursive search at top (IM) level.\
 Use \procparm{pat} or \procname{QueueAnswer} to specify pattern in Ness.}
 
-\proclistentry{\procname{recsearch-begin}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
+\proclistentry{\procname{recsearch-begin}(\proctype{im} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{pat})\
 Begin recursive search.\
 Use \procparm{pat} or \procname{QueueAnswer} to specify pattern in Ness.}
 
-\proclistentry{\procname{recsearch-replace}(\proctype{object} \procparm{im}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{rpl})\
+\proclistentry{\procname{recsearch-replace}(\proctype{im} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{rpl})\
 Replace target of recsearch with a string.\
 Use \procparm{rpl} or \procname{QueueAnswer} to specify replacement string in Ness.}
 
-\proclistentry{\procname{recsearch-resume}(\proctype{object} \procparm{im})\
+\proclistentry{\procname{recsearch-resume}(\proctype{im} \procparm{obj})\
 Resume recursive search.}
 
 

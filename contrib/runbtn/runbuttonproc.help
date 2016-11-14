@@ -4,12 +4,12 @@
 \chapter{Procedure Table Listing for runbutton}
 
 
-\proclistentry{\procname{runbutton-set-command}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{runbutton-set-command}(\proctype{runbuttonview} \procparm{obj})\
 Set the runbutton command to execute.\
 Menu: \procmenu{RunButton}\procmenuwhere{,}\procmenu{Set Command}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide command name in Ness.}
 
-\proclistentry{\procname{runbutton-set-label}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{runbutton-set-label}(\proctype{runbuttonview} \procparm{obj})\
 Set the runbutton label.\
 Menu: \procmenu{RunButton}\procmenuwhere{,}\procmenu{Set Label}\procmenuwhere{~22}\
 Use \procname{QueueAnswer} to provide label text in Ness.}

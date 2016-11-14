@@ -4,37 +4,37 @@
 \chapter{Procedure Table Listing for html}
 
 
-\proclistentry{\procname{htmlview-add-hrule}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-add-hrule}(\proctype{htmlview} \procparm{obj})\
 Add a horizontal rule}
 
-\proclistentry{\procname{htmlview-add-image}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-add-image}(\proctype{htmlview} \procparm{obj})\
 Add an image}
 
-\proclistentry{\procname{htmlview-add-random}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-add-random}(\proctype{htmlview} \procparm{obj})\
 Add a random entity to a region of text}
 
-\proclistentry{\procname{htmlview-edit-attributes}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-edit-attributes}(\proctype{htmlview} \procparm{obj})\
 Edit the attributes of tag at point}
 
-\proclistentry{\procname{htmlview-make-list}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-make-list}(\proctype{htmlview} \procparm{obj})\
 Make a region into a list}
 
-\proclistentry{\procname{htmlview-modify-list}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-modify-list}(\proctype{htmlview} \procparm{obj})\
 Modify an attribute of a list}
 
-\proclistentry{\procname{htmlview-set-img-src}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-set-img-src}(\proctype{htmlview} \procparm{obj})\
 Set the source of an image}
 
-\proclistentry{\procname{htmlview-set-indexable}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-set-indexable}(\proctype{htmlview} \procparm{obj})\
 Set flag specifying if document is searchable.}
 
-\proclistentry{\procname{htmlview-set-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-set-link}(\proctype{htmlview} \procparm{obj})\
 Turn a region into an active anchor}
 
-\proclistentry{\procname{htmlview-set-title}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-set-title}(\proctype{htmlview} \procparm{obj})\
 Set title of document.}
 
-\proclistentry{\procname{htmlview-unlistify}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{htmlview-unlistify}(\proctype{htmlview} \procparm{obj})\
 Remove all listyness about point or region}
 
 

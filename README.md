@@ -19,7 +19,8 @@ run out of motivation for this.  There's just no point, whatsoever.
 Even the people who want to preserve ez documents should probably work
 on converters, rather than trying to get this crap to work.  I just
 wish there were a similar project that isn't in such bad shape that I
-could get motivated over.
+could get motivated over (if only Emacs wasn't so lispy, but that
+isn't really inset-oriented anyway).
 
 If you are looking for the original AUIS README, look at
 doc/README.ez.  Yes, you'll need a working ez to read this properly,

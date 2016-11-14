@@ -4,27 +4,27 @@
 \chapter{Procedure Table Listing for Tags}
 
 
-\proclistentry{\procname{tags-open}(\proctype{object} \procparm{textview}, \proctype{marker} \procparm{tag})\
+\proclistentry{\procname{tags-open}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{tag})\
 Goto the \procparm{tag} whose name is passed in.  This will 
 not enter recursive editing mode.}
 
-\proclistentry{\procname{tags-load-tag-file}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{tags-load-tag-file}(\proctype{textview} \procparm{obj})\
 Load a tag file from the current directory\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{tags-find-tag}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{tags-find-tag}(\proctype{textview} \procparm{obj})\
 Goto the tag whose name is at the dot.\
 The \prockey{^U} numeric argument can be set to disable recursive 
 editing mode.}
 
-\proclistentry{\procname{tags-goto-tag}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{tags-goto-tag}(\proctype{textview} \procparm{obj})\
 Goto a given tag.\
 The \prockey{^U} numeric argument can be set to disable recursive 
 editing mode.\
 Use or \procname{QueueAnswer} to provide tag name in Ness, or use 
 \procname{tags-open}.}
 
-\proclistentry{\procname{tags-rebuild-tags}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{tags-rebuild-tags}(\proctype{textview} \procparm{obj})\
 Regenerate the tag file with ctags\
 The \prockey{^U} numeric argument can be set to prompt for the 
 command used to do this.\

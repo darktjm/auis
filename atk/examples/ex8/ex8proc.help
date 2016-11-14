@@ -4,11 +4,11 @@
 \chapter{Procedure Table Listing for helloworldview}
 
 
-\proclistentry{\procname{helloworldview-center}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-center}(\proctype{helloworldview} \procparm{obj})\
 Center the helloworldview string.\
 Bound to: \prockey{^C}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Center}}
 
-\proclistentry{\procname{helloworldview-invert}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-invert}(\proctype{helloworldview} \procparm{obj})\
 Invert the helloworldview string.\
 Bound to:  \prockey{Tab}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Invert}}
 

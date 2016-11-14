@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for gofig}
 
 
-\proclistentry{\procname{gofigview-char-to-note}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{gofigview-char-to-note}(\proctype{gofigview} \procparm{obj}, \proctype{integer} \procparm{ch})\
 put letter in selected spot.  Letters replace the note; 
 digits replace non-digits and extend digits; Backspace and Delete 
 delete letter or rightmost digit if present, and the stone if no note 
@@ -15,14 +15,14 @@ Bound to:  \prockey{a} .. \prockey{l}, \prockey{0} ..
 \prockey{Backspace} (\prockey{^H}), \prockey{Delete}, 
 each with their respective character codes as \procparm{ch}.}
 
-\proclistentry{\procname{gofigview-copy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-copy}(\proctype{gofigview} \procparm{obj})\
 copy the go diagram as ASCII to the cut buffer\
 Bound to:  \prockey{^W}, \prockey{Esc-w}; Menu:  \procmenu{Copy }\procmenuwhere{~2}}
 
-\proclistentry{\procname{gofigview-do-nothing}()\
-does nothing}
+\proclistentry{\procname{gofigview-do-nothing}(\proctype{gofigview} \procparm{obj})\
+does nothing; \procparm{obj} is ignored.}
 
-\proclistentry{\procname{gofigview-move-spot}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{where})\
+\proclistentry{\procname{gofigview-move-spot}(\proctype{gofigview} \procparm{obj}, \proctype{integer} \procparm{where})\
 move selected spot; 'A' = up, 'B' = down, 'C' = right, 
 'D' = left.\
 Bound to:\
@@ -35,35 +35,35 @@ Bound to:\
 'D':  \prockey{Left} (\prockey{Esc-D}), \prockey{^F}, 
 \prockey{,}}}
 
-\proclistentry{\procname{gofigview-print-dobj}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-print-dobj}(\proctype{gofigview} \procparm{obj})\
 print contents of dobj to stdout\
 Bound to:  \prockey{D}}
 
-\proclistentry{\procname{gofigview-prompt-for-board-layout}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-prompt-for-board-layout}(\proctype{gofigview} \procparm{obj})\
 prompts for size and edges of board\
 Bound to:  \prockey{L}; Menu:  \procmenu{Gofig}\procmenuwhere{,}\procmenu{Board layout}\procmenuwhere{~40}\
 Use \procname{QueueAnswer} to provide layout string in Ness.}
 
-\proclistentry{\procname{gofigview-prompt-for-note}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-prompt-for-note}(\proctype{gofigview} \procparm{obj})\
 prompts for note to put in stone\
 Bound to:  \prockey{N}; Menu:  \procmenu{Gofig}\procmenuwhere{,}\procmenu{Enter Note}\procmenuwhere{~30}\
 Use \procname{QueueAnswer} to provide text in Ness.}
 
-\proclistentry{\procname{gofigview-prompt-for-print-size}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-prompt-for-print-size}(\proctype{gofigview} \procparm{obj})\
 prompts for printing size parameter\
 Bound to:  \prockey{P}; Menu:  \procmenu{Gofig}\procmenuwhere{,}\procmenu{Printed size}\procmenuwhere{~42}\
 Use \procname{QueueAnswer} to provide print size in Ness.}
 
-\proclistentry{\procname{gofigview-put-stone}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{stone})\
+\proclistentry{\procname{gofigview-put-stone}(\proctype{gofigview} \procparm{obj}, \proctype{integer} \procparm{stone})\
 put \procparm{stone} ('B' or 'W') or empty ('/') in selected spot\
 Bound to:  various:  \prockey{o} ('W'), \prockey{x} ('B'), 
 \prockey{Space} ('/')}
 
-\proclistentry{\procname{gofigview-replace}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofigview-replace}(\proctype{gofigview} \procparm{obj})\
 replaces contents from cut buffer\
 Bound to:  \prockey{^Y}, \prockey{Esc-y}; Menu:  \procmenu{Replace}\procmenuwhere{~4}}
 
-\proclistentry{\procname{gofigview-set-click-mode}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{mode})\
+\proclistentry{\procname{gofigview-set-click-mode}(\proctype{gofigview} \procparm{obj}, \proctype{marker} \procparm{mode})\
 set action for clicking on stones ('A', 'B', 'W', 'E', or 'S')\
 Bound to:  \prockey{O} ('W'), \prockey{A} ('A'), \prockey{X} ('B'), 
 \prockey{E} ('E'), \prockey{S} ('S')\
@@ -71,17 +71,17 @@ Menu:  One for each mode; has " <=" appended to menu entry name for
 currently selected mode.  \procmenu{Gofig}\procmenuwhere{,}\procmenu{White}\procmenuwhere{~12} ('W'), \procmenu{Gofig}\procmenuwhere{,}\procmenu{Black-White} ('A'), 
 \procmenu{Gofig}\procmenuwhere{,}\procmenu{Black} ('B'), \procmenu{Gofig}\procmenuwhere{,}\procmenu{Empty} ('E'), \procmenu{Gofig}\procmenuwhere{,}\procmenu{Select} ('S')}
 
-\proclistentry{\procname{gofigview-set-note-mode}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{seq})\
+\proclistentry{\procname{gofigview-set-note-mode}(\proctype{gofigview} \procparm{obj}, \proctype{integer} \procparm{seq})\
 chooses note sequence for subsequent stones ('a', '0', or '-')\
 Menu:  \procmenu{Gofig}\procmenuwhere{,}\procmenu{Auto a b c ...}\procmenuwhere{~20} ('a'); \procmenu{Gofig}\procmenuwhere{,}\procmenu{Auto 1 2 3 ...}\procmenuwhere{~22} ('0');
 \procmenu{Gofig}\procmenuwhere{,}\procmenu{No Auto Notes}\procmenuwhere{~24} ('-'); selected entry has "  <=" appended.}
 
-\proclistentry{\procname{gofig-invert-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{gofig-invert-debug}(\proctype{gofigview} \procparm{obj})\
 Toggle the gofigview debug flag\
 Bound to:  \prockey{Esc-^D-D}}
 
 
-\proclistentry{\procname{gofig-convert}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gofig-convert}(\proctype{gofigview} \procparm{textview})\
 convert selected text to a gofig object}
 
 

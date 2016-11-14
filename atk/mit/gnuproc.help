@@ -4,33 +4,33 @@
 \chapter{Procedure Table Listing for gnucompat}
 
 
-\proclistentry{\procname{gnucompat-add-default-tpl}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-add-default-tpl}(\proctype{textview} \procparm{obj})\
 Enable basic styles by adding the template named default}
 
-\proclistentry{\procname{gnucompat-denumerate}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-denumerate}(\proctype{textview} \procparm{obj})\
 Delete number from the begining of each 
 paragraph in the region}
 
-\proclistentry{\procname{gnucompat-enumerate}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-enumerate}(\proctype{textview} \procparm{obj})\
 Put number in sequence at the begining of each 
 paragraph in the region}
 
-\proclistentry{\procname{gnucompat-fill-para}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-fill-para}(\proctype{textview} \procparm{obj})\
 Fill Paragraph.}
 
-\proclistentry{\procname{gnucompat-insert-bullets}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-insert-bullets}(\proctype{textview} \procparm{obj})\
 Put a bullet at the begining of each 
 paragraph in the region}
 
-\proclistentry{\procname{gnucompat-insert-inset-no-nl}(\proctype{object} \procparm{textview}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{gnucompat-insert-inset-no-nl}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Insert a named inset without newlines around it\
 Use \procparm{name} or \procname{QueueAnswer} to provide inset name in Ness.}
 
-\proclistentry{\procname{gnucompat-insert-inset}(\proctype{object} \procparm{textview}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
+\proclistentry{\procname{gnucompat-insert-inset}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{name})\
 Insert a named inset here\
 Use \procparm{name} or \procname{QueueAnswer} to provide inset name in Ness.}
 
-\proclistentry{\procname{gnucompat-remove-bullets}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gnucompat-remove-bullets}(\proctype{textview} \procparm{obj})\
 Remove bullets from the begining of each 
 paragraph in the region}
 

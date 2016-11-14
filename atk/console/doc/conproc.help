@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for console}
 
 
-\proclistentry{\procname{console-toggle-var}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{varno})\
+\proclistentry{\procname{console-toggle-var}(\proctype{consoleClass} \procparm{obj}, \proctype{integer} \procparm{varno})\
 \italic{Undocumented; toggle internal variable from console 
 file}\
 Menu:  \italic{menu is part of internal variable def.}\
@@ -13,7 +13,7 @@ configuration files and cannot generally be determined from Ness, or
 for use in manual bindings.  Also, if there are no internal variables 
 defined in a loaded console, this procedure will not be present.}
 
-\proclistentry{\procname{console-read-new-console-file}(\proctype{object} \procparm{self}, 
+\proclistentry{\procname{console-read-new-console-file}(\proctype{consoleClass} \procparm{obj}, 
 \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fname})\
 \italic{Undocumented}; if argument is 0 or null, prompt for 
 a console file name.\
@@ -24,39 +24,39 @@ Menu:  \procmenu{Consoles}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{ \italic{
 console definiton found in path; \italic{order} is order in which they 
 were found, starting at 1)}
 
-\proclistentry{\procname{console-quit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-quit}(\proctype{consoleClass} \procparm{obj})\
 Quit\
 Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-\proclistentry{\procname{console-expand-menu}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-expand-menu}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Expand Menu}\procmenuwhere{~52}}
 
-\proclistentry{\procname{console-shrink-menu}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-shrink-menu}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Display}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{ Shrink Menu}\procmenuwhere{~52}}
 
-\proclistentry{\procname{console-set-alarm}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-set-alarm}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Set Alarm}\procmenuwhere{~5}}
 
-\proclistentry{\procname{console-turn-off-alarm}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-turn-off-alarm}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Turn Off Alarm}\procmenuwhere{~5}}
 
-\proclistentry{\procname{console-write-log-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-write-log-file}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Write Log File}\procmenuwhere{~40}}
 
-\proclistentry{\procname{console-clear-logs}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-clear-logs}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Clear All Logs}\procmenuwhere{~45}}
 
-\proclistentry{\procname{console-getstats}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-getstats}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Restart Getstats}\procmenuwhere{~60}}
 
-\proclistentry{\procname{console-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{console-debug}(\proctype{consoleClass} \procparm{obj})\
 \italic{Undocumented}\
 Menu:  \procmenu{Expert Options}\procmenuwhere{~90}\procmenuwhere{,}\procmenu{ Turn Off Debugging}\procmenuwhere{~90} (when on), 
 \procmenu{Expert Options}\procmenuwhere{~90}\procmenuwhere{,}\procmenu{ Turn On Debugging}\procmenuwhere{~90} (when off)}
@@ -65,7 +65,7 @@ Menu:  \procmenu{Expert Options}\procmenuwhere{~90}\procmenuwhere{,}\procmenu{ T
 \section{logview}
 
 
-\proclistentry{\procname{logview-copy-region}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{logview-copy-region}(\proctype{logview} \procparm{obj})\
 Copy text from console log\
 Menu:  \procmenu{Copy}\procmenuwhere{~12}}
 
@@ -73,7 +73,7 @@ Menu:  \procmenu{Copy}\procmenuwhere{~12}}
 \section{errmonf}
 
 
-\proclistentry{\procname{errmonf-toggle-var}(\proctype{object} \procparm{console}, \proctype{marker} \procparm{var})\
+\proclistentry{\procname{errmonf-toggle-var}(\proctype{consoleClass} \procparm{obj}, \proctype{marker} \procparm{var})\
 \italic{Undocumented; see \procname{console-toggle-var}}\
 Menu:  \italic{menu is part of internal variable def.}}
 

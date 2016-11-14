@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for popupwin}
 
 
-\proclistentry{\proctype{action} \procname{popupwin-cancel}(\proctype{object} \procparm{self})\
+\proclistentry{\proctype{action} \procname{popupwin-cancel}(\proctype{popupwin} \procparm{obj})\
 Cancels a popup.  Takes no extra parameters and returns no 
 value.\
 Bound to:  \prockey{^G}}

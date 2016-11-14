@@ -4,17 +4,17 @@
 \chapter{Procedure Table Listing for ps}
 
 
-\proclistentry{\procname{psview-autobound}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{psview-autobound}(\proctype{psview} \procparm{obj})\
 Suck out the bounding box information and use it to 
 set our bounds\
 Menu:  \procmenu{PostScript}\procmenuwhere{,}\procmenu{Scan for bounds}\procmenuwhere{~20}}
 
-\proclistentry{\procname{psview-set-inch-size}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{psview-set-inch-size}(\proctype{psview} \procparm{obj})\
 Set print size in inches\
 Menu:  \procmenu{PostScript}\procmenuwhere{,}\procmenu{Set Inch Size}\procmenuwhere{~10}\
 Use \procname{QueueAnswer} twice to provide height and width in Ness.}
 
-\proclistentry{\procname{psview-set-point-size}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{psview-set-point-size}(\proctype{psview} \procparm{obj})\
 Set print size in points\
 Menu:  \procmenu{PostScript}\procmenuwhere{,}\procmenu{Set Point Size}\procmenuwhere{~11}\
 Use \procname{QueueAnswer} twice to provide height and width in Ness.}

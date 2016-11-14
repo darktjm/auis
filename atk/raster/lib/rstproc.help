@@ -9,256 +9,256 @@ or select tools from Ness unless the exact geometry of the raster is known.
 Not much can be done in raster using Ness.
 
 
-\proclistentry{\procname{rasterv-copy-subraster}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-copy-subraster}(\proctype{rasterview} \procparm{obj})\
 Copy selected subraster to kill-buffer.\
 Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~3}}
 
-\proclistentry{\procname{rasterv-replace-subraster}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-replace-subraster}(\proctype{rasterview} \procparm{obj})\
 Replace selected subraster from kill-buffer.\
 Bound to:  \prockey{Esc-y}; Menu:  \procmenu{Replace}\procmenuwhere{~13}}
 
-\proclistentry{\procname{rasterv-replace-subraster}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-replace-subraster}(\proctype{rasterview} \procparm{obj})\
 Replace selected subraster from kill-buffer.\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Replace}\procmenuwhere{~13}}
 
-\proclistentry{\procname{rasterv-scale-replace}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-scale-replace}(\proctype{rasterview} \procparm{obj})\
 Scale image in paste buffer to fit in selected Region\
 Bound to:  \prockey{Esc-^Y}; Menu:  \procmenu{Replace Scaled}\procmenuwhere{~15}}
 
-\proclistentry{\procname{rasterv-negative}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-negative}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Interchange black and white within selection.  \procparm{op} 
 must be -1.\
 Bound to:  \prockey{Esc-n}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Negative}\procmenuwhere{~21}}
 
-\proclistentry{\procname{rasterv-white}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-white}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Set white within selection.  \procparm{op} must be 0.\
 Bound to:  \prockey{Esc-W}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{White}\procmenuwhere{~22}}
 
-\proclistentry{\procname{rasterv-black}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-black}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Set black within selection.  \procparm{op} must be 1.\
 Bound to:  \prockey{Esc-B}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Black}\procmenuwhere{~23}}
 
-\proclistentry{\procname{rasterv-gray}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-gray}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Set gray within selection.  \procparm{op} must be 2.\
 Bound to:  \prockey{Esc-G}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Gray}\procmenuwhere{~24}\
 Use \procname{QueueAnswer} to set gray level in Ness.}
 
-\proclistentry{\procname{rasterv-mirror-left-right}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-mirror-left-right}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Interchange left and right within selection.  \procparm{op} 
 must be 3.\
 Bound to:  \prockey{Esc-L}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Mirror LR}\procmenuwhere{~25}}
 
-\proclistentry{\procname{rasterv-mirror-up-down}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-mirror-up-down}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Interchange top and bottom within selection.  
 \procparm{op} must be 4.\
 Bound to:  \prockey{Esc-U}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Mirror UD}\procmenuwhere{~26}}
 
-\proclistentry{\procname{rasterv-rotate}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-rotate}(\proctype{rasterview} \procparm{obj})\
 Rotate entire raster image one-quarter turn clockwise\
 Bound to:  \prockey{Esc-R}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Rotate}\procmenuwhere{~27}}
 
-\proclistentry{\procname{rasterv-scale}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-scale}(\proctype{rasterview} \procparm{obj})\
 Scale the image\
 Bound to:  \prockey{Esc-S}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Scale}\procmenuwhere{~32}\
 Use \procname{QueueAnswer} thrice to provide scale type and factors in Ness.}
 
-\proclistentry{\procname{rasterv-shrink-image}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-shrink-image}(\proctype{rasterview} \procparm{obj})\
 Shrink the image of the raster to a button\
 Bound to:  \prockey{Esc-s}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Shrink to Button}\procmenuwhere{~67}}
 
-\proclistentry{\procname{rasterv-center-image}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-center-image}(\proctype{rasterview} \procparm{obj})\
 Center the Selected Region\
 Bound to:  \prockey{Esc-c}; Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Center Region}\procmenuwhere{~72}}
 
-\proclistentry{\procname{rasterv-upperleft-image}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-upperleft-image}(\proctype{rasterview} \procparm{obj})\
 Upper Left the Selected Region\
 Menu:  \procmenu{Raster Ops}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Upper Left Region}\procmenuwhere{~73}}
 
-\proclistentry{\procname{rasterv-zoom-in}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-zoom-in}(\proctype{rasterview} \procparm{obj})\
 Zoom In using upper left of selected region as starting point.\
 Bound to:  \prockey{Esc-Z}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Zoom In}\procmenuwhere{~12}}
 
-\proclistentry{\procname{rasterv-zoom-out}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-zoom-out}(\proctype{rasterview} \procparm{obj})\
 Zoom Out\
 Bound to:  \prockey{Esc-z}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Zoom Out}\procmenuwhere{~13}}
 
-\proclistentry{\procname{rasterv-zoom-out-to-normal-size}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-zoom-out-to-normal-size}(\proctype{rasterview} \procparm{obj})\
 Normal Size\
 Bound to:  \prockey{Esc-N}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Normal Size}\procmenuwhere{~15}}
 
-\proclistentry{\procname{rasterv-select-entire}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-select-entire}(\proctype{rasterview} \procparm{obj})\
 Select entire raster\
 Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Select All}\procmenuwhere{~22}}
 
-\proclistentry{\procname{rasterv-region-select}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-region-select}(\proctype{rasterview} \procparm{obj})\
 Region Select Mode\
 Bound to:  \prockey{Esc-^X-R}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Region Select}\procmenuwhere{~22}}
 
-\proclistentry{\procname{rasterv-touchup}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-touchup}(\proctype{rasterview} \procparm{obj})\
 Touch Up Mode\
 Bound to:  \prockey{Esc-^X-T}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Touch Up}\procmenuwhere{~23}}
 
-\proclistentry{\procname{rasterv-pan}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-pan}(\proctype{rasterview} \procparm{obj})\
 Pan Mode\
 Bound to:  \prockey{Esc-^X-P}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Pan}\procmenuwhere{~24}}
 
-\proclistentry{\procname{rasterv-move-display-box}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{help})\
+\proclistentry{\procname{rasterv-move-display-box}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{help})\
 Move the location of the Display Box.  If \procparm{help} is 
 non-zero, print help message, first.\
 Bound to:  \prockey{Esc-M}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Move Display Box}\procmenuwhere{~32}\
 It is generally not possible to move the display box using Ness.  Do 
 not use this from Ness.}
 
-\proclistentry{\procname{rasterv-hide-display-box}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-hide-display-box}(\proctype{rasterview} \procparm{obj})\
 Hide the Display Box\
 Bound to:  \prockey{Esc-H}; Menu:  \procmenu{Raster}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Hide Display Box}\procmenuwhere{~34}}
 
-\proclistentry{\procname{rasterv-set-print-scaling}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-set-print-scaling}(\proctype{rasterview} \procparm{obj})\
 Set the scaling factors used when printing\
 Bound to:  \prockey{Esc-P}; Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Set Print Size}\procmenuwhere{~53}\
 Use \procname{QueueAnswer} twice to provide height, width scaling in Ness.}
 
-\proclistentry{\procname{rasterv-extend-to-mat}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-extend-to-mat}(\proctype{rasterview} \procparm{obj})\
 Add pixels to image to reach the bordering matte\
 Bound to:  \prockey{Esc-X}; Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Extend to Mat}\procmenuwhere{~55}}
 
-\proclistentry{\procname{rasterv-crop}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-crop}(\proctype{rasterview} \procparm{obj})\
 Crop image to the selection\
 Bound to:  \prockey{Esc-C}; Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Crop}\procmenuwhere{~63}}
 
-\proclistentry{\procname{rasterv-uncrop}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-uncrop}(\proctype{rasterview} \procparm{obj})\
 Revert image to entire raster\
 Bound to:  \prockey{Esc-c}; Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Uncrop}\procmenuwhere{~65}}
 
-\proclistentry{\procname{rasterv-toggle-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-toggle-debug}(\proctype{rasterview} \procparm{obj})\
 Toggle the rasterview debug flag\
 Bound to:  \prockey{Esc-D}}
 
-\proclistentry{\procname{rasterv-read-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-read-file}(\proctype{rasterview} \procparm{obj})\
 Read a raster file\
 Bound to:  \prockey{Esc-^R-r}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Read Raster}\procmenuwhere{~12}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-read-macpaint}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-read-macpaint}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Read a file allegedly in MacPaint format.  \procparm{op} 
 must be 0.\
 Bound to:  \prockey{Esc-^R-I-m}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Read MacPaint}\procmenuwhere{~22}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-write-macpaint}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-write-macpaint}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Write file in MacPaint format.  \procparm{op} must be 1.\
 Bound to:  \prockey{Esc-^R-I-M}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Write MacPaint}\procmenuwhere{~24}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-write-postscript}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-write-postscript}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Write file in postscript format.  \procparm{op} must be 3.\
 Bound to:  \prockey{Esc-^R-I-P}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Write Postscript}\procmenuwhere{~32}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-read-rasterfile}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-read-rasterfile}(\proctype{rasterview} \procparm{obj})\
 Read a file allegedly in the old ITC RasterFile format\
 Bound to:  \prockey{Esc-^R-r}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Read Old Raster}\procmenuwhere{~42}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-imprint-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-imprint-inset}(\proctype{rasterview} \procparm{obj})\
 Imprint the overlaid inset.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Paste Down Inset}\procmenuwhere{~75}}
 
-\proclistentry{\procname{rasterv-make-asnap}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-make-asnap}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Sweep area and read.  \procparm{op} must be 9.  Note that 
 this requires presence of the \bold{asnap} command, which may be a 
 CMU-exclusive.\
 Bound to:  \prockey{Esc-^R-I-a}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Make Area Dump}\procmenuwhere{~71}}
 
-\proclistentry{\procname{rasterv-make-xwd}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-make-xwd}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Dump X window and read.  \procparm{op} must be 8.  Note that 
 this executes the external \bold{xwd} command.\
 Bound to:  \prockey{Esc-^R-I-w}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Make Window Dump}\procmenuwhere{~70}\
 It is generally not possible to control an external interactive 
 application like \bold{xwd} from Ness.  Do not use this in Ness.}
 
-\proclistentry{\procname{rasterv-overlay-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-overlay-inset}(\proctype{rasterview} \procparm{obj})\
 Overlay an inset on the raster view.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Overlay Inset}\procmenuwhere{~72}}
 
-\proclistentry{\procname{rasterv-read-xbmfile}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-read-xbmfile}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Read file in X Bitmap format.  \procparm{op} must be 6.\
 Bound to:  \prockey{Esc-^R-b}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Read X Bitmap}\procmenuwhere{~14}; 
 Raster I/O~42,Read X Bitmap~62\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-read-xwdfile}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-read-xwdfile}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Read file in X Window Dump format.  \procparm{op} must be 4.\
 Bound to:  \prockey{Esc-^R-x}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Read X Window Dump}\procmenuwhere{~13}; 
 Raster I/O~42,Read X Window Dump~52\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-remove-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-remove-inset}(\proctype{rasterview} \procparm{obj})\
 Remove the overlaid inset.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Remove Inset}\procmenuwhere{~76}}
 
-\proclistentry{\procname{rasterv-resize-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-resize-inset}(\proctype{rasterview} \procparm{obj})\
 Resize the overlaid inset.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Resize Inset}\procmenuwhere{~77}}
 
-\proclistentry{\procname{rasterv-toggle-coord-display}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-toggle-coord-display}(\proctype{rasterview} \procparm{obj})\
 Toggles display of mouse coordinates.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Show/Hide Coords}\procmenuwhere{~57}}
 
-\proclistentry{\procname{rasterv-toolset-create}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-toolset-create}(\proctype{rasterview} \procparm{obj})\
 Creates a window containing editing tools.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Toolset}\procmenuwhere{~80}}
 
-\proclistentry{\procname{rasterv-toolset-destroy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rasterv-toolset-destroy}(\proctype{rasterview} \procparm{obj})\
 Deletes toolset window.\
 Menu:  \procmenu{Raster}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Remove Toolset}\procmenuwhere{~81}}
 
-\proclistentry{\procname{rasterv-write-xbmfile}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-write-xbmfile}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Write file in X Bitmap format.  \procparm{op} must be 7.\
 Bound to:  \prockey{Esc-^R-B}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Write X Bitmap}\procmenuwhere{~64}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{rasterv-write-xwdfile}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{op})\
+\proclistentry{\procname{rasterv-write-xwdfile}(\proctype{rasterview} \procparm{obj}, \proctype{integer} \procparm{op})\
 Write file in X Window Dump format.  \procparm{op} must be 5.\
 Bound to:  \prockey{Esc-^R-X}; Menu:  \procmenu{Raster I/O}\procmenuwhere{~42}\procmenuwhere{,}\procmenu{Write X Window Dump}\procmenuwhere{~54}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
 
-\proclistentry{\procname{rastoolv-floodfill-abort}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-floodfill-abort}(\proctype{rastoolview} \procparm{obj})\
 Abort flood fill operation.\
 Bound to:  \prockey{^C}; Menu:  \procmenu{Abort Flood Fill}\procmenuwhere{~33}}
 
-\proclistentry{\procname{rastoolv-imprint-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-imprint-inset}(\proctype{rastoolview} \procparm{obj})\
 Imprint the overlaid inset.\
 Menu:  \procmenu{Paste Down Inset}\procmenuwhere{~21}}
 
-\proclistentry{\procname{rastoolv-pastedown}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-pastedown}(\proctype{rastoolview} \procparm{obj})\
 Paste down paste region onto raster.\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Paste Down Region}\procmenuwhere{~11}}
 
-\proclistentry{\procname{rastoolv-remove-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-remove-inset}(\proctype{rastoolview} \procparm{obj})\
 Remove the overlaid inset.\
 Menu:  \procmenu{Remove Inset}\procmenuwhere{~22}}
 
-\proclistentry{\procname{rastoolv-resize-inset}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-resize-inset}(\proctype{rastoolview} \procparm{obj})\
 Resize the overlaid inset.\
 Menu:  \procmenu{Resize Inset}\procmenuwhere{~23}}
 
-\proclistentry{\procname{rastoolv-set-curve-spring}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-set-curve-spring}(\proctype{rastoolview} \procparm{obj})\
 Set spring stiffness in curvepaint tool.\
 Menu:  \procmenu{Set Curvypaint Spring}\procmenuwhere{~32}\
 Use \procname{QueueAnswer} to provide stiffness in Ness.}
 
-\proclistentry{\procname{rastoolv-set-spray-size}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-set-spray-size}(\proctype{rastoolview} \procparm{obj})\
 Set radius of spraypaint tool.\
 Menu:  \procmenu{Set Spray Radius}\procmenuwhere{~31}\
 Use \procname{QueueAnswer} to provide size in Ness.}
 
-\proclistentry{\procname{rastoolv-toolset-destroy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-toolset-destroy}(\proctype{rastoolview} \procparm{obj})\
 Deletes toolset window.\
 Bound to:  \prockey{^X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Delete Window}\procmenuwhere{~89}}
 
-\proclistentry{\procname{rastoolv-unpaste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{rastoolv-unpaste}(\proctype{rastoolview} \procparm{obj})\
 Remove paste region from raster.\
 Menu:  \procmenu{Remove Paste Region}\procmenuwhere{~12}}
 

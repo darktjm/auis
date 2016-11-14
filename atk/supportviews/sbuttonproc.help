@@ -4,40 +4,40 @@
 \chapter{Procedure Table Listing for sbutton}
 
 
-\proclistentry{\procname{sbuttonv-add-button}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-add-button}(\proctype{sbttnav} \procparm{obj})\
 Prompts for user to name a new button.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Add Button}\procmenuwhere{~30}\
 Use \procname{QueueAnswer} to provide label text in Ness.}
 
-\proclistentry{\procname{sbuttonv-delete-group}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-delete-group}(\proctype{sbttnav} \procparm{obj}, \proctype{marker} \procparm{group})\
 Deletes the \procparm{group} specified.\
 Menu:   for each group, 
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Delete Group}\procmenuwhere{~35}}
 
-\proclistentry{\procname{sbuttonv-delete}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-delete}(\proctype{sbttnav} \procparm{obj})\
 Deletes the selected button.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Delete button}\procmenuwhere{~31}\
 It is not generally possible to select a button in Ness; do not call 
 this from Ness.}
 
-\proclistentry{\procname{sbuttonv-new-group}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-new-group}(\proctype{sbttnav} \procparm{obj})\
 Creates a new button group.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{New group}\procmenuwhere{~95}\
 Use \procname{QueueAnswer} to provide group name in Ness.}
 
-\proclistentry{\procname{sbuttonv-rename-group}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-rename-group}(\proctype{sbttnav} \procparm{obj}, \proctype{marker} \procparm{group})\
 Renames the specified \procparm{group}.\
 Menu:   for each group, 
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Rename Group}\procmenuwhere{~30}}
 
-\proclistentry{\procname{sbuttonv-set-button-group}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-button-group}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Choose which group the button will take its appearance from.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Button Group}\procmenuwhere{~11} (default); also, for each group, 
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Button Group}\procmenuwhere{~11}\
 It is not generally possible to select a button in Ness; do not call 
 this from Ness.}
 
-\proclistentry{\procname{sbuttonv-set-colors}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-colors}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the foreground and 
 background color of the SButton.  This modifies the 
 colors of \procparm{group}, or the default if not specified.\
@@ -45,27 +45,27 @@ Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Color
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Colors}\procmenuwhere{~24}\
 Use \procname{QueueAnswer} twice to provide colors in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-columns}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-set-columns}(\proctype{sbttnav} \procparm{obj})\
 Sets the number of columns to be used for 
 buttons. Enough rows will be used to ensure that all buttons are visible.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Columns}\procmenuwhere{~72}\
 Use \procname{QueueAnswer} to provide number in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-depth}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-depth}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the depth of the SButton.  This modifies the 
 depth of \procparm{group}, or the default if not specified.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Depth}\procmenuwhere{~27} (default); also, for each group,
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Depth}\procmenuwhere{~27}\
 Use \procname{QueueAnswer} to provide depth in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-font}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-font}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the font of the sbutton.  This modifies the 
 font of \procparm{group}, or the default if not specified.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Font}\procmenuwhere{~22} (default); also, for each group, 
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Button Font}\procmenuwhere{~22}\
 Use \procname{QueueAnswer} to provide font name in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-label-color}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-label-color}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the foreground and 
 background color of the SButton's label.  This modifies the 
 colors of \procparm{group}, or the default if not specified.\
@@ -73,20 +73,20 @@ Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Label
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Label Colors}\procmenuwhere{~26}\
 Use \procname{QueueAnswer} twice to provide colors in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-label}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-set-label}(\proctype{sbttnav} \procparm{obj})\
 Prompts for user to set the text string of the sbutton.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Label}\procmenuwhere{~10}\
 While it is possible to set the label text with \procname{QueueAnswer}, it is 
 not generally possible to select a button in Ness; do not call 
 this from Ness.}
 
-\proclistentry{\procname{sbuttonv-set-rows}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-set-rows}(\proctype{sbttnav} \procparm{obj})\
 Sets the number of rows to be used for buttons. 
 Enough columns will be used to ensure that all buttons are visible.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Rows}\procmenuwhere{~71}\
 Use \procname{QueueAnswer} to provide number in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-shadow-colors}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-shadow-colors}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the top, bottom 
 and middle shadow colors of the SButton.  This modifies the 
 colors of \procparm{group}, or the default if not specified.\
@@ -94,7 +94,7 @@ Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Shado
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Shadow Colors}\procmenuwhere{~25}\
 Use \procname{QueueAnswer} thrice to provide colors in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-style}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
+\proclistentry{\procname{sbuttonv-set-style}(\proctype{sbttnav} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{group})\
 Prompts for user to set the appearance of the 
 SButton.  The choices are Plain Text, Boxed Text, Three Dimensional, 
 Simple Boxed Text and OSF/MOTIF.\
@@ -102,7 +102,7 @@ Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Style
 \procmenu{\italic{GroupName}}\procmenuwhere{~\italic{groupno+22}}\procmenuwhere{,}\procmenu{Set Style}\procmenuwhere{~23}\
 Use \procname{QueueAnswer} thrice to provide selection in Ness.}
 
-\proclistentry{\procname{sbuttonv-set-trigger}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{sbuttonv-set-trigger}(\proctype{sbttnav} \procparm{obj})\
 Prompts for user to set the text string of the 
 sbutton.\
 Menu:  \procmenu{SButton}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Set Trigger}\procmenuwhere{~11}\

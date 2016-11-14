@@ -1,23 +1,23 @@
 \begindata{text,538528536}
 \textdsversion{12}
 \template{prochelp}
-\chapter{Listprocs for Value (etextv, mtextv)}
+\chapter{Procedure Table Listing for Value (etextv, mtextv)}
 
 
-\proclistentry{\procname{etextview-return-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{etextview-return-cmd}(\proctype{etextview} \procparm{obj})\
 Handle enter key\
 Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\proclistentry{\procname{etextview-cancel-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{etextview-cancel-cmd}(\proctype{etextview} \procparm{obj})\
 Handle cancel\
 Bound to:  \prockey{^G}}
 
-\proclistentry{\procname{etextview-clear-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{etextview-clear-cmd}(\proctype{etextview} \procparm{obj})\
 Handle clear\
 Bound to:  \prockey{^U}}
 
 
-\proclistentry{\procname{metextview-return-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{metextview-return-cmd}(\proctype{metextview} \procparm{obj})\
 Handle menter key\
 Bound to:  \prockey{Enter} (\prockey{^M})}
 

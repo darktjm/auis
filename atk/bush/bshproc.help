@@ -4,48 +4,48 @@
 \chapter{Procedure Table Listing for Bush}
 
 
-\proclistentry{\procname{bushv-exit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-exit}(\proctype{bushv} \procparm{obj})\
 Exit.  If any file is modified ask for confirmation.\
 Bond to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}\
 Do not try to confirm within Ness.}
 
-\proclistentry{\procname{bushv-DEBUG}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-DEBUG}(\proctype{bushv} \procparm{obj})\
 Toggle bush debug flag}
 
-\proclistentry{\procname{bushv-switch}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-switch}(\proctype{bushv} \procparm{obj})\
 Switch to a new directory.\
 Use \procname{QueueAnswer} to provide directory name in Ness.}
 
-\proclistentry{\procname{bushv-destroy}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-destroy}(\proctype{bushv} \procparm{obj})\
 Destroy the current directory/files.\
 Do not try to confirm within Ness.}
 
-\proclistentry{\procname{bushv-entries-page-down}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-entries-page-down}(\proctype{bushv} \procparm{obj})\
 Scroll entries list down.\
 Bound to:  \prockey{Next/PageDn} (\prockey{Esc-E}), \prockey{^V}; 
 Menu:  \procmenu{Entries}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Page Down}\procmenuwhere{~10}}
 
-\proclistentry{\procname{bushv-entries-page-up}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-entries-page-up}(\proctype{bushv} \procparm{obj})\
 Scroll entries list up.\
 Bound to:  \prockey{Prior/PageUp} (\prockey{Esc-G}), \prockey{Esc-v}; 
 Menu:  \procmenu{Entries}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Page Up}\procmenuwhere{~20}}
 
-\proclistentry{\procname{bushv-pop}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-pop}(\proctype{bushv} \procparm{obj})\
 Pop up a level.}
 
-\proclistentry{\procname{bushv-rescan}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-rescan}(\proctype{bushv} \procparm{obj})\
 Rescan the current directory.}
 
-\proclistentry{\procname{bushv-save-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-save-file}(\proctype{bushv} \procparm{obj})\
 Saves buffer into its current file.\
 Bound to:  \prockey{^X-^S}; Menu:  \procmenu{Save}\procmenuwhere{~20}}
 
-\proclistentry{\procname{bushv-set-printer}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-set-printer}(\proctype{bushv} \procparm{obj})\
 Set the default printer.\
 Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Set Printer}\procmenuwhere{~20}\
 Note: this is obsoleted by the printer setup dialog; use it instead.}
 
-\proclistentry{\procname{bushv-write-file}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{bushv-write-file}(\proctype{bushv} \procparm{obj})\
 Prompt for a file to save.\
 Bound to:  \prockey{^X-^W}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save As}\procmenuwhere{~1}\
 Use \procname{QueueAnswer} to provide file name in Ness.}

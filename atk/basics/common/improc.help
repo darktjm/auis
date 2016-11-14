@@ -6,55 +6,55 @@
 \chapter{Procedure Table Listing for Im}
 
 
-\proclistentry{\procname{im-exit-program}()\
+\proclistentry{\procname{im-exit-program}(\proctype{im} \procparm{obj})\
 Exit program.\
 Bound to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-\proclistentry{\procname{im-start-keyboard-macro}(\proctype{object} \procparm{view})\
-Start recording input events.  The \procparm{view} parameter is 
+\proclistentry{\procname{im-start-keyboard-macro}(\proctype{im} \procparm{obj})\
+Start recording input events.  The \procparm{obj} parameter is 
 only for displaying messages; the effect is global.\
 Bound to:  \prockey{^X-(}}
 
-\proclistentry{\procname{im-stop-keyboard-macro}(\proctype{object} \procparm{view})\
-Stop recording input events.  The \procparm{view} parameter is 
+\proclistentry{\procname{im-stop-keyboard-macro}(\proctype{im} \procparm{obj})\
+Stop recording input events.  The \procparm{obj} parameter is 
 only for displaying messages; the effect is global.\
 Bound to:  \prockey{^X-)}}
 
-\proclistentry{\procname{im-play-keyboard-macro}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{im-play-keyboard-macro}(\proctype{im} \procparm{obj})\
 Play current keyboard macro.\
 Bound to:  \prockey{^X-e}\
 \prockey{^U}-argument can be set to play repeatedly.  Note that 
 unlike Emacs et al., repetitions do not stop at errors.  They only stop 
 on an explicit break (e.g. \prockey{^G})}
 
-\proclistentry{\procname{im-redraw-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{im-redraw-window}(\proctype{im} \procparm{obj})\
 Redraw the window.\
 Bound to:  \prockey{^L}}
 
-\proclistentry{\procname{im-print-malloc-statistics}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{im-print-malloc-statistics}(\proctype{im} \procparm{obj})\
 Write malloc statistics to a file.  The file's name is fixed 
 (\typewriter{/tmp/mallocstats.}\italic{pid}).  Nothing is written if 
-support not compiled in.  The \procparm{view} parameter is for messages; 
+support not compiled in.  The \procparm{obj} parameter is for messages; 
 the effect is global.\
 Bound to:  \prockey{^X-^@-m}}
 
-\proclistentry{\procname{im-reset-malloc-statistics}(\proctype{object} \procparm{view})\
-Reset malloc statistics.  The \procparm{view} parameter is for 
+\proclistentry{\procname{im-reset-malloc-statistics}(\proctype{im} \procparm{obj})\
+Reset malloc statistics.  The \procparm{obj} parameter is for 
 messages; the effect is global.\
 Bound to:  \prockey{^X-^@-r}}
 
-\proclistentry{\procname{im-print-malloc-table}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{im-print-malloc-table}(\proctype{im} \procparm{obj})\
 Write malloc table to a file.  The file's name is fixed 
 (\typewriter{/tmp/malloctable.}\italic{pid}\typewriter{.}\italic{seq}).  
-Nothing is written if support not compiled in.  The \procparm{view} 
+Nothing is written if support not compiled in.  The \procparm{obj} 
 parameter is for messages; the effect is global.\
 Bound to:  \prockey{^X-^@-t}}
 
-\proclistentry{\procname{im-start-profile}()\
+\proclistentry{\procname{im-start-profile}(\proctype{im} \procparm{obj})\
 Start profiling program.  Actually, does nothing.\
 Bound to:  \prockey{^X-^@-p}}
 
-\proclistentry{\procname{im-stop-profile}()\
+\proclistentry{\procname{im-stop-profile}(\proctype{im} \procparm{obj})\
 Stop profiling program.  Actually, does nothing.\
 Bound to:  \prockey{^X-^@-q}}
 

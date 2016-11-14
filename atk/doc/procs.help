@@ -10,11 +10,17 @@ A procedure table is a list of named procedures and functions for use
 with initialization files and Ness scripts.  The names are 
 case-insensitive.  Procedures take two arguments: an object argument 
 and an extra argument.  The specification of these arguments depends 
-on how the procedure is being called.  At present, the type of the 
-extra argument is rarely checked, so make sure it is the correct type. 
-Most procedures do not take a second argument, in which case the value 
-provided is ignored.  Some procedures have return values; these are 
-ignored except in Ness, where they may optionally be ignored as well.
+on how the procedure is being called.  The object argument may also 
+be interpreted as a string or integer, if the procedure is only 
+intended to be called from Ness.  In the procedure table listings, the 
+type of object arguments (such as the first argument) is given as the 
+expected ATK type, rather than as a generic object type, although Ness 
+has no way of indicating this in function specifications.  At present, 
+the type of the extra argument is rarely checked by procedures, so make 
+sure it is the correct type.  Most procedures do not take a second 
+argument, in which case the value provided is ignored.  Some procedures 
+have return values; these are ignored except in Ness, where they may 
+optionally be ignored as well.
 
 See the \bold{addmenu} and \bold{addkey} command descriptions in the 
 \helptopic{initfiles} help topic for how to use these in an 

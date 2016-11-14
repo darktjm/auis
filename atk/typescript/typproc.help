@@ -6,135 +6,135 @@
 \chapter{Procedure Table Listing for Typescript and Fcomp}
 
 
-\proclistentry{\procname{typescript-Save-As}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Save-As}(\proctype{typescript} \procparm{obj})\
 Prompt for file name to save\
 Menu:  \procmenu{File}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Save As}\procmenuwhere{~10}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{typescript-Print}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Print}(\proctype{typescript} \procparm{obj})\
 Print typescript\
 Menu:  \procmenu{"File}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Print}\procmenuwhere{~21}}
 
-\proclistentry{\procname{typescript-Preview}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Preview}(\proctype{typescript} \procparm{obj})\
 Preview typescript\
 Menu:  \procmenu{File}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Preview}\procmenuwhere{~22}}
 
-\proclistentry{\procname{typescript-SetPrinter}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-SetPrinter}(\proctype{typescript} \procparm{obj})\
 Set Printer\
 File~30,Set Printer~20\
 Use \procname{QueueAnswer} to provide printer name in Ness.}
 
-\proclistentry{\procname{typescript-yank}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-yank}(\proctype{typescript} \procparm{obj})\
 Yank text back from kill-buffer.\
 Bound to:  \prockey{^Y}; Menu:  \procmenu{Paste}\procmenuwhere{~11}}
 
-\proclistentry{\procname{typescript-rotate-backward-paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-rotate-backward-paste}(\proctype{typescript} \procparm{obj})\
 Rotate kill-buffer backwards.\
 Bound to:  \prockey{Esc-^Y}}
 
-\proclistentry{\procname{typescript-rotate-paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-rotate-paste}(\proctype{typescript} \procparm{obj})\
 Rotate kill-buffer.\
 Bound to:  \prockey{Esc-y}; Menu:  \procmenu{Replace}\procmenuwhere{~13}}
 
-\proclistentry{\procname{typescript-Grab-Last-Cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Grab-Last-Cmd}(\proctype{typescript} \procparm{obj})\
 Grab Last Command \italic{FIXME: what does that mean?}\
 Bound to:  \prockey{Esc-=}}
 
-\proclistentry{\procname{typescript-Grab-Current-Cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Grab-Current-Cmd}(\proctype{typescript} \procparm{obj})\
 Grab Current Command \italic{FIXME: what does that mean?}\
 Bound to:  \prockey{Esc-+}; Menu:  \procmenu{Move}\procmenuwhere{~30}}
 
-\proclistentry{\procname{typescript-Execute-Current-Cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Execute-Current-Cmd}(\proctype{typescript} \procparm{obj})\
 Execute Current Command\
 Bound to:  \prockey{Esc-Enter} (\prockey{Esc-^M}); Menu:  \procmenu{
 Execute}\procmenuwhere{~31}}
 
-\proclistentry{\procname{typescript-Grab-Next-Cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Grab-Next-Cmd}(\proctype{typescript} \procparm{obj})\
 Grab Next Command \italic{FIXME: what does that mean?}\
 Bound to:  \prockey{Esc-`}}
 
-\proclistentry{\procname{typescript-interupt-command}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-interupt-command}(\proctype{typescript} \procparm{obj})\
 Handle ^C\
 Bound to:  \prockey{^C}, \prockey{Delete}}
 
-\proclistentry{\procname{typescript-beginning-of-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-beginning-of-line}(\proctype{typescript} \procparm{obj})\
 Move to line beginning\
 Bound to:  \prockey{^A}}
 
-\proclistentry{\procname{typescript-end-of-line}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-end-of-line}(\proctype{typescript} \procparm{obj})\
 Move to line end\
 Bound to:  \prockey{^E}}
 
-\proclistentry{\procname{typescript-EOT-command}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-EOT-command}(\proctype{typescript} \procparm{obj})\
 Handle ^D\
 Bound to:  \prockey{^D}}
 
-\proclistentry{\procname{typescript-return-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-return-cmd}(\proctype{typescript} \procparm{obj})\
 Handle enter key\
 Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\proclistentry{\procname{typescript-return-and-position}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-return-and-position}(\proctype{typescript} \procparm{obj})\
 Handle enter key and place command at top of the screen\
 Bound to:  \prockey{^J}}
 
-\proclistentry{\procname{typescript-ZAP-command}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-ZAP-command}(\proctype{typescript} \procparm{obj})\
 Handles ^U line clearing\
 Bound to:  \prockey{^U}}
 
-\proclistentry{\procname{typescript-Stop-cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Stop-cmd}(\proctype{typescript} \procparm{obj})\
 Handle ^Z Stop cmd\
 Bound to:  \prockey{^Z}}
 
-\proclistentry{\procname{typescript-unbound}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-unbound}(\proctype{typescript} \procparm{obj})\
 Does nothing.\
 Bound to:  \prockey{Esc-~}}
 
-\proclistentry{\procname{typescript-zap-region}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-zap-region}(\proctype{typescript} \procparm{obj})\
 Cut region to kill-buffer.\
 Bound to:  \prockey{^W}; Menu:  \procmenu{Cut}\procmenuwhere{~11}}
 
-\proclistentry{\procname{typescript-copy-region}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-copy-region}(\proctype{typescript} \procparm{obj})\
 Copy region to kill-buffer.\
 Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~12}}
 
-\proclistentry{\procname{typescript-QUIT-command}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-QUIT-command}(\proctype{typescript} \procparm{obj})\
 Handles quit cmd\
 Bound to:  \prockey{^\\}}
 
-\proclistentry{\procname{typescript-No-Echo-Cmd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-No-Echo-Cmd}(\proctype{typescript} \procparm{obj})\
 Turn Off Echoing\
 Bound to:  \prockey{^X^L}}
 
-\proclistentry{\procname{typescript-delete-previous-character}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-delete-previous-character}(\proctype{typescript} \procparm{obj})\
 Delete the previous character.\
 Bound to:  \prockey{Backspace} (\prockey{^H}), \prockey{Delete}}
 
-\proclistentry{\procname{typescript-self-insert}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{typescript-self-insert}(\proctype{typescript} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a character.\
 Bound to:  all printable ASCII except digits (\prockey{Space} .. 
 \prockey{/}, \prockey{:} .. \prockey{~}), with their 
 respective character codes as \procparm{ch}}
 
-\proclistentry{\procname{typescript-Clear}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Clear}(\proctype{typescript} \procparm{obj})\
 Clear Typescript\
 Menu:  \procmenu{Clear}\procmenuwhere{~51}}
 
-\proclistentry{\procname{typescript-Clear-Text}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-Clear-Text}(\proctype{typescript} \procparm{obj})\
 Clear the text of the typescript}
 
-\proclistentry{\procname{typescript-digit}(\proctype{object} \procparm{self}, \proctype{integer} \procparm{ch})\
+\proclistentry{\procname{typescript-digit}(\proctype{typescript} \procparm{obj}, \proctype{integer} \procparm{ch})\
 Insert a character.\
 Bound to:  \prockey{0} .. \prockey{9}, with their respective 
 character codes as \procparm{ch}}
 
-\proclistentry{\procname{typescript-drag-cwd}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-drag-cwd}(\proctype{typescript} \procparm{obj})\
 Drag out current working directory.}
 
-\proclistentry{\procname{typescript-reset-tty}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{typescript-reset-tty}(\proctype{typescript} \procparm{obj})\
 Reset the tty (stty sane)\
 Bound to:  \prockey{Esc-r}}
 
-\proclistentry{\procname{typescript-Read-User-Menus}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{cmd})\
+\proclistentry{\procname{typescript-Read-User-Menus}(\proctype{typescript} \procparm{obj}, \proctype{marker} \procparm{cmd})\
 Handle user supplied menus by self-inserting \procparm{cmd}.\
 Menu:  for each entry in the "shell menu" file, if it exsits, the string 
 before the colon is the menu entry, and the \procparm{cmd} is the text after 
@@ -157,22 +157,22 @@ respective classes:
 \section{fcomp}
 
 
-\proclistentry{\procname{fcomp-complete-filename}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-complete-filename}(\proctype{typescript} \procparm{obj})\
 Filename completion (typescript)}
 
-\proclistentry{\procname{fcomp-possible-completions}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-possible-completions}(\proctype{typescript} \procparm{obj})\
 Display possible filename completions (typescript)}
 
-\proclistentry{\procname{fcomp-complete-command-backward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-complete-command-backward}(\proctype{typescript} \procparm{obj})\
 Complete partial command - searching backwards (typescript)}
 
-\proclistentry{\procname{fcomp-complete-command-foreward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-complete-command-foreward}(\proctype{typescript} \procparm{obj})\
 Complete partial command - searching forewards (typescript)}
 
-\proclistentry{\procname{fcomp-complete-token-backward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-complete-token-backward}(\proctype{typescript} \procparm{obj})\
 Complete partial token - searching backwards (typescript)}
 
-\proclistentry{\procname{fcomp-complete-token-foreward}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{fcomp-complete-token-foreward}(\proctype{typescript} \procparm{obj})\
 Complete partial token - searching forewards (typescript)}
 
 

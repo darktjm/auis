@@ -4,34 +4,35 @@
 \chapter{Procedure Table Listing for Lookz}
 
 
-\proclistentry{\procname{lookzview-edit-styles}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{lookzview-edit-styles}(\proctype{textview} \procparm{obj})\
 Bring up style editor in a seprate window\
 Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Edit Styles}\procmenuwhere{~30}}
 
 
-\proclistentry{\procname{lookzview-add-style}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lookzview-add-style}(\proctype{lookzview} \procparm{obj})\
 Add a new style to stylesheet\
 Bound to:  \prockey{Esc-A}; Menu:  \procmenu{Add Style}\
 Use \procname{QueueAnswer} to provide style name in Ness.}
 
-\proclistentry{\procname{lookzview-delete-style}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lookzview-delete-style}(\proctype{lookzview} \procparm{obj})\
 Delete a style from the stylesheet\
 Bound to:  \prockey{Esc-D}; Menu:  \procmenu{Delete Style}\
 Selecting a style is generally not possible in Ness; do not call this 
 from Ness.}
 
-\proclistentry{\procname{lookzview-set-bgcolor}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lookzview-set-bgcolor}(\proctype{lookzview} \procparm{obj})\
 Set stylesheet background color\
 Menu:  \procmenu{Set Background}\procmenuwhere{~10}\
 Use \procname{QueueAnswer} to provide color in Ness.}
 
-\proclistentry{\procname{lookzview-set-robgcolor}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lookzview-set-robgcolor}(\proctype{lookzview} \procparm{obj})\
 Set stylesheet readonly background color\
 Menu:  \procmenu{Set R/O Background}\procmenuwhere{~11}\
 Use \procname{QueueAnswer} to provide color in Ness.}
 
-\proclistentry{\procname{lookzview-update-document}(\proctype{object} \procparm{self})\
-Cause document to redisplay itself\
+\proclistentry{\procname{lookzview-update-document}(\proctype{lookzview} \procparm{obj})\
+Cause document to redisplay itself.  If the LookzAutoUpdate preference 
+is on, this procedure (and its bindings) will not be available.\
 Bound to:  \prockey{Esc-U}; Menu:  \procmenu{Update Document}}
 
 

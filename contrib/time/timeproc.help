@@ -4,7 +4,7 @@
 \chapter{Procedure Table Listing for writestamp, timeoday, clock}
 
 
-\proclistentry{\procname{writestamp-set-format}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fmt})\
+\proclistentry{\procname{writestamp-set-format}(\proctype{writestampview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fmt})\
 Set the writestamp inset's format to \procparm{fmt}.  If 
 \procparm{fmt} is an empty string, use "%o %A, %Y".  If null or 0, use 
 the default (via the WriteStampDefaultFormat preference or, if no such 
@@ -15,7 +15,7 @@ Menu:  Various default formats:\
 \procmenu{Write Stamp}\procmenuwhere{,}\procmenu{Month DD YYYY}\procmenuwhere{~11}  ("%o %A, %Y")}}
 
 
-\proclistentry{\procname{timeoday-set-format}(\proctype{object} \procparm{self}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fmt})\
+\proclistentry{\procname{timeoday-set-format}(\proctype{timeodayview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{fmt})\
 Set the tomeoday inset's format to \procparm{fmt}.  If 
 \procparm{fmt} is an empty string, use "%o %A, %Y".  If null or 0, use 
 the default (via the TimeODayDefaultFormat preference or, if no such 
@@ -26,7 +26,7 @@ Menu:  Various default formats:\
 \procmenu{Time O'Day}\procmenuwhere{,}\procmenu{Month DD YYYY}\procmenuwhere{~11}  ("%o %A, %Y")}}
 
 
-\proclistentry{\procname{clock-set-labels}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{code})\
+\proclistentry{\procname{clock-set-labels}(\proctype{clockview} \procparm{obj}, \proctype{marker} \procparm{code})\
 Set the clock inset's label parameters.  The menu entries 
 use all available \procparm{code} parameters; see them for details.\
 Menu:  Various label parameters:\
@@ -38,7 +38,7 @@ Menu:  Various label parameters:\
 \procmenu{Clock Labels}\procmenuwhere{~11}\procmenuwhere{,}\procmenu{Roman (XII)}\procmenuwhere{~12}  ("2")\
 \procmenu{Clock Labels}\procmenuwhere{~11}\procmenuwhere{,}\procmenu{English (Twelve)}\procmenuwhere{~13}  ("3")}}
 
-\proclistentry{\procname{clock-set-num-labels}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{code})\
+\proclistentry{\procname{clock-set-num-labels}(\proctype{clockview} \procparm{obj}, \proctype{marker} \procparm{code})\
 Set the clock inset's shape parameters.  The menu entries 
 use all available \procparm{code} parameters; see them for details.\
 Menu:  Various shape parameters:\
@@ -48,7 +48,7 @@ Menu:  Various shape parameters:\
 \procmenu{Clock Shape}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Thin border}\procmenuwhere{~12}  ("2")\
 \procmenu{Clock Shape}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Thick border}\procmenuwhere{~13}  ("3")}}
 
-\proclistentry{\procname{clock-set-seconds}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{code})\
+\proclistentry{\procname{clock-set-seconds}(\proctype{clockview} \procparm{obj}, \proctype{marker} \procparm{code})\
 Set the clock inset's seconds hand parameters.  The menu entries 
 use all available \procparm{code} parameters; see them for details.\
 Menu:  Various seconds hand parameters:\
@@ -56,7 +56,7 @@ Menu:  Various seconds hand parameters:\
 \procmenu{Clock Seconds}\procmenuwhere{~13}\procmenuwhere{,}\procmenu{Radial Hand}\procmenuwhere{~2}  ("B")\
 \procmenu{Clock Seconds}\procmenuwhere{~13}\procmenuwhere{,}\procmenu{Floating Tick}\procmenuwhere{~3}  ("C")}}
 
-\proclistentry{\procname{clock-set-ticks}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{code})\
+\proclistentry{\procname{clock-set-ticks}(\proctype{clockview} \procparm{obj}, \proctype{marker} \procparm{code})\
 Set the clock inset's tick count parameters.  The menu entries 
 use all available \procparm{code} parameters; see them for details.\
 Menu:  Various tick count parameters:\

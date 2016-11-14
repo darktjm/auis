@@ -4,12 +4,12 @@
 \chapter{Procedure Table Listing for Gsearch}
 
 
-\proclistentry{\procname{gsearch-forward}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gsearch-forward}(\proctype{textview} \procparm{obj})\
 Incremental GNU-Emacs style search forward.  If the search 
 fails, interactive macro execution is aborted.\
 This is inherently interactive; do not use from Ness.}
 
-\proclistentry{\procname{gsearch-backward}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{gsearch-backward}(\proctype{textview} \procparm{obj})\
 Incremental GNU-Emacs style search backward.  If the
 search fails, interactive macro execution is aborted.\
 This is inherently interactive; do not use from Ness.}

@@ -3,62 +3,65 @@
 \template{prochelp}
 \chapter{Procedure Table Listing for Lset/Adew}
 
-\proclistentry{\procname{arbcon-create}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{arbcon-create}(\proctype{view} \procparm{obj})\
 Create an Arbcon and pop it up in a new window if one does 
 not already exist.}
 
-\proclistentry{\procname{arbcon-copycon}(\proctype{object} \procparm{view})\
+\proclistentry{\procname{arbcon-copycon}(\proctype{view} \procparm{obj})\
 arbcon copycon \italic{FIXME:  Wow, what informative 
 documentation!  I think this is supposed to copy an arbiter-managed 
 view to a new window, including all insets.}}
 
 
 The following are not available until after an arbcon has been created 
-(i.e., just loading the class does not make them available):
+(i.e., just loading the class does not make them available).  Also, 
+the \procparm{obj} parameter is generally ignored except to provide 
+prompts or feedback.  Instead, each operates on the global "current" 
+arbcon.
 
 
-\proclistentry{\procname{arbcon-add-object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-add-object}(\proctype{view} \procparm{obj})\
 prompt for a new object view pair to add to the list\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Add Object}\procmenuwhere{~22}\
 Use \procname{QueueAnswer} to provide object view pair name in Ness.}
 
-\proclistentry{\procname{arbcon-add-valueview-list}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-add-valueview-list}(\proctype{view} \procparm{obj})\
 Bring up window of valueviews\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Init Value Window}\procmenuwhere{~23}}
 
-\proclistentry{\procname{arbcon-chdir}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-chdir}(\proctype{view} \procparm{obj})\
 Change Directory\
 Menu:  \procmenu{ADEW}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Change Directory}\procmenuwhere{~1}\
 Use \procname{QueueAnswer} to provide directory name in Ness.}
 
-\proclistentry{\procname{arbcon-copy-cel}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-copy-cel}(\proctype{view} \procparm{obj})\
 Copy the current cel\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Copy Cel}\procmenuwhere{~3}\
 This requires a selected cel.  It is not generally possible to select a 
 cel within Ness, so do not call this from Ness.}
 
-\proclistentry{\procname{arbcon-copy-link}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-copy-link}(\proctype{view} \procparm{obj})\
 Copy link to current cel\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Copy Link}\procmenuwhere{~2}\
 This requires a selected cel.  It is not generally possible to select a 
 cel within Ness, so do not call this from Ness.}
 
-\proclistentry{\procname{arbcon-creatcon}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-creatcon}(\proctype{view} \procparm{obj})\
 Create Controller\
 Menu:  \procmenu{ADEW}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Create Controller}\procmenuwhere{~1}}
 
-\proclistentry{\procname{arbcon-cut-cel}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-cut-cel}(\proctype{view} \procparm{obj})\
 Cut the current cel\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Cut Cel}\procmenuwhere{~10}\
 This requires a selected cel.  It is not generally possible to select a 
 cel within Ness, so do not call this from Ness.}
 
-\proclistentry{\procname{arbcon-new-window}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-new-window}(\proctype{view} \procparm{obj})\
 prompt for a file for a new window\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{New Window}\procmenuwhere{~20}\
 Use \procname{QueueAnswer} to provide new file name in Ness.}
 
-\proclistentry{\procname{arbcon-show-cels}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{arbcon-show-cels}(\proctype{view} \procparm{obj})\
 Show cel names\
 Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Show Cels}\procmenuwhere{~21}}
 
@@ -66,74 +69,74 @@ Menu:  \procmenu{Arbcon}\procmenuwhere{~0}\procmenuwhere{,}\procmenu{Show Cels}\
 \section{celview}
 
 
-\proclistentry{\procname{celview-Init-Child}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{celview-Init-Child}(\proctype{celview} \procparm{obj})\
 Initialize Child\
 celview,Init Child}
 
-\proclistentry{\procname{celview-InsertFile}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{celview-InsertFile}(\proctype{celview} \procparm{obj})\
 \italic{Not documented}\
 Menu:  \procmenu{celview}\procmenuwhere{,}\procmenu{Insert File}; 
 \procmenu{Read Child}}
 
-\proclistentry{\procname{celview-Paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{celview-Paste}(\proctype{celview} \procparm{obj})\
 \italic{Not documented}\
 Menu:  \procmenu{celview}\procmenuwhere{,}\procmenu{Paste}; \procmenu{Paste Child}}
 
-\proclistentry{\procname{celview-set-invisible}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{celview-set-invisible}(\proctype{celview} \procparm{obj})\
 Make celview invisible}
 
-\proclistentry{\procname{celview-set-visible}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{celview-set-visible}(\proctype{celview} \procparm{obj})\
 Make celview visible}
 
 
 \section{cel}
 
 
-\proclistentry{\procname{cel-set-invisible}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{cel-set-invisible}(\proctype{cel} \procparm{obj})\
 Make cel invisible}
 
-\proclistentry{\procname{cel-set-visible}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{cel-set-visible}(\proctype{cel} \procparm{obj})\
 Make cel visible}
 
 
 \section{lsetview}
 
 
-\proclistentry{\procname{lsetview-Insert-Object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Insert-Object}(\proctype{lsetview} \procparm{obj})\
 Set the object of a child view}
 
-\proclistentry{\procname{lsetview-Destroy-Object}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Destroy-Object}(\proctype{lsetview} \procparm{obj})\
 Destroy the child view\
 Bound to:  \prockey{Esc-d}}
 
-\proclistentry{\procname{lsetview-Insert-value}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Insert-value}(\proctype{lsetview} \procparm{obj})\
 Set the value of a child view}
 
-\proclistentry{\procname{lsetview-Insert-application}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Insert-application}(\proctype{lsetview} \procparm{obj})\
 Set the application of a child view\
 Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Set application}\procmenuwhere{~32}}
 
-\proclistentry{\procname{lsetview-Insert-Cel}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Insert-Cel}(\proctype{lsetview} \procparm{obj})\
 Set the Cel of a child view\
 Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Set Cel}\procmenuwhere{~30}}
 
-\proclistentry{\procname{lsetview-Paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Paste}(\proctype{lsetview} \procparm{obj})\
 Fill lset with contents of cut buffer\
 lset,Paste~36}
 
-\proclistentry{\procname{lsetview-Unsplit}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Unsplit}(\proctype{lsetview} \procparm{obj})\
 Unsplits parent lset\
 Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Unsplit Lset}\procmenuwhere{~40}}
 
-\proclistentry{\procname{lsetview-Read-File}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Read-File}(\proctype{lsetview} \procparm{obj})\
 Read a file into a child view\
 Menu: \procmenu{lset}\procmenuwhere{,}\procmenu{Insert File}\procmenuwhere{~35}}
 
-\proclistentry{\procname{lsetview-Split-Horz}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Split-Horz}(\proctype{lsetview} \procparm{obj})\
 Split the lpair Horizontally\
 Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Split Horizontal}\procmenuwhere{~11}}
 
-\proclistentry{\procname{lsetview-Split-Vert}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{lsetview-Split-Vert}(\proctype{lsetview} \procparm{obj})\
 Split the lpair Vertically\
 Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Split Vertically}\procmenuwhere{~10}}
 
@@ -141,24 +144,25 @@ Menu:  \procmenu{lset}\procmenuwhere{,}\procmenu{Split Vertically}\procmenuwhere
 \section{page}
 
 
-\proclistentry{\procname{pagev-next-page}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{pagev-next-page}(\proctype{pagev} \procparm{obj})\
 Changes the page to look at the next object\
 Bound to:  \prockey{^X-^N}; Menu:  \procmenu{page}\procmenuwhere{~95}\procmenuwhere{,}\procmenu{Next Page}\procmenuwhere{~90}}
 
-\proclistentry{\procname{pagev-paste}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{pagev-paste}(\proctype{pagev} \procparm{obj})\
 Pastes a switchee from the cut-buffer into a new page\
 Bound to:  \prockey{^X-5}; Menu:  \procmenu{page}\procmenuwhere{~95}\procmenuwhere{,}\procmenu{Paste}\procmenuwhere{~80}}
 
-\proclistentry{\procname{pagev-SetCurrentView}(\proctype{object} \procparm{self}, \proctype{marker} \procparm{name})\
+\proclistentry{\procname{pagev-SetCurrentView}(\proctype{pagev} \procparm{obj}, \proctype{marker} \procparm{name})\
 Switches to a page whose top-level cel has given 
 \procparm{name}.}
 
-\proclistentry{\procname{pagev-switch-object}(\proctype{object} \procparm{self}, \proctype{object} \procparm{swin})\
+\proclistentry{\procname{pagev-switch-object}(\proctype{pagev} \procparm{obj}, \proctype{object} \procparm{swin})\
 Switches to a given object, \procparm{swin}.  It is 
-generally not possible to create the necesary object for \procparm{swin} 
-within Ness; this is just used to generate direct switch menu entries 
-as pages are added.  Do not call from Ness; use 
-\procname{pagev-SetCurrentView} instead.}
+generally not possible to create the necesary object for 
+\procparm{swin}.  As such, it is not possible to bind this to a menu
+or key or to use this procedure from Ness.  It is used internally to 
+add direct switch menu entries as pages are added.  Do not bind or 
+call from Ness; use \procname{pagev-SetCurrentView} instead.}
 
 
 \section{Related Topics}

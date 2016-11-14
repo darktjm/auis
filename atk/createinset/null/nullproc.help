@@ -1,14 +1,14 @@
 \begindata{text,1241}
 \textdsversion{12}
 \template{prochelp}
-\chapter{Procedure Table Listing for null/nullview}
+\chapter{Procedure Table Listing for null}
 
 
-\proclistentry{\procname{null-clear-rectangle}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{null-clear-rectangle}(\proctype{nullview} \procparm{obj})\
 Clear the rectangle\
 Bound to: \prockey{^C}; Menu: \procmenu{Clear}\procmenuwhere{~10}}
 
-\proclistentry{\procname{null-invert-debug}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{null-invert-debug}(\proctype{nullview} \procparm{obj})\
 Toggle the nullview debug flag\
 Bound to: \prockey{Esc-^D-D}}
 

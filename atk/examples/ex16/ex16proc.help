@@ -4,25 +4,25 @@
 \chapter{Procedure Table Listing for helloworldview}
 
 
-\proclistentry{\procname{helloworldview-center}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-center}(\proctype{helloworldview} \procparm{obj})\
 Center the helloworldview string.\
 Bound to: \prockey{^C}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Center}}
 
-\proclistentry{\procname{helloworldview-invert}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-invert}(\proctype{helloworldview} \procparm{obj})\
 Invert the helloworldview string.\
 Bound to:  \prockey{Tab}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Invert}}
 
-\proclistentry{\procname{helloworldview-relocate}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-relocate}(\proctype{helloworldview} \procparm{obj})\
 Relocate the helloworld string.\
 Bound to:  \prockey{^R}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Relocate}\
 Use \procname{QueueAnswer} to provide coordinates in Ness.}
 
-\proclistentry{\procname{helloworldview-read}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-read}(\proctype{helloworldview} \procparm{obj})\
 Read in a new hello world.\
 Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Read}\
 Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\proclistentry{\procname{helloworldview-write}(\proctype{object} \procparm{self})\
+\proclistentry{\procname{helloworldview-write}(\proctype{helloworldview} \procparm{obj})\
 Write out the current hello world to a file.\
 Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Write}\
 Use \procname{QueueAnswer} to provide file name in Ness.}

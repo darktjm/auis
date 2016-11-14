@@ -4,13 +4,13 @@
 \chapter{Procedure Table Listing for Ezdiff}
 
 
-\proclistentry{\procname{ezdiff-change}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{ezdiff-change}(\proctype{textview} \procparm{obj})\
 Change to other mark}
 
-\proclistentry{\procname{ezdiff-current}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{ezdiff-current}(\proctype{textview} \procparm{obj})\
 Get Current Diff}
 
-\proclistentry{\procname{ezdiff-start}(\proctype{object} \procparm{textview}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{opts})\
+\proclistentry{\procname{ezdiff-start}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{opts})\
 Start diff process.  If \procparm{opts} is given, it is added 
 to the \bold{diff}(1) command options.  Otherwise, then come from 
 the EzdiffOptions preference by default, or are blank.\
@@ -20,10 +20,10 @@ preference.\
 Interactive prompting will occur when re-running diff; do not attempt 
 to answer with Ness.}
 
-\proclistentry{\procname{ezdiff-last}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{ezdiff-last}(\proctype{textview} \procparm{obj})\
 Get Last Diff}
 
-\proclistentry{\procname{ezdiff-next}(\proctype{object} \procparm{textview})\
+\proclistentry{\procname{ezdiff-next}(\proctype{textview} \procparm{obj})\
 Get Next Diff}
 
 

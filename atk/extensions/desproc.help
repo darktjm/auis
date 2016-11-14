@@ -4,22 +4,22 @@
 \chapter{Procedure Table Listing for DesKey}
 
 
-\proclistentry{\procname{deskey-describe-key}(\proctype{object} \procparm{im})\
+\proclistentry{\procname{deskey-describe-key}(\proctype{im} \procparm{obj})\
 Show binding of a typed in key sequence.  
 Prompts for a key sequence and responds with the name of the proctable 
 entry that would be called when that sequence is normally typed.\
 It may be possible to provide the sequence via \procname{DoKeys} from Ness.}
 
-\proclistentry{\procname{deskey-describe-bound-keys}(\proctype{object} \procparm{im})\
+\proclistentry{\procname{deskey-describe-bound-keys}(\proctype{im} \procparm{obj})\
 Show bindings for all keys (key sorted).}
 
-\proclistentry{\procname{deskey-describe-bound-procs}(\proctype{object} \procparm{im})\
+\proclistentry{\procname{deskey-describe-bound-procs}(\proctype{im} \procparm{obj})\
 Show bindings for all keys (proc name sorted)}
 
-\proclistentry{\proctype{integer} \procname{deskey-describe-proctable}(\proctype{object} \procparm{im})\
+\proclistentry{\proctype{integer} \procname{deskey-describe-proctable}(\proctype{im} \procparm{obj})\
 List proctable entries.  Returns count.}
 
-\proclistentry{\proctype{integer} \procname{deskey-list-proctable}(\proctype{object} \procparm{im})\
+\proclistentry{\proctype{integer} \procname{deskey-list-proctable}(\proctype{im} \procparm{obj})\
 List proctable entries in plain text to \typewriter{/tmp/ProcList}; 
 Returns count.}
 

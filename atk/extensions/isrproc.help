@@ -4,11 +4,11 @@
 \chapter{Procedure Table Listing for incsearch}
 
 
-\proclistentry{\procname{incsearch-forward}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{key})\
+\proclistentry{\procname{incsearch-forward}(\proctype{textview} \procparm{obj}, \proctype{integer} \procparm{key})\
 Search forward incrementally.  \procparm{key} must be 'S'.\
 This is inherently interactive; do not use from Ness.}
 
-\proclistentry{\procname{incsearch-backward}(\proctype{object} \procparm{textview}, \proctype{integer} \procparm{key})\
+\proclistentry{\procname{incsearch-backward}(\proctype{textview} \procparm{obj}, \proctype{integer} \procparm{key})\
 Search backward incrementally.  \procparm{key} must not be 'S'.\
 This is inherently interactive; do not use from Ness.}
 
