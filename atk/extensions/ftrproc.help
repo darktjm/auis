@@ -1,67 +1,55 @@
 \begindata{text,539045048}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Filter}
 
 
-\bold{filter-sink-region}(object \italic{textview})
+\proclistentry{\procname{filter-sink-region}(\proctype{textview} \procparm{obj})\
+Prompts for a command and provides the 
+selected region as standard input to it; the command's output is discarded.\
+Use \procname{filter-sink-region-thru-command} with Ness.}
 
-\leftindent{Prompts for a command and provides the 
-selected region as standard input to it; the command's output is discarded.
-
-Use \bold{filter-sink-region-thru-command} with Ness.}
-
-\bold{filter-sink-region-thru-command}(object \italic{textview}, 
-marker \italic{command})
-
-\leftindent{Provides the selected region as 
-standard input to the specified \italic{command}; the command's output is 
+\proclistentry{\procname{filter-sink-region-thru-command}(\proctype{textview} \procparm{obj}, \proctype{
+marker} \procparm{command})\
+Provides the selected region as 
+standard input to the specified \procparm{command}; the command's output is 
 discarded.}
 
-\bold{filter-sink-region-formatted}(object \italic{textview})
-
-\leftindent{Prompts for a command and provides 
+\proclistentry{\procname{filter-sink-region-formatted}(\proctype{textview} \procparm{obj})\
+Prompts for a command and provides 
 the selected region as standard input to it; the command's output is 
-discarded.  ATK datastream is written.
+discarded.  ATK datastream is written.\
+Use \procname{filter-sink-region-thru-command-formatted} with Ness.}
 
-Use \bold{filter-sink-region-thru-command-formatted} with Ness.}
-
-\bold{filter-sink-region-thru-command-formatted}(object \italic{textview}, 
-marker \italic{command})
-
-\leftindent{Provides the selected region as standard input to the specified 
-\italic{command}; the command's output is discarded.  ATK datastream is 
+\proclistentry{\procname{filter-sink-region-thru-command-formatted}(\proctype{textview} \procparm{obj}, \proctype{
+marker} \procparm{command})\
+Provides the selected region as standard input to the specified 
+\procparm{command}; the command's output is discarded.  ATK datastream is 
 written.}
 
-\bold{filter-filter-region}(object \italic{textview})
-
-\leftindent{Prompts for a command and executes it with 
+\proclistentry{\procname{filter-filter-region}(\proctype{textview} \procparm{obj})\
+Prompts for a command and executes it with 
 the selection region as standard input, replacing the region with the output 
-of the command.
+of the command.\
+Use \procname{filter-filter-region-thru-command} with Ness.}
 
-Use \bold{filter-filter-region-thru-command} with Ness.}
-
-\bold{filter-filter-region-thru-command}(object \italic{textview}, 
-marker \italic{command})
-
-\leftindent{Executes a \italic{command} with the 
+\proclistentry{\procname{filter-filter-region-thru-command}(\proctype{textview} \procparm{obj}, \proctype{
+marker} \procparm{command})\
+Executes a \procparm{command} with the 
 selection region as standard input, replacing it with the output of the 
 command.}
 
-\bold{filter-filter-region-formatted}(object \italic{textview})
-
-\leftindent{Prompts for a command and 
+\proclistentry{\procname{filter-filter-region-formatted}(\proctype{textview} \procparm{obj})\
+Prompts for a command and 
 executes it with the selection region as standard input, replacing the region 
-with the output of the command. ATK datastream is read and written.
+with the output of the command. ATK datastream is read and written.\
+Use \procname{filter-filter-region-thru-command-formatted} with Ness.}
 
-Use \bold{filter-filter-region-thru-command-formatted} with Ness.}
-
-\bold{filter-filter-region-thru-command-formatted}(object \italic{textview}, 
-marker \italic{command})
-
-\leftindent{Executes a \italic{command} 
+\proclistentry{\procname{filter-filter-region-thru-command-formatted}(\proctype{textview} \procparm{obj}, \proctype{
+marker} \procparm{command})\
+Executes a \procparm{command} 
 with the selection region as standard input, replacing it with the output of 
 the command.  ATK datastream is read and written.}
 

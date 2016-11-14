@@ -1,76 +1,54 @@
 \begindata{text,268849924}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Bush}
 
 
-\bold{bushv-exit}(object \italic{self})
-
-\leftindent{Exit.  If any file is modified ask for confirmation.
-
-Bond to:  \typewriter{^X-^C}; Menu:  Quit~99
-
+\proclistentry{\procname{bushv-exit}(\proctype{bushv} \procparm{obj})\
+Exit.  If any file is modified ask for confirmation.\
+Bond to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}\
 Do not try to confirm within Ness.}
 
-\bold{bushv-DEBUG}(object \italic{self})
+\proclistentry{\procname{bushv-DEBUG}(\proctype{bushv} \procparm{obj})\
+Toggle bush debug flag}
 
-\leftindent{Toggle bush debug flag}
+\proclistentry{\procname{bushv-switch}(\proctype{bushv} \procparm{obj})\
+Switch to a new directory.\
+Use \procname{QueueAnswer} to provide directory name in Ness.}
 
-\bold{bushv-switch}(object \italic{self})
-
-\leftindent{Switch to a new directory.
-
-Use \bold{queueanswer} to provide directory name in Ness.}
-
-\bold{bushv-destroy}(object \italic{self})
-
-\leftindent{Destroy the current directory/files.
-
+\proclistentry{\procname{bushv-destroy}(\proctype{bushv} \procparm{obj})\
+Destroy the current directory/files.\
 Do not try to confirm within Ness.}
 
-\bold{bushv-entries-page-down}(object \italic{self})
+\proclistentry{\procname{bushv-entries-page-down}(\proctype{bushv} \procparm{obj})\
+Scroll entries list down.\
+Bound to:  \prockey{Next/PageDn} (\prockey{Esc-E}), \prockey{^V}; 
+Menu:  \procmenu{Entries}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Page Down}\procmenuwhere{~10}}
 
-\leftindent{Scroll entries list down.
+\proclistentry{\procname{bushv-entries-page-up}(\proctype{bushv} \procparm{obj})\
+Scroll entries list up.\
+Bound to:  \prockey{Prior/PageUp} (\prockey{Esc-G}), \prockey{Esc-v}; 
+Menu:  \procmenu{Entries}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Page Up}\procmenuwhere{~20}}
 
-Bound to:  \typewriter{Next/PageDn} (\typewriter{Esc-E}), \typewriter{^V}; 
-Menu:  Entries~10,Page Down~10}
+\proclistentry{\procname{bushv-pop}(\proctype{bushv} \procparm{obj})\
+Pop up a level.}
 
-\bold{bushv-entries-page-up}(object \italic{self})
+\proclistentry{\procname{bushv-rescan}(\proctype{bushv} \procparm{obj})\
+Rescan the current directory.}
 
-\leftindent{Scroll entries list up.
+\proclistentry{\procname{bushv-save-file}(\proctype{bushv} \procparm{obj})\
+Saves buffer into its current file.\
+Bound to:  \prockey{^X-^S}; Menu:  \procmenu{Save}\procmenuwhere{~20}}
 
-Bound to:  \typewriter{Prior/PageUp} (\typewriter{Esc-G}), \typewriter{Esc-v}; 
-Menu:  Entries~10,Page Up~20}
-
-\bold{bushv-pop}(object \italic{self})
-
-\leftindent{Pop up a level.}
-
-\bold{bushv-rescan}(object \italic{self})
-
-\leftindent{Rescan the current directory.}
-
-\bold{bushv-save-file}(object \italic{self})
-
-\leftindent{Saves buffer into its current file.
-
-Bound to:  \typewriter{^X-^S}; Menu:  Save~20}
-
-\bold{bushv-set-printer}(object \italic{self})
-
-\leftindent{Set the default printer.
-
-Menu:  File~10,Set Printer~20
-
+\proclistentry{\procname{bushv-set-printer}(\proctype{bushv} \procparm{obj})\
+Set the default printer.\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Set Printer}\procmenuwhere{~20}\
 Note: this is obsoleted by the printer setup dialog; use it instead.}
 
-\bold{bushv-write-file}(object \italic{self})
-
-\leftindent{Prompt for a file to save.
-
-Bound to:  \typewriter{^X-^W}; Menu:  File~10,Save As~1
-
-Use \bold{queueanswer} to provide file name in Ness.}
+\proclistentry{\procname{bushv-write-file}(\proctype{bushv} \procparm{obj})\
+Prompt for a file to save.\
+Bound to:  \prockey{^X-^W}; Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Save As}\procmenuwhere{~1}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
 
 \section{Related Topics}

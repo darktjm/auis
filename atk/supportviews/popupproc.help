@@ -1,15 +1,13 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for popupwin}
 
 
-action \bold{popupwin-cancel}(object \italic{self})
-
-\leftindent{Cancels a popup.  Takes no extra parameters and returns no 
-value.
-
-Bound to:  \typewriter{^G}}
+\proclistentry{\proctype{action} \procname{popupwin-cancel}(\proctype{popupwin} \procparm{obj})\
+Cancels a popup.  Takes no extra parameters and returns no 
+value.\
+Bound to:  \prockey{^G}}
 
 
 \section{Related Topics}

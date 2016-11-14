@@ -1,80 +1,60 @@
 \begindata{text,539034464}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Chart}
 
 
-\bold{chartv-Save}(object \italic{self})
+\proclistentry{\procname{chartv-Save}(\proctype{chartv} \procparm{obj})\
+Save Database.  If a name was not assigned yet, one is 
+prompted for.\
+Menu:  \procmenu{Save}\procmenuwhere{~50}\
+Use \procname{QueueAnswer} to set name in Ness if not assigned yet.}
 
-\leftindent{Save Database.  If a name was not assigned yet, one is 
-prompted for.
+\proclistentry{\procname{chartv-Add}(\proctype{chartv} \procparm{obj})\
+Add Item(s).  Prompts will continue until blank name given or 
+canceled.\
+Menu:  \procmenu{Add}\procmenuwhere{~60}\
+Use \procname{QueueAnswer} to enter name and then value pairs with Ness.}
 
-Menu:  Save~50
-
-Use \bold{queueanswer} to set name in Ness if not assigned yet.}
-
-\bold{chartv-Add}(object \italic{self})
-
-\leftindent{Add Item(s).  Prompts will continue until blank name given or 
-canceled.
-
-Menu:  Add~60
-
-Use \bold{queueanswer} to enter name and then value pairs with Ness.}
-
-\bold{chartv-Delete}(object \italic{self})
-
-\leftindent{Delete current item.
-
-Menu:  Delete~61
-
+\proclistentry{\procname{chartv-Delete}(\proctype{chartv} \procparm{obj})\
+Delete current item.\
+Menu:  \procmenu{Delete}\procmenuwhere{~61}\
 Selection of current item is required for this to work, which is not 
 generally possible from Ness.  Do not use this from Ness.}
 
-\bold{chartv-Print}(object \italic{self})
+\proclistentry{\procname{chartv-Print}(\proctype{chartv} \procparm{obj})\
+Print Database.  If this actually results in a printed page 
+for you, it's a miracle.  Try looking at \typewriter{/tmp/chart_print.PS}.\
+Menu:  \procmenu{Print}\procmenuwhere{~63}}
 
-\leftindent{Print Database.  If this actually results in a printed page 
-for you, it's a miracle.  Try looking at \typewriter{/tmp/chart_print.PS}.
-
-Menu:  Print~63}
-
-\bold{chartv-Palette}(object \italic{self})
-
-\leftindent{Toggle presence of palette.
-
-Menu:  Expose Palette~70 (when not present); Hide Palette~70" (when 
+\proclistentry{\procname{chartv-Palette}(\proctype{chartv} \procparm{obj})\
+Toggle presence of palette.\
+Menu:  \procmenu{Expose Palette}\procmenuwhere{~70} (when not present); \procmenu{Hide Palette}\procmenuwhere{~70} (when 
 present)}
 
-\bold{chartv-DEBUG}(object \italic{self})
+\proclistentry{\procname{chartv-DEBUG}(\proctype{chartv} \procparm{obj})\
+Debug-toggle\
+Menu:  \procmenu{DEBUG}\procmenuwhere{~80}}
 
-\leftindent{Debug-toggle
+\proclistentry{\procname{chartv-Quit}(\proctype{chartv} \procparm{obj})\
+Quit (bypasses ATK/ez Quit).\
+Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-Menu:  DEBUG~80}
+\proclistentry{\procname{chartv-ReChart}(\proctype{chartv} \procparm{obj}, \proctype{marker} \procparm{type})\
+Change chart type.  The \procparm{type} argument is required, and is 
+one of those given below.\
+Menu:  \procmenu{ReChart}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Histogram}\procmenuwhere{~1} ("Histogram"); \procmenu{ReChart}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Pie}\procmenuwhere{~2} ("Pie"); 
+\procmenu{ReChart}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Dot}\procmenuwhere{~3} ("Dot"); \procmenu{ReChart}\procmenuwhere{~10}\procmenuwhere{}\procmenu{,Line}\procmenuwhere{~4} ("Line")}
 
-\bold{chartv-Quit}(object \italic{self})
+\proclistentry{\procname{chartv-Sort}(\proctype{chartv} \procparm{obj}, \proctype{integer} \procparm{type})\
+Change sort order.  The \procparm{type} parameters supported are 
+given after the menu entries.  The default is Position Ascend (260).\
+Menu:  \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Label Ascend}\procmenuwhere{~10} (258); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Label Descend}\procmenuwhere{~11} 
+(514); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Value Ascend}\procmenuwhere{~20} (257); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Value Descend}\procmenuwhere{~21} (513); 
+\procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Position Ascend}\procmenuwhere{~30} (260); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Position Descend}\procmenuwhere{~31} (516)}
 
-\leftindent{Quit (bypasses ATK/ez Quit).
-
-Menu:  Quit~99}
-
-\bold{chartv-ReChart}(object \italic{self}, marker \italic{type})
-
-\leftindent{Change chart type.  The \italic{type} argument is required, and is 
-one of those given below.
-
-Menu:  ReChart~10,Histogram~1 ("Histogram"); ReChart~10,Pie~2 ("Pie"); 
-ReChart~10,Dot~3 ("Dot"); ReChart~10,Line~4 ("Line")}
-
-\bold{chartv-Sort}(object \italic{self}, integer \italic{type})
-
-\leftindent{Change sort order.  The \italic{type} parameters supported are 
-given after the menu entries.  The default is Position Ascend (260).
-
-Menu:  Sort~20,Label Ascend~10 (258); Sort~20,Label Descend~11 
-(514); Sort~20,Value Ascend~20 (257); Sort~20,Value Descend~21 (513); 
-Sort~20,Position Ascend~30 (260); Sort~20,Position Descend~31 (516)}
 
 \section{Related Topics}
 

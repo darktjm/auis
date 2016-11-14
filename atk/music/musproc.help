@@ -1,60 +1,44 @@
 \begindata{text,538490844}
 \textdsversion{12}
-\template{help}
-\define{global
-}
+\template{prochelp}
 \chapter{Procedure Table Listing for play}
 
 
-\bold{play-notes}(marker \italic{codes})
-
-\leftindent{Plays the notes encoded in the string.  The encoding is the 
+\proclistentry{\procname{play-notes}(\proctype{marker} \procparm{codes})\
+Plays the notes encoded in the string.  The encoding is the 
 same as that for Advanced Basic on the IBM PC, and is sketched below.  
-Example: Happy Birthday is played in Ness with:
-
-\leftindent{play_notes("L8 CC L4 DCF    E P4")
-
-play_notes("L8 CC L4 DCG   F P4")
-
-play_notes("L8 CC L4 >C <A  FED P4")
-
-play_notes("L8 A#A# L4 AF G  F.")}
-
+Example: Happy Birthday is played in Ness with:\
+\leftindent{play_notes("L8 CC L4 DCF    E P4")\
+play_notes("L8 CC L4 DCG   F P4")\
+play_notes("L8 CC L4 >C <A  FED P4")\
+play_notes("L8 A#A# L4 AF G  F.")}\
 This procedure cannot be bound to a key or menu; it is only usable 
 from Ness.}
 
-\bold{play-tone}(real \italic{freq}, integer \italic{duration})
-
-\leftindent{Plays a tone of the given frequency for the given duration.  
-\italic{freq} is in Hz; use 0.0 for a rest.  \italic{duration} is 
-interpreted as the number of milliseconds.
-
+\proclistentry{\procname{play-tone}(\proctype{real} \procparm{freq}, \proctype{integer} \procparm{duration})\
+Plays a tone of the given frequency for the given duration.  
+\procparm{freq} is in Hz; use 0.0 for a rest.  \procparm{duration} is 
+interpreted as the number of milliseconds.\
 This procedure cannot be bound to a key or menu; it is only usable 
 from Ness.}
 
-\bold{play-volume}(integer \italic{vol})
-
-\leftindent{Sets the volume to \italic{vol} (0<= \italic{vol} <= 9).  
-Default is 3 for the softest audible volume, which is still pretty loud.
-
+\proclistentry{\procname{play-volume}(\proctype{integer} \procparm{vol})\
+Sets the volume to \procparm{vol} (0<= \procparm{vol} <= 9).  
+Default is 3 for the softest audible volume, which is still pretty loud.\
 This procedure cannot be bound to a key or menu; it is only usable 
 from Ness.}
 
-\bold{play-retard}(integer \italic{slow})
-
-\leftindent{Sets the global retardation  (-30<=\italic{slow}<=40).   Note 
-lengths are mutliplied by (1+\italic{slow}/50).  Default is 0.
-
+\proclistentry{\procname{play-retard}(\proctype{integer} \procparm{slow})\
+Sets the global retardation  (-30<=\procparm{slow}<=40).   Note 
+lengths are mutliplied by (1+\procparm{slow}/50).  Default is 0.\
 This procedure cannot be bound to a key or menu; it is only usable 
 from Ness.}
 
-\bold{play-tuning}(marker \italic{letter})
-
-\leftindent{Chooses one of the available tunings:  EqualTemper, MeanTone, 
-JustIntonation, Pythagorean.  The \italic{letter} must be a string 
+\proclistentry{\procname{play-tuning}(\proctype{marker} \procparm{letter})\
+Chooses one of the available tunings:  EqualTemper, MeanTone, 
+JustIntonation, Pythagorean.  The \procparm{letter} must be a string 
 constant giving the first letter of the tuning name.  The default is 
-"E", but MeanTone is the more usually used.  
-
+"E", but MeanTone is the more usually used.  \
 This procedure cannot be bound to a key or menu; it is only usable 
 from Ness.}
 

@@ -1,20 +1,16 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for helloworldview}
 
 
-\bold{helloworldview-center}(object \italic{self})
+\proclistentry{\procname{helloworldview-center}(\proctype{helloworldview} \procparm{obj})\
+Center the helloworldview string.\
+Bound to: \prockey{^C}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Center}}
 
-\leftindent{Center the helloworldview string.
-
-Bound to: \typewriter{^C}; Menu: Hello World,Center}
-
-\bold{helloworldview-invert}(object \italic{self})
-
-\leftindent{Invert the helloworldview string.
-
-Bound to:  \typewriter{Tab}; Menu: Hello World,Invert}
+\proclistentry{\procname{helloworldview-invert}(\proctype{helloworldview} \procparm{obj})\
+Invert the helloworldview string.\
+Bound to:  \prockey{Tab}; Menu: \procmenu{Hello World}\procmenuwhere{,}\procmenu{Invert}}
 
 
 \section{Related Topics}

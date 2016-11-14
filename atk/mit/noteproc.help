@@ -1,39 +1,30 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for note}
 
 
-\bold{noteview-closeallnotes}(object \italic{textview})
+\proclistentry{\procname{noteview-closeallnotes}(\proctype{view} \procparm{obj})\
+close Note Views}
 
-\leftindent{close Note Views}
+\proclistentry{\procname{noteview-insertnote}(\proctype{textview} \procparm{obj})\
+Insert Note Object}
 
-\bold{noteview-insertnote}(object \italic{textview})
-
-\leftindent{Insert Note Object}
-
-\bold{noteview-openallnotes}(object \italic{textview})
-
-\leftindent{open Note Views}
+\proclistentry{\procname{noteview-openallnotes}(\proctype{view} \procparm{obj})\
+open Note Views}
 
 
-\bold{noteview-closeall}(object \italic{self})
+\proclistentry{\procname{noteview-closeall}(\proctype{noteview} \procparm{obj})\
+close all the notes\
+Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{close all}\procmenuwhere{~12}}
 
-\leftindent{close all the notes
+\proclistentry{\procname{noteview-close}(\proctype{noteview} \procparm{obj})\
+close the note\
+Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{close}\procmenuwhere{~2}}
 
-Menu:  notes,close all~12}
-
-\bold{noteview-close}(object \italic{self})
-
-\leftindent{close the note
-
-Menu:  notes,close~2}
-
-\bold{noteview-openall}(object \italic{self})
-
-\leftindent{open all the notes
-
-Menu:  notes,open all~11}
+\proclistentry{\procname{noteview-openall}(\proctype{noteview} \procparm{obj})\
+open all the notes\
+Menu:  \procmenu{notes}\procmenuwhere{,}\procmenu{open all}\procmenuwhere{~11}}
 
 
 \section{Related Topics}

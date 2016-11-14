@@ -1,479 +1,326 @@
 \begindata{text,538529656}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Zip}
 
 
-\bold{zipview-compose}(object \italic{self})
-
-\leftindent{Switch to Compose-mode
-
-Bound to:  \typewriter{Esc-e}; Menu:  Compose}
-
-\bold{zipview-browse}(object \italic{self})
-
-\leftindent{Switch to Browse-mode
-
-Bound to:  \typewriter{Esc-b}; Menu:  Browse}
-
-\bold{zipview-normalize}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-n}; Menu:  Pane~20,Normalize~10}
-
-\bold{zipview-refesh}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-r}; Menu:  Pane~20,Refresh~11}
-
-\bold{zipview-center}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-P-C}; Menu:  Pane~20,Center~20}
-
-\bold{zipview-pane-top}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-P-T}; Menu:  Pane~20,Top~30}
-
-\bold{zipview-pane-bottom}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-P-B}; Menu:  Pane~20,Bottom~31}
-
-\bold{zipview-pane-left}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-P-L}; Menu:  Pane~20,Left~32}
-
-\bold{zipview-pane-right}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-P-R}; Menu:  Pane~20,Right~33}
-
-\bold{zipview-zoom-zero}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-z-0}; Menu:  Zoom~30,Normal~10}
-
-\bold{zipview-zoom-in}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-z-i}; Menu:  Zoom~30,In~20}
-
-\bold{zipview-zoom-in5}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-z-i-5}; Menu:  Zoom~30,In +5~21}
-
-\bold{zipview-zoom-out}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-z-o}; Menu:  Zoom~30,Out~30}
-
-\bold{zipview-zoom-out5}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-z-o-5}; Menu:  Zoom~30,Out -5~31}
-
-\bold{zipview-scale-normal}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-0}; Menu:  Scale~40,Normal~10}
-
-\bold{zipview-scale-100s}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-s-h}; Menu:  Scale~40,100th Smaller~20}
-
-\bold{zipview-scale-10s}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-s-t}; Menu:  Scale~40,10th Smaller~21}
-
-\bold{zipview-scale-half}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-h}; Menu:  Scale~40,Half Size~22}
-
-\bold{zipview-scale-100l}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-l-h}; Menu:  Scale~40,100th Larger~30}
-
-\bold{zipview-scale-10l}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-l-t}; Menu:  Scale~40,10th Larger~31}
-
-\bold{zipview-scale-double}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-d}; Menu:  Scale~40,Double Size~32}
-
-\bold{zipview-print_portrait}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-p-p}; Menu:  Printing~50,Portrait~10}
-
-\bold{zipview-print_landscape}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-p-l}; Menu:  Printing~50,Landscape~10}
-
-\bold{zipview-print_to_file}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-p-f}; Menu:  Printing~50,To File ...~20
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{zipview-set_print_size}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-p-s}; Menu:  Printing~50,Set Print Size ...~30
-
-Use \bold{queueanswer} to provide width and height in Ness.}
-
-\bold{zipview-DEBUG}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{D}}
+\proclistentry{\procname{zipview-compose}(\proctype{zipview} \procparm{obj})\
+Switch to Compose-mode\
+Bound to:  \prockey{Esc-e}; Menu:  \procmenu{Compose}}
+
+\proclistentry{\procname{zipview-browse}(\proctype{zipview} \procparm{obj})\
+Switch to Browse-mode\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Browse}}
+
+\proclistentry{\procname{zipview-normalize}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-n}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Normalize}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipview-refesh}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-r}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Refresh}\procmenuwhere{~11}}
+
+\proclistentry{\procname{zipview-center}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-P-C}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Center}\procmenuwhere{~20}}
+
+\proclistentry{\procname{zipview-pane-top}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-P-T}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Top}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipview-pane-bottom}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-P-B}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Bottom}\procmenuwhere{~31}}
+
+\proclistentry{\procname{zipview-pane-left}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-P-L}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Left}\procmenuwhere{~32}}
+
+\proclistentry{\procname{zipview-pane-right}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-P-R}; Menu:  \procmenu{Pane}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Right}\procmenuwhere{~33}}
+
+\proclistentry{\procname{zipview-zoom-zero}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-z-0}; Menu:  \procmenu{Zoom}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Normal}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipview-zoom-in}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-z-i}; Menu:  \procmenu{Zoom}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{In}\procmenuwhere{~20}}
+
+\proclistentry{\procname{zipview-zoom-in5}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-z-i-5}; Menu:  \procmenu{Zoom}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{In +5}\procmenuwhere{~21}}
+
+\proclistentry{\procname{zipview-zoom-out}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-z-o}; Menu:  \procmenu{Zoom}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Out}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipview-zoom-out5}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-z-o-5}; Menu:  \procmenu{Zoom}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Out -5}\procmenuwhere{~31}}
+
+\proclistentry{\procname{zipview-scale-normal}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-0}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Normal}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipview-scale-100s}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-s-h}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{100th Smaller}\procmenuwhere{~20}}
+
+\proclistentry{\procname{zipview-scale-10s}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-s-t}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{10th Smaller}\procmenuwhere{~21}}
+
+\proclistentry{\procname{zipview-scale-half}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-h}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Half Size}\procmenuwhere{~22}}
+
+\proclistentry{\procname{zipview-scale-100l}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-l-h}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{100th Larger}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipview-scale-10l}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-l-t}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{10th Larger}\procmenuwhere{~31}}
+
+\proclistentry{\procname{zipview-scale-double}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-d}; Menu:  \procmenu{Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Double Size}\procmenuwhere{~32}}
+
+\proclistentry{\procname{zipview-print_portrait}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-p-p}; Menu:  \procmenu{Printing}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Portrait}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipview-print_landscape}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-p-l}; Menu:  \procmenu{Printing}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Landscape}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipview-print_to_file}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-p-f}; Menu:  \procmenu{Printing}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{To File ...}\procmenuwhere{~20}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
+
+\proclistentry{\procname{zipview-set_print_size}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-p-s}; Menu:  \procmenu{Printing}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Set Print Size ...}\procmenuwhere{~30}\
+Use \procname{QueueAnswer} to provide width and height in Ness.}
+
+\proclistentry{\procname{zipview-DEBUG}(\proctype{zipview} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{D}}
 
 
 \section{zipedit}
 
 
-\bold{zipedit-self-insert}(object \italic{self}, Integer \italic{c})
-
-\leftindent{Enter Character
-
-Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
-\typewriter{Backspace}, \typewriter{Delete}, \typewriter{^J}, 
-\typewriter{Enter} (\typewriter{^M}), with their respective character 
-codes as \italic{c}.} 
-
-\bold{zipedit-insert-stream}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-I-s}; Menu:  File,Insert Stream
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{zipedit-insert-reference}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-I-r}; Menu:  File,Insert Reference
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{zipedit-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-N}; Menu:  Pane,Background~90
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{zipedit-hide-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-H}; Menu:  Background~97,Hide~10}
-
-\bold{zipedit-expose-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-E}; Menu:  Background~97,Expose~10}
-
-\bold{zipedit-lighten-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-L}; Menu:  Background~97,Lighten~20}
-
-\bold{zipedit-darken-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-D}; Menu:  Background~97,Darken~21}
-
-\bold{zipedit-select-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-S}; Menu:  Background~97,Select~30}
-
-\bold{zipedit-unselect-background}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-B-U}; Menu:  Background~97,Unselect~30}
-
-\bold{zipedit-delete}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-S-D}; Menu:  Selection,Delete~10}
-
-\bold{zipedit-duplicate}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-S-M}; Menu:  Selection,Duplicate~30}
-
-\bold{zipedit-to-front}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-S-F}; Menu:  Selection,To Front~40}
-
-\bold{zipedit-to-rear}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-S-R}; Menu:  Selection,To Rear~41}
-
-\bold{zipedit-fit}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-S-Z}; Menu:  Selection,Fit~50}
-
-\bold{zipedit-points-constrain}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-C-C}; Menu:  Grid~50,Constrain To Grid~40}
-
-\bold{zipedit-points-unconstrain}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-C-U}; Menu:  Grid~50,Unconstrain From Grid~40}
-
-\bold{zipedit-grid-expose}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-E}; Menu:  Grid~50,Expose~10}
-
-\bold{zipedit-grid-hide}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-H}; Menu:  Grid~50,Hide~10}
-
-\bold{zipedit-grid-double}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-D}; Menu:  Grid~50,Double~20}
-
-\bold{zipedit-grid-halve}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-L}; Menu:  Grid~50,Halve~21}
-
-\bold{zipedit-coordinates-expose}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-C-E}; Menu:  Grid~50,Expose Coordinates~30}
-
-\bold{zipedit-coordinates-hide}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-G-C-H}; Menu:  Grid~50,Hide Coordinates~30}
-
-\bold{zipedit-absolute}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-O-A}; Menu:  Object~70,Make Absolute~1}
-
-\bold{zipedit-relative}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-O-R}; Menu:  Object~70,Make Relative~10}
+\proclistentry{\procname{zipedit-self-insert}(\proctype{zipedit} \procparm{obj}, \proctype{Integer} \procparm{c})\
+Enter Character\
+Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~}), 
+\prockey{Backspace}, \prockey{Delete}, \prockey{^J}, 
+\prockey{Enter} (\prockey{^M}), with their respective character 
+codes as \procparm{c}.} 
+
+\proclistentry{\procname{zipedit-insert-stream}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-I-s}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Insert Stream}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
+
+\proclistentry{\procname{zipedit-insert-reference}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-I-r}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Insert Reference}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
+
+\proclistentry{\procname{zipedit-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-N}; Menu:  \procmenu{Pane}\procmenuwhere{,}\procmenu{Background}\procmenuwhere{~90}\
+Use \procname{QueueAnswer} to provide file name in Ness.}
+
+\proclistentry{\procname{zipedit-hide-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-H}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Hide}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipedit-expose-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-E}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Expose}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipedit-lighten-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-L}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Lighten}\procmenuwhere{~20}}
+
+\proclistentry{\procname{zipedit-darken-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-D}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Darken}\procmenuwhere{~21}}
+
+\proclistentry{\procname{zipedit-select-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-S}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Select}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipedit-unselect-background}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-B-U}; Menu:  \procmenu{Background}\procmenuwhere{~97}\procmenuwhere{,}\procmenu{Unselect}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipedit-delete}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-S-D}; Menu:  \procmenu{Selection}\procmenuwhere{,}\procmenu{Delete}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipedit-duplicate}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-S-M}; Menu:  \procmenu{Selection}\procmenuwhere{,}\procmenu{Duplicate}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipedit-to-front}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-S-F}; Menu:  \procmenu{Selection}\procmenuwhere{,}\procmenu{To Front}\procmenuwhere{~40}}
+
+\proclistentry{\procname{zipedit-to-rear}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-S-R}; Menu:  \procmenu{Selection}\procmenuwhere{,}\procmenu{To Rear}\procmenuwhere{~41}}
+
+\proclistentry{\procname{zipedit-fit}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-S-Z}; Menu:  \procmenu{Selection}\procmenuwhere{,}\procmenu{Fit}\procmenuwhere{~50}}
+
+\proclistentry{\procname{zipedit-points-constrain}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-C-C}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Constrain To Grid}\procmenuwhere{~40}}
+
+\proclistentry{\procname{zipedit-points-unconstrain}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-C-U}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Unconstrain From Grid}\procmenuwhere{~40}}
+
+\proclistentry{\procname{zipedit-grid-expose}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-E}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Expose}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipedit-grid-hide}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-H}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Hide}\procmenuwhere{~10}}
+
+\proclistentry{\procname{zipedit-grid-double}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-D}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Double}\procmenuwhere{~20}}
+
+\proclistentry{\procname{zipedit-grid-halve}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-L}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Halve}\procmenuwhere{~21}}
+
+\proclistentry{\procname{zipedit-coordinates-expose}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-C-E}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Expose Coordinates}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipedit-coordinates-hide}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-G-C-H}; Menu:  \procmenu{Grid}\procmenuwhere{~50}\procmenuwhere{,}\procmenu{Hide Coordinates}\procmenuwhere{~30}}
+
+\proclistentry{\procname{zipedit-absolute}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-O-A}; Menu:  \procmenu{zipedit}\procmenuwhere{~70}\procmenuwhere{,}\procmenu{Make Absolute}\procmenuwhere{~1}}
+
+\proclistentry{\procname{zipedit-relative}(\proctype{zipedit} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-O-R}; Menu:  \procmenu{zipedit}\procmenuwhere{~70}\procmenuwhere{,}\procmenu{Make Relative}\procmenuwhere{~10}}
 
 
 \section{lt/ltv}
 
 
-\bold{ltv-save}(object \italic{self})
+\proclistentry{\procname{ltv-save}(\proctype{ltv} \procparm{obj})\
+Save\
+Bound to:  \prockey{Esc-s}; Menu:  \procmenu{Save}\procmenuwhere{~10}}
 
-\leftindent{Save
+\proclistentry{\procname{ltv-print}(\proctype{ltv} \procparm{obj})\
+Print\
+Bound to:  \prockey{Esc-p}; Menu:  \procmenu{Print}\procmenuwhere{~20}}
 
-Bound to:  \typewriter{Esc-s}; Menu:  Save~10}
+\proclistentry{\procname{ltv-quit}(\proctype{ltv} \procparm{obj})\
+Quit\
+Bound to:  \prockey{Esc-q}; Menu:  \procmenu{Quit}\procmenuwhere{~9}}
 
-\bold{ltv-print}(object \italic{self})
+\proclistentry{\procname{ltv-debug}(\proctype{ltv} \procparm{obj})\
+Debug\
+Bound to:  \prockey{Esc-z}; Menu:  \procmenu{DEBUG}\procmenuwhere{~88}}
 
-\leftindent{Print
+\proclistentry{\procname{ltv-hide-background}(\proctype{ltv} \procparm{obj})\
+Hide Background\
+Bound to:  \prockey{Esc-x}; Menu:  \procmenu{Background}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Hide}}
 
-Bound to:  \typewriter{Esc-p}; Menu:  Print~20}
+\proclistentry{\procname{ltv-expose-background}(\proctype{ltv} \procparm{obj})\
+Expose Background\
+Bound to:  \prockey{Esc-y}; Menu:  \procmenu{Background}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Expose}}
 
-\bold{ltv-quit}(object \italic{self})
+\proclistentry{\procname{ltv-lighten-background}(\proctype{ltv} \procparm{obj})\
+Lighten Background\
+Bound to:  \prockey{Esc-l}; Menu:  \procmenu{Background}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Lighten}}
 
-\leftindent{Quit
+\proclistentry{\procname{ltv-darken-background}(\proctype{ltv} \procparm{obj})\
+Darken Background\
+Bound to:  \prockey{Esc-d}; Menu:  \procmenu{Background}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{Darken}}
 
-Bound to:  \typewriter{Esc-q}; Menu:  Quit~9}
+\proclistentry{\procname{ltv-normalize}(\proctype{ltv} \procparm{obj})\
+Normalize\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Normalize}\procmenuwhere{~00}}
 
-\bold{ltv-debug}(object \italic{self})
+\proclistentry{\procname{ltv-zoom_in}(\proctype{ltv} \procparm{obj})\
+Zoom In\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Zoom-In}\procmenuwhere{~10}}
 
-\leftindent{Debug
+\proclistentry{\procname{ltv-zoom_out}(\proctype{ltv} \procparm{obj})\
+Zoom Out\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Zoom-Out}\procmenuwhere{~11}}
 
-Bound to:  \typewriter{Esc-z}; Menu:  DEBUG~88}
+\proclistentry{\procname{ltv-pan_foreground}(\proctype{ltv} \procparm{obj})\
+Pan Foreground\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Pan Foreground}\procmenuwhere{~30}}
 
-\bold{ltv-hide-background}(object \italic{self})
+\proclistentry{\procname{ltv-pan_together}(\proctype{ltv} \procparm{obj})\
+Pan Together\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Pan Together}\procmenuwhere{~30}}
 
-\leftindent{Hide Background
+\proclistentry{\procname{ltv-fit}(\proctype{ltv} \procparm{obj})\
+Fit\
+Bound to:  \prockey{Esc-b}; Menu:  \procmenu{Pane}\procmenuwhere{~30}\procmenuwhere{,}\procmenu{Fit}\procmenuwhere{~40}}
 
-Bound to:  \typewriter{Esc-x}; Menu:  Background~20,Hide}
+\proclistentry{\procname{ltv-scale-normal}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-0}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Normal}\procmenuwhere{~00}}
 
-\bold{ltv-expose-background}(object \italic{self})
+\proclistentry{\procname{ltv-scale-100s}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-s-h}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{100th Smaller}\procmenuwhere{~10}}
 
-\leftindent{Expose Background
+\proclistentry{\procname{ltv-scale-10s}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-s-t}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{10th Smaller}\procmenuwhere{~11}}
 
-Bound to:  \typewriter{Esc-y}; Menu:  Background~20,Expose}
+\proclistentry{\procname{ltv-scale-half}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-h}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Half Size}\procmenuwhere{~12}}
 
-\bold{ltv-lighten-background}(object \italic{self})
+\proclistentry{\procname{ltv-scale-100l}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-l-h}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{100th Larger}\procmenuwhere{~20}}
 
-\leftindent{Lighten Background
+\proclistentry{\procname{ltv-scale-10l}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-l-t}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{10th Larger}\procmenuwhere{~21}}
 
-Bound to:  \typewriter{Esc-l}; Menu:  Background~20,Lighten}
-
-\bold{ltv-darken-background}(object \italic{self})
-
-\leftindent{Darken Background
-
-Bound to:  \typewriter{Esc-d}; Menu:  Background~20,Darken}
-
-\bold{ltv-normalize}(object \italic{self})
-
-\leftindent{Normalize
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Normalize~00}
-
-\bold{ltv-zoom_in}(object \italic{self})
-
-\leftindent{Zoom In
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Zoom-In~10}
-
-\bold{ltv-zoom_out}(object \italic{self})
-
-\leftindent{Zoom Out
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Zoom-Out~11}
-
-\bold{ltv-pan_foreground}(object \italic{self})
-
-\leftindent{Pan Foreground
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Pan Foreground~30}
-
-\bold{ltv-pan_together}(object \italic{self})
-
-\leftindent{Pan Together
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Pan Together~30}
-
-\bold{ltv-fit}(object \italic{self})
-
-\leftindent{Fit
-
-Bound to:  \typewriter{Esc-b}; Menu:  Pane~30,Fit~40}
-
-\bold{ltv-scale-normal}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-0}; Menu:  Pane Scale~40,Normal~00}
-
-\bold{ltv-scale-100s}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-s-h}; Menu:  Pane Scale~40,100th Smaller~10}
-
-\bold{ltv-scale-10s}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-s-t}; Menu:  Pane Scale~40,10th Smaller~11}
-
-\bold{ltv-scale-half}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-h}; Menu:  Pane Scale~40,Half Size~12}
-
-\bold{ltv-scale-100l}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-l-h}; Menu:  Pane Scale~40,100th Larger~20}
-
-\bold{ltv-scale-10l}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-l-t}; Menu:  Pane Scale~40,10th Larger~21}
-
-\bold{ltv-scale-double}(object \italic{self})
-
-\leftindent{\italic{Undocumented}
-
-Bound to:  \typewriter{Esc-s-d}; Menu:  Pane Scale~40,Double Size~22}
+\proclistentry{\procname{ltv-scale-double}(\proctype{ltv} \procparm{obj})\
+\italic{Undocumented}\
+Bound to:  \prockey{Esc-s-d}; Menu:  \procmenu{Pane Scale}\procmenuwhere{~40}\procmenuwhere{,}\procmenu{Double Size}\procmenuwhere{~22}}
 
 
 \section{sched/schedv}
 
 
-\bold{schedv-quit}(object \italic{self})
+\proclistentry{\procname{schedv-quit}(\proctype{schedv} \procparm{obj})\
+Quit\
+Bound to:  \prockey{Esc-q}; Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
-\leftindent{Quit
-
-Bound to:  \typewriter{Esc-q}; Menu:  Quit~99}
-
-\bold{schedv-debug}(object \italic{self})
-
-\leftindent{Debug
-
-Bound to:  \typewriter{Esc-z}; Menu:  DEBUG~88}
+\proclistentry{\procname{schedv-debug}(\proctype{schedv} \procparm{obj})\
+Debug\
+Bound to:  \prockey{Esc-z}; Menu:  \procmenu{DEBUG}\procmenuwhere{~88}}
 
 
 \section{Related Topics}

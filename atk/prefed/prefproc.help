@@ -1,43 +1,33 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for prefed}
 
 
-\bold{prefsv-sort}(object \italic{self}, marker \italic{how})
-
-\leftindent{Sorts the preferences. (Valid \italic{how} arguments are: Name, 
-Group, App, Order)
-
-Menu:  Sort,By application ("App"); Sort,By group ("Group"); Sort~20,By name 
-("Name"); Sort~20,By order ("Order")}
+\proclistentry{\procname{prefsv-sort}(\proctype{prefsv} \procparm{obj}, \proctype{marker} \procparm{how})\
+Sorts the preferences. (Valid \procparm{how} arguments are: Name, 
+Group, App, Order)\
+Menu:  \procmenu{Sort}\procmenuwhere{,}\procmenu{By application} ("App"); \procmenu{Sort}\procmenuwhere{,}\procmenu{By group} ("Group"); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{By name} 
+("Name"); \procmenu{Sort}\procmenuwhere{~20}\procmenuwhere{,}\procmenu{By order} ("Order")}
 
 
-\bold{pvaltv-update}(object \italic{self})
-
-\leftindent{sets the preference value from the text in the entry buffer.
-
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{pvaltv-update}(\proctype{pvaltv} \procparm{obj})\
+sets the preference value from the text in the entry buffer.\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
 
-\bold{pvaltvf-complete}(object \italic{self})
+\proclistentry{\procname{pvaltvf-complete}(\proctype{pvaltvf} \procparm{obj})\
+Attempts to complete the filename before the cursor.\
+Bound to:  \prockey{Space}}
 
-\leftindent{Attempts to complete the filename before the cursor.
-
-Bound to:  \typewriter{Space}}
-
-\bold{pvaltvf-help}(object \italic{self})
-
-\leftindent{Provides a list of possible completions in the choices list.
-
-Bound to:  \typewriter{?}}
+\proclistentry{\procname{pvaltvf-help}(\proctype{pvaltvf} \procparm{obj})\
+Provides a list of possible completions in the choices list.\
+Bound to:  \prockey{?}}
 
 
-\bold{pvaltvc-update}(object \italic{self})
-
-\leftindent{sets the preference value from the text in the entry buffer.
-
-Bound to:  \typewriter{Space}}
+\proclistentry{\procname{pvaltvc-update}(\proctype{pvaltvc} \procparm{obj})\
+sets the preference value from the text in the entry buffer.\
+Bound to:  \prockey{Space}}
 
 
 \section{Related Topics}

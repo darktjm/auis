@@ -654,6 +654,15 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 		InterpretationInProgress= SaveInterpInProg;
 		FramePtr = SaveFramePtr;
 
+		/* ensure that no queueanswer/queuecancellation in progress */
+		/* they should really only apply to next proc */
+		if(!InterpretationInProgress) {
+			const char *ans;
+			while((ans = im::GetAnswer()) || im::AnswerWasCancel())
+				// there isn't really a way to return warnings, is there?
+				fprintf(stderr, "Dropping invalid Queue%s %s\n", ans ? "Answer" : "Cancellation", ans ? ans : "");
+		}
+
 		if (exitcode != 1 && 
 				InterpretationInProgress != NULL) {
 			/* we erred in a nested execution

@@ -1,207 +1,142 @@
 \begindata{text,539034464}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Help}
 
 
-\bold{help-add-bookmark}(object \italic{self})
-
-\leftindent{add a history entry for this file at the current dot location.
-
-Bound to:  \typewriter{^X-^B}; Menu:  Other~10,Make Bookmark~30}
-
-\bold{help-print}(object \italic{self})
-
-\leftindent{print current help file
-
-Menu:  Print~6,Print This File~22}
-
-\bold{help-toggle-panels}(object \italic{self})
-
-\leftindent{toggle help panels
-
-Bound to:  \typewriter{^X-p}; Menu:  Panels~10,Hide Panels~2, 
-Panels~10,Show Panels~2}
-
-\bold{help-add-search-dir}(object \italic{self})
-
-\leftindent{add a directory to the search path
-
-Menu:  Other~10,Add Search Directory~20}
-
-\bold{help-delete-window}(object \italic{self})
-
-\leftindent{delete this window
-
-Bound to:  \typewriter{^X-^D}; Menu:  Delete Window~80}
-
-\bold{help-toggle-history}(object \italic{self})
-
-\leftindent{toggle history panel
-
-Bound to:  \typewriter{^X-t}; Menu:  Panels~10,Hide History~24, 
-Panels~10,Show History~24}
-
-\bold{help-readonly-key}(object \italic{self})
-
-\leftindent{fake readonliness
-
-Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
-\typewriter{^J}.  Note that \typewriter{Space}, \typewriter{v} and 
-\typewriter{b} are rebound to other procedures by this class.}
-
-\bold{help-changes}(object \italic{self})
-
-\leftindent{show changes on topic
-
-Bound to:  \typewriter{^X-x}; Menu:  Show Changes~34}
-
-\bold{help-show-tutorial}(object \italic{self})
-
-\leftindent{show tutorial
-
-Menu:  Show Tutorial~32}
-
-\bold{help-comments}(object \italic{self})
-
-\leftindent{send comments on help
-
-Bound to:  \typewriter{^X-s}; Menu:  Send Comment On Help~31}
-
-\bold{help-prev-screen}(object \italic{self})
-
-\leftindent{go back to previous screen
-
-Bound to:  \typewriter{b}}
-
-\bold{help-toggle-size}(object \italic{self})
-
-\leftindent{toggle program list size
-
-Menu:  Panels~10,Shrink Programs List~10, Panels~10,Expand Programs List~10}
-
-\bold{help-next-screen}(object \italic{self})
-
-\leftindent{advance to next screen
-
-Bound to:  \typewriter{Space}, \typewriter{v}}
-
-\bold{help-copy-region}(object \italic{self})
-
-\leftindent{Copy region to kill-buffer
-
-Bound to:  \typewriter{Esc-w}; Menu:  Copy~2}
-
-\bold{help-refilter-programs}(object \italic{self})
-
-\leftindent{filter-programs
-
-Menu:  Other~10,ReFilter Programs Panel~12}
-
-\bold{help-search}(object \italic{self})
-
-\leftindent{forward search
-
-Menu:  Search~4,Forward~12}
-
-\bold{help-printer-setup}(object \italic{self})
-
-\leftindent{Pop up dialogue box to set printer name and other parameters.
-
-Menu:  Print~6,Printer Setup~12}
-
-\bold{help-search-overviews}(object \italic{self})
-
-\leftindent{search overviews
-
-Menu:  Search~4,Search Overviews~20}
-
-\bold{help-search-programs}(object \italic{self})
-
-\leftindent{search programs
-
-Menu:  Search~4,Search Programs~22}
-
-\bold{help-new-show-help-on-selected}(object \italic{self}, integer \italic{type})
-
-\leftindent{show help on selected region in a new 
-window.  \italic{type} must be 10.
-
-Menu:  Window~12,Show Help on Selected Word~26}
-
-\bold{help-show-help-on-selected}(object \italic{self}, integer \italic{type})
-
-\leftindent{show help on selected region.  \italic{type} must be 2.
-
-Menu:  Show Help on Selected Word~16}
-
-\bold{help-new-show-help-on}(object \italic{self}, integer \italic{type})
-
-\leftindent{show help on a prompted keyword in a new 
-window.  \italic{type} must be 9.
-
-Bound to:  \typewriter{^X-2}; Menu:  Window~12,Show Help on...~14
-
-Use \bold{queueanswer} to provide term in Ness.}
-
-\bold{help-toggle-overviews}(object \italic{self})
-
-\leftindent{toggle overviews panel
-
-Menu:  Panels~10,Hide Overviews~20, Panels~10,Show Overviews~20}
-
-\bold{help-toggle-programs}(object \italic{self})
-
-\leftindent{toggle programs panel
-
-Bound to:  \typewriter{^X-e}; Menu:  Panels~10,Hide Programs~22, Panels~10,Show Programs~22}
-
-\bold{help-restore-programs}(object \italic{self})
-
-\leftindent{restore programs panel
-
-Menu:  Other~10,Restore Programs Panel~10}
-
-\bold{help-filter-programs}(object \italic{self})
-
-\leftindent{filter-programs
-
-Menu:  Other~10,Filter Programs Panel~10
-
-Use \bold{queueanswer} to provide filter pattern in Ness.}
-
-\bold{help-reverse-search}(object \italic{self})
-
-\leftindent{reverse search
-
-Menu:  Search~4,Backward~14}
-
-\bold{help-show-help-on}(object \italic{self}, integer \italic{type})
-
-\leftindent{show help on a prompted keyword.  \italic{type} must be 1.
-
-Bound to:  \typewriter{Enter} (\typewriter{^M}), \typewriter{^X-^V}; 
-Menu:  Show Help on ...~14
-
-Use \bold{queueanswer} to provide term in Ness.}
-
-\bold{help-show-more}(object \italic{self})
-
-\leftindent{show more documentation
-
-Bound to:  \typewriter{^X-^N}; Menu:  Show More Documentation~30}
-
-\bold{help-search-again}(object \italic{self})
-
-\leftindent{search again
-
-Menu:  Search~4,Search Again~16}
-
-\bold{help-quit}(object \italic{self})
-
-\leftindent{quit help
-
-Bound to:  \typewriter{^X-^C}; Menu:  Quit~99}
+\proclistentry{\procname{help-add-bookmark}(\proctype{help} \procparm{obj})\
+add a history entry for this file at the current dot location.\
+Bound to:  \prockey{^X-^B}; Menu:  \procmenu{Other}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Make Bookmark}\procmenuwhere{~30}}
+
+\proclistentry{\procname{help-print}(\proctype{help} \procparm{obj})\
+print current help file\
+Menu:  \procmenu{Print}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Print This File}\procmenuwhere{~22}}
+
+\proclistentry{\procname{help-toggle-panels}(\proctype{help} \procparm{obj})\
+toggle help panels\
+Bound to:  \prockey{^X-p}; Menu:  \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Hide Panels}\procmenuwhere{~2}, 
+\procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show Panels}\procmenuwhere{~2}}
+
+\proclistentry{\procname{help-add-search-dir}(\proctype{help} \procparm{obj})\
+add a directory to the search path\
+Menu:  \procmenu{Other}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Add Search Directory}\procmenuwhere{~20}}
+
+\proclistentry{\procname{help-delete-window}(\proctype{help} \procparm{obj})\
+delete this window\
+Bound to:  \prockey{^X-^D}; Menu:  \procmenu{Delete Window}\procmenuwhere{~80}}
+
+\proclistentry{\procname{help-toggle-history}(\proctype{help} \procparm{obj})\
+toggle history panel\
+Bound to:  \prockey{^X-t}; Menu:  \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Hide History}\procmenuwhere{~24}, 
+\procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Show History}\procmenuwhere{~24}}
+
+\proclistentry{\procname{help-readonly-key}(\proctype{help} \procparm{obj})\
+fake readonliness\
+Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~}), 
+\prockey{^J}.  Note that \prockey{Space}, \prockey{v} and 
+\prockey{b} are rebound to other procedures by this class.}
+
+\proclistentry{\procname{help-changes}(\proctype{help} \procparm{obj})\
+show changes on topic\
+Bound to:  \prockey{^X-x}; Menu:  \procmenu{Show Changes}\procmenuwhere{~34}}
+
+\proclistentry{\procname{help-show-tutorial}(\proctype{help} \procparm{obj})\
+show tutorial\
+Menu:  \procmenu{Show Tutorial}\procmenuwhere{~32}}
+
+\proclistentry{\procname{help-comments}(\proctype{help} \procparm{obj})\
+send comments on help\
+Bound to:  \prockey{^X-s}; Menu:  \procmenu{Send Comment On Help}\procmenuwhere{~31}}
+
+\proclistentry{\procname{help-prev-screen}(\proctype{help} \procparm{obj})\
+go back to previous screen\
+Bound to:  \prockey{b}}
+
+\proclistentry{\procname{help-toggle-size}(\proctype{help} \procparm{obj})\
+toggle program list size\
+Menu:  \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Shrink Programs List}\procmenuwhere{~10}, \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Expand Programs List}\procmenuwhere{~10}}
+
+\proclistentry{\procname{help-next-screen}(\proctype{help} \procparm{obj})\
+advance to next screen\
+Bound to:  \prockey{Space}, \prockey{v}}
+
+\proclistentry{\procname{help-copy-region}(\proctype{help} \procparm{obj})\
+Copy region to kill-buffer\
+Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~2}}
+
+\proclistentry{\procname{help-refilter-programs}(\proctype{help} \procparm{obj})\
+filter-programs\
+Menu:  \procmenu{Other}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{ReFilter Programs Panel}\procmenuwhere{~12}}
+
+\proclistentry{\procname{help-search}(\proctype{help} \procparm{obj})\
+forward search\
+Menu:  \procmenu{Search}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Forward}\procmenuwhere{~12}}
+
+\proclistentry{\procname{help-printer-setup}(\proctype{help} \procparm{obj})\
+Pop up dialogue box to set printer name and other parameters.\
+Menu:  \procmenu{Print}\procmenuwhere{~6}\procmenuwhere{,}\procmenu{Printer Setup}\procmenuwhere{~12}}
+
+\proclistentry{\procname{help-search-overviews}(\proctype{help} \procparm{obj})\
+search overviews\
+Menu:  \procmenu{Search}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Search Overviews}\procmenuwhere{~20}}
+
+\proclistentry{\procname{help-search-programs}(\proctype{help} \procparm{obj})\
+search programs\
+Menu:  \procmenu{Search}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Search Programs}\procmenuwhere{~22}}
+
+\proclistentry{\procname{help-new-show-help-on-selected}(\proctype{help} \procparm{obj}, \proctype{integer} \procparm{type})\
+show help on selected region in a new 
+window.  \procparm{type} must be 10.\
+Menu:  \procmenu{Window}\procmenuwhere{~12}\procmenuwhere{,}\procmenu{Show Help on Selected Word}\procmenuwhere{~26}}
+
+\proclistentry{\procname{help-show-help-on-selected}(\proctype{help} \procparm{obj}, \proctype{integer} \procparm{type})\
+show help on selected region.  \procparm{type} must be 2.\
+Menu:  \procmenu{Show Help on Selected Word}\procmenuwhere{~16}}
+
+\proclistentry{\procname{help-new-show-help-on}(\proctype{help} \procparm{obj}, \proctype{integer} \procparm{type})\
+show help on a prompted keyword in a new 
+window.  \procparm{type} must be 9.\
+Bound to:  \prockey{^X-2}; Menu:  \procmenu{Window}\procmenuwhere{~12}\procmenuwhere{,}\procmenu{Show Help on...}\procmenuwhere{~14}\
+Use \procname{QueueAnswer} to provide term in Ness.}
+
+\proclistentry{\procname{help-toggle-overviews}(\proctype{help} \procparm{obj})\
+toggle overviews panel\
+Menu:  \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Hide Overviews}\procmenuwhere{~20}, Panels~10,Show Overviews~20}
+
+\proclistentry{\procname{help-toggle-programs}(\proctype{help} \procparm{obj})\
+toggle programs panel\
+Bound to:  \prockey{^X-e}; Menu:  \procmenu{Panels}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Hide Programs}\procmenuwhere{~22}, Panels~10,Show Programs~22}
+
+\proclistentry{\procname{help-restore-programs}(\proctype{help} \procparm{obj})\
+restore programs panel\
+Menu:  \procmenu{Other}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Restore Programs Panel}\procmenuwhere{~10}}
+
+\proclistentry{\procname{help-filter-programs}(\proctype{help} \procparm{obj})\
+filter-programs\
+Menu:  \procmenu{Other}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Filter Programs Panel}\procmenuwhere{~10}\
+Use \procname{QueueAnswer} to provide filter pattern in Ness.}
+
+\proclistentry{\procname{help-reverse-search}(\proctype{help} \procparm{obj})\
+reverse search\
+Menu:  \procmenu{Search}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Backward}\procmenuwhere{~14}}
+
+\proclistentry{\procname{help-show-help-on}(\proctype{help} \procparm{obj}, \proctype{integer} \procparm{type})\
+show help on a prompted keyword.  \procparm{type} must be 1.\
+Bound to:  \prockey{Enter} (\prockey{^M}), \prockey{^X-^V}; 
+Menu:  \procmenu{Show Help on ...}\procmenuwhere{~14}\
+Use \procname{QueueAnswer} to provide term in Ness.}
+
+\proclistentry{\procname{help-show-more}(\proctype{help} \procparm{obj})\
+show more documentation\
+Bound to:  \prockey{^X-^N}; Menu:  \procmenu{Show More Documentation}\procmenuwhere{~30}}
+
+\proclistentry{\procname{help-search-again}(\proctype{help} \procparm{obj})\
+search again\
+Menu:  \procmenu{Search}\procmenuwhere{~4}\procmenuwhere{,}\procmenu{Search Again}\procmenuwhere{~16}}
+
+\proclistentry{\procname{help-quit}(\proctype{help} \procparm{obj})\
+quit help\
+Bound to:  \prockey{^X-^C}; Menu:  \procmenu{Quit}\procmenuwhere{~99}}
 
 \section{Related Topics}
 

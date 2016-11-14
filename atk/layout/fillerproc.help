@@ -1,15 +1,13 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for filler}
 
 
-\bold{fillerview-set-data-object-by-name}(object \italic{self}, marker \italic{name})
-
-\leftindent{Insert named inset.  If \italic{name} is Ask, prompt for a 
-name.
-
-Use \italic{name} or "Ask" + \bold{queueanswer} to provide inset name in Ness.}
+\proclistentry{\procname{fillerview-set-data-object-by-name}(\proctype{fillerview} \procparm{obj}, \proctype{marker} \procparm{name})\
+Insert named inset.  If \procparm{name} is Ask, prompt for a 
+name.\
+Use \procparm{name} or "Ask" + \procname{QueueAnswer} to provide inset name in Ness.}
 
 
 \section{Related Topics}

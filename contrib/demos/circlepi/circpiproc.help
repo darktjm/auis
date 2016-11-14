@@ -1,15 +1,13 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for circlepi}
 
 
-\bold{circpi-set-depth-limit}(object \italic{self}, integer \italic{rock})
-
-\leftindent{Takes the integer \italic{rock} and uses it to set the 
-depth limit on recursion.
-
-Menu:  10 depth limits:  Depth Limit~10,1~1 .. Depth Limit~10,10~10}
+\proclistentry{\procname{circpi-set-depth-limit}(\proctype{circlepiview} \procparm{obj}, \proctype{integer} \procparm{rock})\
+Takes the integer \procparm{rock} and uses it to set the 
+depth limit on recursion.\
+Menu:  10 depth limits:  \procmenu{Depth Limit}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{1}\procmenuwhere{~1} .. \procmenu{Depth Limit}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{10}\procmenuwhere{~10}}
 
 
 \section{Related Topics}

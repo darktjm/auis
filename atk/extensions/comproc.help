@@ -1,34 +1,27 @@
 \begindata{text,268959464}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Compile}
 
 
-\bold{compile-build}(object \italic{textview})
-
-\leftindent{Start a compilation.  If it was previously paused, it is 
+\proclistentry{\procname{compile-build}(\proctype{textview} \procparm{obj})\
+Start a compilation.  If it was previously paused, it is 
 immediately resumed.  Otherwise, if one is already running, you are 
-prompted to kill it.  All buffers are saved before starting.
-
-Set \typewriter{^U} numeric argument to prompt for command instead of 
-using same command (or preference if first time).
-
-Use \bold{queueanswer} to answer kill query and/or set command from Ness if 
+prompted to kill it.  All buffers are saved before starting.\
+Set \prockey{^U} numeric argument to prompt for command instead of 
+using same command (or preference if first time).\
+Use \procname{QueueAnswer} to answer kill query and/or set command from Ness if 
 necessary.}
 
-\bold{compile-next-error}(object \italic{textview})
+\proclistentry{\procname{compile-next-error}(\proctype{textview} \procparm{obj})\
+Step forward through compilation errors.}
 
-\leftindent{Step forward through compilation errors.}
+\proclistentry{\procname{compile-previous-error}(\proctype{textview} \procparm{obj})\
+Step backward through compilation errors.}
 
-\bold{compile-previous-error}(object \italic{textview})
-
-\leftindent{Step backward through compilation errors.}
-
-\bold{compile-kill-build}(object \italic{textview})
-
-\leftindent{Terminate a compilation.
-
-Set \typewriter{^U} numeric argument to pause instead of kill.}
+\proclistentry{\procname{compile-kill-build}(\proctype{textview} \procparm{obj})\
+Terminate a compilation.\
+Set \prockey{^U} numeric argument to pause instead of kill.}
 
 
 \section{Related Topics}

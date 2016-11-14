@@ -1,104 +1,84 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for compchar}
 
 
-\bold{compchar-acuteaccent-after}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{put a left accent over the next character, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-acuteaccent-after}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+put a left accent over the next character, or insert \procparm{ch} with 
 a left accent if non-blank.}
 
-\bold{compchar-acuteaccent}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{add a left accent to the character to the left 
-of the cursor, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-acuteaccent}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+add a left accent to the character to the left 
+of the cursor, or insert \procparm{ch} with 
 a left accent if non-blank.}
 
-\bold{compchar-ASCIIToATK}(object \italic{self}, null | 0 | marker \italic{noask})
-
-\leftindent{map local ASCII conventions to ATK ISO 
-characters.  If \italic{noask} is non-empty, non-interactively replace all.
-
-This is interactive if \italic{noask} is unspecified or empty, making this 
+\proclistentry{\procname{compchar-ASCIIToATK}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{noask})\
+map local ASCII conventions to ATK ISO 
+characters.  If \procparm{noask} is non-empty, non-interactively replace all.\
+This is interactive if \procparm{noask} is unspecified or empty, making this 
 unusable in Ness if not set.}
 
-\bold{compchar-ATKToASCII}(object \italic{self}, null | 0 | marker \italic{noask})
-
-\leftindent{map ATK ISO characters to local ASCII.  
-If \italic{noask} is non-empty, non-interactively replace all.
-
-This is interactive if \italic{noask} is unspecified or empty, making this 
+\proclistentry{\procname{compchar-ATKToASCII}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{noask})\
+map ATK ISO characters to local ASCII.  
+If \procparm{noask} is non-empty, non-interactively replace all.\
+This is interactive if \procparm{noask} is unspecified or empty, making this 
 unusable in Ness if not set.}
 
-\bold{compchar-circumflex-after}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{put a hat over the next character, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-circumflex-after}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+put a hat over the next character, or insert \procparm{ch} with 
 a hat if non-blank.}
 
-\bold{compchar-circumflex}(object \italic{self}, null | 0 | marker \italic{ch})
+\proclistentry{\procname{compchar-circumflex}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+add a hat to the character to the left of the 
+cursor, or insert \procparm{ch} with a hat if non-blank.}
 
-\leftindent{add a hat to the character to the left of the 
-cursor, or insert \italic{ch} with a hat if non-blank.}
+\proclistentry{\procname{compchar-compose2}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+improved compchar-compose.  \italic{FIXME: what is ch for?}  \
+This is intended to be interactive; use \procname{compchar-compose} in Ness.}
 
-\bold{compchar-compose2}(object \italic{self}, null | 0 | marker \italic{ch})
+\proclistentry{\procname{compchar-compose}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{comp})\
+start the composition of a character, or return composition 
+for \procparm{comp}.\
+Use \procname{QueueAnswer} to provide composition alias in Ness if 
+\procparm{comp} not given (but why would you want to do that?).}
 
-\leftindent{improved compchar-compose.  \italic{FIXME: what is ch for?}  
+\proclistentry{\procname{compchar-graveaccent-after}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+put a right accent over the next 
+character, or insert \procparm{ch} with  a right accent if non-blank.}
 
-This is intended to be interactive; use \bold{compchar-compose} in Ness.}
-
-\bold{compchar-compose}(object \italic{self}, null | 0 | marker \italic{comp})
-
-\leftindent{start the composition of a character, or return composition 
-for \italic{comp}.
-
-Use \bold{queueanswer} to provide composition alias in Ness if 
-\italic{comp} not given (but why would you want to do that?).}
-
-\bold{compchar-graveaccent-after}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{put a right accent over the next 
-character, or insert \italic{ch} with  a right accent if non-blank.}
-
-\bold{compchar-graveaccent}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{add a right accent to the character to the left 
-of the cursor, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-graveaccent}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+add a right accent to the character to the left 
+of the cursor, or insert \procparm{ch} with 
 a right accent if non-blank.}
 
-\bold{compchar-insert}(object \italic{self}, marker \italic{spec})
-
-\leftindent{inserts an arbitrary character whose code is given by 
-\italic{spec}.  This is either \typewriter{x}, followed by hex
+\proclistentry{\procname{compchar-insert}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{spec})\
+inserts an arbitrary character whose code is given by 
+\procparm{spec}.  This is either \typewriter{x}, followed by hex
 digits, or \typewriter{o}, followed by octal digits, or \typewriter{d}, 
 followed by decimal digits, or a vertical bar (\typewriter{|}), 
 followed by a letter whose high bit should be set, or just plain 
 decimal digits.}
 
-\bold{compchar-nop}(object \italic{self}, null | 0 | marker \italic{msg})
-
-\leftindent{nop for use with compchar.  If \italic{msg} is non-blank, display 
+\proclistentry{\procname{compchar-nop}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{msg})\
+nop for use with compchar.  If \procparm{msg} is non-blank, display 
 it.}
 
-\bold{compchar-tilde-after}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{put a tilde over the next character, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-tilde-after}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+put a tilde over the next character, or insert \procparm{ch} with 
 a tilde if non-blank.}
 
-\bold{compchar-tilde}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{add a tilde to the character to the left of the 
-cursor, or insert \italic{ch} with 
+\proclistentry{\procname{compchar-tilde}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+add a tilde to the character to the left of the 
+cursor, or insert \procparm{ch} with 
 a tilde if non-blank.}
 
-\bold{compchar-umlaut-after}(object \italic{self}, null | 0 | marker \italic{ch})
+\proclistentry{\procname{compchar-umlaut-after}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+put an umlaut over the next character}
 
-\leftindent{put an umlaut over the next character}
-
-\bold{compchar-umlaut}(object \italic{self}, null | 0 | marker \italic{ch})
-
-\leftindent{add a umlaut to the character to the left of the 
-cursor, or insert \italic{ch} with an umlaut if non-blank.}
+\proclistentry{\procname{compchar-umlaut}(\proctype{textview} \procparm{obj}, \proctype{null} | \proctype{0} | \proctype{marker} \procparm{ch})\
+add an umlaut to the character to the left of the 
+cursor, or insert \procparm{ch} with an umlaut if non-blank.}
 
 
 \section{Related Topics}

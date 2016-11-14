@@ -1,51 +1,37 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for alink}
 
 
-\bold{alinkview-insert-alink}(object \italic{textview})
+\proclistentry{\procname{alinkview-insert-alink}(\proctype{textview} \procparm{obj})\
+Insert audio link.\
+Menu:  \procmenu{Inset}\procmenuwhere{~33}\procmenuwhere{,}\procmenu{Insert Audio}\procmenuwhere{~20}}
 
-\leftindent{Insert audio link.
-
-Menu:  Inset~33,Insert Audio~20}
-
-\bold{alinkview-insert-record}(object \italic{textview})
-
-\leftindent{Insert audio link and record.
-
-Menu:  Inset~33,Record Audio~21
-
+\proclistentry{\procname{alinkview-insert-record}(\proctype{textview} \procparm{obj})\
+Insert audio link and record.\
+Menu:  \procmenu{Inset}\procmenuwhere{~33}\procmenuwhere{,}\procmenu{Record Audio}\procmenuwhere{~21}\
 It is generally not possible to time the cancel event required to stop 
 recording properly with Ness; this procedure should not be called in 
 Ness.}
 
-\bold{alinkview-play-audio}(object \italic{self})
-
-\leftindent{Plays the audio segment.
-
-Menu:  Audio~1,Play Audio~1
-
+\proclistentry{\procname{alinkview-play-audio}(\proctype{alinkview} \procparm{obj})\
+Plays the audio segment.\
+Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Play Audio}\procmenuwhere{~1}\
 This is the default action of the button.  It is generally not possible 
 to cancel playback within Ness.}
 
-\bold{alinkview-record-audio}(object \italic{self})
-
-\leftindent{Records the audio segment.
-
-Menu:  Audio~1,Change recording~11
-
+\proclistentry{\procname{alinkview-record-audio}(\proctype{alinkview} \procparm{obj})\
+Records the audio segment.\
+Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Change recording}\procmenuwhere{~11}\
 It is generally not possible to time the cancel event required to stop 
 recording properly with Ness; this procedure should not be called in 
 Ness.}
 
-\bold{alinkview-set-label-text}(object \italic{self})
-
-\leftindent{Prompts for user to set the text string of the link button.
-
-Menu:  Audio~1,Change Label~12
-
-Use \bold{queueanswer} to provide label text in Ness.}
+\proclistentry{\procname{alinkview-set-label-text}(\proctype{alinkview} \procparm{obj})\
+Prompts for user to set the text string of the link button.\
+Menu:  \procmenu{Audio}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Change Label}\procmenuwhere{~12}\
+Use \procname{QueueAnswer} to provide label text in Ness.}
 
 
 \section{Related Topics}

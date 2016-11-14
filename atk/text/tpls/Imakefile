@@ -6,6 +6,7 @@
 TEMPLATEFILES = scribe.tpl \
 	default.tpl \
 	help.tpl \
+	prochelp.tpl \
 	letter.tpl \
 	man.tpl \
 	memo.tpl \

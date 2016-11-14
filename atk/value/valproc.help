@@ -1,33 +1,25 @@
 \begindata{text,538528536}
 \textdsversion{12}
-\template{help}
-\chapter{Listprocs for Value (etextv, mtextv)}
+\template{prochelp}
+\chapter{Procedure Table Listing for Value (etextv, mtextv)}
 
 
-\bold{etextview-return-cmd}(object \italic{self})
+\proclistentry{\procname{etextview-return-cmd}(\proctype{etextview} \procparm{obj})\
+Handle enter key\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
-\leftindent{Handle enter key
+\proclistentry{\procname{etextview-cancel-cmd}(\proctype{etextview} \procparm{obj})\
+Handle cancel\
+Bound to:  \prockey{^G}}
 
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
-
-\bold{etextview-cancel-cmd}(object \italic{self})
-
-\leftindent{Handle cancel
-
-Bound to:  \typewriter{^G}}
-
-\bold{etextview-clear-cmd}(object \italic{self})
-
-\leftindent{Handle clear
-
-Bound to:  \typewriter{^U}}
+\proclistentry{\procname{etextview-clear-cmd}(\proctype{etextview} \procparm{obj})\
+Handle clear\
+Bound to:  \prockey{^U}}
 
 
-\bold{metextview-return-cmd}(object \italic{self})
-
-\leftindent{Handle menter key
-
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
+\proclistentry{\procname{metextview-return-cmd}(\proctype{metextview} \procparm{obj})\
+Handle menter key\
+Bound to:  \prockey{Enter} (\prockey{^M})}
 
 
 \section{Related Topics}

@@ -1,45 +1,37 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for compress}
 
 
-\bold{compressv-compress-lines}(object \italic{textview}, marker \italic{range})
-
-\leftindent{Compresses lines in the specified range (or 
+\proclistentry{\procname{compressv-compress-lines}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{range})\
+Compresses lines in the specified range (or 
 selected region) into a box; will prompt if none specified.  The format 
-for \italic{range} is two decimal numbers with any other character(s) 
-between.  \italic{range} takes precedence, then selected region, then 
-prompted answer.
+for \procparm{range} is two decimal numbers with any other character(s) 
+between.  \procparm{range} takes precedence, then selected region, then 
+prompted answer.\
+Use \procname{QueueAnswer} to provide range in Ness, if necessary, but 
+better to just pass in \procparm{range} or set region.}
 
-Use \bold{queueanswer} to provide range in Ness, if necessary, but 
-better to just pass in \italic{range} or set region.}
-
-\bold{compressv-compress-region}(object \italic{textview})
-
-\leftindent{Blindly compresses the selected region, 
+\proclistentry{\procname{compressv-compress-region}(\proctype{textview} \procparm{obj})\
+Blindly compresses the selected region, 
 doesn't know how to combine compresses or grab entire lines, but useful if 
 you WANT to nest compresses.}
 
-\bold{compressv-decompress-all}(object \italic{textview})
+\proclistentry{\procname{compressv-decompress-all}(\proctype{textview} \procparm{obj})\
+Expand all compressed regions in document 
+to normal size.\
+Bound to:  \prockey{Esc-Q}\
+Menu in srctextview:  \procmenu{Source Text}\procmenuwhere{,}\procmenu{Decompress all}\procmenuwhere{~25}}
 
-\leftindent{Expand all compressed regions in document 
-to normal size.
-
-Bound to:  \typewriter{Esc-Q}
-
-Menu in srctextview:  Source Text,Decompress all~25}
-
-\bold{compressv-decompress-lines}(object \italic{textview}, marker \italic{range})
-
-\leftindent{Takes any lines within the specified 
+\proclistentry{\procname{compressv-decompress-lines}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{range})\
+Takes any lines within the specified 
 range (or selected region) out of the box they were in.  The format 
-for \italic{range} is two decimal numbers with any other character(s) 
-between.  \italic{range} takes precedence, then selected region, then 
-prompted answer.
-
-Use \bold{queueanswer} to provide range in Ness, if necessary, but 
-better to just pass in \italic{range} or set region.}
+for \procparm{range} is two decimal numbers with any other character(s) 
+between.  \procparm{range} takes precedence, then selected region, then 
+prompted answer.\
+Use \procname{QueueAnswer} to provide range in Ness, if necessary, but 
+better to just pass in \procparm{range} or set region.}
 
 
 \section{Related Topics}

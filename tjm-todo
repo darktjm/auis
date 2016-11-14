@@ -1,22 +1,7 @@
 - proclist docs:
-  - add specific styles for parts of doc:
-    - "proclistentry" -> hanging indent
-    - "procentry" -> bold
-    - "procparm" -> italic
-    - "proctype" -> normal (for "action" and parameter types)
-    - "prockey" -> typewriter (for keys)
-    - "procmenu" -> normal (or sans?) (for menu names)
-    - "procmenuwhere" -> normal (or italic/small?) for ~ part of menu names
-  - maybe style the menu entries somewhat.  Maybe move ness notes to 1st
-    line, so bindings/menus are the only thing that follow doc line.
-  - document that which is not documented.
-    - add/correct doc strings as needed
+  - generate procs' help topic listing dynamically, such as during help
+    index install.
   - ensure a link from main to proc where posssible (some done; missed some)
-  - check proctable's type field, and ensure 1st parameter is correct
-    everywhere.  maybe reformat as: object[type] self (invalid in
-    ness, but type is actually retained/checked in ness).  Then again,
-    maybe just explain in procs that object parameters are given as
-    the expected object type (e.g. textview), and do it that way.
   - document the fact that ness only supports real, integer, cstring,
     and ATK object for type checking.  All else is "unk".
     Also document Ness->C type conversion.  In particular, it only
@@ -28,8 +13,10 @@
     ness only understands integer if not action
   - document fact that ness only understands 1 return value, and
     bindings ignore all return values.
-  - generate procs' help topic listing dynamically, such as during help
-    index install.
+  - Maybe move ness notes to 1st line, so bindings/menus are the only thing
+    that follow doc line.
+  - document that which is not documented.
+    - add/correct doc strings as needed
 - style editor issues:
   - lprruler/tabruler issues:
     - Font sizes are assumed in pixels.  Everything overlaps.
@@ -61,16 +48,28 @@
   - lookz really needs a "preview text" field, but some styles (even w/o
     adding active stlyes) may be too complex to show adequately.
 - layout options suck:
+  - nothing appears to have a minimum size, so often possible to make
+    GUI unusable.  The menu at least limits to a minimum width (but
+    not height, or at least insufficient height).  I can shrink the ez
+    window down so far that all you get is a vertically cropped More...
+    button.  No minimum 1 line for message line, no minimum of any kind on
+    main view (view disappears before message line).  Each view should have
+    a minimum size, propagated to its parents all the way up to a minimum
+    size for the window.
+  - bdffont font face dialog is restricted to within window, and may be
+    chopped off with no way to scroll.  Same with file name dialog if
+    too small.  Really these type of things should be temporary
+    windows instead of drawn within, and should still support
+    scrolling and/or multicolumn if the screen is too small.
   - lpair only supports absolute and % positioning, not "to fit"
-  - suite might do a better job, but I doubt it.
+  - generally, it would be nice to have hfill/vfill like entities for
+    both text and UI layout.
 - unknown requires manual ^L after inserting raw data
 - only way to give argument in ness is dokeys("^Uddd")
 - argument arbitrarily limited to 64K via keyboard, but unlimited in ProvideArg
   - no negative arguments, except via ProvideArg
-- bdffont font face dialog is restricted to within window, and may be
-  chopped off with no way to scroll.  Other choice dialogs may have
-  similar issue.
 - build or chuck wsactions.C butactions.C colorv.C colormapv.C colormap.C
+- fix or chuck ness-proctable-hook
 - build all tests and run them
 - text doesn't have overstrike mode, apparently.  Only srctext.
 - all that effort to get table sizing to work properly seems to have done
@@ -82,6 +81,9 @@
 - vertical scrolling around table insets is broken.  See xkeys.help:
   - inset size is assumed to be very small, so at top & bottom big
     scrollbar handle, even though most space is in middle.
+    - actually, upon reflection, scrollbar handle sizing is broken *everwhere*
+      probably because it counts something like paragraphs rater than
+      actually looking at how it would end up rendered.
   - bottom "arrow" button does nothing to scroll within table itself,
     but top "arrow" button works fine.
   - nonetheless, moving by clicking in trough is accurate.
@@ -564,7 +566,13 @@ Long-term (as if any of the above weren't long term as well):
 	 global style means "no styling at all"
     mabye e.g. .(*=[bold])* gets bolded text (regardless of style)
     - maybe make search dialog understand this as well.
+    - note that user's perception of a style differs from storage:
+      - style name does not have to indicate what attributes it has
+      - style name does not have to match menu entry, and there's no real
+        way to find style name from menu entry other than styling some
+	text and showing what style it is
 - fix compile to take regexes for error message scanning
+  - probably needs regexes with named subexprs for line/col/search extraction
 - add code snippet inset (or maybe just "style") for literate programming
 - make LaTeX a possible output format (and the default)
 - maybe make eq actually useful.  Probably not worth it, though.

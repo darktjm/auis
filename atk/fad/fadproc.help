@@ -1,58 +1,35 @@
 \begindata{text,538375988}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Fad}
 
 
-\bold{fadview-keys}(object \italic{self}, integer \italic{key})
-
-\leftindent{Get keyed commands.  The default binding's character code for 
-each command is passed in as \italic{key}.  \italic{FIXME: none of these are 
-documented}
-
-Bound to:  \typewriter{R}; Menu:  File,Read Fad~50
-
-Bound to:  \typewriter{f}; Menu:  Icon~5,Next icon~10
-
-Bound to:  \typewriter{u}; Menu:  Icon~5,Previous icon~11
-
-Bound to:  \typewriter{I}; Menu:  Icon~5,Pick new icons~21
-
-Bound to:  \typewriter{N}; Menu:  Mode~2,Line~1
-
-Bound to:  \typewriter{E}; Menu:  Mode~2,Icon~2
-
-Menu:  Mode~2,Label~3 (\italic{key} is 'L')
-
-Bound to:  \typewriter{b}; Menu:  Mode~2,Box~4
-
-Bound to:  \typewriter{B}; Menu:  Mode~2,Action Button~5
-
-Bound to:  \typewriter{d}; Menu:  Misc~7,Delete last item~10
-
-Bound to:  \typewriter{D}; Menu:  Misc~7,Delete current frame~11
-
-Menu:  Misc~7,Set Label Font~30 (\italic{key} is 'F')
-
-Menu:  Misc~7,Set # animation frames~31 (\italic{key} is '#')
-
-Menu:  Misc~7,Set frame delay~32 (\italic{key} is 't')
-
-Bound to:  \typewriter{r}; Menu:  Fad~1,Repeat frame~30
-
-Bound to:  \typewriter{p}; Menu:  Fad~1,Pick frame~22
-
-Bound to:  \typewriter{n}; Menu:  Fad~1,Next frame~20
-
-Bound to:  \typewriter{l}; Menu:  Fad~1,Previous frame~21
-
-Bound to:  \typewriter{a}; Menu:  Fad~1,Animate~5 (\italic{key} may also be 'H')
-
-Menu:  Fad~1,Animate portion~6 (\italic{key} is 'A')
-
-Bound to:  \typewriter{m} \italic{stop animation?}
-
-Bound to:  \typewriter{P} \italic{play?}}
+\proclistentry{\procname{fadview-keys}(\proctype{fadview} \procparm{obj}, \proctype{integer} \procparm{key})\
+Get keyed commands.  The default binding's character code for 
+each command is passed in as \procparm{key}.  \italic{FIXME: none of these are 
+documented}\
+Bound to:  \prockey{R}; Menu:  \procmenu{File}\procmenuwhere{,}\procmenu{Read Fad}\procmenuwhere{~50}\
+Bound to:  \prockey{f}; Menu:  \procmenu{Icon}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Next icon}\procmenuwhere{~10}\
+Bound to:  \prockey{u}; Menu:  \procmenu{Icon}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Previous icon}\procmenuwhere{~11}\
+Bound to:  \prockey{I}; Menu:  \procmenu{Icon}\procmenuwhere{~5}\procmenuwhere{,}\procmenu{Pick new icons}\procmenuwhere{~21}\
+Bound to:  \prockey{N}; Menu:  \procmenu{Mode}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Line}\procmenuwhere{~1}\
+Bound to:  \prockey{E}; Menu:  \procmenu{Mode}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Icon}\procmenuwhere{~2}\
+Menu:  \procmenu{Mode}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Label}\procmenuwhere{~3} (\procparm{key} is 'L')\
+Bound to:  \prockey{b}; Menu:  \procmenu{Mode}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Box}\procmenuwhere{~4}\
+Bound to:  \prockey{B}; Menu:  \procmenu{Mode}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Action Button}\procmenuwhere{~5}\
+Bound to:  \prockey{d}; Menu:  \procmenu{Misc}\procmenuwhere{~7}\procmenuwhere{,}\procmenu{Delete last item}\procmenuwhere{~10}\
+Bound to:  \prockey{D}; Menu:  \procmenu{Misc}\procmenuwhere{~7}\procmenuwhere{,}\procmenu{Delete current frame}\procmenuwhere{~11}\
+Menu:  \procmenu{Misc}\procmenuwhere{~7}\procmenuwhere{,}\procmenu{Set Label Font}\procmenuwhere{~30} (\procparm{key} is 'F')\
+Menu:  \procmenu{Misc}\procmenuwhere{~7}\procmenuwhere{,}\procmenu{Set # animation frames}\procmenuwhere{~31} (\procparm{key} is '#')\
+Menu:  \procmenu{Misc}\procmenuwhere{~7}\procmenuwhere{,}\procmenu{Set frame delay}\procmenuwhere{~32} (\procparm{key} is 't')\
+Bound to:  \prockey{r}; Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Repeat frame}\procmenuwhere{~30}\
+Bound to:  \prockey{p}; Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Pick frame}\procmenuwhere{~22}\
+Bound to:  \prockey{n}; Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Next frame}\procmenuwhere{~20}\
+Bound to:  \prockey{l}; Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Previous frame}\procmenuwhere{~21}\
+Bound to:  \prockey{a}; Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Animate}\procmenuwhere{~5} (\procparm{key} may also be 'H')\
+Menu:  \procmenu{Fad}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Animate portion}\procmenuwhere{~6} (\procparm{key} is 'A')\
+Bound to:  \prockey{m} \italic{stop animation?}\
+Bound to:  \prockey{P} \italic{play?}}
 
 
 \section{Related Topics}

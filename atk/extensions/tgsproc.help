@@ -1,45 +1,34 @@
 \begindata{text,269141872}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Tags}
 
 
-\bold{tags-open}(object \italic{textview}, marker \italic{tag})
-
-\leftindent{Goto the \italic{tag} whose name is passed in.  This will 
+\proclistentry{\procname{tags-open}(\proctype{textview} \procparm{obj}, \proctype{marker} \procparm{tag})\
+Goto the \procparm{tag} whose name is passed in.  This will 
 not enter recursive editing mode.}
 
-\bold{tags-load-tag-file}(object \italic{textview})
+\proclistentry{\procname{tags-load-tag-file}(\proctype{textview} \procparm{obj})\
+Load a tag file from the current directory\
+Use \procname{QueueAnswer} to provide file name in Ness.}
 
-\leftindent{Load a tag file from the current directory
-
-Use \bold{queueanswer} to provide file name in Ness.}
-
-\bold{tags-find-tag}(object \italic{textview})
-
-\leftindent{Goto the tag whose name is at the dot.
-
-The \typewriter{^U} numeric argument can be set to disable recursive 
+\proclistentry{\procname{tags-find-tag}(\proctype{textview} \procparm{obj})\
+Goto the tag whose name is at the dot.\
+The \prockey{^U} numeric argument can be set to disable recursive 
 editing mode.}
 
-\bold{tags-goto-tag}(object \italic{textview})
+\proclistentry{\procname{tags-goto-tag}(\proctype{textview} \procparm{obj})\
+Goto a given tag.\
+The \prockey{^U} numeric argument can be set to disable recursive 
+editing mode.\
+Use or \procname{QueueAnswer} to provide tag name in Ness, or use 
+\procname{tags-open}.}
 
-\leftindent{Goto a given tag.
-
-The \typewriter{^U} numeric argument can be set to disable recursive 
-editing mode.
-
-Use or \bold{queueanswer} to provide tag name in Ness, or use 
-\bold{tags-open}.}
-
-\bold{tags-rebuild-tags}(object \italic{textview})
-
-\leftindent{Regenerate the tag file with ctags
-
-The \typewriter{^U} numeric argument can be set to prompt for the 
-command used to do this.
-
-Use \bold{queueanswer} to provide the command if necessary.}
+\proclistentry{\procname{tags-rebuild-tags}(\proctype{textview} \procparm{obj})\
+Regenerate the tag file with ctags\
+The \prockey{^U} numeric argument can be set to prompt for the 
+command used to do this.\
+Use \procname{QueueAnswer} to provide the command if necessary.}
 
 
 \section{Related Topics}

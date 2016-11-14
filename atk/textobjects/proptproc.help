@@ -1,44 +1,32 @@
 \begindata{text,1241}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for printopts}
 
 
-\bold{printopts-post-window}(object \italic{view})
+\proclistentry{\procname{printopts-post-window}(\proctype{frame} \procparm{obj})\
+Set options for printing of document\
+Menu in frame:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Printer Setup}\procmenuwhere{~20}}
 
-\leftindent{Set options for printing of document
+\proclistentry{\procname{printopts-cancel}(\proctype{printopts} \procparm{obj})\
+Remove dialog and cancel choices.\
+Menu:  \procmenu{Cancel}\procmenuwhere{~91}}
 
-Menu in frame:  File~10,Printer Setup~20}
+\proclistentry{\procname{printopts-done}(\proctype{printopts} \procparm{obj})\
+Remove dialog and accept choices.\
+Bound to:  \prockey{X-^D}, \prockey{^X-^C}; Menu:  \procmenu{Done}\procmenuwhere{~90}; \procmenu{Quit}\procmenuwhere{~99}}
 
-\bold{printopts-cancel}(object \italic{self})
+\proclistentry{\procname{printopts-nop}(\proctype{printopts} \procparm{obj})\
+Do nothing.\
+Bound to:  \prockey{Esc-~}}
 
-\leftindent{Remove dialog and cancel choices.
+\proclistentry{\procname{printopts-preview}(\proctype{printopts} \procparm{obj})\
+Preview document.\
+Menu:  \procmenu{Preview}}
 
-Menu:  Cancel~91}
-
-\bold{printopts-done}(object \italic{self})
-
-\leftindent{Remove dialog and accept choices.
-
-Bound to:  \typewriter{X-^D}, \typewriter{^X-^C}; Menu:  Done~90; Quit~99}
-
-\bold{printopts-nop}(object \italic{self})
-
-\leftindent{Do nothing.
-
-Bound to:  \typewriter{Esc-~}}
-
-\bold{printopts-preview}(object \italic{self})
-
-\leftindent{Preview document.
-
-Menu:  Preview}
-
-\bold{printopts-print}(object \italic{self})
-
-\leftindent{Print document.
-
-Menu:  Print}
+\proclistentry{\procname{printopts-print}(\proctype{printopts} \procparm{obj})\
+Print document.\
+Menu:  \procmenu{Print}}
 
 
 \section{Related Topics}

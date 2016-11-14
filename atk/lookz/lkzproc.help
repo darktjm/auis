@@ -1,54 +1,39 @@
 \begindata{text,6765600}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for Lookz}
 
 
-\bold{lookzview-edit-styles}(object \italic{textview})
-
-\leftindent{Bring up style editor in a seprate window
-
-Menu:  File~10,Edit Styles~30}
+\proclistentry{\procname{lookzview-edit-styles}(\proctype{textview} \procparm{obj})\
+Bring up style editor in a seprate window\
+Menu:  \procmenu{File}\procmenuwhere{~10}\procmenuwhere{,}\procmenu{Edit Styles}\procmenuwhere{~30}}
 
 
-\bold{lookzview-add-style}(object \italic{self})
+\proclistentry{\procname{lookzview-add-style}(\proctype{lookzview} \procparm{obj})\
+Add a new style to stylesheet\
+Bound to:  \prockey{Esc-A}; Menu:  \procmenu{Add Style}\
+Use \procname{QueueAnswer} to provide style name in Ness.}
 
-\leftindent{Add a new style to stylesheet
-
-Bound to:  \typewriter{Esc-A}; Menu:  Add Style
-
-Use \bold{queueanswer} to provide style name in Ness.}
-
-\bold{lookzview-delete-style}(object \italic{self})
-
-\leftindent{Delete a style from the stylesheet
-
-Bound to:  \typewriter{Esc-D}; Menu:  Delete Style
-
+\proclistentry{\procname{lookzview-delete-style}(\proctype{lookzview} \procparm{obj})\
+Delete a style from the stylesheet\
+Bound to:  \prockey{Esc-D}; Menu:  \procmenu{Delete Style}\
 Selecting a style is generally not possible in Ness; do not call this 
 from Ness.}
 
-\bold{lookzview-set-bgcolor}(object \italic{self})
+\proclistentry{\procname{lookzview-set-bgcolor}(\proctype{lookzview} \procparm{obj})\
+Set stylesheet background color\
+Menu:  \procmenu{Set Background}\procmenuwhere{~10}\
+Use \procname{QueueAnswer} to provide color in Ness.}
 
-\leftindent{Set stylesheet background color
+\proclistentry{\procname{lookzview-set-robgcolor}(\proctype{lookzview} \procparm{obj})\
+Set stylesheet readonly background color\
+Menu:  \procmenu{Set R/O Background}\procmenuwhere{~11}\
+Use \procname{QueueAnswer} to provide color in Ness.}
 
-Menu:  Set Background~10
-
-Use \bold{queueanswer} to provide color in Ness.}
-
-\bold{lookzview-set-robgcolor}(object \italic{self})
-
-\leftindent{Set stylesheet readonly background color
-
-Menu:  Set R/O Background~11
-
-Use \bold{queueanswer} to provide color in Ness.}
-
-\bold{lookzview-update-document}(object \italic{self})
-
-\leftindent{Cause document to redisplay itself
-
-Bound to:  \typewriter{Esc-U}; Menu:  Update Document}
+\proclistentry{\procname{lookzview-update-document}(\proctype{lookzview} \procparm{obj})\
+Cause document to redisplay itself.  If the LookzAutoUpdate preference 
+is on, this procedure (and its bindings) will not be available.\
+Bound to:  \prockey{Esc-U}; Menu:  \procmenu{Update Document}}
 
 
 \section{Related Topics}

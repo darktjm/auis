@@ -1,32 +1,26 @@
 \begindata{text,538378132}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \chapter{Procedure Table Listing for DesKey}
 
 
-\bold{deskey-describe-key}(object \italic{im})
-
-\leftindent{Show binding of a typed in key sequence.  
+\proclistentry{\procname{deskey-describe-key}(\proctype{im} \procparm{obj})\
+Show binding of a typed in key sequence.  
 Prompts for a key sequence and responds with the name of the proctable 
-entry that would be called when that sequence is normally typed.
+entry that would be called when that sequence is normally typed.\
+It may be possible to provide the sequence via \procname{DoKeys} from Ness.}
 
-It may be possible to provide the sequence via \bold{dokeys} from Ness.}
+\proclistentry{\procname{deskey-describe-bound-keys}(\proctype{im} \procparm{obj})\
+Show bindings for all keys (key sorted).}
 
-\bold{deskey-describe-bound-keys}(object \italic{im})
+\proclistentry{\procname{deskey-describe-bound-procs}(\proctype{im} \procparm{obj})\
+Show bindings for all keys (proc name sorted)}
 
-\leftindent{Show bindings for all keys (key sorted).}
+\proclistentry{\proctype{integer} \procname{deskey-describe-proctable}(\proctype{im} \procparm{obj})\
+List proctable entries.  Returns count.}
 
-\bold{deskey-describe-bound-procs}(object \italic{im})
-
-\leftindent{Show bindings for all keys (proc name sorted)}
-
-integer \bold{deskey-describe-proctable}(object \italic{im})
-
-\leftindent{List proctable entries.  Returns count.}
-
-integer \bold{deskey-list-proctable}(object \italic{im})
-
-\leftindent{List proctable entries in plain text to /tmp/ProcList; 
+\proclistentry{\proctype{integer} \procname{deskey-list-proctable}(\proctype{im} \procparm{obj})\
+List proctable entries in plain text to \typewriter{/tmp/ProcList}; 
 Returns count.}
 
 

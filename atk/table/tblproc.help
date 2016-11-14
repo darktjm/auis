@@ -1,285 +1,193 @@
 \begindata{text,538405900}
 \textdsversion{12}
-\template{help}
+\template{prochelp}
 \define{global
 }
 \chapter{Procedure Table Listing for Table}
 
 
-\bold{table-self-insert}(object \italic{self}, integer \italic{ch})
-
-\leftindent{Enter character \italic{ch}
-
-Bound to:  all printable ASCII (\typewriter{Space} .. \typewriter{~}), 
-with their respective character codes as \italic{ch}.
-
-Note that in Ness, when entering \typewriter{$} or \typewriter{\{}, the 
-remainder of the text must be inserted using \bold{queueanser}.}
-
-\bold{table-begin-row}(object \italic{self})
-
-\leftindent{Beginning of row
-
-Bound to:  \typewriter{^A}, \typewriter{Home} (\typewriter{Esc-H})}
-
-\bold{table-left}(object \italic{self})
-
-\leftindent{Left one column
-
-Bound to:  \typewriter{^B}, \typewriter{Left} (\typewriter{Esc-D})}
-
-\bold{table-end-row}(object \italic{self})
-
-\leftindent{End of row
-
-Bound to:  \typewriter{^E}, \typewriter{End} (\typewriter{Esc-J})}
-
-\bold{table-right}(object \italic{self})
-
-\leftindent{Right one column
-
-Bound to:  \typewriter{^F}, \typewriter{Right} (\typewriter{Esc-C})}
-
-\bold{table-down}(object \italic{self})
-
-\leftindent{Down one row
-
-Bound to:  \typewriter{^N}, \typewriter{Down} (\typewriter{Esc-B})}
-
-\bold{table-up}(object \italic{self})
-
-\leftindent{Up one row
-
-Bound to:  \typewriter{^P}, \typewriter{Up} (\typewriter{Esc-A})}
-
-\bold{table-top}(object \italic{self})
-
-\leftindent{Top
-
-Bound to:  \typewriter{Esc-<}}
-
-\bold{table-bottom}(object \italic{self})
-
-\leftindent{Bottom
-
-Bound to:  \typewriter{Esc->}}
-
-\bold{table-backspace}(object \italic{self})
-
-\leftindent{Backspace
-
-Bound to:  \typewriter{Backspace} (\typewriter{^H})}
-
-\bold{table-tab}(object \italic{self})
-
-\leftindent{Tab
-
-Bound to:  \typewriter{Tab}}
-
-\bold{table-newline}(object \italic{self})
-
-\leftindent{New line
-
-Bound to:  \typewriter{^J}}
-
-\bold{table-return}(object \italic{self})
-
-\leftindent{Carriage return
-
-Bound to:  \typewriter{Enter} (\typewriter{^M})}
-
-\bold{table-DELchar}(object \italic{self})
-
-\leftindent{Delete
-
-Bound to:  \typewriter{Delete}}
-
-\bold{table-erase}(object \italic{self})
-
-\leftindent{Erase
-
-Bound to:  \typewriter{^U}}
-
-\bold{table-toggle-readonly}(object \italic{self})
-
-\leftindent{Toggle the read-only status of the table.
-
-Bound to:  \typewriter{Esc-~}}
-
-\bold{table-toggle-debug}(object \italic{self})
-
-\leftindent{Toggle Debug
-
-Bound to:  \typewriter{Esc-Esc}}
-
-\bold{table-cut}(object \italic{self})
-
-\leftindent{Save and erase cells
-
-Bound to:  \typewriter{^W}; Menu:  Cut~10}
-
-\bold{table-copy}(object \italic{self})
-
-\leftindent{Copy cells to cutbuffer
-
-Bound to:  \typewriter{Esc-w}; Menu:  Copy~11}
-
-\bold{table-paste}(object \italic{self})
-
-\leftindent{Copy cutbuffer to cells
-
-Bound to:  \typewriter{^Y}; Menu: Paste~12}
-
-\bold{table-write}(object \italic{self})
-
-\leftindent{Write table file
-
-Bound to:  \typewriter{/-f-w}; Menu:  Write table~80
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{table-read}(object \italic{self})
-
-\leftindent{Read table file
-
-Bound to:  \typewriter{/-f-r}; Menu:  Read table~81
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{table-writeTroff}(object \italic{self})
-
-\leftindent{Write .trf file
-
-Menu:  Write Troff~82
-
-Use \bold{queueanswer} to provide name in Ness.}
-
-\bold{table-rename}(object \italic{self})
-
-\leftindent{Rename table
-
-Menu:  Rename~84
-
-Use \bold{queueanswer} to provide name (and possibly removal 
+\proclistentry{\procname{table-self-insert}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{ch})\
+Enter character \procparm{ch}\
+Bound to:  all printable ASCII (\prockey{Space} .. \prockey{~}), 
+with their respective character codes as \procparm{ch}.\
+Note that in Ness, when entering \prockey{$} or \prockey{\{}, the 
+remainder of the text must be inserted using \procname{QueueAnswer}.}
+
+\proclistentry{\procname{table-begin-row}(\proctype{spread} \procparm{obj})\
+Beginning of row\
+Bound to:  \prockey{^A}, \prockey{Home} (\prockey{Esc-H})}
+
+\proclistentry{\procname{table-left}(\proctype{spread} \procparm{obj})\
+Left one column\
+Bound to:  \prockey{^B}, \prockey{Left} (\prockey{Esc-D})}
+
+\proclistentry{\procname{table-end-row}(\proctype{spread} \procparm{obj})\
+End of row\
+Bound to:  \prockey{^E}, \prockey{End} (\prockey{Esc-J})}
+
+\proclistentry{\procname{table-right}(\proctype{spread} \procparm{obj})\
+Right one column\
+Bound to:  \prockey{^F}, \prockey{Right} (\prockey{Esc-C})}
+
+\proclistentry{\procname{table-down}(\proctype{spread} \procparm{obj})\
+Down one row\
+Bound to:  \prockey{^N}, \prockey{Down} (\prockey{Esc-B})}
+
+\proclistentry{\procname{table-up}(\proctype{spread} \procparm{obj})\
+Up one row\
+Bound to:  \prockey{^P}, \prockey{Up} (\prockey{Esc-A})}
+
+\proclistentry{\procname{table-top}(\proctype{spread} \procparm{obj})\
+Top\
+Bound to:  \prockey{Esc-<}}
+
+\proclistentry{\procname{table-bottom}(\proctype{spread} \procparm{obj})\
+Bottom\
+Bound to:  \prockey{Esc->}}
+
+\proclistentry{\procname{table-backspace}(\proctype{spread} \procparm{obj})\
+Backspace\
+Bound to:  \prockey{Backspace} (\prockey{^H})}
+
+\proclistentry{\procname{table-tab}(\proctype{spread} \procparm{obj})\
+Tab\
+Bound to:  \prockey{Tab}}
+
+\proclistentry{\procname{table-newline}(\proctype{spread} \procparm{obj})\
+New line\
+Bound to:  \prockey{^J}}
+
+\proclistentry{\procname{table-return}(\proctype{spread} \procparm{obj})\
+Carriage return\
+Bound to:  \prockey{Enter} (\prockey{^M})}
+
+\proclistentry{\procname{table-DELchar}(\proctype{spread} \procparm{obj})\
+Delete\
+Bound to:  \prockey{Delete}}
+
+\proclistentry{\procname{table-erase}(\proctype{spread} \procparm{obj})\
+Erase\
+Bound to:  \prockey{^U}}
+
+\proclistentry{\procname{table-toggle-readonly}(\proctype{spread} \procparm{obj})\
+Toggle the read-only status of the table.\
+Bound to:  \prockey{Esc-~}}
+
+\proclistentry{\procname{table-toggle-debug}(\proctype{spread} \procparm{obj})\
+Toggle Debug\
+Bound to:  \prockey{Esc-Esc}}
+
+\proclistentry{\procname{table-cut}(\proctype{spread} \procparm{obj})\
+Save and erase cells\
+Bound to:  \prockey{^W}; Menu:  \procmenu{Cut}\procmenuwhere{~10}}
+
+\proclistentry{\procname{table-copy}(\proctype{spread} \procparm{obj})\
+Copy cells to cutbuffer\
+Bound to:  \prockey{Esc-w}; Menu:  \procmenu{Copy}\procmenuwhere{~11}}
+
+\proclistentry{\procname{table-paste}(\proctype{spread} \procparm{obj})\
+Copy cutbuffer to cells\
+Bound to:  \prockey{^Y}; Menu: \procmenu{Paste}\procmenuwhere{~12}}
+
+\proclistentry{\procname{table-write}(\proctype{spread} \procparm{obj})\
+Write table file\
+Bound to:  \prockey{/-f-w}; Menu:  \procmenu{Write table}\procmenuwhere{~80}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{table-read}(\proctype{spread} \procparm{obj})\
+Read table file\
+Bound to:  \prockey{/-f-r}; Menu:  \procmenu{Read table}\procmenuwhere{~81}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{table-writeTroff}(\proctype{spread} \procparm{obj})\
+Write .trf file\
+Menu:  \procmenu{Write Troff}\procmenuwhere{~82}\
+Use \procname{QueueAnswer} to provide name in Ness.}
+
+\proclistentry{\procname{table-rename}(\proctype{spread} \procparm{obj})\
+Rename table\
+Menu:  \procmenu{Rename}\procmenuwhere{~84}\
+Use \procname{QueueAnswer} to provide name (and possibly removal 
 confirmation) in Ness.}
 
-\bold{table-combine}(object \italic{self})
+\proclistentry{\procname{table-combine}(\proctype{spread} \procparm{obj})\
+Combine several cells into one\
+Bound to:  \prockey{/-r-c}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Combine}\procmenuwhere{~10}}
 
-\leftindent{Combine several cells into one
+\proclistentry{\procname{table-separate}(\proctype{spread} \procparm{obj})\
+Separate combined cells\
+Bound to:  \prockey{/-r-s}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Separate}\procmenuwhere{~11}}
 
-Bound to:  \typewriter{/-r-c}; Menu:  Cells~1,Combine~10}
+\proclistentry{\procname{table-drawedges}(\proctype{spread} \procparm{obj})\
+Draw box around cells\
+Bound to:  \prockey{/-r-b-d}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Draw box}\procmenuwhere{~20}}
 
-\bold{table-separate}(object \italic{self})
+\proclistentry{\procname{table-eraseedges}(\proctype{spread} \procparm{obj})\
+Erase box around cells\
+Bound to:  \tyepwriter{/-r-b-e}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Erase box}\procmenuwhere{~21}}
 
-\leftindent{Separate combined cells
+\proclistentry{\procname{table-lock}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{lock})\
+Protect cells against modification (\procparm{lock} must be 
+TRUE)\
+Bound to:  \prockey{/-r-l}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Lock}\procmenuwhere{~30}}
 
-Bound to:  \typewriter{/-r-s}; Menu:  Cells~1,Separate~11}
+\proclistentry{\procname{table-unlock}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{lock})\
+Allow cells to be modified (\procparm{lock} must be 
+FALSE)\
+Bound to:  \prockey{/-r-u}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Unlock}\procmenuwhere{~31}}
 
-\bold{table-drawedges}(object \italic{self})
+\proclistentry{\procname{table-imbed}(\proctype{spread} \procparm{obj})\
+Place BE2 object in cell\
+Bound to:  \prockey{Esc-Tab}; Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Imbed}\procmenuwhere{~40}}
 
-\leftindent{Draw box around cells
+\proclistentry{\procname{table-reset-height}(\proctype{spread} \procparm{obj})\
+Comput row heights automatically\
+Menu:  \procmenu{Cells}\procmenuwhere{~1}\procmenuwhere{,}\procmenu{Reset Heights}\procmenuwhere{~41}}
 
-Bound to:  \typewriter{/-r-b-d}; Menu:  Cells~1,Draw box~20}
+\proclistentry{\procname{table-general-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+general number format (\procparm{fmt} must be 'G')\
+Bound to:  \prockey{/-r-f-g}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{general}\procmenuwhere{~10}}
 
-\bold{table-eraseedges}(object \italic{self})
+\proclistentry{\procname{table-currency-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Dollar sign before number (\procparm{fmt} must be '$')\
+Bound to:  \prockey{/-r-f-c}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Dollar}\procmenuwhere{~11}}
 
-\leftindent{Erase box around cells
+\proclistentry{\procname{table-percent-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Multiply by 100 and display % (\procparm{fmt} must be '%')\
+Bound to:  \prockey{/-r-f-p}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Percent}\procmenuwhere{~12}}
 
-Bound to:  \tyepwriter{/-r-b-e}; Menu:  Cells~1,Erase box~21}
+\proclistentry{\procname{table-exponential-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Exponential format (not implemented) (\procparm{fmt} must be 'E')\
+Bound to:  \prockey{/-r-f-e}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Exp}\procmenuwhere{~13}}
 
-\bold{table-lock}(object \italic{self}, integer \italic{lock})
+\proclistentry{\procname{table-fixed-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Always display decimal places (\procparm{fmt} must be 'F')\
+Bound to:  \prockey{/-r-f-f}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Fixed}\procmenuwhere{~14}}
 
-\leftindent{Protect cells against modification (\italic{lock} must be 
-TRUE)
+\proclistentry{\procname{table-hbar-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Display as horizontal bar (\procparm{fmt} must be 'H')\
+Bound to:  \prockey{/-r-f-h}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{H-Bar}\procmenuwhere{~15}}
 
-Bound to:  \typewriter{/-r-l}; Menu:  Cells~1,Lock~30}
+\proclistentry{\procname{table-vbar-format}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Display as vertical bar (\procparm{fmt} must be 'V')\
+Bound to:  \prockey{/-r-f-v}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{V-Bar}\procmenuwhere{~16}}
 
-\bold{table-unlock}(object \italic{self}, integer \italic{lock})
+\proclistentry{\procname{table-precision}(\proctype{spread} \procparm{obj})\
+Set number of decimal places\
+Bound to:  \prockey{/-r-p}; Menu:  \procmenu{Number Format}\procmenuwhere{~2}\procmenuwhere{,}\procmenu{Precision}\procmenuwhere{~20}\
+Use \procname{QueueAnswer} to provide value in Ness.}
 
-\leftindent{Allow cells to be modified (\italic{lock} must be 
-FALSE)
+\proclistentry{\procname{table-day-month-year}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Display day,  month, and year (\procparm{fmt} must be 'Q')\
+Bound to:  \prockey{/-r-f-d-a}; Menu:  \procmenu{Date Format}\procmenuwhere{~3}\procmenuwhere{,}\procmenu{19 Jun 1970}\procmenuwhere{~10}}
 
-Bound to:  \typewriter{/-r-u}; Menu:  Cells~1,Unlock~31}
+\proclistentry{\procname{table-month-year}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Display month and year  (\procparm{fmt} must be 'R')\
+Bound to:  \prockey{/-r-f-d-b}; Menu:  \procmenu{Date Format}\procmenuwhere{~3}\procmenuwhere{,}\procmenu{Jun 1970}\procmenuwhere{~11}}
 
-\bold{table-imbed}(object \italic{self})
-
-\leftindent{Place BE2 object in cell
-
-Bound to:  \typewriter{Esc-Tab}; Menu:  Cells~1,Imbed~40}
-
-\bold{table-reset-height}(object \italic{self})
-
-\leftindent{Comput row heights automatically
-
-Menu:  Cells~1,Reset Heights~41}
-
-\bold{table-general-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{general number format (\italic{fmt} must be 'G')
-
-Bound to:  \typewriter{/-r-f-g}; Menu:  Number Format~2,general~10}
-
-\bold{table-currency-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Dollar sign before number (\italic{fmt} must be '$')
-
-Bound to:  \typewriter{/-r-f-c}; Menu:  Number Format~2,Dollar~11}
-
-\bold{table-percent-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Multiply by 100 and display % (\italic{fmt} must be '%')
-
-Bound to:  \typewriter{/-r-f-p}; Menu:  Number Format~2,Percent~12}
-
-\bold{table-exponential-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Exponential format (not implemented) (\italic{fmt} must be 'E')
-
-Bound to:  \typewriter{/-r-f-e}; Menu:  Number Format~2,Exp~13}
-
-\bold{table-fixed-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Always display decimal places (\italic{fmt} must be 'F')
-
-Bound to:  \typewriter{/-r-f-f}; Menu:  Number Format~2,Fixed~14}
-
-\bold{table-hbar-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Display as horizontal bar (\italic{fmt} must be 'H')
-
-Bound to:  \typewriter{/-r-f-h}; Menu:  Number Format~2,H-Bar~15}
-
-\bold{table-vbar-format}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Display as vertical bar (\italic{fmt} must be 'V')
-
-Bound to:  \typewriter{/-r-f-v}; Menu:  Number Format~2,V-Bar~16}
-
-\bold{table-precision}(object \italic{self})
-
-\leftindent{Set number of decimal places
-
-Bound to:  \typewriter{/-r-p}; Menu:  Number Format~2,Precision~20
-
-Use \bold{queueanswer} to provide value in Ness.}
-
-\bold{table-day-month-year}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Display day,  month, and year (\italic{fmt} must be 'Q')
-
-Bound to:  \typewriter{/-r-f-d-a}; Menu:  Date Format~3,19 Jun 1970~10}
-
-\bold{table-month-year}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Display month and year  (\italic{fmt} must be 'R')
-
-Bound to:  \typewriter{/-r-f-d-b}; Menu:  Date Format~3,Jun 1970~11}
-
-\bold{table-day-month}(object \italic{self}, integer \italic{fmt})
-
-\leftindent{Display day and month (\italic{fmt} must be 'S')
-
-Bound to:  \typewriter{/-r-f-d-c}; Menu:  Date Format~3,19 Jun~12}
+\proclistentry{\procname{table-day-month}(\proctype{spread} \procparm{obj}, \proctype{integer} \procparm{fmt})\
+Display day and month (\procparm{fmt} must be 'S')\
+Bound to:  \prockey{/-r-f-d-c}; Menu:  \procmenu{Date Format}\procmenuwhere{~3}\procmenuwhere{,}\procmenu{19 Jun}\procmenuwhere{~12}}
 
 
 \section{Related Topics}
